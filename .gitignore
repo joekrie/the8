@@ -188,3 +188,6 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+
+src/WebApp/static/jspm_packages/
+*.lock.json

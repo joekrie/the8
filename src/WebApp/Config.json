@@ -1,0 +1,25 @@
+﻿{
+  "google": {
+    "web": {
+      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+      "client_secret": "_LZY3lzK7_iT1_U-GXjevFeY",
+      "token_uri": "https://accounts.google.com/o/oauth2/token",
+      "client_email": "355634311493-7ccjep9klandn39h41jjv7rleg5flu9g@developer.gserviceaccount.com",
+      "redirect_uris": [
+        "http://localhost:8081/oauth2callback"
+      ],
+      "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/355634311493-7ccjep9klandn39h41jjv7rleg5flu9g@developer.gserviceaccount.com",
+      "client_id": "355634311493-7ccjep9klandn39h41jjv7rleg5flu9g.apps.googleusercontent.com",
+      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+      "javascript_origins": [
+        "http://localhost:8081"
+      ]
+    }
+  },
+  "raven": {
+    "database": {
+      "url": "http://localhost:8080",
+      "defaultdatabase": "TheEightSuite"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "webroot": "wwwroot",
+
+  "dependencies": {
+    "Core": "1.0.0",
+    "Microsoft.AspNet.Mvc": "6.0.0-beta5",
+    "Microsoft.AspNet.Server.IIS": "1.0.0-beta5",
+    "Microsoft.AspNet.Server.WebListener": "1.0.0-beta5",
+    "Microsoft.AspNet.StaticFiles": "1.0.0-beta5",
+    "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-beta5",
+    "Microsoft.AspNet.Loader.IIS": "1.0.0-beta5",
+    "Microsoft.AspNet.Diagnostics": "1.0.0-beta5",
+    "Microsoft.Framework.Configuration.Json": "1.0.0-beta5",
+    "NodaTime": "2.0.0-*",
+    "RavenDB.Client": "3.0.3690",
+    "RavenDB.Database": "3.0.3690",
+    "RavenDB.Client.NodaTime": "3.0.0",
+    "Microsoft.AspNet.Authentication.Google": "1.0.0-beta5"
+  },
+
+  "commands": {
+    "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls http://localhost:5000"
+  },
+
+  "frameworks": {
+    "dnx451": { }
+  },
+
+  "publishExclude": [
+    "node_modules",
+    "bower_components",
+    "jspm_packages",
+    "**.xproj",
+    "**.user",
+    "**.vspscc"
+  ],
+
+  "exclude": [
+    "wwwroot",
+    "node_modules",
+    "bower_components",
+    "jspm_packages"
+  ]
+}
