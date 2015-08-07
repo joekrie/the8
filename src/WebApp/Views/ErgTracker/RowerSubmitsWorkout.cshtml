@@ -1,0 +1,21 @@
+﻿<div ng-app="rowerResultSubmitter" ng-controller="MainCtrl" ng-cloak>
+    <div>
+        {{workoutInfo.title}}
+    </div>
+    <div>
+        {{workoutInfo.comments}}
+    </div>
+    <div>
+        {{workoutInfo.date | date: "MMM dd, yyyy"}}
+    </div>
+    <form name="form" ng-submit="saveResults()">
+        <div ng-repeat="pieceResult in pieceResults">
+            {{pieceResult.pieceInfo | pieceInfo}}&nbsp;&nbsp;
+            <input the8-split ng-model="pieceResult.splitResult" type="text" class="split-input" />
+            <input the8-stroke-rate ng-model="pieceResult.strokeRate" type="tel" class="stroke-rate-input" />
+        </div>
+        <button ng-disabled="form.$invalid || form.$pristine" type="submit">
+            Save
+        </button>
+    </form>
+</div>

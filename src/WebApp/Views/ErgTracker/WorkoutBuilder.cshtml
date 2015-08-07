@@ -1,0 +1,41 @@
+﻿<div ng-app="workoutBuilder" ng-controller="MainCtrl" ng-cloak>
+    <form name="form" ng-submit="saveWorkout()">
+        <div>
+            <label for="title">Title</label><br />
+            <input ng-model="workout.title" id="title" type="text" />
+        </div>
+        <br />
+        <div>
+            <label for="comments">Comments</label><br />
+            <textarea ng-model="workout.comments" id="comments"></textarea>
+        </div>
+        <br />
+        <div>
+            <label for="date">Date</label><br />
+            <input ng-model="workout.date" the8-datepicker id="date" type="date" />
+        </div>
+        <br />
+        <div>
+            <label>Pieces</label>
+            <div as-sortable="sortableOptions" ng-model="workout.pieces">
+                <div ng-repeat="piece in workout.pieces" as-sortable-item>
+                    <span as-sortable-item-handle>::::</span>
+                    <input ng-attr-name="piece.magnitude" ng-model="piece.magnitude" type="tel" />
+                    <select ng-model="piece.unit">
+                        <option value="meters">meters</option>
+                        <option value="minutes">minutes</option>
+                    </select>
+                    <button ng-click="removePiece(piece)">
+                        x
+                    </button>
+                </div>
+                <button ng-click="addPiece()">
+                    +
+                </button>
+            </div>
+        </div>
+        <button ng-disabled="form.$invalid || form.$pristine" type="submit">
+            Save
+        </button>
+    </form>
+</div>

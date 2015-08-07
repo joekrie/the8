@@ -1,60 +1,56 @@
-﻿using System.IO;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Diagnostics;
-using Microsoft.AspNet.Http;
+﻿using Microsoft.AspNet.Builder;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Runtime;
-using Raven.Client;
-using TheEightSoftware.TheEightSuite.Core.Db;
+using Newtonsoft.Json.Converters;
+using NodaTime;
+using NodaTime.Serialization.JsonNet;
+using TheEightSuite.BusinessLogic.Database;
+using TheEightSuite.BusinessLogic.DependencyInjection;
 
-namespace TheEightSoftware.TheEightSuite.WebApp
+namespace TheEightSuite.WebApp
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; private set; }
+        private readonly IApplicationEnvironment _applicationEnvironment;
+        private IConfiguration _configuration;
+
+        public Startup(IApplicationEnvironment applicationEnvironment)
+        {
+            _applicationEnvironment = applicationEnvironment;
+        }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var applicationEnvironment = services.BuildServiceProvider().GetRequiredService<IApplicationEnvironment>();
+            var basePath = _applicationEnvironment.ApplicationBasePath;
 
-            Configuration = new ConfigurationBuilder(applicationEnvironment.ApplicationBasePath)
+            _configuration = new ConfigurationBuilder(basePath)
                 .AddJsonFile("Config.json")
+                .AddUserSecrets()
                 .AddEnvironmentVariables()
                 .Build();
 
-            var dataDir = Path.Combine(applicationEnvironment.ApplicationBasePath, "data");
-            services.AddSingleton(provider => DocumentStoreFactory.GetDocumentStore(dataDir));
+            var ravenHqUrl = _configuration.Get("RavenHqUrl");
+            var ravenHqApiKey = _configuration.Get("RavenHqApiKey");
+            services.AddBusinessLogicServices(new RavenHqDocumentStoreInitializer(ravenHqUrl, ravenHqApiKey));
+
+            services.AddMvc();
+            services.ConfigureMvc(options =>
+            {
+                options.SerializerSettings.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb);
+                options.SerializerSettings.Converters.Add(new StringEnumConverter());
+            });
+        }
+
+        public void ConfigureDevelopment(IApplicationBuilder app)
+        {
+            app.UseErrorPage();
         }
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseErrorPage(new ErrorPageOptions
-            {
-                ShowCookies = true,
-                ShowEnvironment = true,
-                ShowExceptionDetails = true,
-                ShowHeaders = true,
-                ShowQuery = true,
-                ShowSourceCode = true,
-                SourceCodeLineCount = 20
-            });
-
-            app.Run(async context =>
-            {
-                using (var dbSession = app.ApplicationServices.GetService<IDocumentStore>().OpenAsyncSession())
-                {
-                    await dbSession.StoreAsync(new StoreMe { Prop1 = "teams/1"});
-                    await dbSession.SaveChangesAsync();
-                    var storeMe = await dbSession.Query<StoreMe>().FirstAsync();
-                    await context.Response.WriteAsync(storeMe.Prop1);
-                }
-            });
-        }
-
-        public class StoreMe
-        {
-            public string Prop1 { get; set; }
+            app.UseStaticFiles();
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

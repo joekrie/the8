@@ -1,44 +1,43 @@
 {
-  "webroot": "wwwroot",
+    "userSecretsId": "aspnet5-WebApp-20150807121807",
+    "webroot": "wwwroot",
+    "version": "1.0.0-*",
 
-  "dependencies": {
-    "Core": "1.0.0",
-    "Microsoft.AspNet.Mvc": "6.0.0-beta5",
-    "Microsoft.AspNet.Server.IIS": "1.0.0-beta5",
-    "Microsoft.AspNet.Server.WebListener": "1.0.0-beta5",
-    "Microsoft.AspNet.StaticFiles": "1.0.0-beta5",
-    "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-beta5",
-    "Microsoft.AspNet.Loader.IIS": "1.0.0-beta5",
-    "Microsoft.AspNet.Diagnostics": "1.0.0-beta5",
-    "Microsoft.Framework.Configuration.Json": "1.0.0-beta5",
-    "NodaTime": "2.0.0-*",
-    "RavenDB.Client": "3.0.3690",
-    "RavenDB.Database": "3.0.3690",
-    "RavenDB.Client.NodaTime": "3.0.0",
-    "Microsoft.AspNet.Authentication.Google": "1.0.0-beta5"
-  },
+    "dependencies": {
+        "Microsoft.AspNet.Server.IIS": "1.0.0-beta5",
+        "Microsoft.AspNet.Server.WebListener": "1.0.0-beta5",
+        "Microsoft.AspNet.Mvc": "6.0.0-beta5",
+        "Microsoft.AspNet.StaticFiles": "1.0.0-beta5",
+        "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-beta5",
+        "Microsoft.AspNet.Diagnostics": "1.0.0-beta5",
+        "Microsoft.Framework.Configuration.Json": "1.0.0-beta5",
+        "NodaTime": "1.3.1",
+        "RavenDB.Client": "3.0.3690",
+        "RavenDB.Database": "3.0.3690",
+        "RavenDB.Client.NodaTime": "3.0.0",
+        "Microsoft.AspNet.Authentication.Google": "1.0.0-beta5",
+        "BusinessLogic": "1.0.0-*",
+        "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta5",
+      "NodaTime.Serialization.JsonNet": "1.3.1"
+    },
 
-  "commands": {
-    "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls http://localhost:5000"
-  },
+    "commands": {
+        "web": "Microsoft.AspNet.Hosting --config hosting.ini"
+    },
 
-  "frameworks": {
-    "dnx451": { }
-  },
+    "frameworks": {
+        "dnx451": { }
+    },
 
-  "publishExclude": [
-    "node_modules",
-    "bower_components",
-    "jspm_packages",
-    "**.xproj",
-    "**.user",
-    "**.vspscc"
-  ],
+    "publishExclude": [
+        "node_modules",
+        "**.xproj",
+        "**.user",
+        "**.vspscc"
+    ],
 
-  "exclude": [
-    "wwwroot",
-    "node_modules",
-    "bower_components",
-    "jspm_packages"
-  ]
+    "exclude": [
+        "wwwroot",
+        "node_modules"
+    ]
 }

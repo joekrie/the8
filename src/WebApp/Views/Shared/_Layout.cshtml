@@ -1,11 +1,25 @@
-﻿@*<!doctype html>
-    <html lang="en">
-    <head>
-        <title></title>
-        @RenderSection("styles", false)
-    </head>
-    <body>
-        @RenderBody()
-        @RenderSection("scripts", false)
-    </body>
-    </html>
+﻿@{
+    var baseUrl = Url.Action(
+        new UrlActionContext
+        {
+            Controller = "Home",
+            Action = "Index",
+            Protocol = "http"
+        });
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <title></title>
+    <base href="@baseUrl" />
+    <link href="~/libs/libs.css" rel="stylesheet"/>
+    <link href="~/styles/site.css" rel="stylesheet"/>
+    @RenderSection("styles", false)
+</head>
+<body>
+@RenderBody()
+<script src="~/libs/libs.js"></script>
+<script src="~/app/app.js"></script>
+@RenderSection("scripts", false)
+</body>
+</html>

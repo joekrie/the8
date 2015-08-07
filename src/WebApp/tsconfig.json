@@ -6,6 +6,7 @@
     "removeComments": false,
     "sourceMap": true,
     "emitDecoratorMetadata": true,
-    "target": "es6"
+    "target": "es6",
+    "experimentalDecorators": true
   }
 }
