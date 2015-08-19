@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0-*",
+  "description": "QueueHandlers Class Library",
+  "authors": [ "Joseph" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "dependencies": {
+    "Twilio": "4.0.3",
+    "NodaTime": "2.0.0-alpha20150728",
+    "Microsoft.Framework.DependencyInjection": "1.0.0-beta5",
+    "Microsoft.Framework.Runtime.Abstractions": "1.0.0-beta5",
+    "Microsoft.Framework.Configuration": "1.0.0-beta5",
+    "Microsoft.Azure.WebJobs": "1.0.1"
+  },
+
+  "frameworks": {
+    "dnx451": { }
+  }
+}

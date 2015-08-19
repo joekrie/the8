@@ -1,0 +1,29 @@
+﻿<div class="the8-boat">
+    <div class="the8-boat-header">
+        <span class="the8-boat-name">{{name}}</span>
+        <span class="the8-boat-type">{{type}}</span>
+        <textarea class="the8-boat-comments" ng-model="comments"></textarea>
+    </div>
+    <div class="the8-boat-lineup">
+        <div class="the8-boat-seat the8-boat-cox" ng-show="isCoxed">
+            <div class="the8-boat-seat-name">
+                Coxswain
+            </div>
+            <div class="the8-boat-seat-"></div>
+        </div>
+        <div class="the8-boat-rowers" ng-repeat="rower in rowers">
+            <div class="the8-boat-seat the8-boat-rower" ng-class="{$first: 'the8-boat-bow', $last: 'the8-boat-stroke'}">
+                <div class="the8-boat-seat-name" ng-show="$first">
+                    Bow
+                </div>
+                <div class="the8-boat-seat-name" ng-show="$middle">
+                    {{$index + 1}}
+                </div>
+                <div class="the8-boat-seat-name" ng-show="$last">
+                    Stroke
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

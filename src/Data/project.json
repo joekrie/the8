@@ -1,0 +1,17 @@
+{
+    "version": "1.0.0-*",
+    "description": "Data Class Library",
+    "authors": [ "Joseph" ],
+    "tags": [ "" ],
+    "projectUrl": "",
+    "licenseUrl": "",
+
+    "dependencies": {
+        "RavenDB.Client": "3.0.3690",
+        "RavenDB.Client.NodaTime": "3.0.0"
+    },
+
+    "frameworks": {
+        "dnx451": { }
+    }
+}

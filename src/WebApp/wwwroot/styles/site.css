@@ -188,7 +188,7 @@ dl {
   dl dd {
     margin: 0; }
 
-table {
+table:not(.rd-days) {
   -webkit-font-feature-settings: "kern", "liga", "tnum";
   -moz-font-feature-settings: "kern", "liga", "tnum";
   -ms-font-feature-settings: "kern", "liga", "tnum";
@@ -197,21 +197,18 @@ table {
   margin: 0.75em 0;
   table-layout: fixed;
   width: 100%; }
-
-th {
-  border-bottom: 1px solid #b7b7b7;
-  font-weight: 600;
-  padding: 0.75em 0;
-  text-align: left; }
-
-td {
-  border-bottom: 1px solid #ddd;
-  padding: 0.75em 0; }
-
-tr,
-td,
-th {
-  vertical-align: middle; }
+  table:not(.rd-days) th {
+    border-bottom: 1px solid #b7b7b7;
+    font-weight: 600;
+    padding: 0.75em 0;
+    text-align: left; }
+  table:not(.rd-days) td {
+    border-bottom: 1px solid #ddd;
+    padding: 0.75em 0; }
+  table:not(.rd-days) tr,
+  table:not(.rd-days) td,
+  table:not(.rd-days) th {
+    vertical-align: middle; }
 
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none !important; }

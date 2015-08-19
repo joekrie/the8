@@ -3,10 +3,10 @@ using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Runtime;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using NodaTime;
 using NodaTime.Serialization.JsonNet;
-using TheEightSuite.BusinessLogic.Database;
-using TheEightSuite.BusinessLogic.DependencyInjection;
+using TheEightSuite.Data;
 
 namespace TheEightSuite.WebApp
 {
@@ -24,21 +24,32 @@ namespace TheEightSuite.WebApp
         {
             var basePath = _applicationEnvironment.ApplicationBasePath;
 
-            _configuration = new ConfigurationBuilder(basePath)
-                .AddJsonFile("Config.json")
-                .AddUserSecrets()
-                .AddEnvironmentVariables()
-                .Build();
+            var configBuilder = new ConfigurationBuilder(basePath)
+                .AddJsonFile("Config.json");
 
-            var ravenHqUrl = _configuration.Get("RavenHqUrl");
-            var ravenHqApiKey = _configuration.Get("RavenHqApiKey");
-            services.AddBusinessLogicServices(new RavenHqDocumentStoreInitializer(ravenHqUrl, ravenHqApiKey));
+            if (_applicationEnvironment.Configuration == "Debug")
+            {
+                configBuilder.AddUserSecrets();
+                services.AddSingleton(provider => DocumentStoreFactory.GetDevelopmentDocumentStore());
+            }
+            else
+            {
+                configBuilder.AddEnvironmentVariables();
+
+                var url = _configuration.Get("Raven:Url");
+                var apiKey = _configuration.Get("Raven:ApiKey");
+                services.AddSingleton(provider => DocumentStoreFactory.GetCloudDocumentStore(url, apiKey));
+            }
+
+            _configuration = configBuilder.Build();
 
             services.AddMvc();
+
             services.ConfigureMvc(options =>
             {
                 options.SerializerSettings.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb);
-                options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                options.SerializerSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             });
         }
 
@@ -50,7 +61,7 @@ namespace TheEightSuite.WebApp
         public void Configure(IApplicationBuilder app)
         {
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc();
         }
     }
 }

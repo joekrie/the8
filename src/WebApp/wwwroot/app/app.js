@@ -73,102 +73,9 @@ angular.module("coachResultSubmitter")
 	        console.log($scope.pieceResults);
 	    }
 	}]);
-angular.module("coachResultSubmitter")
-	.factory("dataService", ["ajaxService", function (ajaxService) {
-	    return {
-	        getWorkout: function (workoutId) {
-	            return {
-	                workoutInfo: {
-	                    workoutId: workoutId,
-	                    title: "6 x 500m",
-	                    comments: "Sprints!",
-	                    date: moment([2015, 10, 11]).toDate()
-	                },
-	                rowers: [
-						{
-						    rowerId: "rowers/1",
-						    displayName: "Aladdin",
-						    sortName: "Aladdin"
-						},
-						{
-						    rowerId: "rowers/2",
-						    displayName: "Goofy",
-						    sortName: "Goofy"
-						}
-	                ],
-	                pieceResults: [
-						{
-						    pieceInfo: {
-						        magnitude: 500,
-						        unit: "meters"
-						    },
-						    results: [
-								{
-								    rowerInfo: {
-								        rowerId: "rowers/1",
-								        displayName: "Aladdin",
-								        sortName: "Aladdin"
-								    },
-								    splitResult: moment.duration({
-								        minutes: 1,
-								        seconds: 50
-								    }),
-								    strokeRate: 28
-								},
-								{
-								    rowerInfo: {
-								        rowerId: "rowers/2",
-								        displayName: "Goofy",
-								        sortName: "Goofy"
-								    },
-								    splitResult: moment.duration({
-								        minutes: 1,
-								        seconds: 45
-								    }),
-								    strokeRate: 29
-								}
-						    ]
-						},
-						{
-						    pieceInfo: {
-						        magnitude: 20,
-						        unit: "minutes"
-						    },
-						    results: [
-								{
-								    rowerInfo: {
-								        rowerId: "rowers/2",
-								        displayName: "Goofy",
-								        sortName: "Goofy"
-								    },
-								    splitResult: moment.duration({
-								        minutes: 2,
-								        seconds: 2
-								    }),
-								    strokeRate: 22
-								},
-								{
-								    rowerInfo: {
-								        rowerId: "rowers/1",
-								        displayName: "Aladdin",
-								        sortName: "Aladdin"
-								    },
-								    splitResult: moment.duration({
-								        minutes: 1,
-								        seconds: 59
-								    }),
-								    strokeRate: 23
-								}
-						    ]
-						}
-	                ]
-	            }
-	        }
-	    }
-	}]);
 angular.module("rowerResultSubmitter")
-	.controller("MainCtrl", ["$scope", "dataService", "$window", function ($scope, dataService, $window) {
-	    var workout = dataService.getWorkout("workouts/1");
+	.controller("MainCtrl", ["$scope", "$window", function ($scope, $window) {
+	    //var workout = dataService.getWorkout("workouts/1");
 
 	    $scope.workoutInfo = workout.workoutInfo;
 	    $scope.rowerInfo = workout.rowerInfo;
@@ -178,106 +85,54 @@ angular.module("rowerResultSubmitter")
 	        $window.location.href = "";
 	    }
 	}]);
-angular.module("rowerResultSubmitter")
-	.factory("dataService", ["ajaxService", function (ajaxService) {
-	    return {
-            getWorkout: function(workoutId) {
-                return {
-                    workoutInfo: {
-                        workoutId: "workouts/1",
-                        title: "6 x 500m",
-                        comments: "Sprints!",
-                        date: moment([2015, 10, 11]).toDate()
-                    },
-                    pieceResults: [
-                        {
-                            pieceInfo: {
-                                magnitude: 500,
-                                unit: "meters"
-                            },
-                            splitResult: moment.duration({
-                                minutes: 1,
-                                seconds: 50
-                            }),
-                            strokeRate: 25
-                        },
-                        {
-                            pieceInfo: {
-                                magnitude: 500,
-                                unit: "meters"
-                            },
-                            splitResult: moment.duration({
-                                minutes: 1,
-                                seconds: 50
-                            }),
-                            strokeRate: 26
-                        }
-                    ]
-                }
-            }
+angular.module("workoutBuilder")
+    .controller("MainCtrl", [
+        "$scope", "$http", "$attrs", function ($scope, $http, $attrs) {
+            $scope.dataLoaded = false;
+
+            $http.get($attrs.getUrl)
+                .then(function(response) {
+                    $scope.workout = response.data;
+                    $scope.dataLoaded = true;
+                });
+
+            $scope.removePiece = function(piece) {
+                var index = $scope.workout.pieces.indexOf(piece);
+                $scope.workout.pieces.splice(index, 1);
+            };
+
+            $scope.addPiece = function() {
+                $scope.workout.pieces.push({
+                    magnitude: null,
+                    unit: "meters"
+                });
+            };
+
+            $scope.saveWorkout = function() {
+                $http({
+                        url: $attrs.saveUrl,
+                        method: "POST",
+                        data: $scope.workout
+                    })
+                    .then(function(response) {
+                        console.log(response);
+                    });
+            };
+
+            $scope.deleteWorkout = function() {
+                $http({
+                    url: $attrs.deleteUrl,
+                    method: "POST",
+                    data: {
+                        workoutId: $scope.workout.workoutId,
+                        forceDeleteIfResults: $scope.workout.forceSaveIfResults
+                    }
+                });
+            };
+
+            $scope.sortableOptions = {};
         }
-    }]);
-angular.module("workoutBuilder")
-	.controller("MainCtrl", ["$scope", "dataService", function ($scope, dataService) {
-	    $scope.workout = dataService.getWorkout("workouts/1");
-
-	    $scope.removePiece = function (piece) {
-	        var index = $scope.workout.pieces.indexOf(piece);
-	        $scope.workout.pieces.splice(index, 1);
-	    };
-
-	    $scope.addPiece = function () {
-	        $scope.workout.pieces.push({
-	            magnitude: null,
-	            unit: "meters"
-	        });
-	    };
-
-	    $scope.saveWorkout = function () {
-	        console.log($scope.workout);
-	    };
-
-	    $scope.sortableOptions = {};
-	}]);
-angular.module("workoutBuilder")
-	.factory("dataService", ["ajaxService", function (ajaxService) {
-	    return {
-	        getWorkout: function (workoutId) {
-	            return {
-	                workoutId: workoutId,
-	                title: "6 x 500m",
-	                comments: "Sprints!",
-	                date: moment([2015, 10, 11]).toDate(),
-	                pieces: [
-						{
-						    magnitude: 500,
-						    unit: "meters"
-						},
-						{
-						    magnitude: 500,
-						    unit: "meters"
-						},
-						{
-						    magnitude: 500,
-						    unit: "meters"
-						},
-						{
-						    magnitude: 500,
-						    unit: "meters"
-						},
-						{
-						    magnitude: 500,
-						    unit: "meters"
-						},
-						{
-						    magnitude: 500,
-						    unit: "meters"
-						}
-	                ]
-	            }
-	        }
-	    }
-	}]);
+    ]);
 angular.module("shared")
     .directive("the8Datepicker", [
         function() {
@@ -285,25 +140,36 @@ angular.module("shared")
                 restrict: "A",
                 require: "ngModel",
                 scope: {
-                    ngModel: "="
+                    "ngModel": "="
                 },
-                link: function(scope, element, attr, ngModel) {
+                link: function (scope, element, attr, ngModel) {
+                    var dateFormat = "YYYY-MM-DD";
+
+                    ngModel.$formatters.push(function(value) {
+                        return moment(value).toDate();
+                    });
+
                     if (!Modernizr.inputtypes.date) {
                         var datepicker = rome(element[0], {
-                            time: false,
-                            intialValue: moment(scope.ngModel)
+                            time: false
                         });
+                        
+                        datepicker.on("data", function (data) {
+                            var currVal = moment(scope.ngModel);
+                            var newVal = moment(data);
+                            var valsSame = currVal.isSame(newVal, "day");
 
-                        var initialValue = scope.ngModel;
-                        datepicker.setValue(initialValue);
-
-                        datepicker.on("data", function(data) {
+                            if (valsSame) {
+                                return;
+                            }
+                            
                             scope.$apply(function() {
-                                scope.ngModel = moment(data).toDate();
+                                scope.ngModel = moment(data).format(dateFormat);
+                                ngModel.$setDirty();
                             });
                         });
 
-                        scope.$watch(scope.ngModel, function(newValue) {
+                        scope.$watch("ngModel", function (newValue) {
                             datepicker.setValue(newValue);
                         });
                     }
@@ -311,6 +177,21 @@ angular.module("shared")
             };
         }
     ]);
+angular.module("shared")
+    .directive("the8Spinner", [function() {
+        return {
+            restrict: "A",
+            require: "ngModel",
+            scope: {
+                "ngModel": "="
+            },
+            link: function (scope, element, attr, ngModel) {
+                scope.$watch("ngModel", function (newValue) {
+                    
+                });
+            }
+        }
+    }]);
 angular.module("shared")
     .directive("the8Split", [
         function() {
@@ -403,9 +284,3 @@ angular.module("shared")
             return "";
         };
     });
-angular.module("shared")
-	.factory("ajaxService", ["$http", "$q", function ($http, $q) {
-	    return {
-			
-	    }
-	}]);

@@ -2270,9 +2270,9 @@
       "RavenDB.Database >= 3.0.3690",
       "RavenDB.Client.NodaTime >= 3.0.0",
       "Microsoft.AspNet.Authentication.Google >= 1.0.0-beta5",
-      "BusinessLogic >= 1.0.0-*",
       "Microsoft.Framework.Configuration.UserSecrets >= 1.0.0-beta5",
-      "NodaTime.Serialization.JsonNet >= 1.3.1"
+      "NodaTime.Serialization.JsonNet >= 1.3.1",
+      "Data >= 1.0.0-*"
     ],
     "DNX,Version=v4.5.1": []
   }

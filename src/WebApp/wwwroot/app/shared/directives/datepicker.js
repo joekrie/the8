@@ -5,25 +5,36 @@
                 restrict: "A",
                 require: "ngModel",
                 scope: {
-                    ngModel: "="
+                    "ngModel": "="
                 },
-                link: function(scope, element, attr, ngModel) {
+                link: function (scope, element, attr, ngModel) {
+                    var dateFormat = "YYYY-MM-DD";
+
+                    ngModel.$formatters.push(function(value) {
+                        return moment(value).toDate();
+                    });
+
                     if (!Modernizr.inputtypes.date) {
                         var datepicker = rome(element[0], {
-                            time: false,
-                            intialValue: moment(scope.ngModel)
+                            time: false
                         });
+                        
+                        datepicker.on("data", function (data) {
+                            var currVal = moment(scope.ngModel);
+                            var newVal = moment(data);
+                            var valsSame = currVal.isSame(newVal, "day");
 
-                        var initialValue = scope.ngModel;
-                        datepicker.setValue(initialValue);
-
-                        datepicker.on("data", function(data) {
+                            if (valsSame) {
+                                return;
+                            }
+                            
                             scope.$apply(function() {
-                                scope.ngModel = moment(data).toDate();
+                                scope.ngModel = moment(data).format(dateFormat);
+                                ngModel.$setDirty();
                             });
                         });
 
-                        scope.$watch(scope.ngModel, function(newValue) {
+                        scope.$watch("ngModel", function (newValue) {
                             datepicker.setValue(newValue);
                         });
                     }
