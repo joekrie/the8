@@ -191,3 +191,4 @@ ModelManifest.xml
 
 src/WebApp/static/jspm_packages/
 *.lock.json
+sh.exe.stackdump
