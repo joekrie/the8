@@ -1,18 +1,19 @@
 {
   "version": "1.0.0-*",
-  "description": "QueueHandlers Class Library",
+  "description": "Core Class Library",
   "authors": [ "Joseph" ],
   "tags": [ "" ],
   "projectUrl": "",
   "licenseUrl": "",
 
   "dependencies": {
-    "Twilio": "4.0.3",
-    "NodaTime": "2.0.0-alpha20150728",
-    "Microsoft.Framework.DependencyInjection": "1.0.0-beta5",
-    "Microsoft.Framework.Runtime.Abstractions": "1.0.0-beta5",
+    "RavenDB.Client": "3.0.3690",
+    "RavenDB.Client.NodaTime": "3.0.0",
+    "NLog": "4.0.1",
+    "Microsoft.Framework.Logging.Console": "1.0.0-beta5",
+    "Microsoft.Framework.Logging.NLog": "1.0.0-beta6-11585",
+    "Microsoft.Framework.Configuration.Abstractions": "1.0.0-beta5",
     "Microsoft.Framework.Configuration": "1.0.0-beta5",
-    "Microsoft.Azure.WebJobs": "1.0.1",
     "Microsoft.Framework.Configuration.EnvironmentVariables": "1.0.0-beta5",
     "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta5"
   },

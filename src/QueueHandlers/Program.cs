@@ -15,7 +15,10 @@ namespace TheEightSuite.QueueHandlers
 
         public Program()
         {
-            var configBuilder = new ConfigurationBuilder();
+            _configuration = new ConfigurationBuilder()
+                .AddEnvironmentVariables()
+                .AddUserSecrets()
+                .Build();
 
             var services = new ServiceCollection()
                 .AddSingleton(provider => new TwilioRestClient(, ))

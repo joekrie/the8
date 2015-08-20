@@ -2,7 +2,7 @@
 using Raven.Client.Document;
 using Raven.Client.NodaTime;
 
-namespace TheEightSuite.Data
+namespace TheEightSuite.Core
 {
     public static class DocumentStoreFactory
     {

@@ -1,47 +1,44 @@
 ﻿using Microsoft.AspNet.Builder;
+using Microsoft.AspNet.Diagnostics;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
+using Microsoft.Framework.Logging;
 using Microsoft.Framework.Runtime;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using NodaTime;
 using NodaTime.Serialization.JsonNet;
-using TheEightSuite.Data;
+using TheEightSuite.Core;
 
 namespace TheEightSuite.WebApp
 {
     public class Startup
     {
         private readonly IApplicationEnvironment _applicationEnvironment;
-        private IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
+        private ILogger _logger;
 
         public Startup(IApplicationEnvironment applicationEnvironment)
         {
             _applicationEnvironment = applicationEnvironment;
+            _configuration = ConfigurationFactory.GetConfiguration(_applicationEnvironment.ApplicationBasePath);
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var basePath = _applicationEnvironment.ApplicationBasePath;
-
-            var configBuilder = new ConfigurationBuilder(basePath)
-                .AddJsonFile("Config.json");
-
             if (_applicationEnvironment.Configuration == "Debug")
             {
-                configBuilder.AddUserSecrets();
                 services.AddSingleton(provider => DocumentStoreFactory.GetDevelopmentDocumentStore());
             }
             else
             {
-                configBuilder.AddEnvironmentVariables();
-
-                var url = _configuration.Get("Raven:Url");
-                var apiKey = _configuration.Get("Raven:ApiKey");
-                services.AddSingleton(provider => DocumentStoreFactory.GetCloudDocumentStore(url, apiKey));
+                services.AddSingleton(provider =>
+                {
+                    var url = _configuration.Get("RavenHq:Url");
+                    var apiKey = _configuration.Get("RavenHq:ApiKey");
+                    return DocumentStoreFactory.GetCloudDocumentStore(url, apiKey);
+                });
             }
-
-            _configuration = configBuilder.Build();
 
             services.AddMvc();
 
@@ -55,11 +52,14 @@ namespace TheEightSuite.WebApp
 
         public void ConfigureDevelopment(IApplicationBuilder app)
         {
-            app.UseErrorPage();
+            app.UseErrorPage(ErrorPageOptions.ShowAll);
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
+            _logger = loggerFactory.Setup(_applicationEnvironment.ApplicationBasePath, _applicationEnvironment.Configuration == "Debug")
+                .CreateLogger(_applicationEnvironment.ApplicationName);
+
             app.UseStaticFiles();
             app.UseMvc();
         }
