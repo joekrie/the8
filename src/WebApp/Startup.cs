@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNet.Builder;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Diagnostics;
+using Microsoft.AspNet.Http;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
@@ -9,6 +11,7 @@ using Newtonsoft.Json.Serialization;
 using NodaTime;
 using NodaTime.Serialization.JsonNet;
 using TheEightSuite.Core;
+using TheEightSuite.WebApp.Middleware;
 
 namespace TheEightSuite.WebApp
 {
@@ -60,6 +63,7 @@ namespace TheEightSuite.WebApp
             _logger = loggerFactory.Setup(_applicationEnvironment.ApplicationBasePath, _applicationEnvironment.Configuration == "Debug")
                 .CreateLogger(_applicationEnvironment.ApplicationName);
 
+            app.UseTeamDetectorMiddleware();
             app.UseStaticFiles();
             app.UseMvc();
         }
