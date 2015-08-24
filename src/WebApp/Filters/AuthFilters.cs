@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
-using TheEightSuite.WebApp.BusinessObjects.Teams;
+using TheEightSuite.Data.Models.Teams;
 
 namespace TheEightSuite.WebApp.Filters
 {

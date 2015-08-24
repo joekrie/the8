@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using TheEightSuite.WebApp.BusinessObjects.WorkoutTracker;
 
 namespace TheEightSuite.WebApp.ViewModels.WorkoutBuilder
 {

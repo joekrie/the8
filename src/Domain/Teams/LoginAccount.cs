@@ -1,0 +1,8 @@
+﻿namespace TheEightSuite.Domain.Teams
+{
+    public class LoginAccount
+    {
+        public string LoginProvider { get; set; }
+        public string UserIdentifier { get; set; }
+    }
+}

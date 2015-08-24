@@ -1,6 +1,5 @@
 using NodaTime;
 using TheEightSuite.Data.Models.WorkoutTracker;
-using TheEightSuite.WebApp.BusinessObjects.WorkoutTracker;
 
 namespace TheEightSuite.WebApp.ViewModels
 {

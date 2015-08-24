@@ -1,0 +1,16 @@
+{
+    "version": "1.0.0-*",
+    "description": "Domain Class Library",
+    "authors": [ "Joseph" ],
+    "tags": [ "" ],
+    "projectUrl": "",
+    "licenseUrl": "",
+
+    "dependencies": {
+        "NodaTime": "2.0.0-alpha20150728"
+    },
+
+    "frameworks": {
+        "dnx451": { }
+    }
+}

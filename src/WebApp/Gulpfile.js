@@ -4,7 +4,7 @@ var del = require("del");
 var concat = require("gulp-concat");
 
 var sassPaths = ["wwwroot/**/*.scss", "!wwwroot/libs/**/*.scss"];
-var appPaths = ["wwwroot/utilities/*.js", "wwwroot/app/**/module.js", "wwwroot/app/**/{*, !module}.js"];
+var appPaths = ["wwwroot/utilities/*.js", "wwwroot/app/**/module.js", "wwwroot/app/**/{*,!module}.js"];
 
 gulp.task("default", ["sass", "concat"]);
 gulp.task("watch", ["sass:watch", "concat-app:watch"]);

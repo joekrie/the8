@@ -3,6 +3,52 @@
   "version": -9996,
   "targets": {
     "DNX,Version=v4.5.1": {
+      "Core/1.0.0": {
+        "dependencies": {
+          "jQuery": "1.9.1",
+          "knockoutjs": "2.2.1",
+          "Sammy.js": "0.7.4"
+        }
+      },
+      "Data/1.0.0": {
+        "dependencies": {
+          "EnterpriseLibrary.Data": "6.0.1304.0",
+          "EnterpriseLibrary.Common": "6.0.1304.0"
+        },
+        "compile": {
+          "lib/Data.dll": {}
+        },
+        "runtime": {
+          "lib/Data.dll": {}
+        }
+      },
+      "EnterpriseLibrary.Common/6.0.1304.0": {
+        "frameworkAssemblies": [
+          "mscorlib"
+        ],
+        "compile": {
+          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Common.dll": {}
+        },
+        "runtime": {
+          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Common.dll": {}
+        }
+      },
+      "EnterpriseLibrary.Data/6.0.1304.0": {
+        "dependencies": {
+          "EnterpriseLibrary.Common": "6.0"
+        },
+        "frameworkAssemblies": [
+          "mscorlib"
+        ],
+        "compile": {
+          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Data.dll": {}
+        },
+        "runtime": {
+          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Data.dll": {}
+        }
+      },
+      "jQuery/1.9.1": {},
+      "knockoutjs/2.2.1": {},
       "Microsoft.AspNet.Authentication/1.0.0-beta5": {
         "dependencies": {
           "Microsoft.AspNet.DataProtection": "1.0.0-beta5",
@@ -1266,6 +1312,11 @@
           "lib/net45/Raven.Database.dll": {}
         }
       },
+      "Sammy.js/0.7.4": {
+        "dependencies": {
+          "jQuery": "1.4.1"
+        }
+      },
       "System.Collections.Immutable/1.1.36": {
         "compile": {
           "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.dll": {}
@@ -1288,6 +1339,78 @@
     }
   },
   "libraries": {
+    "Core/1.0.0": {
+      "sha512": "bFbFb2kIo5iGEfFe5R2VuX9CFm9xLe1oovhRx+o8vg83kuoC/iIlu00qfei15iuvNDE4K2O7P9g4kxMtwNfBxA==",
+      "files": [
+        "Core.1.0.0.nupkg",
+        "Core.1.0.0.nupkg.sha512",
+        "Core.nuspec",
+        "Conesoft/Core.js"
+      ]
+    },
+    "Data/1.0.0": {
+      "sha512": "iQB6lDyGYiMD7N459ydJbrXtBHzSx3XfmywJij4atW0gpgkjN8Ij4HdAbr9adabg09ex9JC5ES2IYeXrbN2rQQ==",
+      "files": [
+        "Data.1.0.0.nupkg",
+        "Data.1.0.0.nupkg.sha512",
+        "Data.nuspec",
+        "content/_._",
+        "lib/Data.dll"
+      ]
+    },
+    "EnterpriseLibrary.Common/6.0.1304.0": {
+      "sha512": "w/ua1PWAQD1/CnJ+qz/5APgmqI/1YnbamnwFGSotm7b66sFIkrnfLC+9+WzcSZWnePwwUw3Pl2QsLVDyX7NwaQ==",
+      "files": [
+        "EnterpriseLibrary.Common.6.0.1304.0.nupkg",
+        "EnterpriseLibrary.Common.6.0.1304.0.nupkg.sha512",
+        "EnterpriseLibrary.Common.nuspec",
+        "EnterpriseLibrary.Configuration.xsd",
+        "Update-EntlibConfiguration.ps1",
+        "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Common.dll",
+        "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Common.xml",
+        "tools/install.ps1",
+        "tools/Utils.psm1"
+      ]
+    },
+    "EnterpriseLibrary.Data/6.0.1304.0": {
+      "sha512": "FmaIrwbO7qOg0hd6rESeltyxcOccBa9V5QXPQ/4vMzpqZXh457uiJcwV4Xtx8q1zFhiGq1AszYjWP1p69Qps+w==",
+      "files": [
+        "EnterpriseLibrary.Data.6.0.1304.0.nupkg",
+        "EnterpriseLibrary.Data.6.0.1304.0.nupkg.sha512",
+        "EnterpriseLibrary.Data.nuspec",
+        "Readme.txt",
+        "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Data.dll",
+        "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Data.xml",
+        "tools/install.ps1",
+        "tools/Utils.psm1"
+      ]
+    },
+    "jQuery/1.9.1": {
+      "sha512": "HiX9icLyiJGgiL5EOIn0d1MBPHVV2M9mzWT4mANdniDNR51RvAFTyKEXEd2+5yQJ4PJ5xePOR61Vjj/omQzYcw==",
+      "files": [
+        "jQuery.1.9.1.nupkg",
+        "jQuery.1.9.1.nupkg.sha512",
+        "jQuery.nuspec",
+        "Content/Scripts/jquery-1.9.1-vsdoc.js",
+        "Content/Scripts/jquery-1.9.1.js",
+        "Content/Scripts/jquery-1.9.1.min.js",
+        "Content/Scripts/jquery-1.9.1.min.map",
+        "Tools/common.ps1",
+        "Tools/install.ps1",
+        "Tools/jquery-1.9.1.intellisense.js",
+        "Tools/uninstall.ps1"
+      ]
+    },
+    "knockoutjs/2.2.1": {
+      "sha512": "+EJyE1DT7WApO0HnQr1TDuIJy8jqWOTlteJyB2CQTK6XU11naJhAwu8I35bP8oxS8kCuIry9S4jIpPMULw3xvw==",
+      "files": [
+        "knockoutjs.2.2.1.nupkg",
+        "knockoutjs.2.2.1.nupkg.sha512",
+        "knockoutjs.nuspec",
+        "Content/Scripts/knockout-2.2.1.debug.js",
+        "Content/Scripts/knockout-2.2.1.js"
+      ]
+    },
     "Microsoft.AspNet.Authentication/1.0.0-beta5": {
       "serviceable": true,
       "sha512": "0aGfwSmbVHhNIQSp6dXqz6sLYD07U9Dgnw8rm/wnQDkLFfJ9iPQKBBTk/Oh/6wGwaSg9Ko7mzXTwILE42HZdZA==",
@@ -2347,6 +2470,19 @@
         "tools/install.ps1"
       ]
     },
+    "Sammy.js/0.7.4": {
+      "sha512": "jWRXtY9wMa1GDn3yycBpELFS2OWDnyArL1c8tJNOzTeVfCsaDmKmaN8U1PoWiJYPaueAawlqaRZFG5YegTlzLA==",
+      "files": [
+        "Sammy.js.0.7.4.nupkg",
+        "Sammy.js.0.7.4.nupkg.sha512",
+        "Sammy.js.nuspec",
+        "Content/Scripts/sammy-0.7.4.js",
+        "Content/Scripts/sammy-0.7.4.min.js",
+        "Tools/common.ps1",
+        "Tools/install.ps1",
+        "Tools/uninstall.ps1"
+      ]
+    },
     "System.Collections.Immutable/1.1.36": {
       "serviceable": true,
       "sha512": "MOlivTIeAIQPPMUPWIIoMCvZczjFRLYUWSYwqi1szu8QPyeIbsaPeI+hpXe1DzTxNwnRnmfYaoToi6kXIfSPNg==",
@@ -2394,7 +2530,9 @@
       "Microsoft.Framework.Logging.NLog >= 1.0.0-beta6-11585",
       "NLog >= 4.0.1",
       "NLog.Schema >= 4.0.1",
-      "NLog.Config >= 4.0.1"
+      "NLog.Config >= 4.0.1",
+      "Common >= 1.0.0-*",
+      "Domain >= 1.0.0-*"
     ],
     "DNX,Version=v4.5.1": []
   }
