@@ -1,4 +1,5 @@
-﻿@model TheEightSuite.WebApp.ViewModels.AjaxUrlVM
+﻿@using TheEight.WebApp.ViewModels
+@model TheEight.WebApp.ViewModels.AjaxUrlVM
 
 <div ng-app="workoutBuilder" ng-controller="MainCtrl" data-get-url="@Model.GetUrl" data-save-url="@Model.SaveUrl" ng-cloak>
     <form name="form" ng-submit="saveWorkout()" autocomplete="off" ng-show="dataLoaded">

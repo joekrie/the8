@@ -1,4 +1,4 @@
-namespace TheEightSuite.WebApp.ViewModels
+namespace TheEight.WebApp.ViewModels
 {
     public class DeleteWorkoutVM
     {

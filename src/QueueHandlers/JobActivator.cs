@@ -2,7 +2,7 @@
 using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Framework.DependencyInjection;
 
-namespace TheEightSuite.QueueHandlers
+namespace TheEight.QueueHandlers
 {
     public class JobActivator : IJobActivator
     {

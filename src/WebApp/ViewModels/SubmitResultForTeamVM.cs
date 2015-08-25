@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using TheEightSuite.Data.Models.Teams;
-using TheEightSuite.Data.Models.WorkoutTracker;
+using TheEight.Domain.Teams;
+using TheEight.Domain.WorkoutTracker;
 
-namespace TheEightSuite.WebApp.ViewModels
+namespace TheEight.WebApp.ViewModels
 {
     public class SubmitResultForTeamVM
     {

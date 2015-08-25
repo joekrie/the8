@@ -1,4 +1,4 @@
-namespace TheEightSuite.Domain.WorkoutTracker
+namespace TheEight.Domain.WorkoutTracker
 {
     public class PieceInfo
     {

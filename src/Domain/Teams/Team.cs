@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using NodaTime;
 
-namespace TheEightSuite.Domain.Teams
+namespace TheEight.Domain.Teams
 {
     public class Team
     {

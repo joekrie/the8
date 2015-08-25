@@ -1,6 +1,6 @@
 ﻿using Microsoft.Framework.Configuration;
 
-namespace TheEightSuite.Common
+namespace TheEight.Common.Config
 {
     public static class ConfigurationFactory
     {

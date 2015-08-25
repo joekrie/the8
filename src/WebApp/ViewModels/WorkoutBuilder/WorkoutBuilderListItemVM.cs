@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-
-namespace TheEightSuite.WebApp.ViewModels.WorkoutBuilder
+namespace TheEight.WebApp.ViewModels.WorkoutBuilder
 {
     public class WorkoutBuilderListItemVM
     {

@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using NodaTime;
 using Raven.Client;
-using TheEightSuite.Domain.WorkoutTracker;
-using TheEightSuite.WebApp.ViewModels;
-using TheEightSuite.WebApp.ViewModels.WorkoutBuilder;
+using TheEight.Domain.WorkoutTracker;
+using TheEight.WebApp.ViewModels;
+using TheEight.WebApp.ViewModels.WorkoutBuilder;
 
-namespace TheEightSuite.WebApp.Controllers
+namespace TheEight.WebApp.Controllers
 {
     [Route("workouts/builder")]
     public class WorkoutBuilderController : Controller

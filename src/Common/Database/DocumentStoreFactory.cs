@@ -1,8 +1,9 @@
 ﻿using Raven.Client;
 using Raven.Client.Document;
 using Raven.Client.NodaTime;
+using TheEight.Common.Config;
 
-namespace TheEightSuite.Common
+namespace TheEight.Common.Database
 {
     public static class DocumentStoreFactory
     {
@@ -12,12 +13,12 @@ namespace TheEightSuite.Common
                 .ConfigureForNodaTime();
         }
 
-        public static IDocumentStore GetCloudDocumentStore(string url, string apiKey)
+        public static IDocumentStore GetCloudDocumentStore(RavenHqSettings settings)
         {
             return new DocumentStore
             {
-                Url = url,
-                ApiKey = apiKey
+                Url = settings.Url,
+                ApiKey = settings.ApiKey
             }
                 .Initialize()
                 .Configure();

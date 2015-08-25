@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
-using TheEightSuite.Data.Models.Teams;
+using TheEight.Domain.Teams;
 
-namespace TheEightSuite.WebApp.Filters
+namespace TheEight.WebApp.Filters
 {
     public class AuthenticationFilterAttribute : IAsyncAuthorizationFilter
     {

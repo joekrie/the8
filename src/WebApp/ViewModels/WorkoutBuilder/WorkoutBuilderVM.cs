@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using TheEightSuite.Data.Models.WorkoutTracker;
+using TheEight.Domain.WorkoutTracker;
 
-namespace TheEightSuite.WebApp.ViewModels.WorkoutBuilder
+namespace TheEight.WebApp.ViewModels.WorkoutBuilder
 {
     public class WorkoutBuilderVM
     {

@@ -1,4 +1,4 @@
-namespace TheEightSuite.Domain.Teams
+namespace TheEight.Domain.Teams
 {
     public class UserInfo
     {

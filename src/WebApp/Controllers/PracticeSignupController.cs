@@ -3,7 +3,7 @@ using Microsoft.AspNet.Mvc;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace TheEightSuite.WebApp.Controllers
+namespace TheEight.WebApp.Controllers
 {
     [Route("api/[controller]")]
     public class PracticeSignupController : Controller

@@ -3,46 +3,53 @@ using Microsoft.AspNet.Diagnostics;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
+using Microsoft.Framework.OptionsModel;
 using Microsoft.Framework.Runtime;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using NodaTime;
 using NodaTime.Serialization.JsonNet;
-using TheEightSuite.Common;
-using TheEightSuite.WebApp.Services.TeamDetection;
+using TheEight.Common.Config;
+using TheEight.Common.Database;
+using TheEight.Common.Logging;
 
-namespace TheEightSuite.WebApp
+namespace TheEight.WebApp
 {
     public class Startup
     {
-        private readonly IApplicationEnvironment _applicationEnvironment;
-        private readonly IConfiguration _configuration;
+        private readonly IApplicationEnvironment _appEnv;
+        private readonly IConfiguration _config;
         private ILogger _logger;
 
         public Startup(IApplicationEnvironment applicationEnvironment)
         {
-            _applicationEnvironment = applicationEnvironment;
-            _configuration = ConfigurationFactory.GetConfiguration(_applicationEnvironment.ApplicationBasePath);
+            _appEnv = applicationEnvironment;
+            _config = ConfigurationFactory.GetConfiguration(_appEnv.ApplicationBasePath);
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            if (_applicationEnvironment.Configuration == "Debug")
+            services.AddOptions();
+
+            services.Configure<FacebookSettings>(_config.GetConfigurationSection("Facebook"));
+            services.Configure<GoogleSettings>(_config.GetConfigurationSection("Google"));
+            services.Configure<MicrosoftAccountSettings>(_config.GetConfigurationSection("MicrosoftAccount"));
+
+            if (_appEnv.Configuration == "Debug")
             {
                 services.AddSingleton(provider => DocumentStoreFactory.GetDevelopmentDocumentStore());
             }
             else
             {
+                services.Configure<RavenHqSettings>(_config.GetConfigurationSection("RavenHq"));
+
                 services.AddSingleton(provider =>
                 {
-                    var url = _configuration.Get("RavenHq:Url");
-                    var apiKey = _configuration.Get("RavenHq:ApiKey");
-                    return DocumentStoreFactory.GetCloudDocumentStore(url, apiKey);
+                    var settings = provider.GetRequiredService<IOptions<RavenHqSettings>>();
+                    return DocumentStoreFactory.GetCloudDocumentStore(settings.Options);
                 });
             }
-
-            services.AddTeamDetector();
-
+            
             services.AddMvc();
 
             services.ConfigureMvc(options =>
@@ -61,10 +68,9 @@ namespace TheEightSuite.WebApp
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
             _logger = loggerFactory
-                .Setup(_applicationEnvironment.ApplicationBasePath, _applicationEnvironment.Configuration == "Debug")
-                .CreateLogger(_applicationEnvironment.ApplicationName);
-
-            app.UseTeamDetector();
+                .SetupNLog(_appEnv.ApplicationBasePath, _appEnv.Configuration == "Debug")
+                .CreateLogger(_appEnv.ApplicationName);
+            
             app.UseStaticFiles();
             app.UseMvc();
         }

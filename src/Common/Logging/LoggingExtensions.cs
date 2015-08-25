@@ -2,13 +2,12 @@
 using NLog;
 using NLog.Config;
 using NLog.Targets;
-using LogLevel = NLog.LogLevel;
 
-namespace TheEightSuite.Common
+namespace TheEight.Common.Logging
 {
     public static class LoggingExtensions
     {
-        public static ILoggerFactory Setup(this ILoggerFactory loggerFactory, string basePath, bool debugMode)
+        public static ILoggerFactory SetupNLog(this ILoggerFactory loggerFactory, string basePath, bool debugMode)
         {
             var nLogFileTarget = new FileTarget
             {
@@ -18,7 +17,7 @@ namespace TheEightSuite.Common
 
             var nLogConfig = new LoggingConfiguration();
             nLogConfig.AddTarget("file", nLogFileTarget);
-            nLogConfig.LoggingRules.Add(new LoggingRule("*", LogLevel.Info, nLogFileTarget));
+            nLogConfig.LoggingRules.Add(new LoggingRule("*", NLog.LogLevel.Info, nLogFileTarget));
 
             if (debugMode)
             {
@@ -27,8 +26,7 @@ namespace TheEightSuite.Common
                     .AddNLog(new LogFactory(nLogConfig));
             }
             
-            return loggerFactory
-                .AddNLog(new LogFactory(nLogConfig));
+            return loggerFactory.AddNLog(new LogFactory(nLogConfig));
         }
     }
 }

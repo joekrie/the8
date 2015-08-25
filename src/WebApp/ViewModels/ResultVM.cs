@@ -1,7 +1,7 @@
 using NodaTime;
-using TheEightSuite.Data.Models.WorkoutTracker;
+using TheEight.Domain.WorkoutTracker;
 
-namespace TheEightSuite.WebApp.ViewModels
+namespace TheEight.WebApp.ViewModels
 {
     public class ResultVM
     {

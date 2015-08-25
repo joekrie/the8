@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace TheEightSuite.Domain.WorkoutTracker
+namespace TheEight.Domain.WorkoutTracker
 {
     public class Piece
     {

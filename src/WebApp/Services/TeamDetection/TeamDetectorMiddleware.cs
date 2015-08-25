@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 
-namespace TheEightSuite.WebApp.Services.TeamDetection
+namespace TheEight.WebApp.Services.TeamDetection
 {
     public class TeamDetectorMiddleware
     {
