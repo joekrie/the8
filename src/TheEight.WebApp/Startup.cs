@@ -1,5 +1,10 @@
-﻿using Microsoft.AspNet.Builder;
+﻿using System;
+using System.ComponentModel.Composition.Hosting;
+using Autofac;
+using Autofac.Framework.DependencyInjection;
+using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Diagnostics;
+using Microsoft.AspNet.Hosting;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
@@ -10,6 +15,7 @@ using Newtonsoft.Json.Serialization;
 using NodaTime;
 using NodaTime.Serialization.JsonNet;
 using TheEight.Common.Config;
+using TheEight.Common.Configuration;
 using TheEight.Common.Database;
 using TheEight.Common.Logging;
 
@@ -19,16 +25,20 @@ namespace TheEight.WebApp
     {
         private readonly IApplicationEnvironment _appEnv;
         private readonly IConfiguration _config;
+        private readonly IHostingEnvironment _hostEnv;
         private ILogger _logger;
 
-        public Startup(IApplicationEnvironment applicationEnvironment)
+        public Startup(IApplicationEnvironment applicationEnvironment, IHostingEnvironment hostingEnvironment)
         {
             _appEnv = applicationEnvironment;
+            _hostEnv = hostingEnvironment;
             _config = ConfigurationFactory.GetConfiguration(_appEnv.ApplicationBasePath);
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            var builder = new ContainerBuilder();
+
             services.AddOptions();
 
             services.Configure<FacebookSettings>(_config.GetConfigurationSection("Facebook"));
@@ -58,6 +68,10 @@ namespace TheEight.WebApp
                 options.SerializerSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             });
+            
+            builder.Populate(services);
+            
+            return builder.Build().Resolve<IServiceProvider>();
         }
 
         public void ConfigureDevelopment(IApplicationBuilder app)

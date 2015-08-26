@@ -7,6 +7,7 @@ using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.OptionsModel;
 using Microsoft.Framework.Runtime;
 using TheEight.Common.Config;
+using TheEight.Common.Configuration;
 using TheEight.QueueHandlers.MessageQueue;
 using Twilio;
 
