@@ -8,8 +8,8 @@ using Microsoft.Framework.OptionsModel;
 using Microsoft.Framework.Runtime;
 using TheEight.Common.Config;
 using TheEight.Common.Configuration;
-using TheEight.QueueHandlers.MessageQueue;
 using Twilio;
+using TheEight.Common.DependencyInjection;
 
 namespace TheEight.QueueHandlers
 {
@@ -22,7 +22,6 @@ namespace TheEight.QueueHandlers
         public Program(IApplicationEnvironment applicationEnvironment)
         {
             _appEnv = applicationEnvironment;
-
             _config = ConfigurationFactory.GetConfiguration(_appEnv.ApplicationBasePath);
 
             var services = new ServiceCollection()
@@ -59,10 +58,10 @@ namespace TheEight.QueueHandlers
                             : settings.Dashboard.ConnectionString
                     };
                 })
-                .AddScoped<MessageQueueHandler>();
+                .AddScoped<MessageQueueHandler>()
+                .BuildServiceProvider();
 
-            var serviceProvider = services.BuildServiceProvider();
-            _jobActivator = new JobActivator(serviceProvider);
+            _jobActivator = new JobActivator(services);
         }
 
         public void Main(string[] args)

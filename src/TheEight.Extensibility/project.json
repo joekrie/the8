@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0-*",
+  "description": "TheEight.Extensibility Class Library",
+  "authors": [ "Joseph" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "dependencies": {
+    "Microsoft.Azure.WebJobs": "1.0.1"
+  },
+
+  "frameworks": {
+    "dnx451": {
+      "frameworkAssemblies": {
+        "System.ComponentModel.Composition": "4.0.0.0"
+      }
+    }
+  }
+}

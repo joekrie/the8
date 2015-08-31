@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel.Composition.Hosting;
-using Autofac;
-using Autofac.Framework.DependencyInjection;
-using Microsoft.AspNet.Builder;
+﻿using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Diagnostics;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Framework.Configuration;
@@ -35,10 +31,8 @@ namespace TheEight.WebApp
             _config = ConfigurationFactory.GetConfiguration(_appEnv.ApplicationBasePath);
         }
 
-        public IServiceProvider ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
-            var builder = new ContainerBuilder();
-
             services.AddOptions();
 
             services.Configure<FacebookSettings>(_config.GetConfigurationSection("Facebook"));
@@ -68,10 +62,6 @@ namespace TheEight.WebApp
                 options.SerializerSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             });
-            
-            builder.Populate(services);
-            
-            return builder.Build().Resolve<IServiceProvider>();
         }
 
         public void ConfigureDevelopment(IApplicationBuilder app)

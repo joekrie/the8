@@ -1,8 +1,7 @@
-﻿using System;
-using System.Net.Mail;
+﻿using System.Net.Mail;
 using Microsoft.Azure.WebJobs;
 
-namespace TheEight.QueueHandlers.MessageQueue
+namespace TheEight.QueueHandlers
 {
     public class MessageQueueHandler
     {
