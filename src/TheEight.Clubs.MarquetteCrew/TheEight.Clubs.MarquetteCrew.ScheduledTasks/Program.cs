@@ -20,9 +20,14 @@ namespace TheEight.ScheduledTasks
     public class Program
     {
         private readonly IJobActivator _jobActivator;
+        private readonly IAssemblyLoadContextAccessor _loadContextAccessor;
+        private readonly IAssemblyLoaderContainer _loaderContainer;
 
-        public Program(IApplicationEnvironment applicationEnvironment)
+        public Program(IAssemblyLoadContextAccessor loadContextAccessor, IAssemblyLoaderContainer loaderContainer)
         {
+            _loadContextAccessor = loadContextAccessor;
+            _loaderContainer = loaderContainer;
+
             var services = new ServiceCollection()
                 .AddSingleton(provider => DocumentStoreFactory.GetDevelopmentDocumentStore())
                 .BuildServiceProvider();
@@ -41,7 +46,7 @@ namespace TheEight.ScheduledTasks
 
         public void Main(string[] args)
         {
-            Console.WriteLine(typeof(ICalculator).Assembly.Location);
+            var loadContext = _loadContextAccessor.Default;
 
             var catalog = new AggregateCatalog();
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(Program).Assembly));

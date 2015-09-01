@@ -10,8 +10,7 @@
     "Microsoft.Azure.WebJobs": "1.0.1",
     "Microsoft.Framework.DependencyInjection": "1.0.0-beta5",
     "TheEight.Common": "1.0.0-*",
-    "Microsoft.Framework.Runtime.Abstractions": "1.0.0-beta5",
-    "TheEight.Extensibility": "1.0.0-*"
+    "Microsoft.Framework.Runtime.Abstractions": "1.0.0-beta5"
   },
 
   "commands": {
