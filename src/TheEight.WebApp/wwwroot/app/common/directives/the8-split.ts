@@ -1,14 +1,16 @@
-﻿angular.module("the8.common").directive("the8Split", () => {
+﻿var splitUtilities = require("../utilities/splitUtilities");
+
+angular.module("the8.common").directive("the8Split", () => {
     return {
         restrict: "A",
         require: "ngModel",
         scope: {
             "ngModel": "="
         },
-        link: function(scope, element, attr, ngModel) {
-            ngModel.$formatters.push(value => splitUtilities.formatSplit(value));
+        link: (scope, element, attr, ngModel: angular.INgModelController) => {
+            ngModel.$formatters.push((value: moment.Duration) => splitUtilities.formatSplit(value));
 
-            ngModel.$parsers.push(value => {
+            ngModel.$parsers.push((value: string) => {
                 if (value.trim() === "") {
                     ngModel.$setValidity("durationRange", true);
                     ngModel.$setValidity("validDuration", true);

@@ -1,0 +1,17 @@
+﻿<the8-modal show-modal="">
+    <span class="modal-title"></span>
+    <div class="field-group">
+        <label>
+            Range
+            <input type="checkbox" ng-model="range" />
+        </label>
+    </div>
+    <div class="field-group">
+        <span class="field-group-title">{{ range ? 'Date' : 'From' }}</span>
+        <div date-picker=""></div>
+    </div>
+    <div class="field-group" ng-show="">
+        <span class="field-group-title">To</span>
+        <div date-picker=""></div>
+    </div>
+</the8-modal>
