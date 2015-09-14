@@ -1,4 +1,4 @@
-﻿var splitUtilities = require("../utilities/splitUtilities");
+﻿import splitUtilities = require("../utilities/splitUtilities");
 
 angular.module("the8.common").directive("the8Split", () => {
     return {
@@ -7,7 +7,7 @@ angular.module("the8.common").directive("the8Split", () => {
         scope: {
             "ngModel": "="
         },
-        link: (scope, element, attr, ngModel: angular.INgModelController) => {
+        link: (scope: angular.IScope, element: angular.IAugmentedJQuery, attr: angular.IAttributes, ngModel: angular.INgModelController) => {
             ngModel.$formatters.push((value: moment.Duration) => splitUtilities.formatSplit(value));
 
             ngModel.$parsers.push((value: string) => {
