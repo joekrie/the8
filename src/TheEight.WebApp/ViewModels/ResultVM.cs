@@ -1,5 +1,5 @@
 using NodaTime;
-using TheEight.Domain.WorkoutTracker;
+using TheEight.Domain.Workouts;
 
 namespace TheEight.WebApp.ViewModels
 {

@@ -1,1 +1,1 @@
-﻿angular.module("practicePlanner", ["shared"]);
+﻿angular.module("the8.practicePlanner", ["the8.common", "dragularModule", "datePicker"]);

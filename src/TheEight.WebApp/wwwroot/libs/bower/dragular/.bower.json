@@ -1,0 +1,30 @@
+{
+  "name": "dragular.js",
+  "version": "3.0.2",
+  "description": "Angular drag and drop based on dragula",
+  "main": [
+    "dist/dragular.min.js",
+    "dist/dragular.min.css"
+  ],
+  "dependencies": {
+    "angular": "1.x"
+  },
+  "ignore": [
+    "node_modules",
+    "bower_components"
+  ],
+  "homepage": "http://luckylooke.github.io/dragular/",
+  "authors": [
+    "Ctibor Laky <luckylooke@gmail.com>"
+  ],
+  "license": "MIT",
+  "_release": "3.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v3.0.2",
+    "commit": "56a93b570b79ee06d7fd09a13bfa967bd38595d6"
+  },
+  "_source": "git://github.com/luckylooke/dragular.git",
+  "_target": "^3.0.2",
+  "_originalSource": "dragular"
+}

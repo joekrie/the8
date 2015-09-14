@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using NodaTime;
 using Raven.Client;
-using TheEight.Domain.WorkoutTracker;
+using TheEight.Domain.Workouts;
 using TheEight.WebApp.ViewModels;
 using TheEight.WebApp.ViewModels.WorkoutBuilder;
 

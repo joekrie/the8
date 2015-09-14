@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using TheEight.Domain.Teams;
-using TheEight.Domain.WorkoutTracker;
+using TheEight.Domain.Workouts;
 
 namespace TheEight.WebApp.ViewModels
 {
