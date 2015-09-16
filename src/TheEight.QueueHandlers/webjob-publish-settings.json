@@ -1,0 +1,4 @@
+﻿{
+  "webJobName": "QueueHandlers",
+  "runMode": "Continuous"
+}

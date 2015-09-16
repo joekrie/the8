@@ -1,0 +1,7 @@
+﻿{
+  "WebJobs": [
+    {
+      "filePath": "../QueueHandlers/QueueHandlers.xproj"
+    }
+  ]
+}
