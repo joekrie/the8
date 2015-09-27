@@ -1,1 +1,0 @@
-﻿angular.module("the8.common", ["dragularModule", "datePicker"]);

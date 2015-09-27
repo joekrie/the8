@@ -1,0 +1,1 @@
+module.exports = require("npm:rome@2.1.22/src/rome.moment");

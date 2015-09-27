@@ -1,0 +1,1 @@
+module.exports = require("npm:seleccion@2.0.0/src/seleccion");

@@ -1,0 +1,1 @@
+module.exports = require("npm:bullseye@1.4.6/bullseye");

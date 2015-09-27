@@ -1,0 +1,14 @@
+{
+  "name": "jest",
+  "homepage": "https://github.com/facebook/jest",
+  "version": "5.0.3",
+  "_release": "5.0.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v5.0.3",
+    "commit": "50873747ad44c99a3cff690571ee63b0d0ec17fe"
+  },
+  "_source": "git://github.com/facebook/jest.git",
+  "_target": "^5.0.3",
+  "_originalSource": "jest"
+}

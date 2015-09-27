@@ -1,0 +1,1 @@
+module.exports = require("npm:sell@1.0.0/sell");

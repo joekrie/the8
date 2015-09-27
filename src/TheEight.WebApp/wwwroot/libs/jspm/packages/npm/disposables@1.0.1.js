@@ -1,0 +1,1 @@
+module.exports = require("npm:disposables@1.0.1/modules/index");

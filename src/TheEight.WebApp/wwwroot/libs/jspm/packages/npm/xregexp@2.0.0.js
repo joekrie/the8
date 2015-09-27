@@ -1,0 +1,1 @@
+module.exports = require("npm:xregexp@2.0.0/xregexp-all");
