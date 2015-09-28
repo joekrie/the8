@@ -19,6 +19,8 @@ System.config({
     "react-dnd": "npm:react-dnd@1.1.7",
     "reqwest": "github:ded/reqwest@2.0.3",
     "rome": "npm:rome@2.1.22",
+    "rx": "npm:rx@4.0.0",
+    "rx-react": "npm:rx-react@0.3.0-beta2",
     "traceur": "github:jmcriffey/bower-traceur@0.0.88",
     "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88",
     "xregexp": "npm:xregexp@2.0.0",
@@ -181,6 +183,11 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.1",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
+    "npm:core-js@1.2.0": {
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "process": "github:jspm/nodelibs-process@0.1.1",
+      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
+    },
     "npm:core-util-is@1.0.1": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
@@ -272,7 +279,7 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:fbjs@0.2.1": {
-      "core-js": "npm:core-js@1.1.4",
+      "core-js": "npm:core-js@1.2.0",
       "process": "github:jspm/nodelibs-process@0.1.1",
       "promise": "npm:promise@7.0.4",
       "whatwg-fetch": "npm:whatwg-fetch@0.9.0"
@@ -463,6 +470,15 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.1",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
+    },
+    "npm:rx-react@0.3.0-beta2": {
+      "fbjs": "npm:fbjs@0.2.1",
+      "process": "github:jspm/nodelibs-process@0.1.1",
+      "react": "npm:react@0.14.0-rc1",
+      "rx": "npm:rx@4.0.0"
+    },
+    "npm:rx@4.0.0": {
+      "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:sha.js@2.4.3": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",

@@ -2,12 +2,27 @@
 var sass = require("gulp-sass");
 var del = require("del");
 var concat = require("gulp-concat");
+var Builder = require('systemjs-builder');
 
 var sassPaths = ["wwwroot/**/*.scss", "!wwwroot/libs/**/*.scss"];
 var appPaths = ["wwwroot/utilities/*.js", "wwwroot/app/**/module.js", "wwwroot/app/**/{*,!module}.js"];
 
 gulp.task("default", ["sass", "concat"]);
 gulp.task("watch", ["sass:watch", "concat-app:watch"]);
+
+gulp.task('bundle-js-build', [], function () {
+    var builder = new Builder('./', 'config.js')
+    
+    return builder.buildStatic(pathToSrc + 'index.js', '../' + 'index.js', {
+        runtime: false,
+        sourceMaps: true,
+        lowResSourceMaps: true
+    })
+    .catch(function(err) {
+        console.log('Build error');
+        console.log(err);
+    });
+});
 
 gulp.task("sass", function() {
     return gulp.src(sassPaths)

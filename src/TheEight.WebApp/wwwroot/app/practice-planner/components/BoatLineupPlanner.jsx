@@ -4,163 +4,121 @@ import HTML5Backend from 'react-dnd/modules/backends/HTML5';
 import Dispatcher from '../../common/dispatcher';
 import { actions } from '../constants';
 import _ from 'lodash';
+import Immutable from 'immutable';
+import boatTypes from '../boatTypes';
 
 @DragDropContext(HTML5Backend)
 export default class BoatLineupPlanner extends Component {
 	constructor() {
 		this.dispatcher = new Dispatcher();
 		
+		// todo: move these into testable modules
+		
 		this.dispatcher.registerAction(actions.ASSIGN, 
-			(attendee, newSeatKey) => {
-				// assign attendee to new seat
+			(attendee, boatKey, position) => {
+				const newBoats = this.state.boats
+					.setIn([boatKey, 'seats', position], attendee);
+					
+				const newUnassigned = this.state.unassignedAttendees
+					.delete(attendee.get('id'));
+				
+				this.setState('boats', newBoats);
+				this.setState('unassignedAttendees', newUnassigned);
 			});
 		
 		this.dispatcher.registerAction(actions.UNASSIGN, 
-			(attendee, oldSeatKey) => {
-				// set old seat to empty
-				// add attendee to unassigned list
+			(attendee, oldBoatKey, oldPosition) => {
+				const newBoats = this.state.boats
+					.setIn([oldBoatKey, 'seats', oldPosition], null);
+					
+				const newUnassigned = this.state.unassignedAttendees
+					.set(attendee.get('id'), attendee);
+					
+				this.setState('boats', newBoats);
+				this.setState('unassignedAttendees', newUnassigned);
 			});
 			
 		this.dispatcher.registerAction(actions.MOVE,
-			(attendee, oldSeatKey, newSeatKey) => {
-				// set old seat to empty
-				// assign attendee to new seat
+			(newAttendee, oldBoatKey, oldPosition, newBoatKey, newPosition) => {
+				const oldAttendee = this.state.boats.getIn([newBoatKey, 'seats', newPosition]);
+				
+				const newBoats = this.state.boats
+					.setIn([oldBoatKey, 'seats', oldPosition], oldAttendee)
+					.setIn([newBoatKey, 'seats', newPosition], newAttendee);
+					
+				this.setState('boats', newBoats);
 			});
 	}
 	
 	getInitialState() {
-		return {
-			unassignedAttendees: [],
-			boats: []
-		};
-	}
-	
-	componentDidMount() {
-		this.setState({
-			unassignedAttendees: [
-				{
-					teamMemberId: 'TeamMembers/103',
+		return Immutable.fromJS({
+			unassignedAttendees: {
+				'TeamMembers/103': {
+					id: 'TeamMembers/103',
 					sortName: 'Yealsalot, George',
 					displayName: 'George Yealsalot',
 					position: 'coxswain'
 				},
-				{
-					teamMemberId: 'TeamMembers/77',
+				'TeamMembers/77': {
+					id: 'TeamMembers/77',
 					sortName: 'Earges, Jimmy',
 					displayName: 'Jimmy Earges',
 					position: 'rower'
 				},
-				{
-					teamMemberId: 'TeamMembers/31',
+				'TeamMembers/31': {
+					id: 'TeamMembers/31',
 					sortName: 'Crabbs, Bill',
 					displayName: 'Bill Crabbs',
 					position: 'rower'
-				}
-			],
-			boats: [
-				{
-					key: 'boat-1',
-					title: 'M2',
-					type: {
-						rowers: 4,
-						coxswain: true,
-						shortTitle: '4+',
-						longTitle: 'four'
-					},
-					coxswain: {
-						teamMemberId: 'TeamMembers/17',
-						sortName: 'Passem, Henry',
-						displayName: 'Henry Passem',
-						position: 'rower'
-					},
-					seats: [
-						{
-							position: 1,
-							attendee: {
-								teamMemberId: 'TeamMembers/54',
-								sortName: 'Rowerson, Mickey',
-								displayName: 'Mickey Rowerson',
-								position: 'rower'
-							}
-						},
-						{
-							position: 2,
-							attendee: null
-						},
-						{
-							position: 3,
-							attendee: null
-						},
-						{
-							position: 4,
-							attendee: null
-						}
-					]
 				},
-				{
-					key: 'boat-2',
-					title: 'Jaws',
-					type: {
-						rowers: 2,
-						coxswain: false,
-						shortTitle: '2x',
-						longTitle: 'double'
-					},
-					seats: [
-						{
-							position: 1,
-							attendee: null
-						},
-						{
-							position: 2,
-							attendee: null
-						}
-					]
+				'TeamMembers/6': {
+					id: 'TeamMembers/6',
+					sortName: 'Whaker, Brig',
+					displayName: 'Brig Whaker',
+					position: 'coxswain'
 				}
-			]
+			},
+			boats: {
+				'boat-1': {
+					title: 'M2',
+					type: boatTypes.FOUR,
+					seats: {
+						coxswain: {
+							id: 'TeamMembers/17',
+							sortName: 'Passem, Henry',
+							displayName: 'Henry Passem',
+							position: 'rower'
+						},
+						stroke: {
+							id: 'TeamMembers/54',
+							sortName: 'Rowerson, Mickey',
+							displayName: 'Mickey Rowerson',
+							position: 'rower'
+						},
+						2: null,
+						3: null,
+						bow: null
+					}
+				},
+				'boat-2': {
+					title: 'Jaws',
+					type: boatTypes.DOUBLE,
+					seats: {
+						stroke: null,
+						bow: null
+					}
+				}
+			}
 		});
 	}
-
+	
 	render() {
 		return (
 			<div>
-				<UnassignedAttendeeList dispatcher={this.dispatcher} />
+				<UnassignedAttendeeList unassignedAttendees={this.state.unassignedAttendees} 
+					dispatcher={this.dispatcher} />
 				<BoatList boats={this.state.boats} dispatcher={this.dispatcher} />
 			</div>
 		);
-	}
-}
-	
-function createRowerSeatLabel(count, num) {
-	if (num === 1) {
-		return 'Bow';
-	}
-	
-	if (num === count) {
-		return 'Stroke';
-	}
-	
-	return String(num);
-}
-
-function createEmptyRowerSeat(boatKey, boatType, position) {
-	const seatKey = `${boatKey}.seat-${position}`;
-
-	return {
-		key: seatKey,
-		attendee: null,
-		label: createRowerSeatLabel(boatType.seatCount, num)
-	};
-}
-
-function createEmptyBoat(type) {
-	const boatKey = _.uniqueKey('boat-');
-			
-	const seats = _.times(type.seatCount, 
-		num => createEmptyRowerSeat(boatKey, type, num));
-	
-	return {
-		key: boatKey,
-		seats: seats
 	}
 }

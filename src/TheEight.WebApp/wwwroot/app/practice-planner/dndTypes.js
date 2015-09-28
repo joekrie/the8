@@ -1,3 +1,3 @@
 export default {
-	ATTENDEE: 'attendee'
+	ATTENDEE: Symbol('attendee')
 };

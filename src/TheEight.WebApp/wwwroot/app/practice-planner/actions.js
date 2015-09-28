@@ -1,5 +1,5 @@
 export default {
-	ASSIGN: 'assign',
-	UNASSIGN: 'unassign',
-	MOVE: 'move'
+	ASSIGN: Symbol('assign'),
+	UNASSIGN: Symbol('unassign'),
+	MOVE: Symbol('move')
 };

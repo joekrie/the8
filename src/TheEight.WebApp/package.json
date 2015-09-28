@@ -27,6 +27,8 @@
       "react-dnd": "npm:react-dnd@^1.1.7",
       "reqwest": "github:ded/reqwest@^2.0.3",
       "rome": "npm:rome@^2.1.22",
+      "rx": "npm:rx@^4.0.0",
+      "rx-react": "npm:rx-react@^0.3.0-beta2",
       "xregexp": "npm:xregexp@^2.0.0"
     },
     "devDependencies": {
