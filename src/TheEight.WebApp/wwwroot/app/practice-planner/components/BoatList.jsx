@@ -6,7 +6,8 @@ export default class BoatList extends Component {
 	render() {
 		return (
 			<div>
-				{this.props.boats.map(boat => (<Boat boat={boat} dispatcher={this.props.dispatcher}>))}
+				{this.props.boats.toArray()
+					.map(boat => <Boat key={boat.key} boat={boat} dispatcher={this.props.dispatcher}>)}
 			</div>
 		);
 	}

@@ -9,7 +9,8 @@ export default class Boat extends Component {
 					<div>{this.props.type}</div>
 				</div>
 				<div>
-					{this.props.seats.map(seat => (<BoatSeat seat={seat} dispatcher={this.props.dispatcher} />))}
+					{this.props.seats.toJS()
+						.map(seat => <BoatSeat seat={seat} dispatcher={this.props.dispatcher} />)}
 				</div>
 			</div>
 		);

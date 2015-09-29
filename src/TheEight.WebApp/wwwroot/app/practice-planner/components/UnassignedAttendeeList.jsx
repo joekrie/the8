@@ -15,7 +15,7 @@ export default class UnassignedAttendeeList extends Component {
 	render() {
 		return this.props.connectDropTarget(
 			<div>
-				{this.props.attendees.map(attendee => (<Attendee attendee={this.attendee} />))}}
+				{this.props.attendees.map(attendee => (<Attendee key={attendee.id} attendee={this.attendee} />))}}
 			</div>
 		);
 	}

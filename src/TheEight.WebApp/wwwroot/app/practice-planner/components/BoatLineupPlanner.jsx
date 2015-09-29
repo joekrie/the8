@@ -10,49 +10,17 @@ import boatTypes from '../boatTypes';
 @DragDropContext(HTML5Backend)
 export default class BoatLineupPlanner extends Component {
 	constructor() {
+		this.store = new PracticePlannerStore(this.state, this.setState);
+		
 		this.dispatcher = new Dispatcher();
-		
-		// todo: move these into testable modules
-		
-		this.dispatcher.registerAction(actions.ASSIGN, 
-			(attendee, boatKey, position) => {
-				const newBoats = this.state.boats
-					.setIn([boatKey, 'seats', position], attendee);
-					
-				const newUnassigned = this.state.unassignedAttendees
-					.delete(attendee.get('id'));
-				
-				this.setState('boats', newBoats);
-				this.setState('unassignedAttendees', newUnassigned);
-			});
-		
-		this.dispatcher.registerAction(actions.UNASSIGN, 
-			(attendee, oldBoatKey, oldPosition) => {
-				const newBoats = this.state.boats
-					.setIn([oldBoatKey, 'seats', oldPosition], null);
-					
-				const newUnassigned = this.state.unassignedAttendees
-					.set(attendee.get('id'), attendee);
-					
-				this.setState('boats', newBoats);
-				this.setState('unassignedAttendees', newUnassigned);
-			});
-			
-		this.dispatcher.registerAction(actions.MOVE,
-			(newAttendee, oldBoatKey, oldPosition, newBoatKey, newPosition) => {
-				const oldAttendee = this.state.boats.getIn([newBoatKey, 'seats', newPosition]);
-				
-				const newBoats = this.state.boats
-					.setIn([oldBoatKey, 'seats', oldPosition], oldAttendee)
-					.setIn([newBoatKey, 'seats', newPosition], newAttendee);
-					
-				this.setState('boats', newBoats);
-			});
+		this.dispatcher.registerAction(actions.ASSIGN, store.assign);		
+		this.dispatcher.registerAction(actions.UNASSIGN, store.unassign);			
+		this.dispatcher.registerAction(actions.MOVE, store.move);
 	}
 	
 	getInitialState() {
-		return Immutable.fromJS({
-			unassignedAttendees: {
+		return {
+			unassignedAttendees: Immutable.fromJS({
 				'TeamMembers/103': {
 					id: 'TeamMembers/103',
 					sortName: 'Yealsalot, George',
@@ -77,9 +45,10 @@ export default class BoatLineupPlanner extends Component {
 					displayName: 'Brig Whaker',
 					position: 'coxswain'
 				}
-			},
-			boats: {
+			}),
+			boats: Immutable.fromJS({
 				'boat-1': {
+					key: 'boat-1',
 					title: 'M2',
 					type: boatTypes.FOUR,
 					seats: {
@@ -101,6 +70,7 @@ export default class BoatLineupPlanner extends Component {
 					}
 				},
 				'boat-2': {
+					key: 'boat-2',
 					title: 'Jaws',
 					type: boatTypes.DOUBLE,
 					seats: {
@@ -108,8 +78,8 @@ export default class BoatLineupPlanner extends Component {
 						bow: null
 					}
 				}
-			}
-		});
+			})
+		};
 	}
 	
 	render() {
