@@ -1,1 +1,0 @@
-module.exports = require("npm:rx-react@0.3.0-beta2/index");

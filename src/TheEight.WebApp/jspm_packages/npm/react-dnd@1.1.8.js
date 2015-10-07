@@ -1,0 +1,1 @@
+module.exports = require("npm:react-dnd@1.1.8/modules/index");

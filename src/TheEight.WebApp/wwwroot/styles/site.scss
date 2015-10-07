@@ -1,9 +1,2 @@
 ﻿@import "base";
 
-[ng\:cloak], [ng-cloak], .ng-cloak {
-  display: none !important;
-}
-
-div.container {
-    @include outer-container;
-} 

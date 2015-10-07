@@ -12,28 +12,19 @@
     "node-sass": "^3.2.0"
   },
   "jspm": {
-    "directories": {
-      "baseURL": "wwwroot",
-      "packages": "wwwroot/libs/jspm/packages"
-    },
-    "configFile": "wwwroot/libs/jspm/config.js",
+    "directories": {},
+    "configFile": "jspm_config.js",
     "dependencies": {
-      "atoa": "npm:atoa@^1.0.0",
-      "contra": "npm:contra@^1.9.1",
-      "immutable": "npm:immutable@^3.7.5",
-      "jsx": "github:floatdrop/plugin-jsx@^1.1.0",
-      "moment": "github:moment/moment@^2.10.6",
       "react": "npm:react@^0.14.0-rc1",
-      "react-dnd": "npm:react-dnd@^1.1.7",
-      "reqwest": "github:ded/reqwest@^2.0.3",
-      "rome": "npm:rome@^2.1.22",
-      "rx": "npm:rx@^4.0.0",
-      "rx-react": "npm:rx-react@^0.3.0-beta2",
-      "xregexp": "npm:xregexp@^2.0.0"
+      "react-dnd": "npm:react-dnd@^1.1.8",
+      "react-dnd-touch-backend": "npm:react-dnd-touch-backend@^0.1.0",
+      "react-redux": "npm:react-redux@^3.1.0",
+      "redux": "npm:redux@^3.0.2"
     },
     "devDependencies": {
-      "traceur": "github:jmcriffey/bower-traceur@0.0.88",
-      "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88"
+      "babel": "npm:babel-core@^5.1.13",
+      "babel-runtime": "npm:babel-runtime@^5.1.13",
+      "core-js": "npm:core-js@^0.9.4"
     }
   }
 }

@@ -1,1 +1,0 @@
-module.exports = require("npm:crossvent@1.5.4/src/crossvent");

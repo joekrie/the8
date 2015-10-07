@@ -47,25 +47,13 @@ textarea {
   transition: border-color;
   width: 100%;
 
-  &.ng-invalid {
-      border-color: $error-color;
-  }
-
   &:hover {
     border-color: darken($base-border-color, 10%);
-
-      &.ng-invalid {
-        border-color: darken($error-color, 10%);
-      }
   }
 
   &:focus {
     border-color: $action-color;
     outline: none;
-
-      &.ng-invalid {
-        border-color: darken($error-color, 10%);
-      }
   }
 }
 
