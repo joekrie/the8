@@ -44,5 +44,5 @@
   ],
   "userSecretsId": "TheEightSuite",
   "version": "1.0.0-*",
-  "webroot": "wwwroot"
+  "webroot": "dist"
 }

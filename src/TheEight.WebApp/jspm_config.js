@@ -1,5 +1,5 @@
 System.config({
-  "baseURL": "wwwroot",
+  "baseURL": "src/app",
   "transpiler": "babel",
   "babelOptions": {
     "blacklist": [],
@@ -19,10 +19,13 @@ System.config({
   "map": {
     "babel": "npm:babel-core@5.8.25",
     "babel-runtime": "npm:babel-runtime@5.8.25",
+    "classnames": "npm:classnames@2.1.5",
     "core-js": "npm:core-js@0.9.18",
-    "react": "npm:react@0.14.0-rc1",
+    "immutable": "npm:immutable@3.7.5",
+    "react": "npm:react@0.14.0",
     "react-dnd": "npm:react-dnd@1.1.8",
     "react-dnd-touch-backend": "npm:react-dnd-touch-backend@0.1.0",
+    "react-dom": "npm:react-dom@0.14.0",
     "react-redux": "npm:react-redux@3.1.0",
     "redux": "npm:redux@3.0.2",
     "github:jspm/nodelibs-assert@0.1.0": {
@@ -70,6 +73,11 @@ System.config({
       "ieee754": "npm:ieee754@1.1.6",
       "is-array": "npm:is-array@1.0.1"
     },
+    "npm:classnames@2.1.5": {
+      "assert": "github:jspm/nodelibs-assert@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
+    },
     "npm:core-js@0.9.18": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "process": "github:jspm/nodelibs-process@0.1.2",
@@ -101,10 +109,11 @@ System.config({
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:fbjs@0.2.1": {
+    "npm:fbjs@0.3.1": {
       "core-js": "npm:core-js@1.2.1",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "promise": "npm:promise@7.0.4",
+      "ua-parser-js": "npm:ua-parser-js@0.7.9",
       "whatwg-fetch": "npm:whatwg-fetch@0.9.0"
     },
     "npm:inherits@2.0.1": {
@@ -156,7 +165,10 @@ System.config({
       "lodash": "npm:lodash@3.10.1",
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
-      "react": "npm:react@0.14.0-rc1"
+      "react": "npm:react@0.14.0"
+    },
+    "npm:react-dom@0.14.0": {
+      "react": "npm:react@0.14.0"
     },
     "npm:react-redux@3.1.0": {
       "hoist-non-react-statics": "npm:hoist-non-react-statics@1.0.3",
@@ -164,9 +176,9 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "redux": "npm:redux@3.0.2"
     },
-    "npm:react@0.14.0-rc1": {
+    "npm:react@0.14.0": {
       "envify": "npm:envify@3.4.0",
-      "fbjs": "npm:fbjs@0.2.1",
+      "fbjs": "npm:fbjs@0.3.1",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:readable-stream@1.1.13": {
@@ -201,6 +213,9 @@ System.config({
     "npm:through@2.3.8": {
       "process": "github:jspm/nodelibs-process@0.1.2",
       "stream": "github:jspm/nodelibs-stream@0.1.0"
+    },
+    "npm:ua-parser-js@0.7.9": {
+      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
     "npm:util@0.10.3": {
       "inherits": "npm:inherits@2.0.1",

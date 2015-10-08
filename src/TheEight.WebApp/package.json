@@ -15,9 +15,12 @@
     "directories": {},
     "configFile": "jspm_config.js",
     "dependencies": {
-      "react": "npm:react@^0.14.0-rc1",
+      "classnames": "npm:classnames@^2.1.5",
+      "immutable": "npm:immutable@^3.7.5",
+      "react": "npm:react@^0.14.0",
       "react-dnd": "npm:react-dnd@^1.1.8",
       "react-dnd-touch-backend": "npm:react-dnd-touch-backend@^0.1.0",
+      "react-dom": "npm:react-dom@^0.14.0",
       "react-redux": "npm:react-redux@^3.1.0",
       "redux": "npm:redux@^3.0.2"
     },
