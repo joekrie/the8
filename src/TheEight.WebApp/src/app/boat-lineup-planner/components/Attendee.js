@@ -5,15 +5,9 @@ import classNames from 'classnames';
 import attendeePositions from '../constants/attendeePositions';
 
 const spec = {
-	beginDrag: (props, monitor, component) => {
-        console.log('beginDrag');
-        console.log(props);
-        console.log(monitor);
-        console.log(component);
-        return {};
-    },
-	endDrag: (props, monitor, component) => ({}),
-	//canDrag: (props, monitor) => true
+	beginDrag: props => ({
+		attendeeId: props.teamMember.get('id')
+	})
 };
 
 const collect = (connect, monitor) => ({
@@ -23,16 +17,16 @@ const collect = (connect, monitor) => ({
 @DragSource(dndTypes.ATTENDEE, spec, collect)
 export default class extends React.Component {
 	render() {
-		const { attendee, connectDragSource } = this.props;
+		const { teamMember, connectDragSource } = this.props;
 		
 		const classes = classNames('attendee', {
-			'rower': attendee.get('position') == attendeePositions.ROWER,
-			'coxswain': attendee.get('position') == attendeePositions.COXSWAIN
+			'rower': teamMember.get('position') == attendeePositions.ROWER,
+			'coxswain': teamMember.get('position') == attendeePositions.COXSWAIN
 		});
 		
 		return connectDragSource(
 			<div className={classes}>
-				{attendee.get('displayName')}
+				{teamMember.get('displayName')}
 			</div>
 		);
 	}

@@ -10476,223 +10476,76 @@ System.register("npm:lodash@3.10.1/internal/createDefaults", ["npm:lodash@3.10.1
   return module.exports;
 });
 
-System.register("npm:react-dnd-touch-backend@0.1.0/dist/Touch", ["npm:react-dnd@1.1.8/modules/utils/OffsetHelpers", "npm:invariant@2.1.1"], true, function(require, exports, module) {
+System.register("npm:react-redux@3.1.0/lib/utils/createStoreShape", [], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  "use strict";
+  exports.__esModule = true;
+  exports["default"] = createStoreShape;
+  function createStoreShape(PropTypes) {
+    return PropTypes.shape({
+      subscribe: PropTypes.func.isRequired,
+      dispatch: PropTypes.func.isRequired,
+      getState: PropTypes.func.isRequired
+    });
+  }
+  module.exports = exports["default"];
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:react-redux@3.1.0/lib/utils/shallowEqual", [], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  "use strict";
+  exports.__esModule = true;
+  exports["default"] = shallowEqual;
+  function shallowEqual(objA, objB) {
+    if (objA === objB) {
+      return true;
+    }
+    var keysA = Object.keys(objA);
+    var keysB = Object.keys(objB);
+    if (keysA.length !== keysB.length) {
+      return false;
+    }
+    var hasOwn = Object.prototype.hasOwnProperty;
+    for (var i = 0; i < keysA.length; i++) {
+      if (!hasOwn.call(objB, keysA[i]) || objA[keysA[i]] !== objB[keysA[i]]) {
+        return false;
+      }
+    }
+    return true;
+  }
+  module.exports = exports["default"];
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:react-redux@3.1.0/lib/utils/isPlainObject", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  Object.defineProperty(exports, '__esModule', {value: true});
-  var _createClass = (function() {
-    function defineProperties(target, props) {
-      for (var i = 0; i < props.length; i++) {
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ('value' in descriptor)
-          descriptor.writable = true;
-        Object.defineProperty(target, descriptor.key, descriptor);
-      }
+  exports.__esModule = true;
+  exports['default'] = isPlainObject;
+  var fnToString = function fnToString(fn) {
+    return Function.prototype.toString.call(fn);
+  };
+  function isPlainObject(obj) {
+    if (!obj || typeof obj !== 'object') {
+      return false;
     }
-    return function(Constructor, protoProps, staticProps) {
-      if (protoProps)
-        defineProperties(Constructor.prototype, protoProps);
-      if (staticProps)
-        defineProperties(Constructor, staticProps);
-      return Constructor;
-    };
-  })();
-  exports['default'] = createTouchBackend;
-  function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {'default': obj};
-  }
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function');
+    var proto = typeof obj.constructor === 'function' ? Object.getPrototypeOf(obj) : Object.prototype;
+    if (proto === null) {
+      return true;
     }
+    var constructor = proto.constructor;
+    return typeof constructor === 'function' && constructor instanceof constructor && fnToString(constructor) === fnToString(Object);
   }
-  var _reactDndModulesUtilsOffsetHelpers = require("npm:react-dnd@1.1.8/modules/utils/OffsetHelpers");
-  var _invariant = require("npm:invariant@2.1.1");
-  var _invariant2 = _interopRequireDefault(_invariant);
-  var TouchBackend = (function() {
-    function TouchBackend(manager) {
-      _classCallCheck(this, TouchBackend);
-      this.actions = manager.getActions();
-      this.monitor = manager.getMonitor();
-      this.registry = manager.getRegistry();
-      this.sourceNodes = {};
-      this.sourceNodeOptions = {};
-      this.sourcePreviewNodes = {};
-      this.sourcePreviewNodeOptions = {};
-      this.targetNodes = {};
-      this.targetNodeOptions = {};
-      this._mouseClientOffset = {};
-      this.getSourceClientOffset = this.getSourceClientOffset.bind(this);
-      this.handleTopTouchStart = this.handleTopTouchStart.bind(this);
-      this.handleTopTouchStartCapture = this.handleTopTouchStartCapture.bind(this);
-      this.handleTopTouchMoveCapture = this.handleTopTouchMoveCapture.bind(this);
-      this.handleTopTouchEndCapture = this.handleTopTouchEndCapture.bind(this);
-    }
-    _createClass(TouchBackend, [{
-      key: 'setup',
-      value: function setup() {
-        if (typeof window === 'undefined') {
-          return ;
-        }
-        (0, _invariant2['default'])(!this.constructor.isSetUp, 'Cannot have two Touch backends at the same time.');
-        this.constructor.isSetUp = true;
-        window.addEventListener('touchstart', this.handleTopTouchStartCapture, true);
-        window.addEventListener('touchstart', this.handleTopTouchStart);
-        window.addEventListener('touchmove', this.handleTopTouchMoveCapture, true);
-        window.addEventListener('touchend', this.handleTopTouchEndCapture, true);
-      }
-    }, {
-      key: 'teardown',
-      value: function teardown() {
-        if (typeof window === 'undefined') {
-          return ;
-        }
-        this.constructor.isSetUp = false;
-        this._mouseClientOffset = {};
-        window.removeEventListener('touchstart', this.handleTopTouchStartCapture, true);
-        window.removeEventListener('touchstart', this.handleTopTouchStart);
-        window.removeEventListener('touchmove', this.handleTopTouchMoveCapture, true);
-        window.removeEventListener('touchend', this.handleTopTouchEndCapture, true);
-        this.uninstallSourceNodeRemovalObserver();
-      }
-    }, {
-      key: 'connectDragSource',
-      value: function connectDragSource(sourceId, node, options) {
-        var _this = this;
-        var handleTouchStart = this.handleTouchStart.bind(this, sourceId);
-        this.sourceNodes[sourceId] = node;
-        node.addEventListener('touchstart', handleTouchStart);
-        return function() {
-          delete _this.sourceNodes[sourceId];
-          node.removeEventListener('touchstart', handleTouchStart);
-        };
-      }
-    }, {
-      key: 'connectDragPreview',
-      value: function connectDragPreview(sourceId, node, options) {
-        var _this2 = this;
-        this.sourcePreviewNodeOptions[sourceId] = options;
-        this.sourcePreviewNodes[sourceId] = node;
-        return function() {
-          delete _this2.sourcePreviewNodes[sourceId];
-          delete _this2.sourcePreviewNodeOptions[sourceId];
-        };
-      }
-    }, {
-      key: 'connectDropTarget',
-      value: function connectDropTarget(targetId, node) {
-        var _this3 = this;
-        this.targetNodes[targetId] = node;
-        return function() {
-          delete _this3.targetNodes[targetId];
-        };
-      }
-    }, {
-      key: 'getSourceClientOffset',
-      value: function getSourceClientOffset(sourceId) {
-        return (0, _reactDndModulesUtilsOffsetHelpers.getElementClientOffset)(this.sourceNodes[sourceId]);
-      }
-    }, {
-      key: 'handleTopTouchStartCapture',
-      value: function handleTopTouchStartCapture(e) {
-        this.touchStartSourceIds = [];
-      }
-    }, {
-      key: 'handleTouchStart',
-      value: function handleTouchStart(sourceId) {
-        this.touchStartSourceIds.unshift(sourceId);
-      }
-    }, {
-      key: 'handleTopTouchStart',
-      value: function handleTopTouchStart(e) {
-        if (e.targetTouches.length !== 1) {
-          return ;
-        }
-        this._mouseClientOffset = (0, _reactDndModulesUtilsOffsetHelpers.getEventClientOffset)(e.targetTouches[0]);
-      }
-    }, {
-      key: 'handleTopTouchMoveCapture',
-      value: function handleTopTouchMoveCapture(e) {
-        var _this4 = this;
-        var touchStartSourceIds = this.touchStartSourceIds;
-        if (e.targetTouches.length !== 1) {
-          return ;
-        }
-        var clientOffset = (0, _reactDndModulesUtilsOffsetHelpers.getEventClientOffset)(e.targetTouches[0]);
-        if (!this.monitor.isDragging() && this._mouseClientOffset.hasOwnProperty('x') && touchStartSourceIds && (this._mouseClientOffset.x !== clientOffset.x || this._mouseClientOffset.y !== clientOffset.y)) {
-          this.touchStartSourceIds = null;
-          this.actions.beginDrag(touchStartSourceIds, {
-            clientOffset: this._mouseClientOffset,
-            getSourceClientOffset: this.getSourceClientOffset,
-            publishSource: false
-          });
-        }
-        if (!this.monitor.isDragging()) {
-          return ;
-        }
-        var sourceNode = this.sourceNodes[this.monitor.getSourceId()];
-        this.installSourceNodeRemovalObserver(sourceNode);
-        this.actions.publishDragSource();
-        e.preventDefault();
-        var matchingTargetIds = Object.keys(this.targetNodes).filter(function(targetId) {
-          var boundingRect = _this4.targetNodes[targetId].getBoundingClientRect();
-          return clientOffset.x >= boundingRect.left && clientOffset.x <= boundingRect.right && clientOffset.y >= boundingRect.top && clientOffset.y <= boundingRect.bottom;
-        });
-        this.actions.hover(matchingTargetIds, {clientOffset: clientOffset});
-      }
-    }, {
-      key: 'handleTopTouchEndCapture',
-      value: function handleTopTouchEndCapture(e) {
-        if (!this.monitor.isDragging() || this.monitor.didDrop()) {
-          return ;
-        }
-        e.preventDefault();
-        this._mouseClientOffset = {};
-        this.uninstallSourceNodeRemovalObserver();
-        this.actions.drop();
-        this.actions.endDrag();
-      }
-    }, {
-      key: 'installSourceNodeRemovalObserver',
-      value: function installSourceNodeRemovalObserver(node) {
-        var _this5 = this;
-        this.uninstallSourceNodeRemovalObserver();
-        this.draggedSourceNode = node;
-        this.draggedSourceNodeRemovalObserver = new window.MutationObserver(function() {
-          if (!node.parentElement) {
-            _this5.resurrectSourceNode();
-            _this5.uninstallSourceNodeRemovalObserver();
-          }
-        });
-        this.draggedSourceNodeRemovalObserver.observe(node.parentElement, {childList: true});
-      }
-    }, {
-      key: 'resurrectSourceNode',
-      value: function resurrectSourceNode() {
-        this.draggedSourceNode.style.display = 'none';
-        this.draggedSourceNode.removeAttribute('data-reactid');
-        document.body.appendChild(this.draggedSourceNode);
-      }
-    }, {
-      key: 'uninstallSourceNodeRemovalObserver',
-      value: function uninstallSourceNodeRemovalObserver() {
-        if (this.draggedSourceNodeRemovalObserver) {
-          this.draggedSourceNodeRemovalObserver.disconnect();
-        }
-        this.draggedSourceNodeRemovalObserver = null;
-        this.draggedSourceNode = null;
-      }
-    }]);
-    return TouchBackend;
-  })();
-  exports.TouchBackend = TouchBackend;
-  function createTouchBackend(manager) {
-    return new TouchBackend(manager);
-  }
+  module.exports = exports['default'];
   global.define = __define;
   return module.exports;
 });
@@ -10788,6 +10641,42 @@ System.register("npm:redux@3.0.2/lib/utils/compose", [], true, function(require,
     };
   }
   module.exports = exports["default"];
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:hoist-non-react-statics@1.0.3/index", [], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var REACT_STATICS = {
+    childContextTypes: true,
+    contextTypes: true,
+    defaultProps: true,
+    displayName: true,
+    getDefaultProps: true,
+    mixins: true,
+    propTypes: true,
+    type: true
+  };
+  var KNOWN_STATICS = {
+    name: true,
+    length: true,
+    prototype: true,
+    caller: true,
+    arguments: true,
+    arity: true
+  };
+  module.exports = function hoistNonReactStatics(targetComponent, sourceComponent) {
+    var keys = Object.getOwnPropertyNames(sourceComponent);
+    for (var i = 0; i < keys.length; ++i) {
+      if (!REACT_STATICS[keys[i]] && !KNOWN_STATICS[keys[i]]) {
+        targetComponent[keys[i]] = sourceComponent[keys[i]];
+      }
+    }
+    return targetComponent;
+  };
   global.define = __define;
   return module.exports;
 });
@@ -14258,11 +14147,112 @@ System.register("npm:lodash@3.10.1/internal/bindCallback", ["npm:lodash@3.10.1/u
   return module.exports;
 });
 
-System.register("npm:react-dnd-touch-backend@0.1.0", ["npm:react-dnd-touch-backend@0.1.0/dist/Touch"], true, function(require, exports, module) {
+System.register("npm:react-redux@3.1.0/lib/components/createProvider", ["npm:react-redux@3.1.0/lib/utils/createStoreShape"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  module.exports = require("npm:react-dnd-touch-backend@0.1.0/dist/Touch");
+  'use strict';
+  exports.__esModule = true;
+  exports['default'] = createProvider;
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {'default': obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== 'function' && superClass !== null) {
+      throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var _utilsCreateStoreShape = require("npm:react-redux@3.1.0/lib/utils/createStoreShape");
+  var _utilsCreateStoreShape2 = _interopRequireDefault(_utilsCreateStoreShape);
+  function isUsingOwnerContext(React) {
+    var version = React.version;
+    if (typeof version !== 'string') {
+      return true;
+    }
+    var sections = version.split('.');
+    var major = parseInt(sections[0], 10);
+    var minor = parseInt(sections[1], 10);
+    return major === 0 && minor === 13;
+  }
+  function createProvider(React) {
+    var Component = React.Component;
+    var PropTypes = React.PropTypes;
+    var Children = React.Children;
+    var storeShape = _utilsCreateStoreShape2['default'](PropTypes);
+    var requireFunctionChild = isUsingOwnerContext(React);
+    var didWarnAboutChild = false;
+    function warnAboutFunctionChild() {
+      if (didWarnAboutChild || requireFunctionChild) {
+        return ;
+      }
+      didWarnAboutChild = true;
+      console.error('With React 0.14 and later versions, you no longer need to ' + 'wrap <Provider> child into a function.');
+    }
+    function warnAboutElementChild() {
+      if (didWarnAboutChild || !requireFunctionChild) {
+        return ;
+      }
+      didWarnAboutChild = true;
+      console.error('With React 0.13, you need to ' + 'wrap <Provider> child into a function. ' + 'This restriction will be removed with React 0.14.');
+    }
+    var didWarnAboutReceivingStore = false;
+    function warnAboutReceivingStore() {
+      if (didWarnAboutReceivingStore) {
+        return ;
+      }
+      didWarnAboutReceivingStore = true;
+      console.error('<Provider> does not support changing `store` on the fly. ' + 'It is most likely that you see this error because you updated to ' + 'Redux 2.x and React Redux 2.x which no longer hot reload reducers ' + 'automatically. See https://github.com/rackt/react-redux/releases/' + 'tag/v2.0.0 for the migration instructions.');
+    }
+    var Provider = (function(_Component) {
+      _inherits(Provider, _Component);
+      Provider.prototype.getChildContext = function getChildContext() {
+        return {store: this.store};
+      };
+      function Provider(props, context) {
+        _classCallCheck(this, Provider);
+        _Component.call(this, props, context);
+        this.store = props.store;
+      }
+      Provider.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+        var store = this.store;
+        var nextStore = nextProps.store;
+        if (store !== nextStore) {
+          warnAboutReceivingStore();
+        }
+      };
+      Provider.prototype.render = function render() {
+        var children = this.props.children;
+        if (typeof children === 'function') {
+          warnAboutFunctionChild();
+          children = children();
+        } else {
+          warnAboutElementChild();
+        }
+        return Children.only(children);
+      };
+      return Provider;
+    })(Component);
+    Provider.childContextTypes = {store: storeShape.isRequired};
+    Provider.propTypes = {
+      store: storeShape.isRequired,
+      children: (requireFunctionChild ? PropTypes.func : PropTypes.element).isRequired
+    };
+    return Provider;
+  }
+  module.exports = exports['default'];
   global.define = __define;
   return module.exports;
 });
@@ -14410,6 +14400,15 @@ System.register("npm:redux@3.0.2/lib/utils/applyMiddleware", ["npm:redux@3.0.2/l
     };
   }
   module.exports = exports['default'];
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:hoist-non-react-statics@1.0.3", ["npm:hoist-non-react-statics@1.0.3/index"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = require("npm:hoist-non-react-statics@1.0.3/index");
   global.define = __define;
   return module.exports;
 });
@@ -19675,6 +19674,24 @@ System.register("npm:lodash@3.10.1/object/defaults", ["npm:lodash@3.10.1/object/
   return module.exports;
 });
 
+System.register("npm:react-redux@3.1.0/lib/utils/wrapActionCreators", ["npm:redux@3.0.2"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  exports.__esModule = true;
+  exports['default'] = wrapActionCreators;
+  var _redux = require("npm:redux@3.0.2");
+  function wrapActionCreators(actionCreators) {
+    return function(dispatch) {
+      return _redux.bindActionCreators(actionCreators, dispatch);
+    };
+  }
+  module.exports = exports['default'];
+  global.define = __define;
+  return module.exports;
+});
+
 System.register("npm:fbjs@0.3.1/lib/toArray", ["npm:fbjs@0.3.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -20592,6 +20609,227 @@ System.register("npm:react-dnd@1.1.8/modules/backends/HTML5", ["npm:dnd-core@1.2
   return module.exports;
 });
 
+System.register("npm:react-redux@3.1.0/lib/components/createConnect", ["npm:react-redux@3.1.0/lib/utils/createStoreShape", "npm:react-redux@3.1.0/lib/utils/shallowEqual", "npm:react-redux@3.1.0/lib/utils/isPlainObject", "npm:react-redux@3.1.0/lib/utils/wrapActionCreators", "npm:hoist-non-react-statics@1.0.3", "npm:invariant@2.1.1", "github:jspm/nodelibs-process@0.1.2"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    var _extends = Object.assign || function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    exports['default'] = createConnect;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    function _classCallCheck(instance, Constructor) {
+      if (!(instance instanceof Constructor)) {
+        throw new TypeError('Cannot call a class as a function');
+      }
+    }
+    function _inherits(subClass, superClass) {
+      if (typeof superClass !== 'function' && superClass !== null) {
+        throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+      }
+      subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+          value: subClass,
+          enumerable: false,
+          writable: true,
+          configurable: true
+        }});
+      if (superClass)
+        Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+    }
+    var _utilsCreateStoreShape = require("npm:react-redux@3.1.0/lib/utils/createStoreShape");
+    var _utilsCreateStoreShape2 = _interopRequireDefault(_utilsCreateStoreShape);
+    var _utilsShallowEqual = require("npm:react-redux@3.1.0/lib/utils/shallowEqual");
+    var _utilsShallowEqual2 = _interopRequireDefault(_utilsShallowEqual);
+    var _utilsIsPlainObject = require("npm:react-redux@3.1.0/lib/utils/isPlainObject");
+    var _utilsIsPlainObject2 = _interopRequireDefault(_utilsIsPlainObject);
+    var _utilsWrapActionCreators = require("npm:react-redux@3.1.0/lib/utils/wrapActionCreators");
+    var _utilsWrapActionCreators2 = _interopRequireDefault(_utilsWrapActionCreators);
+    var _hoistNonReactStatics = require("npm:hoist-non-react-statics@1.0.3");
+    var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
+    var _invariant = require("npm:invariant@2.1.1");
+    var _invariant2 = _interopRequireDefault(_invariant);
+    var defaultMapStateToProps = function defaultMapStateToProps() {
+      return {};
+    };
+    var defaultMapDispatchToProps = function defaultMapDispatchToProps(dispatch) {
+      return {dispatch: dispatch};
+    };
+    var defaultMergeProps = function defaultMergeProps(stateProps, dispatchProps, parentProps) {
+      return _extends({}, parentProps, stateProps, dispatchProps);
+    };
+    function getDisplayName(Component) {
+      return Component.displayName || Component.name || 'Component';
+    }
+    var nextVersion = 0;
+    function createConnect(React) {
+      var Component = React.Component;
+      var PropTypes = React.PropTypes;
+      var storeShape = _utilsCreateStoreShape2['default'](PropTypes);
+      return function connect(mapStateToProps, mapDispatchToProps, mergeProps) {
+        var options = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+        var shouldSubscribe = Boolean(mapStateToProps);
+        var finalMapStateToProps = mapStateToProps || defaultMapStateToProps;
+        var finalMapDispatchToProps = _utilsIsPlainObject2['default'](mapDispatchToProps) ? _utilsWrapActionCreators2['default'](mapDispatchToProps) : mapDispatchToProps || defaultMapDispatchToProps;
+        var finalMergeProps = mergeProps || defaultMergeProps;
+        var shouldUpdateStateProps = finalMapStateToProps.length > 1;
+        var shouldUpdateDispatchProps = finalMapDispatchToProps.length > 1;
+        var _options$pure = options.pure;
+        var pure = _options$pure === undefined ? true : _options$pure;
+        var version = nextVersion++;
+        function computeStateProps(store, props) {
+          var state = store.getState();
+          var stateProps = shouldUpdateStateProps ? finalMapStateToProps(state, props) : finalMapStateToProps(state);
+          _invariant2['default'](_utilsIsPlainObject2['default'](stateProps), '`mapStateToProps` must return an object. Instead received %s.', stateProps);
+          return stateProps;
+        }
+        function computeDispatchProps(store, props) {
+          var dispatch = store.dispatch;
+          var dispatchProps = shouldUpdateDispatchProps ? finalMapDispatchToProps(dispatch, props) : finalMapDispatchToProps(dispatch);
+          _invariant2['default'](_utilsIsPlainObject2['default'](dispatchProps), '`mapDispatchToProps` must return an object. Instead received %s.', dispatchProps);
+          return dispatchProps;
+        }
+        function _computeNextState(stateProps, dispatchProps, parentProps) {
+          var mergedProps = finalMergeProps(stateProps, dispatchProps, parentProps);
+          _invariant2['default'](_utilsIsPlainObject2['default'](mergedProps), '`mergeProps` must return an object. Instead received %s.', mergedProps);
+          return mergedProps;
+        }
+        return function wrapWithConnect(WrappedComponent) {
+          var Connect = (function(_Component) {
+            _inherits(Connect, _Component);
+            Connect.prototype.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+              if (!pure) {
+                this.updateStateProps(nextProps);
+                this.updateDispatchProps(nextProps);
+                this.updateState(nextProps);
+                return true;
+              }
+              var storeChanged = nextState.storeState !== this.state.storeState;
+              var propsChanged = !_utilsShallowEqual2['default'](nextProps, this.props);
+              var mapStateProducedChange = false;
+              var dispatchPropsChanged = false;
+              if (storeChanged || propsChanged && shouldUpdateStateProps) {
+                mapStateProducedChange = this.updateStateProps(nextProps);
+              }
+              if (propsChanged && shouldUpdateDispatchProps) {
+                dispatchPropsChanged = this.updateDispatchProps(nextProps);
+              }
+              if (propsChanged || mapStateProducedChange || dispatchPropsChanged) {
+                this.updateState(nextProps);
+                return true;
+              }
+              return false;
+            };
+            function Connect(props, context) {
+              _classCallCheck(this, Connect);
+              _Component.call(this, props, context);
+              this.version = version;
+              this.store = props.store || context.store;
+              _invariant2['default'](this.store, 'Could not find "store" in either the context or ' + ('props of "' + this.constructor.displayName + '". ') + 'Either wrap the root component in a <Provider>, ' + ('or explicitly pass "store" as a prop to "' + this.constructor.displayName + '".'));
+              this.stateProps = computeStateProps(this.store, props);
+              this.dispatchProps = computeDispatchProps(this.store, props);
+              this.state = {storeState: null};
+              this.updateState();
+            }
+            Connect.prototype.computeNextState = function computeNextState() {
+              var props = arguments.length <= 0 || arguments[0] === undefined ? this.props : arguments[0];
+              return _computeNextState(this.stateProps, this.dispatchProps, props);
+            };
+            Connect.prototype.updateStateProps = function updateStateProps() {
+              var props = arguments.length <= 0 || arguments[0] === undefined ? this.props : arguments[0];
+              var nextStateProps = computeStateProps(this.store, props);
+              if (_utilsShallowEqual2['default'](nextStateProps, this.stateProps)) {
+                return false;
+              }
+              this.stateProps = nextStateProps;
+              return true;
+            };
+            Connect.prototype.updateDispatchProps = function updateDispatchProps() {
+              var props = arguments.length <= 0 || arguments[0] === undefined ? this.props : arguments[0];
+              var nextDispatchProps = computeDispatchProps(this.store, props);
+              if (_utilsShallowEqual2['default'](nextDispatchProps, this.dispatchProps)) {
+                return false;
+              }
+              this.dispatchProps = nextDispatchProps;
+              return true;
+            };
+            Connect.prototype.updateState = function updateState() {
+              var props = arguments.length <= 0 || arguments[0] === undefined ? this.props : arguments[0];
+              this.nextState = this.computeNextState(props);
+            };
+            Connect.prototype.isSubscribed = function isSubscribed() {
+              return typeof this.unsubscribe === 'function';
+            };
+            Connect.prototype.trySubscribe = function trySubscribe() {
+              if (shouldSubscribe && !this.unsubscribe) {
+                this.unsubscribe = this.store.subscribe(this.handleChange.bind(this));
+                this.handleChange();
+              }
+            };
+            Connect.prototype.tryUnsubscribe = function tryUnsubscribe() {
+              if (this.unsubscribe) {
+                this.unsubscribe();
+                this.unsubscribe = null;
+              }
+            };
+            Connect.prototype.componentDidMount = function componentDidMount() {
+              this.trySubscribe();
+            };
+            Connect.prototype.componentWillUnmount = function componentWillUnmount() {
+              this.tryUnsubscribe();
+            };
+            Connect.prototype.handleChange = function handleChange() {
+              if (!this.unsubscribe) {
+                return ;
+              }
+              this.setState({storeState: this.store.getState()});
+            };
+            Connect.prototype.getWrappedInstance = function getWrappedInstance() {
+              return this.refs.wrappedInstance;
+            };
+            Connect.prototype.render = function render() {
+              return React.createElement(WrappedComponent, _extends({ref: 'wrappedInstance'}, this.nextState));
+            };
+            return Connect;
+          })(Component);
+          Connect.displayName = 'Connect(' + getDisplayName(WrappedComponent) + ')';
+          Connect.WrappedComponent = WrappedComponent;
+          Connect.contextTypes = {store: storeShape};
+          Connect.propTypes = {store: storeShape};
+          if (process.env.NODE_ENV !== 'production') {
+            Connect.prototype.componentWillUpdate = function componentWillUpdate() {
+              if (this.version === version) {
+                return ;
+              }
+              this.version = version;
+              this.trySubscribe();
+              this.updateStateProps();
+              this.updateDispatchProps();
+              this.updateState();
+            };
+          }
+          return _hoistNonReactStatics2['default'](Connect, WrappedComponent);
+        };
+      };
+    }
+    module.exports = exports['default'];
+  })(require("github:jspm/nodelibs-process@0.1.2"));
+  global.define = __define;
+  return module.exports;
+});
+
 System.register("npm:fbjs@0.3.1/lib/createArrayFromMixed", ["npm:fbjs@0.3.1/lib/toArray"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -20793,6 +21031,33 @@ System.register("npm:babel-runtime@5.8.25/core-js/symbol", ["npm:core-js@0.9.18/
   return module.exports;
 });
 
+System.register("npm:react-redux@3.1.0/lib/components/createAll", ["npm:react-redux@3.1.0/lib/components/createProvider", "npm:react-redux@3.1.0/lib/components/createConnect"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  exports.__esModule = true;
+  exports['default'] = createAll;
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {'default': obj};
+  }
+  var _createProvider = require("npm:react-redux@3.1.0/lib/components/createProvider");
+  var _createProvider2 = _interopRequireDefault(_createProvider);
+  var _createConnect = require("npm:react-redux@3.1.0/lib/components/createConnect");
+  var _createConnect2 = _interopRequireDefault(_createConnect);
+  function createAll(React) {
+    var Provider = _createProvider2['default'](React);
+    var connect = _createConnect2['default'](React);
+    return {
+      Provider: Provider,
+      connect: connect
+    };
+  }
+  module.exports = exports['default'];
+  global.define = __define;
+  return module.exports;
+});
+
 System.register("npm:fbjs@0.3.1/lib/createNodesFromMarkup", ["npm:fbjs@0.3.1/lib/ExecutionEnvironment", "npm:fbjs@0.3.1/lib/createArrayFromMixed", "npm:fbjs@0.3.1/lib/getMarkupWrap", "npm:fbjs@0.3.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -20921,6 +21186,28 @@ System.register("npm:dnd-core@1.2.1/lib/reducers/dragOffset", ["npm:dnd-core@1.2
   return module.exports;
 });
 
+System.register("npm:react-redux@3.1.0/lib/index", ["npm:react@0.14.0", "npm:react-redux@3.1.0/lib/components/createAll"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  exports.__esModule = true;
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {'default': obj};
+  }
+  var _react = require("npm:react@0.14.0");
+  var _react2 = _interopRequireDefault(_react);
+  var _componentsCreateAll = require("npm:react-redux@3.1.0/lib/components/createAll");
+  var _componentsCreateAll2 = _interopRequireDefault(_componentsCreateAll);
+  var _createAll = _componentsCreateAll2['default'](_react2['default']);
+  var Provider = _createAll.Provider;
+  var connect = _createAll.connect;
+  exports.Provider = Provider;
+  exports.connect = connect;
+  global.define = __define;
+  return module.exports;
+});
+
 System.register("npm:react@0.14.0/lib/Danger", ["npm:fbjs@0.3.1/lib/ExecutionEnvironment", "npm:fbjs@0.3.1/lib/createNodesFromMarkup", "npm:fbjs@0.3.1/lib/emptyFunction", "npm:fbjs@0.3.1/lib/getMarkupWrap", "npm:fbjs@0.3.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -21028,6 +21315,15 @@ System.register("npm:dnd-core@1.2.1/lib/reducers/index", ["npm:dnd-core@1.2.1/li
     };
   };
   module.exports = exports['default'];
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:react-redux@3.1.0", ["npm:react-redux@3.1.0/lib/index"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = require("npm:react-redux@3.1.0/lib/index");
   global.define = __define;
   return module.exports;
 });
@@ -21555,6 +21851,155 @@ System.register("npm:react-dnd@1.1.8", ["npm:react-dnd@1.1.8/modules/index"], tr
   return module.exports;
 });
 
+System.register('src/app/boat-lineup-planner/constants/attendeePositions', [], function (_export) {
+	'use strict';
+
+	return {
+		setters: [],
+		execute: function () {
+			_export('default', {
+				ROWER: 'rower',
+				COXSWAIN: 'coxswain'
+			});
+		}
+	};
+});
+System.register('src/app/boat-lineup-planner/components/BoatSeat', ['npm:babel-runtime@5.8.25/helpers/get', 'npm:babel-runtime@5.8.25/helpers/inherits', 'npm:babel-runtime@5.8.25/helpers/create-class', 'npm:babel-runtime@5.8.25/helpers/class-call-check', 'npm:react@0.14.0', 'npm:react-dnd@1.1.8', 'src/app/boat-lineup-planner/components/Attendee', 'src/app/boat-lineup-planner/constants/dndTypes'], function (_export) {
+	var _get, _inherits, _createClass, _classCallCheck, React, DropTarget, Attendee, dndTypes, spec, collect, _default;
+
+	return {
+		setters: [function (_npmBabelRuntime5825HelpersGet) {
+			_get = _npmBabelRuntime5825HelpersGet['default'];
+		}, function (_npmBabelRuntime5825HelpersInherits) {
+			_inherits = _npmBabelRuntime5825HelpersInherits['default'];
+		}, function (_npmBabelRuntime5825HelpersCreateClass) {
+			_createClass = _npmBabelRuntime5825HelpersCreateClass['default'];
+		}, function (_npmBabelRuntime5825HelpersClassCallCheck) {
+			_classCallCheck = _npmBabelRuntime5825HelpersClassCallCheck['default'];
+		}, function (_npmReact0140) {
+			React = _npmReact0140['default'];
+		}, function (_npmReactDnd118) {
+			DropTarget = _npmReactDnd118.DropTarget;
+		}, function (_srcAppBoatLineupPlannerComponentsAttendee) {
+			Attendee = _srcAppBoatLineupPlannerComponentsAttendee['default'];
+		}, function (_srcAppBoatLineupPlannerConstantsDndTypes) {
+			dndTypes = _srcAppBoatLineupPlannerConstantsDndTypes['default'];
+		}],
+		execute: function () {
+			'use strict';
+
+			spec = {
+				drop: function drop(props, monitor) {
+					var _monitor$getItem = monitor.getItem();
+
+					var attendeeId = _monitor$getItem.attendeeId;
+					var onAssignAttendee = props.onAssignAttendee;
+					var boatKey = props.boatKey;
+					var seatPosition = props.seatPosition;
+
+					onAssignAttendee(attendeeId, boatKey, seatPosition);
+				},
+				canDrop: function canDrop(props) {
+					return !props.teamMember;
+				}
+			};
+
+			collect = function collect(connect, monitor) {
+				return {
+					connectDropTarget: connect.dropTarget()
+				};
+			};
+
+			_default = (function (_React$Component) {
+				_inherits(_default, _React$Component);
+
+				function _default() {
+					_classCallCheck(this, _default2);
+
+					_get(Object.getPrototypeOf(_default2.prototype), 'constructor', this).apply(this, arguments);
+				}
+
+				_createClass(_default, [{
+					key: 'render',
+					value: function render() {
+						var _props = this.props;
+						var teamMember = _props.teamMember;
+						var connectDropTarget = _props.connectDropTarget;
+
+						var content = teamMember && React.createElement(Attendee, { teamMember: teamMember });
+
+						return connectDropTarget(React.createElement(
+							'div',
+							{ className: 'boat-seat' },
+							content
+						));
+					}
+				}]);
+
+				var _default2 = _default;
+				_default = DropTarget(dndTypes.ATTENDEE, spec, collect)(_default) || _default;
+				return _default;
+			})(React.Component);
+
+			_export('default', _default);
+		}
+	};
+});
+System.register('src/app/boat-lineup-planner/actions/actionTypes', [], function (_export) {
+	'use strict';
+
+	return {
+		setters: [],
+		execute: function () {
+			_export('default', {
+				ASSIGN_ATTENDEE: 'assign_attendee',
+				UNASSIGN_ATTENDEE: 'unassign_attendee',
+				MOVE_ATTENDEE: 'move_attendee'
+			});
+		}
+	};
+});
+System.register('src/app/boat-lineup-planner/createBoatSeats', ['npm:immutable@3.7.5'], function (_export) {
+	'use strict';
+
+	var Immutable;
+	return {
+		setters: [function (_npmImmutable375) {
+			Immutable = _npmImmutable375['default'];
+		}],
+		execute: function () {
+			_export('default', function (boatType) {
+				var seats = {};
+
+				if (boatType.get('coxswain')) {
+					seats.coxswain = null;
+				}
+
+				for (var i = 1; i <= boatType.get('rowers'); i++) {
+					seats[String(i)] = null;
+				}
+
+				return Immutable.fromJS(seats);
+			});
+		}
+	};
+});
+System.register('src/app/boat-lineup-planner/constants/emptyAttendeePlacement', ['npm:immutable@3.7.5'], function (_export) {
+	'use strict';
+
+	var Immutable;
+	return {
+		setters: [function (_npmImmutable375) {
+			Immutable = _npmImmutable375['default'];
+		}],
+		execute: function () {
+			_export('default', Immutable.fromJS({
+				boatKey: '',
+				seat: ''
+			}));
+		}
+	};
+});
 System.register('src/app/boat-lineup-planner/constants/boatTypes', [], function (_export) {
 	'use strict';
 
@@ -21596,231 +22041,6 @@ System.register('src/app/boat-lineup-planner/constants/boatTypes', [], function 
 		}
 	};
 });
-System.register('src/app/boat-lineup-planner/constants/attendeePositions', [], function (_export) {
-	'use strict';
-
-	return {
-		setters: [],
-		execute: function () {
-			_export('default', {
-				ROWER: 'rower',
-				COXSWAIN: 'coxswain'
-			});
-		}
-	};
-});
-System.register('src/app/boat-lineup-planner/components/BoatSeat', ['npm:babel-runtime@5.8.25/helpers/get', 'npm:babel-runtime@5.8.25/helpers/inherits', 'npm:babel-runtime@5.8.25/helpers/create-class', 'npm:babel-runtime@5.8.25/helpers/class-call-check', 'npm:react@0.14.0', 'npm:react-dnd@1.1.8', 'src/app/boat-lineup-planner/components/Attendee', 'src/app/boat-lineup-planner/constants/dndTypes'], function (_export) {
-	var _get, _inherits, _createClass, _classCallCheck, React, DropTarget, Attendee, dndTypes, spec, collect, _default;
-
-	return {
-		setters: [function (_npmBabelRuntime5825HelpersGet) {
-			_get = _npmBabelRuntime5825HelpersGet['default'];
-		}, function (_npmBabelRuntime5825HelpersInherits) {
-			_inherits = _npmBabelRuntime5825HelpersInherits['default'];
-		}, function (_npmBabelRuntime5825HelpersCreateClass) {
-			_createClass = _npmBabelRuntime5825HelpersCreateClass['default'];
-		}, function (_npmBabelRuntime5825HelpersClassCallCheck) {
-			_classCallCheck = _npmBabelRuntime5825HelpersClassCallCheck['default'];
-		}, function (_npmReact0140) {
-			React = _npmReact0140['default'];
-		}, function (_npmReactDnd118) {
-			DropTarget = _npmReactDnd118.DropTarget;
-		}, function (_srcAppBoatLineupPlannerComponentsAttendee) {
-			Attendee = _srcAppBoatLineupPlannerComponentsAttendee['default'];
-		}, function (_srcAppBoatLineupPlannerConstantsDndTypes) {
-			dndTypes = _srcAppBoatLineupPlannerConstantsDndTypes['default'];
-		}],
-		execute: function () {
-			'use strict';
-
-			spec = {
-				drop: function drop(props, monitor, component) {
-					return {};
-				},
-				hover: function hover(props, monitor, component) {
-					return {};
-				}
-			};
-			//canDrop: (props, monitor) => {}
-
-			collect = function collect(connect, monitor) {
-				return {
-					connectDropTarget: connect.dropTarget()
-				};
-			};
-
-			_default = (function (_React$Component) {
-				_inherits(_default, _React$Component);
-
-				function _default() {
-					_classCallCheck(this, _default2);
-
-					_get(Object.getPrototypeOf(_default2.prototype), 'constructor', this).apply(this, arguments);
-				}
-
-				_createClass(_default, [{
-					key: 'render',
-					value: function render() {
-						var _props = this.props;
-						var seat = _props.seat;
-						var connectDropTarget = _props.connectDropTarget;
-
-						var content = null;
-
-						if (seat !== null) {
-							content = React.createElement(Attendee, { attendee: seat });
-						}
-
-						return connectDropTarget(React.createElement(
-							'div',
-							{ className: 'boat-seat' },
-							content
-						));
-					}
-				}]);
-
-				var _default2 = _default;
-				_default = DropTarget(dndTypes.ATTENDEE, spec, collect)(_default) || _default;
-				return _default;
-			})(React.Component);
-
-			_export('default', _default);
-		}
-	};
-});
-System.register('src/app/boat-lineup-planner/actions/actionTypes', ['npm:babel-runtime@5.8.25/core-js/symbol'], function (_export) {
-	var _Symbol;
-
-	return {
-		setters: [function (_npmBabelRuntime5825CoreJsSymbol) {
-			_Symbol = _npmBabelRuntime5825CoreJsSymbol['default'];
-		}],
-		execute: function () {
-			'use strict';
-
-			_export('default', {
-				ASSIGN_ATTENDEE: _Symbol('assign_attendee'),
-				UNASSIGN_ATTENDEE: _Symbol('unassign_attendee'),
-				MOVE_ATTENDEE: _Symbol('move_attendee')
-			});
-		}
-	};
-});
-System.register('src/app/boat-lineup-planner/fakeInitialState', ['npm:immutable@3.7.5', 'src/app/boat-lineup-planner/constants/boatTypes'], function (_export) {
-	'use strict';
-
-	var Immutable, boatTypes;
-	return {
-		setters: [function (_npmImmutable375) {
-			Immutable = _npmImmutable375['default'];
-		}, function (_srcAppBoatLineupPlannerConstantsBoatTypes) {
-			boatTypes = _srcAppBoatLineupPlannerConstantsBoatTypes['default'];
-		}],
-		execute: function () {
-			_export('default', Immutable.fromJS({
-				unassignedAttendees: {
-					'TeamMembers/103': {
-						id: 'TeamMembers/103',
-						sortName: 'Yealsalot, George',
-						displayName: 'George Yealsalot',
-						position: 'coxswain'
-					},
-					'TeamMembers/77': {
-						id: 'TeamMembers/77',
-						sortName: 'Earges, Jimmy',
-						displayName: 'Jimmy Earges',
-						position: 'rower'
-					},
-					'TeamMembers/31': {
-						id: 'TeamMembers/31',
-						sortName: 'Crabbs, Bill',
-						displayName: 'Bill Crabbs',
-						position: 'rower'
-					},
-					'TeamMembers/6': {
-						id: 'TeamMembers/6',
-						sortName: 'Whaker, Brig',
-						displayName: 'Brig Whaker',
-						position: 'coxswain'
-					}
-				},
-				boats: {
-					'boat-1': {
-						key: 'boat-1',
-						title: 'M2',
-						type: boatTypes.FOUR,
-						seats: {
-							coxswain: {
-								id: 'TeamMembers/17',
-								sortName: 'Passem, Henry',
-								displayName: 'Henry Passem',
-								position: 'rower'
-							},
-							stroke: {
-								id: 'TeamMembers/54',
-								sortName: 'Rowerson, Mickey',
-								displayName: 'Mickey Rowerson',
-								position: 'rower'
-							},
-							2: null,
-							3: null,
-							bow: null
-						}
-					},
-					'boat-2': {
-						key: 'boat-2',
-						title: 'Jaws',
-						type: boatTypes.DOUBLE,
-						seats: {
-							stroke: null,
-							bow: null
-						}
-					}
-				}
-			}));
-		}
-	};
-});
-System.register('src/app/boat-lineup-planner/actions/attendeeActions', ['src/app/boat-lineup-planner/actions/actionTypes'], function (_export) {
-	'use strict';
-
-	var actionTypes;
-	return {
-		setters: [function (_srcAppBoatLineupPlannerActionsActionTypes) {
-			actionTypes = _srcAppBoatLineupPlannerActionsActionTypes['default'];
-		}],
-		execute: function () {
-			_export('default', {
-				assign: function assign(attendee, newBoatKey, newPosition) {
-					return {
-						type: actionTypes.ASSIGN_ATTENDEE,
-						attendee: attendee,
-						newBoatKey: newBoatKey,
-						newPosition: newPosition
-					};
-				},
-				unassign: function unassign(attendee, oldBoatKey, oldPosition) {
-					return {
-						type: actionTypes.UNASSIGN_ATTENDEE,
-						attendee: attendee,
-						oldBoatKey: oldBoatKey,
-						oldPosition: oldPosition
-					};
-				},
-				move: function move(attendee, oldBoatKey, oldPosition, newBoatKey, newPosition) {
-					return {
-						type: actionTypes.MOVE_ATTENDEE,
-						attendee: attendee,
-						oldBoatKey: oldBoatKey,
-						oldPosition: oldPosition,
-						newBoatKey: newBoatKey,
-						newPosition: newPosition
-					};
-				}
-			});
-		}
-	};
-});
 System.register('src/app/boat-lineup-planner/components/Boat', ['npm:babel-runtime@5.8.25/helpers/get', 'npm:babel-runtime@5.8.25/helpers/inherits', 'npm:babel-runtime@5.8.25/helpers/create-class', 'npm:babel-runtime@5.8.25/helpers/class-call-check', 'npm:react@0.14.0', 'src/app/boat-lineup-planner/components/BoatSeat'], function (_export) {
 	var _get, _inherits, _createClass, _classCallCheck, React, BoatSeat, _default;
 
@@ -21853,7 +22073,10 @@ System.register('src/app/boat-lineup-planner/components/Boat', ['npm:babel-runti
 				_createClass(_default, [{
 					key: 'render',
 					value: function render() {
-						var boat = this.props.boat;
+						var _props = this.props;
+						var boat = _props.boat;
+						var boatKey = _props.boatKey;
+						var onAssignAttendee = _props.onAssignAttendee;
 
 						return React.createElement(
 							'div',
@@ -21869,8 +22092,12 @@ System.register('src/app/boat-lineup-planner/components/Boat', ['npm:babel-runti
 								React.createElement(
 									'div',
 									null,
-									boat.get('seats').map(function (seat, key) {
-										return React.createElement(BoatSeat, { seat: seat, key: key });
+									boat.get('seats').map(function (teamMember, seatPosition) {
+										return React.createElement(BoatSeat, { key: seatPosition,
+											seatPosition: seatPosition,
+											teamMember: teamMember,
+											boatKey: boatKey,
+											onAssignAttendee: onAssignAttendee });
 									})
 								)
 							)
@@ -21885,32 +22112,167 @@ System.register('src/app/boat-lineup-planner/components/Boat', ['npm:babel-runti
 		}
 	};
 });
-System.register('src/app/boat-lineup-planner/reducers/attendeeReducers', ['src/app/boat-lineup-planner/actions/actionTypes', 'src/app/boat-lineup-planner/fakeInitialState'], function (_export) {
+System.register('src/app/boat-lineup-planner/actions/bindAttendeeActionCreators', ['src/app/boat-lineup-planner/actions/actionTypes'], function (_export) {
 	'use strict';
 
-	var actionTypes, fakeInitialState;
+	var actionTypes;
 	return {
 		setters: [function (_srcAppBoatLineupPlannerActionsActionTypes) {
 			actionTypes = _srcAppBoatLineupPlannerActionsActionTypes['default'];
-		}, function (_srcAppBoatLineupPlannerFakeInitialState) {
-			fakeInitialState = _srcAppBoatLineupPlannerFakeInitialState['default'];
 		}],
 		execute: function () {
-			_export('default', function (state, action) {
-				if (state === undefined) state = fakeInitialState;
-
-				switch (action.type) {
-					case actionTypes.ASSIGN_ATTENDEE:
-						return state.setIn(['boats', action.newBoatKey, 'seats', action.newPosition], action.attendee).deleteIn(['unassignedAttendees', action.attendee.get('id')]);
-					case actionTypes.UNASSIGN_ATTENDEE:
-						return state.setIn(['boats', action.oldBoatKey, 'seats', action.oldPosition], null).setIn(['unassignedAttendees', action.attendee.get('id')], action.attendee);
-					case actionTypes.MOVE_ATTENDEE:
-						var oldAttendee = state.getIn(['boats', newBoatKey, 'seats', newPosition]);
-						return state.setIn(['boats', action.oldBoatKey, 'seats', action.oldPosition], oldAttendee).setIn(['boats', action.newBoatKey, 'seats', action.newPosition], action.newAttendee);
-					default:
-						return state;
-				}
+			_export('default', function (dispatch) {
+				return {
+					onAssignAttendee: function onAssignAttendee(attendeeId, boatKey, seatPosition) {
+						return dispatch({
+							type: actionTypes.ASSIGN_ATTENDEE,
+							attendeeId: attendeeId,
+							boatKey: boatKey,
+							seatPosition: seatPosition
+						});
+					},
+					onUnassignAttendee: function onUnassignAttendee(attendeeId) {
+						return dispatch({
+							type: actionTypes.UNASSIGN_ATTENDEE,
+							attendeeId: attendeeId
+						});
+					}
+				};
 			});
+		}
+	};
+});
+System.register('src/app/boat-lineup-planner/stateConnector', ['src/app/boat-lineup-planner/createBoatSeats', 'src/app/boat-lineup-planner/constants/emptyAttendeePlacement'], function (_export) {
+	'use strict';
+
+	var createBoatSeats, emptyAttendeePlacement;
+	return {
+		setters: [function (_srcAppBoatLineupPlannerCreateBoatSeats) {
+			createBoatSeats = _srcAppBoatLineupPlannerCreateBoatSeats['default'];
+		}, function (_srcAppBoatLineupPlannerConstantsEmptyAttendeePlacement) {
+			emptyAttendeePlacement = _srcAppBoatLineupPlannerConstantsEmptyAttendeePlacement['default'];
+		}],
+		execute: function () {
+			_export('default', function (state) {
+				return {
+					unassignedAttendees: state.get('attendees').filter(function (attendee) {
+						return attendee.get('placement').equals(emptyAttendeePlacement);
+					}).map(function (attendee) {
+						return attendee.get('teamMember');
+					}),
+					boats: state.get('boats').map(function (boat, boatKey) {
+						var attendees = state.get('attendees').filter(function (attendee) {
+							return attendee.getIn(['placement', 'boatKey']) === boatKey;
+						});
+
+						var boatSeats = createBoatSeats(boat.get('type')).map(function (seat, seatPosition) {
+							var seatAttendee = attendees.find(function (attendee) {
+								return attendee.getIn(['placement', 'seat']) === seatPosition;
+							});
+
+							if (seatAttendee) {
+								return seatAttendee.get('teamMember');
+							}
+
+							return null;
+						});
+
+						return boat.set('seats', boatSeats);
+					})
+				};
+			});
+		}
+	};
+});
+System.register('src/app/boat-lineup-planner/fakeInitialState', ['npm:immutable@3.7.5', 'src/app/boat-lineup-planner/constants/boatTypes', 'src/app/boat-lineup-planner/constants/attendeePositions', 'src/app/boat-lineup-planner/constants/emptyAttendeePlacement'], function (_export) {
+	'use strict';
+
+	var Immutable, boatTypes, attendeePositions, emptyAttendeePlacement;
+	return {
+		setters: [function (_npmImmutable375) {
+			Immutable = _npmImmutable375['default'];
+		}, function (_srcAppBoatLineupPlannerConstantsBoatTypes) {
+			boatTypes = _srcAppBoatLineupPlannerConstantsBoatTypes['default'];
+		}, function (_srcAppBoatLineupPlannerConstantsAttendeePositions) {
+			attendeePositions = _srcAppBoatLineupPlannerConstantsAttendeePositions['default'];
+		}, function (_srcAppBoatLineupPlannerConstantsEmptyAttendeePlacement) {
+			emptyAttendeePlacement = _srcAppBoatLineupPlannerConstantsEmptyAttendeePlacement['default'];
+		}],
+		execute: function () {
+			_export('default', Immutable.fromJS({
+				attendees: {
+					'TeamMembers/103': {
+						teamMember: {
+							id: 'TeamMembers/103',
+							sortName: 'Yealsalot, George',
+							displayName: 'George Yealsalot',
+							position: attendeePositions.COXSWAIN
+						},
+						placement: emptyAttendeePlacement
+					},
+					'TeamMembers/77': {
+						teamMember: {
+							id: 'TeamMembers/77',
+							sortName: 'Earges, Jimmy',
+							displayName: 'Jimmy Earges',
+							position: attendeePositions.ROWER
+						},
+						placement: emptyAttendeePlacement
+					},
+					'TeamMembers/31': {
+						teamMember: {
+							id: 'TeamMembers/31',
+							sortName: 'Crabbs, Bill',
+							displayName: 'Bill Crabbs',
+							position: attendeePositions.ROWER
+						},
+						placement: emptyAttendeePlacement
+					},
+					'TeamMembers/6': {
+						teamMember: {
+							id: 'TeamMembers/6',
+							sortName: 'Whaker, Brig',
+							displayName: 'Brig Whaker',
+							position: attendeePositions.COXSWAIN
+						},
+						placement: emptyAttendeePlacement
+					},
+					'TeamMembers/17': {
+						teamMember: {
+							id: 'TeamMembers/17',
+							sortName: 'Passem, Henry',
+							displayName: 'Henry Passem',
+							position: attendeePositions.ROWER
+						},
+						placement: {
+							boatKey: 'boat-1',
+							seat: 'coxswain'
+						}
+					},
+					'TeamMembers/54': {
+						teamMember: {
+							id: 'TeamMembers/54',
+							sortName: 'Rowerson, Mickey',
+							displayName: 'Mickey Rowerson',
+							position: attendeePositions.ROWER
+						},
+						placement: {
+							boatKey: 'boat-1',
+							seat: '2'
+						}
+					}
+				},
+				boats: {
+					'boat-1': {
+						title: 'M2',
+						type: boatTypes.FOUR
+					},
+					'boat-2': {
+						title: 'Jaws',
+						type: boatTypes.DOUBLE
+					}
+				}
+			}));
 		}
 	};
 });
@@ -21941,18 +22303,12 @@ System.register('src/app/boat-lineup-planner/components/Attendee', ['npm:babel-r
 			'use strict';
 
 			spec = {
-				beginDrag: function beginDrag(props, monitor, component) {
-					console.log('beginDrag');
-					console.log(props);
-					console.log(monitor);
-					console.log(component);
-					return {};
-				},
-				endDrag: function endDrag(props, monitor, component) {
-					return {};
+				beginDrag: function beginDrag(props) {
+					return {
+						attendeeId: props.teamMember.get('id')
+					};
 				}
 			};
-			//canDrag: (props, monitor) => true
 
 			collect = function collect(connect, monitor) {
 				return {
@@ -21973,18 +22329,18 @@ System.register('src/app/boat-lineup-planner/components/Attendee', ['npm:babel-r
 					key: 'render',
 					value: function render() {
 						var _props = this.props;
-						var attendee = _props.attendee;
+						var teamMember = _props.teamMember;
 						var connectDragSource = _props.connectDragSource;
 
 						var classes = classNames('attendee', {
-							'rower': attendee.get('position') == attendeePositions.ROWER,
-							'coxswain': attendee.get('position') == attendeePositions.COXSWAIN
+							'rower': teamMember.get('position') == attendeePositions.ROWER,
+							'coxswain': teamMember.get('position') == attendeePositions.COXSWAIN
 						});
 
 						return connectDragSource(React.createElement(
 							'div',
 							{ className: classes },
-							attendee.get('displayName')
+							teamMember.get('displayName')
 						));
 					}
 				}]);
@@ -22030,13 +22386,21 @@ System.register('src/app/boat-lineup-planner/components/BoatList', ['npm:babel-r
 				_createClass(_default, [{
 					key: 'render',
 					value: function render() {
-						var boats = this.props.boats;
+						var _props = this.props;
+						var boats = _props.boats;
+						var boatKey = _props.boatKey;
+						var onAssignAttendee = _props.onAssignAttendee;
+						var onMoveAttendee = _props.onMoveAttendee;
 
 						return React.createElement(
 							'div',
 							{ className: 'boat-list' },
-							boats.map(function (boat, key) {
-								return React.createElement(Boat, { key: key, boat: boat });
+							boats.map(function (boat, boatKey) {
+								return React.createElement(Boat, { key: boatKey,
+									boat: boat,
+									boatKey: boatKey,
+									onAssignAttendee: onAssignAttendee,
+									onMoveAttendee: onMoveAttendee });
 							})
 						);
 					}
@@ -22046,6 +22410,34 @@ System.register('src/app/boat-lineup-planner/components/BoatList', ['npm:babel-r
 			})(React.Component);
 
 			_export('default', _default);
+		}
+	};
+});
+System.register('src/app/boat-lineup-planner/actions/attendeeReducers', ['src/app/boat-lineup-planner/actions/actionTypes', 'src/app/boat-lineup-planner/fakeInitialState', 'src/app/boat-lineup-planner/constants/emptyAttendeePlacement'], function (_export) {
+	'use strict';
+
+	var actionTypes, fakeInitialState, emptyAttendeePlacement;
+	return {
+		setters: [function (_srcAppBoatLineupPlannerActionsActionTypes) {
+			actionTypes = _srcAppBoatLineupPlannerActionsActionTypes['default'];
+		}, function (_srcAppBoatLineupPlannerFakeInitialState) {
+			fakeInitialState = _srcAppBoatLineupPlannerFakeInitialState['default'];
+		}, function (_srcAppBoatLineupPlannerConstantsEmptyAttendeePlacement) {
+			emptyAttendeePlacement = _srcAppBoatLineupPlannerConstantsEmptyAttendeePlacement['default'];
+		}],
+		execute: function () {
+			_export('default', function (state, action) {
+				if (state === undefined) state = fakeInitialState;
+
+				switch (action.type) {
+					case actionTypes.UNASSIGN_ATTENDEE:
+						return state.setIn(['attendees', action.attendeeId, 'placement'], emptyAttendeePlacement);
+					case actionTypes.ASSIGN_ATTENDEE:
+						return state.setIn(['attendees', action.attendeeId, 'placement', 'boatKey'], action.boatKey).setIn(['attendees', action.attendeeId, 'placement', 'seat'], action.seatPosition);
+					default:
+						return state;
+				}
+			});
 		}
 	};
 });
@@ -22090,14 +22482,15 @@ System.register('src/app/boat-lineup-planner/components/UnassignedAttendeeList',
 			'use strict';
 
 			spec = {
-				drop: function drop(props, monitor, component) {
-					return {};
-				},
-				hover: function hover(props, monitor, component) {
-					return {};
+				drop: function drop(props, monitor) {
+					var _monitor$getItem = monitor.getItem();
+
+					var attendeeId = _monitor$getItem.attendeeId;
+					var onUnassignAttendee = props.onUnassignAttendee;
+
+					onUnassignAttendee(attendeeId);
 				}
 			};
-			//canDrop: (props, monitor) => {}
 
 			collect = function collect(connect, monitor) {
 				return {
@@ -22118,14 +22511,14 @@ System.register('src/app/boat-lineup-planner/components/UnassignedAttendeeList',
 					key: 'render',
 					value: function render() {
 						var _props = this.props;
-						var attendees = _props.attendees;
+						var unassignedAttendees = _props.unassignedAttendees;
 						var connectDropTarget = _props.connectDropTarget;
 
 						return connectDropTarget(React.createElement(
 							'div',
 							{ className: 'unassigned-attendee-list' },
-							attendees.map(function (attendee, key) {
-								return React.createElement(Attendee, { attendee: attendee, key: key });
+							unassignedAttendees.map(function (teamMember) {
+								return React.createElement(Attendee, { teamMember: teamMember, key: teamMember.id });
 							})
 						));
 					}
@@ -22140,8 +22533,8 @@ System.register('src/app/boat-lineup-planner/components/UnassignedAttendeeList',
 		}
 	};
 });
-System.register('src/app/boat-lineup-planner/components/BoatLineupPlanner', ['npm:babel-runtime@5.8.25/helpers/get', 'npm:babel-runtime@5.8.25/helpers/inherits', 'npm:babel-runtime@5.8.25/helpers/create-class', 'npm:babel-runtime@5.8.25/helpers/class-call-check', 'npm:react@0.14.0', 'npm:react-dnd@1.1.8', 'npm:immutable@3.7.5', 'src/app/boat-lineup-planner/constants/boatTypes', 'src/app/boat-lineup-planner/components/UnassignedAttendeeList', 'src/app/boat-lineup-planner/components/BoatList', 'npm:react-dnd@1.1.8/modules/backends/HTML5', 'npm:react-dnd-touch-backend@0.1.0'], function (_export) {
-	var _get, _inherits, _createClass, _classCallCheck, React, DragDropContext, Immutable, boatTypes, UnassignedAttendeeList, BoatList, HTML5Backend, TouchBackend, _default;
+System.register('src/app/boat-lineup-planner/App', ['npm:babel-runtime@5.8.25/helpers/get', 'npm:babel-runtime@5.8.25/helpers/inherits', 'npm:babel-runtime@5.8.25/helpers/create-class', 'npm:babel-runtime@5.8.25/helpers/class-call-check', 'npm:react@0.14.0', 'npm:react-dnd@1.1.8', 'npm:immutable@3.7.5', 'src/app/boat-lineup-planner/components/UnassignedAttendeeList', 'src/app/boat-lineup-planner/components/BoatList', 'npm:react-dnd@1.1.8/modules/backends/HTML5', 'npm:react-redux@3.1.0', 'src/app/boat-lineup-planner/actions/bindAttendeeActionCreators', 'src/app/boat-lineup-planner/stateConnector'], function (_export) {
+	var _get, _inherits, _createClass, _classCallCheck, React, DragDropContext, Immutable, UnassignedAttendeeList, BoatList, HTML5Backend, connect, bindAttendeeActionCreators, stateConnector, App;
 
 	return {
 		setters: [function (_npmBabelRuntime5825HelpersGet) {
@@ -22158,81 +22551,92 @@ System.register('src/app/boat-lineup-planner/components/BoatLineupPlanner', ['np
 			DragDropContext = _npmReactDnd118.DragDropContext;
 		}, function (_npmImmutable375) {
 			Immutable = _npmImmutable375['default'];
-		}, function (_srcAppBoatLineupPlannerConstantsBoatTypes) {
-			boatTypes = _srcAppBoatLineupPlannerConstantsBoatTypes['default'];
 		}, function (_srcAppBoatLineupPlannerComponentsUnassignedAttendeeList) {
 			UnassignedAttendeeList = _srcAppBoatLineupPlannerComponentsUnassignedAttendeeList['default'];
 		}, function (_srcAppBoatLineupPlannerComponentsBoatList) {
 			BoatList = _srcAppBoatLineupPlannerComponentsBoatList['default'];
 		}, function (_npmReactDnd118ModulesBackendsHTML5) {
 			HTML5Backend = _npmReactDnd118ModulesBackendsHTML5['default'];
-		}, function (_npmReactDndTouchBackend010) {
-			TouchBackend = _npmReactDndTouchBackend010['default'];
+		}, function (_npmReactRedux310) {
+			connect = _npmReactRedux310.connect;
+		}, function (_srcAppBoatLineupPlannerActionsBindAttendeeActionCreators) {
+			bindAttendeeActionCreators = _srcAppBoatLineupPlannerActionsBindAttendeeActionCreators['default'];
+		}, function (_srcAppBoatLineupPlannerStateConnector) {
+			stateConnector = _srcAppBoatLineupPlannerStateConnector['default'];
 		}],
 		execute: function () {
 			'use strict';
 
-			_default = (function (_React$Component) {
-				_inherits(_default, _React$Component);
+			App = (function (_React$Component) {
+				_inherits(App, _React$Component);
 
-				function _default() {
-					_classCallCheck(this, _default2);
+				function App() {
+					_classCallCheck(this, _App);
 
-					_get(Object.getPrototypeOf(_default2.prototype), 'constructor', this).apply(this, arguments);
+					_get(Object.getPrototypeOf(_App.prototype), 'constructor', this).apply(this, arguments);
 				}
 
-				_createClass(_default, [{
+				_createClass(App, [{
 					key: 'render',
 					value: function render() {
-						var state = this.props.state;
+						var _props = this.props;
+						var dispatch = _props.dispatch;
+						var unassignedAttendees = _props.unassignedAttendees;
+						var boats = _props.boats;
+						var onAssignAttendee = _props.onAssignAttendee;
+						var onUnassignAttendee = _props.onUnassignAttendee;
+						var onMoveAttendee = _props.onMoveAttendee;
 
 						return React.createElement(
 							'div',
 							{ className: 'boat-lineup-planner' },
-							React.createElement(UnassignedAttendeeList, { attendees: state.get('unassignedAttendees') }),
-							React.createElement(BoatList, { boats: state.get('boats') })
+							React.createElement(UnassignedAttendeeList, {
+								unassignedAttendees: unassignedAttendees,
+								onUnassignAttendee: onUnassignAttendee }),
+							React.createElement(BoatList, {
+								onAssignAttendee: onAssignAttendee,
+								onMoveAttendee: onMoveAttendee,
+								boats: boats })
 						);
 					}
 				}]);
 
-				var _default2 = _default;
-				_default = DragDropContext(HTML5Backend)(_default) || _default;
-				return _default;
+				var _App = App;
+				App = DragDropContext(HTML5Backend)(App) || App;
+				return App;
 			})(React.Component);
 
-			_export('default', _default);
+			_export('default', connect(stateConnector, bindAttendeeActionCreators)(App));
 		}
 	};
 });
-System.register('src/app/boat-lineup-planner/main', ['npm:react@0.14.0', 'npm:react-dom@0.14.0', 'src/app/boat-lineup-planner/components/BoatLineupPlanner', 'npm:redux@3.0.2', 'src/app/boat-lineup-planner/reducers/attendeeReducers', 'src/app/boat-lineup-planner/actions/actionTypes', 'src/app/boat-lineup-planner/actions/attendeeActions'], function (_export) {
-  'use strict';
+System.register('src/app/boat-lineup-planner/main', ['npm:react@0.14.0', 'npm:react-dom@0.14.0', 'src/app/boat-lineup-planner/App', 'npm:redux@3.0.2', 'src/app/boat-lineup-planner/actions/attendeeReducers', 'npm:react-redux@3.1.0'], function (_export) {
+	'use strict';
 
-  var React, ReactDOM, BoatLineupPlanner, createStore, attendeeReducers, actionTypes, attendeeActions;
-  return {
-    setters: [function (_npmReact0140) {
-      React = _npmReact0140['default'];
-    }, function (_npmReactDom0140) {
-      ReactDOM = _npmReactDom0140['default'];
-    }, function (_srcAppBoatLineupPlannerComponentsBoatLineupPlanner) {
-      BoatLineupPlanner = _srcAppBoatLineupPlannerComponentsBoatLineupPlanner['default'];
-    }, function (_npmRedux302) {
-      createStore = _npmRedux302.createStore;
-    }, function (_srcAppBoatLineupPlannerReducersAttendeeReducers) {
-      attendeeReducers = _srcAppBoatLineupPlannerReducersAttendeeReducers['default'];
-    }, function (_srcAppBoatLineupPlannerActionsActionTypes) {
-      actionTypes = _srcAppBoatLineupPlannerActionsActionTypes['default'];
-    }, function (_srcAppBoatLineupPlannerActionsAttendeeActions) {
-      attendeeActions = _srcAppBoatLineupPlannerActionsAttendeeActions['default'];
-    }],
-    execute: function () {
+	var React, ReactDOM, App, createStore, attendeeReducers, Provider;
+	return {
+		setters: [function (_npmReact0140) {
+			React = _npmReact0140['default'];
+		}, function (_npmReactDom0140) {
+			ReactDOM = _npmReactDom0140['default'];
+		}, function (_srcAppBoatLineupPlannerApp) {
+			App = _srcAppBoatLineupPlannerApp['default'];
+		}, function (_npmRedux302) {
+			createStore = _npmRedux302.createStore;
+		}, function (_srcAppBoatLineupPlannerActionsAttendeeReducers) {
+			attendeeReducers = _srcAppBoatLineupPlannerActionsAttendeeReducers['default'];
+		}, function (_npmReactRedux310) {
+			Provider = _npmReactRedux310.Provider;
+		}],
+		execute: function () {
 
-      window.store = createStore(attendeeReducers);
-      window.actionTypes = actionTypes;
-      window.attendeeActions = attendeeActions;
-
-      ReactDOM.render(React.createElement(BoatLineupPlanner, { state: window.store.getState() }), document.getElementById('app'));
-    }
-  };
+			ReactDOM.render(React.createElement(
+				Provider,
+				{ store: createStore(attendeeReducers) },
+				React.createElement(App, null)
+			), document.getElementById('app'));
+		}
+	};
 });
 });
 //# sourceMappingURL=main.js.map

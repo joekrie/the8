@@ -3,12 +3,16 @@ import Boat from './Boat';
 
 export default class extends React.Component {
 	render() {
-		const { boats } = this.props;
+		const { boats, boatKey, onAssignAttendee, onMoveAttendee } = this.props;
 		
 		return (
 			<div className='boat-list'>
-				{boats.map((boat, key) => 
-					<Boat key={key} boat={boat} />
+				{boats.map((boat, boatKey) => 
+					<Boat key={boatKey} 
+						boat={boat} 
+						boatKey={boatKey}						
+						onAssignAttendee={onAssignAttendee} 
+						onMoveAttendee={onMoveAttendee} />
 				)}
 			</div>
 		);

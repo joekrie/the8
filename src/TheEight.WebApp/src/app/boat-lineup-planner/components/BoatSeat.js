@@ -4,9 +4,12 @@ import Attendee from './Attendee';
 import dndTypes from '../constants/dndTypes';
 
 const spec = {
-	drop: (props, monitor, component) => ({}),
-	hover: (props, monitor, component) => ({}),
-	//canDrop: (props, monitor) => {}
+	drop: (props, monitor) => {
+		const { attendeeId } = monitor.getItem();
+		const { onAssignAttendee, boatKey, seatPosition } = props;		
+		onAssignAttendee(attendeeId, boatKey, seatPosition);
+	},
+	canDrop: props => !props.teamMember
 };
 
 const collect = (connect, monitor) => ({
@@ -16,13 +19,9 @@ const collect = (connect, monitor) => ({
 @DropTarget(dndTypes.ATTENDEE, spec, collect)
 export default class extends React.Component {
 	render() {
-		const { seat, connectDropTarget } = this.props;
-		let content = null;
-		
-		if (seat !== null) {
-			content = <Attendee attendee={seat} />;
-		}
-	
+		const { teamMember, connectDropTarget } = this.props;
+		let content = teamMember && <Attendee teamMember={teamMember} />;
+
 		return connectDropTarget(
 			<div className='boat-seat'>
 				{content}

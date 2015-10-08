@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import BoatLineupPlanner from './components/BoatLineupPlanner';
+import App from './App';
 import { createStore } from 'redux';
-import attendeeReducers from './reducers/attendeeReducers';
-import actionTypes from './actions/actionTypes';
-import attendeeActions from './actions/attendeeActions';
+import attendeeReducers from './actions/attendeeReducers';
+import { Provider } from 'react-redux';
 
-window.store = createStore(attendeeReducers);
-window.actionTypes = actionTypes;
-window.attendeeActions = attendeeActions;
-
-ReactDOM.render(<BoatLineupPlanner state={window.store.getState()} />, document.getElementById('app'));
+ReactDOM.render(
+	<Provider store={createStore(attendeeReducers)}>
+		<App />
+	</Provider>, 
+	document.getElementById('app')
+);

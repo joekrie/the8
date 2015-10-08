@@ -20,8 +20,8 @@ gulp.task('jspm', function () {
 });
 
 gulp.task('glyphicons', function() {
-    return gulp.src('src/libs/glyphicons/**/*')
-        .pipe(gulp.dest('dist/libs/glyphicons'));
+    return gulp.src('src/styles/glyphicons-fonts/*')
+        .pipe(gulp.dest('dist/styles/glyphicons-fonts/'));
 });
 
 gulp.task('sass', function() {

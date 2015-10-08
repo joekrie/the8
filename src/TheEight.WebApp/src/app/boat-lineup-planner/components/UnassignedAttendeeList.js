@@ -4,9 +4,11 @@ import dndTypes from '../constants/dndTypes';
 import Attendee from './Attendee';
 
 const spec = {
-	drop: (props, monitor, component) => ({}),
-	hover: (props, monitor, component) => ({}),
-	//canDrop: (props, monitor) => {}
+	drop: (props, monitor) => {
+		const { attendeeId } = monitor.getItem();
+		const { onUnassignAttendee } = props;
+		onUnassignAttendee(attendeeId);
+	}
 };
 
 const collect = (connect, monitor) => ({
@@ -16,12 +18,12 @@ const collect = (connect, monitor) => ({
 @DropTarget(dndTypes.ATTENDEE, spec, collect)
 export default class extends React.Component {
 	render() {
-		const { attendees, connectDropTarget } = this.props;
+		const { unassignedAttendees, connectDropTarget } = this.props;
 		
 		return connectDropTarget(
 			<div className='unassigned-attendee-list'>
-				{attendees.map((attendee, key) => 
-					<Attendee attendee={attendee} key={key} />
+				{unassignedAttendees.map(teamMember => 
+					<Attendee teamMember={teamMember} key={teamMember.id} />
 				)}
 			</div>
 		);

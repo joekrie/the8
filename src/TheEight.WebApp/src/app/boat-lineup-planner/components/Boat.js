@@ -3,7 +3,7 @@ import BoatSeat from './BoatSeat';
 
 export default class extends React.Component {
 	render() {
-		const { boat } = this.props;
+		const { boat, boatKey, onAssignAttendee } = this.props;
 		
 		return (
 			<div className='boat'>
@@ -12,8 +12,12 @@ export default class extends React.Component {
 						{boat.get('title')}
 					</div>
 					<div>
-						{boat.get('seats').map((seat, key) => 
-							<BoatSeat seat={seat} key={key} />
+						{boat.get('seats').map((teamMember, seatPosition) => 
+							<BoatSeat key={seatPosition}
+								seatPosition={seatPosition}
+								teamMember={teamMember} 
+								boatKey={boatKey}						
+								onAssignAttendee={onAssignAttendee} />						
 						)}
 					</div>
 				</div>
