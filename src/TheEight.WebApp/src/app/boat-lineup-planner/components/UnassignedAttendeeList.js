@@ -23,7 +23,8 @@ export default class extends React.Component {
 		return connectDropTarget(
 			<div className='unassigned-attendee-list'>
 				{unassignedAttendees.map(teamMember => 
-					<Attendee teamMember={teamMember} key={teamMember.id} />
+					<Attendee key={teamMember.id} 
+						attendee={teamMember} />
 				)}
 			</div>
 		);

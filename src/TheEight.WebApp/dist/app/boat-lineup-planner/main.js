@@ -21864,86 +21864,15 @@ System.register('src/app/boat-lineup-planner/constants/attendeePositions', [], f
 		}
 	};
 });
-System.register('src/app/boat-lineup-planner/components/BoatSeat', ['npm:babel-runtime@5.8.25/helpers/get', 'npm:babel-runtime@5.8.25/helpers/inherits', 'npm:babel-runtime@5.8.25/helpers/create-class', 'npm:babel-runtime@5.8.25/helpers/class-call-check', 'npm:react@0.14.0', 'npm:react-dnd@1.1.8', 'src/app/boat-lineup-planner/components/Attendee', 'src/app/boat-lineup-planner/constants/dndTypes'], function (_export) {
-	var _get, _inherits, _createClass, _classCallCheck, React, DropTarget, Attendee, dndTypes, spec, collect, _default;
+System.register('src/app/boat-lineup-planner/constants/coxswainSeatPosition', [], function (_export) {
+  'use strict';
 
-	return {
-		setters: [function (_npmBabelRuntime5825HelpersGet) {
-			_get = _npmBabelRuntime5825HelpersGet['default'];
-		}, function (_npmBabelRuntime5825HelpersInherits) {
-			_inherits = _npmBabelRuntime5825HelpersInherits['default'];
-		}, function (_npmBabelRuntime5825HelpersCreateClass) {
-			_createClass = _npmBabelRuntime5825HelpersCreateClass['default'];
-		}, function (_npmBabelRuntime5825HelpersClassCallCheck) {
-			_classCallCheck = _npmBabelRuntime5825HelpersClassCallCheck['default'];
-		}, function (_npmReact0140) {
-			React = _npmReact0140['default'];
-		}, function (_npmReactDnd118) {
-			DropTarget = _npmReactDnd118.DropTarget;
-		}, function (_srcAppBoatLineupPlannerComponentsAttendee) {
-			Attendee = _srcAppBoatLineupPlannerComponentsAttendee['default'];
-		}, function (_srcAppBoatLineupPlannerConstantsDndTypes) {
-			dndTypes = _srcAppBoatLineupPlannerConstantsDndTypes['default'];
-		}],
-		execute: function () {
-			'use strict';
-
-			spec = {
-				drop: function drop(props, monitor) {
-					var _monitor$getItem = monitor.getItem();
-
-					var attendeeId = _monitor$getItem.attendeeId;
-					var onAssignAttendee = props.onAssignAttendee;
-					var boatKey = props.boatKey;
-					var seatPosition = props.seatPosition;
-
-					onAssignAttendee(attendeeId, boatKey, seatPosition);
-				},
-				canDrop: function canDrop(props) {
-					return !props.teamMember;
-				}
-			};
-
-			collect = function collect(connect, monitor) {
-				return {
-					connectDropTarget: connect.dropTarget()
-				};
-			};
-
-			_default = (function (_React$Component) {
-				_inherits(_default, _React$Component);
-
-				function _default() {
-					_classCallCheck(this, _default2);
-
-					_get(Object.getPrototypeOf(_default2.prototype), 'constructor', this).apply(this, arguments);
-				}
-
-				_createClass(_default, [{
-					key: 'render',
-					value: function render() {
-						var _props = this.props;
-						var teamMember = _props.teamMember;
-						var connectDropTarget = _props.connectDropTarget;
-
-						var content = teamMember && React.createElement(Attendee, { teamMember: teamMember });
-
-						return connectDropTarget(React.createElement(
-							'div',
-							{ className: 'boat-seat' },
-							content
-						));
-					}
-				}]);
-
-				var _default2 = _default;
-				_default = DropTarget(dndTypes.ATTENDEE, spec, collect)(_default) || _default;
-				return _default;
-			})(React.Component);
-
-			_export('default', _default);
-		}
-	};
+  return {
+    setters: [],
+    execute: function () {
+      _export('default', 'coxswain');
+    }
+  };
 });
 System.register('src/app/boat-lineup-planner/actions/actionTypes', [], function (_export) {
 	'use strict';
@@ -21953,51 +21882,23 @@ System.register('src/app/boat-lineup-planner/actions/actionTypes', [], function 
 		execute: function () {
 			_export('default', {
 				ASSIGN_ATTENDEE: 'assign_attendee',
-				UNASSIGN_ATTENDEE: 'unassign_attendee',
-				MOVE_ATTENDEE: 'move_attendee'
+				UNASSIGN_ATTENDEE: 'unassign_attendee'
 			});
 		}
 	};
 });
-System.register('src/app/boat-lineup-planner/createBoatSeats', ['npm:immutable@3.7.5'], function (_export) {
+System.register('src/app/boat-lineup-planner/utils/attendeeUtils', [], function (_export) {
 	'use strict';
 
-	var Immutable;
+	_export('attendeeIsPlaced', attendeeIsPlaced);
+
+	function attendeeIsPlaced(attendee) {
+		return Boolean(attendee.getIn(['placement', 'boatKey']));
+	}
+
 	return {
-		setters: [function (_npmImmutable375) {
-			Immutable = _npmImmutable375['default'];
-		}],
-		execute: function () {
-			_export('default', function (boatType) {
-				var seats = {};
-
-				if (boatType.get('coxswain')) {
-					seats.coxswain = null;
-				}
-
-				for (var i = 1; i <= boatType.get('rowers'); i++) {
-					seats[String(i)] = null;
-				}
-
-				return Immutable.fromJS(seats);
-			});
-		}
-	};
-});
-System.register('src/app/boat-lineup-planner/constants/emptyAttendeePlacement', ['npm:immutable@3.7.5'], function (_export) {
-	'use strict';
-
-	var Immutable;
-	return {
-		setters: [function (_npmImmutable375) {
-			Immutable = _npmImmutable375['default'];
-		}],
-		execute: function () {
-			_export('default', Immutable.fromJS({
-				boatKey: '',
-				seat: ''
-			}));
-		}
+		setters: [],
+		execute: function () {}
 	};
 });
 System.register('src/app/boat-lineup-planner/constants/boatTypes', [], function (_export) {
@@ -22041,75 +21942,78 @@ System.register('src/app/boat-lineup-planner/constants/boatTypes', [], function 
 		}
 	};
 });
-System.register('src/app/boat-lineup-planner/components/Boat', ['npm:babel-runtime@5.8.25/helpers/get', 'npm:babel-runtime@5.8.25/helpers/inherits', 'npm:babel-runtime@5.8.25/helpers/create-class', 'npm:babel-runtime@5.8.25/helpers/class-call-check', 'npm:react@0.14.0', 'src/app/boat-lineup-planner/components/BoatSeat'], function (_export) {
-	var _get, _inherits, _createClass, _classCallCheck, React, BoatSeat, _default;
+System.register('src/app/boat-lineup-planner/constants/emptyAttendeePlacement', ['npm:immutable@3.7.5'], function (_export) {
+	'use strict';
 
+	var Immutable;
 	return {
-		setters: [function (_npmBabelRuntime5825HelpersGet) {
-			_get = _npmBabelRuntime5825HelpersGet['default'];
-		}, function (_npmBabelRuntime5825HelpersInherits) {
-			_inherits = _npmBabelRuntime5825HelpersInherits['default'];
-		}, function (_npmBabelRuntime5825HelpersCreateClass) {
-			_createClass = _npmBabelRuntime5825HelpersCreateClass['default'];
-		}, function (_npmBabelRuntime5825HelpersClassCallCheck) {
-			_classCallCheck = _npmBabelRuntime5825HelpersClassCallCheck['default'];
-		}, function (_npmReact0140) {
-			React = _npmReact0140['default'];
-		}, function (_srcAppBoatLineupPlannerComponentsBoatSeat) {
-			BoatSeat = _srcAppBoatLineupPlannerComponentsBoatSeat['default'];
+		setters: [function (_npmImmutable375) {
+			Immutable = _npmImmutable375['default'];
 		}],
 		execute: function () {
-			'use strict';
-
-			_default = (function (_React$Component) {
-				_inherits(_default, _React$Component);
-
-				function _default() {
-					_classCallCheck(this, _default);
-
-					_get(Object.getPrototypeOf(_default.prototype), 'constructor', this).apply(this, arguments);
-				}
-
-				_createClass(_default, [{
-					key: 'render',
-					value: function render() {
-						var _props = this.props;
-						var boat = _props.boat;
-						var boatKey = _props.boatKey;
-						var onAssignAttendee = _props.onAssignAttendee;
-
-						return React.createElement(
-							'div',
-							{ className: 'boat' },
-							React.createElement(
-								'div',
-								null,
-								React.createElement(
-									'div',
-									null,
-									boat.get('title')
-								),
-								React.createElement(
-									'div',
-									null,
-									boat.get('seats').map(function (teamMember, seatPosition) {
-										return React.createElement(BoatSeat, { key: seatPosition,
-											seatPosition: seatPosition,
-											teamMember: teamMember,
-											boatKey: boatKey,
-											onAssignAttendee: onAssignAttendee });
-									})
-								)
-							)
-						);
-					}
-				}]);
-
-				return _default;
-			})(React.Component);
-
-			_export('default', _default);
+			_export('default', Immutable.fromJS({
+				boatKey: '',
+				seat: ''
+			}));
 		}
+	};
+});
+System.register('src/app/boat-lineup-planner/utils/boatSeatUtils', ['npm:immutable@3.7.5', 'src/app/boat-lineup-planner/constants/coxswainSeatPosition'], function (_export) {
+	'use strict';
+
+	var Immutable, coxswainSeatPosition;
+
+	_export('createBoatSeats', createBoatSeats);
+
+	_export('seatIsEmpty', seatIsEmpty);
+
+	function createBoatSeats(boatType) {
+		var seats = {};
+
+		if (boatType.get('coxswain')) {
+			seats.coxswain = {
+				attendee: null,
+				label: getSeatLabel(coxswainSeatPosition, boatType)
+			};
+		}
+
+		for (var i = 1; i <= boatType.get('rowers'); i++) {
+			seats[String(i)] = {
+				attendee: null,
+				label: getSeatLabel(i, boatType)
+			};
+		}
+
+		return Immutable.fromJS(seats);
+	}
+
+	function getSeatLabel(seatPosition, boatType) {
+		if (seatPosition === coxswainSeatPosition) {
+			return 'Coxswain';
+		}
+
+		if (seatPosition == 1) {
+			return 'Bow';
+		}
+
+		if (seatPosition == boatType.get('rowers')) {
+			return 'Stroke';
+		}
+
+		return String(seatPosition);
+	}
+
+	function seatIsEmpty(seat) {
+		return !Boolean(seat.get('attendee'));
+	}
+
+	return {
+		setters: [function (_npmImmutable375) {
+			Immutable = _npmImmutable375['default'];
+		}, function (_srcAppBoatLineupPlannerConstantsCoxswainSeatPosition) {
+			coxswainSeatPosition = _srcAppBoatLineupPlannerConstantsCoxswainSeatPosition['default'];
+		}],
+		execute: function () {}
 	};
 });
 System.register('src/app/boat-lineup-planner/actions/bindAttendeeActionCreators', ['src/app/boat-lineup-planner/actions/actionTypes'], function (_export) {
@@ -22142,23 +22046,29 @@ System.register('src/app/boat-lineup-planner/actions/bindAttendeeActionCreators'
 		}
 	};
 });
-System.register('src/app/boat-lineup-planner/stateConnector', ['src/app/boat-lineup-planner/createBoatSeats', 'src/app/boat-lineup-planner/constants/emptyAttendeePlacement'], function (_export) {
+System.register('src/app/boat-lineup-planner/stateConnector', ['src/app/boat-lineup-planner/utils/boatSeatUtils', 'src/app/boat-lineup-planner/utils/attendeeUtils', 'src/app/boat-lineup-planner/constants/attendeePositions'], function (_export) {
 	'use strict';
 
-	var createBoatSeats, emptyAttendeePlacement;
+	var createBoatSeats, attendeeIsPlaced, attendeePositions;
 	return {
-		setters: [function (_srcAppBoatLineupPlannerCreateBoatSeats) {
-			createBoatSeats = _srcAppBoatLineupPlannerCreateBoatSeats['default'];
-		}, function (_srcAppBoatLineupPlannerConstantsEmptyAttendeePlacement) {
-			emptyAttendeePlacement = _srcAppBoatLineupPlannerConstantsEmptyAttendeePlacement['default'];
+		setters: [function (_srcAppBoatLineupPlannerUtilsBoatSeatUtils) {
+			createBoatSeats = _srcAppBoatLineupPlannerUtilsBoatSeatUtils.createBoatSeats;
+		}, function (_srcAppBoatLineupPlannerUtilsAttendeeUtils) {
+			attendeeIsPlaced = _srcAppBoatLineupPlannerUtilsAttendeeUtils.attendeeIsPlaced;
+		}, function (_srcAppBoatLineupPlannerConstantsAttendeePositions) {
+			attendeePositions = _srcAppBoatLineupPlannerConstantsAttendeePositions['default'];
 		}],
 		execute: function () {
 			_export('default', function (state) {
 				return {
-					unassignedAttendees: state.get('attendees').filter(function (attendee) {
-						return attendee.get('placement').equals(emptyAttendeePlacement);
-					}).map(function (attendee) {
+					unassignedAttendees: state.get('attendees').filterNot(attendeeIsPlaced).map(function (attendee) {
 						return attendee.get('teamMember');
+					}).sort(function (x, y) {
+						if (x.get('position') === y.get('position')) {
+							return x.get('sortName').localeCompare(y.get('sortName'));
+						}
+
+						return x.get('position') === attendeePositions.COXSWAIN ? -1 : 1;
 					}),
 					boats: state.get('boats').map(function (boat, boatKey) {
 						var attendees = state.get('attendees').filter(function (attendee) {
@@ -22171,10 +22081,10 @@ System.register('src/app/boat-lineup-planner/stateConnector', ['src/app/boat-lin
 							});
 
 							if (seatAttendee) {
-								return seatAttendee.get('teamMember');
+								return seat.set('attendee', seatAttendee.get('teamMember'));
 							}
 
-							return null;
+							return seat.set('attendee', null);
 						});
 
 						return boat.set('seats', boatSeats);
@@ -22305,7 +22215,7 @@ System.register('src/app/boat-lineup-planner/components/Attendee', ['npm:babel-r
 			spec = {
 				beginDrag: function beginDrag(props) {
 					return {
-						attendeeId: props.teamMember.get('id')
+						attendeeId: props.attendee.get('id')
 					};
 				}
 			};
@@ -22329,24 +22239,209 @@ System.register('src/app/boat-lineup-planner/components/Attendee', ['npm:babel-r
 					key: 'render',
 					value: function render() {
 						var _props = this.props;
-						var teamMember = _props.teamMember;
+						var attendee = _props.attendee;
 						var connectDragSource = _props.connectDragSource;
 
-						var classes = classNames('attendee', {
-							'rower': teamMember.get('position') == attendeePositions.ROWER,
-							'coxswain': teamMember.get('position') == attendeePositions.COXSWAIN
-						});
+						var classes = classNames('attendee', attendee.get('position') === attendeePositions.COXSWAIN ? 'coxswain' : 'rower');
 
 						return connectDragSource(React.createElement(
 							'div',
 							{ className: classes },
-							teamMember.get('displayName')
+							attendee.get('displayName')
 						));
 					}
 				}]);
 
 				var _default2 = _default;
 				_default = DragSource(dndTypes.ATTENDEE, spec, collect)(_default) || _default;
+				return _default;
+			})(React.Component);
+
+			_export('default', _default);
+		}
+	};
+});
+System.register('src/app/boat-lineup-planner/components/BoatSeat', ['npm:babel-runtime@5.8.25/helpers/get', 'npm:babel-runtime@5.8.25/helpers/inherits', 'npm:babel-runtime@5.8.25/helpers/create-class', 'npm:babel-runtime@5.8.25/helpers/class-call-check', 'npm:react@0.14.0', 'npm:react-dnd@1.1.8', 'src/app/boat-lineup-planner/components/Attendee', 'src/app/boat-lineup-planner/constants/dndTypes', 'src/app/boat-lineup-planner/utils/boatSeatUtils'], function (_export) {
+	var _get, _inherits, _createClass, _classCallCheck, React, DropTarget, Attendee, dndTypes, seatIsEmpty, spec, collect, _default;
+
+	return {
+		setters: [function (_npmBabelRuntime5825HelpersGet) {
+			_get = _npmBabelRuntime5825HelpersGet['default'];
+		}, function (_npmBabelRuntime5825HelpersInherits) {
+			_inherits = _npmBabelRuntime5825HelpersInherits['default'];
+		}, function (_npmBabelRuntime5825HelpersCreateClass) {
+			_createClass = _npmBabelRuntime5825HelpersCreateClass['default'];
+		}, function (_npmBabelRuntime5825HelpersClassCallCheck) {
+			_classCallCheck = _npmBabelRuntime5825HelpersClassCallCheck['default'];
+		}, function (_npmReact0140) {
+			React = _npmReact0140['default'];
+		}, function (_npmReactDnd118) {
+			DropTarget = _npmReactDnd118.DropTarget;
+		}, function (_srcAppBoatLineupPlannerComponentsAttendee) {
+			Attendee = _srcAppBoatLineupPlannerComponentsAttendee['default'];
+		}, function (_srcAppBoatLineupPlannerConstantsDndTypes) {
+			dndTypes = _srcAppBoatLineupPlannerConstantsDndTypes['default'];
+		}, function (_srcAppBoatLineupPlannerUtilsBoatSeatUtils) {
+			seatIsEmpty = _srcAppBoatLineupPlannerUtilsBoatSeatUtils.seatIsEmpty;
+		}],
+		execute: function () {
+			'use strict';
+
+			spec = {
+				drop: function drop(props, monitor) {
+					var _monitor$getItem = monitor.getItem();
+
+					var attendeeId = _monitor$getItem.attendeeId;
+					var onAssignAttendee = props.onAssignAttendee;
+					var boatKey = props.boatKey;
+					var seatPosition = props.seatPosition;
+
+					onAssignAttendee(attendeeId, boatKey, seatPosition);
+				},
+				canDrop: function canDrop(props) {
+					return seatIsEmpty(props.seat);
+				}
+			};
+
+			collect = function collect(connect, monitor) {
+				return {
+					connectDropTarget: connect.dropTarget()
+				};
+			};
+
+			_default = (function (_React$Component) {
+				_inherits(_default, _React$Component);
+
+				function _default() {
+					_classCallCheck(this, _default2);
+
+					_get(Object.getPrototypeOf(_default2.prototype), 'constructor', this).apply(this, arguments);
+				}
+
+				_createClass(_default, [{
+					key: 'render',
+					value: function render() {
+						var _props = this.props;
+						var seat = _props.seat;
+						var seatPosition = _props.seatPosition;
+						var connectDropTarget = _props.connectDropTarget;
+
+						var attendee = seatIsEmpty(seat) ? null : React.createElement(Attendee, { attendee: seat.get('attendee') });
+
+						return connectDropTarget(React.createElement(
+							'div',
+							{ className: 'boat-seat' },
+							React.createElement(
+								'span',
+								null,
+								seatPosition
+							),
+							attendee
+						));
+					}
+				}]);
+
+				var _default2 = _default;
+				_default = DropTarget(dndTypes.ATTENDEE, spec, collect)(_default) || _default;
+				return _default;
+			})(React.Component);
+
+			_export('default', _default);
+		}
+	};
+});
+System.register('src/app/boat-lineup-planner/actions/attendeeReducers', ['src/app/boat-lineup-planner/actions/actionTypes', 'src/app/boat-lineup-planner/fakeInitialState', 'src/app/boat-lineup-planner/constants/emptyAttendeePlacement'], function (_export) {
+	'use strict';
+
+	var actionTypes, fakeInitialState, emptyAttendeePlacement;
+	return {
+		setters: [function (_srcAppBoatLineupPlannerActionsActionTypes) {
+			actionTypes = _srcAppBoatLineupPlannerActionsActionTypes['default'];
+		}, function (_srcAppBoatLineupPlannerFakeInitialState) {
+			fakeInitialState = _srcAppBoatLineupPlannerFakeInitialState['default'];
+		}, function (_srcAppBoatLineupPlannerConstantsEmptyAttendeePlacement) {
+			emptyAttendeePlacement = _srcAppBoatLineupPlannerConstantsEmptyAttendeePlacement['default'];
+		}],
+		execute: function () {
+			_export('default', function (state, action) {
+				if (state === undefined) state = fakeInitialState;
+
+				switch (action.type) {
+					case actionTypes.UNASSIGN_ATTENDEE:
+						return state.setIn(['attendees', action.attendeeId, 'placement'], emptyAttendeePlacement);
+					case actionTypes.ASSIGN_ATTENDEE:
+						return state.setIn(['attendees', action.attendeeId, 'placement', 'boatKey'], action.boatKey).setIn(['attendees', action.attendeeId, 'placement', 'seat'], action.seatPosition);
+					default:
+						return state;
+				}
+			});
+		}
+	};
+});
+System.register('src/app/boat-lineup-planner/components/Boat', ['npm:babel-runtime@5.8.25/helpers/get', 'npm:babel-runtime@5.8.25/helpers/inherits', 'npm:babel-runtime@5.8.25/helpers/create-class', 'npm:babel-runtime@5.8.25/helpers/class-call-check', 'npm:react@0.14.0', 'src/app/boat-lineup-planner/components/BoatSeat'], function (_export) {
+	var _get, _inherits, _createClass, _classCallCheck, React, BoatSeat, _default;
+
+	return {
+		setters: [function (_npmBabelRuntime5825HelpersGet) {
+			_get = _npmBabelRuntime5825HelpersGet['default'];
+		}, function (_npmBabelRuntime5825HelpersInherits) {
+			_inherits = _npmBabelRuntime5825HelpersInherits['default'];
+		}, function (_npmBabelRuntime5825HelpersCreateClass) {
+			_createClass = _npmBabelRuntime5825HelpersCreateClass['default'];
+		}, function (_npmBabelRuntime5825HelpersClassCallCheck) {
+			_classCallCheck = _npmBabelRuntime5825HelpersClassCallCheck['default'];
+		}, function (_npmReact0140) {
+			React = _npmReact0140['default'];
+		}, function (_srcAppBoatLineupPlannerComponentsBoatSeat) {
+			BoatSeat = _srcAppBoatLineupPlannerComponentsBoatSeat['default'];
+		}],
+		execute: function () {
+			'use strict';
+
+			_default = (function (_React$Component) {
+				_inherits(_default, _React$Component);
+
+				function _default() {
+					_classCallCheck(this, _default);
+
+					_get(Object.getPrototypeOf(_default.prototype), 'constructor', this).apply(this, arguments);
+				}
+
+				_createClass(_default, [{
+					key: 'render',
+					value: function render() {
+						var _props = this.props;
+						var boat = _props.boat;
+						var boatKey = _props.boatKey;
+						var onAssignAttendee = _props.onAssignAttendee;
+
+						return React.createElement(
+							'div',
+							{ className: 'boat' },
+							React.createElement(
+								'div',
+								null,
+								React.createElement(
+									'div',
+									null,
+									boat.get('title')
+								),
+								React.createElement(
+									'div',
+									null,
+									boat.get('seats').map(function (seat, seatPosition) {
+										return React.createElement(BoatSeat, { key: seatPosition,
+											seat: seat,
+											seatPosition: seatPosition,
+											boatKey: boatKey,
+											onAssignAttendee: onAssignAttendee });
+									})
+								)
+							)
+						);
+					}
+				}]);
+
 				return _default;
 			})(React.Component);
 
@@ -22410,34 +22505,6 @@ System.register('src/app/boat-lineup-planner/components/BoatList', ['npm:babel-r
 			})(React.Component);
 
 			_export('default', _default);
-		}
-	};
-});
-System.register('src/app/boat-lineup-planner/actions/attendeeReducers', ['src/app/boat-lineup-planner/actions/actionTypes', 'src/app/boat-lineup-planner/fakeInitialState', 'src/app/boat-lineup-planner/constants/emptyAttendeePlacement'], function (_export) {
-	'use strict';
-
-	var actionTypes, fakeInitialState, emptyAttendeePlacement;
-	return {
-		setters: [function (_srcAppBoatLineupPlannerActionsActionTypes) {
-			actionTypes = _srcAppBoatLineupPlannerActionsActionTypes['default'];
-		}, function (_srcAppBoatLineupPlannerFakeInitialState) {
-			fakeInitialState = _srcAppBoatLineupPlannerFakeInitialState['default'];
-		}, function (_srcAppBoatLineupPlannerConstantsEmptyAttendeePlacement) {
-			emptyAttendeePlacement = _srcAppBoatLineupPlannerConstantsEmptyAttendeePlacement['default'];
-		}],
-		execute: function () {
-			_export('default', function (state, action) {
-				if (state === undefined) state = fakeInitialState;
-
-				switch (action.type) {
-					case actionTypes.UNASSIGN_ATTENDEE:
-						return state.setIn(['attendees', action.attendeeId, 'placement'], emptyAttendeePlacement);
-					case actionTypes.ASSIGN_ATTENDEE:
-						return state.setIn(['attendees', action.attendeeId, 'placement', 'boatKey'], action.boatKey).setIn(['attendees', action.attendeeId, 'placement', 'seat'], action.seatPosition);
-					default:
-						return state;
-				}
-			});
 		}
 	};
 });
@@ -22518,7 +22585,7 @@ System.register('src/app/boat-lineup-planner/components/UnassignedAttendeeList',
 							'div',
 							{ className: 'unassigned-attendee-list' },
 							unassignedAttendees.map(function (teamMember) {
-								return React.createElement(Attendee, { teamMember: teamMember, key: teamMember.id });
+								return React.createElement(Attendee, { attendee: teamMember, key: teamMember.id });
 							})
 						));
 					}

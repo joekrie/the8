@@ -200,8 +200,8 @@ table:not(.rd-days) {
 
 @font-face {
   font-family: 'Glyphicons Regular';
-  src: url("glyphicons-fonts/glyphicons-regular.eot");
-  src: url("glyphicons-fonts/glyphicons-regular.eot?#iefix") format("embedded-opentype"), url("glyphicons-fonts/glyphicons-regular.woff2") format("woff2"), url("glyphicons-fonts/glyphicons-regular.woff") format("woff"), url("glyphicons-fonts/glyphicons-regular.ttf") format("truetype"), url("glyphicons-fonts/glyphicons-regular.svg#glyphiconsregular") format("svg"); }
+  src: url("glyphicons/glyphicons-regular.eot");
+  src: url("glyphicons/glyphicons-regular.eot?#iefix") format("embedded-opentype"), url("glyphicons/glyphicons-regular.woff2") format("woff2"), url("glyphicons/glyphicons-regular.woff") format("woff"), url("glyphicons/glyphicons-regular.ttf") format("truetype"), url("glyphicons/glyphicons-regular.svg#glyphiconsregular") format("svg"); }
 
 .glyphicons {
   position: relative;
@@ -2246,7 +2246,9 @@ table:not(.rd-days) {
     float: left;
     display: block;
     margin-right: 2.12766%;
-    width: 23.40426%; }
+    width: 23.40426%;
+    padding: 10px;
+    border: 1px solid black; }
     .boat-lineup-planner .unassigned-attendee-list:last-child {
       margin-right: 0; }
   .boat-lineup-planner .boat-list {
@@ -2256,10 +2258,13 @@ table:not(.rd-days) {
     width: 74.46809%; }
     .boat-lineup-planner .boat-list:last-child {
       margin-right: 0; }
-    .boat-lineup-planner .boat-list .boat .boat-seat {
-      border: 1px solid black;
-      width: 150px;
-      min-height: 50px; }
+    .boat-lineup-planner .boat-list .boat {
+      padding: 10px;
+      border: 1px solid black; }
+      .boat-lineup-planner .boat-list .boat .boat-seat {
+        border: 1px solid black;
+        width: 150px;
+        min-height: 50px; }
   .boat-lineup-planner .attendee {
     border: 1px solid black;
     width: 100%;

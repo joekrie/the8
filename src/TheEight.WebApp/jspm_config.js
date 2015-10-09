@@ -2,9 +2,9 @@ System.config({
   "baseURL": "src/app",
   "transpiler": "babel",
   "babelOptions": {
-    "blacklist": [],
-    "stage": 0,
     "optional": [
+      "es7.decorators",
+      "es7.classProperties",
       "runtime"
     ]
   },

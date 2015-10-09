@@ -12,10 +12,10 @@ export default class extends React.Component {
 						{boat.get('title')}
 					</div>
 					<div>
-						{boat.get('seats').map((teamMember, seatPosition) => 
+						{boat.get('seats').map((seat, seatPosition) => 
 							<BoatSeat key={seatPosition}
+								seat={seat}
 								seatPosition={seatPosition}
-								teamMember={teamMember} 
 								boatKey={boatKey}						
 								onAssignAttendee={onAssignAttendee} />						
 						)}
