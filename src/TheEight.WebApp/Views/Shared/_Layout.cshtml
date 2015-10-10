@@ -1,25 +1,11 @@
-﻿@{
-    var baseUrl = Url.Action(
-        new UrlActionContext
-        {
-            Controller = "Home",
-            Action = "Index",
-            Protocol = "http"
-        });
-}
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
-    <title></title>
-    <base href="@baseUrl" />
-    <link href="~/libs/libs.css" rel="stylesheet"/>
-    <link href="~/styles/site.css" rel="stylesheet"/>
-    @RenderSection("styles", false)
+    <title>The Eight</title>
+    <link href="~/styles/site.css" rel="stylesheet" />
 </head>
 <body>
 @RenderBody()
-<script src="~/libs/libs.js"></script>
-<script src="~/app/app.js"></script>
 @RenderSection("scripts", false)
 </body>
 </html>

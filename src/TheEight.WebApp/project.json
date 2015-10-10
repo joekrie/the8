@@ -3,31 +3,25 @@
     "web": "Microsoft.AspNet.Hosting --config hosting.ini"
   },
   "dependencies": {
-    "Autofac": "4.0.0-beta5-92",
-    "Autofac.Framework.DependencyInjection": "4.0.0-beta5-92",
-    "Microsoft.AspNet.Authentication.Google": "1.0.0-beta5",
-    "Microsoft.AspNet.Diagnostics": "1.0.0-beta5",
-    "Microsoft.AspNet.Mvc": "6.0.0-beta5",
-    "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-beta5",
-    "Microsoft.AspNet.Server.IIS": "1.0.0-beta5",
-    "Microsoft.AspNet.Server.WebListener": "1.0.0-beta5",
-    "Microsoft.AspNet.StaticFiles": "1.0.0-beta5",
+    "Autofac.Framework.DependencyInjection": "4.0.0-beta6-110",
+    "Microsoft.AspNet.Mvc": "6.0.0-beta7",
+    "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-beta7",
+    "Microsoft.AspNet.Server.IIS": "1.0.0-beta7",
+    "Microsoft.AspNet.Server.WebListener": "1.0.0-beta7",
+    "Microsoft.AspNet.Diagnostics": "1.0.0-beta7",
+    "Microsoft.AspNet.StaticFiles": "1.0.0-beta7",
     "Microsoft.Composition": "1.0.30",
-    "Microsoft.Framework.Configuration.Json": "1.0.0-beta5",
-    "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta5",
-    "Microsoft.Framework.DependencyInjection": "1.0.0-beta5",
-    "Microsoft.Framework.Logging.Console": "1.0.0-beta5",
-    "Microsoft.Framework.Logging.NLog": "1.0.0-beta6-11585",
-    "NLog": "4.0.1",
-    "NLog.Config": "4.0.1",
-    "NLog.Schema": "4.0.1",
+    "Microsoft.Framework.Configuration.Json": "1.0.0-beta7",
+    "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta7",
+    "Microsoft.Framework.DependencyInjection": "1.0.0-beta7",
     "NodaTime": "1.3.1",
     "NodaTime.Serialization.JsonNet": "1.3.1",
     "RavenDB.Client": "3.0.3690",
     "RavenDB.Client.NodaTime": "3.0.0",
     "RavenDB.Database": "3.0.3690",
     "TheEight.Common": "1.0.0-*",
-    "TheEight.Domain": "1.0.0-*"
+    "TheEight.Domain": "1.0.0-*",
+    "React.AspNet": "1.5.5"
   },
   "exclude": [
     "wwwroot",
@@ -38,11 +32,12 @@
   },
   "publishExclude": [
     "node_modules",
+    "jspm_packages",
     "**.xproj",
     "**.user",
     "**.vspscc"
   ],
   "userSecretsId": "TheEightSuite",
   "version": "1.0.0-*",
-  "webroot": "wwwroot"
+  "webroot": "dist"
 }

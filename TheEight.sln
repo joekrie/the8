@@ -9,21 +9,12 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TheEight.Common", "src\TheE
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TheEight.Domain", "src\TheEight.Domain\TheEight.Domain.xproj", "{1F8FB55D-1C41-4D1A-8569-19FCDE91CD90}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TheEight.QueueHandlers", "src\TheEight.QueueHandlers\TheEight.QueueHandlers.xproj", "{467D0F7E-C8CD-4E97-95CD-68F6A8E60285}"
-	ProjectSection(ProjectDependencies) = postProject
-		{1F8FB55D-1C41-4D1A-8569-19FCDE91CD90} = {1F8FB55D-1C41-4D1A-8569-19FCDE91CD90}
-	EndProjectSection
-EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TheEight.WebApp", "src\TheEight.WebApp\TheEight.WebApp.xproj", "{83D26331-A739-4E94-B764-97BB5EE80441}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CAEF08D3-56BC-45BF-A50C-AE2A3B7C32A5}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TheEight.Clubs.MarquetteCrew", "TheEight.Clubs.MarquetteCrew", "{2319AC4F-DA25-419E-B8B0-87235D64C0F2}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TheEight.Clubs.MarquetteCrew.ScheduledTasks", "src\TheEight.Clubs.MarquetteCrew\TheEight.Clubs.MarquetteCrew.ScheduledTasks\TheEight.Clubs.MarquetteCrew.ScheduledTasks.xproj", "{8696540E-015F-4662-A0D6-5CC226BEBF21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,18 +30,10 @@ Global
 		{1F8FB55D-1C41-4D1A-8569-19FCDE91CD90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F8FB55D-1C41-4D1A-8569-19FCDE91CD90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F8FB55D-1C41-4D1A-8569-19FCDE91CD90}.Release|Any CPU.Build.0 = Release|Any CPU
-		{467D0F7E-C8CD-4E97-95CD-68F6A8E60285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{467D0F7E-C8CD-4E97-95CD-68F6A8E60285}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{467D0F7E-C8CD-4E97-95CD-68F6A8E60285}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{467D0F7E-C8CD-4E97-95CD-68F6A8E60285}.Release|Any CPU.Build.0 = Release|Any CPU
 		{83D26331-A739-4E94-B764-97BB5EE80441}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{83D26331-A739-4E94-B764-97BB5EE80441}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83D26331-A739-4E94-B764-97BB5EE80441}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83D26331-A739-4E94-B764-97BB5EE80441}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8696540E-015F-4662-A0D6-5CC226BEBF21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8696540E-015F-4662-A0D6-5CC226BEBF21}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8696540E-015F-4662-A0D6-5CC226BEBF21}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8696540E-015F-4662-A0D6-5CC226BEBF21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,9 +41,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{FBF539E0-1767-4AFA-9DCD-F19BBB397AA9} = {69DEBE83-BA3A-420A-AA7E-3D7F1B696D5E}
 		{1F8FB55D-1C41-4D1A-8569-19FCDE91CD90} = {69DEBE83-BA3A-420A-AA7E-3D7F1B696D5E}
-		{467D0F7E-C8CD-4E97-95CD-68F6A8E60285} = {69DEBE83-BA3A-420A-AA7E-3D7F1B696D5E}
 		{83D26331-A739-4E94-B764-97BB5EE80441} = {69DEBE83-BA3A-420A-AA7E-3D7F1B696D5E}
-		{2319AC4F-DA25-419E-B8B0-87235D64C0F2} = {69DEBE83-BA3A-420A-AA7E-3D7F1B696D5E}
-		{8696540E-015F-4662-A0D6-5CC226BEBF21} = {2319AC4F-DA25-419E-B8B0-87235D64C0F2}
 	EndGlobalSection
 EndGlobal

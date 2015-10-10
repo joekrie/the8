@@ -7,32 +7,18 @@ namespace TheEight.Common.Database
 {
     public static class DocumentStoreFactory
     {
-        private static IDocumentStore Configure(this IDocumentStore documentStore)
+        public static IDocumentStore CreateAndInitialize(RavenSettings settings)
         {
-            return documentStore
-                .ConfigureForNodaTime();
-        }
-
-        public static IDocumentStore GetCloudDocumentStore(RavenHqSettings settings)
-        {
-            return new DocumentStore
+            var docStore = new DocumentStore
             {
                 Url = settings.Url,
-                ApiKey = settings.ApiKey
-            }
-                .Initialize()
-                .Configure();
-        }
+                ApiKey = settings.ApiKey,
+                DefaultDatabase = settings.DatabaseName
+            };
 
-        public static IDocumentStore GetDevelopmentDocumentStore()
-        {
-            return new DocumentStore
-            {
-                Url = "http://localhost:8080",
-                DefaultDatabase = "TheEightSuite"
-            }
+            return docStore
                 .Initialize()
-                .Configure();
+                .ConfigureForNodaTime();
         }
     }
 }

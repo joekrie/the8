@@ -1,0 +1,40 @@
+/// <reference path="base/_base.scss" />
+
+.boat-lineup-planner {
+	@include outer-container;
+	
+	.unassigned-attendee-list {
+		@include span-columns(3);
+		padding: 10px;
+		border: 1px solid black;
+	}
+
+	.boat-list {
+		@include span-columns(9);
+		
+		.boat {
+			padding: 10px;
+			border: 1px solid black;
+			
+			.boat-seat {
+				border: 1px solid black;
+				width: 150px;
+				min-height: 50px;
+			}
+		}
+	}
+					
+	.attendee {
+		border: 1px solid black;
+		width: 100%;
+		padding: 10px;
+		
+		&.rower {
+			background-color: lightgray;
+		}
+		
+		&.coxswain {
+			background-color: gray;
+		}
+	}	
+}
