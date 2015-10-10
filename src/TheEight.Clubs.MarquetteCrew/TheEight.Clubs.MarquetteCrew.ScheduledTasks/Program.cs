@@ -13,7 +13,6 @@ using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using TheEight.Common.Database;
 using TheEight.Common.DependencyInjection;
-using TheEight.Extensibility;
 
 namespace TheEight.ScheduledTasks
 {

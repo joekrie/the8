@@ -1,0 +1,67 @@
+{
+  "name": "dnd-core",
+  "version": "1.2.1",
+  "description": "Drag and drop sans the GUI",
+  "main": "lib/index.js",
+  "scripts": {
+    "clean": "rimraf lib",
+    "build": "npm run clean && babel src --out-dir lib",
+    "test": "mocha --compilers js:babel/register --recursive",
+    "test:cov": "istanbul cover ./node_modules/.bin/_mocha -- --compilers js:babel/register --recursive",
+    "test:watch": "npm run test -- --watch",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gaearon/dnd-core.git"
+  },
+  "author": {
+    "name": "Dan Abramov",
+    "email": "dan.abramov@me.com",
+    "url": "http://github.com/gaearon"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gaearon/dnd-core/issues"
+  },
+  "homepage": "https://github.com/gaearon/dnd-core",
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "babel-plugin-object-assign": "^1.2.1",
+    "expect.js": "^0.3.1",
+    "istanbul": "~0.3.7",
+    "mocha": "^2.0.1",
+    "rimraf": "^2.4.3"
+  },
+  "gitHead": "cd96dcff3085c46b596a56a8302ae0147ac25c78",
+  "_id": "dnd-core@1.2.1",
+  "_shasum": "3024e093d3828d45f0b0c98e94dfb1dde4923315",
+  "_from": ".",
+  "_npmVersion": "2.11.0",
+  "_nodeVersion": "2.2.1",
+  "_npmUser": {
+    "name": "gaearon",
+    "email": "dan.abramov@gmail.com"
+  },
+  "dist": {
+    "shasum": "3024e093d3828d45f0b0c98e94dfb1dde4923315",
+    "tarball": "http://registry.npmjs.org/dnd-core/-/dnd-core-1.2.1.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "gaearon",
+      "email": "dan.abramov@gmail.com"
+    }
+  ],
+  "format": "cjs",
+  "ignore": [
+    "node_modules"
+  ],
+  "registry": "npm",
+  "dependencies": {
+    "invariant": "invariant@^2.0.0",
+    "keymirror": "keymirror@^0.1.1",
+    "lodash": "lodash@^3.10.1",
+    "redux": "redux@^3.0.0"
+  }
+}

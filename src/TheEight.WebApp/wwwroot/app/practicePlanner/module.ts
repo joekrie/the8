@@ -1,1 +1,0 @@
-﻿angular.module("the8.practicePlanner", ["the8.common", "dragularModule", "datePicker"]);

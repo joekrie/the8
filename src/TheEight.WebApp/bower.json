@@ -9,13 +9,14 @@
     "lodash": "^3.10.1",
     "modernizr": "^2.8.3",
     "moment": "^2.10.6",
-    "angular": "^1.4.5",
     "normalize-css": "^3.0.3",
     "xregexp": "^2.0.0",
     "spinjs": "^2.3.2",
-    "dragular": "^3.0.2",
-    "angular-datepicker": "^1.0.14",
-    "angular-moment": "^0.10.3"
+    "react-dragula": "^1.0.12",
+    "rome": "^2.1.22",
+    "contra": "^1.9.1",
+    "interact": "^1.2.5",
+    "jest": "^5.0.3"
   },
   "ignore": [
     "**/.*",

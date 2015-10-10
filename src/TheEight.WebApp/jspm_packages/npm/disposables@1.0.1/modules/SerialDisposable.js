@@ -1,0 +1,55 @@
+/* */ 
+'use strict';
+var _interopRequireWildcard = function(obj) {
+  return obj && obj.__esModule ? obj : {'default': obj};
+};
+var _classCallCheck = function(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError('Cannot call a class as a function');
+  }
+};
+exports.__esModule = true;
+var _isDisposable = require("./isDisposable");
+var _isDisposable2 = _interopRequireWildcard(_isDisposable);
+var SerialDisposable = (function() {
+  function SerialDisposable() {
+    _classCallCheck(this, SerialDisposable);
+    this.isDisposed = false;
+    this.current = null;
+  }
+  SerialDisposable.prototype.getDisposable = function getDisposable() {
+    return this.current;
+  };
+  SerialDisposable.prototype.setDisposable = function setDisposable() {
+    var value = arguments[0] === undefined ? null : arguments[0];
+    if (value != null && !_isDisposable2['default'](value)) {
+      throw new Error('Expected either an empty value or a valid disposable');
+    }
+    var isDisposed = this.isDisposed;
+    var previous = undefined;
+    if (!isDisposed) {
+      previous = this.current;
+      this.current = value;
+    }
+    if (previous) {
+      previous.dispose();
+    }
+    if (isDisposed && value) {
+      value.dispose();
+    }
+  };
+  SerialDisposable.prototype.dispose = function dispose() {
+    if (this.isDisposed) {
+      return ;
+    }
+    this.isDisposed = true;
+    var previous = this.current;
+    this.current = null;
+    if (previous) {
+      previous.dispose();
+    }
+  };
+  return SerialDisposable;
+})();
+exports['default'] = SerialDisposable;
+module.exports = exports['default'];
