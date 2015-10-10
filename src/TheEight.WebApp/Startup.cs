@@ -1,80 +1,70 @@
 ﻿using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Diagnostics;
-using Microsoft.AspNet.Hosting;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
-using Microsoft.Framework.Logging;
 using Microsoft.Framework.OptionsModel;
-using Microsoft.Framework.Runtime;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using NodaTime;
 using NodaTime.Serialization.JsonNet;
 using TheEight.Common.Config;
-using TheEight.Common.Configuration;
 using TheEight.Common.Database;
-using TheEight.Common.Logging;
+using React.AspNet;
+using System;
+using Microsoft.Dnx.Runtime;
 
 namespace TheEight.WebApp
 {
     public class Startup
     {
-        private readonly IApplicationEnvironment _appEnv;
-        private readonly IConfiguration _config;
-        private readonly IHostingEnvironment _hostEnv;
-        private ILogger _logger;
+        private IConfiguration _config;
 
-        public Startup(IApplicationEnvironment applicationEnvironment, IHostingEnvironment hostingEnvironment)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            _appEnv = applicationEnvironment;
-            _hostEnv = hostingEnvironment;
-            _config = ConfigurationFactory.GetConfiguration(_appEnv.ApplicationBasePath);
-        }
+            var applicationEnvironment = services.BuildServiceProvider()
+                .GetRequiredService<IApplicationEnvironment>();
 
-        public void ConfigureServices(IServiceCollection services)
-        {
+            _config = new ConfigurationBuilder(applicationEnvironment.ApplicationBasePath)
+                .AddEnvironmentVariables("APPSETTING_")
+                .AddUserSecrets()
+                .Build();
+
             services.AddOptions();
 
-            services.Configure<FacebookSettings>(_config.GetConfigurationSection("Facebook"));
-            services.Configure<GoogleSettings>(_config.GetConfigurationSection("Google"));
-            services.Configure<MicrosoftAccountSettings>(_config.GetConfigurationSection("MicrosoftAccount"));
+            services.Configure<GoogleSettings>(_config.GetSection("Google"));
+            services.Configure<RavenSettings>(_config.GetSection("Raven"));
 
-            if (_appEnv.Configuration == "Debug")
+            services.AddSingleton(provider =>
             {
-                services.AddSingleton(provider => DocumentStoreFactory.GetDevelopmentDocumentStore());
-            }
-            else
-            {
-                services.Configure<RavenHqSettings>(_config.GetConfigurationSection("RavenHq"));
-
-                services.AddSingleton(provider =>
-                {
-                    var settings = provider.GetRequiredService<IOptions<RavenHqSettings>>();
-                    return DocumentStoreFactory.GetCloudDocumentStore(settings.Options);
-                });
-            }
-            
-            services.AddMvc();
-
-            services.ConfigureMvc(options =>
-            {
-                options.SerializerSettings.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb);
-                options.SerializerSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
-                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                var settings = provider.GetRequiredService<IOptions<RavenSettings>>();
+                return DocumentStoreFactory.CreateAndInitialize(settings.Options);
             });
+
+            services.AddReact();
+
+            services.AddMvc()
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb);
+                    options.SerializerSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                });
+
+            return services.BuildServiceProvider();
         }
 
         public void ConfigureDevelopment(IApplicationBuilder app)
         {
-            app.UseErrorPage(ErrorPageOptions.ShowAll);
+            app.UseErrorPage();
         }
 
-        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app)
         {
-            _logger = loggerFactory
-                .SetupNLog(_appEnv.ApplicationBasePath, _appEnv.Configuration == "Debug")
-                .CreateLogger(_appEnv.ApplicationName);
-            
+            app.UseReact(config =>
+            {
+                config.SetUseHarmony(false);
+                config.AddScript("~/app/boat-lineup-planner/main.js");
+            });
+
             app.UseStaticFiles();
             app.UseMvc();
         }
