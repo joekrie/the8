@@ -1,2 +1,2 @@
 /* */ 
-module.exports = require("./isEqual");
+module.exports = require('./isEqual');

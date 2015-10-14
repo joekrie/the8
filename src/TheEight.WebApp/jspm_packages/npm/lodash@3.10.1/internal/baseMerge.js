@@ -1,12 +1,12 @@
 /* */ 
-var arrayEach = require("./arrayEach"),
-    baseMergeDeep = require("./baseMergeDeep"),
-    isArray = require("../lang/isArray"),
-    isArrayLike = require("./isArrayLike"),
-    isObject = require("../lang/isObject"),
-    isObjectLike = require("./isObjectLike"),
-    isTypedArray = require("../lang/isTypedArray"),
-    keys = require("../object/keys");
+var arrayEach = require('./arrayEach'),
+    baseMergeDeep = require('./baseMergeDeep'),
+    isArray = require('../lang/isArray'),
+    isArrayLike = require('./isArrayLike'),
+    isObject = require('../lang/isObject'),
+    isObjectLike = require('./isObjectLike'),
+    isTypedArray = require('../lang/isTypedArray'),
+    keys = require('../object/keys');
 function baseMerge(object, source, customizer, stackA, stackB) {
   if (!isObject(object)) {
     return object;

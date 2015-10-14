@@ -1,5 +1,5 @@
 /* */ 
-var isIndex = require("./isIndex");
+var isIndex = require('./isIndex');
 var arrayProto = Array.prototype;
 var splice = arrayProto.splice;
 function basePullAt(array, indexes) {

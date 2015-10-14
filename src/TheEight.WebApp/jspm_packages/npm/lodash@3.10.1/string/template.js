@@ -1,16 +1,16 @@
 /* */ 
-var assignOwnDefaults = require("../internal/assignOwnDefaults"),
-    assignWith = require("../internal/assignWith"),
-    attempt = require("../utility/attempt"),
-    baseAssign = require("../internal/baseAssign"),
-    baseToString = require("../internal/baseToString"),
-    baseValues = require("../internal/baseValues"),
-    escapeStringChar = require("../internal/escapeStringChar"),
-    isError = require("../lang/isError"),
-    isIterateeCall = require("../internal/isIterateeCall"),
-    keys = require("../object/keys"),
-    reInterpolate = require("../internal/reInterpolate"),
-    templateSettings = require("./templateSettings");
+var assignOwnDefaults = require('../internal/assignOwnDefaults'),
+    assignWith = require('../internal/assignWith'),
+    attempt = require('../utility/attempt'),
+    baseAssign = require('../internal/baseAssign'),
+    baseToString = require('../internal/baseToString'),
+    baseValues = require('../internal/baseValues'),
+    escapeStringChar = require('../internal/escapeStringChar'),
+    isError = require('../lang/isError'),
+    isIterateeCall = require('../internal/isIterateeCall'),
+    keys = require('../object/keys'),
+    reInterpolate = require('../internal/reInterpolate'),
+    templateSettings = require('./templateSettings');
 var reEmptyStringLeading = /\b__p \+= '';/g,
     reEmptyStringMiddle = /\b(__p \+=) '' \+/g,
     reEmptyStringTrailing = /(__e\(.*?\)|\b__t\)) \+\n'';/g;

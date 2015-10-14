@@ -1,5 +1,5 @@
 /* */ 
-var realNames = require("./realNames");
+var realNames = require('./realNames');
 function getFuncName(func) {
   var result = (func.name + ''),
       array = realNames[result],

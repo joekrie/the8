@@ -1,10 +1,10 @@
 /* */ 
-var arrayExtremum = require("./arrayExtremum"),
-    baseCallback = require("./baseCallback"),
-    baseExtremum = require("./baseExtremum"),
-    isArray = require("../lang/isArray"),
-    isIterateeCall = require("./isIterateeCall"),
-    toIterable = require("./toIterable");
+var arrayExtremum = require('./arrayExtremum'),
+    baseCallback = require('./baseCallback'),
+    baseExtremum = require('./baseExtremum'),
+    isArray = require('../lang/isArray'),
+    isIterateeCall = require('./isIterateeCall'),
+    toIterable = require('./toIterable');
 function createExtremum(comparator, exValue) {
   return function(collection, iteratee, thisArg) {
     if (thisArg && isIterateeCall(collection, iteratee, thisArg)) {

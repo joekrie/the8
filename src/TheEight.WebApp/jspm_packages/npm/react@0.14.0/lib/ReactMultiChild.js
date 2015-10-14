@@ -1,12 +1,12 @@
 /* */ 
 (function(process) {
   'use strict';
-  var ReactComponentEnvironment = require("./ReactComponentEnvironment");
-  var ReactMultiChildUpdateTypes = require("./ReactMultiChildUpdateTypes");
-  var ReactCurrentOwner = require("./ReactCurrentOwner");
-  var ReactReconciler = require("./ReactReconciler");
-  var ReactChildReconciler = require("./ReactChildReconciler");
-  var flattenChildren = require("./flattenChildren");
+  var ReactComponentEnvironment = require('./ReactComponentEnvironment');
+  var ReactMultiChildUpdateTypes = require('./ReactMultiChildUpdateTypes');
+  var ReactCurrentOwner = require('./ReactCurrentOwner');
+  var ReactReconciler = require('./ReactReconciler');
+  var ReactChildReconciler = require('./ReactChildReconciler');
+  var flattenChildren = require('./flattenChildren');
   var updateDepth = 0;
   var updateQueue = [];
   var markupQueue = [];
@@ -191,7 +191,7 @@
         var nextChildren = this._reconcilerUpdateChildren(prevChildren, nextNestedChildrenElements, transaction, context);
         this._renderedChildren = nextChildren;
         if (!nextChildren && !prevChildren) {
-          return ;
+          return;
         }
         var name;
         var lastIndex = 0;
@@ -255,4 +255,4 @@
       }
     }};
   module.exports = ReactMultiChild;
-})(require("process"));
+})(require('process'));

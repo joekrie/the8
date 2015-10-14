@@ -1,5 +1,5 @@
 /* */ 
-var isObject = require("../lang/isObject");
+var isObject = require('../lang/isObject');
 var baseCreate = (function() {
   function object() {}
   return function(prototype) {

@@ -1,10 +1,10 @@
 /* */ 
 (function(process) {
   'use strict';
-  var PooledClass = require("./PooledClass");
-  var assign = require("./Object.assign");
-  var emptyFunction = require("fbjs/lib/emptyFunction");
-  var warning = require("fbjs/lib/warning");
+  var PooledClass = require('./PooledClass');
+  var assign = require('./Object.assign');
+  var emptyFunction = require('fbjs/lib/emptyFunction');
+  var warning = require('fbjs/lib/warning');
   var EventInterface = {
     type: null,
     currentTarget: emptyFunction.thatReturnsNull,
@@ -51,7 +51,7 @@
         process.env.NODE_ENV !== 'production' ? warning(event, 'This synthetic event is reused for performance reasons. If you\'re ' + 'seeing this, you\'re calling `preventDefault` on a ' + 'released/nullified synthetic event. This is a no-op. See ' + 'https://fb.me/react-event-pooling for more information.') : undefined;
       }
       if (!event) {
-        return ;
+        return;
       }
       if (event.preventDefault) {
         event.preventDefault();
@@ -66,7 +66,7 @@
         process.env.NODE_ENV !== 'production' ? warning(event, 'This synthetic event is reused for performance reasons. If you\'re ' + 'seeing this, you\'re calling `stopPropagation` on a ' + 'released/nullified synthetic event. This is a no-op. See ' + 'https://fb.me/react-event-pooling for more information.') : undefined;
       }
       if (!event) {
-        return ;
+        return;
       }
       if (event.stopPropagation) {
         event.stopPropagation();
@@ -102,4 +102,4 @@
   };
   PooledClass.addPoolingTo(SyntheticEvent, PooledClass.fourArgumentPooler);
   module.exports = SyntheticEvent;
-})(require("process"));
+})(require('process'));

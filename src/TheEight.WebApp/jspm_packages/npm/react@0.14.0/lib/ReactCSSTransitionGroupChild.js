@@ -1,10 +1,10 @@
 /* */ 
 'use strict';
-var React = require("./React");
-var ReactDOM = require("./ReactDOM");
-var CSSCore = require("fbjs/lib/CSSCore");
-var ReactTransitionEvents = require("./ReactTransitionEvents");
-var onlyChild = require("./onlyChild");
+var React = require('./React');
+var ReactDOM = require('./ReactDOM');
+var CSSCore = require('fbjs/lib/CSSCore');
+var ReactTransitionEvents = require('./ReactTransitionEvents');
+var onlyChild = require('./onlyChild');
 var TICK = 17;
 var ReactCSSTransitionGroupChild = React.createClass({
   displayName: 'ReactCSSTransitionGroupChild',
@@ -34,14 +34,14 @@ var ReactCSSTransitionGroupChild = React.createClass({
       if (finishCallback) {
         finishCallback();
       }
-      return ;
+      return;
     }
     var className = this.props.name[animationType] || this.props.name + '-' + animationType;
     var activeClassName = this.props.name[animationType + 'Active'] || className + '-active';
     var timeout = null;
     var endListener = function(e) {
       if (e && e.target !== node) {
-        return ;
+        return;
       }
       clearTimeout(timeout);
       CSSCore.removeClass(node, className);

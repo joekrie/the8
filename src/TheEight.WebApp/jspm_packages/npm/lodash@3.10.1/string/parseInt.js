@@ -1,6 +1,6 @@
 /* */ 
-var isIterateeCall = require("../internal/isIterateeCall"),
-    trim = require("./trim");
+var isIterateeCall = require('../internal/isIterateeCall'),
+    trim = require('./trim');
 var reHasHexPrefix = /^0[xX]/;
 var nativeParseInt = global.parseInt;
 function parseInt(string, radix, guard) {

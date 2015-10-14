@@ -1,8 +1,8 @@
 /* */ 
 (function(process) {
-  var test = require("tape");
-  var spec = require("stream-spec");
-  var through = require("../index");
+  var test = require('tape');
+  var spec = require('stream-spec');
+  var through = require('../index');
   function write(array, stream) {
     array = array.slice();
     function next() {
@@ -68,7 +68,7 @@
     var s = spec(t).through().pausable();
     t.on('data', function() {
       if (Math.random() > 0.1)
-        return ;
+        return;
       t.pause();
       process.nextTick(function() {
         t.resume();
@@ -95,4 +95,4 @@
     assert.equal(count, 2);
     assert.end();
   });
-})(require("process"));
+})(require('process'));

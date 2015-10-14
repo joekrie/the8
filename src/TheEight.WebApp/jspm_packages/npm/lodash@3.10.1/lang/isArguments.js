@@ -1,6 +1,6 @@
 /* */ 
-var isArrayLike = require("../internal/isArrayLike"),
-    isObjectLike = require("../internal/isObjectLike");
+var isArrayLike = require('../internal/isArrayLike'),
+    isObjectLike = require('../internal/isObjectLike');
 var objectProto = Object.prototype;
 var hasOwnProperty = objectProto.hasOwnProperty;
 var propertyIsEnumerable = objectProto.propertyIsEnumerable;

@@ -1,5 +1,5 @@
 /* */ 
-var restParam = require("../function/restParam");
+var restParam = require('../function/restParam');
 function createDefaults(assigner, customizer) {
   return restParam(function(args) {
     var object = args[0];

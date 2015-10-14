@@ -1,5 +1,5 @@
 /* */ 
-var repeat = require("../string/repeat");
+var repeat = require('../string/repeat');
 var nativeCeil = Math.ceil,
     nativeIsFinite = global.isFinite;
 function createPadding(string, length, chars) {

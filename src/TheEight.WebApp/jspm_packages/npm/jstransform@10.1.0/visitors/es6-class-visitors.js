@@ -1,9 +1,9 @@
 /* */ 
 'use strict';
-var base62 = require("base62");
-var Syntax = require("esprima-fb").Syntax;
-var utils = require("../src/utils");
-var reservedWordsHelper = require("./reserved-words-helper");
+var base62 = require('base62');
+var Syntax = require('esprima-fb').Syntax;
+var utils = require('../src/utils');
+var reservedWordsHelper = require('./reserved-words-helper');
 var declareIdentInLocalScope = utils.declareIdentInLocalScope;
 var initScopeMetadata = utils.initScopeMetadata;
 var SUPER_PROTO_IDENT_PREFIX = '____SuperProtoOf';
@@ -161,7 +161,7 @@ function visitClassMethodParam(traverse, node, path, state) {
 }
 visitClassMethodParam.test = function(node, path, state) {
   if (!path[0] || !path[1]) {
-    return ;
+    return;
   }
   var parentFuncExpr = path[0];
   var parentClassMethod = path[1];

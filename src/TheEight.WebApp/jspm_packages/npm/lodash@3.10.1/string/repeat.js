@@ -1,5 +1,5 @@
 /* */ 
-var baseToString = require("../internal/baseToString");
+var baseToString = require('../internal/baseToString');
 var nativeFloor = Math.floor,
     nativeIsFinite = global.isFinite;
 function repeat(string, n) {

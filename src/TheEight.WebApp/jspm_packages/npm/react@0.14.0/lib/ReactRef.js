@@ -1,7 +1,7 @@
 /* */ 
 (function(process) {
   'use strict';
-  var ReactOwner = require("./ReactOwner");
+  var ReactOwner = require('./ReactOwner');
   var ReactRef = {};
   function attachRef(ref, component, owner) {
     if (typeof ref === 'function') {
@@ -19,7 +19,7 @@
   }
   ReactRef.attachRefs = function(instance, element) {
     if (element === null || element === false) {
-      return ;
+      return;
     }
     var ref = element.ref;
     if (ref != null) {
@@ -33,7 +33,7 @@
   };
   ReactRef.detachRefs = function(instance, element) {
     if (element === null || element === false) {
-      return ;
+      return;
     }
     var ref = element.ref;
     if (ref != null) {
@@ -41,4 +41,4 @@
     }
   };
   module.exports = ReactRef;
-})(require("process"));
+})(require('process'));

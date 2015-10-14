@@ -1,6 +1,6 @@
 /* */ 
-var isArrayLike = require("./isArrayLike"),
-    isIndex = require("./isIndex");
+var isArrayLike = require('./isArrayLike'),
+    isIndex = require('./isIndex');
 function baseAt(collection, props) {
   var index = -1,
       isNil = collection == null,

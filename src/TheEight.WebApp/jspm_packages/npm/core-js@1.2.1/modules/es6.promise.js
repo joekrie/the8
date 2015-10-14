@@ -1,23 +1,23 @@
 /* */ 
 (function(process) {
   'use strict';
-  var $ = require("./$"),
-      LIBRARY = require("./$.library"),
-      global = require("./$.global"),
-      ctx = require("./$.ctx"),
-      classof = require("./$.classof"),
-      $def = require("./$.def"),
-      isObject = require("./$.is-object"),
-      anObject = require("./$.an-object"),
-      aFunction = require("./$.a-function"),
-      strictNew = require("./$.strict-new"),
-      forOf = require("./$.for-of"),
-      setProto = require("./$.set-proto").set,
-      same = require("./$.same"),
-      species = require("./$.species"),
-      SPECIES = require("./$.wks")('species'),
-      RECORD = require("./$.uid")('record'),
-      asap = require("./$.microtask"),
+  var $ = require('./$'),
+      LIBRARY = require('./$.library'),
+      global = require('./$.global'),
+      ctx = require('./$.ctx'),
+      classof = require('./$.classof'),
+      $def = require('./$.def'),
+      isObject = require('./$.is-object'),
+      anObject = require('./$.an-object'),
+      aFunction = require('./$.a-function'),
+      strictNew = require('./$.strict-new'),
+      forOf = require('./$.for-of'),
+      setProto = require('./$.set-proto').set,
+      same = require('./$.same'),
+      species = require('./$.species'),
+      SPECIES = require('./$.wks')('species'),
+      RECORD = require('./$.uid')('record'),
+      asap = require('./$.microtask'),
       PROMISE = 'Promise',
       process = global.process,
       isNode = classof(process) == 'process',
@@ -43,7 +43,7 @@
       if (!(P2.resolve(5).then(function() {}) instanceof P2)) {
         works = false;
       }
-      if (works && require("./$.support-desc")) {
+      if (works && require('./$.support-desc')) {
         var thenableThenGotten = false;
         P.resolve($.setDesc({}, 'then', {get: function() {
             thenableThenGotten = true;
@@ -73,7 +73,7 @@
   };
   var notify = function(record, isReject) {
     if (record.n)
-      return ;
+      return;
     record.n = true;
     var chain = record.c;
     asap(function() {
@@ -143,7 +143,7 @@
   var $reject = function(value) {
     var record = this;
     if (record.d)
-      return ;
+      return;
     record.d = true;
     record = record.r || record;
     record.v = value;
@@ -155,7 +155,7 @@
     var record = this,
         then;
     if (record.d)
-      return ;
+      return;
     record.d = true;
     record = record.r || record;
     try {
@@ -203,7 +203,7 @@
         $reject.call(record, err);
       }
     };
-    require("./$.mix")(P.prototype, {
+    require('./$.mix')(P.prototype, {
       then: function then(onFulfilled, onRejected) {
         var S = anObject(anObject(this).constructor)[SPECIES];
         var react = {
@@ -230,9 +230,9 @@
     });
   }
   $def($def.G + $def.W + $def.F * !useNative, {Promise: P});
-  require("./$.tag")(P, PROMISE);
+  require('./$.tag')(P, PROMISE);
   species(P);
-  species(Wrapper = require("./$.core")[PROMISE]);
+  species(Wrapper = require('./$.core')[PROMISE]);
   $def($def.S + $def.F * !useNative, PROMISE, {reject: function reject(r) {
       return new this(function(res, rej) {
         rej(r);
@@ -243,7 +243,7 @@
         res(x);
       });
     }});
-  $def($def.S + $def.F * !(useNative && require("./$.iter-detect")(function(iter) {
+  $def($def.S + $def.F * !(useNative && require('./$.iter-detect')(function(iter) {
     P.all(iter)['catch'](function() {});
   })), PROMISE, {
     all: function all(iterable) {
@@ -273,4 +273,4 @@
       });
     }
   });
-})(require("process"));
+})(require('process'));

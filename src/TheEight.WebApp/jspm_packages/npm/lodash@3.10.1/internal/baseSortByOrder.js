@@ -1,9 +1,9 @@
 /* */ 
-var arrayMap = require("./arrayMap"),
-    baseCallback = require("./baseCallback"),
-    baseMap = require("./baseMap"),
-    baseSortBy = require("./baseSortBy"),
-    compareMultiple = require("./compareMultiple");
+var arrayMap = require('./arrayMap'),
+    baseCallback = require('./baseCallback'),
+    baseMap = require('./baseMap'),
+    baseSortBy = require('./baseSortBy'),
+    compareMultiple = require('./compareMultiple');
 function baseSortByOrder(collection, iteratees, orders) {
   var index = -1;
   iteratees = arrayMap(iteratees, function(iteratee) {

@@ -1,9 +1,9 @@
 /* */ 
 (function(process) {
-  var arrayMap = require("../internal/arrayMap"),
-      arrayReduce = require("../internal/arrayReduce"),
-      bindCallback = require("../internal/bindCallback"),
-      unzip = require("./unzip");
+  var arrayMap = require('../internal/arrayMap'),
+      arrayReduce = require('../internal/arrayReduce'),
+      bindCallback = require('../internal/bindCallback'),
+      unzip = require('./unzip');
   function unzipWith(array, iteratee, thisArg) {
     var length = array ? array.length : 0;
     if (!length) {
@@ -19,4 +19,4 @@
     });
   }
   module.exports = unzipWith;
-})(require("process"));
+})(require('process'));

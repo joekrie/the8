@@ -1,7 +1,7 @@
 /* */ 
-var baseIsEqualDeep = require("./baseIsEqualDeep"),
-    isObject = require("../lang/isObject"),
-    isObjectLike = require("./isObjectLike");
+var baseIsEqualDeep = require('./baseIsEqualDeep'),
+    isObject = require('../lang/isObject'),
+    isObjectLike = require('./isObjectLike');
 function baseIsEqual(value, other, customizer, isLoose, stackA, stackB) {
   if (value === other) {
     return true;

@@ -1,6 +1,6 @@
 /* */ 
 'use strict';
-var Promise = require("./core");
+var Promise = require('./core');
 module.exports = Promise;
 var TRUE = valuePromise(true);
 var FALSE = valuePromise(false);
@@ -62,7 +62,7 @@ Promise.all = function(arr) {
           val.then(function(val) {
             res(i, val);
           }, reject);
-          return ;
+          return;
         } else {
           var then = val.then;
           if (typeof then === 'function') {
@@ -70,7 +70,7 @@ Promise.all = function(arr) {
             p.then(function(val) {
               res(i, val);
             }, reject);
-            return ;
+            return;
           }
         }
       }

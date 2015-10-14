@@ -1,8 +1,8 @@
 /* */ 
-var isIndex = require("../internal/isIndex"),
-    isKey = require("../internal/isKey"),
-    isObject = require("../lang/isObject"),
-    toPath = require("../internal/toPath");
+var isIndex = require('../internal/isIndex'),
+    isKey = require('../internal/isKey'),
+    isObject = require('../lang/isObject'),
+    toPath = require('../internal/toPath');
 function set(object, path, value) {
   if (object == null) {
     return object;

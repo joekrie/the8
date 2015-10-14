@@ -4,11 +4,11 @@
   },
   "dependencies": {
     "Autofac.Framework.DependencyInjection": "4.0.0-beta6-110",
+    "Microsoft.AspNet.Diagnostics": "1.0.0-beta7",
     "Microsoft.AspNet.Mvc": "6.0.0-beta7",
     "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-beta7",
     "Microsoft.AspNet.Server.IIS": "1.0.0-beta7",
     "Microsoft.AspNet.Server.WebListener": "1.0.0-beta7",
-    "Microsoft.AspNet.Diagnostics": "1.0.0-beta7",
     "Microsoft.AspNet.StaticFiles": "1.0.0-beta7",
     "Microsoft.Composition": "1.0.30",
     "Microsoft.Framework.Configuration.Json": "1.0.0-beta7",
@@ -19,12 +19,12 @@
     "RavenDB.Client": "3.0.3690",
     "RavenDB.Client.NodaTime": "3.0.0",
     "RavenDB.Database": "3.0.3690",
+    "React.AspNet": "1.5.5",
     "TheEight.Common": "1.0.0-*",
-    "TheEight.Domain": "1.0.0-*",
-    "React.AspNet": "1.5.5"
+    "TheEight.Domain": "1.0.0-*"
   },
   "exclude": [
-    "wwwroot",
+    "dist",
     "node_modules"
   ],
   "frameworks": {

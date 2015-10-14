@@ -1,7 +1,7 @@
 /* */ 
-var baseWrapperValue = require("./baseWrapperValue"),
-    getView = require("./getView"),
-    isArray = require("../lang/isArray");
+var baseWrapperValue = require('./baseWrapperValue'),
+    getView = require('./getView'),
+    isArray = require('../lang/isArray');
 var LARGE_ARRAY_SIZE = 200;
 var LAZY_FILTER_FLAG = 1,
     LAZY_MAP_FLAG = 2;

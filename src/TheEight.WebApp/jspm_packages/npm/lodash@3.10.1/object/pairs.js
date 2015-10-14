@@ -1,6 +1,6 @@
 /* */ 
-var keys = require("./keys"),
-    toObject = require("../internal/toObject");
+var keys = require('./keys'),
+    toObject = require('../internal/toObject');
 function pairs(object) {
   object = toObject(object);
   var index = -1,

@@ -1,13 +1,13 @@
 /* */ 
 (function(process) {
   'use strict';
-  var ReactElement = require("./ReactElement");
-  var ReactPropTypeLocations = require("./ReactPropTypeLocations");
-  var ReactPropTypeLocationNames = require("./ReactPropTypeLocationNames");
-  var ReactCurrentOwner = require("./ReactCurrentOwner");
-  var getIteratorFn = require("./getIteratorFn");
-  var invariant = require("fbjs/lib/invariant");
-  var warning = require("fbjs/lib/warning");
+  var ReactElement = require('./ReactElement');
+  var ReactPropTypeLocations = require('./ReactPropTypeLocations');
+  var ReactPropTypeLocationNames = require('./ReactPropTypeLocationNames');
+  var ReactCurrentOwner = require('./ReactCurrentOwner');
+  var getIteratorFn = require('./getIteratorFn');
+  var invariant = require('fbjs/lib/invariant');
+  var warning = require('fbjs/lib/warning');
   function getDeclarationErrorAddendum() {
     if (ReactCurrentOwner.current) {
       var name = ReactCurrentOwner.current.getName();
@@ -21,12 +21,12 @@
   var loggedTypeFailures = {};
   function validateExplicitKey(element, parentType) {
     if (!element._store || element._store.validated || element.key != null) {
-      return ;
+      return;
     }
     element._store.validated = true;
     var addenda = getAddendaForKeyUse('uniqueKey', element, parentType);
     if (addenda === null) {
-      return ;
+      return;
     }
     process.env.NODE_ENV !== 'production' ? warning(false, 'Each child in an array or iterator should have a unique "key" prop.' + '%s%s%s', addenda.parentOrOwner || '', addenda.childOwner || '', addenda.url || '') : undefined;
   }
@@ -55,7 +55,7 @@
   }
   function validateChildKeys(node, parentType) {
     if (typeof node !== 'object') {
-      return ;
+      return;
     }
     if (Array.isArray(node)) {
       for (var i = 0; i < node.length; i++) {
@@ -105,7 +105,7 @@
   function validatePropTypes(element) {
     var componentClass = element.type;
     if (typeof componentClass !== 'function') {
-      return ;
+      return;
     }
     var name = componentClass.displayName || componentClass.name;
     if (componentClass.propTypes) {
@@ -158,4 +158,4 @@
     }
   };
   module.exports = ReactElementValidator;
-})(require("process"));
+})(require('process'));

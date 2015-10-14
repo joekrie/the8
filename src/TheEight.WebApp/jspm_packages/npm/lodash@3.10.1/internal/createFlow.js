@@ -1,9 +1,9 @@
 /* */ 
-var LodashWrapper = require("./LodashWrapper"),
-    getData = require("./getData"),
-    getFuncName = require("./getFuncName"),
-    isArray = require("../lang/isArray"),
-    isLaziable = require("./isLaziable");
+var LodashWrapper = require('./LodashWrapper'),
+    getData = require('./getData'),
+    getFuncName = require('./getFuncName'),
+    isArray = require('../lang/isArray'),
+    isLaziable = require('./isLaziable');
 var CURRY_FLAG = 8,
     PARTIAL_FLAG = 32,
     ARY_FLAG = 128,

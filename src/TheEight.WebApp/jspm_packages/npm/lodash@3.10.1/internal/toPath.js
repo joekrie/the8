@@ -1,7 +1,7 @@
 /* */ 
 (function(process) {
-  var baseToString = require("./baseToString"),
-      isArray = require("../lang/isArray");
+  var baseToString = require('./baseToString'),
+      isArray = require('../lang/isArray');
   var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\n\\]|\\.)*?)\2)\]/g;
   var reEscapeChar = /\\(\\)?/g;
   function toPath(value) {
@@ -15,4 +15,4 @@
     return result;
   }
   module.exports = toPath;
-})(require("process"));
+})(require('process'));

@@ -1,13 +1,13 @@
 /* */ 
 (function(process) {
   'use strict';
-  var ReactCurrentOwner = require("./ReactCurrentOwner");
-  var ReactElement = require("./ReactElement");
-  var ReactInstanceMap = require("./ReactInstanceMap");
-  var ReactUpdates = require("./ReactUpdates");
-  var assign = require("./Object.assign");
-  var invariant = require("fbjs/lib/invariant");
-  var warning = require("fbjs/lib/warning");
+  var ReactCurrentOwner = require('./ReactCurrentOwner');
+  var ReactElement = require('./ReactElement');
+  var ReactInstanceMap = require('./ReactInstanceMap');
+  var ReactUpdates = require('./ReactUpdates');
+  var assign = require('./Object.assign');
+  var invariant = require('fbjs/lib/invariant');
+  var warning = require('fbjs/lib/warning');
   function enqueueUpdate(internalInstance) {
     ReactUpdates.enqueueUpdate(internalInstance);
   }
@@ -65,7 +65,7 @@
     enqueueForceUpdate: function(publicInstance) {
       var internalInstance = getInternalInstanceReadyForUpdate(publicInstance, 'forceUpdate');
       if (!internalInstance) {
-        return ;
+        return;
       }
       internalInstance._pendingForceUpdate = true;
       enqueueUpdate(internalInstance);
@@ -73,7 +73,7 @@
     enqueueReplaceState: function(publicInstance, completeState) {
       var internalInstance = getInternalInstanceReadyForUpdate(publicInstance, 'replaceState');
       if (!internalInstance) {
-        return ;
+        return;
       }
       internalInstance._pendingStateQueue = [completeState];
       internalInstance._pendingReplaceState = true;
@@ -82,7 +82,7 @@
     enqueueSetState: function(publicInstance, partialState) {
       var internalInstance = getInternalInstanceReadyForUpdate(publicInstance, 'setState');
       if (!internalInstance) {
-        return ;
+        return;
       }
       var queue = internalInstance._pendingStateQueue || (internalInstance._pendingStateQueue = []);
       queue.push(partialState);
@@ -91,7 +91,7 @@
     enqueueSetProps: function(publicInstance, partialProps) {
       var internalInstance = getInternalInstanceReadyForUpdate(publicInstance, 'setProps');
       if (!internalInstance) {
-        return ;
+        return;
       }
       ReactUpdateQueue.enqueueSetPropsInternal(internalInstance, partialProps);
     },
@@ -107,7 +107,7 @@
     enqueueReplaceProps: function(publicInstance, props) {
       var internalInstance = getInternalInstanceReadyForUpdate(publicInstance, 'replaceProps');
       if (!internalInstance) {
-        return ;
+        return;
       }
       ReactUpdateQueue.enqueueReplacePropsInternal(internalInstance, props);
     },
@@ -125,4 +125,4 @@
     }
   };
   module.exports = ReactUpdateQueue;
-})(require("process"));
+})(require('process'));

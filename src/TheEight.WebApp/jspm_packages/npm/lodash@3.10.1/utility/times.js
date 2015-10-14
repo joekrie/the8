@@ -1,5 +1,5 @@
 /* */ 
-var bindCallback = require("../internal/bindCallback");
+var bindCallback = require('../internal/bindCallback');
 var nativeFloor = Math.floor,
     nativeIsFinite = global.isFinite,
     nativeMin = Math.min;

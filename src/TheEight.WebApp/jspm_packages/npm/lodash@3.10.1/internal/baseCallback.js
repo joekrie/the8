@@ -1,9 +1,9 @@
 /* */ 
-var baseMatches = require("./baseMatches"),
-    baseMatchesProperty = require("./baseMatchesProperty"),
-    bindCallback = require("./bindCallback"),
-    identity = require("../utility/identity"),
-    property = require("../utility/property");
+var baseMatches = require('./baseMatches'),
+    baseMatchesProperty = require('./baseMatchesProperty'),
+    bindCallback = require('./bindCallback'),
+    identity = require('../utility/identity'),
+    property = require('../utility/property');
 function baseCallback(func, thisArg, argCount) {
   var type = typeof func;
   if (type == 'function') {

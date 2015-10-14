@@ -1,9 +1,9 @@
 /* */ 
-var arrayPush = require("./arrayPush"),
-    isArguments = require("../lang/isArguments"),
-    isArray = require("../lang/isArray"),
-    isArrayLike = require("./isArrayLike"),
-    isObjectLike = require("./isObjectLike");
+var arrayPush = require('./arrayPush'),
+    isArguments = require('../lang/isArguments'),
+    isArray = require('../lang/isArray'),
+    isArrayLike = require('./isArrayLike'),
+    isObjectLike = require('./isObjectLike');
 function baseFlatten(array, isDeep, isStrict, result) {
   result || (result = []);
   var index = -1,

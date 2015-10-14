@@ -1,7 +1,7 @@
 /* */ 
-var getLength = require("./getLength"),
-    isLength = require("./isLength"),
-    toObject = require("./toObject");
+var getLength = require('./getLength'),
+    isLength = require('./isLength'),
+    toObject = require('./toObject');
 function createBaseEach(eachFunc, fromRight) {
   return function(collection, iteratee) {
     var length = collection ? getLength(collection) : 0;

@@ -1,8 +1,8 @@
 /* */ 
-var arrayEvery = require("../internal/arrayEvery"),
-    baseFlatten = require("../internal/baseFlatten"),
-    baseIsFunction = require("../internal/baseIsFunction"),
-    restParam = require("./restParam");
+var arrayEvery = require('../internal/arrayEvery'),
+    baseFlatten = require('../internal/baseFlatten'),
+    baseIsFunction = require('../internal/baseIsFunction'),
+    restParam = require('./restParam');
 var FUNC_ERROR_TEXT = 'Expected a function';
 var nativeMin = Math.min;
 var modArgs = restParam(function(func, transforms) {

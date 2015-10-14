@@ -1,8 +1,8 @@
 /* */ 
 'use strict';
-var ExecutionEnvironment = require("fbjs/lib/ExecutionEnvironment");
-var getNodeForCharacterOffset = require("./getNodeForCharacterOffset");
-var getTextContentAccessor = require("./getTextContentAccessor");
+var ExecutionEnvironment = require('fbjs/lib/ExecutionEnvironment');
+var getNodeForCharacterOffset = require('./getNodeForCharacterOffset');
+var getTextContentAccessor = require('./getTextContentAccessor');
 function isCollapsed(anchorNode, anchorOffset, focusNode, focusOffset) {
   return anchorNode === focusNode && anchorOffset === focusOffset;
 }
@@ -75,7 +75,7 @@ function setIEOffsets(node, offsets) {
 }
 function setModernOffsets(node, offsets) {
   if (!window.getSelection) {
-    return ;
+    return;
   }
   var selection = window.getSelection();
   var length = node[getTextContentAccessor()].length;

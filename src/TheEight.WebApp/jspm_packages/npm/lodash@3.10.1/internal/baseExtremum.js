@@ -1,5 +1,5 @@
 /* */ 
-var baseEach = require("./baseEach");
+var baseEach = require('./baseEach');
 function baseExtremum(collection, iteratee, comparator, exValue) {
   var computed = exValue,
       result = computed;

@@ -1,13 +1,13 @@
 /* */ 
-var baseGet = require("./baseGet"),
-    baseIsEqual = require("./baseIsEqual"),
-    baseSlice = require("./baseSlice"),
-    isArray = require("../lang/isArray"),
-    isKey = require("./isKey"),
-    isStrictComparable = require("./isStrictComparable"),
-    last = require("../array/last"),
-    toObject = require("./toObject"),
-    toPath = require("./toPath");
+var baseGet = require('./baseGet'),
+    baseIsEqual = require('./baseIsEqual'),
+    baseSlice = require('./baseSlice'),
+    isArray = require('../lang/isArray'),
+    isKey = require('./isKey'),
+    isStrictComparable = require('./isStrictComparable'),
+    last = require('../array/last'),
+    toObject = require('./toObject'),
+    toPath = require('./toPath');
 function baseMatchesProperty(path, srcValue) {
   var isArr = isArray(path),
       isCommon = isKey(path) && isStrictComparable(srcValue),

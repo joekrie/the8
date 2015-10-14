@@ -1,8 +1,8 @@
 /* */ 
-var baseFlatten = require("../internal/baseFlatten"),
-    baseSortByOrder = require("../internal/baseSortByOrder"),
-    isIterateeCall = require("../internal/isIterateeCall"),
-    restParam = require("../function/restParam");
+var baseFlatten = require('../internal/baseFlatten'),
+    baseSortByOrder = require('../internal/baseSortByOrder'),
+    isIterateeCall = require('../internal/isIterateeCall'),
+    restParam = require('../function/restParam');
 var sortByAll = restParam(function(collection, iteratees) {
   if (collection == null) {
     return [];

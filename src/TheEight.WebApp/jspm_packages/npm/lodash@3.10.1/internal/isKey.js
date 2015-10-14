@@ -1,6 +1,6 @@
 /* */ 
-var isArray = require("../lang/isArray"),
-    toObject = require("./toObject");
+var isArray = require('../lang/isArray'),
+    toObject = require('./toObject');
 var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\n\\]|\\.)*?\1)\]/,
     reIsPlainProp = /^\w*$/;
 function isKey(value, object) {

@@ -1,9 +1,9 @@
 /* */ 
-var baseEach = require("../internal/baseEach"),
-    invokePath = require("../internal/invokePath"),
-    isArrayLike = require("../internal/isArrayLike"),
-    isKey = require("../internal/isKey"),
-    restParam = require("../function/restParam");
+var baseEach = require('../internal/baseEach'),
+    invokePath = require('../internal/invokePath'),
+    isArrayLike = require('../internal/isArrayLike'),
+    isKey = require('../internal/isKey'),
+    restParam = require('../function/restParam');
 var invoke = restParam(function(collection, path, args) {
   var index = -1,
       isFunc = typeof path == 'function',

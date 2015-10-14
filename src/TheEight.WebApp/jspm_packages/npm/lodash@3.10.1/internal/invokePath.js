@@ -1,9 +1,9 @@
 /* */ 
-var baseGet = require("./baseGet"),
-    baseSlice = require("./baseSlice"),
-    isKey = require("./isKey"),
-    last = require("../array/last"),
-    toPath = require("./toPath");
+var baseGet = require('./baseGet'),
+    baseSlice = require('./baseSlice'),
+    isKey = require('./isKey'),
+    last = require('../array/last'),
+    toPath = require('./toPath');
 function invokePath(object, path, args) {
   if (object != null && !isKey(path, object)) {
     path = toPath(path);

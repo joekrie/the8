@@ -1,5 +1,5 @@
 /* */ 
-var isIterateeCall = require("../internal/isIterateeCall");
+var isIterateeCall = require('../internal/isIterateeCall');
 var nativeCeil = Math.ceil,
     nativeMax = Math.max;
 function range(start, end, step) {

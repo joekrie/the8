@@ -1,11 +1,11 @@
 /* */ 
 (function(process) {
   'use strict';
-  var LinkedValueUtils = require("./LinkedValueUtils");
-  var ReactMount = require("./ReactMount");
-  var ReactUpdates = require("./ReactUpdates");
-  var assign = require("./Object.assign");
-  var warning = require("fbjs/lib/warning");
+  var LinkedValueUtils = require('./LinkedValueUtils');
+  var ReactMount = require('./ReactMount');
+  var ReactUpdates = require('./ReactUpdates');
+  var assign = require('./Object.assign');
+  var warning = require('fbjs/lib/warning');
   var valueContextKey = '__ReactDOMSelect_value$' + Math.random().toString(36).slice(2);
   function updateOptionsIfPendingUpdateAndMounted() {
     if (this._rootNodeID && this._wrapperState.pendingUpdate) {
@@ -62,7 +62,7 @@
       for (i = 0; i < options.length; i++) {
         if (options[i].value === selectedValue) {
           options[i].selected = true;
-          return ;
+          return;
         }
       }
       if (options.length) {
@@ -121,4 +121,4 @@
     return returnValue;
   }
   module.exports = ReactDOMSelect;
-})(require("process"));
+})(require('process'));

@@ -5,9 +5,9 @@ exports['default'] = bindConnector;
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {'default': obj};
 }
-var _bindConnectorMethod2 = require("./bindConnectorMethod");
+var _bindConnectorMethod2 = require('./bindConnectorMethod');
 var _bindConnectorMethod3 = _interopRequireDefault(_bindConnectorMethod2);
-var _disposables = require("disposables");
+var _disposables = require('disposables');
 function bindConnector(connector, handlerId) {
   var compositeDisposable = new _disposables.CompositeDisposable();
   var handlerConnector = {};

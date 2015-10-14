@@ -1,7 +1,7 @@
 /* */ 
 (function(process) {
-  var baseSlice = require("../internal/baseSlice"),
-      isIterateeCall = require("../internal/isIterateeCall");
+  var baseSlice = require('../internal/baseSlice'),
+      isIterateeCall = require('../internal/isIterateeCall');
   var nativeCeil = Math.ceil,
       nativeFloor = Math.floor,
       nativeMax = Math.max;
@@ -21,4 +21,4 @@
     return result;
   }
   module.exports = chunk;
-})(require("process"));
+})(require('process'));

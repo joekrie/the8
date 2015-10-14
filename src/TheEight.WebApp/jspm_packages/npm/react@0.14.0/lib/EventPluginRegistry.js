@@ -1,12 +1,12 @@
 /* */ 
 (function(process) {
   'use strict';
-  var invariant = require("fbjs/lib/invariant");
+  var invariant = require('fbjs/lib/invariant');
   var EventPluginOrder = null;
   var namesToPlugins = {};
   function recomputePluginOrdering() {
     if (!EventPluginOrder) {
-      return ;
+      return;
     }
     for (var pluginName in namesToPlugins) {
       var PluginModule = namesToPlugins[pluginName];
@@ -112,4 +112,4 @@
     }
   };
   module.exports = EventPluginRegistry;
-})(require("process"));
+})(require('process'));

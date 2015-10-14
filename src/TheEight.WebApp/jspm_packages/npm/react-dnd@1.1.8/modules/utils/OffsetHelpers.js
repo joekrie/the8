@@ -7,8 +7,8 @@ exports.getDragPreviewOffset = getDragPreviewOffset;
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {'default': obj};
 }
-var _BrowserDetector = require("./BrowserDetector");
-var _createMonotonicInterpolant = require("./createMonotonicInterpolant");
+var _BrowserDetector = require('./BrowserDetector');
+var _createMonotonicInterpolant = require('./createMonotonicInterpolant');
 var _createMonotonicInterpolant2 = _interopRequireDefault(_createMonotonicInterpolant);
 var ELEMENT_NODE = 1;
 function getElementClientOffset(el) {

@@ -1,13 +1,13 @@
 /* */ 
-var arrayCopy = require("./arrayCopy"),
-    arrayEach = require("./arrayEach"),
-    baseAssign = require("./baseAssign"),
-    baseForOwn = require("./baseForOwn"),
-    initCloneArray = require("./initCloneArray"),
-    initCloneByTag = require("./initCloneByTag"),
-    initCloneObject = require("./initCloneObject"),
-    isArray = require("../lang/isArray"),
-    isObject = require("../lang/isObject");
+var arrayCopy = require('./arrayCopy'),
+    arrayEach = require('./arrayEach'),
+    baseAssign = require('./baseAssign'),
+    baseForOwn = require('./baseForOwn'),
+    initCloneArray = require('./initCloneArray'),
+    initCloneByTag = require('./initCloneByTag'),
+    initCloneObject = require('./initCloneObject'),
+    isArray = require('../lang/isArray'),
+    isObject = require('../lang/isObject');
 var argsTag = '[object Arguments]',
     arrayTag = '[object Array]',
     boolTag = '[object Boolean]',

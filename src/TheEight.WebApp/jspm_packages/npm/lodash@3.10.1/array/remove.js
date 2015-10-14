@@ -1,6 +1,6 @@
 /* */ 
-var baseCallback = require("../internal/baseCallback"),
-    basePullAt = require("../internal/basePullAt");
+var baseCallback = require('../internal/baseCallback'),
+    basePullAt = require('../internal/basePullAt');
 function remove(array, predicate, thisArg) {
   var result = [];
   if (!(array && array.length)) {

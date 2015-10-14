@@ -1,6 +1,6 @@
 /* */ 
-var baseIsEqual = require("./baseIsEqual"),
-    toObject = require("./toObject");
+var baseIsEqual = require('./baseIsEqual'),
+    toObject = require('./toObject');
 function baseIsMatch(object, matchData, customizer) {
   var index = matchData.length,
       length = index,

@@ -1,7 +1,7 @@
 /* */ 
-var baseForIn = require("../internal/baseForIn"),
-    isArguments = require("./isArguments"),
-    isObjectLike = require("../internal/isObjectLike");
+var baseForIn = require('../internal/baseForIn'),
+    isArguments = require('./isArguments'),
+    isObjectLike = require('../internal/isObjectLike');
 var objectTag = '[object Object]';
 var objectProto = Object.prototype;
 var hasOwnProperty = objectProto.hasOwnProperty;

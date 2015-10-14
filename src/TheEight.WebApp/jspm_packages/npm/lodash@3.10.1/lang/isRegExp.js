@@ -1,5 +1,5 @@
 /* */ 
-var isObject = require("./isObject");
+var isObject = require('./isObject');
 var regexpTag = '[object RegExp]';
 var objectProto = Object.prototype;
 var objToString = objectProto.toString;

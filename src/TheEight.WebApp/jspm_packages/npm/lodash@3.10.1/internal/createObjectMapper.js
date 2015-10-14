@@ -1,6 +1,6 @@
 /* */ 
-var baseCallback = require("./baseCallback"),
-    baseForOwn = require("./baseForOwn");
+var baseCallback = require('./baseCallback'),
+    baseForOwn = require('./baseForOwn');
 function createObjectMapper(isMapKeys) {
   return function(object, iteratee, thisArg) {
     var result = {};

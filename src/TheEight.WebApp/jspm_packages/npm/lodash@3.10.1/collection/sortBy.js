@@ -1,9 +1,9 @@
 /* */ 
-var baseCallback = require("../internal/baseCallback"),
-    baseMap = require("../internal/baseMap"),
-    baseSortBy = require("../internal/baseSortBy"),
-    compareAscending = require("../internal/compareAscending"),
-    isIterateeCall = require("../internal/isIterateeCall");
+var baseCallback = require('../internal/baseCallback'),
+    baseMap = require('../internal/baseMap'),
+    baseSortBy = require('../internal/baseSortBy'),
+    compareAscending = require('../internal/compareAscending'),
+    isIterateeCall = require('../internal/isIterateeCall');
 function sortBy(collection, iteratee, thisArg) {
   if (collection == null) {
     return [];

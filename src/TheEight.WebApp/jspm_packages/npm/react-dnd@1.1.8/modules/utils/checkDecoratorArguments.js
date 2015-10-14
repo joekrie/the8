@@ -14,10 +14,10 @@
         var arg = args[i];
         if (arg && arg.prototype && arg.prototype.render) {
           console.error('You seem to be applying the arguments in the wrong order. ' + ('It should be ' + functionName + '(' + signature + ')(Component), not the other way around. ') + 'Read more: http://gaearon.github.io/react-dnd/docs-troubleshooting.html#you-seem-to-be-applying-the-arguments-in-the-wrong-order');
-          return ;
+          return;
         }
       }
     }
   }
   module.exports = exports['default'];
-})(require("process"));
+})(require('process'));

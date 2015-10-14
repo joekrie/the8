@@ -1,6 +1,6 @@
 /* */ 
-var isFunction = require("./isFunction"),
-    isObjectLike = require("../internal/isObjectLike");
+var isFunction = require('./isFunction'),
+    isObjectLike = require('../internal/isObjectLike');
 var reIsHostCtor = /^\[object .+?Constructor\]$/;
 var objectProto = Object.prototype;
 var fnToString = Function.prototype.toString;

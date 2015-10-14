@@ -1,6 +1,6 @@
 /* */ 
-var assert = require("assert");
-var dedupe = require("../dedupe");
+var assert = require('assert');
+var dedupe = require('../dedupe');
 describe('dedupe', function() {
   it('keeps object keys with truthy values', function() {
     assert.equal(dedupe({

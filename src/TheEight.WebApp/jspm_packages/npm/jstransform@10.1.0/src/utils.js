@@ -1,6 +1,6 @@
 /* */ 
 (function(Buffer, process) {
-  var Syntax = require("esprima-fb").Syntax;
+  var Syntax = require('esprima-fb').Syntax;
   var leadingIndentRegexp = /(^|\n)( {2}|\t)/g;
   var nonWhiteRegexp = /(\S)/g;
   function createState(source, rootNode, transformOptions) {
@@ -47,7 +47,7 @@
   }
   function catchup(end, state, contentTransformer) {
     if (end < state.g.position) {
-      return ;
+      return;
     }
     var source = state.g.source.substring(state.g.position, end);
     var transformed = updateIndent(source, state);
@@ -221,7 +221,7 @@
   }
   function getDocblock(state) {
     if (!state.g.docblock) {
-      var docblock = require("./docblock");
+      var docblock = require('./docblock');
       state.g.docblock = docblock.parseAsObject(docblock.extract(state.g.source));
     }
     return state.g.docblock;
@@ -272,7 +272,7 @@
   function analyzeAndTraverse(analyzer, traverser, node, path, state) {
     if (node.type) {
       if (analyzer(node, path, state) === false) {
-        return ;
+        return;
       }
       path.unshift(node);
     }
@@ -297,7 +297,7 @@
   }
   function enqueueNodeWithStartIndex(queue, node) {
     if (typeof node !== 'object' || node === null) {
-      return ;
+      return;
     }
     if (node.range) {
       queue.push([node, node.range[0]]);
@@ -383,4 +383,4 @@
   exports.scopeTypes = scopeTypes;
   exports.updateIndent = updateIndent;
   exports.updateState = updateState;
-})(require("buffer").Buffer, require("process"));
+})(require('buffer').Buffer, require('process'));

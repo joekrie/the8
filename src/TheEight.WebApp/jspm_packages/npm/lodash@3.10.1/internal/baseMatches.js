@@ -1,7 +1,7 @@
 /* */ 
-var baseIsMatch = require("./baseIsMatch"),
-    getMatchData = require("./getMatchData"),
-    toObject = require("./toObject");
+var baseIsMatch = require('./baseIsMatch'),
+    getMatchData = require('./getMatchData'),
+    toObject = require('./toObject');
 function baseMatches(source) {
   var matchData = getMatchData(source);
   if (matchData.length == 1 && matchData[0][2]) {

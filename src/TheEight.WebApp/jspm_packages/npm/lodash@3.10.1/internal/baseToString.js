@@ -4,4 +4,4 @@
     return value == null ? '' : (value + '');
   }
   module.exports = baseToString;
-})(require("process"));
+})(require('process'));

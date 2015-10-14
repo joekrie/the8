@@ -1,10 +1,10 @@
 /* */ 
 (function(process) {
   'use strict';
-  var DOMProperty = require("./DOMProperty");
-  var ReactPerf = require("./ReactPerf");
-  var quoteAttributeValueForBrowser = require("./quoteAttributeValueForBrowser");
-  var warning = require("fbjs/lib/warning");
+  var DOMProperty = require('./DOMProperty');
+  var ReactPerf = require('./ReactPerf');
+  var quoteAttributeValueForBrowser = require('./quoteAttributeValueForBrowser');
+  var warning = require('fbjs/lib/warning');
   var VALID_ATTRIBUTE_NAME_REGEX = /^[a-zA-Z_][\w\.\-]*$/;
   var illegalAttributeNameCache = {};
   var validatedAttributeNameCache = {};
@@ -36,7 +36,7 @@
     var warnedProperties = {};
     var warnUnknownProperty = function(name) {
       if (reactProps.hasOwnProperty(name) && reactProps[name] || warnedProperties.hasOwnProperty(name) && warnedProperties[name]) {
-        return ;
+        return;
       }
       warnedProperties[name] = true;
       var lowerCasedName = name.toLowerCase();
@@ -110,7 +110,7 @@
     },
     setValueForAttribute: function(node, name, value) {
       if (!isAttributeNameSafe(name)) {
-        return ;
+        return;
       }
       if (value == null) {
         node.removeAttribute(name);
@@ -146,4 +146,4 @@
     deleteValueForProperty: 'deleteValueForProperty'
   });
   module.exports = DOMPropertyOperations;
-})(require("process"));
+})(require('process'));

@@ -1,9 +1,9 @@
 /* */ 
 (function(process) {
-  var arrayFilter = require("../internal/arrayFilter"),
-      arrayMap = require("../internal/arrayMap"),
-      baseProperty = require("../internal/baseProperty"),
-      isArrayLike = require("../internal/isArrayLike");
+  var arrayFilter = require('../internal/arrayFilter'),
+      arrayMap = require('../internal/arrayMap'),
+      baseProperty = require('../internal/baseProperty'),
+      isArrayLike = require('../internal/isArrayLike');
   var nativeMax = Math.max;
   function unzip(array) {
     if (!(array && array.length)) {
@@ -24,4 +24,4 @@
     return result;
   }
   module.exports = unzip;
-})(require("process"));
+})(require('process'));

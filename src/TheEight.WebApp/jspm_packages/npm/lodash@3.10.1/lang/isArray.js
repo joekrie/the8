@@ -1,7 +1,7 @@
 /* */ 
-var getNative = require("../internal/getNative"),
-    isLength = require("../internal/isLength"),
-    isObjectLike = require("../internal/isObjectLike");
+var getNative = require('../internal/getNative'),
+    isLength = require('../internal/isLength'),
+    isObjectLike = require('../internal/isObjectLike');
 var arrayTag = '[object Array]';
 var objectProto = Object.prototype;
 var objToString = objectProto.toString;

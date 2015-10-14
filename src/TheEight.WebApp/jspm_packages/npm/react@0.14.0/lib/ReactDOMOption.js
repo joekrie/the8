@@ -1,10 +1,10 @@
 /* */ 
 (function(process) {
   'use strict';
-  var ReactChildren = require("./ReactChildren");
-  var ReactDOMSelect = require("./ReactDOMSelect");
-  var assign = require("./Object.assign");
-  var warning = require("fbjs/lib/warning");
+  var ReactChildren = require('./ReactChildren');
+  var ReactDOMSelect = require('./ReactDOMSelect');
+  var assign = require('./Object.assign');
+  var warning = require('fbjs/lib/warning');
   var valueContextKey = ReactDOMSelect.valueContextKey;
   var ReactDOMOption = {
     mountWrapper: function(inst, props, context) {
@@ -39,7 +39,7 @@
       var content = '';
       ReactChildren.forEach(props.children, function(child) {
         if (child == null) {
-          return ;
+          return;
         }
         if (typeof child === 'string' || typeof child === 'number') {
           content += child;
@@ -52,4 +52,4 @@
     }
   };
   module.exports = ReactDOMOption;
-})(require("process"));
+})(require('process'));

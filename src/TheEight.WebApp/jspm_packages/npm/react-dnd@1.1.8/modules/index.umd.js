@@ -32,8 +32,8 @@ function _defaults(obj, defaults) {
   }
   return obj;
 }
-var _index = require("./index");
+var _index = require('./index');
 _defaults(exports, _interopExportWildcard(_index, _defaults));
-var _backendsHTML5 = require("./backends/HTML5");
+var _backendsHTML5 = require('./backends/HTML5');
 var _HTML5 = _interopRequireWildcard(_backendsHTML5);
 exports.HTML5 = _HTML5;

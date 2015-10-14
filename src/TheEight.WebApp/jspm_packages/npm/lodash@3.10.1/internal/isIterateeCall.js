@@ -1,7 +1,7 @@
 /* */ 
-var isArrayLike = require("./isArrayLike"),
-    isIndex = require("./isIndex"),
-    isObject = require("../lang/isObject");
+var isArrayLike = require('./isArrayLike'),
+    isIndex = require('./isIndex'),
+    isObject = require('../lang/isObject');
 function isIterateeCall(value, index, object) {
   if (!isObject(object)) {
     return false;

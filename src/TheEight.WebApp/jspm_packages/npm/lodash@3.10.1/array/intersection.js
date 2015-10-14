@@ -1,9 +1,9 @@
 /* */ 
-var baseIndexOf = require("../internal/baseIndexOf"),
-    cacheIndexOf = require("../internal/cacheIndexOf"),
-    createCache = require("../internal/createCache"),
-    isArrayLike = require("../internal/isArrayLike"),
-    restParam = require("../function/restParam");
+var baseIndexOf = require('../internal/baseIndexOf'),
+    cacheIndexOf = require('../internal/cacheIndexOf'),
+    createCache = require('../internal/createCache'),
+    isArrayLike = require('../internal/isArrayLike'),
+    restParam = require('../function/restParam');
 var intersection = restParam(function(arrays) {
   var othLength = arrays.length,
       othIndex = othLength,

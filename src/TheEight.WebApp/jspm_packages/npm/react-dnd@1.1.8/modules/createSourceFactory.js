@@ -11,9 +11,9 @@
       throw new TypeError('Cannot call a class as a function');
     }
   }
-  var _invariant = require("invariant");
+  var _invariant = require('invariant');
   var _invariant2 = _interopRequireDefault(_invariant);
-  var _lodashLangIsPlainObject = require("lodash/lang/isPlainObject");
+  var _lodashLangIsPlainObject = require('lodash/lang/isPlainObject');
   var _lodashLangIsPlainObject2 = _interopRequireDefault(_lodashLangIsPlainObject);
   var ALLOWED_SPEC_METHODS = ['canDrag', 'beginDrag', 'canDrag', 'isDragging', 'endDrag'];
   var REQUIRED_SPEC_METHODS = ['beginDrag'];
@@ -59,7 +59,7 @@
       };
       Source.prototype.endDrag = function endDrag() {
         if (!spec.endDrag) {
-          return ;
+          return;
         }
         spec.endDrag(this.props, this.monitor, this.component);
       };
@@ -70,4 +70,4 @@
     };
   }
   module.exports = exports['default'];
-})(require("process"));
+})(require('process'));

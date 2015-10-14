@@ -54,12 +54,12 @@ function _inherits(subClass, superClass) {
   if (superClass)
     Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
-var _react = require("react");
+var _react = require('react');
 var _react2 = _interopRequireDefault(_react);
-var _dndCore = require("dnd-core");
-var _invariant = require("invariant");
+var _dndCore = require('dnd-core');
+var _invariant = require('invariant');
 var _invariant2 = _interopRequireDefault(_invariant);
-var _utilsCheckDecoratorArguments = require("./utils/checkDecoratorArguments");
+var _utilsCheckDecoratorArguments = require('./utils/checkDecoratorArguments');
 var _utilsCheckDecoratorArguments2 = _interopRequireDefault(_utilsCheckDecoratorArguments);
 function DragDropContext(backend) {
   _utilsCheckDecoratorArguments2['default'].apply(undefined, ['DragDropContext', 'backend'].concat(_slice.call(arguments)));

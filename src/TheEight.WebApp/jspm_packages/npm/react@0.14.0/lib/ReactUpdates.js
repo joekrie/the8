@@ -1,13 +1,13 @@
 /* */ 
 (function(process) {
   'use strict';
-  var CallbackQueue = require("./CallbackQueue");
-  var PooledClass = require("./PooledClass");
-  var ReactPerf = require("./ReactPerf");
-  var ReactReconciler = require("./ReactReconciler");
-  var Transaction = require("./Transaction");
-  var assign = require("./Object.assign");
-  var invariant = require("fbjs/lib/invariant");
+  var CallbackQueue = require('./CallbackQueue');
+  var PooledClass = require('./PooledClass');
+  var ReactPerf = require('./ReactPerf');
+  var ReactReconciler = require('./ReactReconciler');
+  var Transaction = require('./Transaction');
+  var assign = require('./Object.assign');
+  var invariant = require('fbjs/lib/invariant');
   var dirtyComponents = [];
   var asapCallbackQueue = CallbackQueue.getPooled();
   var asapEnqueued = false;
@@ -103,7 +103,7 @@
     ensureInjected();
     if (!batchingStrategy.isBatchingUpdates) {
       batchingStrategy.batchedUpdates(enqueueUpdate, component);
-      return ;
+      return;
     }
     dirtyComponents.push(component);
   }
@@ -133,4 +133,4 @@
     asap: asap
   };
   module.exports = ReactUpdates;
-})(require("process"));
+})(require('process'));

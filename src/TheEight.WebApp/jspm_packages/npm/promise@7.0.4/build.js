@@ -1,9 +1,9 @@
 /* */ 
 'use strict';
-var fs = require("fs");
-var rimraf = require("rimraf");
-var acorn = require("acorn");
-var walk = require("acorn/dist/walk");
+var fs = require('fs');
+var rimraf = require('rimraf');
+var acorn = require('acorn');
+var walk = require('acorn/dist/walk');
 var ids = [];
 var names = {};
 function getIdFor(name) {
@@ -22,11 +22,11 @@ function fixup(src) {
   src = src.split('');
   walk.simple(ast, {MemberExpression: function(node) {
       if (node.computed)
-        return ;
+        return;
       if (node.property.type !== 'Identifier')
-        return ;
+        return;
       if (node.property.name[0] !== '_')
-        return ;
+        return;
       replace(node.property, getIdFor(node.property.name));
     }});
   function source(node) {

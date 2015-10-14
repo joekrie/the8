@@ -1,6 +1,6 @@
 /* */ 
-var SetCache = require("./SetCache"),
-    getNative = require("./getNative");
+var SetCache = require('./SetCache'),
+    getNative = require('./getNative');
 var Set = getNative(global, 'Set');
 var nativeCreate = getNative(Object, 'create');
 function createCache(values) {

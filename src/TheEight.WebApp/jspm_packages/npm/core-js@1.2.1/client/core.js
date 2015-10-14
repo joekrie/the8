@@ -2158,7 +2158,7 @@
       };
       var notify = function(record, isReject) {
         if (record.n)
-          return ;
+          return;
         record.n = true;
         var chain = record.c;
         asap(function() {
@@ -2228,7 +2228,7 @@
       var $reject = function(value) {
         var record = this;
         if (record.d)
-          return ;
+          return;
         record.d = true;
         record = record.r || record;
         record.v = value;
@@ -2240,7 +2240,7 @@
         var record = this,
             then;
         if (record.d)
-          return ;
+          return;
         record.d = true;
         record = record.r || record;
         try {
@@ -3656,4 +3656,4 @@
     else
       __g.core = __e;
   }(1, 1);
-})(require("process"));
+})(require('process'));

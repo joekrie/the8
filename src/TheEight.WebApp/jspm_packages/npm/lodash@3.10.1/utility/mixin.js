@@ -1,10 +1,10 @@
 /* */ 
-var arrayCopy = require("../internal/arrayCopy"),
-    arrayPush = require("../internal/arrayPush"),
-    baseFunctions = require("../internal/baseFunctions"),
-    isFunction = require("../lang/isFunction"),
-    isObject = require("../lang/isObject"),
-    keys = require("../object/keys");
+var arrayCopy = require('../internal/arrayCopy'),
+    arrayPush = require('../internal/arrayPush'),
+    baseFunctions = require('../internal/baseFunctions'),
+    isFunction = require('../lang/isFunction'),
+    isObject = require('../lang/isObject'),
+    keys = require('../object/keys');
 function mixin(object, source, options) {
   var methodNames = baseFunctions(source, keys(source));
   var chain = true,

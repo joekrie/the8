@@ -54,18 +54,18 @@ function _inherits(subClass, superClass) {
   if (superClass)
     Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
-var _react = require("react");
+var _react = require('react');
 var _react2 = _interopRequireDefault(_react);
-var _dndCore = require("dnd-core");
-var _utilsShallowEqual = require("./utils/shallowEqual");
+var _dndCore = require('dnd-core');
+var _utilsShallowEqual = require('./utils/shallowEqual');
 var _utilsShallowEqual2 = _interopRequireDefault(_utilsShallowEqual);
-var _utilsShallowEqualScalar = require("./utils/shallowEqualScalar");
+var _utilsShallowEqualScalar = require('./utils/shallowEqualScalar');
 var _utilsShallowEqualScalar2 = _interopRequireDefault(_utilsShallowEqualScalar);
-var _lodashLangIsPlainObject = require("lodash/lang/isPlainObject");
+var _lodashLangIsPlainObject = require('lodash/lang/isPlainObject');
 var _lodashLangIsPlainObject2 = _interopRequireDefault(_lodashLangIsPlainObject);
-var _invariant = require("invariant");
+var _invariant = require('invariant');
 var _invariant2 = _interopRequireDefault(_invariant);
-var _utilsCheckDecoratorArguments = require("./utils/checkDecoratorArguments");
+var _utilsCheckDecoratorArguments = require('./utils/checkDecoratorArguments');
 var _utilsCheckDecoratorArguments2 = _interopRequireDefault(_utilsCheckDecoratorArguments);
 function DragLayer(collect) {
   var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];

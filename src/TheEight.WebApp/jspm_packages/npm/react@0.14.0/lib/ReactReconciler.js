@@ -1,6 +1,6 @@
 /* */ 
 'use strict';
-var ReactRef = require("./ReactRef");
+var ReactRef = require('./ReactRef');
 function attachRefs() {
   ReactRef.attachRefs(this, this._currentElement);
 }
@@ -19,7 +19,7 @@ var ReactReconciler = {
   receiveComponent: function(internalInstance, nextElement, transaction, context) {
     var prevElement = internalInstance._currentElement;
     if (nextElement === prevElement && context === internalInstance._context) {
-      return ;
+      return;
     }
     var refsChanged = ReactRef.shouldUpdateRefs(prevElement, nextElement);
     if (refsChanged) {

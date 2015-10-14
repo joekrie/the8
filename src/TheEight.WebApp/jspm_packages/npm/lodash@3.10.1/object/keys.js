@@ -1,8 +1,8 @@
 /* */ 
-var getNative = require("../internal/getNative"),
-    isArrayLike = require("../internal/isArrayLike"),
-    isObject = require("../lang/isObject"),
-    shimKeys = require("../internal/shimKeys");
+var getNative = require('../internal/getNative'),
+    isArrayLike = require('../internal/isArrayLike'),
+    isObject = require('../lang/isObject'),
+    shimKeys = require('../internal/shimKeys');
 var nativeKeys = getNative(Object, 'keys');
 var keys = !nativeKeys ? shimKeys : function(object) {
   var Ctor = object == null ? undefined : object.constructor;

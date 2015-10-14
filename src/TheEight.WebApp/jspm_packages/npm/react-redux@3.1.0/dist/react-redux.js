@@ -4,7 +4,7 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("react"), require("redux"));
 	else if(typeof define === 'function' && define.amd)
-		define(["react","redux"], factory);
+		define(["react", "redux"], factory);
 	else if(typeof exports === 'object')
 		exports["ReactRedux"] = factory(require("react"), require("redux"));
 	else

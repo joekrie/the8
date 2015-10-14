@@ -1,8 +1,8 @@
 /* */ 
-var arrayPush = require("../internal/arrayPush"),
-    baseDifference = require("../internal/baseDifference"),
-    baseUniq = require("../internal/baseUniq"),
-    isArrayLike = require("../internal/isArrayLike");
+var arrayPush = require('../internal/arrayPush'),
+    baseDifference = require('../internal/baseDifference'),
+    baseUniq = require('../internal/baseUniq'),
+    isArrayLike = require('../internal/isArrayLike');
 function xor() {
   var index = -1,
       length = arguments.length;

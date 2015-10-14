@@ -1,6 +1,6 @@
 /* */ 
-var assert = require("assert");
-var classNames = require("../index");
+var assert = require('assert');
+var classNames = require('../index');
 describe('classNames', function() {
   it('keeps object keys with truthy values', function() {
     assert.equal(classNames({

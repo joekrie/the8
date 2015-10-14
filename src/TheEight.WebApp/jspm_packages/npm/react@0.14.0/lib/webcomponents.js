@@ -314,7 +314,7 @@
       }
       function rewrap(node, wrapper) {
         if (wrapper === null)
-          return ;
+          return;
         assert(isNative(node));
         assert(wrapper === undefined || isWrapper(wrapper));
         node.__wrapper8e3dd93a60__ = wrapper;
@@ -563,7 +563,7 @@
       function setEndOfMicrotask(func) {
         callbacks.push(func);
         if (pending)
-          return ;
+          return;
         pending = true;
         timerFunc(handle, 0);
       }
@@ -579,11 +579,11 @@
       var isScheduled = false;
       function scheduleCallback(observer) {
         if (observer.scheduled_)
-          return ;
+          return;
         observer.scheduled_ = true;
         globalMutationObservers.push(observer);
         if (isScheduled)
-          return ;
+          return;
         setEndOfMicrotask(notifyObservers);
         isScheduled = true;
       }
@@ -634,7 +634,7 @@
           var node = observer.nodes_[i];
           var registrations = registrationsTable.get(node);
           if (!registrations)
-            return ;
+            return;
           for (var j = 0; j < registrations.length; j++) {
             var registration = registrations[j];
             if (registration.observer === observer)
@@ -777,7 +777,7 @@
       Registration.prototype = {
         addTransientObserver: function(node) {
           if (node === this.target)
-            return ;
+            return;
           scheduleCallback(this.observer);
           this.transientObservedNodes.push(node);
           var registrations = registrationsTable.get(node);
@@ -1013,7 +1013,7 @@
       var pendingError;
       function dispatchOriginalEvent(originalEvent) {
         if (handledEventsTable.get(originalEvent))
-          return ;
+          return;
         handledEventsTable.set(originalEvent, true);
         dispatchEvent(wrap(originalEvent), wrap(originalEvent.target));
         if (pendingError) {
@@ -1091,7 +1091,7 @@
         var phase = BUBBLING_PHASE;
         for (var i = 1; i < eventPath.length; i++) {
           if (!invoke(eventPath[i], event, phase, eventPath, overrideTarget))
-            return ;
+            return;
         }
         if (win && eventPath.length > 0) {
           invoke(win, event, phase, eventPath, overrideTarget);
@@ -1374,7 +1374,7 @@
       EventTarget.prototype = {
         addEventListener: function(type, fun, capture) {
           if (!isValidListener(fun) || isMutationEvent(type))
-            return ;
+            return;
           var listener = new Listener(type, fun, capture);
           var listeners = listenersTable.get(this);
           if (!listeners) {
@@ -1384,7 +1384,7 @@
           } else {
             for (var i = 0; i < listeners.length; i++) {
               if (listener.equals(listeners[i]))
-                return ;
+                return;
             }
           }
           listeners.push(listener);
@@ -1395,7 +1395,7 @@
           capture = Boolean(capture);
           var listeners = listenersTable.get(this);
           if (!listeners)
-            return ;
+            return;
           var count = 0,
               found = false;
           for (var i = 0; i < listeners.length; i++) {
@@ -1521,12 +1521,12 @@
       var wrap = scope.wrap;
       var OriginalTouchEvent = window.TouchEvent;
       if (!OriginalTouchEvent)
-        return ;
+        return;
       var nativeEvent;
       try {
         nativeEvent = document.createEvent("TouchEvent");
       } catch (ex) {
-        return ;
+        return;
       }
       var nonEnumDescriptor = {enumerable: false};
       function nonEnum(obj, prop) {
@@ -1748,10 +1748,10 @@
       }
       function adoptNodesIfNeeded(owner, nodes) {
         if (!nodes.length)
-          return ;
+          return;
         var ownerDoc = owner.ownerDocument;
         if (ownerDoc === nodes[0].ownerDocument)
-          return ;
+          return;
         for (var i = 0; i < nodes.length; i++) {
           scope.adoptNodeNoRemove(nodes[i], ownerDoc);
         }
@@ -2516,7 +2516,7 @@
       function invalidateRendererBasedOnAttribute(element, name) {
         var p = element.parentNode;
         if (!p || !p.shadowRoot)
-          return ;
+          return;
         var renderer = scope.getRendererForHost(p);
         if (renderer.dependsOnAttribute(name))
           renderer.invalidate();
@@ -2702,7 +2702,7 @@
         set innerHTML(value) {
           if (oldIe && plaintextParents[this.localName]) {
             this.textContent = value;
-            return ;
+            return;
           }
           var removedNodes = snapshotNodeList(this.childNodes);
           if (this.invalidateShadowRenderer()) {
@@ -2755,7 +2755,7 @@
               refNode = null;
               break;
             default:
-              return ;
+              return;
           }
           var df = frag(contextElement, text);
           contextElement.insertBefore(df, refNode);
@@ -2987,7 +2987,7 @@
       var registerWrapper = scope.registerWrapper;
       var OriginalHTMLMediaElement = window.HTMLMediaElement;
       if (!OriginalHTMLMediaElement)
-        return ;
+        return;
       function HTMLMediaElement(node) {
         HTMLElement.call(this, node);
       }
@@ -3003,7 +3003,7 @@
       var rewrap = scope.rewrap;
       var OriginalHTMLAudioElement = window.HTMLAudioElement;
       if (!OriginalHTMLAudioElement)
-        return ;
+        return;
       function HTMLAudioElement(node) {
         HTMLMediaElement.call(this, node);
       }
@@ -3092,7 +3092,7 @@
         remove: function(indexOrNode) {
           if (indexOrNode === undefined) {
             HTMLElement.prototype.remove.call(this);
-            return ;
+            return;
           }
           if (typeof indexOrNode === "object")
             indexOrNode = unwrap(indexOrNode);
@@ -3281,7 +3281,7 @@
       var wrap = scope.wrap;
       var OriginalSVGElementInstance = window.SVGElementInstance;
       if (!OriginalSVGElementInstance)
-        return ;
+        return;
       function SVGElementInstance(impl) {
         EventTarget.call(this, impl);
       }
@@ -3354,7 +3354,7 @@
       var wrap = scope.wrap;
       var OriginalWebGLRenderingContext = window.WebGLRenderingContext;
       if (!OriginalWebGLRenderingContext)
-        return ;
+        return;
       function WebGLRenderingContext(impl) {
         setWrapper(impl, this);
       }
@@ -3587,7 +3587,7 @@
         var node = unwrap(nodeWrapper);
         var parentNode = node.parentNode;
         if (!parentNode)
-          return ;
+          return;
         var parentNodeWrapper = wrap(parentNode);
         updateWrapperUpAndSideways(nodeWrapper);
         if (nodeWrapper.previousSibling)
@@ -3671,7 +3671,7 @@
         },
         sync: function(opt_added) {
           if (this.skip)
-            return ;
+            return;
           var nodeWrapper = this.node;
           var newChildren = this.childNodes;
           var oldChildren = getChildNodesSnapshot(unwrap(nodeWrapper));
@@ -3717,7 +3717,7 @@
       ShadowRenderer.prototype = {
         render: function(opt_renderNode) {
           if (!this.dirty)
-            return ;
+            return;
           this.invalidateAttributes();
           var host = this.host;
           this.distribution(host);
@@ -3739,7 +3739,7 @@
               parentRenderer.invalidate();
             pendingDirtyRenderers.push(this);
             if (renderTimer)
-              return ;
+              return;
             renderTimer = window[request](handleRequestAnimationFrame, 0);
           }
         },
@@ -3792,7 +3792,7 @@
         },
         poolDistribution: function(node, pool) {
           if (node instanceof HTMLShadowElement)
-            return ;
+            return;
           if (node instanceof HTMLContentElement) {
             var content = node;
             this.updateDependentAttributes(content.getAttribute("select"));
@@ -3812,7 +3812,7 @@
                 destributeNodeInto(child, content);
               }
             }
-            return ;
+            return;
           }
           for (var child = node.firstChild; child; child = child.nextSibling) {
             this.poolDistribution(child, pool);
@@ -3853,7 +3853,7 @@
         },
         updateDependentAttributes: function(selector) {
           if (!selector)
-            return ;
+            return;
           var attributes = this.attributes;
           if (/\.\w+/.test(selector))
             attributes["class"] = true;
@@ -3991,7 +3991,7 @@
       var elementsWithFormProperty = ["HTMLButtonElement", "HTMLFieldSetElement", "HTMLInputElement", "HTMLKeygenElement", "HTMLLabelElement", "HTMLLegendElement", "HTMLObjectElement", "HTMLOutputElement", "HTMLTextAreaElement"];
       function createWrapperConstructor(name) {
         if (!window[name])
-          return ;
+          return;
         assert(!scope.wrappers[name]);
         var GeneratedWrapper = function(node) {
           HTMLElement.call(this, node);
@@ -4167,7 +4167,7 @@
           ["createdCallback", "attachedCallback", "detachedCallback", "attributeChangedCallback"].forEach(function(name) {
             var f = prototype[name];
             if (!f)
-              return ;
+              return;
             newPrototype[name] = function() {
               if (!(wrap(this) instanceof CustomElementConstructor)) {
                 rewrap(this);
@@ -4323,7 +4323,7 @@
       var unwrap = scope.unwrap;
       var OriginalFormData = window.FormData;
       if (!OriginalFormData)
-        return ;
+        return;
       function FormData(formElement) {
         var impl;
         if (formElement instanceof OriginalFormData) {
@@ -4421,7 +4421,7 @@
         var nativeConstructorName = elements[tagName];
         var nativeConstructor = window[nativeConstructorName];
         if (!nativeConstructor)
-          return ;
+          return;
         var element = document.createElement(tagName);
         var wrapperConstructor = element.constructor;
         window[nativeConstructorName] = wrapperConstructor;
@@ -4799,7 +4799,7 @@
       var isChrome = navigator.userAgent.match("Chrome");
       function withCssRules(cssText, callback) {
         if (!callback) {
-          return ;
+          return;
         }
         var rules;
         if (cssText.match("@import") && isChrome) {
@@ -4860,12 +4860,12 @@
             var originalParseGeneric = HTMLImports.parser.parseGeneric;
             HTMLImports.parser.parseGeneric = function(elt) {
               if (elt[SHIMMED_ATTRIBUTE]) {
-                return ;
+                return;
               }
               var style = elt.__importElement || elt;
               if (!style.hasAttribute(SHIM_ATTRIBUTE)) {
                 originalParseGeneric.call(this, elt);
-                return ;
+                return;
               }
               if (elt.__resource) {
                 style = elt.ownerDocument.createElement("style");
@@ -4970,7 +4970,7 @@
       observer.nodes_.forEach(function(node) {
         var registrations = registrationsTable.get(node);
         if (!registrations)
-          return ;
+          return;
         registrations.forEach(function(registration) {
           if (registration.observer === observer)
             registration.removeTransientObservers();
@@ -5107,7 +5107,7 @@
           var recordToReplaceLast = selectRecord(lastRecord, record);
           if (recordToReplaceLast) {
             records[length - 1] = recordToReplaceLast;
-            return ;
+            return;
           }
         } else {
           scheduleCallback(this.observer);
@@ -5144,7 +5144,7 @@
       },
       addTransientObserver: function(node) {
         if (node === this.target)
-          return ;
+          return;
         this.addListeners_(node);
         this.transientObservedNodes.push(node);
         var registrations = registrationsTable.get(node);
@@ -5179,9 +5179,9 @@
             var oldValue = e.attrChange === MutationEvent.ADDITION ? null : e.prevValue;
             forEachAncestorAndObserverEnqueueRecord(target, function(options) {
               if (!options.attributes)
-                return ;
+                return;
               if (options.attributeFilter && options.attributeFilter.length && options.attributeFilter.indexOf(name) === -1 && options.attributeFilter.indexOf(namespace) === -1) {
-                return ;
+                return;
               }
               if (options.attributeOldValue)
                 return getRecordWithOldValue(oldValue);
@@ -5194,7 +5194,7 @@
             var oldValue = e.prevValue;
             forEachAncestorAndObserverEnqueueRecord(target, function(options) {
               if (!options.characterData)
-                return ;
+                return;
               if (options.characterDataOldValue)
                 return getRecordWithOldValue(oldValue);
               return record;
@@ -5223,7 +5223,7 @@
             record.nextSibling = nextSibling;
             forEachAncestorAndObserverEnqueueRecord(target, function(options) {
               if (!options.childList)
-                return ;
+                return;
               return record;
             });
         }
@@ -5586,7 +5586,7 @@
       parse: function(elt) {
         if (this.isParsed(elt)) {
           flags.parse && console.log("[%s] is already parsed", elt.localName);
-          return ;
+          return;
         }
         var fn = this[this.map[elt.localName]];
         if (fn) {
@@ -5736,7 +5736,7 @@
               if (this.hasResource(n)) {
                 return nodeIsImport(n) ? this.nextToParseInDoc(n.import, n) : n;
               } else {
-                return ;
+                return;
               }
             }
           }
@@ -5919,7 +5919,7 @@
   (function(scope) {
     initializeModules = scope.initializeModules;
     if (scope.useNative) {
-      return ;
+      return;
     }
     if (typeof window.CustomEvent !== "function") {
       window.CustomEvent = function(inType, dictionary) {
@@ -5999,7 +5999,7 @@
     function _forDocumentTree(doc, cb) {
       doc = wrap(doc);
       if (processingDocuments.indexOf(doc) >= 0) {
-        return ;
+        return;
       }
       processingDocuments.push(doc);
       var imports = doc.querySelectorAll("link[rel=" + IMPORT_LINK_TYPE + "]");
@@ -6147,13 +6147,13 @@
         if (mx.type === "childList") {
           forEach(mx.addedNodes, function(n) {
             if (!n.localName) {
-              return ;
+              return;
             }
             addedNode(n);
           });
           forEach(mx.removedNodes, function(n) {
             if (!n.localName) {
-              return ;
+              return;
             }
             detachedNode(n);
           });
@@ -6178,7 +6178,7 @@
     var forEach = Array.prototype.forEach.call.bind(Array.prototype.forEach);
     function observe(inRoot) {
       if (inRoot.__observer) {
-        return ;
+        return;
       }
       var observer = new MutationObserver(handler);
       observer.observe(inRoot, {
@@ -6310,7 +6310,7 @@
     }
     function overrideAttributeApi(prototype) {
       if (prototype.setAttribute._polyfilled) {
-        return ;
+        return;
       }
       var setAttribute = prototype.setAttribute;
       prototype.setAttribute = function(name, value) {
@@ -6603,4 +6603,4 @@
   if (typeof exports !== 'undefined') {
     module.exports = window.WebComponents;
   }
-})(require("process"));
+})(require('process'));

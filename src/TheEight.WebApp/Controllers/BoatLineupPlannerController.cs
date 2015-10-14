@@ -2,14 +2,12 @@
 
 namespace TheEight.WebApp.Controllers
 {
-    [Route("boat-lineup-planner")]
+    [Route("")]
     public class BoatLineupPlannerController : Controller
     {
         public IActionResult Index()
         {
             return View();
-        }
-
-
+        }        
     }
 }

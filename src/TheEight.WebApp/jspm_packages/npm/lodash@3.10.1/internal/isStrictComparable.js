@@ -1,5 +1,5 @@
 /* */ 
-var isObject = require("../lang/isObject");
+var isObject = require('../lang/isObject');
 function isStrictComparable(value) {
   return value === value && !isObject(value);
 }

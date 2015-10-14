@@ -23,7 +23,7 @@ function _inherits(subClass, superClass) {
   if (superClass)
     Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
-var _utilsCreateStoreShape = require("../utils/createStoreShape");
+var _utilsCreateStoreShape = require('../utils/createStoreShape');
 var _utilsCreateStoreShape2 = _interopRequireDefault(_utilsCreateStoreShape);
 function isUsingOwnerContext(React) {
   var version = React.version;
@@ -44,14 +44,14 @@ function createProvider(React) {
   var didWarnAboutChild = false;
   function warnAboutFunctionChild() {
     if (didWarnAboutChild || requireFunctionChild) {
-      return ;
+      return;
     }
     didWarnAboutChild = true;
     console.error('With React 0.14 and later versions, you no longer need to ' + 'wrap <Provider> child into a function.');
   }
   function warnAboutElementChild() {
     if (didWarnAboutChild || !requireFunctionChild) {
-      return ;
+      return;
     }
     didWarnAboutChild = true;
     console.error('With React 0.13, you need to ' + 'wrap <Provider> child into a function. ' + 'This restriction will be removed with React 0.14.');
@@ -59,7 +59,7 @@ function createProvider(React) {
   var didWarnAboutReceivingStore = false;
   function warnAboutReceivingStore() {
     if (didWarnAboutReceivingStore) {
-      return ;
+      return;
     }
     didWarnAboutReceivingStore = true;
     console.error('<Provider> does not support changing `store` on the fly. ' + 'It is most likely that you see this error because you updated to ' + 'Redux 2.x and React Redux 2.x which no longer hot reload reducers ' + 'automatically. See https://github.com/rackt/react-redux/releases/' + 'tag/v2.0.0 for the migration instructions.');

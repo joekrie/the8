@@ -1,6 +1,6 @@
 /* */ 
-var baseGet = require("./baseGet"),
-    toPath = require("./toPath");
+var baseGet = require('./baseGet'),
+    toPath = require('./toPath');
 function basePropertyDeep(path) {
   var pathKey = (path + '');
   path = toPath(path);

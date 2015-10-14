@@ -34,13 +34,13 @@
     args: [['one', 'two'], ['three'], ['four', ['five']], [{six: true}, {seven: false}]],
     expected: 'one two three four five six'
   }];
-  var local = require("../index");
-  var dedupe = require("../dedupe");
-  var localPackage = require("../package.json!systemjs-json");
+  var local = require('../index');
+  var dedupe = require('../dedupe');
+  var localPackage = require('../package.json!systemjs-json');
   try {
-    var npm = require("../index");
-    var npmDedupe = require("../dedupe");
-    var npmPackage = require("./node_modules/classnames/package.json!systemjs-json");
+    var npm = require('../index');
+    var npmDedupe = require('../dedupe');
+    var npmPackage = require('./node_modules/classnames/package.json!systemjs-json');
   } catch (e) {
     console.log('There was an error loading the benchmark classnames package.\n' + 'Please make sure you have run `npm install` in ./benchmarks\n');
     process.exit(0);
@@ -49,8 +49,8 @@
     console.log('Your local version (' + localPackage.version + ') does not match the installed version (' + npmPackage.version + ')\n\n' + 'Please run `npm update` in ./benchmarks to ensure you are benchmarking\n' + 'the latest version of this package.\n');
     process.exit(0);
   }
-  var assert = require("assert");
-  var benchmark = require("benchmark");
+  var assert = require('assert');
+  var benchmark = require('benchmark');
   function sortClasses(str) {
     return str.split(' ').sort().join(' ');
   }
@@ -83,4 +83,4 @@
     });
     suite.run();
   });
-})(require("process"));
+})(require('process'));

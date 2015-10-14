@@ -11,9 +11,9 @@
       throw new TypeError('Cannot call a class as a function');
     }
   }
-  var _invariant = require("invariant");
+  var _invariant = require('invariant');
   var _invariant2 = _interopRequireDefault(_invariant);
-  var _lodashLangIsPlainObject = require("lodash/lang/isPlainObject");
+  var _lodashLangIsPlainObject = require('lodash/lang/isPlainObject');
   var _lodashLangIsPlainObject2 = _interopRequireDefault(_lodashLangIsPlainObject);
   var ALLOWED_SPEC_METHODS = ['canDrop', 'hover', 'drop'];
   function createTargetFactory(spec) {
@@ -45,13 +45,13 @@
       };
       Target.prototype.hover = function hover() {
         if (!spec.hover) {
-          return ;
+          return;
         }
         spec.hover(this.props, this.monitor, this.component);
       };
       Target.prototype.drop = function drop() {
         if (!spec.drop) {
-          return ;
+          return;
         }
         var dropResult = spec.drop(this.props, this.monitor, this.component);
         if (process.env.NODE_ENV !== 'production') {
@@ -66,4 +66,4 @@
     };
   }
   module.exports = exports['default'];
-})(require("process"));
+})(require('process'));

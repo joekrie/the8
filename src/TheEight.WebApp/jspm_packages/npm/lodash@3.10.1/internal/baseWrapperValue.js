@@ -1,6 +1,6 @@
 /* */ 
-var LazyWrapper = require("./LazyWrapper"),
-    arrayPush = require("./arrayPush");
+var LazyWrapper = require('./LazyWrapper'),
+    arrayPush = require('./arrayPush');
 function baseWrapperValue(value, actions) {
   var result = value;
   if (result instanceof LazyWrapper) {

@@ -38,16 +38,16 @@ function _defineProperty(obj, key, value) {
   }
   return obj;
 }
-var _dndCore = require("dnd-core");
-var _utilsEnterLeaveCounter = require("../utils/EnterLeaveCounter");
+var _dndCore = require('dnd-core');
+var _utilsEnterLeaveCounter = require('../utils/EnterLeaveCounter');
 var _utilsEnterLeaveCounter2 = _interopRequireDefault(_utilsEnterLeaveCounter);
-var _utilsBrowserDetector = require("../utils/BrowserDetector");
-var _utilsOffsetHelpers = require("../utils/OffsetHelpers");
-var _utilsShallowEqual = require("../utils/shallowEqual");
+var _utilsBrowserDetector = require('../utils/BrowserDetector');
+var _utilsOffsetHelpers = require('../utils/OffsetHelpers');
+var _utilsShallowEqual = require('../utils/shallowEqual');
 var _utilsShallowEqual2 = _interopRequireDefault(_utilsShallowEqual);
-var _lodashObjectDefaults = require("lodash/object/defaults");
+var _lodashObjectDefaults = require('lodash/object/defaults');
 var _lodashObjectDefaults2 = _interopRequireDefault(_lodashObjectDefaults);
-var _invariant = require("invariant");
+var _invariant = require('invariant');
 var _invariant2 = _interopRequireDefault(_invariant);
 var emptyImage = undefined;
 function getEmptyImage() {
@@ -153,7 +153,7 @@ var HTML5Backend = (function() {
   }
   HTML5Backend.prototype.setup = function setup() {
     if (typeof window === 'undefined') {
-      return ;
+      return;
     }
     _invariant2['default'](!this.constructor.isSetUp, 'Cannot have two HTML5 backends at the same time.');
     this.constructor.isSetUp = true;
@@ -170,7 +170,7 @@ var HTML5Backend = (function() {
   };
   HTML5Backend.prototype.teardown = function teardown() {
     if (typeof window === 'undefined') {
-      return ;
+      return;
     }
     this.constructor.isSetUp = false;
     window.removeEventListener('dragstart', this.handleTopDragStart);
@@ -281,7 +281,7 @@ var HTML5Backend = (function() {
   HTML5Backend.prototype.endDragIfSourceWasRemovedFromDOM = function endDragIfSourceWasRemovedFromDOM() {
     var node = this.currentDragSourceNode;
     if (document.body.contains(node)) {
-      return ;
+      return;
     }
     this.actions.endDrag();
     this.clearCurrentDragSourceNode();
@@ -365,7 +365,7 @@ var HTML5Backend = (function() {
     } else if (nativeType) {
       this.beginDragNativeItem(nativeType);
     } else if (!dataTransfer.types && (!e.target.hasAttribute || !e.target.hasAttribute('draggable'))) {
-      return ;
+      return;
     } else {
       e.preventDefault();
     }
@@ -379,7 +379,7 @@ var HTML5Backend = (function() {
     this.dragEnterTargetIds = [];
     var isFirstEnter = this.enterLeaveCounter.enter(e.target);
     if (!isFirstEnter || this.monitor.isDragging()) {
-      return ;
+      return;
     }
     var dataTransfer = e.dataTransfer;
     var nativeType = matchNativeItemType(dataTransfer);
@@ -395,7 +395,7 @@ var HTML5Backend = (function() {
     var dragEnterTargetIds = this.dragEnterTargetIds;
     this.dragEnterTargetIds = [];
     if (!this.monitor.isDragging()) {
-      return ;
+      return;
     }
     if (!_utilsBrowserDetector.isFirefox()) {
       this.actions.hover(dragEnterTargetIds, {clientOffset: _utilsOffsetHelpers.getEventClientOffset(e)});
@@ -421,7 +421,7 @@ var HTML5Backend = (function() {
     if (!this.monitor.isDragging()) {
       e.preventDefault();
       e.dataTransfer.dropEffect = 'none';
-      return ;
+      return;
     }
     this.actions.hover(dragOverTargetIds, {clientOffset: _utilsOffsetHelpers.getEventClientOffset(e)});
     var canDrop = dragOverTargetIds.some(function(targetId) {
@@ -444,7 +444,7 @@ var HTML5Backend = (function() {
     }
     var isLastLeave = this.enterLeaveCounter.leave(e.target);
     if (!isLastLeave) {
-      return ;
+      return;
     }
     if (this.isDraggingNativeItem()) {
       this.endDragNativeItem();

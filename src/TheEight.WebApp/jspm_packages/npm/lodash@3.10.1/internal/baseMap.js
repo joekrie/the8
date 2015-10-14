@@ -1,6 +1,6 @@
 /* */ 
-var baseEach = require("./baseEach"),
-    isArrayLike = require("./isArrayLike");
+var baseEach = require('./baseEach'),
+    isArrayLike = require('./isArrayLike');
 function baseMap(collection, iteratee) {
   var index = -1,
       result = isArrayLike(collection) ? Array(collection.length) : [];

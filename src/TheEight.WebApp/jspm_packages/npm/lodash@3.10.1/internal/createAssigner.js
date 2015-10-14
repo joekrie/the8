@@ -1,7 +1,7 @@
 /* */ 
-var bindCallback = require("./bindCallback"),
-    isIterateeCall = require("./isIterateeCall"),
-    restParam = require("../function/restParam");
+var bindCallback = require('./bindCallback'),
+    isIterateeCall = require('./isIterateeCall'),
+    restParam = require('../function/restParam');
 function createAssigner(assigner) {
   return restParam(function(object, sources) {
     var index = -1,

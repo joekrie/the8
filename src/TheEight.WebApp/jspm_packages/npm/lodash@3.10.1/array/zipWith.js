@@ -1,7 +1,7 @@
 /* */ 
 (function(process) {
-  var restParam = require("../function/restParam"),
-      unzipWith = require("./unzipWith");
+  var restParam = require('../function/restParam'),
+      unzipWith = require('./unzipWith');
   var zipWith = restParam(function(arrays) {
     var length = arrays.length,
         iteratee = length > 2 ? arrays[length - 2] : undefined,
@@ -16,4 +16,4 @@
     return unzipWith(arrays, iteratee, thisArg);
   });
   module.exports = zipWith;
-})(require("process"));
+})(require('process'));

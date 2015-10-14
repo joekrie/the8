@@ -1,17 +1,17 @@
 /* */ 
 (function(process) {
   'use strict';
-  var ReactComponent = require("./ReactComponent");
-  var ReactElement = require("./ReactElement");
-  var ReactPropTypeLocations = require("./ReactPropTypeLocations");
-  var ReactPropTypeLocationNames = require("./ReactPropTypeLocationNames");
-  var ReactNoopUpdateQueue = require("./ReactNoopUpdateQueue");
-  var assign = require("./Object.assign");
-  var emptyObject = require("fbjs/lib/emptyObject");
-  var invariant = require("fbjs/lib/invariant");
-  var keyMirror = require("fbjs/lib/keyMirror");
-  var keyOf = require("fbjs/lib/keyOf");
-  var warning = require("fbjs/lib/warning");
+  var ReactComponent = require('./ReactComponent');
+  var ReactElement = require('./ReactElement');
+  var ReactPropTypeLocations = require('./ReactPropTypeLocations');
+  var ReactPropTypeLocationNames = require('./ReactPropTypeLocationNames');
+  var ReactNoopUpdateQueue = require('./ReactNoopUpdateQueue');
+  var assign = require('./Object.assign');
+  var emptyObject = require('fbjs/lib/emptyObject');
+  var invariant = require('fbjs/lib/invariant');
+  var keyMirror = require('fbjs/lib/keyMirror');
+  var keyOf = require('fbjs/lib/keyOf');
+  var warning = require('fbjs/lib/warning');
   var MIXINS_KEY = keyOf({mixins: null});
   var SpecPolicy = keyMirror({
     DEFINE_ONCE: null,
@@ -105,7 +105,7 @@
   }
   function mixSpecIntoComponent(Constructor, spec) {
     if (!spec) {
-      return ;
+      return;
     }
     !(typeof spec !== 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactClass: You\'re attempting to ' + 'use a component class as a mixin. Instead, just use a regular object.') : invariant(false) : undefined;
     !!ReactElement.isValidElement(spec) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactClass: You\'re attempting to ' + 'use a component as a mixin. Instead, just use a regular object.') : invariant(false) : undefined;
@@ -158,7 +158,7 @@
   }
   function mixStaticSpecIntoComponent(Constructor, statics) {
     if (!statics) {
-      return ;
+      return;
     }
     for (var name in statics) {
       var property = statics[name];
@@ -326,4 +326,4 @@
       }}
   };
   module.exports = ReactClass;
-})(require("process"));
+})(require('process'));

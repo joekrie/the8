@@ -11,6 +11,7 @@ using TheEight.Common.Database;
 using React.AspNet;
 using System;
 using Microsoft.Dnx.Runtime;
+using Microsoft.AspNet.Diagnostics;
 
 namespace TheEight.WebApp
 {
@@ -20,7 +21,8 @@ namespace TheEight.WebApp
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            var applicationEnvironment = services.BuildServiceProvider()
+            var applicationEnvironment = services
+                .BuildServiceProvider()
                 .GetRequiredService<IApplicationEnvironment>();
 
             _config = new ConfigurationBuilder(applicationEnvironment.ApplicationBasePath)
@@ -39,8 +41,6 @@ namespace TheEight.WebApp
                 return DocumentStoreFactory.CreateAndInitialize(settings.Options);
             });
 
-            services.AddReact();
-
             services.AddMvc()
                 .AddJsonOptions(options =>
                 {
@@ -49,20 +49,22 @@ namespace TheEight.WebApp
                     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 });
 
-            return services.BuildServiceProvider();
-        }
+            services.AddReact();
 
-        public void ConfigureDevelopment(IApplicationBuilder app)
-        {
-            app.UseErrorPage();
+            return services.BuildServiceProvider();
         }
 
         public void Configure(IApplicationBuilder app)
         {
+            app.Properties["host.AppMode"] = "development";
+            app.UseErrorPage();
+
             app.UseReact(config =>
             {
-                config.SetUseHarmony(false);
-                config.AddScript("~/app/boat-lineup-planner/main.js");
+                config
+                    .SetUseHarmony(false)
+                    .SetReuseJavaScriptEngines(true)
+                    .AddScript("~/app/boat-lineup-planner/main.js");
             });
 
             app.UseStaticFiles();

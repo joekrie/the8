@@ -1,6 +1,6 @@
 /* */ 
-var isStrictComparable = require("./isStrictComparable"),
-    pairs = require("../object/pairs");
+var isStrictComparable = require('./isStrictComparable'),
+    pairs = require('../object/pairs');
 function getMatchData(object) {
   var result = pairs(object),
       length = result.length;

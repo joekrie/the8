@@ -54,18 +54,18 @@
     if (superClass)
       Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
-  var _react = require("react");
+  var _react = require('react');
   var _react2 = _interopRequireDefault(_react);
-  var _disposables = require("disposables");
-  var _utilsShallowEqual = require("./utils/shallowEqual");
+  var _disposables = require('disposables');
+  var _utilsShallowEqual = require('./utils/shallowEqual');
   var _utilsShallowEqual2 = _interopRequireDefault(_utilsShallowEqual);
-  var _utilsShallowEqualScalar = require("./utils/shallowEqualScalar");
+  var _utilsShallowEqualScalar = require('./utils/shallowEqualScalar');
   var _utilsShallowEqualScalar2 = _interopRequireDefault(_utilsShallowEqualScalar);
-  var _lodashLangIsPlainObject = require("lodash/lang/isPlainObject");
+  var _lodashLangIsPlainObject = require('lodash/lang/isPlainObject');
   var _lodashLangIsPlainObject2 = _interopRequireDefault(_lodashLangIsPlainObject);
-  var _invariant = require("invariant");
+  var _invariant = require('invariant');
   var _invariant2 = _interopRequireDefault(_invariant);
-  var _bindConnector2 = require("./bindConnector");
+  var _bindConnector2 = require('./bindConnector');
   var _bindConnector3 = _interopRequireDefault(_bindConnector2);
   function decorateHandler(_ref) {
     var DecoratedComponent = _ref.DecoratedComponent;
@@ -132,7 +132,7 @@
       };
       DragDropContainer.prototype.receiveType = function receiveType(type) {
         if (type === this.currentType) {
-          return ;
+          return;
         }
         this.currentType = type;
         var _registerHandler = registerHandler(type, this.handler, this.manager);
@@ -173,4 +173,4 @@
     })(_react.Component);
   }
   module.exports = exports['default'];
-})(require("process"));
+})(require('process'));

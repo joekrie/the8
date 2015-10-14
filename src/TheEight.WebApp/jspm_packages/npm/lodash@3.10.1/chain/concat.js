@@ -1,2 +1,2 @@
 /* */ 
-module.exports = require("./wrapperConcat");
+module.exports = require('./wrapperConcat');

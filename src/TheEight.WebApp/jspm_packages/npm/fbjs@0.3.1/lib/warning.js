@@ -1,7 +1,7 @@
 /* */ 
 (function(process) {
   'use strict';
-  var emptyFunction = require("./emptyFunction");
+  var emptyFunction = require('./emptyFunction');
   var warning = emptyFunction;
   if (process.env.NODE_ENV !== 'production') {
     warning = function(condition, format) {
@@ -14,7 +14,7 @@
         throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
       }
       if (format.indexOf('Failed Composite propType: ') === 0) {
-        return ;
+        return;
       }
       if (!condition) {
         var argIndex = 0;
@@ -31,4 +31,4 @@
     };
   }
   module.exports = warning;
-})(require("process"));
+})(require('process'));

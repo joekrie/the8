@@ -1,5 +1,5 @@
 /* */ 
-var arraySome = require("./arraySome");
+var arraySome = require('./arraySome');
 function equalArrays(array, other, equalFunc, customizer, isLoose, stackA, stackB) {
   var index = -1,
       arrLength = array.length,
