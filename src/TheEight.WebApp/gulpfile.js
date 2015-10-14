@@ -9,14 +9,14 @@ gulp.task('default', ['jspm', 'sass']);
 
 // todo: get gulp-jspm working
 gulp.task('jspm', function () {
-    var cmd = 'jspm bundle-sfx src/app/boat-lineup-planner/main dist/app/boat-lineup-planner/main.js';
-    exec(cmd, function (err, stdout, stderr) {
-        if (err) { throw err; }
-    });
+    //var cmd = 'jspm bundle-sfx src/app/boat-lineup-planner/main dist/app/boat-lineup-planner/main.js';
+    //exec(cmd, function (err, stdout, stderr) {
+    //    if (err) { throw err; }
+    //});
     
-    //return gulp.src('src/app/**/main.js')
-    //    .pipe(jspm())
-    //    .pipe(gulp.dest('dist/app'));
+    return gulp.src('src/app/**/main.js')
+        .pipe(jspm())
+        .pipe(gulp.dest('dist/app'));
 });
 
 gulp.task('glyphicons', function() {

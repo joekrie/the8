@@ -16,9 +16,11 @@ namespace TheEight.Common.Database
                 DefaultDatabase = settings.DatabaseName
             };
 
-            return docStore
-                .Initialize()
-                .ConfigureForNodaTime();
+            docStore.Initialize();
+            docStore.ConfigureForNodaTime();
+            docStore.Conventions.IdentityPartsSeparator = "-";
+
+            return docStore;
         }
     }
 }
