@@ -2,33 +2,24 @@
   "version": "1.0.0",
   "name": "TheEightSuite",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "classnames": "^2.1.5",
+    "immutable": "^3.7.5",
+    "react": "^0.14.0",
+    "react-dnd": "^1.1.8",
+    "react-redux": "^3.1.0",
+    "redux": "^3.0.2"
+  },
   "devDependencies": {
+    "babel-core": "^5.8.25",
+    "babel-loader": "^5.3.2",
     "del": "^1.2.0",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
-    "gulp-jspm": "^0.4.1",
     "gulp-sass": "^2.0.3",
     "gulp-util": "^3.0.6",
-    "jspm": "^0.16.12",
-    "node-sass": "^3.3.3"
-  },
-  "jspm": {
-    "configFile": "jspm_config.js",
-    "dependencies": {
-      "classnames": "npm:classnames@^2.1.5",
-      "immutable": "npm:immutable@^3.7.5",
-      "react": "npm:react@^0.14.0",
-      "react-dnd": "npm:react-dnd@^1.1.8",
-      "react-dnd-touch-backend": "npm:react-dnd-touch-backend@^0.1.0",
-      "react-dom": "npm:react-dom@^0.14.0",
-      "react-redux": "npm:react-redux@^3.1.0",
-      "redux": "npm:redux@^3.0.2"
-    },
-    "devDependencies": {
-      "babel": "npm:babel-core@^5.8.24",
-      "babel-runtime": "npm:babel-runtime@^5.8.24",
-      "core-js": "npm:core-js@^1.1.4"
-    }
+    "node-sass": "^3.3.3",
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.12.0"
   }
 }
