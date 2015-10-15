@@ -1,16 +1,31 @@
+var path = require('path');
+
 module.exports = {
-	entry: ['./utils', './app.js'],
+    entry: './src/app/boat-lineup-planner/main',
 	output: {
-		filename: 'bundle.js'
+	    filename: './dist/app/boat-lineup-planner/main.js'
 	},
 	module: {
-		loaders: [
-			test: /\.es6$/,
-			exclude: /node_modules/,
-			loader: 'babel-loader'
+	    loaders: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+                query: {
+                    optional: [
+                        'runtime'
+                    ],
+                    stage: 0
+                }
+            }
 		]
 	},
 	resolve: {
-		extensions: ['', '.js', '.es6']
+	    modulesDirectories: [
+            'node_modules'
+	    ]
+	},
+	externals: {
+	    react: 'React'
 	}
 }

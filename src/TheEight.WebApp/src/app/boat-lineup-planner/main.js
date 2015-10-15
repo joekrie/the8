@@ -1,3 +1,1 @@
-import Provider from './Provider';
-window.Provider = Provider;
-export { Provider };
+export Provider from 'expose?Provider!./Provider';
