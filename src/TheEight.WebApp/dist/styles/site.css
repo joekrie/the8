@@ -2234,42 +2234,58 @@ table:not(.rd-days) {
   -webkit-animation-name: tada;
   animation-name: tada; }
 
-.boat-lineup-planner {
-  max-width: 68em;
-  margin-left: auto;
-  margin-right: auto; }
-  .boat-lineup-planner::after {
-    clear: both;
-    content: "";
-    display: table; }
-  .boat-lineup-planner .unassigned-attendee-list {
-    float: left;
-    display: block;
-    margin-right: 2.12766%;
-    width: 23.40426%;
-    padding: 10px;
-    border: 1px solid black; }
-    .boat-lineup-planner .unassigned-attendee-list:last-child {
-      margin-right: 0; }
-  .boat-lineup-planner .boat-list {
-    float: left;
-    display: block;
-    margin-right: 2.12766%;
-    width: 74.46809%; }
-    .boat-lineup-planner .boat-list:last-child {
-      margin-right: 0; }
-    .boat-lineup-planner .boat-list .boat {
-      padding: 10px;
-      border: 1px solid black; }
-      .boat-lineup-planner .boat-list .boat .boat-seat {
-        border: 1px solid black;
-        width: 150px;
-        min-height: 50px; }
-  .boat-lineup-planner .attendee {
-    border: 1px solid black;
-    width: 100%;
+.boat-lineup-planner::after {
+  clear: both;
+  content: "";
+  display: table; }
+
+.boat-lineup-planner .unassigned-attendee-list {
+  float: left;
+  width: 300px;
+  background-color: #263751;
+  padding: 15px;
+  margin-right: 20px; }
+  .boat-lineup-planner .unassigned-attendee-list .attendee {
+    margin-bottom: 10px; }
+
+.boat-lineup-planner .boat-list::after {
+  clear: both;
+  content: "";
+  display: table; }
+
+.boat-lineup-planner .boat-list .boat {
+  width: 300px;
+  background-color: #263751;
+  float: left;
+  margin-right: 20px;
+  color: #F5F5F5; }
+  .boat-lineup-planner .boat-list .boat .boat-header {
+    background-color: #263F52;
+    margin-bottom: 10px;
     padding: 10px; }
-    .boat-lineup-planner .attendee.rower {
-      background-color: lightgray; }
-    .boat-lineup-planner .attendee.coxswain {
-      background-color: gray; }
+  .boat-lineup-planner .boat-list .boat .boat-seat {
+    height: 50px; }
+    .boat-lineup-planner .boat-list .boat .boat-seat::after {
+      clear: both;
+      content: "";
+      display: table; }
+    .boat-lineup-planner .boat-list .boat .boat-seat .boat-seat-label {
+      float: left;
+      font-size: 0.9em;
+      height: 50px;
+      line-height: 50px;
+      white-space: nowrap;
+      margin-left: 10px;
+      width: 30px; }
+
+.boat-lineup-planner .attendee {
+  padding: 10px;
+  color: #F5F5F5;
+  cursor: grab; }
+  .boat-lineup-planner .attendee.rower {
+    background-color: #304F66; }
+  .boat-lineup-planner .attendee.coxswain {
+    background-color: #2A4458; }
+
+body {
+  background-color: #182B3D; }

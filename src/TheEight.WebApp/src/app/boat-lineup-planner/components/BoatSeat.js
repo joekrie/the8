@@ -28,7 +28,9 @@ export default class extends React.Component {
 
 		return connectDropTarget(
 			<div className='boat-seat'>
-				<span>{seatPosition}</span>
+				<div className='boat-seat-label'>
+                    {seatPosition}
+                 </div>
 				{attendee}
 			</div>
 		);

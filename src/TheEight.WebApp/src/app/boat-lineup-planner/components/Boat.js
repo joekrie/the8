@@ -8,7 +8,7 @@ export default class extends React.Component {
 		return (
 			<div className='boat'>
 				<div>
-					<div>
+					<div className='boat-header'>
 						{boat.get('title')}
 					</div>
 					<div>
