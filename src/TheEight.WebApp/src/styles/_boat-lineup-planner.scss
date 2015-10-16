@@ -1,40 +1,64 @@
 /// <reference path="base/_base.scss" />
 
 .boat-lineup-planner {
-	@include outer-container;
+    @include clearfix;
 	
 	.unassigned-attendee-list {
-		@include span-columns(3);
-		padding: 10px;
-		border: 1px solid black;
+		float: left;
+        width: 300px;
+		background-color: #263751;
+        padding: 15px;
+        margin-right: 20px;
+
+        .attendee {
+            margin-bottom: 10px;
+        }
 	}
 
 	.boat-list {
-		@include span-columns(9);
+        @include clearfix;
 		
 		.boat {
-			padding: 10px;
-			border: 1px solid black;
-			
+			width: 300px;
+			background-color: #263751;
+            float: left;
+            margin-right: 20px;
+            color: #F5F5F5;
+
+            .boat-header {
+                background-color: #263F52;
+                margin-bottom: 10px;
+                padding: 10px;
+            }
+
 			.boat-seat {
-				border: 1px solid black;
-				width: 150px;
-				min-height: 50px;
+                @include clearfix;
+				height: 50px;
+
+                .boat-seat-label {
+                    float: left;
+                    font-size: $base-font-size * 0.9;
+                    height: 50px;
+                    line-height: 50px;
+                    white-space: nowrap;
+                    margin-left: 10px;
+                    width: 30px;
+                }
 			}
 		}
 	}
 					
 	.attendee {
-		border: 1px solid black;
-		width: 100%;
 		padding: 10px;
+        color: #F5F5F5;
+        cursor: grab;        
 		
 		&.rower {
-			background-color: lightgray;
+			background-color: #304F66;
 		}
 		
 		&.coxswain {
-			background-color: gray;
+			background-color: #2A4458;
 		}
 	}	
 }

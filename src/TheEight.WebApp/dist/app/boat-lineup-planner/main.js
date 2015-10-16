@@ -10561,7 +10561,7 @@
 						null,
 						_react2['default'].createElement(
 							'div',
-							null,
+							{ className: 'boat-header' },
 							boat.get('title')
 						),
 						_react2['default'].createElement(
@@ -10668,8 +10668,8 @@
 					'div',
 					{ className: 'boat-seat' },
 					_react2['default'].createElement(
-						'span',
-						null,
+						'div',
+						{ className: 'boat-seat-label' },
 						seatPosition
 					),
 					attendee
