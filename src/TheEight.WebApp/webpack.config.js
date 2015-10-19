@@ -1,9 +1,12 @@
 var path = require('path');
 
 module.exports = {
-    entry: './src/app/boat-lineup-planner/main',
+    entry: {
+        'boat-lineup-planner/client': './src/app/boat-lineup-planner/client',
+        'boat-lineup-planner/server': './src/app/boat-lineup-planner/server'
+    },
 	output: {
-	    filename: './dist/app/boat-lineup-planner/main.js'
+	    filename: './dist/app/[name].js'
 	},
 	module: {
 	    loaders: [
@@ -17,6 +20,11 @@ module.exports = {
                     ],
                     stage: 0
                 }
+            },
+            {
+                test: /\.scss$./,
+                exclude: /node_modules/,
+                loaders: ['style', 'css', 'sass']
             }
 		]
 	},

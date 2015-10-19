@@ -64,7 +64,7 @@ namespace TheEight.WebApp
                 config
                     .SetUseHarmony(false)
                     .SetReuseJavaScriptEngines(false)
-                    .AddScript("~/app/boat-lineup-planner/main.js");
+                    .AddScriptWithoutTransform("~/app/boat-lineup-planner/server.js");
             });
 
             app.UseStaticFiles();

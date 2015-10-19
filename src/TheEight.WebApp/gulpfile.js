@@ -1,4 +1,5 @@
-﻿var gulp = require('gulp');
+﻿/// <binding AfterBuild='default' ProjectOpened='sass:watch' />
+var gulp = require('gulp');
 var sass = require('gulp-sass');
 var del = require('del');
 var concat = require('gulp-concat');
