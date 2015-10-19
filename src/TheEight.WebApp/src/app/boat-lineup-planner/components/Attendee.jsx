@@ -17,16 +17,19 @@ const collect = (connect, monitor) => ({
 @DragSource(dndTypes.ATTENDEE, spec, collect)
 export default class extends React.Component {
 	render() {
-		const { attendee, connectDragSource } = this.props;
-	
+	    const { attendee, connectDragSource } = this.props;
+	    const isCoxswain = attendee.get('position') === attendeePositions.COXSWAIN;
+
 		const classes = classNames(
 			'attendee',
-			attendee.get('position') === attendeePositions.COXSWAIN ? 'coxswain': 'rower'
-		);	
+			isCoxswain ? 'coxswain': 'rower'
+		);
+
+		let displayName = attendee.get('displayName');
 	
 		return connectDragSource(
 			<div className={classes}>
-				{attendee.get('displayName')}
+				{displayName}
 			</div>
 		);
 	}

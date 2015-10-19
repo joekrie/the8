@@ -72,7 +72,7 @@
 	var _interopRequireDefault = __webpack_require__(32)['default'];
 
 	Object.defineProperty(exports, '__esModule', {
-	    value: true
+		value: true
 	});
 
 	var _react = __webpack_require__(33);
@@ -92,28 +92,28 @@
 	var _reactRedux = __webpack_require__(151);
 
 	var _default = (function (_React$Component) {
-	    _inherits(_default, _React$Component);
+		_inherits(_default, _React$Component);
 
-	    function _default() {
-	        _classCallCheck(this, _default);
+		function _default() {
+			_classCallCheck(this, _default);
 
-	        _get(Object.getPrototypeOf(_default.prototype), 'constructor', this).call(this);
-	    }
+			_get(Object.getPrototypeOf(_default.prototype), 'constructor', this).apply(this, arguments);
+		}
 
-	    _createClass(_default, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2['default'].createElement(
-	                _reactRedux.Provider,
-	                { store: (0, _redux.createStore)(_actionsAttendeeReducers2['default']) },
-	                function () {
-	                    return _react2['default'].createElement(_App2['default'], null);
-	                }
-	            );
-	        }
-	    }]);
+		_createClass(_default, [{
+			key: 'render',
+			value: function render() {
+				return _react2['default'].createElement(
+					_reactRedux.Provider,
+					{ store: (0, _redux.createStore)(_actionsAttendeeReducers2['default']) },
+					function () {
+						return _react2['default'].createElement(_App2['default'], null);
+					}
+				);
+			}
+		}]);
 
-	    return _default;
+		return _default;
 	})(_react2['default'].Component);
 
 	exports['default'] = _default;
@@ -10247,10 +10247,19 @@
 				return connectDropTarget(_react2['default'].createElement(
 					'div',
 					{ className: 'unassigned-attendee-list' },
-					unassignedAttendees.map(function (teamMember) {
-						return _react2['default'].createElement(_Attendee2['default'], { key: teamMember.id,
-							attendee: teamMember });
-					})
+					_react2['default'].createElement(
+						'div',
+						{ className: 'header' },
+						'Unassigned'
+					),
+					_react2['default'].createElement(
+						'div',
+						{ className: 'attendees' },
+						unassignedAttendees.map(function (teamMember) {
+							return _react2['default'].createElement(_Attendee2['default'], { key: teamMember.id,
+								attendee: teamMember });
+						})
+					)
 				));
 			}
 		}]);
@@ -10345,12 +10354,16 @@
 				var attendee = _props.attendee;
 				var connectDragSource = _props.connectDragSource;
 
-				var classes = (0, _classnames2['default'])('attendee', attendee.get('position') === _constantsAttendeePositions2['default'].COXSWAIN ? 'coxswain' : 'rower');
+				var isCoxswain = attendee.get('position') === _constantsAttendeePositions2['default'].COXSWAIN;
+
+				var classes = (0, _classnames2['default'])('attendee', isCoxswain ? 'coxswain' : 'rower');
+
+				var displayName = attendee.get('displayName');
 
 				return connectDragSource(_react2['default'].createElement(
 					'div',
 					{ className: classes },
-					attendee.get('displayName')
+					displayName
 				));
 			}
 		}]);
@@ -10551,7 +10564,7 @@
 						null,
 						_react2['default'].createElement(
 							'div',
-							{ className: 'boat-header' },
+							{ className: 'header' },
 							boat.get('title')
 						),
 						_react2['default'].createElement(
@@ -10656,10 +10669,10 @@
 
 				return connectDropTarget(_react2['default'].createElement(
 					'div',
-					{ className: 'boat-seat' },
+					{ className: 'seat' },
 					_react2['default'].createElement(
 						'div',
-						{ className: 'boat-seat-label' },
+						{ className: 'label' },
 						seatPosition
 					),
 					attendee
@@ -10714,7 +10727,9 @@
 			};
 		}
 
-		return _immutable2['default'].fromJS(seats);
+		return _immutable2['default'].fromJS(seats).sortBy(function (seat, seatKey) {
+			return seatKey === 'coxswain' ? 0 : Number(seatKey);
+		});
 	}
 
 	function getSeatLabel(seatPosition, boatType) {

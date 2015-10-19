@@ -5,9 +5,6 @@ import attendeeReducers from './actions/attendeeReducers';
 import { Provider } from 'react-redux';
 
 export default class extends React.Component {
-    constructor() {
-        super();
-    }
 	render() {
 	    return (
             <Provider store={createStore(attendeeReducers)}>

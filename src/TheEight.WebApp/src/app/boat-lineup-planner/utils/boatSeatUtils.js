@@ -18,7 +18,9 @@ export function createBoatSeats(boatType) {
 		};
 	}
 	
-	return Immutable.fromJS(seats);
+	return Immutable
+        .fromJS(seats)
+        .sortBy((seat, seatKey) => seatKey === 'coxswain' ? 0 : Number(seatKey));
 }
 
 function getSeatLabel(seatPosition, boatType) {

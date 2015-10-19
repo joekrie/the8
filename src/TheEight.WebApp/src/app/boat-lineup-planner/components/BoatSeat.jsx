@@ -27,8 +27,8 @@ export default class extends React.Component {
 				attendee={seat.get('attendee')} />;
 
 		return connectDropTarget(
-			<div className='boat-seat'>
-				<div className='boat-seat-label'>
+			<div className='seat'>
+				<div className='label'>
                     {seatPosition}
                  </div>
 				{attendee}

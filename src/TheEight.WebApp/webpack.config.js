@@ -11,7 +11,7 @@ module.exports = {
 	module: {
 	    loaders: [
             {
-                test: /\.js$/,
+                test: /\.js(x)?$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
                 query: {
@@ -25,13 +25,19 @@ module.exports = {
                 test: /\.scss$./,
                 exclude: /node_modules/,
                 loaders: ['style', 'css', 'sass']
+            },
+            {
+                test: /\.css$./,
+                exclude: /node_modules/,
+                loaders: ['style', 'css']
             }
 		]
 	},
 	resolve: {
 	    modulesDirectories: [
             'node_modules'
-	    ]
+	    ],
+	    extensions: ['', '.js', '.jsx']
 	},
 	externals: {
 	    react: 'React'
