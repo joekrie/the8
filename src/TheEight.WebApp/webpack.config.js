@@ -2,11 +2,11 @@ var path = require('path');
 
 module.exports = {
     entry: {
-        'boat-lineup-planner/client': './src/app/boat-lineup-planner/client',
-        'boat-lineup-planner/server': './src/app/boat-lineup-planner/server'
+        'boat-lineup-planner/client': './client/app/boat-lineup-planner/client',
+        'boat-lineup-planner/server': './client/app/boat-lineup-planner/server'
     },
 	output: {
-	    filename: './dist/app/[name].js'
+	    filename: './wwwroot/app/[name].js'
 	},
 	module: {
 	    loaders: [

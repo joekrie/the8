@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using Microsoft.AspNet.Authorization;
+using Microsoft.AspNet.Mvc;
 
 namespace TheEight.WebApp.Controllers
 {
-    [Route("")]
+    [Route("boat")]
     public class BoatLineupPlannerController : Controller
     {
+        [Authorize]
         public IActionResult Index()
         {
             return View();

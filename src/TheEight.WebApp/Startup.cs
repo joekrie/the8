@@ -11,25 +11,36 @@ using TheEight.Common.Database;
 using React.AspNet;
 using System;
 using Microsoft.Dnx.Runtime;
-using Microsoft.AspNet.Diagnostics;
+using Microsoft.AspNet.Http;
+using Microsoft.AspNet.Hosting;
+using System.Collections.Generic;
+using Microsoft.AspNet.Mvc;
 
 namespace TheEight.WebApp
 {
     public class Startup
     {
         private IConfiguration _config;
+        private bool _isDevelopment;
+
+        public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(appEnv.ApplicationBasePath)
+                .AddEnvironmentVariables();
+
+            _isDevelopment = env.IsDevelopment();
+
+            if (_isDevelopment)
+            {
+                builder.AddUserSecrets();
+            }
+            
+            _config = builder.Build();
+        }
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            var applicationEnvironment = services
-                .BuildServiceProvider()
-                .GetRequiredService<IApplicationEnvironment>();
-
-            _config = new ConfigurationBuilder(applicationEnvironment.ApplicationBasePath)
-                .AddEnvironmentVariables("APPSETTING_")
-                .AddUserSecrets()
-                .Build();
-
             services.AddOptions();
 
             services.Configure<GoogleSettings>(_config.GetSection("Google"));
@@ -38,7 +49,7 @@ namespace TheEight.WebApp
             services.AddSingleton(provider =>
             {
                 var settings = provider.GetRequiredService<IOptions<RavenSettings>>();
-                return DocumentStoreFactory.CreateAndInitialize(settings.Options);
+                return DocumentStoreFactory.CreateAndInitialize(settings.Value);
             });
 
             services.AddMvc()
@@ -47,6 +58,13 @@ namespace TheEight.WebApp
                     options.SerializerSettings.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb);
                     options.SerializerSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
                     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                })
+                .AddMvcOptions(options=>
+                {
+                    if (!_isDevelopment)
+                    {
+                        options.Filters.Add(new RequireHttpsAttribute());
+                    }
                 });
 
             services.AddReact();
@@ -56,14 +74,35 @@ namespace TheEight.WebApp
 
         public void Configure(IApplicationBuilder app)
         {
-            app.Properties["host.AppMode"] = "development";
-            app.UseErrorPage();
+            app.UseDeveloperExceptionPage();
+
+            const string cookieAuthScheme = "the8-auth-cookie";
+
+            app.UseCookieAuthentication(options =>
+            {
+                options.AuthenticationScheme = cookieAuthScheme;
+                options.CookieName = cookieAuthScheme;
+                options.CookieDomain = ".the8.io";
+                options.LoginPath = new PathString("/login");
+                options.LogoutPath = new PathString("/logout");
+                options.AutomaticAuthentication = true;
+            });
+
+            app.UseGoogleAuthentication(options =>
+            {
+                options.CallbackPath = "/google";
+                options.AuthenticationScheme = "google";
+                options.SignInScheme = cookieAuthScheme;
+                options.ClientId = "687186987154-tnt0pqj5661jf91317jndtjp6ec2n3pq.apps.googleusercontent.com";
+                options.ClientSecret = "9DgbfWF8KpobZxzVVGw8H6Au";
+                options.Scope.Clear();
+                options.Scope.Add("openid");
+            });
 
             app.UseReact(config =>
             {
                 config
-                    .SetUseHarmony(false)
-                    .SetReuseJavaScriptEngines(false)
+                    .SetLoadBabel(false)
                     .AddScriptWithoutTransform("~/app/boat-lineup-planner/server.js");
             });
 
