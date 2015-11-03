@@ -1,10 +1,10 @@
 ﻿@model TheEight.WebApp.Models.BoatLineupPlanner.BoatLineupPlannerVM
 
-@Html.React("Provider", new {})
+@Html.React("BoatLineupPlanner", new {})
 
 
 @section scripts{
-    <script src="https://fb.me/react-0.14.0.js"></script>
-    <script src="~/app/boat-lineup-planner/client.js"></script>
+    <script src="~/app/client-common.js"></script>
+    <script src="~/app/boat-lineup-planner.js"></script>
     @Html.ReactInitJavaScript()
 } 

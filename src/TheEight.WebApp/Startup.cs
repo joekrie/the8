@@ -6,14 +6,14 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using NodaTime;
 using NodaTime.Serialization.JsonNet;
-using TheEight.Common.Config;
-using TheEight.Common.Database;
 using React.AspNet;
 using System;
 using Microsoft.Dnx.Runtime;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Mvc;
+using TheEight.Common.Database;
+using TheEight.Common.Config;
 
 namespace TheEight.WebApp
 {
@@ -58,7 +58,7 @@ namespace TheEight.WebApp
                     options.SerializerSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
                     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 })
-                .AddMvcOptions(options=>
+                .AddMvcOptions(options =>
                 {
                     if (!_isDevelopment)
                     {
@@ -83,6 +83,7 @@ namespace TheEight.WebApp
                 options.CookieName = cookieAuthScheme;
                 options.LoginPath = new PathString("/login");
                 options.LogoutPath = new PathString("/logout");
+                options.ReturnUrlParameter = "next";
                 options.AutomaticAuthentication = true;
             });
 
@@ -101,7 +102,7 @@ namespace TheEight.WebApp
             {
                 config
                     .SetLoadBabel(false)
-                    .AddScriptWithoutTransform("~/app/boat-lineup-planner/server.js");
+                    .AddScriptWithoutTransform("~/app/server.js");
             });
 
             app.UseStaticFiles();

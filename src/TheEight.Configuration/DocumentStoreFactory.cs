@@ -17,6 +17,12 @@ namespace TheEight.Common.Database
             };
 
             docStore.Initialize();
+
+            return ConfigureInitializedDocumentStore(docStore);
+        }
+
+        public static IDocumentStore ConfigureInitializedDocumentStore(IDocumentStore docStore)
+        {
             docStore.ConfigureForNodaTime();
             docStore.Conventions.IdentityPartsSeparator = "-";
 

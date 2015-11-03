@@ -24,7 +24,7 @@
     "RavenDB.Client.NodaTime": "3.0.0",
     "RavenDB.Database": "3.0.3800",
     "React.AspNet": "2.0.0",
-    "TheEight.Common": "1.0.0-*",
+    "TheEight.Configuration": "1.0.0-*",
     "TheEight.Domain": "1.0.0-*"
   },
   "exclude": [

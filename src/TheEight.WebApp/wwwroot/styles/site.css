@@ -3,9 +3,7 @@
 html {
   box-sizing: border-box; }
 
-*,
-*::after,
-*::before {
+*, *::after, *::before {
   box-sizing: inherit; }
 
 body {
@@ -37,12 +35,9 @@ a {
   color: #477dca;
   text-decoration: none;
   transition: color 0.1s linear; }
-  a:active,
-  a:focus,
-  a:hover {
+  a:active, a:focus, a:hover {
     color: #2c5999; }
-  a:active,
-  a:focus {
+  a:active, a:focus {
     outline: none; }
 
 hr {
@@ -80,11 +75,7 @@ button {
   user-select: none;
   vertical-align: middle;
   white-space: nowrap; }
-  button:hover,
-  button:focus, input[type="button"]:hover,
-  input[type="button"]:focus, input[type="reset"]:hover,
-  input[type="reset"]:focus, input[type="submit"]:hover,
-  input[type="submit"]:focus,
+  button:hover, button:focus, input[type="button"]:hover, input[type="button"]:focus, input[type="reset"]:hover, input[type="reset"]:focus, input[type="submit"]:hover, input[type="submit"]:focus,
   button:hover,
   button:focus {
     background-color: #2c5999;
