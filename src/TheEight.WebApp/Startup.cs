@@ -13,7 +13,6 @@ using System;
 using Microsoft.Dnx.Runtime;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Hosting;
-using System.Collections.Generic;
 using Microsoft.AspNet.Mvc;
 
 namespace TheEight.WebApp
@@ -82,7 +81,6 @@ namespace TheEight.WebApp
             {
                 options.AuthenticationScheme = cookieAuthScheme;
                 options.CookieName = cookieAuthScheme;
-                options.CookieDomain = ".the8.io";
                 options.LoginPath = new PathString("/login");
                 options.LogoutPath = new PathString("/logout");
                 options.AutomaticAuthentication = true;

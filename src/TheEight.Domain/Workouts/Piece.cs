@@ -4,7 +4,7 @@ namespace TheEight.Domain.Workouts
 {
     public class Piece
     {
-        public PieceInfo PieceInfo { get; set; }
-        public IList<Result> Results { get; set; } = new List<Result>();
+        public IDictionary<string, Split> SplitsByRowerId { get; set; } = new Dictionary<string, Split>();
+        public PieceMagnitude Magnitude { get; set; }
     }
 }
