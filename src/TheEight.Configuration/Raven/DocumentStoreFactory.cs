@@ -3,7 +3,7 @@ using Raven.Client.Document;
 using Raven.Client.NodaTime;
 using TheEight.Common.Config;
 
-namespace TheEight.Common
+namespace TheEight.Common.Raven
 {
     public static class DocumentStoreFactory
     {

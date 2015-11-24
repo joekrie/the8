@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.OptionsModel;
 using Microsoft.Extensions.PlatformAbstractions;
 using TheEight.Common;
+using TheEight.Common.Raven;
 
 namespace TheEight.WebApp
 {
