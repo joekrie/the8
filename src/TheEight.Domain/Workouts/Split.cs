@@ -5,15 +5,16 @@ namespace TheEight.Domain.Workouts
 {
     public struct Split
     {
+        private static readonly Duration MinSplit = Duration.FromMinutes(1);
         private static readonly Duration MaxSplit = Duration.FromMinutes(5);
 
         private readonly Duration _split;
 
-        private Split(Duration splitDuration)
+        public Split(Duration splitDuration)
         {
-            if (splitDuration <= Duration.Zero)
+            if (splitDuration <= MinSplit)
             {
-                var msg = $"The argument {nameof(splitDuration)} must be positive.";
+                var msg = $"The argument {nameof(splitDuration)} must exceed {MinSplit}.";
                 throw new ArgumentOutOfRangeException(nameof(splitDuration), splitDuration, msg);
             }
 
@@ -26,7 +27,7 @@ namespace TheEight.Domain.Workouts
             _split = splitDuration;
         }
 
-        private Split(Duration totalDuration, decimal distance)
+        public Split(Duration totalDuration, decimal distance)
         {
             if (totalDuration <= Duration.Zero)
             {
@@ -41,6 +42,12 @@ namespace TheEight.Domain.Workouts
             }
 
             var split = CalculateSplit(totalDuration, distance);
+
+            if (split <= MinSplit)
+            {
+                var msg = $"The split calculated from the arguments {nameof(totalDuration)} and {nameof(distance)} must exceed {MinSplit}.";
+                throw new ArgumentException(msg);
+            }
 
             if (split > MaxSplit)
             {

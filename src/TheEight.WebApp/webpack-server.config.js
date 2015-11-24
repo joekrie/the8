@@ -9,8 +9,4 @@ config.output = {
     filename: './wwwroot/app/server.js'
 };
 
-config.externals = {
-    react: 'React'
-};
-
 module.exports = config;

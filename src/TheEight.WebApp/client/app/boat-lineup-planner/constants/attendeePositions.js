@@ -1,4 +1,2 @@
-export default {
-	ROWER: 'rower',
-	COXSWAIN: 'coxswain'
-}
+export const ROWER = 'rower';
+export const COXSWAIN = 'coxswain';

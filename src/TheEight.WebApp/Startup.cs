@@ -1,26 +1,26 @@
 ﻿using Microsoft.AspNet.Builder;
-using Microsoft.Framework.Configuration;
-using Microsoft.Framework.DependencyInjection;
-using Microsoft.Framework.OptionsModel;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using NodaTime;
 using NodaTime.Serialization.JsonNet;
 using React.AspNet;
 using System;
-using Microsoft.Dnx.Runtime;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Mvc;
-using TheEight.Common.Database;
+using Microsoft.Extensions.Configuration;
 using TheEight.Common.Config;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.OptionsModel;
+using Microsoft.Extensions.PlatformAbstractions;
+using TheEight.Common;
 
 namespace TheEight.WebApp
 {
     public class Startup
     {
-        private IConfiguration _config;
-        private bool _isDevelopment;
+        private readonly IConfiguration _config;
+        private readonly bool _isDevelopment;
 
         public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
         {
@@ -84,16 +84,18 @@ namespace TheEight.WebApp
                 options.LoginPath = new PathString("/login");
                 options.LogoutPath = new PathString("/logout");
                 options.ReturnUrlParameter = "next";
-                options.AutomaticAuthentication = true;
+                options.AutomaticAuthenticate = true;
             });
-
+            
             app.UseGoogleAuthentication(options =>
             {
                 options.CallbackPath = "/google";
                 options.AuthenticationScheme = "google";
                 options.SignInScheme = cookieAuthScheme;
+
                 options.ClientId = "687186987154-tnt0pqj5661jf91317jndtjp6ec2n3pq.apps.googleusercontent.com";
                 options.ClientSecret = "9DgbfWF8KpobZxzVVGw8H6Au";
+
                 options.Scope.Clear();
                 options.Scope.Add("openid");
             });
@@ -102,6 +104,7 @@ namespace TheEight.WebApp
             {
                 config
                     .SetLoadBabel(false)
+                    .SetLoadReact(false)
                     .AddScriptWithoutTransform("~/app/server.js");
             });
 

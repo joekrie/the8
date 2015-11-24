@@ -1,4 +1,12 @@
 {
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:61583/",
+      "sslPort": 0
+    }
+  },
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
@@ -11,7 +19,10 @@
       "commandName": "web",
       "launchBrowser": true,
       "launchUrl": "http://local-test.the8.io",
-      "sdkVersion": "dnx-clr-win-x86.1.0.0-beta8"
+      "environmentVariables": {
+        "Hosting:Environment": "Development"
+      },
+      "sdkVersion": "dnx-clr-win-x86.1.0.0-rc1-final"
     }
   }
 }

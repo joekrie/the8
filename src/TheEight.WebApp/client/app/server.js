@@ -1,1 +1,2 @@
-﻿require('expose?BoatLineupPlanner!./boat-lineup-planner/App.jsx');
+﻿import 'expose?React!React';
+import 'expose?BoatLineupPlanner!./boat-lineup-planner/App.jsx';

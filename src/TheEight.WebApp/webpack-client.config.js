@@ -4,13 +4,13 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var config = Object.create(baseConfig);
 
 config.entry = {
-    'boat-lineup-planner': './client/app/boat-lineup-planner/main.js',
-    //'erg-result-submitter': './client/app/erg-result-submitter/main.js'
+    'boat-lineup-planner': './client/app/boat-lineup-planner/client.js',
+    'erg-result-submitter': './client/app/erg-result-submitter/client.js'
 };
 
 config.plugins.push(
     new ExtractTextPlugin('wwwroot/styles/app.css', { allChunks: true }),
-    new webpack.optimize.CommonsChunkPlugin('./wwwroot/app/client-common.js')
+    new webpack.optimize.CommonsChunkPlugin('./wwwroot/app/client/common.js')
 );
 
 config.module.loaders.unshift({
@@ -20,7 +20,11 @@ config.module.loaders.unshift({
 });
 
 config.output = {
-    filename: './wwwroot/app/[name].js'
+    filename: './wwwroot/app/client/[name].js'
+};
+
+config.externals = {
+    react: 'React'
 };
 
 module.exports = config;

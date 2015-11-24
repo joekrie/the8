@@ -1,3 +1,1 @@
-export default {
-	ATTENDEE: 'attendee'
-};
+export const ATTENDEE = 'attendee';
