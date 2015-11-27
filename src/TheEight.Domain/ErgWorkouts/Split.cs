@@ -1,9 +1,9 @@
-using NodaTime;
 using System;
+using NodaTime;
 
-namespace TheEight.Domain.Workouts
+namespace TheEight.Domain.ErgWorkouts
 {
-    public struct Split
+    public struct Split : IComparable<Split>, IComparable<Duration>
     {
         private static readonly Duration MinSplit = Duration.FromMinutes(1);
         private static readonly Duration MaxSplit = Duration.FromMinutes(5);
@@ -88,6 +88,31 @@ namespace TheEight.Domain.Workouts
         public static bool operator !=(Split x, Split y)
         {
             return !x.Equals(y);
+        }
+
+        public static bool operator >(Split x, Split y)
+        {
+            return Compare(x, y) > 0;
+        }
+
+        public static bool operator <(Split x, Split y)
+        {
+            return Compare(x, y) < 0;
+        }
+
+        public int CompareTo(Split other)
+        {
+            return _split.CompareTo(other._split);
+        }
+
+        public static int Compare(Split x, Split y)
+        {
+            return x._split.CompareTo(y._split);
+        }
+
+        public int CompareTo(Duration other)
+        {
+            return _split.CompareTo(other);
         }
 
         public override bool Equals(object obj)

@@ -1,6 +1,6 @@
 using NodaTime;
 
-namespace TheEight.Domain.Workouts
+namespace TheEight.Domain.ErgWorkouts
 {
     public class WorkoutInfo
     {

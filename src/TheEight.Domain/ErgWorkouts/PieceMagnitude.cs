@@ -1,7 +1,7 @@
 using System;
 using NodaTime;
 
-namespace TheEight.Domain.Workouts
+namespace TheEight.Domain.ErgWorkouts
 {
     public struct PieceMagnitude
     {

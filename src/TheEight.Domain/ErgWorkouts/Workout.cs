@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace TheEight.Domain.Workouts
+namespace TheEight.Domain.ErgWorkouts
 {
     public class Workout
     {

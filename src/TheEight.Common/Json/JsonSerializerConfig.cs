@@ -4,7 +4,7 @@ using Newtonsoft.Json.Serialization;
 using NodaTime;
 using NodaTime.Serialization.JsonNet;
 
-namespace TheEight.Common
+namespace TheEight.Common.Json
 {
     public class JsonSerializerConfig
     {

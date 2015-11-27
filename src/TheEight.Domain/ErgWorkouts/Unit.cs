@@ -1,4 +1,4 @@
-namespace TheEight.Domain.Workouts
+namespace TheEight.Domain.ErgWorkouts
 {
     public enum Unit
     {

@@ -1,7 +1,7 @@
 ﻿using Raven.Client;
 using Raven.Client.Document;
 using Raven.Client.NodaTime;
-using TheEight.Common.Config;
+using TheEight.Common.OptionsModels;
 
 namespace TheEight.Common.Raven
 {

@@ -9,11 +9,11 @@ using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Configuration;
-using TheEight.Common.Config;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.OptionsModel;
 using Microsoft.Extensions.PlatformAbstractions;
 using TheEight.Common;
+using TheEight.Common.OptionsModels;
 using TheEight.Common.Raven;
 
 namespace TheEight.WebApp

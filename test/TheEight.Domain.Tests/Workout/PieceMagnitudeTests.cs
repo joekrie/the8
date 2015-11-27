@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TheEight.Domain.ErgWorkouts;
 using Xunit;
-using TheEight.Domain.Workouts;
 
 namespace TheEight.Domain.Tests
 {

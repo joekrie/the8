@@ -10,7 +10,6 @@ namespace TheEight.Domain.Teams
         public string Name { get; set; }
         public Interval ActivePeriod { get; set; }
 
-        public IList<string> RowerUserIds { get; set; } = new List<string>();
-        public IList<string> CoachUserIds { get; set; } = new List<string>();
+        public IList<TeamMember> TeamMembers { get; set; } = new List<TeamMember>();
     }
 }

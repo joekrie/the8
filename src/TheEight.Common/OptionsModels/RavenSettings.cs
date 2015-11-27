@@ -1,4 +1,4 @@
-namespace TheEight.Common.Config
+namespace TheEight.Common.OptionsModels
 {
     public class RavenSettings
     {
