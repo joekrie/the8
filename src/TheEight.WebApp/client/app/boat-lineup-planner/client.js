@@ -1,2 +1,2 @@
-require('expose?BoatLineupPlanner!./App');
-require('./App.scss');
+import 'expose?BoatLineupPlanner!./App';
+import './App.scss';

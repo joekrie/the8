@@ -1,38 +1,27 @@
-import React from 'react';
-import { DropTarget } from 'react-dnd';
 import Attendee from './Attendee';
-import dndTypes from '../constants/dndTypes';
 import { seatIsEmpty } from '../utils/boatSeatUtils';
 
-const spec = {
-	drop: (props, monitor) => {
-		const { attendeeId } = monitor.getItem();
-		const { onAssignAttendee, boatKey, seatPosition } = props;		
-		onAssignAttendee(attendeeId, boatKey, seatPosition);
-	},
-	canDrop: props => seatIsEmpty(props.seat)
-};
+function createAttendee(seat) {
+    if (seatIsEmpty(seat)) {
+        return null;
+    }
 
-const collect = (connect, monitor) => ({
-	connectDropTarget: connect.dropTarget()
-});
+    const attendeeId = seat.getIn(['attendee', 'id']);
+    const attendee = seat.get('attendee');
 
-@DropTarget(dndTypes.ATTENDEE, spec, collect)
-export default class extends React.Component {
-	render() {
-		const { seat, seatPosition, connectDropTarget } = this.props;
-		const attendee = seatIsEmpty(seat) 
-			? null 
-			: <Attendee key={seat.getIn(['attendee', 'id'])} 
-				attendee={seat.get('attendee')} />;
+    return <Attendee key={attendeeId} attendee={attendee} />;
+}
 
-		return connectDropTarget(
-			<div className='seat'>
-				<div className='label'>
-                    {seatPosition}
-                 </div>
-				{attendee}
-			</div>
-		);
-	}
+export default function(props) {		
+    const { seat, seatPosition } = props;
+    const attendee = createAttendee(seat);
+
+    return (
+        <div className='seat'>
+            <div className='label'>
+                {seatPosition}
+            </div>
+            {attendee}
+        </div>
+    );
 }

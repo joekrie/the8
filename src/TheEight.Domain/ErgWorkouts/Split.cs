@@ -137,24 +137,24 @@ namespace TheEight.Domain.ErgWorkouts
             return _split.GetHashCode();
         }
 
-        private static Duration CalculateSplit(Duration totalDuration, decimal distance)
-        {
-            var fiveHundreds = decimal.Divide(distance, 500m);
-            var splitTicks = decimal.Divide(totalDuration.Ticks, fiveHundreds);
-            return Duration.FromTicks((long)splitTicks);
-        }
-
-        private static Duration CalculateDuration(Duration splitDuration, decimal distance)
+        public static Duration CalculateDuration(Duration splitDuration, decimal distance)
         {
             var fiveHundreds = decimal.Divide(distance, 500m);
             var durationTicks = splitDuration.Ticks * fiveHundreds;
             return Duration.FromTicks((long)durationTicks);
         }
 
-        private static decimal CalculateDistance(Duration splitDuration, Duration totalDuration)
+        public static decimal CalculateDistance(Duration splitDuration, Duration totalDuration)
         {
             var factor = decimal.Divide(totalDuration.Ticks, splitDuration.Ticks);
             return factor * 500m;
+        }
+
+        public static Duration CalculateSplit(Duration totalDuration, decimal distance)
+        {
+            var fiveHundreds = decimal.Divide(distance, 500m);
+            var splitTicks = decimal.Divide(totalDuration.Ticks, fiveHundreds);
+            return Duration.FromTicks((long)splitTicks);
         }
     }
 }

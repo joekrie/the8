@@ -35,7 +35,7 @@ namespace TheEight.Domain.Practices
 
             pracBoat.Rowers = Enumerable
                 .Range(1, boatTemplate.RowerCount)
-                .ToDictionary(i => i, i => (Attendee)null);
+                .ToDictionary(i => i, i => (Attendee) null);
 
             return pracBoat;
         }

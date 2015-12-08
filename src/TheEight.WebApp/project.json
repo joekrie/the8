@@ -5,6 +5,7 @@
   "dependencies": {
     "Microsoft.AspNet.Authentication": "1.0.0-rc1-final",
     "Microsoft.AspNet.Authentication.Cookies": "1.0.0-rc1-final",
+    "Microsoft.AspNet.Authentication.Facebook": "1.0.0-rc1-final",
     "Microsoft.AspNet.Authentication.Google": "1.0.0-rc1-final",
     "Microsoft.AspNet.Authentication.OAuth": "1.0.0-rc1-final",
     "Microsoft.AspNet.Diagnostics": "1.0.0-rc1-final",
@@ -22,6 +23,7 @@
     "RavenDB.Client.NodaTime": "3.0.0",
     "RavenDB.Database": "3.0.3800",
     "React.AspNet": "2.1.1",
+    "System.Linq": "4.0.1-beta-23516",
     "TheEight.Common": "1.0.0-*",
     "TheEight.Domain": "1.0.0-*"
   },

@@ -22,11 +22,6 @@ namespace TheEight.WebApp.Controllers
         [HttpPost("")]
         public IActionResult LoginWithProvider(string provider)
         {
-            if (HttpContext.Request.Host.Value != "accounts.the8.io")
-            {
-                return new BadRequestResult();
-            }
-
             return new ChallengeResult(provider);
         }
     }

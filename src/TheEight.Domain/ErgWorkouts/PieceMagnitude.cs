@@ -7,8 +7,7 @@ namespace TheEight.Domain.ErgWorkouts
     {
         private readonly decimal _distance;
         private readonly Duration _duration;
-        private readonly PieceType _pieceType;
-        
+
         private PieceMagnitude(decimal meters)
         {
             if (meters <= 0)
@@ -19,7 +18,7 @@ namespace TheEight.Domain.ErgWorkouts
             
             _distance = meters;
             _duration = Duration.Zero;
-            _pieceType = PieceType.FixedDistance;
+            Type = PieceType.FixedDistance;
         }
         
         private PieceMagnitude(Duration duration)
@@ -32,7 +31,7 @@ namespace TheEight.Domain.ErgWorkouts
             
             _distance = 0;
             _duration = duration;
-            _pieceType = PieceType.FixedDuration;
+            Type = PieceType.FixedDuration;
         }
 
         public static PieceMagnitude FromFixedMeters(decimal meters)
@@ -45,12 +44,13 @@ namespace TheEight.Domain.ErgWorkouts
             return new PieceMagnitude(duration);
         }
         
-        public PieceType Type => _pieceType;
-        public decimal? DistanceInMeters => _pieceType == PieceType.FixedDistance ? _distance : new decimal?();
-        public Duration? TotalDuration => _pieceType == PieceType.FixedDuration ? _duration : new Duration?();
+        public PieceType Type { get; }
+
+        public decimal? DistanceInMeters => Type == PieceType.FixedDistance ? _distance : new decimal?();
+        public Duration? TotalDuration => Type == PieceType.FixedDuration ? _duration : new Duration?();
                 
         public static bool operator ==(PieceMagnitude x, PieceMagnitude y)
-        {            
+        {
             return x.Equals(y);
         }
 
@@ -67,7 +67,7 @@ namespace TheEight.Domain.ErgWorkouts
 
                 return other._distance == _distance
                     && other._duration == _duration
-                    && other._pieceType == _pieceType;
+                    && other.Type == Type;
             }
 
             return false;
@@ -75,7 +75,7 @@ namespace TheEight.Domain.ErgWorkouts
 
         public override int GetHashCode()
         {
-            return new { _distance, _duration, _pieceType }.GetHashCode();
+            return new { _distance, _duration, Type }.GetHashCode();
         }
     }
 }

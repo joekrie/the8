@@ -1,49 +1,37 @@
 import React from 'react';
 import { createStore } from 'redux';
-import { Provider, connect } from 'react-redux';
+import { Provider, connect, bindActionCreators } from 'react-redux';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-import Immutable from 'immutable';
 
 import UnassignedAttendeeList from './components/UnassignedAttendeeList';
 import BoatList from './components/BoatList';
 import stateConnector from './stateConnector';
-import Reducer from '../Reducer';
-import initialState from './fakeInitialState';
-import assignAttendee from './actions/assignAttendee';
-import unassignAttendee from './actions/unassignAttendee';
+import actionCreators from './actionCreators';
+import reducer from './reducer';
 
 @DragDropContext(HTML5Backend)
 class App extends React.Component {
 	render() {
-	    const { dispatch, unassignedAttendees, boats, onAssignAttendee, onUnassignAttendee, 
-            onMoveAttendee } = this.props;
+	    const { dispatch, unassignedAttendees, boats } = this.props;
+	    const boundActionCreators = bindActionCreators(actionCreators, dispatch);
 
 		return (
 			<div className='boat-lineup-planner'>
-				<UnassignedAttendeeList 
-	                unassignedAttendees={unassignedAttendees}
-					onUnassignAttendee={onUnassignAttendee} />
-				<BoatList 
-					onAssignAttendee={onAssignAttendee}
-					onMoveAttendee={onMoveAttendee}
-					boats={boats} />
+				<UnassignedAttendeeList unassignedAttendees={unassignedAttendees} {...boundActionCreators} />
+				<BoatList boats={boats} {...boundActionCreators} />
 			</div>
 		);
 	}
 }
 
-const reducer = new Reducer(initialState);
-reducer.register(assignAttendee);
-reducer.register(unassignAttendee);
-
-const AppProvider = connect(stateConnector, reducer.bind)(App);
+const ConnectedApp = connect(stateConnector)(App);
 
 export default class extends React.Component {
     render() {
         return (
-            <Provider store={createStore(reducer.reduce)}>
-                <AppProvider/>
+            <Provider store={createStore(reducer)}>
+                <ConnectedApp/>
             </Provider>
 		);
     }

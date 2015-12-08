@@ -7,12 +7,17 @@ var concat = require('gulp-concat');
 var gutil = require('gulp-util');
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
+var jest = require('jest-cli');
 
 var webpackServerConfig = require('./webpack-server.config.js');
 var webpackClientConfig = require('./webpack-client.config.js');
 
 gulp.task('default', ['sass', 'webpack-server', 'webpack-client']);
 gulp.task('watch', ['sass:watch']);
+
+gulp.task('jest', function() {
+    
+});
 
 gulp.task('sass', function() {
     return gulp.src('client/styles/site.scss')

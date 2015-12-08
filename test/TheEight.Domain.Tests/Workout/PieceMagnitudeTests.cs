@@ -1,12 +1,9 @@
-﻿using NodaTime;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
+using NodaTime;
 using TheEight.Domain.ErgWorkouts;
 using Xunit;
 
-namespace TheEight.Domain.Tests
+namespace TheEight.Domain.Tests.Workout
 {
     public class PieceMagnitudeTests
     {
@@ -27,5 +24,17 @@ namespace TheEight.Domain.Tests
             Assert.Throws<ArgumentOutOfRangeException>(
                 () => PieceMagnitude.FromFixedMeters(meters));
         }
+
+        [Fact]
+        public void EqualWhenDurationSame()
+        {
+            var duration = Duration.FromSeconds(1);
+            var x = PieceMagnitude.FromFixedTotalDuration(duration);
+            var y = PieceMagnitude.FromFixedTotalDuration(duration);
+
+            Assert.True(x == y);
+        }
+
+
     }
 }
