@@ -3,6 +3,7 @@ using React.AspNet;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
+using TheEight.Common.Configuration;
 
 namespace TheEight.WebApp
 {
@@ -11,20 +12,10 @@ namespace TheEight.WebApp
         private readonly IConfiguration _config;
         private readonly bool _isDevelopment;
 
-        public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
+        public Startup(IHostingEnvironment hostEnv, IApplicationEnvironment appEnv)
         {
-            var configBuilder = new ConfigurationBuilder()
-                .SetBasePath(appEnv.ApplicationBasePath)
-                .AddEnvironmentVariables();
-
-            _isDevelopment = env.IsDevelopment();
-
-            if (_isDevelopment)
-            {
-                configBuilder.AddUserSecrets();
-            }
-            
-            _config = configBuilder.Build();
+            _isDevelopment = hostEnv.IsDevelopment();
+            _config = ConfigurationFactory.Create(appEnv.ApplicationBasePath, _isDevelopment);
         }
 
         public void Configure(IApplicationBuilder app)

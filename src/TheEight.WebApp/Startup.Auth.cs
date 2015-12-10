@@ -4,10 +4,10 @@ using Microsoft.AspNet.Authentication.OAuth;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.OptionsModel;
-using TheEight.Common.Authentication;
-using TheEight.Common.OptionsModels;
 using TheEight.WebApp.Services;
 using Microsoft.Extensions.DependencyInjection;
+using TheEight.Common.Configuration.Models;
+using TheEight.WebApp.Authentication;
 
 namespace TheEight.WebApp
 {

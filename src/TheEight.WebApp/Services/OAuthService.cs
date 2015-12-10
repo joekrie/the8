@@ -2,9 +2,8 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Authentication.OAuth;
-using TheEight.Common.Authentication;
-using TheEight.Common.Services;
 using System.Linq;
+using TheEight.WebApp.Authentication;
 
 namespace TheEight.WebApp.Services
 {

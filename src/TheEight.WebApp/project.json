@@ -24,8 +24,7 @@
     "RavenDB.Database": "3.0.3800",
     "React.AspNet": "2.1.1",
     "System.Linq": "4.0.1-beta-23516",
-    "TheEight.Common": "1.0.0-*",
-    "TheEight.Domain": "1.0.0-*"
+    "TheEight.Common": "1.0.0-*"
   },
   "exclude": [
     "dist",
@@ -41,7 +40,7 @@
     "**.user",
     "**.vspscc"
   ],
-  "userSecretsId": "TheEightSuite",
+  "userSecretsId": "TheEight",
   "version": "1.0.0-beta8",
   "webroot": "wwwroot"
 }
