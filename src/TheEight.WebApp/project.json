@@ -3,6 +3,8 @@
     "web": "Microsoft.AspNet.Server.Kestrel --server Microsoft.AspNet.Server.WebListener --server.urls http://local-test.the8.io"
   },
   "dependencies": {
+    "Autofac": "4.0.0-rc1-177",
+    "Autofac.Extensions.DependencyInjection": "4.0.0-rc1-177",
     "Microsoft.AspNet.Authentication": "1.0.0-rc1-final",
     "Microsoft.AspNet.Authentication.Cookies": "1.0.0-rc1-final",
     "Microsoft.AspNet.Authentication.Facebook": "1.0.0-rc1-final",

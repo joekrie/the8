@@ -15,7 +15,7 @@ namespace TheEight.WebApp
         public Startup(IHostingEnvironment hostEnv, IApplicationEnvironment appEnv)
         {
             _isDevelopment = hostEnv.IsDevelopment();
-            _config = ConfigurationFactory.Create(appEnv.ApplicationBasePath, _isDevelopment);
+            _config = ConfigurationHelpers.Create(appEnv.ApplicationBasePath, _isDevelopment);
         }
 
         public void Configure(IApplicationBuilder app)

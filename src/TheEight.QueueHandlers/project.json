@@ -5,8 +5,11 @@
   "tags": [ "" ],
   "projectUrl": "",
   "licenseUrl": "",
-  
+
   "dependencies": {
+    "Autofac": "4.0.0-rc1-177",
+    "Autofac.Extensions.DependencyInjection": "4.0.0-rc1-177",
+    "Autofac.Extras.AttributeMetadata": "4.0.0",
     "Microsoft.AspNet.Hosting.Abstractions": "1.0.0-rc1-final",
     "Microsoft.Azure.WebJobs": "1.1.0",
     "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
@@ -14,7 +17,10 @@
     "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
     "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc1-final",
     "TheEight.Common": "1.0.0-*",
-    "Twilio": "4.4.1"
+    "Twilio": "4.4.1",
+    "Twilio.TwiML": "3.4.0",
+    "RestSharp": "105.2.2",
+    "Sendgrid": "6.3.0"
   },
 
   "commands": {

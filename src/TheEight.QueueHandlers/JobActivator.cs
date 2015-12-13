@@ -1,21 +1,20 @@
-﻿using System;
+﻿using Autofac;
 using Microsoft.Azure.WebJobs.Host;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace TheEight.QueueHandlers
 {
     public class JobActivator : IJobActivator
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IContainer _autofacContainer;
 
-        public JobActivator(IServiceProvider serviceProvider)
+        public JobActivator(IContainer autofacContainer)
         {
-            _serviceProvider = serviceProvider;
+            _autofacContainer = autofacContainer;
         }
 
         public T CreateInstance<T>()
         {
-            return _serviceProvider.GetRequiredService<T>();
+            return _autofacContainer.Resolve<T>();
         }
     }
 }

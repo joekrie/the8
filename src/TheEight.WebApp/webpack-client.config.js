@@ -1,5 +1,5 @@
 var webpack = require('webpack');
-var baseConfig = require('./webpack-base.config.js');
+var baseConfig = require('./client/build/webpackBaseConfig.js');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var config = Object.create(baseConfig);
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Raven.Client;
-using TheEight.Common.Domain.Teams;
+using TheEight.Common.Domain.Accounts;
 using TheEight.Common.RavenDb.Indexes;
 
 namespace TheEight.WebApp.Services
@@ -19,8 +19,8 @@ namespace TheEight.WebApp.Services
         {
             var user = await _ravenSession
                 .Query<User>(UserByLoginIndex.Name)
-                .SingleOrDefaultAsync(u => u.LoginProvider == loginProvider
-                                           && u.LoginIdentifier == loginIdentifier);
+                .SingleOrDefaultAsync(u => u.AccountInfo.LoginProvider == loginProvider
+                                           && u.AccountInfo.LoginIdentifier == loginIdentifier);
 
             if (user == null)
             {
@@ -35,8 +35,9 @@ namespace TheEight.WebApp.Services
             private static string ErrorMessage(string loginProvider, string loginIdentifier) =>
                 $"Could not find user by login in database with provider {loginProvider} and identifier {loginIdentifier}";
 
-            public UserNotFoundByLoginException(string loginProvider, string loginIdentifier) 
-                : base(ErrorMessage(loginProvider, loginIdentifier)) { }
+            public UserNotFoundByLoginException(string loginProvider, string loginIdentifier)
+                : base(ErrorMessage(loginProvider, loginIdentifier))
+            { }
         }
     }
 }

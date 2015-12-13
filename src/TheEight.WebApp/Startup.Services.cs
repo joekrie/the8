@@ -1,14 +1,14 @@
 ﻿using System;
+using System.Reflection;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
-using NodaTime;
 using React.AspNet;
-using TheEight.Common;
+using TheEight.Common.Autofac.Modules;
 using TheEight.WebApp.Services;
-using NodaTime.Serialization.JsonNet;
+using TheEight.Common.Configuration;
+using TheEight.Common.Json;
 
 namespace TheEight.WebApp
 {
@@ -16,11 +16,18 @@ namespace TheEight.WebApp
     {
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            var autofacBuilder = new ContainerBuilder();
+            
             services.AddConfigurationServices(_config);
-            services.AddRavenDbServices();
 
-            // todo: scan assembly for services
-            services.AddTransient<UserService>();
+            autofacBuilder.RegisterModule(new RavenDbModule());
+
+            var thisAssembly = Assembly.GetExecutingAssembly();
+
+            autofacBuilder
+                .RegisterAssemblyTypes(thisAssembly)
+                .Where(t => t.IsInNamespaceOf<UserService>())
+                .AsSelf();
 
             services
                 .AddMvc()
@@ -35,7 +42,9 @@ namespace TheEight.WebApp
 
             services.AddReact();
 
-            return services.BuildServiceProvider();
+            autofacBuilder.Populate(services);
+            var container = autofacBuilder.Build();
+            return container.Resolve<IServiceProvider>();
         }
     }
 }

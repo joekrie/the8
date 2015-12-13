@@ -1,21 +1,15 @@
-﻿using System.IO;
-using System.Net.Mail;
+﻿using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
+using TheEight.Common.Domain.Messaging;
 
 namespace TheEight.QueueHandlers.Handlers
 {
     public class MessageHandler
     {
-        private readonly SmtpClient _smtpClient;
-        
-        public MessageHandler(SmtpClient smtpClient)
-        {
-            _smtpClient = smtpClient;
-        }
 
-        public void SendMessage([QueueTrigger("messages")] string message)
+        public async Task ProcessMessageBatchAsync([QueueTrigger("messages")] MessageBatch batch)
         {
-            _smtpClient.Send("joe@the8.io", "joe.kriefall@gmail.com", "Sent by a WebJob!!!", message);
+
         }
     }
 }

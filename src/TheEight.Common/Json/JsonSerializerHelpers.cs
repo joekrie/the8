@@ -4,17 +4,10 @@ using Newtonsoft.Json.Serialization;
 using NodaTime;
 using NodaTime.Serialization.JsonNet;
 
-namespace TheEight.Common
+namespace TheEight.Common.Json
 {
     public static class JsonSerializerHelpers
     {
-        public static JsonSerializer CreateJsonSerializer(bool prettyPrint)
-        {
-            var settings = new JsonSerializerSettings();
-            settings.Configure(prettyPrint);
-            return JsonSerializer.Create(settings);
-        }
-
         public static JsonSerializerSettings Configure(this JsonSerializerSettings settings, bool prettyPrint)
         {
             settings.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb);
