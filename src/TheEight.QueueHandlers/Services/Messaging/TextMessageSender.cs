@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Autofac.Extras.AttributeMetadata;
 using Microsoft.Extensions.OptionsModel;
 using TheEight.Common.Configuration.Models;
-using TheEight.Common.Domain.Messaging;
 using Twilio;
 
 namespace TheEight.QueueHandlers.Services.Messaging
@@ -20,12 +17,11 @@ namespace TheEight.QueueHandlers.Services.Messaging
             _phoneNumber = twilioSettings.Value.PhoneNumber;
         }
 
-        public Task SendTextMessageAsync(IEnumerable<string> recipientPhoneNumbers, 
-            TextMessageContent textMessageContent)
+        public Task SendTextMessageAsync(IEnumerable<string> recipientPhoneNumbers, string message)
         {
             foreach (var recipient in recipientPhoneNumbers)
             {
-                _twilioClient.SendMessage(_phoneNumber, recipient, textMessageContent.Body);
+                _twilioClient.SendMessage(_phoneNumber, recipient, message);
             }
 
             return Task.FromResult(0);

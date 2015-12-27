@@ -7,6 +7,6 @@ namespace TheEight.Common.Domain.Messaging
     {
         None = 0,
         Email = 1,
-        Sms = 2
+        TextMessage = 2
     }
 }

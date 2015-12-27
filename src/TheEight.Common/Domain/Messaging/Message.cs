@@ -1,8 +1,8 @@
-namespace TheEight.Common.Domain.Messaging
+namespace TheEight.Common.Database.Entities.Messaging
 {
     public class Message
     {
         public EmailContent Email { get; set; }
-        public TextMessageContent TextMessage { get; set; }
+        public string TextMessage { get; set; }
     }
 }

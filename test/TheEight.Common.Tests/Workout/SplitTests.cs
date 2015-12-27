@@ -1,6 +1,6 @@
 ﻿using NodaTime;
 using System;
-using TheEight.Domain.ErgWorkouts;
+using TheEight.Common.Domain.ErgWorkouts;
 using Xunit;
 
 namespace TheEight.Domain.Tests.Workout

@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Raven.Client;
-using TheEight.Common.Domain.Accounts;
+using TheEight.Common.Database.Entities.Accounts;
+using TheEight.Common.Database.Entities.Messaging;
 using TheEight.Common.Domain.Messaging;
 
 namespace TheEight.QueueHandlers.Services.Messaging
@@ -16,9 +17,10 @@ namespace TheEight.QueueHandlers.Services.Messaging
         }
 
         public IDictionary<string, MessageMethod> GetMessageMethod(IEnumerable<string> userId, 
-            NotificationType notificationType)
+            MessageType messageType)
         {
-            _ravenSession.Query<User>()
+            _ravenSession.Query<User>();
+            return new Dictionary<string, MessageMethod>();
         }
     }
 

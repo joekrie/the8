@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Raven.Client;
-using TheEight.Common.Domain.Accounts;
+using TheEight.Common.Database.Entities.Accounts;
 using TheEight.Common.RavenDb.Indexes;
 
 namespace TheEight.WebApp.Services

@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="6e575638-7a39-4114-83ee-3fa6723345b4" ChangeDateTime="12/26/2015 19:48:22">
+    <Property Name="ElementName" Value="[WaterEvents].[SquadMemberAttendee].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[WaterEvents].[SquadMemberAttendee]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EventId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8abc4cbb-4a8e-46d1-8827-013775a40000" ChangeDateTime="12/26/2015 19:54:57">
+    <Property Name="ElementName" Value="[Clubs].[SquadMember].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Clubs].[SquadMember]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SquadMemberId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8888a28e-0a6c-4111-af6b-cccb4e99eae2" ChangeDateTime="12/26/2015 20:00:08">
+    <Property Name="ElementName" Value="[WaterEvents].[AnonymousAttendees].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[WaterEvents].[AnonymousAttendees]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AnonymousAttendeeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0b0a71f3-a641-4516-94fc-89f5deb9797d" ChangeDateTime="12/26/2015 20:28:49">
+    <Property Name="ElementName" Value="[Accounts].[Users].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Accounts].[Users]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5813ac58-2b5d-48c1-90b6-957e87baed76" ChangeDateTime="12/26/2015 20:33:12">
+    <Property Name="ElementName" Value="[Clubs].[Clubs].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Clubs].[Clubs]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ClubId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6bf5bed0-8f10-4fbe-b550-73c296154181" ChangeDateTime="12/26/2015 20:33:59">
+    <Property Name="ElementName" Value="[Clubs].[ClubMembers].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Clubs].[ClubMembers]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ClubMemberId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="eaaf5b96-3580-4dba-9912-e33cabf295da" ChangeDateTime="12/26/2015 20:34:16">
+    <Property Name="ElementName" Value="[Clubs].[ClubMembers].[ClubMemberId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Clubs].[ClubMembers]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ClubId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="838f0934-00af-4b4f-a27d-e31eacbdbdd0" ChangeDateTime="12/26/2015 20:34:25">
+    <Property Name="ElementName" Value="[Clubs].[ClubMembers].[ClubMember]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Clubs].[ClubMembers]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1f9fe42f-16ae-4c90-99a4-12a184d89319" ChangeDateTime="12/26/2015 20:35:52">
+    <Property Name="ElementName" Value="[WaterEvents].[ClubMemberAttendees].[SquadMemberId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[WaterEvents].[ClubMemberAttendees]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ClubMemberId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="482a8421-b883-4e64-b8de-df89715ddd96" ChangeDateTime="12/26/2015 20:36:35">
+    <Property Name="ElementName" Value="[WaterEvents].[RegisteredAttendees].[ClubMemberId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[WaterEvents].[RegisteredAttendees]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1d919cd9-43a5-4022-8233-c98f4afb47ab" ChangeDateTime="12/26/2015 20:40:51">
+    <Property Name="ElementName" Value="[Clubs].[SquadMembers].[SquadMemberId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Clubs].[SquadMembers]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UseId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fee169c8-8228-4771-b5f4-f24264a01267" ChangeDateTime="12/26/2015 20:40:55">
+    <Property Name="ElementName" Value="[Clubs].[SquadMembers].[UseId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Clubs].[SquadMembers]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a65ecea6-b71f-44f1-8abe-d72952d6b59e" ChangeDateTime="12/26/2015 20:57:26">
+    <Property Name="ElementName" Value="[WaterEvents].[AnonymousAttendees].[AnonymousAttendeeId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[WaterEvents].[AnonymousAttendees]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AttendeeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d774b879-4955-45db-84be-f15a313f4f8d" ChangeDateTime="12/27/2015 07:37:09">
+    <Property Name="ElementName" Value="[WaterEvents].[EventBoats].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[WaterEvents].[EventBoats]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EventBoatId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="bc90fc83-ed4c-4a4e-8171-31f5c755bfca" ChangeDateTime="12/27/2015 07:37:57">
+    <Property Name="ElementName" Value="[WaterEvents].[ClubBoats].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[WaterEvents].[ClubBoats]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ClubBoatId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5b639ff6-c8bf-48ba-ade6-0292d375a4bd" ChangeDateTime="12/27/2015 07:40:49">
+    <Property Name="ElementName" Value="[WaterEvents].[AnonymousBoats].[ClubBoatId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[WaterEvents].[AnonymousBoats]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="BoatId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="222d9a2e-6097-4dcf-9936-d0fe3501904d" ChangeDateTime="12/27/2015 07:45:41">
+    <Property Name="ElementName" Value="[WaterEvents].[EventBoats].[EventBoatId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[WaterEvents].[EventBoats]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EventId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="59dcbe36-ac37-4783-aa5a-a27b953dd455" ChangeDateTime="12/27/2015 08:04:01">
+    <Property Name="ElementName" Value="[Clubs].[Squads].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Clubs].[Squads]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SquadId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8b8aca73-3cae-4878-bb93-f46b6f797e3a" ChangeDateTime="12/27/2015 18:54:02">
+    <Property Name="ElementName" Value="[Clubs].[SquadMemberRoles].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Clubs].[SquadMemberRoles]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SquadMemberRoleId" />
+  </Operation>
+</Operations>

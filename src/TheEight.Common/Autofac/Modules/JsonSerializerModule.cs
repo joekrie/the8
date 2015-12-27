@@ -6,12 +6,18 @@ namespace TheEight.Common.Autofac.Modules
 {
     public class JsonSerializerModule : Module
     {
-        public bool PrettyPrint { get; set; }
+        private readonly bool _prettyPrint;
+
+        public JsonSerializerModule(bool prettyPrint)
+        {
+            _prettyPrint = prettyPrint;
+        }
 
         protected override void Load(ContainerBuilder autofacBuilder)
         {
             var settings = new JsonSerializerSettings();
-            settings.Configure(PrettyPrint);
+            settings.Configure(_prettyPrint);
+
             autofacBuilder.Register(ctx => JsonSerializer.Create(settings));
         }
     }

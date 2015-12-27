@@ -6,15 +6,21 @@
   "projectUrl": "",
   "licenseUrl": "",
 
+  "commands": {
+    "ef": "EntityFramework.Commands"
+  },
+
   "dependencies": {
     "Autofac": "4.0.0-rc1-177",
     "Autofac.Extensions.DependencyInjection": "4.0.0-rc1-177",
-    "Microsoft.Extensions.Configuration": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc1-final",
-    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-    "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
+    "EntityFramework.Commands": "7.0.0-rc2-16630",
+    "EntityFramework.MicrosoftSqlServer": "7.0.0-rc2-16630",
+    "Microsoft.Extensions.Configuration": "1.0.0-rc1-15696",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc1-15696",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc2-15945",
+    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc2-15939",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc2-15915",
+    "Microsoft.Extensions.OptionsModel": "1.0.0-rc2-15914",
     "NodaTime": "1.3.1",
     "NodaTime.Serialization.JsonNet": "1.3.1",
     "RavenDB.Client": "3.0.3800",

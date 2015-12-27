@@ -24,22 +24,6 @@ namespace TheEight.QueueHandlers
         private static void RegisterServices(ContainerBuilder autofacBuilder)
         {
             autofacBuilder
-                .Register(ctx =>
-                {
-                    var settings = ctx.Resolve<IOptions<TwilioSettings>>().Value;
-                    return new TwilioRestClient(settings.AccountSid, settings.AuthToken);
-                
-
-            autofacBuilder
-                .Register(ctx =>
-                {
-                    var settings = ctx.Resolve<IOptions<SendGridSettings>>().Value;
-                    return new SendGrid.Web(settings.ApiKey);
-                })
-                .AsSelf()
-                .SingleInstance();
-
-            autofacBuilder
                 .RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                 .Where(t => t.IsInNamespaceOf<MessageHandler>() || t.IsInNamespaceOf<MessageBatchProcessor>())
                 .AsSelf()

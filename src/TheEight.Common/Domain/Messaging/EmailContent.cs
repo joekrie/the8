@@ -1,4 +1,4 @@
-namespace TheEight.Common.Domain.Messaging
+namespace TheEight.Common.Database.Entities.Messaging
 {
     public class EmailContent
     {
