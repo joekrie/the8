@@ -6,25 +6,18 @@
   "projectUrl": "",
   "licenseUrl": "",
 
-  "commands": {
-    "ef": "EntityFramework.Commands"
-  },
-
   "dependencies": {
     "Autofac": "4.0.0-rc1-177",
     "Autofac.Extensions.DependencyInjection": "4.0.0-rc1-177",
-    "EntityFramework.Commands": "7.0.0-rc2-16630",
-    "EntityFramework.MicrosoftSqlServer": "7.0.0-rc2-16630",
-    "Microsoft.Extensions.Configuration": "1.0.0-rc1-15696",
-    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc1-15696",
+    "Dapper-NodaTime": "0.0.1",
+    "EntityFramework.SqlServer": "7.0.0-rc1-15886",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc2-15945",
     "Microsoft.Extensions.Configuration.Json": "1.0.0-rc2-15945",
     "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc2-15939",
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc2-15915",
     "Microsoft.Extensions.OptionsModel": "1.0.0-rc2-15914",
     "NodaTime": "1.3.1",
-    "NodaTime.Serialization.JsonNet": "1.3.1",
-    "RavenDB.Client": "3.0.3800",
-    "RavenDB.Client.NodaTime": "3.0.0"
+    "NodaTime.Serialization.JsonNet": "1.3.1"
   },
 
   "frameworks": {

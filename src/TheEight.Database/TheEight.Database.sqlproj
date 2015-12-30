@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{1b98d5ac-9183-4aa0-8d06-03d82615560e}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql120DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -23,6 +23,8 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
+    <IncludeSchemaNameInFileName>True</IncludeSchemaNameInFileName>
+    <GenerateCreateScript>True</GenerateCreateScript>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -62,36 +64,47 @@
     <Folder Include="StoredProcedures" />
     <Folder Include="DataScripts" />
     <Folder Include="Schemas" />
-    <Folder Include="Tables\WaterEvents" />
-    <Folder Include="Tables\Clubs" />
-    <Folder Include="Views\WaterEvents" />
+    <Folder Include="Security" />
+    <Folder Include="Security\Users" />
+    <Folder Include="Security\Logins" />
     <Folder Include="Tables\Accounts" />
-    <Folder Include="Miscellaneous" />
-    <Folder Include="Miscellaneous\WaterEvents" />
-    <Folder Include="DataScripts\Clubs" />
+    <Folder Include="Tables\Clubs" />
+    <Folder Include="Tables\WaterEvents" />
+    <Folder Include="Tables\ErgWorkouts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schemas\WaterEvents.sql" />
-    <Build Include="Tables\WaterEvents\Events.sql" />
-    <Build Include="Tables\WaterEvents\Modes.sql" />
-    <Build Include="Tables\WaterEvents\RegisteredAttendees.sql" />
     <Build Include="Schemas\Clubs.sql" />
-    <Build Include="Tables\Clubs\SquadMembers.sql" />
     <Build Include="Schemas\Accounts.sql" />
-    <Build Include="Tables\WaterEvents\AnonymousAttendees.sql" />
-    <Build Include="Views\WaterEvents\AttendeeNames.sql" />
-    <Build Include="Tables\Accounts\Users.sql" />
-    <Build Include="Tables\Clubs\ClubMembers.sql" />
-    <Build Include="Tables\Clubs\Clubs.sql" />
-    <Build Include="Miscellaneous\WaterEvents\AttendeeIdSequence.sql" />
-    <Build Include="Views\WaterEvents\RegisteredAttendeeNames.sql" />
-    <Build Include="Tables\WaterEvents\EventBoats.sql" />
-    <Build Include="Tables\WaterEvents\Boats.sql" />
-    <Build Include="Tables\WaterEvents\EventBoatPlacements.sql" />
-    <Build Include="Tables\Clubs\Squads.sql" />
-    <Build Include="Tables\WaterEvents\Attendees.sql" />
-    <Build Include="Tables\Clubs\SquadMemberRoles.sql" />
-    <None Include="DataScripts\Clubs\Insert_SquadMemberRoles.sql" />
+    <Build Include="Schemas\Messaging.sql" />
+    <Build Include="StoredProcedures\Accounts.GetUserIdByLogin.sql" />
+    <Build Include="Views\WaterEvents.AttendeeNames.sql" />
+    <Build Include="Views\WaterEvents.RegisteredAttendeeNames.sql" />
+    <None Include="DataScripts\Initial.sql" />
+    <Build Include="Schemas\ErgWorkouts.sql" />
+    <Build Include="Security\Users\TheEightAppUser.sql" />
+    <Build Include="Tables\Accounts\Accounts.Users.sql" />
+    <Build Include="Tables\Accounts\Accounts.Logins.sql" />
+    <Build Include="Tables\Clubs\Clubs.Squads.sql" />
+    <Build Include="Tables\Clubs\Clubs.Clubs.sql" />
+    <Build Include="Tables\Clubs\Clubs.SquadMemberRoles.sql" />
+    <Build Include="Tables\Clubs\Clubs.SquadMembers.sql" />
+    <Build Include="Tables\Clubs\Clubs.ClubMembers.sql" />
+    <Build Include="Tables\WaterEvents\WaterEvents.AnonymousAttendees.sql" />
+    <Build Include="Tables\WaterEvents\WaterEvents.Attendees.sql" />
+    <Build Include="Tables\WaterEvents\WaterEvents.Boats.sql" />
+    <Build Include="Tables\WaterEvents\WaterEvents.EventBoatPlacements.sql" />
+    <Build Include="Tables\WaterEvents\WaterEvents.EventBoats.sql" />
+    <Build Include="Tables\WaterEvents\WaterEvents.EventModes.sql" />
+    <Build Include="Tables\WaterEvents\WaterEvents.Events.sql" />
+    <Build Include="Tables\WaterEvents\WaterEvents.RegisteredAttendees.sql" />
+    <Build Include="Tables\ErgWorkouts\ErgWorkouts.Workouts.sql" />
+    <Build Include="Tables\ErgWorkouts\ErgWorkouts.Pieces.sql" />
+    <Build Include="Tables\ErgWorkouts\ErgWorkouts.Results.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Development.publish.xml" />
+    <None Include="Production.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TheEight.Database.refactorlog" />

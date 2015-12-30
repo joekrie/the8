@@ -1,12 +1,13 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using Microsoft.AspNet.Authentication.OAuth;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
-using Microsoft.Extensions.OptionsModel;
-using TheEight.WebApp.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using TheEight.Common.Configuration.Models;
+using TheEight.Common.DataAccess.Repositories;
 using TheEight.WebApp.Authentication;
 
 namespace TheEight.WebApp
@@ -30,7 +31,7 @@ namespace TheEight.WebApp
             app.UseGoogleAuthentication(options =>
             {
                 var settings = app.ApplicationServices.GetRequiredService<IOptions<GoogleSettings>>().Value;
-                var oAuthService = app.ApplicationServices.GetRequiredService<OAuthService>();
+                var oAuthService = app.ApplicationServices.GetRequiredService<IAccountService>();
 
                 options.CallbackPath = "/google";
                 options.AuthenticationScheme = AuthenticationSchemes.Google;
@@ -47,7 +48,7 @@ namespace TheEight.WebApp
             app.UseFacebookAuthentication(options =>
             {
                 var settings = app.ApplicationServices.GetRequiredService<IOptions<FacebookSettings>>().Value;
-                var oAuthService = app.ApplicationServices.GetRequiredService<OAuthService>();
+                var oAuthService = app.ApplicationServices.GetRequiredService<IAccountService>();
 
                 options.CallbackPath = "/facebook";
                 options.AuthenticationScheme = AuthenticationSchemes.Facebook;
@@ -59,7 +60,7 @@ namespace TheEight.WebApp
             });
         }
 
-        private static void ConfigureExternalAuth(OAuthOptions options, OAuthService oAuthService)
+        private static void ConfigureExternalAuth(OAuthOptions options, IAccountService oAuthService)
         {
             options.SignInScheme = AuthenticationSchemes.Cookie;
 
@@ -71,9 +72,14 @@ namespace TheEight.WebApp
                         .Single(c => c.Type == ClaimTypes.NameIdentifier)
                         .Value;
 
-                    var identity = await oAuthService.CreateClaimsIdentityAsync(options.AuthenticationScheme, 
-                        loginIdentifier);
+                    var userId = await oAuthService.GetUserIdFromLoginAsync(options.AuthenticationScheme, loginIdentifier);
 
+                    var claims = new List<Claim>
+                    {
+                        new Claim(UserClaimTypes.UserId, userId)
+                    };
+
+                    var identity = new ClaimsIdentity(claims);
                     context.Principal.AddIdentity(identity);
                 }
             };

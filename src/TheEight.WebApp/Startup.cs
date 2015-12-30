@@ -2,8 +2,8 @@
 using React.AspNet;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.PlatformAbstractions;
 using TheEight.Common.Configuration;
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace TheEight.WebApp
 {
