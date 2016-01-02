@@ -8,6 +8,7 @@ namespace TheEight.Common.DataAccess.Accounts
     public class AccountsRepository : IAccountsRepository
     {
         private readonly IDbConnection _dbConn;
+
         public AccountsRepository(IDbConnection dbConn)
         {
             _dbConn = dbConn;

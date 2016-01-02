@@ -6,8 +6,8 @@ using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using TheEight.Common.Configuration.Models;
-using TheEight.Common.DataAccess.Repositories;
+using TheEight.Common.Configuration;
+using TheEight.Common.DataAccess.Accounts;
 using TheEight.WebApp.Authentication;
 
 namespace TheEight.WebApp
@@ -31,7 +31,7 @@ namespace TheEight.WebApp
             app.UseGoogleAuthentication(options =>
             {
                 var settings = app.ApplicationServices.GetRequiredService<IOptions<GoogleSettings>>().Value;
-                var oAuthService = app.ApplicationServices.GetRequiredService<IAccountService>();
+                var oAuthService = app.ApplicationServices.GetRequiredService<IAccountsRepository>();
 
                 options.CallbackPath = "/google";
                 options.AuthenticationScheme = AuthenticationSchemes.Google;
@@ -48,7 +48,7 @@ namespace TheEight.WebApp
             app.UseFacebookAuthentication(options =>
             {
                 var settings = app.ApplicationServices.GetRequiredService<IOptions<FacebookSettings>>().Value;
-                var oAuthService = app.ApplicationServices.GetRequiredService<IAccountService>();
+                var oAuthService = app.ApplicationServices.GetRequiredService<IAccountsRepository>();
 
                 options.CallbackPath = "/facebook";
                 options.AuthenticationScheme = AuthenticationSchemes.Facebook;
@@ -60,7 +60,7 @@ namespace TheEight.WebApp
             });
         }
 
-        private static void ConfigureExternalAuth(OAuthOptions options, IAccountService oAuthService)
+        private static void ConfigureExternalAuth(OAuthOptions options, IAccountsRepository oAuthService)
         {
             options.SignInScheme = AuthenticationSchemes.Cookie;
 

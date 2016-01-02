@@ -1,4 +1,4 @@
-namespace TheEight.Common.Database.Entities.Accounts
+namespace TheEight.Common.Domain.Accounts
 {
     public enum AccountProvider
     {

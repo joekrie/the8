@@ -1,28 +1,32 @@
-﻿using Autofac;
+﻿using System;
 using Microsoft.Azure.WebJobs;
-using Microsoft.Extensions.OptionsModel;
-using TheEight.Common.Configuration.Models;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using TheEight.Common.Configuration;
 
 namespace TheEight.QueueHandlers
 {
     public partial class Program
     {
-        private static IContainer AutofacContainer;
+        private static IServiceProvider ServiceProvider;
 
         public Program()
         {
-            BuildAutofacContainer();
+            ServiceProvider = ConfigureServices();
         }
 
         public static void Main()
         {
-            var azureSettings = AutofacContainer.Resolve<IOptions<AzureSettings>>().Value;
-            var jobActivator = new JobActivator(AutofacContainer);
+            var azureSettings = ServiceProvider
+                .GetService<IOptions<AzureStorageSettings>>()
+                .Value;
+
+            var jobActivator = new JobActivator(ServiceProvider);
 
             var jobHostConfig = new JobHostConfiguration
             {
-                StorageConnectionString = azureSettings.Storage.StorageConnectionString,
-                DashboardConnectionString = azureSettings.Storage.DashboardConnectionString,
+                StorageConnectionString = azureSettings.StorageConnectionString,
+                DashboardConnectionString = azureSettings.DashboardConnectionString,
                 JobActivator = jobActivator
             };
 

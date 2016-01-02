@@ -1,66 +1,80 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
-  <Operation Name="Rename Refactor" Key="9992a744-6634-4b66-8104-171d42e75ad0" ChangeDateTime="12/30/2015 03:32:43">
-    <Property Name="ElementName" Value="[ErgWorkouts].[Pieces].[Id]" />
+  <Operation Name="Rename Refactor" Key="f8ebde17-ec59-4992-959e-0c110705b1bc" ChangeDateTime="01/01/2016 00:20:54">
+    <Property Name="ElementName" Value="[Messaging].[Message].[Name]" />
     <Property Name="ElementType" Value="SqlSimpleColumn" />
-    <Property Name="ParentElementName" Value="[ErgWorkouts].[Pieces]" />
+    <Property Name="ParentElementName" Value="[Messaging].[Message]" />
     <Property Name="ParentElementType" Value="SqlTable" />
-    <Property Name="NewName" Value="PieceId" />
+    <Property Name="NewName" Value="Subject" />
   </Operation>
-  <Operation Name="Rename Refactor" Key="86902995-5b99-4534-8eb4-4c456aef9543" ChangeDateTime="12/30/2015 03:33:35">
-    <Property Name="ElementName" Value="[ErgWorkouts].[Workout].[Id]" />
+  <Operation Name="Rename Refactor" Key="0849d110-7bc6-4b3c-bae4-de002eb486ba" ChangeDateTime="01/01/2016 00:28:18">
+    <Property Name="ElementName" Value="[Messaging].[Message].[ShortMessage]" />
     <Property Name="ElementType" Value="SqlSimpleColumn" />
-    <Property Name="ParentElementName" Value="[ErgWorkouts].[Workout]" />
+    <Property Name="ParentElementName" Value="[Messaging].[Message]" />
     <Property Name="ParentElementType" Value="SqlTable" />
-    <Property Name="NewName" Value="WorkoutId" />
+    <Property Name="NewName" Value="TextMessage" />
   </Operation>
-  <Operation Name="Rename Refactor" Key="932dc067-9724-4470-88af-78f5d200dd25" ChangeDateTime="12/30/2015 03:35:47">
-    <Property Name="ElementName" Value="[ErgWorkouts].[Results].[WorkoutId]" />
+  <Operation Name="Rename Refactor" Key="620a1cef-31cf-4af2-abb2-57b59a31bd9e" ChangeDateTime="01/01/2016 00:28:25">
+    <Property Name="ElementName" Value="[Messaging].[Message].[TextMessage]" />
     <Property Name="ElementType" Value="SqlSimpleColumn" />
-    <Property Name="ParentElementName" Value="[ErgWorkouts].[Results]" />
+    <Property Name="ParentElementName" Value="[Messaging].[Message]" />
     <Property Name="ParentElementType" Value="SqlTable" />
-    <Property Name="NewName" Value="ResultId" />
+    <Property Name="NewName" Value="TextContent" />
   </Operation>
-  <Operation Name="Rename Refactor" Key="de3ebc49-733c-4525-9bde-57e95ea8cd95" ChangeDateTime="12/30/2015 03:41:07">
-    <Property Name="ElementName" Value="[ErgWorkouts].[Results].[ResultId]" />
+  <Operation Name="Rename Refactor" Key="3861d7aa-7757-4291-8720-21fec2c0e359" ChangeDateTime="01/01/2016 00:28:55">
+    <Property Name="ElementName" Value="[Messaging].[Message].[TextContent]" />
     <Property Name="ElementType" Value="SqlSimpleColumn" />
-    <Property Name="ParentElementName" Value="[ErgWorkouts].[Results]" />
+    <Property Name="ParentElementName" Value="[Messaging].[Message]" />
     <Property Name="ParentElementType" Value="SqlTable" />
-    <Property Name="NewName" Value="PieceId" />
+    <Property Name="NewName" Value="ShortMessage" />
   </Operation>
-  <Operation Name="Rename Refactor" Key="4a665657-bdfd-469a-8d40-1b44b4750ec6" ChangeDateTime="12/30/2015 03:42:06">
-    <Property Name="ElementName" Value="[ErgWorkouts].[Results].[Split]" />
+  <Operation Name="Rename Refactor" Key="edcc6ae9-a232-497b-afef-4b19cf95fd39" ChangeDateTime="01/01/2016 00:49:06">
+    <Property Name="ElementName" Value="[Clubs].[Clubs].[TextMessagePhoneNumber]" />
     <Property Name="ElementType" Value="SqlSimpleColumn" />
-    <Property Name="ParentElementName" Value="[ErgWorkouts].[Results]" />
+    <Property Name="ParentElementName" Value="[Clubs].[Clubs]" />
     <Property Name="ParentElementType" Value="SqlTable" />
-    <Property Name="NewName" Value="SplitMilliseconds" />
+    <Property Name="NewName" Value="SmsPhoneNumber" />
   </Operation>
-  <Operation Name="Rename Refactor" Key="8c8973e4-fe48-4c87-bec7-351202db5f60" ChangeDateTime="12/30/2015 03:46:58">
-    <Property Name="ElementName" Value="[ErgWorkouts].[Results].[TeamMemberId]" />
+  <Operation Name="Rename Refactor" Key="af9e5629-c7e1-4cfc-baa9-ee1b6f2ab46b" ChangeDateTime="01/01/2016 01:15:50">
+    <Property Name="ElementName" Value="[Clubs].[CreateClubCommands].[SmsPhoneNumber]" />
     <Property Name="ElementType" Value="SqlSimpleColumn" />
-    <Property Name="ParentElementName" Value="[ErgWorkouts].[Results]" />
+    <Property Name="ParentElementName" Value="[Clubs].[CreateClubCommands]" />
     <Property Name="ParentElementType" Value="SqlTable" />
-    <Property Name="NewName" Value="SquadMemberId" />
+    <Property Name="NewName" Value="SmsAreaCode" />
   </Operation>
-  <Operation Name="Rename Refactor" Key="da50d6c5-3103-4d10-b3b4-df75ea4a0529" ChangeDateTime="12/30/2015 04:25:09">
-    <Property Name="ElementName" Value="[ErgWorkouts].[FixedDistancePieces].[WorkoutId]" />
+  <Operation Name="Rename Refactor" Key="e95622b1-3ef9-4197-a6c9-11e522eee1fb" ChangeDateTime="01/01/2016 19:53:14">
+    <Property Name="ElementName" Value="[Accounts].[UserInvite].[UserInviteId]" />
     <Property Name="ElementType" Value="SqlSimpleColumn" />
-    <Property Name="ParentElementName" Value="[ErgWorkouts].[FixedDistancePieces]" />
+    <Property Name="ParentElementName" Value="[Accounts].[UserInvite]" />
     <Property Name="ParentElementType" Value="SqlTable" />
-    <Property Name="NewName" Value="Workou=tId" />
+    <Property Name="NewName" Value="InviteId" />
   </Operation>
-  <Operation Name="Rename Refactor" Key="260acd57-1b84-4fe9-bf5c-2523a2cddafa" ChangeDateTime="12/30/2015 04:27:02">
-    <Property Name="ElementName" Value="[ErgWorkouts].[Pieces].[Distance]" />
+  <Operation Name="Rename Refactor" Key="a6e20f76-8fdc-4791-acfa-0eae00d4586a" ChangeDateTime="01/01/2016 21:05:53">
+    <Property Name="ElementName" Value="[Accounts].[ClubRoleInvites].[Email]" />
     <Property Name="ElementType" Value="SqlSimpleColumn" />
-    <Property Name="ParentElementName" Value="[ErgWorkouts].[Pieces]" />
+    <Property Name="ParentElementName" Value="[Accounts].[ClubRoleInvites]" />
     <Property Name="ParentElementType" Value="SqlTable" />
-    <Property Name="NewName" Value="DistanceMeters" />
+    <Property Name="NewName" Value="ClubId" />
   </Operation>
-  <Operation Name="Rename Refactor" Key="951a25f5-3925-4a94-bbe3-d2906ee317eb" ChangeDateTime="12/30/2015 04:27:09">
-    <Property Name="ElementName" Value="[ErgWorkouts].[Pieces].[Duration]" />
+  <Operation Name="Rename Refactor" Key="35d22811-c25c-4a0e-b5bb-22886aee1397" ChangeDateTime="01/01/2016 21:06:11">
+    <Property Name="ElementName" Value="[Accounts].[ClubRoleInvites].[ClubId]" />
     <Property Name="ElementType" Value="SqlSimpleColumn" />
-    <Property Name="ParentElementName" Value="[ErgWorkouts].[Pieces]" />
+    <Property Name="ParentElementName" Value="[Accounts].[ClubRoleInvites]" />
     <Property Name="ParentElementType" Value="SqlTable" />
-    <Property Name="NewName" Value="DurationMilliseconds" />
+    <Property Name="NewName" Value="SquadId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="661cb4d4-47ef-4507-89b2-0849c6988c96" ChangeDateTime="01/01/2016 21:06:15">
+    <Property Name="ElementName" Value="[Accounts].[ClubRoleInvites].[Created]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Accounts].[ClubRoleInvites]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="RoleId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d6837be6-b029-4c2c-b366-f631cb83c05a" ChangeDateTime="01/01/2016 21:06:41">
+    <Property Name="ElementName" Value="[Accounts].[SquadRoleInvites].[RoleId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Accounts].[SquadRoleInvites]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SquadMemberRoleId" />
   </Operation>
 </Operations>

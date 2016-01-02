@@ -1,12 +1,11 @@
 ﻿using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
-using TheEight.Common.Database.Entities.Messaging;
-using TheEight.QueueHandlers.Services.Messaging;
+using TheEight.Common.Domain.Messaging;
 
-namespace TheEight.QueueHandlers.Handlers
+namespace TheEight.QueueHandlers.Handlers.Messaging
 {
-    public class MessageHandler
+    public class MessageHandler 
     {
         private readonly EmailSender _emailSender;
         private readonly TextMessageSender _textMessageSender;

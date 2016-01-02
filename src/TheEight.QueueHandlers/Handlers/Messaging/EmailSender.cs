@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
-using Microsoft.Extensions.OptionsModel;
+using Microsoft.Extensions.Options;
 using SendGrid;
-using TheEight.Common.Configuration.Models;
-using TheEight.Common.Database.Entities.Messaging;
+using TheEight.Common.Configuration;
+using TheEight.Common.Domain.Messaging;
 
-namespace TheEight.QueueHandlers.Services.Messaging
+namespace TheEight.QueueHandlers.Handlers.Messaging
 {
     public class EmailSender
     {

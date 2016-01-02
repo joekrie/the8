@@ -2,25 +2,23 @@
 using System.Data.SqlClient;
 using Autofac;
 using Dapper.NodaTime;
-using TheEight.Common.Configuration.Models;
+using Microsoft.Extensions.Options;
+using TheEight.Common.Configuration;
 
 namespace TheEight.Common.DependencyInjection
 {
     public class DataAccessModule : Module
     {
-        private readonly DatabaseSettings _databaseSettings;
-
-        public DataAccessModule(DatabaseSettings databaseSettings)
-        {
-            _databaseSettings = databaseSettings;
-        }
-
         protected override void Load(ContainerBuilder builder)
         {
             DapperNodaTimeSetup.Register();
 
             builder
-                .Register(ctx => new SqlConnection(_databaseSettings.ConnectionString))
+                .Register(ctx =>
+                {
+                    var settings = ctx.Resolve<IOptions<DatabaseSettings>>().Value;
+                    return new SqlConnection(settings.ConnectionString);
+                })
                 .InstancePerDependency()
                 .As<IDbConnection>();
 

@@ -1,4 +1,4 @@
-namespace TheEight.Common.Configuration.Models
+namespace TheEight.Common.Configuration
 {
     public class DatabaseSettings
     {

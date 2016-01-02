@@ -1,24 +1,23 @@
 ﻿using Microsoft.AspNet.Builder;
 using React.AspNet;
 using Microsoft.AspNet.Hosting;
-using Microsoft.Extensions.Configuration;
-using TheEight.Common.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 
 namespace TheEight.WebApp
 {
     public partial class Startup
     {
-        private readonly IConfiguration _config;
+        private readonly string _appBasePath;
         private readonly bool _isDevelopment;
 
         public Startup(IHostingEnvironment hostEnv, IApplicationEnvironment appEnv)
         {
             _isDevelopment = hostEnv.IsDevelopment();
-            _config = ConfigurationHelpers.Create(appEnv.ApplicationBasePath, _isDevelopment);
+            _appBasePath = appEnv.ApplicationBasePath;
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
             if (_isDevelopment)
             {
@@ -26,16 +25,27 @@ namespace TheEight.WebApp
             }
             
             ConfigureAuth(app);
+            ConfigureLogging(loggerFactory);
 
             app.UseReact(config =>
             {
-                config.SetLoadBabel(false)
-                    .SetLoadReact(false)
-                    .AddScriptWithoutTransform("~/app/server.js");
+                config.SetLoadBabel(false);
+                config.SetLoadReact(false);
+                config.AddScriptWithoutTransform("~/app/server.js");
             });
 
             app.UseStaticFiles();
             app.UseMvc();
+        }
+        
+        public static void Main(string[] args)
+        {
+            var application = new WebApplicationBuilder()
+                .UseConfiguration(WebApplicationConfiguration.GetDefault(args))
+                .UseStartup<Startup>()
+                .Build();
+            
+            application.Run();
         }
     }
 }

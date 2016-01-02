@@ -71,16 +71,17 @@
     <Folder Include="Tables\Clubs" />
     <Folder Include="Tables\WaterEvents" />
     <Folder Include="Tables\ErgWorkouts" />
+    <Folder Include="StoredProcedures\Accounts" />
+    <Folder Include="Views\WaterEvents" />
+    <Folder Include="Tables\Messaging\" />
+    <Folder Include="StoredProcedures\Messaging" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schemas\WaterEvents.sql" />
     <Build Include="Schemas\Clubs.sql" />
     <Build Include="Schemas\Accounts.sql" />
     <Build Include="Schemas\Messaging.sql" />
-    <Build Include="StoredProcedures\Accounts.GetUserIdByLogin.sql" />
-    <Build Include="Views\WaterEvents.AttendeeNames.sql" />
-    <Build Include="Views\WaterEvents.RegisteredAttendeeNames.sql" />
-    <None Include="DataScripts\Initial.sql" />
+    <None Include="DataScripts\Enums.sql" />
     <Build Include="Schemas\ErgWorkouts.sql" />
     <Build Include="Security\Users\TheEightAppUser.sql" />
     <Build Include="Tables\Accounts\Accounts.Users.sql" />
@@ -101,6 +102,19 @@
     <Build Include="Tables\ErgWorkouts\ErgWorkouts.Workouts.sql" />
     <Build Include="Tables\ErgWorkouts\ErgWorkouts.Pieces.sql" />
     <Build Include="Tables\ErgWorkouts\ErgWorkouts.Results.sql" />
+    <Build Include="Tables\ErgWorkouts\ErgWorkouts.PieceTypes.sql" />
+    <Build Include="StoredProcedures\Accounts\Accounts.GetUserIdByLogin.sql" />
+    <Build Include="Views\WaterEvents\WaterEvents.RegisteredAttendeeNames.sql" />
+    <Build Include="Views\WaterEvents\WaterEvents.AttendeeNames.sql" />
+    <None Include="DataScripts\SampleData.sql" />
+    <Build Include="Tables\Messaging\Messaging.Categories.sql" />
+    <Build Include="Tables\Messaging\Messaging.Methods.sql" />
+    <Build Include="Tables\Messaging\Messaging.Messages.sql" />
+    <Build Include="Tables\Messaging\Messaging.ShortMessages.sql" />
+    <Build Include="Tables\Messaging\Messaging.LongMessages.sql" />
+    <Build Include="Tables\Clubs\Clubs.Administrators.sql" />
+    <Build Include="Tables\Accounts\Accounts.Invites.sql" />
+    <Build Include="Tables\Accounts\Accounts.SquadInvites.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Development.publish.xml" />

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.Extensions.OptionsModel;
-using TheEight.Common.Configuration.Models;
+using Microsoft.Extensions.Options;
+using TheEight.Common.Configuration;
 using Twilio;
 
-namespace TheEight.QueueHandlers.Services.Messaging
+namespace TheEight.QueueHandlers.Handlers.Messaging
 {
     public class TextMessageSender
     {

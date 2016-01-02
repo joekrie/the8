@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TheEight.Common.Database.Entities.Messaging
+namespace TheEight.Common.Domain.Messaging
 {
     public class MessageBatch
     {
