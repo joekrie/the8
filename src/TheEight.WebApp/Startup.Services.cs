@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using React.AspNet;
+using NodaTime;
+//using React.AspNet; // waiting for React.NET to catch up to RC2
 using TheEight.Common;
 using TheEight.Common.DependencyInjection;
+using TheEight.WebApp.Services.Invites;
 
 namespace TheEight.WebApp
 {
@@ -13,15 +17,23 @@ namespace TheEight.WebApp
     {
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            var thisAssembly = Assembly.GetExecutingAssembly();
             var autofacBuilder = new ContainerBuilder();
 
-            services.AddTheEightConfiguration(_appBasePath);
+            services.AddTheEightConfiguration(_appBasePath,
+                builder =>
+                {
+                    if (_isDevelopment)
+                    {
+                        builder.AddJsonFile("appsettings.develop.json");
+                    }
+                });
 
             services
                 .AddMvc()
                 .AddJsonOptions(options =>
                 {
-                    options.SerializerSettings.Configure(_isDevelopment);
+                    options.SerializerSettings.ConfigureForTheEight(_isDevelopment);
                 })
                 .AddMvcOptions(options =>
                 {
@@ -30,15 +42,47 @@ namespace TheEight.WebApp
                         options.Filters.Add(new RequireHttpsAttribute());
                     }
                 });
+            
+            //services.AddReact();
 
-            services.AddReact();
+            autofacBuilder
+                .RegisterAssemblyTypes(thisAssembly)
+                .Where(TypeIsRepositoryOrService)
+                .InstancePerDependency()
+                .AsImplementedInterfaces();
 
+            autofacBuilder
+                .Register(ctx => SystemClock.Instance)
+                .As<IClock>()
+                .SingleInstance();
+
+            autofacBuilder
+                .Register<Func<string>>(ctx => AccessCodeGenerator.Generate)
+                .Named<Func<string>>(AccessCodeGenerator.ServiceName)
+                .SingleInstance();
+            
             autofacBuilder.RegisterModule(new DataAccessModule());
-
             autofacBuilder.Populate(services);
-            var container = autofacBuilder.Build();
 
+            var container = autofacBuilder.Build();
             return container.Resolve<IServiceProvider>();
+        }
+
+        private static bool TypeIsRepositoryOrService(Type type)
+        {
+            if (type.IsInNamespace("TheEight.WebApp.Repositories") 
+                && type.Name.EndsWith("Repository"))
+            {
+                return true;
+            }
+
+            if (type.IsInNamespace("TheEight.WebApp.Services") 
+                && type.Name.EndsWith("Service"))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

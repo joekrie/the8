@@ -1,20 +1,20 @@
 import Boat from './Boat';
 
-function createBoat(boat, boatKey, props) {
+function createBoat(boat, boatKey, moveAttendee) {
     return (
         <Boat key={boatKey}
             boat={boat}
             boatKey={boatKey}
-            assignAttendee={props.moveAttendee} />
+            assignAttendee={moveAttendee} />
     );
 }
 
 export default function(props) {
-    const { boats } = props;
+    const { boats, moveAttendee } = props;
 
     return (
         <div className='boat-list'>
-			{boats.map(createBoat)}
+			{boats.map((boat, boatKey) => createBoat(boat, boatKey, moveAttendee))}
 		</div>
     );
 };

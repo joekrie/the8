@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TheEight.Common.Domain.Messaging;
 
-namespace TheEight.Common.DataAccess.Messaging
+namespace TheEight.WebApp.Repositories.Messaging
 {
     public interface IMessageRepository
     {

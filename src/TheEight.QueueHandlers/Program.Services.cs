@@ -4,9 +4,7 @@ using Autofac;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 using Autofac.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
 using TheEight.Common;
-using TheEight.QueueHandlers.Handlers.Messaging;
 
 namespace TheEight.QueueHandlers
 {

@@ -6,8 +6,10 @@
     "emitEntryPoint": true
   },
   "dependencies": {
-    "Autofac": "4.0.0-rc1-177",
-    "Autofac.Extensions.DependencyInjection": "4.0.0-rc1-177",
+    "Autofac": "4.0.0-rc2-182",
+    "Autofac.Extensions.DependencyInjection": "4.0.0-rc2-182",
+    "Autofac.Extras.AttributeMetadata": "4.0.0-CI-221",
+    "Base32": "1.1.0.2",
     "Dapper": "1.50.0-beta6",
     "Dapper-NodaTime": "0.0.1",
     "Microsoft.AspNet.Authentication": "1.0.0-rc2-16216",
@@ -32,7 +34,6 @@
     "RavenDB.Client": "3.0.3800",
     "RavenDB.Client.NodaTime": "3.0.0",
     "RavenDB.Database": "3.0.3800",
-    "React.AspNet": "2.1.1",
     "TheEight.Common": "1.0.0-*"
   },
   "exclude": [

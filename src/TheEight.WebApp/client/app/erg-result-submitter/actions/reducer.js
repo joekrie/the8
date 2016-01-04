@@ -1,15 +1,26 @@
 import { handleActions } from 'redux-actions';
-import * as actionTypes from './actionTypes';
 import emptyState from '../constants/emptyState';
 import emptyAttendeePlacement from '../constants/emptyAttendeePlacement';
 
-const reducers = {};
+function assignAttendee(state, action) {
+    const { attendeeId, boatKey, seatPosition } = action.payload;
+    const boatKeyPath = ['attendees', attendeeId, 'placement', 'boatKey'];
+    const seatPath = ['attendees', attendeeId, 'placement', 'seat'];
 
-reducers[actionTypes.ASSIGN_ATTENDEE] = (state, action) =>
-    state.setIn(['attendees', action.payload.attendeeId, 'placement', 'boatKey'], action.payload.boatKey)
-        .setIn(['attendees', action.payload.attendeeId, 'placement', 'seat'], action.payload.seatPosition);
+    return state
+        .setIn(boatKeyPath, boatKey)
+        .setIn(seatPath, seatPosition);
+}
 
-reducers[actionTypes.UNASSIGN_ATTENDEE] = (state, action) =>
-    state.setIn(['attendees', action.payload.attendeeId, 'placement'], emptyAttendeePlacement);
+function unassignAttendee(state, action) {
+    const { attendeeId } = action.payload;
+    const placementPath = ['attendees', attendeeId, 'placement'];
 
-export default handleActions(reducers, emptyState);
+    return state
+        .setIn(placementPath, emptyAttendeePlacement);
+}
+
+export default handleActions({
+    ASSIGN_ATTENDEE: assignAttendee
+    UNASSIGN_ATTENDEE: unassignAttendee
+}, emptyState);

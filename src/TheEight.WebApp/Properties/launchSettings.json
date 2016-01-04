@@ -18,11 +18,11 @@
     "web": {
       "commandName": "web",
       "launchBrowser": true,
-      "launchUrl": "http://local-test.the8.io",
+      "launchUrl": "http://local-test.the8.io:8005",
       "environmentVariables": {
         "Hosting:Environment": "Development"
       },
-      "sdkVersion": "dnx-clr-win-x86.1.0.0-rc1-final"
+      "sdkVersion": "dnx-clr-win-x86.1.0.0-rc2-16351"
     }
   }
 }

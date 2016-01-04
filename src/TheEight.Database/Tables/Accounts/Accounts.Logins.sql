@@ -1,8 +1,9 @@
 ﻿CREATE TABLE [Accounts].[Logins]
 (
 	[UserId] INT NOT NULL, 
-    [LoginProvider] NVARCHAR(100) NOT NULL, 
-    [Identifier] NVARCHAR(500) NOT NULL, 
-    CONSTRAINT [PK_Logins] PRIMARY KEY ([LoginProvider], [UserId]), 
-    CONSTRAINT [AK_Logins_LoginProviderId_Identifier] UNIQUE ([LoginProvider], [Identifier])
+    [LoginProviderId] NVARCHAR(25) NOT NULL, 
+    [LoginIdentifier] NVARCHAR(500) NOT NULL, 
+    CONSTRAINT [PK_Logins] PRIMARY KEY ([LoginProviderId], [UserId]), 
+    CONSTRAINT [AK_Logins_LoginProviderId_LoginIdentifier] UNIQUE ([LoginProviderId], [LoginIdentifier]), 
+    CONSTRAINT [FK_Logins_LoginProviders] FOREIGN KEY ([LoginProviderId]) REFERENCES [Accounts].[LoginProviders]([LoginProviderId])
 )

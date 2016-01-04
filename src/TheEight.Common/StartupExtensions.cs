@@ -13,14 +13,14 @@ namespace TheEight.Common
     public static class StartupExtensions
     {
         public static IServiceCollection AddTheEightConfiguration(this IServiceCollection services, string appBasePath, 
-            Action<IConfigurationBuilder> configConfig = null)
+            Action<IConfigurationBuilder> additionalConfig = null)
         {
             var configBuilder = new ConfigurationBuilder()
                 .SetBasePath(appBasePath)
                 .AddEnvironmentVariables()
                 .AddUserSecrets();
 
-            configConfig?.Invoke(configBuilder);
+            additionalConfig?.Invoke(configBuilder);
             var config = configBuilder.Build();
 
             return services
@@ -29,10 +29,11 @@ namespace TheEight.Common
                 .Configure<FacebookSettings>(config.GetSection("Facebook"))
                 .Configure<TwilioSettings>(config.GetSection("Twilio"))
                 .Configure<SendGridSettings>(config.GetSection("SendGrid"))
-                .Configure<AzureStorageSettings>(config.GetSection("AzureStorage"));
+                .Configure<AzureStorageSettings>(config.GetSection("AzureStorage"))
+                .Configure<DatabaseSettings>(config.GetSection("Database"));
         }
 
-        public static JsonSerializerSettings Configure(this JsonSerializerSettings settings, bool prettyPrint)
+        public static JsonSerializerSettings ConfigureForTheEight(this JsonSerializerSettings settings, bool prettyPrint)
         {
             settings.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb);
             settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });

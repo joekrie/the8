@@ -21,13 +21,6 @@ namespace TheEight.Common.DependencyInjection
                 })
                 .InstancePerDependency()
                 .As<IDbConnection>();
-
-            builder
-                .RegisterAssemblyTypes(ThisAssembly)
-                .Where(type => type.IsInNamespace("TheEight.Common.DataAccess")
-                    && type.Name.EndsWith("Repository"))
-                .InstancePerDependency()
-                .AsImplementedInterfaces();
         }
     }
 }
