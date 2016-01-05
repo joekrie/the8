@@ -1,4 +1,8 @@
-export default function(props) {
+import { PropTypes } from 'react';
+
+export default Email = (props) => {
+    const {  deleteEmail } = props;
+
     return (
         <div>
             <input type='hidden' />
@@ -8,9 +12,13 @@ export default function(props) {
 
                 </option>
             </select>
-            <button onClick={}>
+            <button onClick={deleteEmail}>
                 Delete
             </button>
         </div>
     );
-}
+};
+
+Email.propTypes = {
+    deleteEmail: PropTypes.func.isRequired
+};

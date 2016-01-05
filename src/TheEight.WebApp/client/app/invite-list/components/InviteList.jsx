@@ -1,12 +1,11 @@
+import { PropTypes } from 'react';
 import Email from './Email';
 
-function createEmail(email, index, deleteEmail) {
-    return (
-        <Email>
-    );
-}
+const createEmail = (email, index, deleteEmail) => (
+    <Email />
+);
 
-export default function(props) {
+export default InviteList = (props) => {
     const { emails, deleteEmail } = props;
 
     return (
@@ -14,4 +13,8 @@ export default function(props) {
             {emails.map((email, index) => createEmail(email, index, deleteEmail))}
         </div>
     );
-}
+};
+
+InviteList.propTypes = {
+    
+};
