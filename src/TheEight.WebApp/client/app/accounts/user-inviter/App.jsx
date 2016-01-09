@@ -1,26 +1,33 @@
 import React from 'react';
-import { render } from 'react-dom';
 import { createStore, bindActionCreators } from 'redux';
 import { Provider, connect } from 'react-redux';
 import reducer from './actions/reducer';
 import * as actionCreators from './actions/actionCreators';
 import InviteList from './components/InviteList';
+import Immutable from 'immutable';
 
 class App extends React.Component {
 	render() {
-	    const { dispatch } = this.props;
-	    const boundActionCreators = bindActionCreators(actionCreators, dispatch);
+	    const { emails, addEmail, updateEmail, removeEmail } = this.props;
 
-	    return <InviteList {...boundActionCreators} />;
+	    return <InviteList emails={emails}
+                           addEmail={addEmail}
+	                       updateEmail={updateEmail}
+                           removeEmail={removeEmail} />;
 	}
 }
 
-const store = createStore(reducer);
-const stateConnector = state => state;
-const AppProvider = connect(stateConnector)(App);
+const AppProvider = connect(
+    state => ({
+        emails: state.emails
+    }), 
+    dispatch => bindActionCreators(actionCreators, dispatch)
+)(App);
 
 export default class extends React.Component {
     render() {
+        const store = createStore(reducer);
+
         return (
             <Provider store={store}>
                 <AppProvider />

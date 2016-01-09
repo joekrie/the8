@@ -1,2 +1,2 @@
 ﻿import 'expose?React!React';
-import 'expose?BoatLineupPlanner!./boat-lineup-planner/App.jsx';
+import 'expose?UserInviter!./accounts/user-inviter/App.jsx';
