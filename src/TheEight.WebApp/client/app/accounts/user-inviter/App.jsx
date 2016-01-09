@@ -17,7 +17,7 @@ class App extends React.Component {
 	}
 }
 
-const AppProvider = connect(
+const ConnectedApp = connect(
     state => ({
         emails: state.emails
     }), 
@@ -26,11 +26,15 @@ const AppProvider = connect(
 
 export default class extends React.Component {
     render() {
-        const store = createStore(reducer);
+        const { initialEmails } = this.props;
+
+        const store = createStore(reducer, {
+            emails: Immutable.fromJS(initialEmails)
+        });
 
         return (
             <Provider store={store}>
-                <AppProvider />
+                <ConnectedApp />
             </Provider>
 		);
     }

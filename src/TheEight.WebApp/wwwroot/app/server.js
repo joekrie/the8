@@ -380,7 +380,7 @@
 	    return App;
 	})(_react2.default.Component);
 
-	var AppProvider = (0, _reactRedux.connect)(function (state) {
+	var ConnectedApp = (0, _reactRedux.connect)(function (state) {
 	    return {
 	        emails: state.emails
 	    };
@@ -400,12 +400,16 @@
 	    _createClass(_default, [{
 	        key: 'render',
 	        value: function render() {
-	            var store = (0, _redux.createStore)(_reducer2.default);
+	            var initialEmails = this.props.initialEmails;
+
+	            var store = (0, _redux.createStore)(_reducer2.default, {
+	                emails: _immutable2.default.fromJS(initialEmails)
+	            });
 
 	            return _react2.default.createElement(
 	                _reactRedux.Provider,
 	                { store: store },
-	                _react2.default.createElement(AppProvider, null)
+	                _react2.default.createElement(ConnectedApp, null)
 	            );
 	        }
 	    }]);
@@ -7598,7 +7602,6 @@
 	    var index = props.index;
 
 	    var handleChangeEmail = function handleChangeEmail(event) {
-	        console.log(event);
 	        var newEmail = event.target.value;
 	        updateEmail({ index: index, email: newEmail });
 	    };
