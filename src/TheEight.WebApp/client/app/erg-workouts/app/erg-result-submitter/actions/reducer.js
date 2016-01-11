@@ -1,11 +1,11 @@
-import { handleActions } from 'redux-actions';
-import emptyState from '../constants/emptyState';
-import emptyAttendeePlacement from '../constants/emptyAttendeePlacement';
+import { handleActions } from "redux-actions";
+import emptyState from "../constants/emptyState";
+import emptyAttendeePlacement from "../constants/emptyAttendeePlacement";
 
 function assignAttendee(state, action) {
     const { attendeeId, boatKey, seatPosition } = action.payload;
-    const boatKeyPath = ['attendees', attendeeId, 'placement', 'boatKey'];
-    const seatPath = ['attendees', attendeeId, 'placement', 'seat'];
+    const boatKeyPath = ["attendees", attendeeId, "placement", "boatKey"];
+    const seatPath = ["attendees", attendeeId, "placement", "seat"];
 
     return state
         .setIn(boatKeyPath, boatKey)
@@ -14,7 +14,7 @@ function assignAttendee(state, action) {
 
 function unassignAttendee(state, action) {
     const { attendeeId } = action.payload;
-    const placementPath = ['attendees', attendeeId, 'placement'];
+    const placementPath = ["attendees", attendeeId, "placement"];
 
     return state
         .setIn(placementPath, emptyAttendeePlacement);

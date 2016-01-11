@@ -1,20 +1,22 @@
-import Attendee from './Attendee';
+import Attendee from "./Attendee";
 
-function createUnassignedAttendee(teamMember) {
-    return <Attendee key={teamMember.id} attendee={teamMember} />;
-}
+const UnassignedAttendeeList = props => {
+    const { unassignedAttendees } = props;
 
-export default function(props) {
-	const { unassignedAttendees } = props;
-		
-	return (
-		<div className='unassigned-attendee-list'>
-            <div className='header'>
+    return (
+        <div className="unassigned-attendee-list">
+            <div className="header">
                 Unassigned
             </div>
-            <div className='attendees'>
-                {unassignedAttendees.map(createUnassignedAttendee)}
+            <div className="attendees">
+                {unassignedAttendees.map(tm => <Attendee key={tm.id} attendee={tm} />)}
             </div>
 		</div>
-	);
-}
+    );
+};
+
+UnassignedAttendeeList.propTypes = {
+
+};
+
+export default UnassignedAttendeeList;

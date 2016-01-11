@@ -1,7 +1,7 @@
-import React from 'react';
-import { DropTarget } from 'react-dnd';
-import { seatIsEmpty } from '../utils/boatSeatUtils';
-import BoatSeat from './BoatSeat';
+import React from "react";
+import { DropTarget } from "react-dnd";
+import { seatIsEmpty } from "../utils/boatSeatUtils";
+import BoatSeat from "./BoatSeat";
 
 const spec = {
 	drop: (props, monitor) => {
@@ -16,7 +16,7 @@ const collect = (connect, monitor) => ({
 	connectDropTarget: connect.dropTarget()
 });
 
-@DropTarget('ATTENDEE', spec, collect)
+@DropTarget("ATTENDEE", spec, collect)
 export default class extends React.Component {
 	render() {
 	    const { connectDropTarget, seat, seatPosition } = this.props;

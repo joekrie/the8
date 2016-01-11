@@ -1,10 +1,10 @@
-import React from 'react';
-import { DragSource, DropTarget } from 'react-dnd';
-import { findDOMNode } from 'react-dom';
-import classNames from 'classnames';
+import React from "react";
+import { DragSource, DropTarget } from "react-dnd";
+import { findDOMNode } from "react-dom";
+import classNames from "classnames";
 
-import dndTypes from '../constants/dndTypes';
-import attendeePositions from '../constants/attendeePositions';
+import dndTypes from "../constants/dndTypes";
+import attendeePositions from "../constants/attendeePositions";
 
 const dropSpec = {
     hover: (props, monitor, component) => {
@@ -51,7 +51,7 @@ const dragCollect = (connect, monitor) => ({
 export default class extends React.Component {
     constructor() {
         this.state = {
-            value: ''
+            value: ""
         };
     }
 

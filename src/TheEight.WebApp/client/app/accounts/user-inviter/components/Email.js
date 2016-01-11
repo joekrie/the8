@@ -1,4 +1,4 @@
-import { PropTypes } from 'react';
+import { PropTypes } from "react";
 
 const Email = props => {
     const { removeEmail, updateEmail, email, index } = props;
@@ -8,9 +8,7 @@ const Email = props => {
         updateEmail({ index, email: newEmail });
     };
 
-    const handleRemoveEmail = () => {
-        removeEmail({index});
-    };
+    const handleRemoveEmail = () => { removeEmail({ index }); };
 
     return (
         <div>
@@ -22,6 +20,13 @@ const Email = props => {
             </button>
         </div>
     );
+};
+
+Email.propTypes = {
+    removeEmail: PropTypes.func.isRequired,
+    updateEmail: PropTypes.func.isRequired,
+    email: PropTypes.string.isRequired,
+    index: PropTypes.number.isRequired
 };
 
 export default Email;

@@ -1,4 +1,4 @@
-import Boat from './Boat';
+import Boat from "./Boat";
 
 function createBoat(boat, boatKey, moveAttendee) {
     return (
@@ -13,7 +13,7 @@ export default function(props) {
     const { boats, moveAttendee } = props;
 
     return (
-        <div className='boat-list'>
+        <div className="boat-list">
 			{boats.map((boat, boatKey) => createBoat(boat, boatKey, moveAttendee))}
 		</div>
     );

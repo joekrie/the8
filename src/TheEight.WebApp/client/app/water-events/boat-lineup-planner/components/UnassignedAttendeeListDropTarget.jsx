@@ -1,6 +1,6 @@
-import React from 'react';
-import { DropTarget } from 'react-dnd';
-import UnassignedAttendeeList from './UnassignedAttendeeList';
+import { Component, PropTypes } from "react";
+import { DropTarget } from "react-dnd";
+import UnassignedAttendeeList from "./UnassignedAttendeeList";
 
 const spec = {
 	drop: (props, monitor) => {
@@ -11,12 +11,12 @@ const spec = {
 	}
 };
 
-const collect = (connect, monitor) => ({
+const collect = connect => ({
 	connectDropTarget: connect.dropTarget()
 });
 
-@DropTarget('ATTENDEE', spec, collect)
-export default class extends React.Component {
+@DropTarget("ATTENDEE", spec, collect)
+export default class extends Component {
 	render() {
 		const { unassignedAttendees, connectDropTarget } = this.props;
 

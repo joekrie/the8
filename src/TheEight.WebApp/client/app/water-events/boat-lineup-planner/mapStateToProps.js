@@ -1,11 +1,10 @@
-import { createBoatSeats } from "./utils/boatSeatUtils";
+import createBoatSeats from "./utils/createBoatSeats";
 import { attendeeIsPlaced } from "./utils/attendeeUtils";
-import attendeePositions from "./constants/attendeePositions";
 
 export default function(state) {
 	return {
 		unassignedAttendees: state
-			.get("attendees")
+			.attendees
 			.filterNot(attendeeIsPlaced)
 			.map(attendee => attendee.get("teamMember"))
 			.sort((x, y) => {
@@ -13,13 +12,13 @@ export default function(state) {
 					return x.get("sortName").localeCompare(y.get("sortName"));
 				}
 
-				return x.get("position") === attendeePositions.COXSWAIN ? -1 : 1;
+				return x.get("position") === "COXSWAIN" ? -1 : 1;
 			}),
 		boats: state
-			.get("boats")
+			.boats
 			.map((boat, boatKey) => {
 				const attendees = state
-					.get("attendees")
+					.attendees
 					.filter(attendee => attendee.getIn(["placement", "boatKey"]) === boatKey);
 				
 				const boatSeats = createBoatSeats(boat.get("type"))
