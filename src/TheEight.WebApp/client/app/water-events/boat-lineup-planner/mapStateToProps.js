@@ -1,40 +1,57 @@
-import createBoatSeats from "./utils/createBoatSeats";
-import { attendeeIsPlaced } from "./utils/attendeeUtils";
+const sortAttendees = (x, y) => {
+    if (x.get("position") === y.get("position")) {
+        return x
+            .get("sortName")
+            .localeCompare(y.get("sortName"));
+    }
 
-export default function(state) {
-	return {
-		unassignedAttendees: state
-			.attendees
-			.filterNot(attendeeIsPlaced)
-			.map(attendee => attendee.get("teamMember"))
-			.sort((x, y) => {
-				if (x.get("position") === y.get("position")) {
-					return x.get("sortName").localeCompare(y.get("sortName"));
-				}
+    return x.get("position") === 0 ? -1 : 1;
+};
 
-				return x.get("position") === "COXSWAIN" ? -1 : 1;
-			}),
-		boats: state
-			.boats
-			.map((boat, boatKey) => {
-				const attendees = state
-					.attendees
-					.filter(attendee => attendee.getIn(["placement", "boatKey"]) === boatKey);
-				
-				const boatSeats = createBoatSeats(boat.get("type"))
-					.map((seat, seatPosition) => {
-						const seatAttendee = attendees.find(attendee => 
-							attendee.getIn(["placement", "seat"]) === seatPosition
-						);
-						
-						if (seatAttendee) {
-							return seat.set("attendee", seatAttendee.get("teamMember"));
-						}
-						
-						return seat.set("attendee", null);
-					});
-				
-				return boat.set("seats", boatSeats);
-			})
+export default state => {
+    const { event } = state;
+
+    const attendeeIsAssignable = attendee => {
+        const allowMultiple = event.getIn(["settings", "allowMultipleAssignments"]);
+        
+        if (allowMultiple) {
+            return true;
+        }
+
+        const assigned = event
+            .get("boats")
+            .flatMap(boat => boat.get("seatAssignments"));
+
+        const attendeeId = attendee.get("attendeeId");
+        return assigned.includes(attendeeId);
+    };
+
+    const mapBoat = boat => {
+        const allAttendees = event.get("attendees");
+
+        const seats = boat
+            .get("seatAssignments")
+            .map(seat => {
+                if (seat === null) {
+                    return null;
+                }
+
+                return allAttendees
+                    .find(attendee => seat === attendee.get("attendeeId"));
+            });
+
+        return boat.set("seatAssignments", seats);
+    }
+
+    return {
+        eventSettings: event.get("settings"),
+        boats: event
+            .get("boats")
+            .map(mapBoat),
+        attendees: event.get("attendees"),
+        assignableAttendees: event
+            .get("attendees")
+			.filterNot(attendeeIsAssignable)
+			.sort(sortAttendees)
 	}
-}
+};

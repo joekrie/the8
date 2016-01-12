@@ -1,6 +1,6 @@
-﻿import {flatten} from "lodash";
+import {flatten} from "lodash";
 
-export default function(unparsed) {
+const parseBulkEmails = unparsed => {
     const delimiters = [/\r?\n/, ",", ";", " "];
     let splitEmails = [unparsed];
 
@@ -12,6 +12,13 @@ export default function(unparsed) {
     const emails = splitEmails
         .map(email => email.trim())
         .filter(email => email !== "" && email !== null);
-    
+
     return emails;
-}
+};
+
+export default (state, action) => {
+    const emails = action.payload.emails;
+    const emailList = parseBulkEmails(emails);
+    const newList = state.emails.push(...emailList);
+    return { emails: newList };
+};

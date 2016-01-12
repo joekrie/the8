@@ -1,23 +1,16 @@
 import { createAction, handleActions } from "redux-actions";
 import Immutable from "immutable";
-
-function assignAttendee(state, action) {
-    state.setIn(["attendees", action.payload.attendeeId, "placement", "boatKey"], action.payload.boatKey)
-        .setIn(["attendees", action.payload.attendeeId, "placement", "seat"], action.payload.seatPosition);
-}
-
-function unassignAttendee(state, action) {
-    const emptyAttendeePlacement = Immutable.fromJS({
-        boatKey: "",
-        seat: ""
-    });
-
-    state.setIn(["attendees", action.payload.attendeeId, "placement"], emptyAttendeePlacement);
-}
+import assignAttendee from "./reducers/assignAttendee";
+import unassignAttendee from "./reducers/unassignAttendee";
 
 const defaultState = {
-    attendees: Immutable.Map(),
-    boats: Immutable.Map()
+    event: Immutable.fromJS({
+        settings: {
+            allowMultipleAssignments: false
+        },
+        attendees: [],
+        boats: []
+    })
 };
 
 export const reducer = handleActions({

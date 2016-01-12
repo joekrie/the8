@@ -1,30 +1,9 @@
 import { handleActions, createAction } from "redux-actions";
 import Immutable from "immutable";
-import parseBulkEmails from "./utils/parseBulkEmails";
-
-function addEmail(state) {
-    const newList = state.emails.push("");
-    return { emails: newList };
-}
-
-function addBulkEmails(state, action) {
-    const emails = action.payload.emails;
-    const emailList = parseBulkEmails(emails);
-    const newList = state.emails.push(...emailList);
-    return { emails: newList };
-}
-
-function removeEmail(state, action) {
-    const index = action.payload.index;
-    const newList = state.emails.delete(index);
-    return { emails: newList };
-}
-
-function updateEmail(state, action) {
-    const { email, index } = action.payload;
-    const newList = state.emails.set(index, email);
-    return { emails: newList };
-}
+import addEmail from "./reducers/addEmail";
+import addBulkEmails from "./reducers/addBulkEmails";
+import updateEmail from "./reducers/updateEmail";
+import removeEmail from "./reducers/removeEmail";
 
 const defaultState = {
     emails: Immutable.List()

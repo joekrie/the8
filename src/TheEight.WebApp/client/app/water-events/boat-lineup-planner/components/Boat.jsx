@@ -10,7 +10,12 @@ export default function(props) {
 					{boat.get("title")}
 				</div>
 				<div>
-					{boat.get("seats").map((seat, seatPosition) => <BoatSeat key={seatPosition} seat={seat} seatPosition={seatPosition} boatKey={boatKey} onAssignAttendee={onAssignAttendee} />)}
+					{boat.get("seats").map((seat, seatPosition) => 
+					    <BoatSeat key={seatPosition} 
+				                  seat={seat} 
+				                  seatPosition={seatPosition} 
+				                  boatKey={boatKey}  
+				                  onAssignAttendee={onAssignAttendee} />)}
 				</div>
 			</div>
 		</div>
