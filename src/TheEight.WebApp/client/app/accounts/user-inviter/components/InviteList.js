@@ -1,6 +1,7 @@
 import { PropTypes } from "react";
 import Email from "./Email";
 import ImmutablePropTypes from "react-immutable-proptypes";
+import Radium from "radium";
 
 const InviteList = props => {
     const { emails, addEmail, removeEmail, updateEmail } = props;
@@ -29,4 +30,4 @@ InviteList.propTypes = {
     updateEmail: PropTypes.func.isRequired
 };
 
-export default InviteList;
+export default Radium(InviteList);

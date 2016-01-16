@@ -7,10 +7,10 @@ import Container from "./Container";
 
 export default class extends Component {
     render() {
-        const { initialEmails } = this.props;
+        const { event } = this.props;
 
         const store = createStore(reducer, {
-            emails: Immutable.List(initialEmails)
+            event: Immutable.fromJS(event)
         });
 
         return (

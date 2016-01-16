@@ -1,6 +1,7 @@
-﻿import React from "react";
+﻿import {PropTypes, Component} from "react";
+import Radium from "radium";
 
-class BulkParser extends React.Component {
+class BulkParser extends Component {
     constructor(props) {
         super(props);
         this.state = { unparsedEmails: "" };
@@ -21,10 +22,12 @@ class BulkParser extends React.Component {
         };
 
         return (
-            <div>
-                <textarea value={unparsedEmails} onChange={handleEmailsChange}></textarea>
-                <br/>
-                <button onClick={handleAddEmails}>
+            <div style={[styles.root]}>
+                <textarea style={[styles.textbox]} 
+                          value={unparsedEmails} 
+                          onChange={handleEmailsChange} />
+                <button style={[styles.addButton]} 
+                        onClick={handleAddEmails}>
                     Add
                 </button>
             </div>
@@ -32,8 +35,20 @@ class BulkParser extends React.Component {
     }
 }
 
-BulkParser.propTypes = {
-    addBulkEmails: React.PropTypes.func
+const styles = {
+    root: {
+        
+    },
+    textbox: {
+        "display": "block"
+    },
+    addButton: {
+        "display": "block"
+    }
 };
 
-export default BulkParser;
+BulkParser.propTypes = {
+    addBulkEmails: PropTypes.func.isRequired
+};
+
+export default Radium(BulkParser);

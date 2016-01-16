@@ -38,7 +38,8 @@
   },
   "exclude": [
     "dist",
-    "node_modules"
+    "node_modules",
+    ".idea"
   ],
   "frameworks": {
     "dnx451": { }
@@ -46,6 +47,7 @@
   "publishExclude": [
     "node_modules",
     "jspm_packages",
+    ".idea",
     "**.xproj",
     "**.user",
     "**.vspscc"

@@ -1,13 +1,13 @@
 import { Component, PropTypes } from "react";
 import { DropTarget } from "react-dnd";
-import UnassignedAttendeeList from "./UnassignedAttendeeList";
+import AssignableAttendeeList from "./AssignableAttendeeList";
 
 const spec = {
 	drop: (props, monitor) => {
 		const { attendeeId } = monitor.getItem();
-		const { onUnassignAttendee } = props;
+		const { unassignAttendee } = props;
 
-		onUnassignAttendee(attendeeId);
+	    unassignAttendee({ attendeeId });
 	}
 };
 
@@ -18,11 +18,11 @@ const collect = connect => ({
 @DropTarget("ATTENDEE", spec, collect)
 export default class extends Component {
 	render() {
-		const { unassignedAttendees, connectDropTarget } = this.props;
+	    const { assignableAttendees, connectDropTarget } = this.props;
 
 	    return connectDropTarget(
 	        <div>
-                <UnassignedAttendeeList unassignedAttendees={unassignedAttendees} />
+                <AssignableAttendeeList assignableAttendees={assignableAttendees} />
             </div>
 		);
 	}

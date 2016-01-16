@@ -4,20 +4,23 @@ import { connect } from "react-redux";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 import ImmutablePropTypes from "react-immutable-proptypes";
-import UnassignedAttendeeList from "./components/UnassignedAttendeeList";
+import AssignableAttendeeListDropTarget from "./components/AssignableAttendeeListDropTarget";
 import BoatList from "./components/BoatList";
 import mapStateToProps from "./mapStateToProps";
 import { actionCreators } from "./actions";
+import Radium from "radium";
 
 @DragDropContext(HTML5Backend)
 class Container extends Component {
 	render() {
-	    const { unassignedAttendees, boats } = this.props;
+	    const { assignableAttendees, assignAttendee, unassignAttendee, boats } = this.props;
 
 		return (
-			<div className="boat-lineup-planner">
-				<UnassignedAttendeeList unassignedAttendees={unassignedAttendees} />
-				<BoatList boats={boats} />
+			<div style={[styles.root]}>
+				<AssignableAttendeeListDropTarget assignableAttendees={assignableAttendees} 
+                                                  unassignAttendee={unassignAttendee} />
+				<BoatList boats={boats}
+                          assignAttendee={assignAttendee}/>
 			</div>
 		);
 	}
@@ -27,7 +30,16 @@ Container.propTypes = {
     //unassignedAttendees: ImmutablePropTypes.listOf().isRequired
 };
 
-export default connect(
+const styles = {
+    root: {
+        "position": "absolute",
+        "height": "100%"
+    }
+};
+
+const ConnectedApp = connect(
     mapStateToProps,
     dispatch => bindActionCreators(actionCreators, dispatch)
 )(Container);
+
+export default Radium(ConnectedApp);

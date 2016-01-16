@@ -1,4 +1,5 @@
 import { PropTypes } from "react";
+import Radium from "radium";
 
 const Email = props => {
     const { removeEmail, updateEmail, email, index } = props;
@@ -29,4 +30,4 @@ Email.propTypes = {
     index: PropTypes.number.isRequired
 };
 
-export default Email;
+export default Radium(Email);
