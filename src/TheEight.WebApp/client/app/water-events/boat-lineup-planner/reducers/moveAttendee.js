@@ -1,17 +1,19 @@
 export default (state, action) => {
-    const { oldSeatPosition, attendeeId, boatId } = action.payload;
+    console.log("move");
 
-    const boatAndPos = state.event
+    const { oldPlacement, newPlacement, attendeeId  } = action.payload;
+    
+    const newBoatAndPos = state.event
         .get("boats")
-        .findEntry(boat => boat.get("boatId") === boatId);
-
-    const newBoat = boatAndPos[1]
-        .setIn(["seatAssignments", String(seatPosition)], attendeeId);
+        .findEntry(boat => boat.get("boatId") === newPlacement.boatId);
+    
+    const newBoat = newBoatAndPos[1]
+        .setIn(["seatAssignments", String(newPlacement.seatPosition)], attendeeId);
 
     const newState = Object.create(state);
 
     newState.event = state.event
-        .setIn(["boats", boatAndPos[0]], newBoat);
+        .setIn(["boats", newBoatAndPos[0]], newBoat);
 
     return newState;
 };

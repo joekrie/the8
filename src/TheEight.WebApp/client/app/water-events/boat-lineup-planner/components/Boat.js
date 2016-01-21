@@ -3,7 +3,7 @@ import Radium from "radium";
 import { range } from "lodash";
 
 const Boat = props => {
-    const { boat, assignAttendee } = props;
+    const { boat, assignAttendee, moveAttendee } = props;
     const boatId = boat.get("boatId");
 
     const firstSeatNum = boat.get("isCoxed") ? 0 : 1;
@@ -11,12 +11,13 @@ const Boat = props => {
     const boats = range(firstSeatNum, boat.get("seatCount") + 1)
         .map(seatPosition => {
             const attendee = boat.getIn(["seatAssignments", String(seatPosition)]);
+            const placement = { boatId, seatPosition };
 
             return <BoatSeatDropTarget key={seatPosition}
-                                       boatId={boatId}
+                                       placement={placement}
                                        attendee={attendee}
-                                       seatPosition={seatPosition}
-                                       assignAttendee={assignAttendee} />;
+                                       assignAttendee={assignAttendee}
+                                       moveAttendee={moveAttendee} />;
         });
 		
 	return (

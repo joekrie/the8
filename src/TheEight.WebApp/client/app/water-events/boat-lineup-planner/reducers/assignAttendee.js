@@ -1,12 +1,12 @@
 export default (state, action) => {
-    const { seatPosition, attendeeId, boatId } = action.payload;
+    const { newPlacement, attendeeId } = action.payload;
 
     const boatAndPos = state.event
         .get("boats")
-        .findEntry(boat => boat.get("boatId") === boatId);
+        .findEntry(boat => boat.get("boatId") === newPlacement.boatId);
 
     const newBoat = boatAndPos[1]
-        .setIn(["seatAssignments", String(seatPosition)], attendeeId);
+        .setIn(["seatAssignments", String(newPlacement.seatPosition)], attendeeId);
 
     const newState = Object.create(state);
 

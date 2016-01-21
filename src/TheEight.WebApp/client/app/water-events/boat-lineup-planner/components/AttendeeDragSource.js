@@ -3,9 +3,14 @@ import { DragSource } from "react-dnd";
 import Attendee from "./Attendee";
 
 const dndSpec = {
-	beginDrag: props => ({
-		attendeeId: props.attendee.get("attendeeId")
-	})
+    beginDrag: props => {
+        const { attendee, placement } = props;
+
+	    return {
+	        attendeeId: attendee.get("attendeeId"),
+            oldPlacement: placement
+	    };
+	}
 };
 
 const dndCollect = connect => ({
@@ -13,7 +18,7 @@ const dndCollect = connect => ({
 });
 
 @DragSource("ATTENDEE", dndSpec, dndCollect)
-export default class extends Component {
+class AttendeeDragSource extends Component {
     render() {
         const { attendee, connectDragSource } = this.props;
 
@@ -24,3 +29,5 @@ export default class extends Component {
         );
     }
 }
+
+export default AttendeeDragSource;

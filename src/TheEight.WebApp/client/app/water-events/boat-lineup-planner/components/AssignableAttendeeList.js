@@ -5,12 +5,14 @@ const AssignableAttendeeList = props => {
     const { assignableAttendees } = props;
 
     return (
-        <div style={[styles.root]}>
-            <div style={[styles.header]}>
+        <div style={styles.root}>
+            <div style={styles.header}>
                 Unassigned
             </div>
-            <div style={[styles.attendeeList]}>
-                {assignableAttendees.map(tm => <AttendeeDragSource key={tm.attendeeId} attendee={tm} />)}
+            <div style={styles.attendeeList}>
+                {assignableAttendees.map(attendee => 
+                    <AttendeeDragSource key={attendee.get("attendeeId")} 
+                                        attendee={attendee} />)}
             </div>
 		</div>
     );

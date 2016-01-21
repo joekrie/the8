@@ -17,7 +17,7 @@ const Attendee = props => {
 };
 
 Attendee.propTypes = {
-
+    
 };
 
 const styles = {

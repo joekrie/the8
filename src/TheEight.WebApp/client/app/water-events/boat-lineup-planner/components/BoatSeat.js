@@ -2,23 +2,26 @@ import AttendeeDragSource from "./AttendeeDragSource";
 import Radium from "radium";
 import clearfix from "../../../common/styles/clearfix";
 
-const createAttendee = attendee => {
-    if (!attendee) {
-        return null;
-    }
-
-    const attendeeId = attendee.get("attendeeId");
-    return <AttendeeDragSource key={attendeeId} attendee={attendee} />;
-};
-
 const BoatSeat = props => {
-    const { attendee, seatPosition } = props;
-    const attendeeComponent = createAttendee(attendee);
+    const { attendee, placement } = props;
+
+    let attendeeComponent;
+
+    if (attendee) {
+        const attendeeId = attendee.get("attendeeId");
+
+        attendeeComponent = 
+            <AttendeeDragSource key={attendeeId} 
+                                attendee={attendee} 
+                                placement={placement}/>;
+    } else {
+        attendeeComponent = null;
+    }
 
     return (
         <div style={styles.root}>
             <div style={styles.label}>
-                {seatPosition}
+                {placement.seatPosition}
             </div>
             {attendeeComponent}
         </div>

@@ -2,14 +2,15 @@ import Boat from "./Boat";
 import Radium from "radium";
 
 const BoatList = props => {
-    const { boats, assignAttendee } = props;
+    const { boats, assignAttendee, moveAttendee } = props;
 
     return (
         <div style={styles.root}>
 			{boats.map(boat => 
 			    <Boat key={boat.get("boatId")}
                       boat={boat}
-                      assignAttendee={assignAttendee} />)}
+                      assignAttendee={assignAttendee} 
+                      moveAttendee={moveAttendee} />)}
 		</div>
     );
 };
