@@ -2,10 +2,6 @@ import { Component, PropTypes } from "react";
 import { DropTarget } from "react-dnd";
 import BoatSeat from "./BoatSeat";
 
-const seatIsEmpty = seat => {
-    return !Boolean(seat.get("attendee"));
-};
-
 const spec = {
 	drop: (props, monitor) => {
 		const { attendeeId } = monitor.getItem();
@@ -13,7 +9,7 @@ const spec = {
 
 	    assignAttendee({ attendeeId, boatId, seatPosition });
 	},
-	canDrop: props => seatIsEmpty(props.seat)
+	canDrop: props => !props.attendee
 };
 
 const collect = connect => ({
@@ -23,11 +19,12 @@ const collect = connect => ({
 @DropTarget("ATTENDEE", spec, collect)
 export default class extends Component {
 	render() {
-	    const { connectDropTarget, seat, seatPosition } = this.props;
+	    const { connectDropTarget, attendee, seatPosition } = this.props;
 
 		return connectDropTarget(
 			<div>
-                <BoatSeat seat={seat} seatPosition={seatPosition} />
+                <BoatSeat attendee={attendee} 
+                          seatPosition={seatPosition} />
 			</div>
 		);
 	}

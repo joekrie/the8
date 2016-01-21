@@ -1,5 +1,5 @@
 export default (state, action) => {
-    const { seatPosition, attendeeId, boatId } = action.payload;
+    const { oldSeatPosition, attendeeId, boatId } = action.payload;
 
     const boatAndPos = state.event
         .get("boats")

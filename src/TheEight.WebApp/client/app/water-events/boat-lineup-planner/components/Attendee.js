@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import Radium from "radium";
 import { PropTypes } from "react";
 

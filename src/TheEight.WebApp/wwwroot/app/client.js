@@ -90,13 +90,13 @@
 	        position: "COXSWAIN"
 	    }, {
 	        attendeeId: "squad-member-5",
-	        displayName: "John Doe",
-	        sortName: "Doe, John",
+	        displayName: "Billy Madison",
+	        sortName: "Madison, Billy",
 	        position: "ROWER"
 	    }, {
 	        attendeeId: "anonymous-1",
-	        displayName: "John Doe",
-	        sortName: "Doe, John",
+	        displayName: "Abe Lincoln",
+	        sortName: "Lincoln, Abe",
 	        position: "ROWER"
 	    }]
 	};
@@ -45111,9 +45111,22 @@
 	});
 
 	exports.default = function (state, action) {
-	    console.log("assigning attendee");
-	    console.log(action);
-	    return state;
+	    var _action$payload = action.payload;
+	    var seatPosition = _action$payload.seatPosition;
+	    var attendeeId = _action$payload.attendeeId;
+	    var boatId = _action$payload.boatId;
+
+	    var boatAndPos = state.event.get("boats").findEntry(function (boat) {
+	        return boat.get("boatId") === boatId;
+	    });
+
+	    var newBoat = boatAndPos[1].setIn(["seatAssignments", String(seatPosition)], attendeeId);
+
+	    var newState = Object.create(state);
+
+	    newState.event = state.event.setIn(["boats", boatAndPos[0]], newBoat);
+
+	    return newState;
 	};
 
 /***/ },
@@ -45133,12 +45146,25 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = function (state, action) {
-	    var emptyAttendeePlacement = _immutable2.default.fromJS({
-	        boatKey: "",
-	        seat: ""
-	    });
+	    console.log(action);
 
-	    state.setIn(["attendees", action.payload.attendeeId, "placement"], emptyAttendeePlacement);
+	    //const { seatPosition, attendeeId, boatId } = action.payload;
+
+	    //const boatAndPos = state.event
+	    //    .get("boats")
+	    //    .findEntry(boat => boat.get("boatId") === boatId);
+
+	    //const newBoat = boatAndPos[1]
+	    //    .setIn(["seatAssignments", String(seatPosition)], attendeeId);
+
+	    //const newState = Object.create(state);
+
+	    //newState.event = state.event
+	    //    .setIn(["boats", boatAndPos[0]], newBoat);
+
+	    //return newState;
+
+	    return state;
 	};
 
 /***/ },
@@ -45175,11 +45201,11 @@
 
 	var _AssignableAttendeeListDropTarget2 = _interopRequireDefault(_AssignableAttendeeListDropTarget);
 
-	var _BoatList = __webpack_require__(392);
+	var _BoatList = __webpack_require__(391);
 
 	var _BoatList2 = _interopRequireDefault(_BoatList);
 
-	var _mapStateToProps = __webpack_require__(397);
+	var _mapStateToProps = __webpack_require__(396);
 
 	var _mapStateToProps2 = _interopRequireDefault(_mapStateToProps);
 
@@ -45217,7 +45243,7 @@
 
 	            return React.createElement(
 	                "div",
-	                { style: [styles.root] },
+	                { style: styles.root },
 	                React.createElement(_AssignableAttendeeListDropTarget2.default, { assignableAttendees: assignableAttendees,
 	                    unassignAttendee: unassignAttendee }),
 	                React.createElement(_BoatList2.default, { boats: boats,
@@ -52355,10 +52381,6 @@
 	    value: true
 	});
 
-	var _classnames = __webpack_require__(391);
-
-	var _classnames2 = _interopRequireDefault(_classnames);
-
 	var _radium = __webpack_require__(205);
 
 	var _radium2 = _interopRequireDefault(_radium);
@@ -52408,67 +52430,13 @@
 /* 391 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2015 Jed Watson.
-	  Licensed under the MIT License (MIT), see
-	  http://jedwatson.github.io/classnames
-	*/
-	/* global define */
-
-	(function () {
-		'use strict';
-
-		var hasOwn = {}.hasOwnProperty;
-
-		function classNames () {
-			var classes = '';
-
-			for (var i = 0; i < arguments.length; i++) {
-				var arg = arguments[i];
-				if (!arg) continue;
-
-				var argType = typeof arg;
-
-				if (argType === 'string' || argType === 'number') {
-					classes += ' ' + arg;
-				} else if (Array.isArray(arg)) {
-					classes += ' ' + classNames.apply(null, arg);
-				} else if (argType === 'object') {
-					for (var key in arg) {
-						if (hasOwn.call(arg, key) && arg[key]) {
-							classes += ' ' + key;
-						}
-					}
-				}
-			}
-
-			return classes.substr(1);
-		}
-
-		if (typeof module !== 'undefined' && module.exports) {
-			module.exports = classNames;
-		} else if (true) {
-			// register as 'classnames', consistent with npm package name
-			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
-				return classNames;
-			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-		} else {
-			window.classNames = classNames;
-		}
-	}());
-
-
-/***/ },
-/* 392 */
-/***/ function(module, exports, __webpack_require__) {
-
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 
-	var _Boat = __webpack_require__(393);
+	var _Boat = __webpack_require__(392);
 
 	var _Boat2 = _interopRequireDefault(_Boat);
 
@@ -52478,21 +52446,17 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var createBoat = function createBoat(boat, assignAttendee) {
-	    return React.createElement(_Boat2.default, { key: boat.get("boatId"),
-	        boat: boat,
-	        assignAttendee: assignAttendee });
-	};
-
 	var BoatList = function BoatList(props) {
 	    var boats = props.boats;
 	    var assignAttendee = props.assignAttendee;
 
 	    return React.createElement(
 	        "div",
-	        { style: [styles.root] },
+	        { style: styles.root },
 	        boats.map(function (boat) {
-	            return createBoat(boat, assignAttendee);
+	            return React.createElement(_Boat2.default, { key: boat.get("boatId"),
+	                boat: boat,
+	                assignAttendee: assignAttendee });
 	        })
 	    );
 	};
@@ -52508,16 +52472,16 @@
 	exports.default = (0, _radium2.default)(BoatList);
 
 /***/ },
-/* 393 */
+/* 392 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	    value: true
 	});
 
-	var _BoatSeatDropTarget = __webpack_require__(394);
+	var _BoatSeatDropTarget = __webpack_require__(393);
 
 	var _BoatSeatDropTarget2 = _interopRequireDefault(_BoatSeatDropTarget);
 
@@ -52525,61 +52489,69 @@
 
 	var _radium2 = _interopRequireDefault(_radium);
 
+	var _lodash = __webpack_require__(197);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Boat = function Boat(props) {
-		var boat = props.boat;
-		var assignAttendee = props.assignAttendee;
+	    var boat = props.boat;
+	    var assignAttendee = props.assignAttendee;
 
-		var boatId = boat.get("boatId");
+	    var boatId = boat.get("boatId");
 
-		return React.createElement(
-			"div",
-			{ style: [styles.root] },
-			React.createElement(
-				"div",
-				null,
-				React.createElement(
-					"div",
-					{ style: [styles.header] },
-					boat.get("title")
-				),
-				React.createElement(
-					"div",
-					null,
-					boat.get("seatAssignments").map(function (seat, seatPosition) {
-						return React.createElement(_BoatSeatDropTarget2.default, { key: seatPosition,
-							boatId: boatId,
-							seat: seat,
-							seatPosition: seatPosition,
-							assignAttendee: assignAttendee });
-					})
-				)
-			)
-		);
+	    var firstSeatNum = boat.get("isCoxed") ? 0 : 1;
+
+	    var boats = (0, _lodash.range)(firstSeatNum, boat.get("seatCount") + 1).map(function (seatPosition) {
+	        var attendee = boat.getIn(["seatAssignments", String(seatPosition)]);
+
+	        return React.createElement(_BoatSeatDropTarget2.default, { key: seatPosition,
+	            boatId: boatId,
+	            attendee: attendee,
+	            seatPosition: seatPosition,
+	            assignAttendee: assignAttendee });
+	    });
+
+	    return React.createElement(
+	        "div",
+	        { style: [styles.root] },
+	        React.createElement(
+	            "div",
+	            null,
+	            React.createElement(
+	                "div",
+	                { style: [styles.header] },
+	                boat.get("title")
+	            ),
+	            React.createElement(
+	                "div",
+	                null,
+	                boats
+	            )
+	        )
+	    );
 	};
 
 	Boat.propTypes = {};
 
 	var styles = {
-		root: {
-			"width": "300px",
-			"backgroundColor": "#263751",
-			"display": "inline-block",
-			"marginRight": "20px",
-			"color": "#F5F5F5"
-		},
-		header: {
-			"backgroundColor": "#263F52",
-			"marginBottom": "10px",
-			"padding": "10px"
-		}
+	    root: {
+	        "width": "300px",
+	        "backgroundColor": "#263751",
+	        "display": "inline-block",
+	        "marginRight": "20px",
+	        "color": "#F5F5F5"
+	    },
+	    header: {
+	        "backgroundColor": "#263F52",
+	        "marginBottom": "10px",
+	        "padding": "10px"
+	    }
 	};
 
 	exports.default = (0, _radium2.default)(Boat);
 
 /***/ },
-/* 394 */
+/* 393 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -52597,7 +52569,7 @@
 
 	var _reactDnd = __webpack_require__(257);
 
-	var _BoatSeat = __webpack_require__(395);
+	var _BoatSeat = __webpack_require__(394);
 
 	var _BoatSeat2 = _interopRequireDefault(_BoatSeat);
 
@@ -52608,10 +52580,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var seatIsEmpty = function seatIsEmpty(seat) {
-		return !Boolean(seat.get("attendee"));
-	};
 
 	var spec = {
 		drop: function drop(props, monitor) {
@@ -52625,7 +52593,7 @@
 			assignAttendee({ attendeeId: attendeeId, boatId: boatId, seatPosition: seatPosition });
 		},
 		canDrop: function canDrop(props) {
-			return seatIsEmpty(props.seat);
+			return !props.attendee;
 		}
 	};
 
@@ -52649,13 +52617,14 @@
 			value: function render() {
 				var _props = this.props;
 				var connectDropTarget = _props.connectDropTarget;
-				var seat = _props.seat;
+				var attendee = _props.attendee;
 				var seatPosition = _props.seatPosition;
 
 				return connectDropTarget(React.createElement(
 					"div",
 					null,
-					React.createElement(_BoatSeat2.default, { seat: seat, seatPosition: seatPosition })
+					React.createElement(_BoatSeat2.default, { attendee: attendee,
+						seatPosition: seatPosition })
 				));
 			}
 		}]);
@@ -52666,7 +52635,7 @@
 	exports.default = _default;
 
 /***/ },
-/* 395 */
+/* 394 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -52683,42 +52652,36 @@
 
 	var _radium2 = _interopRequireDefault(_radium);
 
-	var _clearfix = __webpack_require__(396);
+	var _clearfix = __webpack_require__(395);
 
 	var _clearfix2 = _interopRequireDefault(_clearfix);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var seatIsEmpty = function seatIsEmpty(seat) {
-	    return !Boolean(seat.get("attendee"));
-	};
-
-	var createAttendee = function createAttendee(seat) {
-	    if (seatIsEmpty(seat)) {
+	var createAttendee = function createAttendee(attendee) {
+	    if (!attendee) {
 	        return null;
 	    }
 
-	    var attendeeId = seat.getIn(["attendee", "id"]);
-	    var attendee = seat.get("attendee");
-
+	    var attendeeId = attendee.get("attendeeId");
 	    return React.createElement(_AttendeeDragSource2.default, { key: attendeeId, attendee: attendee });
 	};
 
 	var BoatSeat = function BoatSeat(props) {
-	    var seat = props.seat;
+	    var attendee = props.attendee;
 	    var seatPosition = props.seatPosition;
 
-	    var attendee = createAttendee(seat);
+	    var attendeeComponent = createAttendee(attendee);
 
 	    return React.createElement(
 	        "div",
-	        { style: [styles.root] },
+	        { style: styles.root },
 	        React.createElement(
 	            "div",
-	            { style: [styles.label] },
+	            { style: styles.label },
 	            seatPosition
 	        ),
-	        attendee
+	        attendeeComponent
 	    );
 	};
 
@@ -52739,7 +52702,7 @@
 	exports.default = (0, _radium2.default)(BoatSeat);
 
 /***/ },
-/* 396 */
+/* 395 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -52756,7 +52719,7 @@
 	};
 
 /***/ },
-/* 397 */
+/* 396 */
 /***/ function(module, exports) {
 
 	"use strict";

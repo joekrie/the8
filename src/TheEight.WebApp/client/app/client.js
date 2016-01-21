@@ -36,14 +36,14 @@ const event = {
         },
         {
             attendeeId: "squad-member-5",
-            displayName: "John Doe",
-            sortName: "Doe, John",
+            displayName: "Billy Madison",
+            sortName: "Madison, Billy",
             position: "ROWER"
         },
         {
             attendeeId: "anonymous-1",
-            displayName: "John Doe",
-            sortName: "Doe, John",
+            displayName: "Abe Lincoln",
+            sortName: "Lincoln, Abe",
             position: "ROWER"
         }
     ]

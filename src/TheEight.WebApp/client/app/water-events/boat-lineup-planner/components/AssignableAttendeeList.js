@@ -10,7 +10,7 @@ const AssignableAttendeeList = props => {
                 Unassigned
             </div>
             <div style={[styles.attendeeList]}>
-                {assignableAttendees.map(tm => <AttendeeDragSource key={tm.id} attendee={tm} />)}
+                {assignableAttendees.map(tm => <AttendeeDragSource key={tm.attendeeId} attendee={tm} />)}
             </div>
 		</div>
     );

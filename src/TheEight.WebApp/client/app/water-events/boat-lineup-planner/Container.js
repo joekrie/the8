@@ -16,7 +16,7 @@ class Container extends Component {
 	    const { assignableAttendees, assignAttendee, unassignAttendee, boats } = this.props;
 
 		return (
-			<div style={[styles.root]}>
+			<div style={styles.root}>
 				<AssignableAttendeeListDropTarget assignableAttendees={assignableAttendees} 
                                                   unassignAttendee={unassignAttendee} />
 				<BoatList boats={boats}
