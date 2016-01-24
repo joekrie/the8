@@ -20,10 +20,10 @@ export default state => {
 
         const assigned = event
             .get("boats")
-            .flatMap(boat => boat.get("seatAssignments"));
+            .flatMap(boat => boat.get("seatAssignments").valueSeq());
 
         const attendeeId = attendee.get("attendeeId");
-        return assigned.includes(attendeeId);
+        return !assigned.includes(attendeeId);
     };
 
     const mapBoat = boat => {
@@ -51,7 +51,7 @@ export default state => {
         attendees: event.get("attendees"),
         assignableAttendees: event
             .get("attendees")
-			.filterNot(attendeeIsAssignable)
+			.filter(attendeeIsAssignable)
 			.sort(sortAttendees)
 	}
 };

@@ -4,20 +4,23 @@ import BoatSeat from "./BoatSeat";
 
 const spec = {
     drop: (props, monitor) => {
-        const { assignAttendee, moveAttendee, placement } = props;
+        const { placeAttendee, placement, attendee } = props;
+        const targetAttendeeId = attendee ? attendee.get("attendeeId") : null;
         const dragItem = monitor.getItem();
-
-        if (dragItem) {
-            const { attendeeId, oldPlacement } = dragItem;
-
-            if (oldPlacement) {
-                moveAttendee({ attendeeId, newPlacement: placement, oldPlacement });
-            } else {
-                assignAttendee({ attendeeId, newPlacement: placement });
-            }
+        
+        if (!dragItem) {
+            return;
         }
-    },
-	canDrop: props => !props.attendee
+
+        const { movedAttendeeId, originPlacement } = dragItem;
+
+        placeAttendee({
+            targetPlacement: placement,
+            movedAttendeeId,
+            originPlacement,            
+            targetAttendeeId
+        });
+    }
 };
 
 const collect = connect => ({

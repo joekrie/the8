@@ -1,8 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import Immutable from "immutable";
-import assignAttendee from "./reducers/assignAttendee";
-import unassignAttendee from "./reducers/unassignAttendee";
-import moveAttendee from "./reducers/moveAttendee";
+import placeAttendee from "./reducers/placeAttendee";
+import unplaceAttendee from "./reducers/unplaceAttendee";
 
 const defaultState = {
     event: Immutable.fromJS({
@@ -15,13 +14,11 @@ const defaultState = {
 };
 
 export const reducer = handleActions({
-    ASSIGN_ATTENDEE: assignAttendee,
-    UNASSIGN_ATTENDEE: unassignAttendee,
-    MOVE_ATTENDEE: moveAttendee
+    PLACE_ATTENDEE: placeAttendee,
+    UNPLACE_ATTENDEE: unplaceAttendee
 }, defaultState);
 
 export const actionCreators = {
-    assignAttendee: createAction("ASSIGN_ATTENDEE"),
-    unassignAttendee: createAction("UNASSIGN_ATTENDEE"),
-    moveAttendee: createAction("MOVE_ATTENDEE")
+    placeAttendee: createAction("PLACE_ATTENDEE"),
+    unplaceAttendee: createAction("UNPLACE_ATTENDEE")
 };

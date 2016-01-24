@@ -7,8 +7,8 @@ const dndSpec = {
         const { attendee, placement } = props;
 
 	    return {
-	        attendeeId: attendee.get("attendeeId"),
-            oldPlacement: placement
+	        movedAttendeeId: attendee.get("attendeeId"),
+            originPlacement: placement
 	    };
 	}
 };

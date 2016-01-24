@@ -5,7 +5,7 @@ import BoatLineupPlannerApp from "./water-events/boat-lineup-planner/App";
 
 const event = {
     settings: {
-        allowMultipleAssignments: false
+        allowMultipleAssignments: true
     },
     boats: [
         {

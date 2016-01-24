@@ -13,22 +13,22 @@ import Radium from "radium";
 @DragDropContext(HTML5Backend)
 class Container extends Component {
 	render() {
-	    const { assignableAttendees, assignAttendee, unassignAttendee, moveAttendee, boats } = this.props;
+	    const { assignableAttendees, boats, placeAttendee, unplaceAttendee } = this.props;
 
 		return (
 			<div style={styles.root}>
 				<AssignableAttendeeListDropTarget assignableAttendees={assignableAttendees} 
-                                                  unassignAttendee={unassignAttendee} />
+                                                  unplaceAttendee={unplaceAttendee} />
 				<BoatList boats={boats}
-                          assignAttendee={assignAttendee}
-                          moveAttendee={moveAttendee} />
+                          placeAttendee={placeAttendee} />
 			</div>
 		);
 	}
 }
 
 Container.propTypes = {
-    //unassignedAttendees: ImmutablePropTypes.listOf().isRequired
+    placeAttendee: PropTypes.func.isRequired,
+    unplaceAttendee: PropTypes.func.isRequired
 };
 
 const styles = {

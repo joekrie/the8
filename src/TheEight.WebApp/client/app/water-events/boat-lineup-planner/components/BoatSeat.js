@@ -1,6 +1,5 @@
 import AttendeeDragSource from "./AttendeeDragSource";
 import Radium from "radium";
-import clearfix from "../../../common/styles/clearfix";
 
 const BoatSeat = props => {
     const { attendee, placement } = props;
@@ -29,9 +28,10 @@ const BoatSeat = props => {
 };
 
 const styles = {
-    root: Object.assign({
-        "height": "50px"
-    }, clearfix),
+    root: {
+        "height": "50px",
+        "clear": "both"
+    },
     label: {
         "float": "left",
         "height": "50px",

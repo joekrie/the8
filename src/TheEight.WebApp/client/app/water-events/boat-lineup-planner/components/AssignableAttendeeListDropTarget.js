@@ -3,11 +3,20 @@ import { DropTarget } from "react-dnd";
 import AssignableAttendeeList from "./AssignableAttendeeList";
 
 const spec = {
-	drop: (props, monitor) => {
-		const { attendeeId } = monitor.getItem();
-		const { unassignAttendee } = props;
+    drop: (props, monitor) => {
+        const dragItem = monitor.getItem();
 
-	    unassignAttendee({ attendeeId });
+        if (!dragItem) {
+            return;
+        }
+        
+		const { attendeeId, originPlacement } = dragItem;
+		const { unplaceAttendee } = props;
+
+		unplaceAttendee({ 
+		    movedAttendeeId: attendeeId, 
+		    originPlacement 
+		});
 	}
 };
 
