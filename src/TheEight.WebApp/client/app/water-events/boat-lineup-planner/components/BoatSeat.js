@@ -17,10 +17,12 @@ const BoatSeat = props => {
         attendeeComponent = null;
     }
 
+    const label = placement.seatPosition === "0" ? "COX" : placement.seatPosition;
+
     return (
         <div style={styles.root}>
             <div style={styles.label}>
-                {placement.seatPosition}
+                {label}
             </div>
             {attendeeComponent}
         </div>

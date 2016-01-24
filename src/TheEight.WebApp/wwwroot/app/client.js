@@ -52746,13 +52746,15 @@
 	        attendeeComponent = null;
 	    }
 
+	    var label = placement.seatPosition === "0" ? "COX" : placement.seatPosition;
+
 	    return React.createElement(
 	        "div",
 	        { style: styles.root },
 	        React.createElement(
 	            "div",
 	            { style: styles.label },
-	            placement.seatPosition
+	            label
 	        ),
 	        attendeeComponent
 	    );
