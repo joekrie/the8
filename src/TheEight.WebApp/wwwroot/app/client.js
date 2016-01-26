@@ -45072,8 +45072,6 @@
 
 	var _placeAttendee = __webpack_require__(254);
 
-	var _placeAttendee2 = _interopRequireDefault(_placeAttendee);
-
 	var _unplaceAttendee = __webpack_require__(255);
 
 	var _unplaceAttendee2 = _interopRequireDefault(_unplaceAttendee);
@@ -45091,7 +45089,7 @@
 	};
 
 	var reducer = exports.reducer = (0, _reduxActions.handleActions)({
-	    PLACE_ATTENDEE: _placeAttendee2.default,
+	    PLACE_ATTENDEE: _placeAttendee.placeAttendee,
 	    UNPLACE_ATTENDEE: _unplaceAttendee2.default
 	}, defaultState);
 
@@ -45102,7 +45100,7 @@
 
 /***/ },
 /* 254 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
@@ -45111,14 +45109,34 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	exports.previewPlaceAttendee = exports.placeAttendee = exports.attendeeMoveTypes = undefined;
 
-	exports.default = function (state, action) {
+	var _lodash = __webpack_require__(197);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var attendeeMoveTypes = exports.attendeeMoveTypes = {
+	    WITHIN_BOAT_TO_EMPTY_SEAT: 1,
+	    SWAP_WITHIN_BOAT: 2,
+	    FROM_OTHER_BOAT_TO_EMPTY_SEAT: 3,
+	    SWAP_FROM_OTHER_BOAT: 4,
+	    UNASSIGNED_TO_EMPTY_SEAT: 5,
+	    UNASSIGNED_TO_OCCUPIED_SEAT: 6
+	};
+
+	var placeAttendee = exports.placeAttendee = function placeAttendee(state, action) {
 	    var _action$payload = action.payload;
 	    var targetPlacement = _action$payload.targetPlacement;
 	    var movedAttendeeId = _action$payload.movedAttendeeId;
 	    var originPlacement = _action$payload.originPlacement;
 	    var targetAttendeeId = _action$payload.targetAttendeeId;
 	    var event = state.event;
+
+	    var _previewPlaceAttendee = previewPlaceAttendee(event.get("boats"), originPlacement, targetPlacement, movedAttendeeId);
+
+	    var moveType = _previewPlaceAttendee.moveType;
 
 	    var _event$get$findEntry = event.get("boats").findEntry(function (boat) {
 	        return boat.get("boatId") === targetPlacement.boatId;
@@ -45130,50 +45148,72 @@
 	    var targetBoat = _event$get$findEntry2[1];
 
 	    var newTargetBoat = targetBoat.setIn(["seatAssignments", targetPlacement.seatPosition], movedAttendeeId);
-	    var newEvent = event.setIn(["boats", targetBoatIndex], newTargetBoat);
-	    var movingWithinBoat = false;
+	    var newEvent = Object.create(event);
 
-	    if (originPlacement) {
-	        var _event$get$findEntry3 = event.get("boats").findEntry(function (boat) {
-	            return boat.get("boatId") === originPlacement.boatId;
-	        });
-
-	        var _event$get$findEntry4 = _slicedToArray(_event$get$findEntry3, 2);
-
-	        var originBoatIndex = _event$get$findEntry4[0];
-	        var originBoat = _event$get$findEntry4[1];
-
-	        if (targetAttendeeId) {
-	            if (originBoatIndex === targetBoatIndex) {
-	                newTargetBoat = newTargetBoat.setIn(["seatAssignments", originPlacement.seatPosition], targetAttendeeId);
-	                movingWithinBoat = true;
-	            } else {
-	                var newOriginBoat = originBoat.setIn(["seatAssignments", originPlacement.seatPosition], targetAttendeeId);
-	                newEvent = newEvent.setIn(["boats", originBoatIndex], newOriginBoat);
-	            }
-	        } else {
-	            if (originBoatIndex === targetBoatIndex) {
-	                newTargetBoat = newTargetBoat.deleteIn(["seatAssignments", originPlacement.seatPosition], targetAttendeeId);
-	                movingWithinBoat = true;
-	            } else {
-	                var newOriginBoat = originBoat.deleteIn(["seatAssignments", originPlacement.seatPosition], targetAttendeeId);
-	                newEvent = newEvent.setIn(["boats", originBoatIndex], newOriginBoat);
-	            }
-	        }
+	    if (moveType === attendeeMoveTypes.SWAP_WITHIN_BOAT) {
+	        newTargetBoat = newTargetBoat.setIn(["seatAssignments", originPlacement.seatPosition], targetAttendeeId);
+	        newEvent = newEvent.setIn(["boats", targetBoatIndex], newTargetBoat);
 	    }
 
-	    var alreadyInTargetBoat = targetBoat.get("seatAssignments").valueSeq().includes(movedAttendeeId);
-
-	    if (alreadyInTargetBoat && !movingWithinBoat) {
-	        return state;
+	    if (moveType === attendeeMoveTypes.SWAP_FROM_OTHER_BOAT) {
+	        var newOriginBoat = originBoat.setIn(["seatAssignments", originPlacement.seatPosition], targetAttendeeId);
+	        newEvent = newEvent.setIn(["boats", originBoatIndex], newOriginBoat);
 	    }
 
-	    newEvent = newEvent.setIn(["boats", targetBoatIndex], newTargetBoat);
+	    if (moveType === attendeeMoveTypes.WITHIN_BOAT_TO_EMPTY_SEAT) {
+	        newTargetBoat = newTargetBoat.deleteIn(["seatAssignments", originPlacement.seatPosition], targetAttendeeId);
+	        newEvent = newEvent.setIn(["boats", targetBoatIndex], newTargetBoat);
+	    }
+
+	    if (moveType === attendeeMoveTypes.FROM_OTHER_BOAT_TO_EMPTY_SEAT) {
+	        var newOriginBoat = originBoat.deleteIn(["seatAssignments", originPlacement.seatPosition], targetAttendeeId);
+	        newEvent = newEvent.setIn(["boats", originBoatIndex], newOriginBoat);
+	    }
 
 	    var newState = Object.create(state);
 	    newState.event = newEvent;
 
 	    return newState;
+	};
+
+	var previewPlaceAttendee = exports.previewPlaceAttendee = function previewPlaceAttendee(boats, originPlacement, targetPlacement, movedAttendeeId) {
+	    var originBoat = boats.find(function (boat) {
+	        return boat.get("boatId") === _lodash2.default.get(originPlacement, "boatId");
+	    });
+	    var targetBoat = boats.find(function (boat) {
+	        return boat.get("boatId") === targetPlacement.boatId;
+	    });
+
+	    var targetAttendeeId = _lodash2.default.invoke(targetBoat, "getIn", ["seatAssignments", targetPlacement.seatPosition]);
+	    var attendeeInTarget = Boolean(targetAttendeeId);
+
+	    var movingWithinBoat = _lodash2.default.get(originPlacement, "boatId") === _lodash2.default.get(targetPlacement, "boatId");
+	    var attendeeWasUnassigned = Boolean(originPlacement);
+
+	    var alreadyInTargetBoat = targetBoat.get("seatAssignments").valueSeq().includes(movedAttendeeId);
+
+	    if (alreadyInTargetBoat && !movingWithinBoat) {
+	        return {
+	            isAllowed: false
+	        };
+	    }
+
+	    var moveType = undefined;
+
+	    if (attendeeWasUnassigned) {
+	        moveType = attendeeInTarget ? attendeeMoveTypes.UNASSIGNED_TO_OCCUPIED_SEAT : attendeeMoveTypes.UNASSIGNED_TO_EMPTY_SEAT;
+	    } else {
+	        if (attendeeInTarget) {
+	            moveType = movingWithinBoat ? attendeeMoveTypes.SWAP_WITHIN_BOAT : attendeeMoveTypes.SWAP_FROM_OTHER_BOAT;
+	        } else {
+	            moveType = movingWithinBoat ? attendeeMoveTypes.WITHIN_BOAT_TO_EMPTY_SEAT : attendeeMoveTypes.FROM_OTHER_BOAT_TO_EMPTY_SEAT;
+	        }
+	    }
+
+	    return {
+	        isAllowed: true,
+	        moveType: moveType
+	    };
 	};
 
 /***/ },
@@ -52522,6 +52562,7 @@
 	        boats.map(function (boat) {
 	            return React.createElement(_Boat2.default, { key: boat.get("boatId"),
 	                boat: boat,
+	                boats: boats,
 	                placeAttendee: placeAttendee });
 	        })
 	    );
@@ -52561,13 +52602,14 @@
 
 	var Boat = function Boat(props) {
 	    var boat = props.boat;
+	    var boats = props.boats;
 	    var placeAttendee = props.placeAttendee;
 
 	    var boatId = boat.get("boatId");
 
 	    var firstSeatNum = boat.get("isCoxed") ? 0 : 1;
 
-	    var boats = (0, _lodash.range)(firstSeatNum, boat.get("seatCount") + 1).map(function (num) {
+	    var boatSeats = (0, _lodash.range)(firstSeatNum, boat.get("seatCount") + 1).map(function (num) {
 	        var seatPosition = String(num);
 	        var attendee = boat.getIn(["seatAssignments", seatPosition]);
 	        var placement = { boatId: boatId, seatPosition: seatPosition };
@@ -52575,7 +52617,8 @@
 	        return React.createElement(_BoatSeatDropTarget2.default, { key: seatPosition,
 	            placement: placement,
 	            attendee: attendee,
-	            placeAttendee: placeAttendee });
+	            placeAttendee: placeAttendee,
+	            boats: boats });
 	    });
 
 	    return React.createElement(
@@ -52592,7 +52635,7 @@
 	            React.createElement(
 	                "div",
 	                null,
-	                boats
+	                boatSeats
 	            )
 	        )
 	    );
@@ -52640,6 +52683,12 @@
 
 	var _BoatSeat2 = _interopRequireDefault(_BoatSeat);
 
+	var _placeAttendee = __webpack_require__(254);
+
+	var _lodash = __webpack_require__(197);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -52653,6 +52702,7 @@
 	        var placeAttendee = props.placeAttendee;
 	        var placement = props.placement;
 	        var attendee = props.attendee;
+	        var boats = props.boats;
 
 	        var targetAttendeeId = attendee ? attendee.get("attendeeId") : null;
 	        var dragItem = monitor.getItem();
@@ -52670,6 +52720,27 @@
 	            originPlacement: originPlacement,
 	            targetAttendeeId: targetAttendeeId
 	        });
+	    },
+	    canDrop: function canDrop(props, monitor) {
+	        var placement = props.placement;
+	        var attendee = props.attendee;
+	        var boats = props.boats;
+
+	        var targetAttendeeId = attendee ? attendee.get("attendeeId") : null;
+	        var dragItem = monitor.getItem();
+
+	        if (!dragItem) {
+	            return false;
+	        }
+
+	        var movedAttendeeId = dragItem.movedAttendeeId;
+	        var originPlacement = dragItem.originPlacement;
+
+	        var _previewPlaceAttendee = (0, _placeAttendee.previewPlaceAttendee)(boats, originPlacement, placement, movedAttendeeId);
+
+	        var isAllowed = _previewPlaceAttendee.isAllowed;
+
+	        return isAllowed;
 	    }
 	};
 

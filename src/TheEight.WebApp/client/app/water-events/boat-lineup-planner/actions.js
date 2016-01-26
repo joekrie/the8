@@ -1,6 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import Immutable from "immutable";
-import placeAttendee from "./reducers/placeAttendee";
+import { placeAttendee } from "./reducers/placeAttendee";
 import unplaceAttendee from "./reducers/unplaceAttendee";
 
 const defaultState = {

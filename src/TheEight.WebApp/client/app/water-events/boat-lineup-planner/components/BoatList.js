@@ -9,6 +9,7 @@ const BoatList = props => {
 			{boats.map(boat => 
 			    <Boat key={boat.get("boatId")}
                       boat={boat}
+                      boats={boats}
                       placeAttendee={placeAttendee} />)}
 		</div>
     );

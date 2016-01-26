@@ -17,7 +17,7 @@ const spec = {
 		    movedAttendeeId: attendeeId, 
 		    originPlacement 
 		});
-	}
+    }
 };
 
 const collect = connect => ({
