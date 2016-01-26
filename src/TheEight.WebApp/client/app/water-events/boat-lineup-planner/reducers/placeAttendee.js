@@ -56,7 +56,7 @@ export const previewPlaceAttendee = (boats, originPlacement, targetPlacement, mo
     const attendeeInTarget = Boolean(targetAttendeeId);
     
     const movingWithinBoat = _.get(originPlacement, "boatId") === _.get(targetPlacement, "boatId");
-    const attendeeWasUnassigned = Boolean(originPlacement);
+    const attendeeWasAssigned = Boolean(originPlacement);
 
     const alreadyInTargetBoat = 
         targetBoat
@@ -72,11 +72,7 @@ export const previewPlaceAttendee = (boats, originPlacement, targetPlacement, mo
     
     let moveType;
 
-    if (attendeeWasUnassigned) { 
-        moveType = attendeeInTarget 
-            ? attendeeMoveTypes.UNASSIGNED_TO_OCCUPIED_SEAT
-            : attendeeMoveTypes.UNASSIGNED_TO_EMPTY_SEAT;
-    } else {
+    if (attendeeWasAssigned) {
         if (attendeeInTarget) {
             moveType = movingWithinBoat 
                 ? attendeeMoveTypes.SWAP_WITHIN_BOAT
@@ -85,7 +81,11 @@ export const previewPlaceAttendee = (boats, originPlacement, targetPlacement, mo
             moveType = movingWithinBoat 
                 ? attendeeMoveTypes.WITHIN_BOAT_TO_EMPTY_SEAT
                 : attendeeMoveTypes.FROM_OTHER_BOAT_TO_EMPTY_SEAT;
-        }
+        }       
+    } else {
+        moveType = attendeeInTarget 
+           ? attendeeMoveTypes.UNASSIGNED_TO_OCCUPIED_SEAT
+           : attendeeMoveTypes.UNASSIGNED_TO_EMPTY_SEAT;
     }
 
     return {
