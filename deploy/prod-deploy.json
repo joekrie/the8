@@ -1,0 +1,48 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "resources": [
+    {
+      "apiVersion": "2015-08-01",
+      "type": "Microsoft.Web/serverfarms",
+      "name": "hostingPlanName",
+      "location": "[resourceGroup().location]",
+      "sku": {
+        "tier": "S1 Standard",
+        "name": "f1",
+        "capacity": 0
+      },
+      "properties": {
+        "numberOfWorkers": 1
+      }
+    },
+    {
+      "apiVersion": "2015-08-01",
+      "name": "siteName",
+      "type": "Microsoft.Web/sites",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "Microsoft.Web/serverFarms/hostingPlanName"
+      ],
+      "resources": [
+        {
+          "name": "web",
+          "type": "config",
+          "apiVersion": "2015-08-01",
+          "dependsOn": [
+            "Microsoft.Web/Sites/siteName"
+          ],
+          "properties": {
+            "connectionStrings": [
+              {
+                "ConnectionString": "[concat('Data Source=tcp:', reference(concat('Microsoft.Sql/servers/', parameters('serverName'))).fullyQualifiedDomainName, ',1433;Initial Catalog=', parameters('databaseName'), ';User Id=', parameters('administratorLogin'), '@', parameters('serverName'), ';Password=', parameters('administratorLoginPassword'), ';')]",
+                "Name": "DefaultConnection",
+                "Type": 2
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
