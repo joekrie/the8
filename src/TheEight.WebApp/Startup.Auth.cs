@@ -7,6 +7,7 @@ using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using TheEight.Common.Configuration;
+using TheEight.Common.Configuration.Security;
 using TheEight.WebApp.Constants;
 using TheEight.WebApp.Services.Authentication;
 

@@ -7,6 +7,9 @@ using Newtonsoft.Json.Serialization;
 using NodaTime;
 using NodaTime.Serialization.JsonNet;
 using TheEight.Common.Configuration;
+using TheEight.Common.Configuration.Infrastructure;
+using TheEight.Common.Configuration.Security;
+using TheEight.Common.Configuration.Services;
 
 namespace TheEight.Common
 {

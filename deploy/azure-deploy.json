@@ -1,17 +1,36 @@
 {
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
+  "parameters": {
+    "environment": {
+      "type": "string",
+      "allowedValues": [
+        "development",
+        "production"
+      ]
+    }
+  },
   "variables": {
-    "hostingPlanName": "TheEight"
+    "environments": {
+      "development": {
+        "webApp": {
+        }
+      },
+      "production": {
+        "webApp": {
+          "customDomain": "the8.io"
+        }
+      }
+    }
   },
   "resources": [
     {
       "apiVersion": "2015-08-01",
       "type": "Microsoft.Web/serverfarms",
       "name": "hostingPlanName",
-      "location": "[resourceGroup().location]",
+      "location": "Central US",
       "sku": {
-        "tier": "S1 Standard",
+        "tier": "Standard",
         "name": "f1",
         "capacity": 0
       },
@@ -21,6 +40,9 @@
     },
     {
       "apiVersion": "2015-08-01",
+      "properties": {
+        "hostnames": "[variables('environments')[parameters('environment')]['webApp.customDomain']]"
+      },
       "name": "siteName",
       "type": "Microsoft.Web/sites",
       "location": "[resourceGroup().location]",
@@ -36,16 +58,13 @@
             "Microsoft.Web/Sites/siteName"
           ],
           "properties": {
-            "connectionStrings": [
-              {
-                "ConnectionString": "[concat('Data Source=tcp:', reference(concat('Microsoft.Sql/servers/', parameters('serverName'))).fullyQualifiedDomainName, ',1433;Initial Catalog=', parameters('databaseName'), ';User Id=', parameters('administratorLogin'), '@', parameters('serverName'), ';Password=', parameters('administratorLoginPassword'), ';')]",
-                "Name": "DefaultConnection",
-                "Type": 2
-              }
-            ]
+            "netFrameworkVersion": "4.6.1"
           }
         }
       ]
     }
-  ]
+  ],
+  "outputs": {
+
+  }
 }

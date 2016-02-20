@@ -3,6 +3,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using TheEight.Common.Configuration;
+using TheEight.Common.Configuration.Infrastructure;
 
 namespace TheEight.QueueHandlers
 {

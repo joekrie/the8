@@ -9,6 +9,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TheEight.WebApp", "src\TheE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CAEF08D3-56BC-45BF-A50C-AE2A3B7C32A5}"
 	ProjectSection(SolutionItems) = preProject
+		azure-deploy.json = azure-deploy.json
 		global.json = global.json
 	EndProjectSection
 EndProject

@@ -1,4 +1,4 @@
-namespace TheEight.Common.Configuration
+namespace TheEight.Common.Configuration.Security
 {
     public class MicrosoftAccountSettings
     {

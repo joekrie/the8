@@ -4,6 +4,7 @@ using Autofac;
 using Dapper.NodaTime;
 using Microsoft.Extensions.Options;
 using TheEight.Common.Configuration;
+using TheEight.Common.Configuration.Infrastructure;
 
 namespace TheEight.Common.DependencyInjection
 {

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using SendGrid;
 using TheEight.Common.Configuration;
+using TheEight.Common.Configuration.Services;
 using TheEight.Common.Domain.Messaging;
 
 namespace TheEight.QueueHandlers.Handlers.Messaging
