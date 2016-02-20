@@ -1,6 +1,9 @@
 {
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
+  "variables": {
+    "hostingPlanName": "TheEight"
+  },
   "resources": [
     {
       "apiVersion": "2015-08-01",
@@ -22,7 +25,7 @@
       "type": "Microsoft.Web/sites",
       "location": "[resourceGroup().location]",
       "dependsOn": [
-        "Microsoft.Web/serverFarms/hostingPlanName"
+        "[concat('Microsoft.Web/serverFarms/', variables('hostingPlanName'))]"
       ],
       "resources": [
         {
