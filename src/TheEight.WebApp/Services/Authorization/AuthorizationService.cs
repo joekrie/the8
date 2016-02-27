@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNet.Http;
-using TheEight.Common.Domain.Clubs;
+using TheEight.Common.Clubs;
 using TheEight.WebApp.Constants;
-using TheEight.WebApp.Repositories.Accounts;
 
 namespace TheEight.WebApp.Services.Authorization
 {
@@ -25,7 +24,7 @@ namespace TheEight.WebApp.Services.Authorization
         public async Task<bool> UserAuthorizedForSquad(int squadId)
         {
             var role = await _accountsRepository.GetSquadMemberRoleForUser(0, squadId);
-            return role != SquadMemberRole.None;
+            return role != SquadRole.None;
         }
     }
 }

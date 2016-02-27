@@ -2,7 +2,6 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using TheEight.WebApp.Constants;
-using TheEight.WebApp.Repositories.Accounts;
 
 namespace TheEight.WebApp.Services.Authentication
 {

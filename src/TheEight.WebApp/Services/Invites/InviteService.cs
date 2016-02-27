@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using NodaTime;
-using TheEight.Common.Domain.Clubs;
-using TheEight.WebApp.Repositories.Accounts;
 using System.Linq;
 using Autofac.Extras.AttributeMetadata;
+using TheEight.Common.Clubs;
 
 namespace TheEight.WebApp.Services.Invites
 {
@@ -24,7 +23,7 @@ namespace TheEight.WebApp.Services.Invites
             _generateAccessCode = generateAccessCode;
         }
 
-        public async Task InviteUsersToSquadAsync(IEnumerable<string> emails, int squadId, SquadMemberRole role)
+        public async Task InviteUsersToSquadAsync(IEnumerable<string> emails, int squadId, SquadRole role)
         {
             var created = _clock.Now;
             var expiration = created + Duration.FromStandardDays(4);

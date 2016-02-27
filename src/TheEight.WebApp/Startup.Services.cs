@@ -7,8 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NodaTime;
 //using React.AspNet; // waiting for React.NET to catch up to RC2
-using TheEight.Common;
-using TheEight.Common.DependencyInjection;
+using TheEight.Common.Infrastructure;
+using TheEight.Common.Infrastructure.DependencyInjection;
 using TheEight.WebApp.Services.Invites;
 
 namespace TheEight.WebApp
@@ -57,8 +57,8 @@ namespace TheEight.WebApp
                 .SingleInstance();
 
             autofacBuilder
-                .Register<Func<string>>(ctx => AccessCodeGenerator.Generate)
-                .Named<Func<string>>(AccessCodeGenerator.ServiceName)
+                .RegisterType<AccessCodeGenerator>()
+                .As<IAccessCodeGenerator>()
                 .SingleInstance();
             
             autofacBuilder.RegisterModule(new DataAccessModule());

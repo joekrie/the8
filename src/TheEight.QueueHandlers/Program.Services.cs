@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Reflection;
 using Autofac;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 using Autofac.Extensions.DependencyInjection;
-using TheEight.Common;
+using TheEight.Common.Infrastructure;
 
 namespace TheEight.QueueHandlers
 {

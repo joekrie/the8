@@ -3,11 +3,9 @@ using Base32;
 
 namespace TheEight.WebApp.Services.Invites
 {
-    public static class AccessCodeGenerator
+    public class AccessCodeGenerator : IAccessCodeGenerator
     {
-        public const string ServiceName = "access-code-generator";
-
-        public static string Generate()
+        public string GenerateCode()
         {
             var rng = new Random();
             var randomBytes = new byte[14];
@@ -21,7 +19,6 @@ namespace TheEight.WebApp.Services.Invites
             uniqueBytes.CopyTo(combinedBytes, randomBytes.Length);
 
             var encoded = Base32Encoder.Encode(combinedBytes);
-
             return encoded;
         }
     }

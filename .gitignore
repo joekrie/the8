@@ -194,3 +194,4 @@ src/WebApp/static/jspm_packages/
 sh.exe.stackdump
 deploy/azure-deploy-params.json
 .vs/config/applicationhost.config
+TheEight.sln.DotSettings.user
