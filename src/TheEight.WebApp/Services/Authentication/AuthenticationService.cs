@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using TheEight.Common.Clubs;
 using TheEight.WebApp.Constants;
 
 namespace TheEight.WebApp.Services.Authentication

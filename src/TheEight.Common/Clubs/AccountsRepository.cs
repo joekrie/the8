@@ -34,7 +34,7 @@ namespace TheEight.Common.Clubs
             return userId;
         }
 
-        public async Task CreateSquadInvitesAsync(IEnumerable<string> emails, int squadId, SquadRole role,
+        public async Task CreateSquadInvitesAsync(IEnumerable<string> emails, int squadId, SquadRoles roles,
             string accessCode, Instant created, Instant expiration)
         {
             const string sqlCmd =
@@ -49,7 +49,7 @@ namespace TheEight.Common.Clubs
             {
                 Email = e,
                 SquadId = squadId,
-                SquadMemberRoleId = role,
+                SquadMemberRoleId = roles,
                 AccessCode = accessCode,
                 Created = created,
                 Expiration = expiration
@@ -58,7 +58,7 @@ namespace TheEight.Common.Clubs
             await _dbConn.ExecuteAsync(sqlCmd, sqlParams);
         }
 
-        public async Task<SquadRole> GetSquadMemberRoleForUser(int userId, int squadId)
+        public async Task<SquadRoles> GetSquadMemberRoleForUser(int userId, int squadId)
         {
             const string sqlCmd =
                 "SELECT SquadMemberRoleId " +
@@ -72,7 +72,7 @@ namespace TheEight.Common.Clubs
                 SquadId = squadId
             };
 
-            var role = await _dbConn.QuerySingleOrDefaultAsync<SquadRole>(sqlCmd, sqlParams);
+            var role = await _dbConn.QuerySingleOrDefaultAsync<SquadRoles>(sqlCmd, sqlParams);
             return role;
         }
     }

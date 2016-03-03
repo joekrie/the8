@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Security.Claims;
+using System.Threading.Tasks;
 using Microsoft.AspNet.Http;
 using TheEight.Common.Clubs;
 using TheEight.WebApp.Constants;
@@ -21,10 +22,26 @@ namespace TheEight.WebApp.Services.Authorization
             return didParse ? squadId : new int?();
         }
 
+        private static int GetUserIdFromClaimsPrincipal(ClaimsPrincipal claimsPrincipal)
+        {
+            var userIdClaim = claimsPrincipal
+                .FindFirst(claim => claim.Type == TheEightClaimTypes.UserId)
+                .Value;
+
+            var userId = int.Parse(userIdClaim);
+            return userId;
+        }
+
+        public Task<ClubRoles> GetClubRoles(ClaimsPrincipal claimsPrincipal)
+        {
+            var userId = GetUserIdFromClaimsPrincipal(claimsPrincipal);
+            return Task.FromResult(ClubRoles.Admin);
+        }
+
         public async Task<bool> UserAuthorizedForSquad(int squadId)
         {
             var role = await _accountsRepository.GetSquadMemberRoleForUser(0, squadId);
-            return role != SquadRole.None;
+            return role != SquadRoles.None;
         }
     }
 }

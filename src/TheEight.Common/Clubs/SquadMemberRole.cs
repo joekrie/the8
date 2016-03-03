@@ -1,15 +1,22 @@
-﻿namespace TheEight.Common.Clubs
+﻿using System;
+
+namespace TheEight.Common.Clubs
 {
-    public enum SquadRole
+    [Flags]
+    public enum SquadRoles
     {
         None = 0,
         Rower = 1,
         Coxswain = 2,
-        Coach = 3
+        Coach = 4
     }
 
-    public enum ClubRole
+    [Flags]
+    public enum ClubRoles
     {
-        
+        None = 0,
+        Admin = 1
     }
+
+    
 }

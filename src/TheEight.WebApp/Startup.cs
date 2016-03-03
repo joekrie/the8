@@ -16,12 +16,14 @@ namespace TheEight.WebApp
         
         public static void Main(string[] args)
         {
-            var application = new WebApplicationBuilder()
-                .UseConfiguration(WebApplicationConfiguration.GetDefault(args))
-                .UseStartup<Startup>()
-                .Build();
+            //var application = new WebApplication();
+
+            //application
+            //    .UseConfiguration(WebApplicationConfiguration.GetDefault(args))
+            //    .UseStartup<Startup>()
+            //    .Build();
             
-            application.Run();
+            //application.Run();
         }
     }
 }

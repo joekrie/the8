@@ -4,7 +4,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using NodaTime;
 using System.Linq;
-using Autofac.Extras.AttributeMetadata;
 using TheEight.Common.Clubs;
 
 namespace TheEight.WebApp.Services.Invites
@@ -16,21 +15,21 @@ namespace TheEight.WebApp.Services.Invites
         private readonly IClock _clock;
 
         public InviteService(IAccountsRepository repository, IClock clock,
-            [WithKey(AccessCodeGenerator.ServiceName)] Func<string> generateAccessCode)
+            IAccessCodeGenerator accessCodeGenerator)
         {
             _repository = repository;
             _clock = clock;
-            _generateAccessCode = generateAccessCode;
+            _generateAccessCode = accessCodeGenerator.GenerateCode;
         }
 
-        public async Task InviteUsersToSquadAsync(IEnumerable<string> emails, int squadId, SquadRole role)
+        public async Task InviteUsersToSquadAsync(IEnumerable<string> emails, int squadId, SquadRoles roles)
         {
             var created = _clock.Now;
             var expiration = created + Duration.FromStandardDays(4);
 
             var accessCode = _generateAccessCode();
             
-            await _repository.CreateSquadInvitesAsync(emails, squadId, role, accessCode, created, expiration);
+            await _repository.CreateSquadInvitesAsync(emails, squadId, roles, accessCode, created, expiration);
         }
 
         public ClaimsDerivedInfo DeriveInfoFromClaims(ClaimsIdentity identity)

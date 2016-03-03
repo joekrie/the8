@@ -2,7 +2,7 @@
 using System.Data.SqlClient;
 using Autofac;
 using Dapper.NodaTime;
-using Microsoft.Extensions.Options;
+using Microsoft.Extensions.OptionsModel;
 using TheEight.Common.Infrastructure.Configuration.Infrastructure;
 
 namespace TheEight.Common.Infrastructure.DependencyInjection
