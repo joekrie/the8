@@ -6,8 +6,11 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NodaTime;
-//using React.AspNet; // waiting for React.NET to catch up to RC2
+using React.AspNet;
 using TheEight.Common.Infrastructure;
+using TheEight.Common.Infrastructure.Configuration.ExternalServices;
+using TheEight.Common.Infrastructure.Configuration.Infrastructure;
+using TheEight.Common.Infrastructure.Configuration.Security;
 using TheEight.Common.Infrastructure.DependencyInjection;
 using TheEight.WebApp.Services.Invites;
 
@@ -43,7 +46,18 @@ namespace TheEight.WebApp
                     }
                 });
             
-            //services.AddReact();
+            services.AddReact();
+
+            services.AddApplicationInsightsTelemetry(_config);
+
+            services
+                .AddOptions()
+                .Configure<GoogleSettings>(_config.GetSection("Google"))
+                .Configure<FacebookSettings>(_config.GetSection("Facebook"))
+                .Configure<TwilioSettings>(_config.GetSection("Twilio"))
+                .Configure<SendGridSettings>(_config.GetSection("SendGrid"))
+                .Configure<AzureStorageSettings>(_config.GetSection("AzureStorage"))
+                .Configure<DatabaseSettings>(_config.GetSection("Database"));
 
             autofacBuilder
                 .RegisterAssemblyTypes(thisAssembly)

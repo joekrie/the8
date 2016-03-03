@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Builder;
 using Microsoft.Extensions.Logging;
-//using React.AspNet;
+using React.AspNet;
 
 namespace TheEight.WebApp
 {
@@ -16,12 +16,12 @@ namespace TheEight.WebApp
             ConfigureAuth(app);
             ConfigureLogging(loggerFactory);
 
-            //app.UseReact(config =>
-            //{
-            //    config.SetLoadBabel(false);
-            //    config.SetLoadReact(false);
-            //    config.AddScriptWithoutTransform("~/app/server.js");
-            //});
+            app.UseReact(config =>
+            {
+                config.SetLoadBabel(false);
+                config.SetLoadReact(false);
+                config.AddScriptWithoutTransform("~/app/server.js");
+            });
 
             app.UseStaticFiles();
             //app.UseMvc(ConfigureRouting);
