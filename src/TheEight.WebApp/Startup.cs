@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNet.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 
 namespace TheEight.WebApp
@@ -7,11 +9,20 @@ namespace TheEight.WebApp
     {
         private readonly bool _isDevelopment;
         private readonly string _appBasePath;
+        private readonly IConfiguration _config;
 
         public Startup(IHostingEnvironment hostEnv, IApplicationEnvironment appEnv)
         {
             _isDevelopment = hostEnv.IsDevelopment();
             _appBasePath = appEnv.ApplicationBasePath;
+
+            var configBuilder = new ConfigurationBuilder()
+                .SetBasePath(_appBasePath)
+                .AddEnvironmentVariables()
+                .AddUserSecrets()
+                .AddApplicationInsightsSettings();
+
+            _config = configBuilder.Build();
         }
         
         public static void Main(string[] args)
