@@ -6,6 +6,7 @@
       "type": "string",
       "allowedValues": [
         "development",
+        "staging",
         "production"
       ]
     }
