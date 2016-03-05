@@ -1,0 +1,35 @@
+{
+  "version": "1.0.0-*",
+  "description": "TheEight.QueueHandlers Console Application",
+  "authors": [ "joekr" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "dependencies": {
+    "Autofac": "4.0.0-rc1-177",
+    "Autofac.Extensions.DependencyInjection": "4.0.0-rc1-177",
+    "Autofac.Extras.AttributeMetadata": "4.0.0",
+    "Microsoft.AspNet.Hosting.Abstractions": "1.0.0-rc2-16161",
+    "Microsoft.Azure.WebJobs": "1.1.0",
+    "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc2-15952",
+    "Microsoft.Extensions.DependencyInjection": "1.0.0-rc2-15921",
+    "Microsoft.Extensions.Options": "1.0.0-rc2-15942",
+    "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc2-16530",
+    "Microsoft.Extensions.Logging": "1.0.0-rc2-15958",
+    "TheEight.Common": "1.0.0-*",
+    "Twilio": "4.4.1",
+    "Twilio.TwiML": "3.4.0",
+    "RestSharp": "105.2.2",
+    "Sendgrid": "6.3.0"
+  },
+
+  "commands": {
+    "TheEight.QueueHandlers": "TheEight.QueueHandlers"
+  },
+
+  "frameworks": {
+    "dnx451": { }
+  },
+  "userSecretsId": "TheEight"
+}

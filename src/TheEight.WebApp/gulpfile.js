@@ -1,31 +1,73 @@
-﻿var gulp = require('gulp');
+/// <binding />
+
+var gulp = require('gulp');
 var sass = require('gulp-sass');
 var del = require('del');
 var concat = require('gulp-concat');
-var jspm = require('gulp-jspm');
-var exec = require('child_process').execSync;
+var gutil = require('gulp-util');
+var webpack = require('webpack');
+var WebpackDevServer = require('webpack-dev-server');
+var jest = require('jest-cli');
 
-gulp.task('default', ['jspm', 'sass']);
+var webpackServerConfig = require('./webpack-server.config.js');
+var webpackClientConfig = require('./webpack-client.config.js');
 
-// todo: get gulp-jspm working
-gulp.task('jspm', function () {
-    //var cmd = 'jspm bundle-sfx src/app/boat-lineup-planner/main dist/app/boat-lineup-planner/main.js';
-    //exec(cmd, function (err, stdout, stderr) {
-    //    if (err) { throw err; }
-    //});
+gulp.task('default', ['sass', 'webpack-server', 'webpack-client']);
+gulp.task('watch', ['sass:watch']);
+
+gulp.task('jest', function() {
     
-    return gulp.src('src/app/**/main.js')
-        .pipe(jspm())
-        .pipe(gulp.dest('dist/app'));
-});
-
-gulp.task('glyphicons', function() {
-    return gulp.src('src/styles/glyphicons-fonts/*')
-        .pipe(gulp.dest('dist/styles/glyphicons-fonts/'));
 });
 
 gulp.task('sass', function() {
-    return gulp.src('src/styles/site.scss')
+    return gulp.src('client/styles/site.scss')
         .pipe(sass())
-        .pipe(gulp.dest('dist/styles'));
+        .pipe(gulp.dest('wwwroot/styles'));
 });
+
+gulp.task('sass:watch', function () {
+    return gulp.watch('client/styles/**/*', ['sass']);
+});
+
+
+gulp.task("webpack-server", function (callback) {
+    webpack(webpackServerConfig, function (err, stats) {
+        if (err) {
+            throw new gutil.PluginError("webpack", err);
+        }
+
+        gutil.log("[webpack]", stats.toString({
+            // output options
+        }));
+
+        callback();
+    });
+});
+
+gulp.task("webpack-client", function (callback) {
+    webpack(webpackClientConfig, function (err, stats) {
+        if (err) {
+            throw new gutil.PluginError("webpack", err);
+        }
+
+        gutil.log("[webpack]", stats.toString({
+            // output options
+        }));
+
+        callback();
+    });
+});
+
+//gulp.task("webpack-dev-server", function (callback) {
+//    var compiler = webpack(webpackConfig);
+
+//    new WebpackDevServer(compiler, {})
+//        .listen(8082, "localhost", function (err) {
+//            if (err) {
+//                throw new gutil.PluginError("webpack-dev-server", err);
+//            }
+
+//            gutil.log("[webpack-dev-server]", "http://localhost:8082/webpack-dev-server/index.html");
+//            callback();
+//        });
+//});

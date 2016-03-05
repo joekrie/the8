@@ -1,74 +1,40 @@
-﻿using Microsoft.AspNet.Builder;
-using Microsoft.Framework.Configuration;
-using Microsoft.Framework.DependencyInjection;
-using Microsoft.Framework.OptionsModel;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
-using NodaTime;
-using NodaTime.Serialization.JsonNet;
-using TheEight.Common.Config;
-using TheEight.Common.Database;
-using React.AspNet;
-using System;
-using Microsoft.Dnx.Runtime;
-using Microsoft.AspNet.Diagnostics;
+﻿using Microsoft.AspNet.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace TheEight.WebApp
 {
-    public class Startup
+    public partial class Startup
     {
-        private IConfiguration _config;
+        private readonly bool _isDevelopment;
+        private readonly string _appBasePath;
+        private readonly IConfiguration _config;
 
-        public IServiceProvider ConfigureServices(IServiceCollection services)
+        public Startup(IHostingEnvironment hostEnv, IApplicationEnvironment appEnv)
         {
-            var applicationEnvironment = services
-                .BuildServiceProvider()
-                .GetRequiredService<IApplicationEnvironment>();
+            _isDevelopment = hostEnv.IsDevelopment();
+            _appBasePath = appEnv.ApplicationBasePath;
 
-            _config = new ConfigurationBuilder(applicationEnvironment.ApplicationBasePath)
-                .AddEnvironmentVariables("APPSETTING_")
+            var configBuilder = new ConfigurationBuilder()
+                .SetBasePath(_appBasePath)
+                .AddEnvironmentVariables()
                 .AddUserSecrets()
-                .Build();
+                .AddApplicationInsightsSettings();
 
-            services.AddOptions();
-
-            services.Configure<GoogleSettings>(_config.GetSection("Google"));
-            services.Configure<RavenSettings>(_config.GetSection("Raven"));
-
-            services.AddSingleton(provider =>
-            {
-                var settings = provider.GetRequiredService<IOptions<RavenSettings>>();
-                return DocumentStoreFactory.CreateAndInitialize(settings.Options);
-            });
-
-            services.AddMvc()
-                .AddJsonOptions(options =>
-                {
-                    options.SerializerSettings.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb);
-                    options.SerializerSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
-                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                });
-
-            services.AddReact();
-
-            return services.BuildServiceProvider();
+            _config = configBuilder.Build();
         }
-
-        public void Configure(IApplicationBuilder app)
+        
+        public static void Main(string[] args)
         {
-            app.Properties["host.AppMode"] = "development";
-            app.UseErrorPage();
+            //var application = new WebApplication();
 
-            app.UseReact(config =>
-            {
-                config
-                    .SetUseHarmony(false)
-                    .SetReuseJavaScriptEngines(true)
-                    .AddScript("~/app/boat-lineup-planner/main.js");
-            });
-
-            app.UseStaticFiles();
-            app.UseMvc();
+            //application
+            //    .UseConfiguration(WebApplicationConfiguration.GetDefault(args))
+            //    .UseStartup<Startup>()
+            //    .Build();
+            
+            //application.Run();
         }
     }
 }

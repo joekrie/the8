@@ -1,8 +1,9 @@
 ﻿@model TheEight.WebApp.Models.BoatLineupPlanner.BoatLineupPlannerVM
 
-@Html.React("Provider", new {})
+@Html.React("BoatLineupPlanner", new {})
+
 
 @section scripts{
-    <script src="~/app/boat-lineup-planner/main.js"></script>
+    <script src="~/app/client/boat-lineup-planner.js"></script>
     @Html.ReactInitJavaScript()
-}
+} 

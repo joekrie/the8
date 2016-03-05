@@ -3,9 +3,12 @@
 <head>
     <title>The Eight</title>
     <link href="~/styles/site.css" rel="stylesheet" />
+    <link href="~/styles/app.css" rel="stylesheet" />
 </head>
 <body>
-@RenderBody()
-@RenderSection("scripts", false)
+    @RenderBody()
+    <script src="~/libs/react-0.14.2.js"></script>
+    <script src="~/app/client/common.js"></script>
+    @RenderSection("scripts", false)
 </body>
 </html>
