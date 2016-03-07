@@ -17,5 +17,5 @@ Management tool for rowing clubs to manage teams, water practices, race lineups,
 * Facebook: authentication
 
 ## Domain terminology
-* Team: group of rowers, coxswains & coaches for a specified time. For example, 
+* Team: group of rowers, coxswains & coaches for a specified time. For example, Novice Men 2015-16
 * Club: client that has signed up for service
