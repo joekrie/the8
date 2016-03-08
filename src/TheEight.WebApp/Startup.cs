@@ -8,33 +8,23 @@ namespace TheEight.WebApp
     public partial class Startup
     {
         private readonly bool _isDevelopment;
-        private readonly string _appBasePath;
         private readonly IConfiguration _config;
 
         public Startup(IHostingEnvironment hostEnv, IApplicationEnvironment appEnv)
         {
             _isDevelopment = hostEnv.IsDevelopment();
-            _appBasePath = appEnv.ApplicationBasePath;
+            var appBasePath = appEnv.ApplicationBasePath;
+
+            var envName = hostEnv.EnvironmentName;
 
             var configBuilder = new ConfigurationBuilder()
-                .SetBasePath(_appBasePath)
+                .SetBasePath(appBasePath)
                 .AddEnvironmentVariables()
                 .AddUserSecrets()
-                .AddApplicationInsightsSettings();
+                .AddJsonFile($"config/{envName}.json")
+                .AddApplicationInsightsSettings(_isDevelopment);
 
             _config = configBuilder.Build();
-        }
-        
-        public static void Main(string[] args)
-        {
-            //var application = new WebApplication();
-
-            //application
-            //    .UseConfiguration(WebApplicationConfiguration.GetDefault(args))
-            //    .UseStartup<Startup>()
-            //    .Build();
-            
-            //application.Run();
         }
     }
 }

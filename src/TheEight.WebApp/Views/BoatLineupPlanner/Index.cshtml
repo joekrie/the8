@@ -1,9 +1,61 @@
-﻿@model TheEight.WebApp.Models.BoatLineupPlanner.BoatLineupPlannerVM
+﻿@{
+    var waterEvent = new
+    {
+        settings = new
+        {
+            allowMultipleAssignments = true
+        },
+        boats = new[]
+        {
+            new
+            {
+                boatId = "club-boat-1",
+                title = "Lucky",
+                isCoxed = true,
+                seatCount = 8,
+                seatAssignments = new Dictionary<int, string>
+                {
+                    {0, "squad-member-5"}
+                }
+            },
+            new
+            {
+                boatId = "club-boat-2",
+                title = "Longhorn",
+                isCoxed = false,
+                seatCount = 4,
+                seatAssignments = new Dictionary<int, string>
+                {
+                    {3, "squad-member-2"}
+                }
+            }
+        },
+        attendees = new[]
+        {
+            new
+            {
+                attendeeId = "squad-member-2",
+                displayName = "John Doe",
+                sortName = "Doe, John",
+                position = "COXSWAIN"
+            },
+            new
+            {
+                attendeeId = "squad-member-5",
+                displayName = "Billy Madison",
+                sortName = "Madison, Billy",
+                position = "ROWER"
+            },
+            new
+            {
+                attendeeId = "anonymous-1",
+                displayName = "Abe Lincoln",
+                sortName = "Lincoln, Abe",
+                position = "ROWER"
+            }
+        }
+    };
 
-@Html.React("BoatLineupPlanner", new {})
+}
 
-
-@section scripts{
-    <script src="~/app/client/boat-lineup-planner.js"></script>
-    @Html.ReactInitJavaScript()
-} 
+@Html.React("Apps.BoatLineupPlannerApp", new { @event = waterEvent })

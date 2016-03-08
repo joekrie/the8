@@ -1,6 +1,6 @@
 namespace TheEight.Common.Infrastructure.Security
 {
-    public enum AccountProvider
+    public enum LoginProvider
     {
         Google,
         Facebook

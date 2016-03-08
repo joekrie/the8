@@ -196,8 +196,6 @@ table:not(.rd-days) {
   src: url("glyphicons/glyphicons-regular.eot?#iefix") format("embedded-opentype"), url("glyphicons/glyphicons-regular.woff2") format("woff2"), url("glyphicons/glyphicons-regular.woff") format("woff"), url("glyphicons/glyphicons-regular.ttf") format("truetype"), url("glyphicons/glyphicons-regular.svg#glyphiconsregular") format("svg"); }
 
 .glyphicons {
-  position: relative;
-  top: 1px;
   display: inline-block;
   font-family: 'Glyphicons Regular';
   font-style: normal;
@@ -206,21 +204,32 @@ table:not(.rd-days) {
   vertical-align: top;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
+  .glyphicons:before {
+    display: inline-block;
+    padding: 6px 8px; }
 
 .glyphicons.x05 {
   font-size: 12px; }
 
 .glyphicons.x2 {
   font-size: 48px; }
+  .glyphicons.x2:before {
+    padding: 8px 12px; }
 
 .glyphicons.x3 {
   font-size: 72px; }
+  .glyphicons.x3:before {
+    padding: 16px 20px; }
 
 .glyphicons.x4 {
   font-size: 96px; }
+  .glyphicons.x4:before {
+    padding: 20px 28px; }
 
 .glyphicons.x5 {
   font-size: 120px; }
+  .glyphicons.x5:before {
+    padding: 28px 36px; }
 
 .glyphicons.light:before {
   color: #f2f2f2; }
@@ -293,10 +302,10 @@ table:not(.rd-days) {
   content: "\E010"; }
 
 .glyphicons-envelope:before {
-  content: "\2709"; }
+  content: "\E011"; }
 
 .glyphicons-camera:before {
-  content: "\E011"; }
+  content: "\E012"; }
 
 .glyphicons-heart:before {
   content: "\E013"; }
@@ -316,7 +325,7 @@ table:not(.rd-days) {
 .glyphicons-music:before {
   content: "\E018"; }
 
-.glyphicons-note:before {
+.glyphicons-music-alt:before {
   content: "\E019"; }
 
 .glyphicons-heart-empty:before {
@@ -326,7 +335,7 @@ table:not(.rd-days) {
   content: "\E021"; }
 
 .glyphicons-snowflake:before {
-  content: "\2744"; }
+  content: "\E022"; }
 
 .glyphicons-fire:before {
   content: "\E023"; }
@@ -353,7 +362,7 @@ table:not(.rd-days) {
   content: "\E030"; }
 
 .glyphicons-pencil:before {
-  content: "\270F"; }
+  content: "\E031"; }
 
 .glyphicons-bus:before {
   content: "\E032"; }
@@ -376,8 +385,8 @@ table:not(.rd-days) {
 .glyphicons-coins:before {
   content: "\E038"; }
 
-.glyphicons-airplane:before {
-  content: "\2708"; }
+.glyphicons-plane:before {
+  content: "\E039"; }
 
 .glyphicons-notes:before {
   content: "\E040"; }
@@ -473,7 +482,7 @@ table:not(.rd-days) {
   content: "\E070"; }
 
 .glyphicons-umbrella:before {
-  content: "\2602"; }
+  content: "\E071"; }
 
 .glyphicons-book:before {
   content: "\E072"; }
@@ -832,34 +841,34 @@ table:not(.rd-days) {
 .glyphicons-brightness-increase:before {
   content: "\E190"; }
 
-.glyphicons-circle-plus:before {
+.glyphicons-plus-sign:before {
   content: "\E191"; }
 
-.glyphicons-circle-minus:before {
+.glyphicons-minus-sign:before {
   content: "\E192"; }
 
-.glyphicons-circle-remove:before {
+.glyphicons-remove-sign:before {
   content: "\E193"; }
 
-.glyphicons-circle-ok:before {
+.glyphicons-ok-sign:before {
   content: "\E194"; }
 
-.glyphicons-circle-question-mark:before {
+.glyphicons-question-sign:before {
   content: "\E195"; }
 
-.glyphicons-circle-info:before {
+.glyphicons-info-sign:before {
   content: "\E196"; }
 
-.glyphicons-circle-exclamation-mark:before {
+.glyphicons-exclamation-sign:before {
   content: "\E197"; }
 
-.glyphicons-remove:before {
+.glyphicons-remove-circle:before {
   content: "\E198"; }
 
-.glyphicons-ok:before {
+.glyphicons-ok-circle:before {
   content: "\E199"; }
 
-.glyphicons-ban:before {
+.glyphicons-ban-circle:before {
   content: "\E200"; }
 
 .glyphicons-download:before {
@@ -880,28 +889,28 @@ table:not(.rd-days) {
 .glyphicons-electricity:before {
   content: "\E206"; }
 
-.glyphicons-ok-2:before {
+.glyphicons-ok:before {
   content: "\E207"; }
 
-.glyphicons-remove-2:before {
+.glyphicons-remove:before {
   content: "\E208"; }
 
-.glyphicons-cart-out:before {
+.glyphicons-cart-in:before {
   content: "\E209"; }
 
-.glyphicons-cart-in:before {
+.glyphicons-cart-out:before {
   content: "\E210"; }
 
-.glyphicons-left-arrow:before {
+.glyphicons-arrow-left:before {
   content: "\E211"; }
 
-.glyphicons-right-arrow:before {
+.glyphicons-arrow-right:before {
   content: "\E212"; }
 
-.glyphicons-down-arrow:before {
+.glyphicons-arrow-down:before {
   content: "\E213"; }
 
-.glyphicons-up-arrow:before {
+.glyphicons-arrow-up:before {
   content: "\E214"; }
 
 .glyphicons-resize-small:before {
@@ -941,7 +950,7 @@ table:not(.rd-days) {
   content: "\E226"; }
 
 .glyphicons-euro:before {
-  content: "\20AC"; }
+  content: "\E227"; }
 
 .glyphicons-usd:before {
   content: "\E228"; }
@@ -956,10 +965,10 @@ table:not(.rd-days) {
   content: "\E231"; }
 
 .glyphicons-sun:before {
-  content: "\2609"; }
+  content: "\E232"; }
 
 .glyphicons-cloud:before {
-  content: "\2601"; }
+  content: "\E233"; }
 
 .glyphicons-direction:before {
   content: "\E234"; }
@@ -988,11 +997,11 @@ table:not(.rd-days) {
 .glyphicons-flash:before {
   content: "\E242"; }
 
-.glyphicons-google-maps:before {
+.glyphicons-map-marker:before {
   content: "\E243"; }
 
 .glyphicons-anchor:before {
-  content: "\2693"; }
+  content: "\E244"; }
 
 .glyphicons-conversation:before {
   content: "\E245"; }
@@ -1000,17 +1009,17 @@ table:not(.rd-days) {
 .glyphicons-chat:before {
   content: "\E246"; }
 
-.glyphicons-male:before {
+.glyphicons-note-empty:before {
   content: "\E247"; }
 
-.glyphicons-female:before {
+.glyphicons-note:before {
   content: "\E248"; }
 
 .glyphicons-asterisk:before {
-  content: "\002A"; }
+  content: "\E249"; }
 
 .glyphicons-divide:before {
-  content: "\00F7"; }
+  content: "\E250"; }
 
 .glyphicons-snorkel-diving:before {
   content: "\E251"; }
@@ -1076,7 +1085,7 @@ table:not(.rd-days) {
   content: "\E271"; }
 
 .glyphicons-ring:before {
-  content: "\02DA"; }
+  content: "\E272"; }
 
 .glyphicons-cake:before {
   content: "\E273"; }
@@ -1193,10 +1202,10 @@ table:not(.rd-days) {
   content: "\E310"; }
 
 .glyphicons-flower:before {
-  content: "\2698"; }
+  content: "\E311"; }
 
 .glyphicons-baseball:before {
-  content: "\26BE"; }
+  content: "\E312"; }
 
 .glyphicons-rugby:before {
   content: "\E313"; }
@@ -1351,10 +1360,10 @@ table:not(.rd-days) {
 .glyphicons-smoking:before {
   content: "\E363"; }
 
-.glyphicons-cloud-download:before {
+.glyphicons-cloud-upload:before {
   content: "\E364"; }
 
-.glyphicons-cloud-upload:before {
+.glyphicons-cloud-download:before {
   content: "\E365"; }
 
 .glyphicons-restart:before {
@@ -1559,10 +1568,10 @@ table:not(.rd-days) {
   content: "\E432"; }
 
 .glyphicons-plus:before {
-  content: "\002B"; }
+  content: "\E433"; }
 
 .glyphicons-minus:before {
-  content: "\2212"; }
+  content: "\E434"; }
 
 .glyphicons-redo:before {
   content: "\E435"; }
@@ -1673,7 +1682,7 @@ table:not(.rd-days) {
   content: "\E470"; }
 
 .glyphicons-charging-station:before {
-  content: "\F471"; }
+  content: "\E471"; }
 
 .glyphicons-gas-station:before {
   content: "\E472"; }
@@ -1681,10 +1690,10 @@ table:not(.rd-days) {
 .glyphicons-target:before {
   content: "\E473"; }
 
-.glyphicons-bed-alt:before {
+.glyphicons-bed:before {
   content: "\E474"; }
 
-.glyphicons-mosquito-net:before {
+.glyphicons-mosquito:before {
   content: "\E475"; }
 
 .glyphicons-dining-set:before {
@@ -1747,11 +1756,11 @@ table:not(.rd-days) {
 .glyphicons-motorcycle:before {
   content: "\E495"; }
 
-.glyphicons-bed:before {
+.glyphicons-bed-alt:before {
   content: "\E496"; }
 
 .glyphicons-tent:before {
-  content: "\26FA"; }
+  content: "\E497"; }
 
 .glyphicons-glasses:before {
   content: "\E498"; }
@@ -1808,7 +1817,7 @@ table:not(.rd-days) {
   content: "\E515"; }
 
 .glyphicons-shower:before {
-  content: "\1F6BF"; }
+  content: "\E516"; }
 
 .glyphicons-menu-hamburger:before {
   content: "\E517"; }
@@ -1883,10 +1892,10 @@ table:not(.rd-days) {
   content: "\E540"; }
 
 .glyphicons-hourglass:before {
-  content: "\231B"; }
+  content: "\E541"; }
 
 .glyphicons-cat:before {
-  content: "\1F408"; }
+  content: "\E542"; }
 
 .glyphicons-lamp:before {
   content: "\E543"; }
@@ -1907,10 +1916,10 @@ table:not(.rd-days) {
   content: "\E548"; }
 
 .glyphicons-yen:before {
-  content: "\00A5"; }
+  content: "\E549"; }
 
 .glyphicons-ruble:before {
-  content: "\20BD"; }
+  content: "\E550"; }
 
 .glyphicons-erase:before {
   content: "\E551"; }
@@ -1945,8 +1954,8 @@ table:not(.rd-days) {
 .glyphicons-voicemail:before {
   content: "\E561"; }
 
-.glyphicons-paragraph:before {
-  content: "\00B6"; }
+.glyphicons-paragraph-alt:before {
+  content: "\E562"; }
 
 .glyphicons-person-walking:before {
   content: "\E563"; }
@@ -1967,7 +1976,7 @@ table:not(.rd-days) {
   content: "\E568"; }
 
 .glyphicons-taxi:before {
-  content: "\1F695"; }
+  content: "\E569"; }
 
 .glyphicons-ice-cream-no:before {
   content: "\E570"; }
@@ -2047,14 +2056,14 @@ table:not(.rd-days) {
 .glyphicons-stethoscope:before {
   content: "\E595"; }
 
-.glyphicons-hotspot:before {
+.glyphicons-paired:before {
   content: "\E596"; }
 
 .glyphicons-activity:before {
   content: "\E597"; }
 
 .glyphicons-watch:before {
-  content: "\231A"; }
+  content: "\E598"; }
 
 .glyphicons-scissors-alt:before {
   content: "\E599"; }
@@ -2087,144 +2096,580 @@ table:not(.rd-days) {
   content: "\E608"; }
 
 .glyphicons-newspaper:before {
-  content: "\1F4F0"; }
+  content: "\E609"; }
 
 .glyphicons-tractor:before {
-  content: "\1F69C"; }
+  content: "\E610"; }
 
-.animated {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -webkit-animation-timing-function: ease-in-out;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  -webkit-animation-iteration-count: infinite; }
+.glyphicons-camping:before {
+  content: "\E611"; }
 
-@-webkit-keyframes pulse {
-  0% {
-    -webkit-transform: scale(1); }
-  50% {
-    -webkit-transform: scale(1.1); }
-  100% {
-    -webkit-transform: scale(1); } }
+.glyphicons-camping-benches:before {
+  content: "\E612"; }
 
-@keyframes pulse {
-  0% {
-    transform: scale(1); }
-  50% {
-    transform: scale(1.1); }
-  100% {
-    transform: scale(1); } }
+.glyphicons-forest:before {
+  content: "\E613"; }
 
-.pulse {
-  -webkit-animation-name: pulse;
-  animation-name: pulse; }
+.glyphicons-park:before {
+  content: "\E614"; }
 
-@-webkit-keyframes rotateIn {
-  0% {
-    -webkit-transform-origin: center center;
-    -webkit-transform: rotate(-200deg);
-    opacity: 0; }
-  100% {
-    -webkit-transform-origin: center center;
-    -webkit-transform: rotate(0);
-    opacity: 1; } }
+.glyphicons-field:before {
+  content: "\E615"; }
 
-@keyframes rotateIn {
-  0% {
-    transform-origin: center center;
-    transform: rotate(-200deg);
-    opacity: 0; }
-  100% {
-    transform-origin: center center;
-    transform: rotate(0);
-    opacity: 1; } }
+.glyphicons-mountains:before {
+  content: "\E616"; }
 
-.rotateIn {
-  -webkit-animation-name: rotateIn;
-  animation-name: rotateIn; }
+.glyphicons-fees-payments:before {
+  content: "\E617"; }
 
-@-webkit-keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    -webkit-transform: translateY(0); }
-  40% {
-    -webkit-transform: translateY(-30px); }
-  60% {
-    -webkit-transform: translateY(-15px); } }
+.glyphicons-small-payments:before {
+  content: "\E618"; }
 
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0); }
-  40% {
-    transform: translateY(-30px); }
-  60% {
-    transform: translateY(-15px); } }
+.glyphicons-mixed-buildings:before {
+  content: "\E619"; }
 
-.bounce {
-  -webkit-animation-name: bounce;
-  animation-name: bounce; }
+.glyphicons-industrial-zone:before {
+  content: "\E620"; }
 
-@-webkit-keyframes swing {
-  20%, 40%, 60%, 80%, 100% {
-    -webkit-transform-origin: top center; }
-  20% {
-    -webkit-transform: rotate(15deg); }
-  40% {
-    -webkit-transform: rotate(-10deg); }
-  60% {
-    -webkit-transform: rotate(5deg); }
-  80% {
-    -webkit-transform: rotate(-5deg); }
-  100% {
-    -webkit-transform: rotate(0deg); } }
+.glyphicons-visitor-tag:before {
+  content: "\E621"; }
 
-@keyframes swing {
-  20% {
-    transform: rotate(15deg); }
-  40% {
-    transform: rotate(-10deg); }
-  60% {
-    transform: rotate(5deg); }
-  80% {
-    transform: rotate(-5deg); }
-  100% {
-    transform: rotate(0deg); } }
+.glyphicons-businessman:before {
+  content: "\E622"; }
 
-.swing {
-  -webkit-transform-origin: top center;
-  transform-origin: top center;
-  -webkit-animation-name: swing;
-  animation-name: swing; }
+.glyphicons-meditation:before {
+  content: "\E623"; }
 
-@-webkit-keyframes tada {
-  0% {
-    -webkit-transform: scale(1); }
-  10%, 20% {
-    -webkit-transform: scale(0.9) rotate(-3deg); }
-  30%, 50%, 70%, 90% {
-    -webkit-transform: scale(1.1) rotate(3deg); }
-  40%, 60%, 80% {
-    -webkit-transform: scale(1.1) rotate(-3deg); }
-  100% {
-    -webkit-transform: scale(1) rotate(0); } }
+.glyphicons-bath:before {
+  content: "\E624"; }
 
-@keyframes tada {
-  0% {
-    transform: scale(1); }
-  10%, 20% {
-    transform: scale(0.9) rotate(-3deg); }
-  30%, 50%, 70%, 90% {
-    transform: scale(1.1) rotate(3deg); }
-  40%, 60%, 80% {
-    transform: scale(1.1) rotate(-3deg); }
-  100% {
-    transform: scale(1) rotate(0); } }
+.glyphicons-donate:before {
+  content: "\E625"; }
 
-.tada {
-  -webkit-animation-name: tada;
-  animation-name: tada; }
+.glyphicons-sauna:before {
+  content: "\E626"; }
+
+.glyphicons-bedroom-nightstand:before {
+  content: "\E627"; }
+
+.glyphicons-bedroom-lamp:before {
+  content: "\E628"; }
+
+.glyphicons-doctor:before {
+  content: "\E629"; }
+
+.glyphicons-engineering-networks:before {
+  content: "\E630"; }
+
+.glyphicons-washing-machine:before {
+  content: "\E631"; }
+
+.glyphicons-dryer:before {
+  content: "\E632"; }
+
+.glyphicons-dishwasher:before {
+  content: "\E633"; }
+
+.glyphicons-luggage-group:before {
+  content: "\E634"; }
+
+.glyphicons-teenager:before {
+  content: "\E635"; }
+
+.glyphicons-person-stick:before {
+  content: "\E636"; }
+
+.glyphicons-person-stick-old:before {
+  content: "\E637"; }
+
+.glyphicons-traveler:before {
+  content: "\E638"; }
+
+.glyphicons-veteran:before {
+  content: "\E639"; }
+
+.glyphicons-group-chat:before {
+  content: "\E640"; }
+
+.glyphicons-elections:before {
+  content: "\E641"; }
+
+.glyphicons-law-justice:before {
+  content: "\E642"; }
+
+.glyphicons-judiciary:before {
+  content: "\E643"; }
+
+.glyphicons-house-fire:before {
+  content: "\E644"; }
+
+.glyphicons-firefighters:before {
+  content: "\E645"; }
+
+.glyphicons-police:before {
+  content: "\E646"; }
+
+.glyphicons-ambulance:before {
+  content: "\E647"; }
+
+.glyphicons-light-beacon:before {
+  content: "\E648"; }
+
+.glyphicons-important-day:before {
+  content: "\E649"; }
+
+.glyphicons-bike-park:before {
+  content: "\E650"; }
+
+.glyphicons-object-align-top:before {
+  content: "\E651"; }
+
+.glyphicons-object-align-bottom:before {
+  content: "\E652"; }
+
+.glyphicons-object-align-horizontal:before {
+  content: "\E653"; }
+
+.glyphicons-object-align-left:before {
+  content: "\E654"; }
+
+.glyphicons-object-align-vertical:before {
+  content: "\E655"; }
+
+.glyphicons-object-align-right:before {
+  content: "\E656"; }
+
+.glyphicons-reflect-y:before {
+  content: "\E657"; }
+
+.glyphicons-reflect-x:before {
+  content: "\E658"; }
+
+.glyphicons-tick:before {
+  content: "\E659"; }
+
+.glyphicons-lawnmower:before {
+  content: "\E660"; }
+
+.glyphicons-call-redirect:before {
+  content: "\E661"; }
+
+.glyphicons-call-ip:before {
+  content: "\E662"; }
+
+.glyphicons-call-record:before {
+  content: "\E663"; }
+
+.glyphicons-call-ringtone:before {
+  content: "\E664"; }
+
+.glyphicons-call-traffic:before {
+  content: "\E665"; }
+
+.glyphicons-call-hold:before {
+  content: "\E666"; }
+
+.glyphicons-call-incoming:before {
+  content: "\E667"; }
+
+.glyphicons-call-outgoing:before {
+  content: "\E668"; }
+
+.glyphicons-call-video:before {
+  content: "\E669"; }
+
+.glyphicons-call-missed:before {
+  content: "\E670"; }
+
+.glyphicons-theater:before {
+  content: "\E671"; }
+
+.glyphicons-heartbeat:before {
+  content: "\E672"; }
+
+.glyphicons-kettlebell:before {
+  content: "\E673"; }
+
+.glyphicons-fireplace:before {
+  content: "\E674"; }
+
+.glyphicons-street-lights:before {
+  content: "\E675"; }
+
+.glyphicons-pedestrian:before {
+  content: "\E676"; }
+
+.glyphicons-flood:before {
+  content: "\E677"; }
+
+.glyphicons-open-water:before {
+  content: "\E678"; }
+
+.glyphicons-for-sale:before {
+  content: "\E679"; }
+
+.glyphicons-dustbin:before {
+  content: "\E680"; }
+
+.glyphicons-door:before {
+  content: "\E681"; }
+
+.glyphicons-camp-fire:before {
+  content: "\E682"; }
+
+.glyphicons-fleur-de-lis:before {
+  content: "\E683"; }
+
+.glyphicons-temperature-settings:before {
+  content: "\E684"; }
+
+.glyphicons-article:before {
+  content: "\E685"; }
+
+.glyphicons-sunbath:before {
+  content: "\E686"; }
+
+.glyphicons-balanced-diet:before {
+  content: "\E687"; }
+
+.glyphicons-ticket:before {
+  content: "\E688"; }
+
+.glyphicons-parking-ticket:before {
+  content: "\E689"; }
+
+.glyphicons-parking-meter:before {
+  content: "\E690"; }
+
+.glyphicons-laptop:before {
+  content: "\E691"; }
+
+.glyphicons-tree-structure:before {
+  content: "\E692"; }
+
+.glyphicons-weather-warning:before {
+  content: "\E693"; }
+
+.glyphicons-temperature-low:before {
+  content: "\E694"; }
+
+.glyphicons-temperature-high:before {
+  content: "\E695"; }
+
+.glyphicons-temperature-low-warning:before {
+  content: "\E696"; }
+
+.glyphicons-temperature-high-warning:before {
+  content: "\E697"; }
+
+.glyphicons-hurricane:before {
+  content: "\E698"; }
+
+.glyphicons-storm:before {
+  content: "\E699"; }
+
+.glyphicons-sorted-waste:before {
+  content: "\E700"; }
+
+.glyphicons-ear:before {
+  content: "\E701"; }
+
+.glyphicons-ear-deaf:before {
+  content: "\E702"; }
+
+.glyphicons-file-plus:before {
+  content: "\E703"; }
+
+.glyphicons-file-minus:before {
+  content: "\E704"; }
+
+.glyphicons-file-lock:before {
+  content: "\E705"; }
+
+.glyphicons-file-cloud:before {
+  content: "\E706"; }
+
+.glyphicons-file-cloud-download:before {
+  content: "\E707"; }
+
+.glyphicons-file-cloud-upload:before {
+  content: "\E708"; }
+
+.glyphicons-paragraph:before {
+  content: "\E709"; }
+
+.glyphicons-list-numbered:before {
+  content: "\E710"; }
+
+.glyphicons-donate-heart:before {
+  content: "\E711"; }
+
+.glyphicons-government:before {
+  content: "\E712"; }
+
+.glyphicons-maze:before {
+  content: "\E713"; }
+
+.glyphicons-chronicle:before {
+  content: "\E714"; }
+
+.glyphicons-user-structure:before {
+  content: "\E715"; }
+
+.glyphicons-recycle:before {
+  content: "\E716"; }
+
+.glyphicons-gas:before {
+  content: "\E717"; }
+
+.glyphicons-waste-pipe:before {
+  content: "\E718"; }
+
+.glyphicons-water-pipe:before {
+  content: "\E719"; }
+
+.glyphicons-parking:before {
+  content: "\E720"; }
+
+.glyphicons-closed:before {
+  content: "\E721"; }
+
+.glyphicons-mouse:before {
+  content: "\E722"; }
+
+.glyphicons-mouse-double-click:before {
+  content: "\E723"; }
+
+.glyphicons-mouse-left-click:before {
+  content: "\E724"; }
+
+.glyphicons-mouse-right-click:before {
+  content: "\E725"; }
+
+.glyphicons-mouse-middle-click:before {
+  content: "\E726"; }
+
+.glyphicons-mouse-scroll:before {
+  content: "\E727"; }
+
+.glyphicons-resize-vertical:before {
+  content: "\E728"; }
+
+.glyphicons-resize-horizontal:before {
+  content: "\E729"; }
+
+.glyphicons-temperature:before {
+  content: "\E730"; }
+
+.glyphicons-puzzle:before {
+  content: "\E731"; }
+
+.glyphicons-puzzle-2:before {
+  content: "\E732"; }
+
+.glyphicons-puzzle-3:before {
+  content: "\E733"; }
+
+.glyphicons-nearby-square:before {
+  content: "\E734"; }
+
+.glyphicons-nearby-circle:before {
+  content: "\E735"; }
+
+.glyphicons-rotate-right:before {
+  content: "\E736"; }
+
+.glyphicons-rotate-left:before {
+  content: "\E737"; }
+
+.glyphicons-pictures:before {
+  content: "\E738"; }
+
+.glyphicons-photo-album:before {
+  content: "\E739"; }
+
+.glyphicons-cadastral-map:before {
+  content: "\E740"; }
+
+.glyphicons-fingerprint-scan:before {
+  content: "\E741"; }
+
+.glyphicons-fingerprint:before {
+  content: "\E742"; }
+
+.glyphicons-fingerprint-lock:before {
+  content: "\E743"; }
+
+.glyphicons-fingerprint-ok:before {
+  content: "\E744"; }
+
+.glyphicons-fingerprint-remove:before {
+  content: "\E745"; }
+
+.glyphicons-fingerprint-reload:before {
+  content: "\E746"; }
+
+.glyphicons-pending-notifications:before {
+  content: "\E747"; }
+
+.glyphicons-synchronization:before {
+  content: "\E748"; }
+
+.glyphicons-synchronization-ban:before {
+  content: "\E749"; }
+
+.glyphicons-hash:before {
+  content: "\E750"; }
+
+.glyphicons-gender-male:before {
+  content: "\E751"; }
+
+.glyphicons-gender-female:before {
+  content: "\E752"; }
+
+.glyphicons-gender-virgin-female:before {
+  content: "\E753"; }
+
+.glyphicons-gender-intersex:before {
+  content: "\E754"; }
+
+.glyphicons-gender-transgender:before {
+  content: "\E755"; }
+
+.glyphicons-gender-ori-lesbian:before {
+  content: "\E756"; }
+
+.glyphicons-gender-ori-gay:before {
+  content: "\E757"; }
+
+.glyphicons-gender-ori-hetero:before {
+  content: "\E758"; }
+
+.glyphicons-gender-other:before {
+  content: "\E759"; }
+
+.glyphicons-gender-unknown:before {
+  content: "\E760"; }
+
+.glyphicons-scanner:before {
+  content: "\E761"; }
+
+.glyphicons-multifunction-printer:before {
+  content: "\E762"; }
+
+.glyphicons-lasso:before {
+  content: "\E763"; }
+
+.glyphicons-view-360:before {
+  content: "\E764"; }
+
+.glyphicons-battery-charging:before {
+  content: "\E765"; }
+
+.glyphicons-battery-full:before {
+  content: "\E766"; }
+
+.glyphicons-battery-75:before {
+  content: "\E767"; }
+
+.glyphicons-battery-50:before {
+  content: "\E768"; }
+
+.glyphicons-battery-25:before {
+  content: "\E769"; }
+
+.glyphicons-battery-10:before {
+  content: "\E770"; }
+
+.glyphicons-satellite:before {
+  content: "\E771"; }
+
+.glyphicons-satellite-dish:before {
+  content: "\E772"; }
+
+.glyphicons-satellite-dish-alt:before {
+  content: "\E773"; }
+
+.glyphicons-auction:before {
+  content: "\E774"; }
+
+.glyphicons-directions:before {
+  content: "\E775"; }
+
+.glyphicons-race:before {
+  content: "\E776"; }
+
+.glyphicons-robot:before {
+  content: "\E777"; }
+
+.glyphicons-ruler-alt:before {
+  content: "\E778"; }
+
+.glyphicons-cube-empty:before {
+  content: "\E779"; }
+
+.glyphicons-cube-black:before {
+  content: "\E780"; }
+
+.glyphicons-move-square:before {
+  content: "\E781"; }
+
+.glyphicons-drop:before {
+  content: "\E782"; }
+
+.glyphicons-vr-headset:before {
+  content: "\E783"; }
+
+.glyphicons-vr-charging:before {
+  content: "\E784"; }
+
+.glyphicons-vr-low-battery:before {
+  content: "\E785"; }
+
+.glyphicons-vr-paired:before {
+  content: "\E786"; }
+
+.glyphicons-vr-settings:before {
+  content: "\E787"; }
+
+.glyphicons-vr-maintenance:before {
+  content: "\E788"; }
+
+.glyphicons-filter-remove:before {
+  content: "\E789"; }
+
+.glyphicons-filter-applied:before {
+  content: "\E790"; }
+
+.glyphicons-one-day:before {
+  content: "\E791"; }
+
+.glyphicons-user-vr:before {
+  content: "\E792"; }
+
+.glyphicons-user-vr-add:before {
+  content: "\E793"; }
+
+.glyphicons-user-vr-remove:before {
+  content: "\E794"; }
+
+.glyphicons-dice-1:before {
+  content: "\E795"; }
+
+.glyphicons-dice-2:before {
+  content: "\E796"; }
+
+.glyphicons-dice-3:before {
+  content: "\E797"; }
+
+.glyphicons-dice-4:before {
+  content: "\E798"; }
+
+.glyphicons-dice-5:before {
+  content: "\E799"; }
+
+.glyphicons-dice-6:before {
+  content: "\E800"; }
 
 body {
   background-color: #182B3D; }

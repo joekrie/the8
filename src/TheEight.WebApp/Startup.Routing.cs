@@ -5,9 +5,6 @@ namespace TheEight.WebApp
 {
     public partial class Startup
     {
-        private void ConfigureRouting(IRouteBuilder routeBuilder)
-        {
-            routeBuilder.MapRoute("", "");
-        }
+        private void ConfigureRouting(IRouteBuilder routeBuilder) {}
     }
 }

@@ -23,15 +23,6 @@ namespace TheEight.WebApp
             var thisAssembly = Assembly.GetExecutingAssembly();
             var autofacBuilder = new ContainerBuilder();
 
-            services.AddTheEightConfiguration(_appBasePath,
-                builder =>
-                {
-                    if (_isDevelopment)
-                    {
-                        builder.AddJsonFile("appsettings.develop.json");
-                    }
-                });
-
             services
                 .AddMvc()
                 .AddJsonOptions(options =>
@@ -47,11 +38,10 @@ namespace TheEight.WebApp
                 });
             
             services.AddReact();
-
             services.AddApplicationInsightsTelemetry(_config);
+            services.AddOptions();
 
             services
-                .AddOptions()
                 .Configure<GoogleSettings>(_config.GetSection("Google"))
                 .Configure<FacebookSettings>(_config.GetSection("Facebook"))
                 .Configure<TwilioSettings>(_config.GetSection("Twilio"))
@@ -61,42 +51,27 @@ namespace TheEight.WebApp
 
             autofacBuilder
                 .RegisterAssemblyTypes(thisAssembly)
-                .Where(TypeIsRepositoryOrService)
-                .InstancePerDependency()
+                .Where(type => type.IsInNamespace("TheEight.WebApp.Repositories"))
+                .SingleInstance()
+                .AsImplementedInterfaces();
+
+            autofacBuilder
+                .RegisterAssemblyTypes(thisAssembly)
+                .Where(type => type.IsInNamespace("TheEight.WebApp.Services"))
+                .SingleInstance()
                 .AsImplementedInterfaces();
 
             autofacBuilder
                 .Register(ctx => SystemClock.Instance)
                 .As<IClock>()
                 .SingleInstance();
-
-            autofacBuilder
-                .RegisterType<AccessCodeGenerator>()
-                .As<IAccessCodeGenerator>()
-                .SingleInstance();
             
             autofacBuilder.RegisterModule(new DataAccessModule());
             autofacBuilder.Populate(services);
-
-            var container = autofacBuilder.Build();
-            return container.Resolve<IServiceProvider>();
-        }
-
-        private static bool TypeIsRepositoryOrService(Type type)
-        {
-            if (type.IsInNamespace("TheEight.WebApp.Repositories") 
-                && type.Name.EndsWith("Repository"))
-            {
-                return true;
-            }
-
-            if (type.IsInNamespace("TheEight.WebApp.Services") 
-                && type.Name.EndsWith("Service"))
-            {
-                return true;
-            }
-
-            return false;
+            
+            return autofacBuilder
+                .Build()
+                .Resolve<IServiceProvider>();
         }
     }
 }

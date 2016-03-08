@@ -8,21 +8,21 @@
     }
   },
   "profiles": {
+    "web": {
+      "commandName": "web",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost.the8.io:5004",
+      "environmentVariables": {
+        "Hosting:Environment": "Development"
+      },
+      "sdkVersion": "dnx-clr-win-x86.1.0.0-rc1-update1"
+    },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNET_ENV": "Development"
-      }
-    },
-    "web": {
-      "commandName": "web",
-      "launchBrowser": true,
-      "launchUrl": "http://local-test.the8.io:8005",
-      "environmentVariables": {
         "Hosting:Environment": "Development"
-      },
-      "sdkVersion": "dnx-clr-win-x86.1.0.0-rc2-16351"
+      }
     }
   }
 }

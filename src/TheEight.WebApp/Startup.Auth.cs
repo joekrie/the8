@@ -39,7 +39,7 @@ namespace TheEight.WebApp
                     .ApplicationServices
                     .GetRequiredService<IAuthenticationService>();
 
-                options.CallbackPath = "/google";
+                options.CallbackPath = "/authgoogle";
                 options.AuthenticationScheme = TheEightAuthenticationSchemes.Google;
 
                 options.ClientId = settings.OAuth.ClientId;
@@ -62,7 +62,7 @@ namespace TheEight.WebApp
                     .ApplicationServices
                     .GetRequiredService<IAuthenticationService>();
 
-                options.CallbackPath = "/facebook";
+                options.CallbackPath = "/authfacebook";
                 options.AuthenticationScheme = TheEightAuthenticationSchemes.Facebook;
 
                 options.ClientId = settings.OAuth.ClientId;

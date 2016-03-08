@@ -18,13 +18,15 @@ namespace TheEight.WebApp
 
             app.UseReact(config =>
             {
-                config.SetLoadBabel(false);
-                config.SetLoadReact(false);
-                config.AddScriptWithoutTransform("~/app/server.js");
+                config
+                    .SetLoadBabel(false)
+                    .SetLoadReact(false)
+                    //.SetAllowMsieEngine(false)
+                    .SetReuseJavaScriptEngines(true)
+                    .AddScriptWithoutTransform("~/app/server.js");
             });
 
             app.UseStaticFiles();
-            //app.UseMvc(ConfigureRouting);
             app.UseMvc();
         }
     }

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Http;
 using TheEight.Common.Clubs;
 using TheEight.WebApp.Constants;
+using IAccountsRepository = TheEight.WebApp.Repositories.IAccountsRepository;
 
 namespace TheEight.WebApp.Services.Authorization
 {

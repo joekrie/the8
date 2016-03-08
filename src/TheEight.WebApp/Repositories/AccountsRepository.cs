@@ -4,8 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using NodaTime;
+using TheEight.Common.Clubs;
 
-namespace TheEight.Common.Clubs
+namespace TheEight.WebApp.Repositories
 {
     public class AccountsRepository : IAccountsRepository
     {

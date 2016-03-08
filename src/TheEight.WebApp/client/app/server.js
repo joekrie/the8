@@ -1,2 +1,4 @@
 ﻿import "expose?React!react";
-import "expose?UserInviter!./accounts/user-inviter/App";
+import "expose?ReactDOM!react-dom";
+import "expose?ReactDOMServer!react-dom/server";
+import "expose?Apps!./apps";

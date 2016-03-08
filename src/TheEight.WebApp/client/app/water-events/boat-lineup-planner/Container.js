@@ -17,8 +17,9 @@ class Container extends Component {
 
 		return (
 			<div style={styles.root}>
-				<AssignableAttendeeListDropTarget assignableAttendees={assignableAttendees} 
-                                                  unplaceAttendee={unplaceAttendee} />
+				<AssignableAttendeeListDropTarget 
+                    assignableAttendees={assignableAttendees} 
+                    unplaceAttendee={unplaceAttendee} />
 				<BoatList boats={boats}
                           placeAttendee={placeAttendee} />
 			</div>

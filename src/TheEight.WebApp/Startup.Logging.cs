@@ -4,9 +4,6 @@ namespace TheEight.WebApp
 {
     public partial class Startup
     {
-        private void ConfigureLogging(ILoggerFactory loggerFactory)
-        {
-
-        }
+        private void ConfigureLogging(ILoggerFactory loggerFactory) {}
     }
 }

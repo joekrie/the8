@@ -1,4 +1,0 @@
-﻿{
-  "server": "Microsoft.AspNet.Server.Kestrel",
-  "server.urls": "http://local-test.the8.io:8005"
-}

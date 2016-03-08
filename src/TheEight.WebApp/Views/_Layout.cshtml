@@ -1,0 +1,22 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <title>The Eight</title>
+    <link href="~/styles/site.css" rel="stylesheet"/>
+    <link href="~/styles/app.css" rel="stylesheet"/>
+    @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
+</head>
+<body>
+    @RenderBody()
+    <script src="https://fb.me/react-0.14.7.min.js"
+            integrity="sha384-zTm/dblzLXQNp3CgY+hfaC/WJ6h4XtNrePh2CW2+rO9GPuNiPb9jmthvAL+oI/dQ"
+            crossorigin="anonymous"
+            asp-fallback-src="~/libs/react-0.14.7.min.js"
+            asp-fallback-test="window.React"></script>
+    <script src="~/app/client.js"></script>
+    @Html.ReactInitJavaScript()
+    @RenderSection("scripts", false)
+</body>
+</html>

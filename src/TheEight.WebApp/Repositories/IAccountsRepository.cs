@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using NodaTime;
+using TheEight.Common.Clubs;
 
-namespace TheEight.Common.Clubs
+namespace TheEight.WebApp.Repositories
 {
     public interface IAccountsRepository
     {

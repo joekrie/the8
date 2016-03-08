@@ -1,0 +1,83 @@
+﻿@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+</head>
+<body>
+<div id="app"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reqwest/2.0.5/reqwest.min.js"></script>
+    <script src="https://fb.me/react-0.14.7.min.js"></script>
+    <script src="https://fb.me/react-dom-0.14.7.min.js"></script>
+    <script src="~/app/client.js"></script>
+    <script>
+        var props = {
+            event:
+            {
+                settings: {
+                    allowMultipleAssignments: true
+                },
+                boats: [
+                    {
+                        boatId: "club-boat-1",
+                        title: "Lucky",
+                        isCoxed: true,
+                        seatCount: 8,
+                        seatAssignments: {
+                            0: "squad-member-5"
+                        }
+                    },
+                    {
+                        boatId: "club-boat-2",
+                        title: "Longhorn",
+                        isCoxed: false,
+                        seatCount: 4,
+                        seatAssignments: {
+                            3: "squad-member-2"
+                        }
+                    }
+                ],
+                attendees: [
+                    {
+                        attendeeId: "squad-member-2",
+                        displayName: "John Doe",
+                        sortName: "Doe, John",
+                        position: "COXSWAIN"
+                    },
+                    {
+                        attendeeId: "squad-member-5",
+                        displayName: "Billy Madison",
+                        sortName: "Madison, Billy",
+                        position: "ROWER"
+                    },
+                    {
+                        attendeeId: "anonymous-1",
+                        displayName: "Abe Lincoln",
+                        sortName: "Lincoln, Abe",
+                        position: "ROWER"
+                    }
+                ]
+            }
+        };
+
+        var Factory = React.createFactory(Apps.BoatLineupPlannerApp);
+
+        reqwest({
+            url: "@Url.Action("GetWaterEvent", new { id = 1 })",
+            method: "get",
+            success: function(resp) {
+                var root = Factory({
+                    event: resp
+                });
+
+                ReactDOM.render(root, document.getElementById("app"));
+            }
+        });
+
+    </script>
+</body>
+</html>

@@ -8,36 +8,38 @@ namespace TheEight.WebApp.Models.BoatLineupPlanner
         public string SaveUrl { get; set; }
     }
 
-    public class Practice
+    public class WaterEventVM
     {
-        public IList<Attendee> Attendees { get; set; }
-        public IList<Boat> Boats { get; set; }
+        public WaterEventSettingsVM Settings { get; set; }
+        public IEnumerable<BoatVM> Boats { get; set; }
+        public IEnumerable<AttendeeVM> Attendees { get; set; }
     }
 
-    public class Attendee
+    public class WaterEventSettingsVM
     {
-        public string Id { get; set; }
+        public bool AllowMultipleAssignments { get; set; }
+    }
+
+    public class BoatVM
+    {
+        public string BoatId { get; set; }
+        public string Title { get; set; }
+        public bool IsCoxed { get; set; }
+        public int SeatCount { get; set; }
+        public IDictionary<int, string> SeatAssignments { get; set; }
+    }
+
+    public class AttendeeVM
+    {
+        public string AttendeeId { get; set; }
         public string SortName { get; set; }
         public string DisplayName { get; set; }
-        public Placement Placement { get; set; }
+        public Position Position { get; set; }
     }
 
-    public class Placement
+    public enum Position
     {
-        public string BoatKey { get; set; }
-        public string SeatPosition { get; set; }
-    }
-
-    public class Boat
-    {
-        public string Id { get; set; }
-        public BoatType Type { get; set; }
-    }
-
-    public class BoatType
-    {
-        public string Title { get; set; }
-        public int RowerCount { get; set; }
-        public bool IsCoxed { get; set; }
+        COXSWAIN,
+        ROWER
     }
 }
