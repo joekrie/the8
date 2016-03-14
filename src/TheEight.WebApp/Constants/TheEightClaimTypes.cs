@@ -2,6 +2,6 @@ namespace TheEight.WebApp.Constants
 {
     public static class TheEightClaimTypes
     {
-        public const string UserId = "http://the8.io/claims/user-id";
+        public const string UserId = "http://claims.the8.io/user-id";
     }
 }

@@ -17,7 +17,17 @@ namespace TheEight.Common.Infrastructure.DependencyInjection
                 .Register(ctx =>
                 {
                     var settings = ctx.Resolve<IOptions<DatabaseSettings>>().Value;
-                    return new SqlConnection(settings.ConnectionString);
+
+                    var connStrBuilder = new SqlConnectionStringBuilder
+                    {
+                        DataSource = settings.Server,
+                        InitialCatalog = settings.Database,
+                        UserID = settings.UserName,
+                        Password = settings.Password
+                    };
+
+                    var connStr = connStrBuilder.ToString();
+                    return new SqlConnection(connStr);
                 })
                 .InstancePerDependency()
                 .As<IDbConnection>();

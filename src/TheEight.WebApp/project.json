@@ -6,6 +6,7 @@
     "emitEntryPoint": false
   },
   "dependencies": {
+    "Authy.Net": "1.1.0.3",
     "Autofac": "4.0.0-rc1-177",
     "Autofac.Extensions.DependencyInjection": "4.0.0-rc1-177",
     "Base32": "1.1.0.2",

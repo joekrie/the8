@@ -14,12 +14,14 @@ namespace TheEight.WebApp
 {
     public partial class Startup
     {
+        private const string CookieAuthScheme = "cookie";
+
         private void ConfigureAuth(IApplicationBuilder app)
         {
             app.UseCookieAuthentication(options =>
             {
-                options.AuthenticationScheme = TheEightAuthenticationSchemes.Cookie;
-                options.CookieName = TheEightCookies.Authentication;
+                options.AuthenticationScheme = CookieAuthScheme;
+                options.CookieName = "the8.auth";
 
                 options.LoginPath = new PathString("/login");
                 options.LogoutPath = new PathString("/logout");
@@ -40,7 +42,7 @@ namespace TheEight.WebApp
                     .GetRequiredService<IAuthenticationService>();
 
                 options.CallbackPath = "/authgoogle";
-                options.AuthenticationScheme = TheEightAuthenticationSchemes.Google;
+                options.AuthenticationScheme = "google";
 
                 options.ClientId = settings.OAuth.ClientId;
                 options.ClientSecret = settings.OAuth.ClientSecret;
@@ -63,7 +65,7 @@ namespace TheEight.WebApp
                     .GetRequiredService<IAuthenticationService>();
 
                 options.CallbackPath = "/authfacebook";
-                options.AuthenticationScheme = TheEightAuthenticationSchemes.Facebook;
+                options.AuthenticationScheme = "facebook";
 
                 options.ClientId = settings.OAuth.ClientId;
                 options.ClientSecret = settings.OAuth.ClientSecret;
@@ -74,7 +76,7 @@ namespace TheEight.WebApp
 
         private static void ConfigureExternalAuth(OAuthOptions options, IAuthenticationService authService)
         {
-            options.SignInScheme = TheEightAuthenticationSchemes.Cookie;
+            options.SignInScheme = CookieAuthScheme;
 
             options.Events = new OAuthEvents
             {

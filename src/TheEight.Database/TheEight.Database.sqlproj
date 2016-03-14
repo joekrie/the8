@@ -24,7 +24,7 @@
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
     <IncludeSchemaNameInFileName>True</IncludeSchemaNameInFileName>
-    <GenerateCreateScript>True</GenerateCreateScript>
+    <GenerateCreateScript>False</GenerateCreateScript>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -63,64 +63,29 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables" />
-    <Folder Include="Views" />
-    <Folder Include="Data" />
     <Folder Include="Schemas" />
-    <Folder Include="Security" />
-    <Folder Include="Security\Users" />
-    <Folder Include="Security\Logins" />
-    <Folder Include="Tables\Accounts" />
-    <Folder Include="Tables\Clubs" />
-    <Folder Include="Tables\WaterEvents" />
-    <Folder Include="Tables\ErgWorkouts" />
-    <Folder Include="Views\WaterEvents" />
-    <Folder Include="Tables\Messaging\" />
-    <Folder Include="Data\Initial" />
-    <Folder Include="Tables\Security" />
+    <Folder Include="Tables\BoatEvents" />
+    <Folder Include="Scripts" />
+    <Folder Include="Scripts\PostDeploy" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Schemas\WaterEvents.sql" />
+    <Build Include="Schemas\BoatEvents.sql" />
     <Build Include="Schemas\Clubs.sql" />
     <Build Include="Schemas\Accounts.sql" />
     <Build Include="Schemas\Messaging.sql" />
     <Build Include="Schemas\ErgWorkouts.sql" />
-    <Build Include="Security\Users\TheEightAppUser.sql" />
-    <Build Include="Tables\Accounts\Accounts.Users.sql" />
-    <Build Include="Tables\Accounts\Accounts.Logins.sql" />
-    <Build Include="Tables\Clubs\Clubs.Squads.sql" />
-    <Build Include="Tables\Clubs\Clubs.Clubs.sql" />
-    <Build Include="Tables\Clubs\Clubs.SquadMembers.sql" />
-    <Build Include="Tables\Clubs\Clubs.ClubMembers.sql" />
-    <Build Include="Tables\WaterEvents\WaterEvents.AnonymousAttendees.sql" />
-    <Build Include="Tables\WaterEvents\WaterEvents.Attendees.sql" />
-    <Build Include="Tables\WaterEvents\WaterEvents.Boats.sql" />
-    <Build Include="Tables\WaterEvents\WaterEvents.EventBoatPlacements.sql" />
-    <Build Include="Tables\WaterEvents\WaterEvents.EventBoats.sql" />
-    <Build Include="Tables\WaterEvents\WaterEvents.EventModes.sql" />
-    <Build Include="Tables\WaterEvents\WaterEvents.Events.sql" />
-    <Build Include="Tables\WaterEvents\WaterEvents.RegisteredAttendees.sql" />
-    <Build Include="Tables\ErgWorkouts\ErgWorkouts.Workouts.sql" />
-    <Build Include="Tables\ErgWorkouts\ErgWorkouts.Pieces.sql" />
-    <Build Include="Tables\ErgWorkouts\ErgWorkouts.Results.sql" />
-    <Build Include="Tables\ErgWorkouts\ErgWorkouts.PieceTypes.sql" />
-    <Build Include="Views\WaterEvents\WaterEvents.RegisteredAttendeeNames.sql" />
-    <Build Include="Views\WaterEvents\WaterEvents.AttendeeNames.sql" />
-    <Build Include="Tables\Messaging\Messaging.Categories.sql" />
-    <Build Include="Tables\Messaging\Messaging.Methods.sql" />
-    <Build Include="Tables\Messaging\Messaging.Messages.sql" />
-    <Build Include="Tables\Messaging\Messaging.ShortMessages.sql" />
-    <Build Include="Tables\Messaging\Messaging.LongMessages.sql" />
-    <Build Include="Tables\Clubs\Clubs.Administrators.sql" />
-    <Build Include="Tables\Accounts\Accounts.Invites.sql" />
-    <Build Include="Tables\Accounts\Accounts.SquadInvites.sql" />
-    <Build Include="Tables\Accounts\Accounts.LoginProviders.sql" />
-    <Build Include="Tables\Accounts\Accounts.ClubAdminInvites.sql" />
-    <None Include="Data\Initial\Enums.sql" />
-    <Build Include="Tables\Accounts\Accounts.ClubPermissions.sql" />
-    <Build Include="Tables\Security\Security.ClubRoles.sql" />
-    <Build Include="Tables\Security\Security.SquadRoles.sql" />
     <Build Include="Schemas\Security.sql" />
-    <Build Include="Tables\Security\Security.ClubRoleAssignments.sql" />
-    <Build Include="Tables\Security\Security.SquadRoleAssignments.sql" />
+    <PostDeploy Include="Scripts\PostDeploy\WebAppUser.sql" />
+    <Build Include="Tables\BoatEvents\BoatEvents.Event.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="TheEight.Database.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="WebAppLoginPassword">
+      <DefaultValue>
+      </DefaultValue>
+      <Value>$(SqlCmdVar__1)</Value>
+    </SqlCmdVariable>
   </ItemGroup>
 </Project>
