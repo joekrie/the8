@@ -13,7 +13,10 @@ Management tool for rowing clubs to manage teams, water practices, race lineups,
 * Namecheap: domain registration & DNS
 * Twilio: SMS
 * Mailgun: transactional email
+* Google: authentication
+* Facebook: authentication
+* Authy: two factor authentication
 
 ## Domain terminology
-* Team: group of rowers, coxswains & coaches for a specified time. For example, 
+* Team: group of rowers, coxswains & coaches for a specified time. For example, Novice Men 2015-16
 * Club: client that has signed up for service
