@@ -76,11 +76,41 @@
       "metadata": {
         "description": "Describes the performance level for Edition"
       }
+    },
+    "db_inportStorageKeyType": {
+      "type": "string",
+      "minLength": 1
+    },
+    "db_inportStorageKey": {
+      "type": "securestring"
+    },
+    "db_inportStorageUri": {
+      "type": "string",
+      "minLength": 1
+    },
+    "db_inportAdministratorLogin": {
+      "type": "string",
+      "minLength": 1
+    },
+    "db_inportAdministratorLoginPassword": {
+      "type": "securestring"
+    },
+    "theeightstorageType": {
+      "type": "string",
+      "defaultValue": "Standard_LRS",
+      "allowedValues": [
+        "Standard_LRS",
+        "Standard_ZRS",
+        "Standard_GRS",
+        "Standard_RAGRS",
+        "Premium_LRS"
+      ]
     }
   },
   "variables": {
     "webSiteName": "[concat('webSite', uniqueString(resourceGroup().id))]",
-    "sqlserverName": "[concat('sqlserver', uniqueString(resourceGroup().id))]"
+    "sqlserverName": "[concat('sqlserver', uniqueString(resourceGroup().id))]",
+    "theeightstorageName": "[concat('theeightstorage', uniqueString(resourceGroup().id))]"
   },
   "resources": [
     {
@@ -112,7 +142,28 @@
             "collation": "[parameters('collation')]",
             "maxSizeBytes": "[parameters('maxSizeBytes')]",
             "requestedServiceObjectiveName": "[parameters('requestedServiceObjectiveName')]"
-          }
+          },
+          "resources": [
+            {
+              "name": "Import",
+              "type": "extensions",
+              "apiVersion": "2014-04-01-preview",
+              "dependsOn": [
+                "[parameters('databaseName')]"
+              ],
+              "tags": {
+                "displayName": "db_import"
+              },
+              "properties": {
+                "storageKeyType": "[parameters('db_inportStorageKeyType')]",
+                "storageKey": "[parameters('db_inportStorageKey')]",
+                "storageUri": "[parameters('db_inportStorageUri')]",
+                "administratorLogin": "[parameters('db_inportAdministratorLogin')]",
+                "administratorLoginPassword": "[parameters('db_inportAdministratorLoginPassword')]",
+                "operationMode": "Import"
+              }
+            }
+          ]
         },
         {
           "type": "firewallrules",
@@ -395,6 +446,127 @@
       "properties": {
         "ApplicationId": "[variables('webSiteName')]"
       }
+    },
+    {
+      "name": "[concat('ServerErrors ', 'the-eight-app-insights')]",
+      "type": "Microsoft.Insights/alertrules",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2014-04-01",
+      "dependsOn": [
+        "[concat('Microsoft.Web/sites/', variables('webSiteName'))]"
+      ],
+      "tags": {
+        "[concat('hidden-link:', resourceGroup().id, '/providers/Microsoft.Web/sites/', variables('webSiteName'))]": "Resource",
+        "displayName": "ServerErrors the-eight-app-insights"
+      },
+      "properties": {
+        "name": "[concat('ServerErrors ', variables('webSiteName'))]",
+        "description": "[concat(variables('webSiteName'), ' has some server errors, status code 5xx.')]",
+        "isEnabled": false,
+        "condition": {
+          "odata.type": "Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
+          "dataSource": {
+            "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
+            "resourceUri": "[concat(resourceGroup().id, '/providers/Microsoft.Web/sites/', variables('webSiteName'))]",
+            "metricName": "Http5xx"
+          },
+          "operator": "GreaterThan",
+          "threshold": 0,
+          "windowSize": "PT5M"
+        },
+        "action": {
+          "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleEmailAction",
+          "sendToServiceOwners": true,
+          "customEmails": [ ]
+        }
+      }
+    },
+    {
+      "name": "[concat('ForbiddenRequests ', 'the-eight-app-insights')]",
+      "type": "Microsoft.Insights/alertrules",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2014-04-01",
+      "dependsOn": [
+        "[concat('Microsoft.Web/sites/', variables('webSiteName'))]"
+      ],
+      "tags": {
+        "displayName": "ForbiddenRequests the-eight-app-insights"
+      },
+      "properties": {
+        "name": "[concat('ForbiddenRequests ', variables('webSiteName'))]",
+        "description": "[concat(variables('webSiteName'), ' has some requests that are forbidden, status code 403.')]",
+        "isEnabled": false,
+        "condition": {
+          "odata.type": "Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
+          "dataSource": {
+            "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
+            "resourceUri": "[concat(resourceGroup().id, '/providers/Microsoft.Web/sites/', variables('webSiteName'))]",
+            "metricName": "Http403"
+          },
+          "operator": "GreaterThan",
+          "threshold": 0,
+          "windowSize": "PT5M"
+        },
+        "action": {
+          "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleEmailAction",
+          "sendToServiceOwners": true,
+          "customEmails": [ ]
+        }
+      }
+    },
+    {
+      "name": "[variables('theeightstorageName')]",
+      "type": "Microsoft.Storage/storageAccounts",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2015-06-15",
+      "dependsOn": [ ],
+      "tags": {
+        "displayName": "theeightstorage"
+      },
+      "properties": {
+        "accountType": "[parameters('theeightstorageType')]"
+      }
+    },
+    {
+      "apiVersion": "2016-01-01",
+      "type": "Microsoft.Scheduler/jobCollections",
+      "name": "[parameters('jobCollectionName')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "sku": "[parameters('sku')]"
+      },
+      "resources": [
+        {
+          "apiVersion": "2016-01-01",
+          "type": "jobs",
+          "name": "[parameters('jobName')]",
+          "dependsOn": [
+            "[concat('Microsoft.Scheduler/jobCollections/', parameters('jobCollectionName'))]"
+          ],
+          "properties": {
+            "state": "Enabled",
+            "action": {
+              "type": "HTTP",
+              "request": {
+                "uri": "[concat('http://', reference(resourceId('Microsoft.Web/sites', parameters('webAppName'))).hostNames[0])]",
+                "method": "GET",
+                "retryPolicy": {
+                  "retryType": "None"
+                }
+              }
+            },
+            "recurrence": {
+              "interval": 1,
+              "frequency": "Week",
+              "schedule": {
+                "weekDays": [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" ],
+                "hours": [ 10, 12 ],
+                "minutes": [ 0, 30 ]
+              }
+            }
+          }
+        }
+      ]
     }
   ]
 }
