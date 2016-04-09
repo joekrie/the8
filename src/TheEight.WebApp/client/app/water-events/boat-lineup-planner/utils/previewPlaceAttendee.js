@@ -1,20 +1,21 @@
-﻿import _ from "lodash";
+﻿import { get, invoke } from "lodash";
+
+const attendeeInBoat = (boat, attendeeId) => boat
+    .get("seatAssignments")
+    .valueSeq()
+    .includes(attendeeId);
 
 export default (boats, originPlacement, targetPlacement, movedAttendeeId) => {
-    const originBoat = boats.find(boat => boat.get("boatId") === _.get(originPlacement, "boatId"));
+    const originBoat = boats.find(boat => boat.get("boatId") === get(originPlacement, "boatId"));
     const targetBoat = boats.find(boat => boat.get("boatId") === targetPlacement.boatId);
 
-    const targetAttendeeId = _.invoke(targetBoat, "getIn", ["seatAssignments", targetPlacement.seatPosition]);
+    const targetAttendeeId = invoke(targetBoat, "getIn", ["seatAssignments", targetPlacement.seatPosition]);
     const attendeeInTarget = Boolean(targetAttendeeId);
     
-    const movingWithinBoat = _.get(originPlacement, "boatId") === _.get(targetPlacement, "boatId");
+    const movingWithinBoat = get(originPlacement, "boatId") === get(targetPlacement, "boatId");
     const attendeeWasAssigned = Boolean(originPlacement);
 
-    const alreadyInTargetBoat = 
-        targetBoat
-            .get("seatAssignments")
-            .valueSeq()
-            .includes(movedAttendeeId);
+    const alreadyInTargetBoat = attendeeInBoat(targetBoat, movedAttendeeId);
 
     if (alreadyInTargetBoat && !movingWithinBoat) {
         return {

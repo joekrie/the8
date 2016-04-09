@@ -1,6 +1,31 @@
 import _ from "lodash";
 import previewPlaceAttendee, { attendeeMoveTypes } from "./utils/previewPlaceAttendee";
 
+const reducers = {    
+    unassignAttendee,
+    swapAttendeesWithinBoat,
+    swapAttendeesAcrossBoats,
+    moveAttendeeToEmptySeatWithinBoat,
+    moveAttendeeToEmptySeatAcrossBoats,
+    assignAttendeeToEmptySeat,
+    swapUnassignedAttendeeWithAssignedAttendee
+};
+
+
+
+export const swapAttendeesWithinBoat = (state, action) => {
+    const newEvent = Object.create(state.event);
+    const boats = event.get("boats");
+    const [targetBoatIndex, targetBoat] = boats.findEntry(boat => boat.get("boatId") === targetPlacement.boatId);
+    let newTargetBoat = targetBoat.setIn(["seatAssignments", targetPlacement.seatPosition], movedAttendeeId);
+    newTargetBoat = newTargetBoat.setIn(["seatAssignments", originPlacement.seatPosition], targetAttendeeId);
+    newEvent = newEvent.setIn(["boats", targetBoatIndex], newTargetBoat);
+};
+
+export const swapAttendeesAcrossBoats = (state, action) => {
+
+};
+
 export const placeAttendee = (state, action) => {
     const { targetPlacement, movedAttendeeId, originPlacement, targetAttendeeId } = action.payload;
     const { event } = state;

@@ -16,51 +16,48 @@
     <script src="~/app/client.js"></script>
     <script>
         var props = {
-            event:
-            {
-                settings: {
-                    allowMultipleAssignments: true
+            settings: {
+                allowMultipleAssignments: true
+            },
+            boats: {
+                "club-boat-1": {
+                    boatId: "club-boat-1",
+                    title: "Lucky",
+                    isCoxed: true,
+                    seatCount: 8,
+                    seatAssignments: {
+                        0: "squad-member-5"
+                    }
                 },
-                boats: [
-                    {
-                        boatId: "club-boat-1",
-                        title: "Lucky",
-                        isCoxed: true,
-                        seatCount: 8,
-                        seatAssignments: {
-                            0: "squad-member-5"
-                        }
-                    },
-                    {
-                        boatId: "club-boat-2",
-                        title: "Longhorn",
-                        isCoxed: false,
-                        seatCount: 4,
-                        seatAssignments: {
-                            3: "squad-member-2"
-                        }
+                "club-boat-2": {
+                    boatId: "club-boat-2",
+                    title: "Longhorn",
+                    isCoxed: false,
+                    seatCount: 4,
+                    seatAssignments: {
+                        3: "squad-member-2"
                     }
-                ],
-                attendees: [
-                    {
-                        attendeeId: "squad-member-2",
-                        displayName: "John Doe",
-                        sortName: "Doe, John",
-                        position: "COXSWAIN"
-                    },
-                    {
-                        attendeeId: "squad-member-5",
-                        displayName: "Billy Madison",
-                        sortName: "Madison, Billy",
-                        position: "ROWER"
-                    },
-                    {
-                        attendeeId: "anonymous-1",
-                        displayName: "Abe Lincoln",
-                        sortName: "Lincoln, Abe",
-                        position: "ROWER"
-                    }
-                ]
+                }
+            },
+            attendees: {
+                "squad-member-2": {
+                    attendeeId: "squad-member-2",
+                    displayName: "John Doe",
+                    sortName: "Doe, John",
+                    position: "COXSWAIN"
+                },
+                "squad-member-5": {
+                    attendeeId: "squad-member-5",
+                    displayName: "Billy Madison",
+                    sortName: "Madison, Billy",
+                    position: "ROWER"
+                },
+               "anonymous-1": {
+                    attendeeId: "anonymous-1",
+                    displayName: "Abe Lincoln",
+                    sortName: "Lincoln, Abe",
+                    position: "ROWER"
+                }
             }
         };
 
