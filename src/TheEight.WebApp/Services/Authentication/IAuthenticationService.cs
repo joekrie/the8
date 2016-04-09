@@ -1,6 +1,5 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Http;
 
 namespace TheEight.WebApp.Services.Authentication
 {

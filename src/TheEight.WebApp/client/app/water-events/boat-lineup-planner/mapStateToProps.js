@@ -1,19 +1,21 @@
-const sortAttendees = (x, y) => {
-    if (x.get("position") === y.get("position")) {
-        return x
-            .get("sortName")
-            .localeCompare(y.get("sortName"));
-    }
-
-    return x.get("position") === 0 ? -1 : 1;
-};
+import Immutable from "immutable";
 
 export default state => {
     const { event } = state;
 
+    const sortAttendees = (x, y) => {
+        if (x.get("position") === y.get("position")) {
+            return x
+                .get("sortName")
+                .localeCompare(y.get("sortName"));
+        }
+
+        return x.get("position") === 0 ? -1 : 1;
+    };
+
     const attendeeIsAssignable = attendee => {
         const allowMultiple = event.getIn(["settings", "allowMultipleAssignments"]);
-        
+
         if (allowMultiple) {
             return true;
         }
@@ -45,13 +47,11 @@ export default state => {
 
     return {
         eventSettings: event.get("settings"),
-        boats: event
-            .get("boats")
-            .map(mapBoat),
+        boats: event.get("boats").map(mapBoat),
         attendees: event.get("attendees"),
-        assignableAttendees: event
-            .get("attendees")
-			.filter(attendeeIsAssignable)
-			.sort(sortAttendees)
-	}
+        assignableAttendees:
+            event.get("attendees")
+                .filter(attendeeIsAssignable)
+                .sort(sortAttendees)
+    }
 };

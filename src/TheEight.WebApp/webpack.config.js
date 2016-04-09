@@ -44,6 +44,9 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin({ minimize: true })
+        // new webpack.optimize.UglifyJsPlugin({ minimize: true }),
+        new webpack.ProvidePlugin({
+            'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+        })
     ]
 };

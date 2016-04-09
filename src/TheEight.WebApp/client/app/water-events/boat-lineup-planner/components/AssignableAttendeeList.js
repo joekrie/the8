@@ -18,10 +18,6 @@ const AssignableAttendeeList = props => {
     );
 };
 
-AssignableAttendeeList.propTypes = {
-
-};
-
 const styles = {
     root: {
         "float": "left",

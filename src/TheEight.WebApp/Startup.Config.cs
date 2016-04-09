@@ -21,7 +21,7 @@ namespace TheEight.WebApp
                 config
                     .SetLoadBabel(false)
                     .SetLoadReact(false)
-                    //.SetAllowMsieEngine(false)
+                    .SetAllowMsieEngine(false)
                     .SetReuseJavaScriptEngines(true)
                     .AddScriptWithoutTransform("~/app/server.js");
             });

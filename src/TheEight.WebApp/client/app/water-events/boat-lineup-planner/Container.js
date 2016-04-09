@@ -3,7 +3,6 @@ import { createStore, bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
-import ImmutablePropTypes from "react-immutable-proptypes";
 import AssignableAttendeeListDropTarget from "./components/AssignableAttendeeListDropTarget";
 import BoatList from "./components/BoatList";
 import mapStateToProps from "./mapStateToProps";
@@ -11,6 +10,7 @@ import { actionCreators } from "./actions";
 import Radium from "radium";
 
 @DragDropContext(HTML5Backend)
+@Radium
 class Container extends Component {
 	render() {
 	    const { assignableAttendees, boats, placeAttendee, unplaceAttendee } = this.props;
@@ -27,11 +27,6 @@ class Container extends Component {
 	}
 }
 
-Container.propTypes = {
-    placeAttendee: PropTypes.func.isRequired,
-    unplaceAttendee: PropTypes.func.isRequired
-};
-
 const styles = {
     root: {
         "position": "absolute",
@@ -44,4 +39,4 @@ const ConnectedApp = connect(
     dispatch => bindActionCreators(actionCreators, dispatch)
 )(Container);
 
-export default Radium(ConnectedApp);
+export default ConnectedApp;
