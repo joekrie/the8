@@ -18,7 +18,8 @@ module.exports = {
                 loader: "babel-loader",
                 query: {
                     plugins: [
-                        "transform-decorators-legacy"
+                        "transform-decorators-legacy",
+                        "babel-plugin-transform-object-rest-spread"
                     ],
                     presets: [
                         "es2015",

@@ -1,23 +1,17 @@
 import Radium from "radium";
-import { PropTypes } from "react";
 
-const Attendee = props => {
-    const { attendee } = props;
+const Attendee = ({ attendee }) => {
     const isCoxswain = attendee.get("position") === "COXSWAIN";
     const displayName = attendee.get("displayName");
 
     const rootStyles = [styles.root.base];
     rootStyles.push(isCoxswain ? styles.root.coxswain : styles.root.rower);
-    
+
     return (
         <div style={rootStyles}>
 		    {displayName}
 	    </div>
     );
-};
-
-Attendee.propTypes = {
-    
 };
 
 const styles = {

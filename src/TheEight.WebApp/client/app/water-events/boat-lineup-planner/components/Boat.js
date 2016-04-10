@@ -2,30 +2,33 @@ import BoatSeatDropTarget from "./BoatSeatDropTarget";
 import Radium from "radium";
 import { range } from "lodash";
 
-const Boat = props => {
-    const { boat, boats, placeAttendee } = props;
-    const boatId = boat.get("boatId");
+const Boat = ({ boat, assignAttendee, unassignAttendee }) => {
+    const createBoatSeat = seat => {
+        const attendee = boat.seatAssignments.get(seat);
 
-    const firstSeatNum = boat.get("isCoxed") ? 0 : 1;
+        const placement = {
+            boatId: boat.boatId, 
+            seat
+        };
+        
+        return (
+            <BoatSeatDropTarget key={seat}
+                placement={placement}
+                attendee={attendee}
+                assignAttendee={assignAttendee}
+                unassignAttendee={unassignAttendee} />
+        );
+    }
 
-    const boatSeats = range(firstSeatNum, boat.get("seatCount") + 1)
-        .map(num => {
-            const seatPosition = String(num);
-            const attendee = boat.getIn(["seatAssignments", seatPosition]);
-            const placement = { boatId, seatPosition };
-
-            return <BoatSeatDropTarget key={seatPosition}
-                                       placement={placement}
-                                       attendee={attendee}
-                                       placeAttendee={placeAttendee}
-                                       boats={boats} />;
-        });
+    const boatSeats = boat
+        .getSeats()
+        .map(createBoatSeat);
 		
 	return (
 		<div style={styles.root}>
 			<div>
 				<div style={styles.header}>
-					{boat.get("title")}
+					{boat.title}
 				</div>
 				<div>
 					{boatSeats}
@@ -33,10 +36,6 @@ const Boat = props => {
 			</div>
 		</div>
 	);
-};
-
-Boat.propTypes = {
-
 };
 
 const styles = {

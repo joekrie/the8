@@ -1,4 +1,4 @@
-import { Record } from "Immutable";
+import { Record } from "immutable";
 
 export default Record({
     attendeeId: "",

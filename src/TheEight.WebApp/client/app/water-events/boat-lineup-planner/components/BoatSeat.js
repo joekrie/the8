@@ -1,18 +1,17 @@
 import AttendeeDragSource from "./AttendeeDragSource";
 import Radium from "radium";
 
-const BoatSeat = props => {
-    const { attendee, placement } = props;
-
+const BoatSeat = ({ attendee, placement }) => {
     let attendeeComponent;
 
     if (attendee) {
         const attendeeId = attendee.get("attendeeId");
 
-        attendeeComponent = 
-            <AttendeeDragSource key={attendeeId} 
-                                attendee={attendee} 
-                                placement={placement}/>;
+        attendeeComponent = (
+            <AttendeeDragSource key={attendeeId}
+                attendee={attendee}
+                currentPlacement={placement} />
+        );
     } else {
         attendeeComponent = null;
     }
