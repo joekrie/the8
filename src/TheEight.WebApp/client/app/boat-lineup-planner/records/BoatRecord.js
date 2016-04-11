@@ -1,4 +1,4 @@
-import { Record, Map } from "immutable";
+import { Record, Map, List } from "immutable";
 import { range } from "lodash";
 
 const defaults = {
@@ -10,23 +10,24 @@ const defaults = {
 };
 
 export default class extends Record(defaults) {
-    unassignSeat(position) {
-        return this.set("seatAssignments", this.seatAssignments.delete(position));
+    unassignSeat(seat) {
+        return this.set("seatAssignments", this.seatAssignments.delete(seat));
     }
 
-    assignAttendee(position, attendeeId) {
-        return this.set("seatAssignments", this.seatAssignments.set(position, attendeeId));
+    assignAttendee(attendeeId, seat) {
+        return this.set("seatAssignments", this.seatAssignments.set(seat, attendeeId));
     }
 
     isAttendeeInBoat(attendeeId) {
         return this.seatAssignments.contains(attendeeId);
     }
 
-    isSeatAssigned(position) {
-        return this.seatAssignments.has(position);
+    isSeatAssigned(seat) {
+        return this.seatAssignments.has(seat);
     }
 
     listSeats() {
-        return range(this.isCoxed ? 0 : 1, this.seatCount + 1);
+        const seats = range(this.isCoxed ? 0 : 1, this.seatCount + 1);
+        return List(seats);
     }
 }
