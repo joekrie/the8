@@ -1,13 +1,8 @@
 import { Component, PropTypes } from "react";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
+import { Provider, connect } from "react-redux";
 import { reducer } from "./actions";
 import Immutable from "immutable";
-
-
-import { Component, PropTypes } from "react";
 import { createStore, bindActionCreators } from "redux";
-import { connect } from "react-redux";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 import AssignableAttendeeListDropTarget from "./components/AssignableAttendeeListDropTarget";

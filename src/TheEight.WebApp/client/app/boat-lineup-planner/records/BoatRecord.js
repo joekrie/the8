@@ -26,8 +26,7 @@ export default class extends Record(defaults) {
         return this.seatAssignments.has(position);
     }
 
-    getSeats() {
-        return range(this.isCoxed ? 0 : 1, this.seatCount + 1)
-            .map(n => String(n));
+    listSeats() {
+        return range(this.isCoxed ? 0 : 1, this.seatCount + 1);
     }
 }
