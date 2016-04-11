@@ -4,5 +4,5 @@ export default Record({
     attendeeId: "",
     displayName: "",
     sortName: "",
-    position: ""
+    isCoxswain: false
 });

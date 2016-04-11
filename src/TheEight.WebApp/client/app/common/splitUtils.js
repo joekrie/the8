@@ -1,7 +1,7 @@
 ﻿import {XRegExp} from "xregexp";
 import * as moment from "moment";
 
-export function formatSplit(duration) {
+export const formatSplit = duration => {
     var split = "";
     split += duration.minutes() + ":";
 
@@ -16,7 +16,7 @@ export function formatSplit(duration) {
     return split;
 }
 
-export function parseSplit(split) {
+export const parseSplit = split => {
     var regExp = XRegExp("^(?<minutes>\\d):(?<seconds>[0-5][0-9])(.(?<secondFraction>\\d*)?)?$");
     var res = XRegExp.exec(split, regExp);
 

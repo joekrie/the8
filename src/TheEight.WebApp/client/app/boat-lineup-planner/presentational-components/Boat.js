@@ -7,10 +7,10 @@ const Boat = ({ boat, assignAttendee, unassignAttendee }) => {
         const attendee = boat.seatAssignments.get(seat);
 
         const placement = {
-            boatId: boat.boatId, 
+            boatId: boat.boatId,
             seat
         };
-        
+
         return (
             <BoatSeatDropTarget key={seat}
                 placement={placement}

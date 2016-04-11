@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { DragSource } from "react-dnd";
-import Attendee from "./Attendee";
+import Attendee from "../presentational-components/Attendee";
 import { defaultDragCollector } from "../../common/dndDefaults";
 
 const beginDrag = ({ attendee, currentPlacement }) => ({

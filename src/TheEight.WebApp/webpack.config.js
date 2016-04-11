@@ -15,18 +15,7 @@ module.exports = {
             {
                 test: /\.js(x)?$/,
                 exclude: /node_modules/,
-                loader: "babel-loader",
-                query: {
-                    plugins: [
-                        "transform-decorators-legacy",
-                        "babel-plugin-transform-object-rest-spread"
-                    ],
-                    presets: [
-                        "es2015",
-                        "stage-0",
-                        "react"
-                    ]
-                }
+                loader: "babel-loader"
             }
         ]
     },

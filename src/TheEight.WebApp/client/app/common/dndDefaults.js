@@ -10,3 +10,30 @@ export const defaultDropCollector = (connect, monitor) => ({
     canDrop: monitor.canDrop(),
     itemType: monitor.getItemType()
 });
+
+export const sortableDropSpec = {
+    hover: (props, monitor, component) => {
+        const dragIndex = monitor.getItem().index;
+        const hoverIndex = props.index;
+
+        if (dragIndex === hoverIndex) {
+            return;
+        }
+
+        const hoverBoundingRect = findDOMNode(component).getBoundingClientRect();
+        const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+        const clientOffset = monitor.getClientOffset();
+        const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+
+        if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+            return;
+        }
+
+        if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+            return;
+        }
+
+        props.moveCard(dragIndex, hoverIndex);
+        monitor.getItem().index = hoverIndex;
+    }
+};

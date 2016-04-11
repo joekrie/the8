@@ -1,4 +1,4 @@
-import { generateReducer, generateActionCreators } from "../../../common/reducerUtils";
+import { generateReducer, generateActionCreators } from "../common/reducerUtils";
 
 const unassignAttendee = (prevState, action) => {
     const { boatId, seat } = action.payload.previousPlacement;
