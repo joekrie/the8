@@ -1,33 +1,16 @@
-import { Component, PropTypes } from "react";
+import { Component } from "react";
 import { Provider, connect } from "react-redux";
-import { reducer } from "./actions";
-import Immutable from "immutable";
-import { createStore, bindActionCreators } from "redux";
+import { reducer } from "./reducers";
+import { List, Map } from "immutable";
+import { createStore } from "redux";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
-import AssignableAttendeeListDropTarget from "./components/AssignableAttendeeListDropTarget";
-import BoatList from "./components/BoatList";
-import mapStateToProps from "./mapStateToProps";
-import { actionCreators } from "./actions";
+import AssignableAttendeeListContainer from "./containers/AssignableAttendeeListContainer";
+import BoatListContainer from "./containers/BoatListContainer";
 import Radium from "radium";
-
-@DragDropContext(HTML5Backend)
-@Radium
-class Container extends Component {
-    render() {
-        const { assignableAttendees, boats, placeAttendee, unplaceAttendee } = this.props;
-
-        return (
-            <div style={styles.root}>
-				<AssignableAttendeeListDropTarget
-                assignableAttendees={assignableAttendees}
-                unplaceAttendee={unplaceAttendee} />
-				<BoatList boats={boats}
-                placeAttendee={placeAttendee} />
-			</div>
-        );
-    }
-}
+import BoatRecord from "./records/BoatRecord";
+import WaterEventRecord from "./records/WaterEventRecord";
+import AttendeeRecord from "./records/AttendeeRecord";
 
 const styles = {
     root: {
@@ -36,28 +19,46 @@ const styles = {
     }
 };
 
-const ConnectedApp = connect(
-    mapStateToProps,
-    dispatch => bindActionCreators(actionCreators, dispatch)
-)(Container);
+const sampleState = {
+    eventSettings: new WaterEventRecord({
+        allowMultipleAttendeeAssignments: true
+    }),
+    boats: new Map({
+        "boat-1": new BoatRecord({
+            boatId: "boat-1",
+            seatAssignments: Map([
+                [1, "rower-1"]
+            ])
+        })
+    }),
+    attendees: new List([
+        new AttendeeRecord({
+            attendeeId: "rower-1",
+            isCoxswain: false
+        }),
+        new AttendeeRecord({
+            attendeeId: "rower-2",
+            isCoxswain: false
+        }),
+        new AttendeeRecord({
+            attendeeId: "cox-1",
+            isCoxswain: true
+        })
+    ])
+};
 
-export default ConnectedApp;
-
+@DragDropContext(HTML5Backend)
+@Radium
 export default class extends Component {
     render() {
-        const { event } = this.props;
-
-        const store = createStore(reducer, {
-            event: Immutable.fromJS(event)
-        });
+        const store = createStore(reducer, Object.create(sampleState));
 
         return (
             <Provider store={store}>
-              	<AssignableAttendeeListDropTarget
-                    assignableAttendees={assignableAttendees}
-                    unplaceAttendee={unplaceAttendee} />
-                <BoatList boats={boats}
-                    placeAttendee={placeAttendee} />
+                <div style={styles.root}>
+                    <AssignableAttendeeListContainer />
+                    <BoatListContainer />
+                </div>
             </Provider>
         );
     }

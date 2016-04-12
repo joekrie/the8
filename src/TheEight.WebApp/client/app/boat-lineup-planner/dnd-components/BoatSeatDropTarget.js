@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { DropTarget } from "react-dnd";
-import BoatSeat from "./BoatSeat";
+import BoatSeat from "../presentational-components/BoatSeat";
 import { defaultDropCollector } from "../../common/dndDefaults";
 
 const canDrop = ({ boat }, monitor) => {

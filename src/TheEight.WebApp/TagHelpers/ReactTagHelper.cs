@@ -27,7 +27,7 @@ namespace TheEight.WebApp.TagHelpers
                 componentTagBuilder.Attributes[prop.Key] = prop.Value;
             }
             
-            var mountExpr = $"ReactDOM.render({}, {mountNode})";
+            var mountExpr = $"ReactDOM.render(\"<BoatLineupPlannerApp \\>\" {mountNode})";
             output.Content.SetContent(mountExpr);
         }
     }

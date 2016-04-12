@@ -59,7 +59,10 @@
     "testPathDirs": [
       "client"
     ],
-    "automock": false
+    "automock": false,
+    "setupFiles": [
+      "jest-setup.js"
+    ]
   },
   "license": "UNLICENSED",
   "name": "the-eight",

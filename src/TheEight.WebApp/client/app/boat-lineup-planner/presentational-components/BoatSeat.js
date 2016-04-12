@@ -1,4 +1,4 @@
-import AttendeeDragSource from "./AttendeeDragSource";
+import AttendeeDragSource from "../dnd-components/AttendeeDragSource";
 import Radium from "radium";
 
 const BoatSeat = ({ attendee, placement }) => {

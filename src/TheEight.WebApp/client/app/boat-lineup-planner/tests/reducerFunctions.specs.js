@@ -9,7 +9,7 @@ describe("Boat lineup planner reducer functions", () => {
                 boats: Map({
                     "boat-1": new BoatRecord({
                         seatAssignments: Map([
-                          [1, "rower-1"]
+                            [1, "rower-1"]
                         ])
                     })
                 })
@@ -30,7 +30,7 @@ describe("Boat lineup planner reducer functions", () => {
             const newState = placeAttendees(prevState, action);
             const newBoat = newState.boats.get("boat-1");
             expect(newBoat.isSeatAssigned(1)).toBe(false);
-        });
+        } );
 
         it("unassignment from an unassigned seat doesn't throw error", () => {
             const prevState = {

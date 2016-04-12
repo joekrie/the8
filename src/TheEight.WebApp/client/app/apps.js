@@ -1,4 +1,4 @@
-﻿import BoatLineupPlannerApp from "./water-events/boat-lineup-planner/App";
+﻿import BoatLineupPlannerApp from "./boat-lineup-planner/App";
 
 export {
     BoatLineupPlannerApp

@@ -1,4 +1,4 @@
-import BoatSeatDropTarget from "./BoatSeatDropTarget";
+import BoatSeatDropTarget from "../dnd-components/BoatSeatDropTarget";
 import Radium from "radium";
 import { range } from "lodash";
 

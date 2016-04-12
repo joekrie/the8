@@ -1,6 +1,7 @@
-import mapServerDataToState, { mapBoats } from "../mapServerDataToState";
+import mapServerDataToState, { mapBoats, mapAttendees } from "../mapServerDataToState";
+import { Iterable } from "immutable";
 
-describe("Map boat lineup planner server data to state", () => {
+describe("Boat lineup planner server-data-to-state mapper", () => {
     it("maps boats", () => {
         const serverBoats = [
             {
@@ -22,7 +23,34 @@ describe("Map boat lineup planner server data to state", () => {
         ];
 
         const stateBoats = mapBoats(serverBoats);
-        console.log(stateBoats);
+        expect(Iterable.isIterable(stateBoats)).toBe(true);
+        expect(stateBoats.count()).toBe(2);
+        expect(stateBoats.sortBy(b => b.boatId).first().boatId).toBeTruthy();
+        expect(stateBoats.sortBy(b => b.boatId).first().seatAssignments.count()).toBe(1);
+        expect(stateBoats.sortBy(b => b.boatId).first().seatAssignments.get(1)).toBe("rower-1");
+    });
+
+    it("maps attendees", () => {
+        const serverAttendees = [
+            {
+                attendeeId: "rower-1",
+                displayName: "Rower 1",
+                sortName: "1, Rower",
+                isCoxswain: false
+            },
+            {
+                attendeeId: "cox-1",
+                displayName: "Coxswain 1",
+                sortName: "1, Coxswain",
+                isCoxswain: true
+            }
+        ];
+
+        const stateAttendees = mapAttendees(serverAttendees);
+        expect(Iterable.isIterable(stateAttendees)).toBe(true);
+        expect(stateAttendees.count()).toBe(2);
+        expect(stateAttendees.sortBy(a => a.attendeeId).first().attendeeId).toBeTruthy();
+        expect(stateAttendees.sortBy(a => a.attendeeId).first().isCoxswain).toBe(true);
     });
 
     it("maps basic data", () => {
@@ -54,6 +82,8 @@ describe("Map boat lineup planner server data to state", () => {
         };
 
         const state = mapServerDataToState(serverData);
-        console.log(state);
+        expect(Iterable.isIterable(state.eventSettings)).toBe(true);
+        expect(Iterable.isIterable(state.boats)).toBe(true);
+        expect(Iterable.isIterable(state.attendees)).toBe(true);
     });
 });

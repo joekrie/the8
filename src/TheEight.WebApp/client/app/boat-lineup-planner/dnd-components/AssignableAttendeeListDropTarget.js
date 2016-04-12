@@ -1,4 +1,4 @@
-import { Component, PropTypes } from "react";
+import { Component } from "react";
 import { DropTarget } from "react-dnd";
 import AssignableAttendeeList from "../presentational-components/AssignableAttendeeList";
 import { defaultDropCollector } from "../../common/dndDefaults";

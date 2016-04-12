@@ -1,6 +1,8 @@
 import AssignableAttendeeListDropTarget from "../dnd-components/AssignableAttendeeListDropTarget";
 import { connect } from "react-redux";
 import { actionCreators } from "../reducers";
+import { List } from "immutable";
+import { bindActionCreators } from "redux";
 
 export const attendeeIsAssignable = (attendee, boats, allowMultiple) => {
     if (allowMultiple) {
@@ -14,24 +16,24 @@ export const attendeeIsAssignable = (attendee, boats, allowMultiple) => {
     return !assigned.includes(attendeeId);
 };
 
-export const mapStateToProps = ({attendees, boats, settings}) => {
+export const mapStateToProps = ({attendees, boats, eventSettings}) => {
     const assignableAttendees = attendees
-        .filter(a => attendeeIsAssignable(a, boats, settings.allowMultiple))
+        .filter(a => attendeeIsAssignable(a, boats, 
+            eventSettings.allowMultipleAttendeeAssignments))
         .groupBy(a => a.isCoxswain ? "coxswains" : "rowers");
+
+    const rowers = assignableAttendees.has("rowers")
+        ? assignableAttendees.get("rowers").sortBy(a => a.sortName)
+        : List();
     
-    return {
-        coxswains: assignableAttendees
-            .get("coxswains")
-            .sortBy(a => a.sortName),
-        rowers: assignableAttendees
-            .get("rowers")
-            .sortBy(a => a.sortName)
-    };
+    const coxswains = assignableAttendees.has("coxswains")
+        ? assignableAttendees.get("coxswains").sortBy(a => a.sortName)
+        : List();
+
+    return { coxswains, rowers };
 };
 
-export const mapDispatchToProps = dispatch => ({
-    
-});
+export const mapDispatchToProps = dispatch => bindActionCreators(dispatch);
 
 export default connect(
     mapStateToProps,

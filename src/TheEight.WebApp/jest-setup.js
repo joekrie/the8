@@ -1,0 +1,1 @@
+﻿global.React = require("react");
