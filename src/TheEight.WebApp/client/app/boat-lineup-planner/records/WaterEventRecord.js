@@ -2,6 +2,6 @@ import { Record } from "immutable";
 
 export default Record({
     waterEventId: "",
-    name: "",
+    title: "",
     allowMultipleAttendeeAssignments: false
 });

@@ -1,9 +1,12 @@
-﻿import {XRegExp} from "xregexp";
+﻿import XRegExp from "xregexp";
 import * as moment from "moment";
 
 export const formatSplit = duration => {
+    let minutes = duration.minutes();
+    minutes += duration.hours() * 60;
+
     var split = "";
-    split += duration.minutes() + ":";
+    split += minutes + ":";
 
     if (duration.seconds() < 10) {
         split += "0";
