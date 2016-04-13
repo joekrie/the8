@@ -1,14 +1,31 @@
 import BoatList from "../presentational-components/BoatList";
 import { connect } from "react-redux";
-import { actionCreators } from "../reducers";
 import { bindActionCreators } from "redux";
+import { createAction } from "redux-actions";
+import { placeAttendees } from "../actionCreators";
+import { Map } from "immutable";
 
-export const mapStateToProps = ({ boats }) => {
-    const boatList = boats.valueSeq();
-    return { boats: boatList };
+export const mapStateToProps = ({ boats, attendees }) => {
+    const findAttendeesInBoat = ({ seatAssignments }) => attendees
+        .filter(attn => seatAssignments.contains(attn.attendeeId))
+        .toList();
+
+    const boatsWithAttendees = Map(
+        boats.map(boat =>
+            Map({
+                boat,
+                attendees: findAttendeesInBoat(boat)
+            })
+        )
+    );
+
+    return {
+        boats: boatsWithAttendees
+    };
 };
 
-export const mapDispatchToProps = dispatch => bindActionCreators(dispatch);
+export const mapDispatchToProps = dispatch => 
+    bindActionCreators({ placeAttendees }, dispatch);
 
 export default connect(
     mapStateToProps,

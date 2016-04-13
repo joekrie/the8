@@ -1,13 +1,13 @@
 import { Component } from "react";
-import { Provider, connect } from "react-redux";
-import { reducer } from "./reducers";
+import Radium from "radium";
+import { Provider } from "react-redux";
+import reducer from "./reducer";
 import { List, Map } from "immutable";
 import { createStore } from "redux";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 import AssignableAttendeeListContainer from "./containers/AssignableAttendeeListContainer";
 import BoatListContainer from "./containers/BoatListContainer";
-import Radium from "radium";
 import BoatRecord from "./records/BoatRecord";
 import WaterEventRecord from "./records/WaterEventRecord";
 import AttendeeRecord from "./records/AttendeeRecord";
@@ -47,12 +47,12 @@ const sampleState = {
     ])
 };
 
+const store = createStore(reducer, Object.create(sampleState));
+
 @DragDropContext(HTML5Backend)
 @Radium
 export default class extends Component {
     render() {
-        const store = createStore(reducer, Object.create(sampleState));
-
         return (
             <Provider store={store}>
                 <div style={styles.root}>

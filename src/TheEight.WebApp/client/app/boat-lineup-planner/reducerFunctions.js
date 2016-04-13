@@ -27,8 +27,3 @@ export const placeAttendees = (prevState, action) => {
 };
 
 export const replaceState = (prevState, action) => action.payload.state;
-
-export default {
-    placeAttendees,
-    replaceState
-};

@@ -1,17 +1,15 @@
 import AssignableAttendeeListDropTarget from "../dnd-components/AssignableAttendeeListDropTarget";
 import { connect } from "react-redux";
-import { actionCreators } from "../reducers";
 import { List } from "immutable";
 import { bindActionCreators } from "redux";
+import { placeAttendees } from "../actionCreators";
 
 export const attendeeIsAssignable = (attendee, boats, allowMultiple) => {
     if (allowMultiple) {
         return true;
     }
 
-    const assigned = boats
-        .flatMap(boat => boat.seatAssignments.valueSeq());
-
+    const assigned = boats.flatMap(boat => boat.seatAssignments.valueSeq());
     const attendeeId = attendee.attendeeId;
     return !assigned.includes(attendeeId);
 };
@@ -33,7 +31,8 @@ export const mapStateToProps = ({attendees, boats, eventSettings}) => {
     return { coxswains, rowers };
 };
 
-export const mapDispatchToProps = dispatch => bindActionCreators(dispatch);
+export const mapDispatchToProps = dispatch => 
+    bindActionCreators({ placeAttendees }, dispatch);
 
 export default connect(
     mapStateToProps,

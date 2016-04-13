@@ -23,6 +23,7 @@ describe("Boat lineup planner server-data-to-state mapper", () => {
         ];
 
         const stateBoats = mapBoats(serverBoats);
+
         expect(Iterable.isIterable(stateBoats)).toBe(true);
         expect(stateBoats.count()).toBe(2);
         expect(stateBoats.sortBy(b => b.boatId).first().boatId).toBeTruthy();
@@ -47,6 +48,7 @@ describe("Boat lineup planner server-data-to-state mapper", () => {
         ];
 
         const stateAttendees = mapAttendees(serverAttendees);
+
         expect(Iterable.isIterable(stateAttendees)).toBe(true);
         expect(stateAttendees.count()).toBe(2);
         expect(stateAttendees.sortBy(a => a.attendeeId).first().attendeeId).toBeTruthy();
@@ -82,6 +84,7 @@ describe("Boat lineup planner server-data-to-state mapper", () => {
         };
 
         const state = mapServerDataToState(serverData);
+
         expect(Iterable.isIterable(state.eventSettings)).toBe(true);
         expect(Iterable.isIterable(state.boats)).toBe(true);
         expect(Iterable.isIterable(state.attendees)).toBe(true);
