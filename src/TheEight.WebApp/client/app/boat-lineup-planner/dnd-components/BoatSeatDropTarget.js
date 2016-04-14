@@ -3,35 +3,28 @@ import { DropTarget } from "react-dnd";
 import BoatSeat from "../presentational-components/BoatSeat";
 import { defaultDropCollector } from "../../common/dndDefaults";
 
-const canDrop = ({ boat }, monitor) => {
+const canDrop = (_, monitor) => {
     const dragItem = monitor.getItem();
         
     if (!dragItem) {
         return false;
     }
     
-    const attendeeInBoat = boat.isAttendeeInBoat(dragItem.attendeeId);
-    return !attendeeInBoat;
+
 };
 
 export const generateDropActions = () => {
     
 };
 
-const drop = ({ assignAttendee, unassignAttendee, placement, attendee, boat }, monitor) => {
+const drop = ({ placeAttendees, attendee }, monitor) => {
     const dragItem = monitor.getItem();
         
     if (!dragItem) {
         return;
     }
 
-    assignAttendee({
-        nextPlacement: {
-            boatId: placement.get("boatId"),
-            seat: placement.get("seat")
-        },
-        attendeeId
-    });
+
 };
 
 export const dropSpec = { canDrop, drop };

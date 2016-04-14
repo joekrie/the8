@@ -1,8 +1,8 @@
 import AttendeeDragSource from "../dnd-components/AttendeeDragSource";
 import Radium from "radium";
 
-const AssignableAttendeeList = props => {
-    const { assignableAttendees } = props;
+const AssignableAttendeeList = ({ rowers, coxswains }) => {
+    const assignableAttendees = rowers.concat(coxswains);
 
     return (
         <div style={styles.root}>
@@ -10,9 +10,9 @@ const AssignableAttendeeList = props => {
                 Unassigned
             </div>
             <div style={styles.attendeeList}>
-                {assignableAttendees.map(attendee => 
-                    <AttendeeDragSource key={attendee.get("attendeeId")} 
-                                        attendee={attendee} />)}
+                {assignableAttendees.map(attendee =>
+                    <AttendeeDragSource key={attendee.attendeeId}
+                    attendee={attendee} />)}
             </div>
 		</div>
     );

@@ -1,27 +1,19 @@
-import { mapStateToProps } from "../BoatListContainer";
-import BoatRecord from "../../records/BoatRecord";
-import WaterEventRecord from "../../records/WaterEventRecord";
-import { Map, List } from "immutable";
-import { isArray } from "lodash";
+import BoatSeat from "../BoatSeat";
+import { mount } from "enzyme";
+import AttendeeRecord from "../../records/AttendeeRecord";
+import { List, Map } from "immutable";
+import TestBackend from "react-dnd-test-backend";
+import { DragDropContext } from "react-dnd";
 
-describe("BoatListContainer", () => {
-    it("maps state to props", () => {
-        const state = {
-            eventSettings: new WaterEventRecord(),
-            boats: new Map({
-                "boat-1": new BoatRecord({
-                    boatId: "boat-1",
-                    seatAssignments: Map([
-                        [1, "rower-1"]
-                    ])
-                })
-            }),
-            attendees: new List()
-        };
+describe("<BoatSeat />", () => {
+    it("mounts without error", () => {
+        const attendee = new AttendeeRecord({ attendeeId: "rower-1" });
+        const TestComponent = DragDropContext(TestBackend)(BoatSeat);
 
-        const props = mapStateToProps(state);
+        const mountComponent = () => mount(
+            <TestComponent attendee={attendee} boatId={"boat-1"} seat={2} />
+        );
 
-        expect(props.boats.count()).toBe(1);
-        expect(isArray(props.boats.toJS())).toBe(true);
+        expect(mountComponent).not.toThrow();
     });
 });

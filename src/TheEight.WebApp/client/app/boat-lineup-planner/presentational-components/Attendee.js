@@ -1,15 +1,12 @@
 import Radium from "radium";
 
 const Attendee = ({ attendee }) => {
-    const isCoxswain = attendee.get("position") === "COXSWAIN";
-    const displayName = attendee.get("displayName");
-
     const rootStyles = [styles.root.base];
-    rootStyles.push(isCoxswain ? styles.root.coxswain : styles.root.rower);
+    rootStyles.push(attendee.isCoxswain ? styles.root.coxswain : styles.root.rower);
 
     return (
         <div style={rootStyles}>
-		    {displayName}
+		    {attendee.displayName}
 	    </div>
     );
 };

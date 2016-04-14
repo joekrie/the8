@@ -19,11 +19,11 @@ export const dropSpec = { drop };
 @DropTarget("ATTENDEE", dropSpec, defaultDropCollector)
 export default class extends Component {
 	render() {
-	    const { assignableAttendees, connectDropTarget } = this.props;
+	    const { rowers, coxswains, connectDropTarget } = this.props;
 
 	    return connectDropTarget(
 	        <div>
-                <AssignableAttendeeList assignableAttendees={assignableAttendees} />
+                <AssignableAttendeeList rowers={rowers} coxswains={coxswains} />
             </div>
 		);
 	}

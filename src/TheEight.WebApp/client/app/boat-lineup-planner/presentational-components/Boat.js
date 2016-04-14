@@ -1,19 +1,18 @@
 import BoatSeatDropTarget from "../dnd-components/BoatSeatDropTarget";
 import Radium from "radium";
 
-const Boat = ({ boat, placeAttendees }) => {
-    const createBoatSeat = seat => {
-        const attendee = boat.seatAssignments.get(seat);
-        const boatId = { boat };
-        const placement = { boatId, seat };
+const Boat = ({ boat, attendees, placeAttendees }) => {
+    const attendeesBySeat = boat
+        .seatAssignments
+        .map(attendeeId =>
+            attendees.find(a => a.attendeeId === attendeeId));
 
-        return (
-            <BoatSeatDropTarget key={seat}
-                placement={placement}
-                attendee={attendee}
-                placeAttendees={placeAttendees} />
-        );
-    }
+    const createBoatSeat = seat => {
+        const attendee = attendeesBySeat.get(seat);
+        const { boatId } = boat;
+        const seatProps = { seat, boatId, attendee, placeAttendees };
+        return <BoatSeatDropTarget key={seat} {...seatProps} />;
+    };
 
     const boatSeats = boat
         .listSeats()

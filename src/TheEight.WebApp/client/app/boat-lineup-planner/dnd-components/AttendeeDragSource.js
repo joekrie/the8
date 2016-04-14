@@ -4,7 +4,7 @@ import Attendee from "../presentational-components/Attendee";
 import { defaultDragCollector } from "../../common/dndDefaults";
 
 const beginDrag = ({ attendee, currentPlacement }) => ({
-    attendeeId: attendee.get("attendeeId"),
+    attendeeId: attendee.attendeeId,
     currentPlacement
 });
 

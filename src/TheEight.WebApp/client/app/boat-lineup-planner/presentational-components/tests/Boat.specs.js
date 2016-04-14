@@ -1,23 +1,30 @@
 import Boat from "../Boat";
 import { mount } from "enzyme";
 import BoatRecord from "../../records/BoatRecord";
-import { Map } from "immutable";
-import { applyReactDndTestBackend } from "../../../common/testUtils";
+import AttendeeRecord from "../../records/AttendeeRecord";
+import { List, Map } from "immutable";
+import TestBackend from "react-dnd-test-backend";
+import { DragDropContext } from "react-dnd";
 
-describe("Boat lineup planner app", () => {
+describe("<Boat />", () => {
     it("mounts without error", () => {
-        const boat = new BoatRecord({
-            seatCount: 2,
-            seatAssignments: Map([
-                [1, "rower-1"]
+        const boat = Map({
+            boat: new BoatRecord({
+                seatCount: 2,
+                seatAssignments: Map([
+                    [1, "rower-1"]
+                ])
+            }),
+            attendees: List([
+                new AttendeeRecord({ attendeeId: "rower-1" })
             ])
         });
-
-        const placeAttendees = jest.fn();
-        const TestBoat = applyReactDndTestBackend(Boat);
+        
+        const TestComponent = DragDropContext(TestBackend)(Boat);
 
         const mountComponent = () => mount(
-            <TestBoat boat={boat} placeAttendees={placeAttendees} />
+            <TestComponent boat={boat.get("boat")} attendees={boat.get("attendees")} 
+                placeAttendees={jest.fn()} />
         );
 
         expect(mountComponent).not.toThrow();

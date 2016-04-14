@@ -2,13 +2,15 @@ import Boat from "./Boat";
 import Radium from "radium";
 
 const BoatList = ({ boats, placeAttendees }) => {
-    const boatComponents = boats.map(boat => (
-        <Boat key={boat.get("boatId")}
-            boat={boat}
-            boats={boats}
-            placeAttendees={placeAttendees} />
-        )
-    );
+    const boatComponents = boats.map(b => {
+        const boat = b.get("boat");
+        const attendees = b.get("attendees");
+        const boatProps = { boat, attendees, placeAttendees };
+
+        return (
+            <Boat key={boat.boatId} {...boatProps} />
+        );
+    });
 
     return (
         <div style={styles.root}>
