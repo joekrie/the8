@@ -5,10 +5,8 @@ const BoatSeat = ({ attendee, seat, boatId }) => {
     let attendeeComponent = null;
 
     if (attendee) {
-        attendeeComponent = (
-            <AttendeeDragSource key={attendee.attendeeId}
-                attendee={attendee} seat={seat} boatId={boatId} />
-        );
+        const props = { attendee, seat, boatId };
+        attendeeComponent = <AttendeeDragSource key={attendee.attendeeId} {...props} />;
     }
 
     const label = seat === 0 ? "COX" : seat;

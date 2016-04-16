@@ -1,5 +1,6 @@
 import { Record, Map, List } from "immutable";
 import { range } from "lodash";
+import SeatRecord from "./SeatRecord";
 
 const defaults = {
     boatId: "",
@@ -27,7 +28,14 @@ export default class extends Record(defaults) {
     }
 
     listSeats() {
-        const seats = range(this.isCoxed ? 0 : 1, this.seatCount + 1);
-        return List(seats);
+        const seatNums = range(this.isCoxed ? 0 : 1, this.seatCount + 1);
+
+        const seatRecs = seats.map(num =>
+            new SeatRecord({
+                boatId: this.boatId,
+                seatNumber: num
+            }));
+        
+        return List(seatRecs);
     }
 }

@@ -1,9 +1,6 @@
 import AssignableAttendeeListDropTarget from "../AssignableAttendeeListDropTarget";
-import { mount } from "enzyme";
 import AttendeeRecord from "../../records/AttendeeRecord";
-import { List, Map } from "immutable";
-import TestBackend from "react-dnd-test-backend";
-import { DragDropContext } from "react-dnd";
+import { List } from "immutable";
 
 describe("<AssignableAttendeeListDropTarget />", () => {
     it("mounts without error", () => {
@@ -15,12 +12,6 @@ describe("<AssignableAttendeeListDropTarget />", () => {
             new AttendeeRecord({ attendeeId: "cox-1", isCoxswain: true })
         ]);
 
-        const TestComponent = DragDropContext(TestBackend)(AssignableAttendeeListDropTarget);
-
-        const mountComponent = () => mount(
-            <TestComponent rowers={rowers} coxswains={coxswains} />
-        );
-
-        expect(mountComponent).not.toThrow();
+        testUtils.expectToMountWithoutError(AssignableAttendeeListDropTarget, { rowers, coxswains });
     });
 });

@@ -3,8 +3,6 @@ import { mount } from "enzyme";
 import BoatRecord from "../../records/BoatRecord";
 import AttendeeRecord from "../../records/AttendeeRecord";
 import { List, Map } from "immutable";
-import TestBackend from "react-dnd-test-backend";
-import { DragDropContext } from "react-dnd";
 
 describe("<BoatList />", () => {
     it("mounts without error", () => {
@@ -28,13 +26,12 @@ describe("<BoatList />", () => {
                 attendees: List()
             })
         });
-        
-        const TestComponent = DragDropContext(TestBackend)(BoatList);
 
-        const mountComponent = () => mount(
-            <TestComponent boats={boats} placeAttendees={jest.fn()} />
-        );
+        const props = {
+            boats,
+            placeAttendees: jest.fn()
+        };
 
-        expect(mountComponent).not.toThrow();
+        testUtils.expectToMountWithoutError(BoatList, props);
     });
 });

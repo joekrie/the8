@@ -7,10 +7,22 @@ const Boat = ({ boat, attendees, placeAttendees }) => {
         .map(attendeeId =>
             attendees.find(a => a.attendeeId === attendeeId));
 
+    const attendeeIdsInBoat = attendees
+        .map(attn => attn.attendeeId)
+        .valueSeq();
+
     const createBoatSeat = seat => {
         const attendee = attendeesBySeat.get(seat);
         const { boatId } = boat;
-        const seatProps = { seat, boatId, attendee, placeAttendees };
+        
+        const seatProps = {
+            seat,
+            boatId,
+            attendee,
+            placeAttendees,
+            attendeeIdsInBoat
+        };
+        
         return <BoatSeatDropTarget key={seat} {...seatProps} />;
     };
 

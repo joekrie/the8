@@ -1,4 +1,5 @@
 import BoatRecord from "../BoatRecord";
+import SeatRecord from "../SeatRecord";
 import { List, Map } from "immutable";
 
 describe("BoatRecord", () => {
@@ -56,7 +57,13 @@ describe("BoatRecord", () => {
         });
 
         const seats = boat.listSeats();
-        const expectedSeats = List([0, 1, 2]);
+
+        const expectedSeats = List([
+            new SeatRecord({ seatNumber: 0 }),
+            new SeatRecord({ seatNumber: 1 }),
+            new SeatRecord({ seatNumber: 2 })
+        ]);
+
         expect(seats.equals(expectedSeats)).toBe(true);
     });
 
@@ -67,7 +74,12 @@ describe("BoatRecord", () => {
         });
 
         const seats = boat.listSeats();
-        const expectedSeats = List([1, 2]);
+
+        const expectedSeats = List([
+            new SeatRecord({ seatNumber: 1 }),
+            new SeatRecord({ seatNumber: 2 })
+        ]);
+
         expect(seats.equals(expectedSeats)).toBe(true);
     });
 });

@@ -9,9 +9,9 @@ export const attendeeIsAssignable = (attendee, boats, allowMultiple) => {
         return true;
     }
 
-    const assigned = boats.flatMap(boat => boat.seatAssignments.valueSeq());
+    const assigned = boats.map(b => b.seatAssignments.valueSeq()).flatten();
     const attendeeId = attendee.attendeeId;
-    return !assigned.includes(attendeeId);
+    return !assigned.contains(attendeeId);
 };
 
 export const mapStateToProps = ({attendees, boats, eventSettings}) => {

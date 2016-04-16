@@ -3,10 +3,6 @@ import BoatRecord from "../../records/BoatRecord";
 import WaterEventRecord from "../../records/WaterEventRecord";
 import AttendeeRecord from "../../records/AttendeeRecord";
 import { Map, List } from "immutable";
-import { isArray } from "lodash";
-import { mount } from "enzyme";
-import TestBackend from "react-dnd-test-backend";
-import { DragDropContext } from "react-dnd";
 import { createStore } from "redux";
 
 describe("<BoatListContainer />", () => {
@@ -67,12 +63,6 @@ describe("<BoatListContainer />", () => {
         };
 
         const store = createStore(state => state, state);
-        const TestComponent = DragDropContext(TestBackend)(BoatListContainer);
-
-        const mountComponent = () => mount(
-            <TestComponent store={store} />    
-        );
-
-        expect(mountComponent).not.toThrow();
+        testUtils.expectToMountWithoutError(BoatListContainer, { store });
     });
 });

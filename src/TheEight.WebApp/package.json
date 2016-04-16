@@ -71,8 +71,14 @@
     "test-js": "jest",
     "build-js": "webpack",
     "watch-js": "webpack",
-    "build-css": "node-sass",
-    "watch-css": "node-sass --watch"
+    "build-css": "node-sass client/styles/site.scss wwwroot/styles/site.css",
+    "watch-css": "node-sass --watch client/styles/site.scss wwwroot/styles/site.css"
   },
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "-vs-binding": {
+    "AfterBuild": [
+      "build-js",
+      "build-css"
+    ]
+  }
 }

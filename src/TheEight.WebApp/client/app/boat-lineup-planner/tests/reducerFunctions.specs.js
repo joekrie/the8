@@ -59,6 +59,7 @@ describe("Boat lineup planner reducer functions", () => {
             expect(reduce).not.toThrow();
         });
 
+        // if this ever happens, something went wrong - probably SHOULD throw error and log
         it("unassignment from nonexistant boat doesn't throw error", () => {
             const prevState = {
                 boats: Map({
