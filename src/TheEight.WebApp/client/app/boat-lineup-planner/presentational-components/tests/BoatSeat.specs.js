@@ -1,5 +1,6 @@
 import BoatSeat from "../BoatSeat";
 import AttendeeRecord from "../../records/AttendeeRecord";
+import SeatRecord from "../../records/SeatRecord";
 
 describe("<BoatSeat />", () => {
     it("mounts without error", () => {
@@ -7,8 +8,10 @@ describe("<BoatSeat />", () => {
 
         const props = {
             attendee,
-            boatId: "boat-1",
-            seat: 2
+            seat: new SeatRecord({
+                boatId: "boat-1",
+                seatNumber: 2
+            })
         };
 
         testUtils.expectToMountWithoutError(BoatSeat, props);

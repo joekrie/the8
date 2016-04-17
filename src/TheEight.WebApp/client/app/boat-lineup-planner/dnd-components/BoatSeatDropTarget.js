@@ -3,14 +3,18 @@ import { DropTarget } from "react-dnd";
 import BoatSeat from "../presentational-components/BoatSeat";
 import { defaultDropCollector } from "../../common/dndDefaults";
 
-const canDrop = ({ attendeeIdsInBoat }, monitor) => {
-    const draggedAttendee = monitor.getItem();
-
-    if (!draggedAttendee) {
+const canDrop = (props, monitor) => {
+    if (!monitor.getItem()) {
         return false;
     }
 
-    return !attendeeAlreadyInBoat(draggedAttendee.attendeeId, attendeeIdsInBoat);
+    const { draggedOriginSeat, draggedAttendeeId } = monitor.getItem();
+    const { attendeeIdsInBoat } = props;
+    const targetBoatId = props.seat.boatId;
+
+    const sameBoat = draggedOriginSeat && draggedOriginSeat.boatId === targetBoatId;
+
+    return sameBoat || !attendeeAlreadyInBoat(draggedAttendeeId, attendeeIdsInBoat);
 };
 
 const attendeeAlreadyInBoat = (attendeeId, attendeeIdsInBoat) => 
@@ -20,20 +24,16 @@ const drop = (props, monitor) => {
     if (!monitor.getItem() || !monitor.canDrop()) {
         return;
     }
+    
+    const { draggedAttendeeId, draggedOriginSeat } = monitor.getItem();
 
     const { placeAttendees } = props;
-
-    const draggedPlacement = monitor.getItem();
-    const draggedAttendeeId = draggedPlacement.attendeeId;
-    const draggedPreviousBoatId = draggedPlacement.boatId;
-    const draggedPreviousSeat = draggedPlacement.seat;
-
-    const targetAttendeeId = props.attendee.attendeeId;
-    const targetBoatId = props.boatId;
-    const targetSeat = props.seat;
     
     const attendeeInTargetSeat = Boolean(props.attendee);
-    const droppedAttendeeWasAssigned = Boolean(attendee.boatId) && Boolean(attendee.seat);
+    const droppedAttendeeWasAssigned = Boolean(draggedOriginSeat);
+
+    const targetAttendeeId = attendeeInTargetSeat ? props.attendee.attendeeId : "";
+    const targetSeat = props.seat;
 
     const actionPayload = {
         assignments: [],
@@ -43,15 +43,13 @@ const drop = (props, monitor) => {
     const assignTargetToDropped = () => {
         actionPayload.assignments.push({
             attendeeId: targetAttendeeId,
-            boatId: draggedPreviousBoatId,
-            seat: draggedPreviousSeat
+            seat: draggedOriginSeat
         });
     };
 
     const assignDroppedToTarget = () => {
         actionPayload.assignments.push({
             attendeeId: draggedAttendeeId,
-            boatId: targetBoatId,
             seat: targetSeat
         });
     };
@@ -85,8 +83,8 @@ export const dropCollect = defaultDropCollector;
 @DropTarget("ATTENDEE", dropSpec, dropCollect)
 export default class extends Component {
 	render() {
-	    const { connectDropTarget, attendee, boatId, seat } = this.props;
-	    const boatSeatProps = { attendee, boatId, seat };
+	    const { connectDropTarget, attendee, seat } = this.props;
+	    const boatSeatProps = { attendee, seat };
 
 		return connectDropTarget(
 			<div>

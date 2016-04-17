@@ -3,10 +3,9 @@ import { DragSource } from "react-dnd";
 import Attendee from "../presentational-components/Attendee";
 import { defaultDragCollector } from "../../common/dndDefaults";
 
-const beginDrag = ({ attendee: { attendeeId }, boatId, seat }) => ({
-    attendeeId,
-    boatId,
-    seat
+const beginDrag = ({ attendee: { attendeeId }, seat }) => ({
+    draggedAttendeeId: attendeeId,
+    draggedOriginSeat: seat
 });
 
 export const dragSpec = { beginDrag };

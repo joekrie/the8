@@ -1,6 +1,8 @@
 import { placeAttendees } from "../reducerFunctions";
-import { Map } from "immutable";
+import { Map, List } from "immutable";
 import BoatRecord from "../records/BoatRecord";
+import SeatRecord from "../records/SeatRecord";
+import AttendeeRecord from "../records/AttendeeRecord";
 
 describe("Boat lineup planner reducer functions", () => {
     describe("unassignAttendee", () => {
@@ -19,10 +21,10 @@ describe("Boat lineup planner reducer functions", () => {
                 payload: {
                     assignments: [],
                     unassignments: [
-                        {
+                        new SeatRecord({
                             boatId: "boat-1",
-                            seat: 1
-                        }
+                            seatNumber: 1
+                        })
                     ]
                 }
             };
@@ -47,10 +49,10 @@ describe("Boat lineup planner reducer functions", () => {
                 payload: {
                     assignments: [],
                     unassignments: [
-                        {
+                        new SeatRecord({
                             boatId: "boat-1",
-                            seat: 1
-                        }
+                            seatNumber: 1
+                        })
                     ]
                 }
             };
@@ -59,7 +61,6 @@ describe("Boat lineup planner reducer functions", () => {
             expect(reduce).not.toThrow();
         });
 
-        // if this ever happens, something went wrong - probably SHOULD throw error and log
         it("unassignment from nonexistant boat doesn't throw error", () => {
             const prevState = {
                 boats: Map({
@@ -75,10 +76,10 @@ describe("Boat lineup planner reducer functions", () => {
                 payload: {
                     assignments: [],
                     unassignments: [
-                        {
+                        new SeatRecord({
                             boatId: "boat-2",
-                            seat: 1
-                        }
+                            seatNumber: 1
+                        })
                     ]
                 }
             };
@@ -101,8 +102,10 @@ describe("Boat lineup planner reducer functions", () => {
                     assignments: [
                         {
                             attendeeId: "rower-1",
-                            boatId: "boat-1",
-                            seat: 1
+                            seat: new SeatRecord({
+                                boatId: "boat-1",
+                                seatNumber: 1
+                            })
                         }
                     ],
                     unassignments: []
@@ -131,8 +134,10 @@ describe("Boat lineup planner reducer functions", () => {
                     assignments: [
                         {
                             attendeeId: "rower-2",
-                            boatId: "boat-1",
-                            seat: 1
+                            seat: new SeatRecord({
+                                boatId: "boat-1",
+                                seatNumber: 1
+                            })
                         }
                     ],
                     unassignments: []
@@ -164,13 +169,17 @@ describe("Boat lineup planner reducer functions", () => {
                     assignments: [
                         {
                             attendeeId: "rower-2",
-                            boatId: "boat-1",
-                            seat: 1
+                            seat: new SeatRecord({
+                                boatId: "boat-1",
+                                seatNumber: 1
+                            })
                         },
                         {
                             attendeeId: "rower-1",
-                            boatId: "boat-1",
-                            seat: 2
+                            seat: new SeatRecord({
+                                boatId: "boat-1",
+                                seatNumber: 2
+                            })
                         }
                     ],
                     unassignments: []
@@ -206,13 +215,17 @@ describe("Boat lineup planner reducer functions", () => {
                     assignments: [
                         {
                             attendeeId: "rower-2",
-                            boatId: "boat-1",
-                            seat: 1
+                            seat: new SeatRecord({
+                                boatId: "boat-1",
+                                seatNumber: 1
+                            })
                         },
                         {
                             attendeeId: "rower-1",
-                            boatId: "boat-1",
-                            seat: 2
+                            seat: new SeatRecord({
+                                boatId: "boat-1",
+                                seatNumber: 2
+                            })
                         }
                     ],
                     unassignments: []
@@ -226,5 +239,39 @@ describe("Boat lineup planner reducer functions", () => {
             const assignedAttendee = newBoat.seatAssignments.get(1);
             expect(assignedAttendee).toBe("rower-2");
         });
+    });
+
+    it("keeps attendees property when changing boats", () => {
+        const prevState = {
+            attendees: List([
+                new AttendeeRecord({
+                    attendeeId: "rower-1"
+                })
+            ]),
+            boats: Map({
+                "boat-1": new BoatRecord({
+                    seatAssignments: Map()
+                })
+            })
+        };
+
+        const action = {
+            payload: {
+                assignments: [
+                    {
+                        attendeeId: "rower-1",
+                        seat: new SeatRecord({
+                            boatId: "boat-1",
+                            seatNumber: 1
+                        })
+                    }
+                ],
+                unassignments: []
+            }
+        };
+
+        const newState = placeAttendees(prevState, action);
+        const attendee = newState.attendees.first();
+        expect(attendee.attendeeId).toBe("rower-1");
     });
 });

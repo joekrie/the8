@@ -4,7 +4,7 @@ var webpack = require("webpack");
 module.exports = {
     context: path.join(__dirname, "client/app"),
     entry: {
-        server: "./server",
+        //server: "./server",
         client: "./client"
     },
     externals: {

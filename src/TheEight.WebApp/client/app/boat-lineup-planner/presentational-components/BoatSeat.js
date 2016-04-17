@@ -1,15 +1,15 @@
 import AttendeeDragSource from "../dnd-components/AttendeeDragSource";
 import Radium from "radium";
 
-const BoatSeat = ({ attendee, seat, boatId }) => {
+const BoatSeat = ({ attendee, seat: { boatId, seatNumber } }) => {
     let attendeeComponent = null;
 
     if (attendee) {
-        const props = { attendee, seat, boatId };
+        const props = { attendee, seat };
         attendeeComponent = <AttendeeDragSource key={attendee.attendeeId} {...props} />;
     }
 
-    const label = seat === 0 ? "COX" : seat;
+    const label = seatNumber === 0 ? "COX" : seatNumber;
 
     return (
         <div style={styles.root}>

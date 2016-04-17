@@ -13,11 +13,9 @@ const Boat = ({ boat, attendees, placeAttendees }) => {
 
     const createBoatSeat = seat => {
         const attendee = attendeesBySeat.get(seat);
-        const { boatId } = boat;
         
         const seatProps = {
             seat,
-            boatId,
             attendee,
             placeAttendees,
             attendeeIdsInBoat

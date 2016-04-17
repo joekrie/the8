@@ -30,7 +30,7 @@ export default class extends Record(defaults) {
     listSeats() {
         const seatNums = range(this.isCoxed ? 0 : 1, this.seatCount + 1);
 
-        const seatRecs = seats.map(num =>
+        const seatRecs = seatNums.map(num =>
             new SeatRecord({
                 boatId: this.boatId,
                 seatNumber: num

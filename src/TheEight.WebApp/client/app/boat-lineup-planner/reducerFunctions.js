@@ -2,20 +2,20 @@ export const placeAttendees = (prevState, action) => {
     const { assignments, unassignments } = action.payload;
     let newBoats = prevState.boats;
 
-    assignments.forEach(({ attendeeId, boatId, seat }) => {
-        const boat = newBoats.get(boatId);
+    assignments.forEach(({ attendeeId, seat }) => {
+        const boat = newBoats.get(seat.boatId);
 
         if (boat) {
-            const newBoat = boat.assignAttendee(attendeeId, seat);
-            newBoats = newBoats.set(boatId, newBoat);
+            const newBoat = boat.assignAttendee(attendeeId, seat.seatNumber);
+            newBoats = newBoats.set(seat.boatId, newBoat);
         }
     });
 
-    unassignments.forEach(({ boatId, seat }) => {
+    unassignments.forEach(({ boatId, seatNumber }) => {
         const boat = newBoats.get(boatId);
 
         if (boat) {
-            const newBoat = boat.unassignSeat(seat);
+            const newBoat = boat.unassignSeat(seatNumber);
             newBoats = newBoats.set(boatId, newBoat);
         }
     });
