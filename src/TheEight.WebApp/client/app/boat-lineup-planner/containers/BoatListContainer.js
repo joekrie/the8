@@ -1,4 +1,4 @@
-import BoatList from "../presentational-components/BoatList";
+import BoatList from "../components/BoatList";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { createAction } from "redux-actions";

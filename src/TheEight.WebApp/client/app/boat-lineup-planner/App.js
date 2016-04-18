@@ -6,6 +6,7 @@ import { List, Map } from "immutable";
 import { createStore } from "redux";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
+import TestBackend from "react-dnd-test-backend";
 import AssignableAttendeeListContainer from "./containers/AssignableAttendeeListContainer";
 import BoatListContainer from "./containers/BoatListContainer";
 import BoatRecord from "./records/BoatRecord";
@@ -76,11 +77,10 @@ const sampleState = {
     ])
 };
 
-const store = createStore(reducer, Object.create(sampleState));
+const store = createStore(reducer, { ...sampleState });
 
-@DragDropContext(HTML5Backend)
 @Radium
-export default class extends Component {
+class App extends Component {
     render() {
         return (
             <Provider store={store}>
@@ -92,3 +92,7 @@ export default class extends Component {
         );
     }
 }
+
+export default DragDropContext(HTML5Backend)(App);
+export const TestApp = DragDropContext(TestBackend)(App);
+export const ServerSideRenderingApp = DragDropContext(TestBackend)(App);

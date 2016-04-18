@@ -1,4 +1,4 @@
-import AssignableAttendeeListDropTarget from "../dnd-components/AssignableAttendeeListDropTarget";
+import AssignableAttendeeList from "../components/AssignableAttendeeList";
 import { connect } from "react-redux";
 import { List } from "immutable";
 import { bindActionCreators } from "redux";
@@ -37,4 +37,4 @@ export const mapDispatchToProps = dispatch =>
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AssignableAttendeeListDropTarget);
+)(AssignableAttendeeList);

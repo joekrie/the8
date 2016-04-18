@@ -1,5 +1,20 @@
-import BoatSeatDropTarget from "../dnd-components/BoatSeatDropTarget";
+import BoatSeat from "../components/BoatSeat";
 import Radium from "radium";
+
+const styles = {
+    root: {
+        "width": "300px",
+        "backgroundColor": "#263751",
+        "display": "inline-block",
+        "marginRight": "20px",
+        "color": "#F5F5F5"
+    },
+    header: {
+        "backgroundColor": "#263F52",
+        "marginBottom": "10px",
+        "padding": "10px"
+    }
+};
 
 const Boat = ({ boat, attendees, placeAttendees }) => {
     const attendeesBySeat = boat
@@ -12,7 +27,7 @@ const Boat = ({ boat, attendees, placeAttendees }) => {
         .valueSeq();
 
     const createBoatSeat = seat => {
-        const attendee = attendeesBySeat.get(seat);
+        const attendee = attendeesBySeat.get(seat.seatNumber);
         
         const seatProps = {
             seat,
@@ -21,7 +36,7 @@ const Boat = ({ boat, attendees, placeAttendees }) => {
             attendeeIdsInBoat
         };
         
-        return <BoatSeatDropTarget key={seat} {...seatProps} />;
+        return <BoatSeat key={seat.seatNumber} {...seatProps} />;
     };
 
     const boatSeats = boat
@@ -40,21 +55,6 @@ const Boat = ({ boat, attendees, placeAttendees }) => {
 			</div>
 		</div>
 	);
-};
-
-const styles = {
-    root: {
-        "width": "300px",
-        "backgroundColor": "#263751",
-        "display": "inline-block",
-        "marginRight": "20px",
-        "color": "#F5F5F5"
-    },
-    header: {
-        "backgroundColor": "#263F52",
-        "marginBottom": "10px",
-        "padding": "10px"
-    }
 };
 
 export default Radium(Boat);

@@ -16,4 +16,12 @@ describe("<BoatSeat />", () => {
 
         testUtils.expectToMountWithoutError(BoatSeat, props);
     });
+
+    xit("allows assignment from outside boat", () => {
+        
+    });
+
+    xit("allows move within boat", () => {
+        
+    });
 });

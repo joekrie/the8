@@ -83,11 +83,13 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.default = undefined;
+	exports.ServerSideRenderingApp = exports.TestApp = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _dec, _class;
+	var _class;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	var _react = __webpack_require__(4);
 
@@ -111,15 +113,19 @@
 
 	var _reactDndHtml5Backend2 = _interopRequireDefault(_reactDndHtml5Backend);
 
-	var _AssignableAttendeeListContainer = __webpack_require__(274);
+	var _reactDndTestBackend = __webpack_require__(274);
+
+	var _reactDndTestBackend2 = _interopRequireDefault(_reactDndTestBackend);
+
+	var _AssignableAttendeeListContainer = __webpack_require__(275);
 
 	var _AssignableAttendeeListContainer2 = _interopRequireDefault(_AssignableAttendeeListContainer);
 
-	var _BoatListContainer = __webpack_require__(281);
+	var _BoatListContainer = __webpack_require__(280);
 
 	var _BoatListContainer2 = _interopRequireDefault(_BoatListContainer);
 
-	var _BoatRecord = __webpack_require__(286);
+	var _BoatRecord = __webpack_require__(284);
 
 	var _BoatRecord2 = _interopRequireDefault(_BoatRecord);
 
@@ -127,7 +133,7 @@
 
 	var _WaterEventRecord2 = _interopRequireDefault(_WaterEventRecord);
 
-	var _AttendeeRecord = __webpack_require__(289);
+	var _AttendeeRecord = __webpack_require__(287);
 
 	var _AttendeeRecord2 = _interopRequireDefault(_AttendeeRecord);
 
@@ -194,18 +200,18 @@
 	    })])
 	};
 
-	var store = (0, _redux.createStore)(_reducer2.default, Object.create(sampleState));
+	var store = (0, _redux.createStore)(_reducer2.default, _extends({}, sampleState));
 
-	var _default = (_dec = (0, _reactDnd.DragDropContext)(_reactDndHtml5Backend2.default), _dec(_class = (0, _radium2.default)(_class = function (_Component) {
-	    _inherits(_default, _Component);
+	var App = (0, _radium2.default)(_class = function (_Component) {
+	    _inherits(App, _Component);
 
-	    function _default() {
-	        _classCallCheck(this, _default);
+	    function App() {
+	        _classCallCheck(this, App);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(_default).apply(this, arguments));
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(App).apply(this, arguments));
 	    }
 
-	    _createClass(_default, [{
+	    _createClass(App, [{
 	        key: "render",
 	        value: function render() {
 	            return React.createElement(
@@ -221,10 +227,12 @@
 	        }
 	    }]);
 
-	    return _default;
-	}(_react.Component)) || _class) || _class);
+	    return App;
+	}(_react.Component)) || _class;
 
-	exports.default = _default;
+	exports.default = (0, _reactDnd.DragDropContext)(_reactDndHtml5Backend2.default)(App);
+	var TestApp = exports.TestApp = (0, _reactDnd.DragDropContext)(_reactDndTestBackend2.default)(App);
+	var ServerSideRenderingApp = exports.ServerSideRenderingApp = (0, _reactDnd.DragDropContext)(_reactDndTestBackend2.default)(App);
 
 /***/ },
 /* 4 */
@@ -19785,6 +19793,19 @@
 /* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	exports.__esModule = true;
+
+	var _dndCore = __webpack_require__(86);
+
+	exports['default'] = _dndCore.createTestBackend;
+	module.exports = exports['default'];
+
+/***/ },
+/* 275 */
+/***/ function(module, exports, __webpack_require__) {
+
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -19792,9 +19813,9 @@
 	});
 	exports.mapDispatchToProps = exports.mapStateToProps = exports.attendeeIsAssignable = undefined;
 
-	var _AssignableAttendeeListDropTarget = __webpack_require__(275);
+	var _AssignableAttendeeList = __webpack_require__(276);
 
-	var _AssignableAttendeeListDropTarget2 = _interopRequireDefault(_AssignableAttendeeListDropTarget);
+	var _AssignableAttendeeList2 = _interopRequireDefault(_AssignableAttendeeList);
 
 	var _reactRedux = __webpack_require__(49);
 
@@ -19802,7 +19823,7 @@
 
 	var _redux = __webpack_require__(55);
 
-	var _actionCreators = __webpack_require__(280);
+	var _actionCreators = __webpack_require__(279);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19844,10 +19865,10 @@
 	    return (0, _redux.bindActionCreators)({ placeAttendees: _actionCreators.placeAttendees }, dispatch);
 	};
 
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_AssignableAttendeeListDropTarget2.default);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_AssignableAttendeeList2.default);
 
 /***/ },
-/* 275 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -19863,15 +19884,17 @@
 
 	var _react = __webpack_require__(4);
 
+	var _Attendee = __webpack_require__(277);
+
+	var _Attendee2 = _interopRequireDefault(_Attendee);
+
+	var _radium = __webpack_require__(5);
+
+	var _radium2 = _interopRequireDefault(_radium);
+
 	var _reactDnd = __webpack_require__(84);
 
-	var _AssignableAttendeeList = __webpack_require__(276);
-
-	var _AssignableAttendeeList2 = _interopRequireDefault(_AssignableAttendeeList);
-
-	var _dndDefaults = __webpack_require__(279);
-
-	var _reactRedux = __webpack_require__(49);
+	var _dndDefaults = __webpack_require__(278);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19881,94 +19904,18 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var drop = function drop(_ref, monitor) {
-	    var placeAttendees = _ref.placeAttendees;
+	var dropSpec = exports.dropSpec = {
+	    drop: function drop(_ref, monitor) {
+	        var placeAttendees = _ref.placeAttendees;
 
-	    var dragItem = monitor.getItem();
+	        var dragItem = monitor.getItem();
 
-	    if (!dragItem) {
-	        return;
-	    }
-
-	    placeAttendees({});
-	};
-
-	var dropSpec = exports.dropSpec = { drop: drop };
-
-	var _default = (_dec = (0, _reactDnd.DropTarget)("ATTENDEE", dropSpec, _dndDefaults.defaultDropCollector), _dec(_class = function (_Component) {
-	    _inherits(_default, _Component);
-
-	    function _default() {
-	        _classCallCheck(this, _default);
-
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(_default).apply(this, arguments));
-	    }
-
-	    _createClass(_default, [{
-	        key: "render",
-	        value: function render() {
-	            var _props = this.props;
-	            var rowers = _props.rowers;
-	            var coxswains = _props.coxswains;
-	            var connectDropTarget = _props.connectDropTarget;
-
-
-	            return connectDropTarget(React.createElement(
-	                "div",
-	                null,
-	                React.createElement(_AssignableAttendeeList2.default, { rowers: rowers, coxswains: coxswains })
-	            ));
+	        if (!dragItem) {
+	            return;
 	        }
-	    }]);
 
-	    return _default;
-	}(_react.Component)) || _class);
-
-	exports.default = _default;
-
-/***/ },
-/* 276 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _AttendeeDragSource = __webpack_require__(277);
-
-	var _AttendeeDragSource2 = _interopRequireDefault(_AttendeeDragSource);
-
-	var _radium = __webpack_require__(5);
-
-	var _radium2 = _interopRequireDefault(_radium);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var AssignableAttendeeList = function AssignableAttendeeList(_ref) {
-	    var rowers = _ref.rowers;
-	    var coxswains = _ref.coxswains;
-
-	    var assignableAttendees = rowers.concat(coxswains);
-
-	    return React.createElement(
-	        "div",
-	        { style: styles.root },
-	        React.createElement(
-	            "div",
-	            { style: styles.header },
-	            "Unassigned"
-	        ),
-	        React.createElement(
-	            "div",
-	            { style: styles.attendeeList },
-	            assignableAttendees.map(function (attendee) {
-	                return React.createElement(_AttendeeDragSource2.default, { key: attendee.attendeeId,
-	                    attendee: attendee });
-	            })
-	        )
-	    );
+	        placeAttendees({});
+	    }
 	};
 
 	var styles = {
@@ -19992,7 +19939,50 @@
 	    }
 	};
 
-	exports.default = (0, _radium2.default)(AssignableAttendeeList);
+	var _default = (_dec = (0, _reactDnd.DropTarget)("ATTENDEE", dropSpec, _dndDefaults.defaultDropCollector), _dec(_class = (0, _radium2.default)(_class = function (_Component) {
+	    _inherits(_default, _Component);
+
+	    function _default() {
+	        _classCallCheck(this, _default);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(_default).apply(this, arguments));
+	    }
+
+	    _createClass(_default, [{
+	        key: "render",
+	        value: function render() {
+	            var _props = this.props;
+	            var rowers = _props.rowers;
+	            var coxswains = _props.coxswains;
+
+	            var assignableAttendees = rowers.concat(coxswains);
+
+	            var attendeeComponents = assignableAttendees.map(function (attendee) {
+	                return React.createElement(_Attendee2.default, { key: attendee.attendeeId, attendee: attendee });
+	            });
+
+	            return React.createElement(
+	                "div",
+	                { style: styles.root },
+	                React.createElement(
+	                    "div",
+	                    { style: styles.header },
+	                    "Unassigned"
+	                ),
+	                React.createElement(
+	                    "div",
+	                    { style: styles.attendeeList },
+	                    attendeeComponents
+	                )
+	            );
+	        }
+	    }]);
+
+	    return _default;
+	}(_react.Component)) || _class) || _class);
+
+	exports.default = _default;
+	;
 
 /***/ },
 /* 277 */
@@ -20003,21 +19993,21 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.dragSpec = undefined;
+	exports.default = exports.dragSpec = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _dec, _class;
 
+	var _radium = __webpack_require__(5);
+
+	var _radium2 = _interopRequireDefault(_radium);
+
 	var _react = __webpack_require__(4);
 
 	var _reactDnd = __webpack_require__(84);
 
-	var _Attendee = __webpack_require__(278);
-
-	var _Attendee2 = _interopRequireDefault(_Attendee);
-
-	var _dndDefaults = __webpack_require__(279);
+	var _dndDefaults = __webpack_require__(278);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20027,73 +20017,15 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var beginDrag = function beginDrag(_ref) {
-	    var attendeeId = _ref.attendee.attendeeId;
-	    var seat = _ref.seat;
-	    return {
-	        draggedAttendeeId: attendeeId,
-	        draggedOriginSeat: seat
-	    };
-	};
-
-	var dragSpec = exports.dragSpec = { beginDrag: beginDrag };
-
-	var AttendeeDragSource = (_dec = (0, _reactDnd.DragSource)("ATTENDEE", dragSpec, _dndDefaults.defaultDragCollector), _dec(_class = function (_Component) {
-	    _inherits(AttendeeDragSource, _Component);
-
-	    function AttendeeDragSource() {
-	        _classCallCheck(this, AttendeeDragSource);
-
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(AttendeeDragSource).apply(this, arguments));
+	var dragSpec = exports.dragSpec = {
+	    beginDrag: function beginDrag(_ref) {
+	        var attendeeId = _ref.attendee.attendeeId;
+	        var seat = _ref.seat;
+	        return {
+	            draggedAttendeeId: attendeeId,
+	            draggedOriginSeat: seat
+	        };
 	    }
-
-	    _createClass(AttendeeDragSource, [{
-	        key: "render",
-	        value: function render() {
-	            var _props = this.props;
-	            var attendee = _props.attendee;
-	            var connectDragSource = _props.connectDragSource;
-
-
-	            return connectDragSource(React.createElement(
-	                "div",
-	                null,
-	                React.createElement(_Attendee2.default, { attendee: attendee })
-	            ));
-	        }
-	    }]);
-
-	    return AttendeeDragSource;
-	}(_react.Component)) || _class);
-	exports.default = AttendeeDragSource;
-
-/***/ },
-/* 278 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _radium = __webpack_require__(5);
-
-	var _radium2 = _interopRequireDefault(_radium);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Attendee = function Attendee(_ref) {
-	    var attendee = _ref.attendee;
-
-	    var rootStyles = [styles.root.base];
-	    rootStyles.push(attendee.isCoxswain ? styles.root.coxswain : styles.root.rower);
-
-	    return React.createElement(
-	        "div",
-	        { style: rootStyles },
-	        attendee.displayName
-	    );
 	};
 
 	var styles = {
@@ -20113,10 +20045,41 @@
 	    }
 	};
 
-	exports.default = (0, _radium2.default)(Attendee);
+	var _default = (_dec = (0, _reactDnd.DragSource)("ATTENDEE", dragSpec, _dndDefaults.defaultDragCollector), _dec(_class = (0, _radium2.default)(_class = function (_Component) {
+	    _inherits(_default, _Component);
+
+	    function _default() {
+	        _classCallCheck(this, _default);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(_default).apply(this, arguments));
+	    }
+
+	    _createClass(_default, [{
+	        key: "render",
+	        value: function render() {
+	            var _props = this.props;
+	            var attendee = _props.attendee;
+	            var connectDragSource = _props.connectDragSource;
+
+
+	            var rootStyles = [styles.root.base];
+	            rootStyles.push(attendee.isCoxswain ? styles.root.coxswain : styles.root.rower);
+
+	            return connectDragSource(React.createElement(
+	                "div",
+	                { style: rootStyles },
+	                attendee.displayName
+	            ));
+	        }
+	    }]);
+
+	    return _default;
+	}(_react.Component)) || _class) || _class);
+
+	exports.default = _default;
 
 /***/ },
-/* 279 */
+/* 278 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -20169,7 +20132,7 @@
 	};
 
 /***/ },
-/* 280 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20184,7 +20147,7 @@
 	var placeAttendees = exports.placeAttendees = (0, _reduxActions.createAction)("PLACE_ATTENDEES");
 
 /***/ },
-/* 281 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20194,7 +20157,7 @@
 	});
 	exports.mapDispatchToProps = exports.mapStateToProps = undefined;
 
-	var _BoatList = __webpack_require__(282);
+	var _BoatList = __webpack_require__(281);
 
 	var _BoatList2 = _interopRequireDefault(_BoatList);
 
@@ -20204,7 +20167,7 @@
 
 	var _reduxActions = __webpack_require__(68);
 
-	var _actionCreators = __webpack_require__(280);
+	var _actionCreators = __webpack_require__(279);
 
 	var _immutable = __webpack_require__(81);
 
@@ -20240,7 +20203,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_BoatList2.default);
 
 /***/ },
-/* 282 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20251,7 +20214,7 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _Boat = __webpack_require__(283);
+	var _Boat = __webpack_require__(282);
 
 	var _Boat2 = _interopRequireDefault(_Boat);
 
@@ -20291,7 +20254,7 @@
 	exports.default = (0, _radium2.default)(BoatList);
 
 /***/ },
-/* 283 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20302,15 +20265,30 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _BoatSeatDropTarget = __webpack_require__(284);
+	var _BoatSeat = __webpack_require__(283);
 
-	var _BoatSeatDropTarget2 = _interopRequireDefault(_BoatSeatDropTarget);
+	var _BoatSeat2 = _interopRequireDefault(_BoatSeat);
 
 	var _radium = __webpack_require__(5);
 
 	var _radium2 = _interopRequireDefault(_radium);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var styles = {
+	    root: {
+	        "width": "300px",
+	        "backgroundColor": "#263751",
+	        "display": "inline-block",
+	        "marginRight": "20px",
+	        "color": "#F5F5F5"
+	    },
+	    header: {
+	        "backgroundColor": "#263F52",
+	        "marginBottom": "10px",
+	        "padding": "10px"
+	    }
+	};
 
 	var Boat = function Boat(_ref) {
 	    var boat = _ref.boat;
@@ -20328,7 +20306,7 @@
 	    }).valueSeq();
 
 	    var createBoatSeat = function createBoatSeat(seat) {
-	        var attendee = attendeesBySeat.get(seat);
+	        var attendee = attendeesBySeat.get(seat.seatNumber);
 
 	        var seatProps = {
 	            seat: seat,
@@ -20337,7 +20315,7 @@
 	            attendeeIdsInBoat: attendeeIdsInBoat
 	        };
 
-	        return React.createElement(_BoatSeatDropTarget2.default, _extends({ key: seat }, seatProps));
+	        return React.createElement(_BoatSeat2.default, _extends({ key: seat.seatNumber }, seatProps));
 	    };
 
 	    var boatSeats = boat.listSeats().map(createBoatSeat);
@@ -20362,25 +20340,10 @@
 	    );
 	};
 
-	var styles = {
-	    root: {
-	        "width": "300px",
-	        "backgroundColor": "#263751",
-	        "display": "inline-block",
-	        "marginRight": "20px",
-	        "color": "#F5F5F5"
-	    },
-	    header: {
-	        "backgroundColor": "#263F52",
-	        "marginBottom": "10px",
-	        "padding": "10px"
-	    }
-	};
-
 	exports.default = (0, _radium2.default)(Boat);
 
 /***/ },
-/* 284 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20394,15 +20357,19 @@
 
 	var _dec, _class;
 
+	var _Attendee = __webpack_require__(277);
+
+	var _Attendee2 = _interopRequireDefault(_Attendee);
+
+	var _radium = __webpack_require__(5);
+
+	var _radium2 = _interopRequireDefault(_radium);
+
 	var _react = __webpack_require__(4);
 
 	var _reactDnd = __webpack_require__(84);
 
-	var _BoatSeat = __webpack_require__(285);
-
-	var _BoatSeat2 = _interopRequireDefault(_BoatSeat);
-
-	var _dndDefaults = __webpack_require__(279);
+	var _dndDefaults = __webpack_require__(278);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20412,172 +20379,89 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var canDrop = function canDrop(props, monitor) {
-	    if (!monitor.getItem()) {
-	        return false;
-	    }
-
-	    var _monitor$getItem = monitor.getItem();
-
-	    var draggedOriginSeat = _monitor$getItem.draggedOriginSeat;
-	    var draggedAttendeeId = _monitor$getItem.draggedAttendeeId;
-	    var attendeeIdsInBoat = props.attendeeIdsInBoat;
-
-	    var targetBoatId = props.seat.boatId;
-
-	    var sameBoat = draggedOriginSeat && draggedOriginSeat.boatId === targetBoatId;
-
-	    return sameBoat || !attendeeAlreadyInBoat(draggedAttendeeId, attendeeIdsInBoat);
-	};
-
 	var attendeeAlreadyInBoat = function attendeeAlreadyInBoat(attendeeId, attendeeIdsInBoat) {
 	    return attendeeIdsInBoat.contains(attendeeId);
 	};
 
-	var drop = function drop(props, monitor) {
-	    if (!monitor.getItem() || !monitor.canDrop()) {
-	        return;
-	    }
-
-	    var _monitor$getItem2 = monitor.getItem();
-
-	    var draggedAttendeeId = _monitor$getItem2.draggedAttendeeId;
-	    var draggedOriginSeat = _monitor$getItem2.draggedOriginSeat;
-	    var placeAttendees = props.placeAttendees;
-
-
-	    var attendeeInTargetSeat = Boolean(props.attendee);
-	    var droppedAttendeeWasAssigned = Boolean(draggedOriginSeat);
-
-	    var targetAttendeeId = attendeeInTargetSeat ? props.attendee.attendeeId : "";
-	    var targetSeat = props.seat;
-
-	    var actionPayload = {
-	        assignments: [],
-	        unassignments: []
-	    };
-
-	    var assignTargetToDropped = function assignTargetToDropped() {
-	        actionPayload.assignments.push({
-	            attendeeId: targetAttendeeId,
-	            seat: draggedOriginSeat
-	        });
-	    };
-
-	    var assignDroppedToTarget = function assignDroppedToTarget() {
-	        actionPayload.assignments.push({
-	            attendeeId: draggedAttendeeId,
-	            seat: targetSeat
-	        });
-	    };
-
-	    var unassignTarget = function unassignTarget() {
-	        actionPayload.unassignments = {
-	            attendeeId: targetAttendeeId
-	        };
-	    };
-
-	    if (droppedAttendeeWasAssigned && attendeeInTargetSeat) {
-	        assignTargetToDropped();
-	        assignDroppedToTarget();
-	    }
-
-	    if (!droppedAttendeeWasAssigned && attendeeInTargetSeat) {
-	        unassignTarget();
-	        assignDroppedToTarget();
-	    }
-
-	    if (!attendeeInTargetSeat) {
-	        assignDroppedToTarget();
-	    }
-
-	    placeAttendees(actionPayload);
-	};
-
-	var dropSpec = exports.dropSpec = { canDrop: canDrop, drop: drop };
-	var dropCollect = exports.dropCollect = _dndDefaults.defaultDropCollector;
-
-	var _default = (_dec = (0, _reactDnd.DropTarget)("ATTENDEE", dropSpec, dropCollect), _dec(_class = function (_Component) {
-	    _inherits(_default, _Component);
-
-	    function _default() {
-	        _classCallCheck(this, _default);
-
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(_default).apply(this, arguments));
-	    }
-
-	    _createClass(_default, [{
-	        key: "render",
-	        value: function render() {
-	            var _props = this.props;
-	            var connectDropTarget = _props.connectDropTarget;
-	            var attendee = _props.attendee;
-	            var boatId = _props.boatId;
-	            var seat = _props.seat;
-
-	            var boatSeatProps = { attendee: attendee, boatId: boatId, seat: seat };
-
-	            return connectDropTarget(React.createElement(
-	                "div",
-	                null,
-	                React.createElement(_BoatSeat2.default, boatSeatProps)
-	            ));
+	var dropSpec = exports.dropSpec = {
+	    canDrop: function canDrop(props, monitor) {
+	        if (!monitor.getItem()) {
+	            return false;
 	        }
-	    }]);
 
-	    return _default;
-	}(_react.Component)) || _class);
+	        var _monitor$getItem = monitor.getItem();
 
-	exports.default = _default;
+	        var draggedOriginSeat = _monitor$getItem.draggedOriginSeat;
+	        var draggedAttendeeId = _monitor$getItem.draggedAttendeeId;
+	        var attendeeIdsInBoat = props.attendeeIdsInBoat;
 
-/***/ },
-/* 285 */
-/***/ function(module, exports, __webpack_require__) {
+	        var targetBoatId = props.seat.boatId;
 
-	"use strict";
+	        var sameBoat = draggedOriginSeat && draggedOriginSeat.boatId === targetBoatId;
+	        return !sameBoat && !attendeeAlreadyInBoat(draggedAttendeeId, attendeeIdsInBoat);
+	    },
+	    drop: function drop(props, monitor) {
+	        if (!monitor.getItem() || !monitor.canDrop()) {
+	            return;
+	        }
 
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
+	        var _monitor$getItem2 = monitor.getItem();
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	        var draggedAttendeeId = _monitor$getItem2.draggedAttendeeId;
+	        var draggedOriginSeat = _monitor$getItem2.draggedOriginSeat;
+	        var placeAttendees = props.placeAttendees;
 
-	var _AttendeeDragSource = __webpack_require__(277);
 
-	var _AttendeeDragSource2 = _interopRequireDefault(_AttendeeDragSource);
+	        var attendeeInTargetSeat = Boolean(props.attendee);
+	        var droppedAttendeeWasAssigned = Boolean(draggedOriginSeat);
 
-	var _radium = __webpack_require__(5);
+	        var targetAttendeeId = attendeeInTargetSeat ? props.attendee.attendeeId : "";
+	        var targetSeat = props.seat;
 
-	var _radium2 = _interopRequireDefault(_radium);
+	        var actionPayload = {
+	            assignments: [],
+	            unassignments: []
+	        };
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	        var assignTargetToDropped = function assignTargetToDropped() {
+	            actionPayload.assignments.push({
+	                attendeeId: targetAttendeeId,
+	                seat: draggedOriginSeat
+	            });
+	        };
 
-	var BoatSeat = function BoatSeat(_ref) {
-	    var attendee = _ref.attendee;
-	    var _ref$seat = _ref.seat;
-	    var boatId = _ref$seat.boatId;
-	    var seatNumber = _ref$seat.seatNumber;
+	        var assignDroppedToTarget = function assignDroppedToTarget() {
+	            actionPayload.assignments.push({
+	                attendeeId: draggedAttendeeId,
+	                seat: targetSeat
+	            });
+	        };
 
-	    var attendeeComponent = null;
+	        var unassignTarget = function unassignTarget() {
+	            actionPayload.unassignments = {
+	                attendeeId: targetAttendeeId
+	            };
+	        };
 
-	    if (attendee) {
-	        var props = { attendee: attendee, seat: seat };
-	        attendeeComponent = React.createElement(_AttendeeDragSource2.default, _extends({ key: attendee.attendeeId }, props));
+	        if (droppedAttendeeWasAssigned && attendeeInTargetSeat) {
+	            assignTargetToDropped();
+	            assignDroppedToTarget();
+	        }
+
+	        if (!droppedAttendeeWasAssigned && attendeeInTargetSeat) {
+	            unassignTarget();
+	            assignDroppedToTarget();
+	        }
+
+	        if (!attendeeInTargetSeat) {
+	            assignDroppedToTarget();
+	        }
+
+	        placeAttendees(actionPayload);
 	    }
-
-	    var label = seatNumber === 0 ? "COX" : seatNumber;
-
-	    return React.createElement(
-	        "div",
-	        { style: styles.root },
-	        React.createElement(
-	            "div",
-	            { style: styles.label },
-	            label
-	        ),
-	        attendeeComponent
-	    );
 	};
+
+	var dropCollect = exports.dropCollect = _dndDefaults.defaultDropCollector;
 
 	var styles = {
 	    root: {
@@ -20594,10 +20478,51 @@
 	    }
 	};
 
-	exports.default = (0, _radium2.default)(BoatSeat);
+	var _default = (_dec = (0, _reactDnd.DropTarget)("ATTENDEE", dropSpec, dropCollect), _dec(_class = (0, _radium2.default)(_class = function (_Component) {
+	    _inherits(_default, _Component);
+
+	    function _default() {
+	        _classCallCheck(this, _default);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(_default).apply(this, arguments));
+	    }
+
+	    _createClass(_default, [{
+	        key: "render",
+	        value: function render() {
+	            var _props = this.props;
+	            var connectDropTarget = _props.connectDropTarget;
+	            var attendee = _props.attendee;
+	            var seat = _props.seat;
+
+	            var attendeeComponent = null;
+
+	            if (attendee) {
+	                attendeeComponent = React.createElement(_Attendee2.default, { key: attendee.attendeeId, attendee: attendee, seat: seat });
+	            }
+
+	            var label = seat.seatNumber === 0 ? "COX" : seat.seatNumber;
+
+	            return connectDropTarget(React.createElement(
+	                "div",
+	                { style: styles.root },
+	                React.createElement(
+	                    "div",
+	                    { style: styles.label },
+	                    label
+	                ),
+	                attendeeComponent
+	            ));
+	        }
+	    }]);
+
+	    return _default;
+	}(_react.Component)) || _class) || _class);
+
+	exports.default = _default;
 
 /***/ },
-/* 286 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20611,9 +20536,9 @@
 
 	var _immutable = __webpack_require__(81);
 
-	var _lodash = __webpack_require__(287);
+	var _lodash = __webpack_require__(285);
 
-	var _SeatRecord = __webpack_require__(288);
+	var _SeatRecord = __webpack_require__(286);
 
 	var _SeatRecord2 = _interopRequireDefault(_SeatRecord);
 
@@ -20686,7 +20611,7 @@
 	exports.default = _default;
 
 /***/ },
-/* 287 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/**
@@ -35766,7 +35691,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(108)(module), (function() { return this; }())))
 
 /***/ },
-/* 288 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -35813,7 +35738,7 @@
 	exports.default = _default;
 
 /***/ },
-/* 289 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";

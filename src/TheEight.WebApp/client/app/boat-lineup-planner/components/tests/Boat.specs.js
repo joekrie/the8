@@ -6,22 +6,23 @@ import { List, Map } from "immutable";
 
 describe("<Boat />", () => {
     it("mounts without error", () => {
-        const boat = Map({
-            boat: new BoatRecord({
-                seatCount: 2,
-                seatAssignments: Map([
-                    [1, "rower-1"]
-                ])
-            }),
-            attendees: List([
-                new AttendeeRecord({ attendeeId: "rower-1" })
+        const boat = new BoatRecord({
+            seatCount: 2,
+            seatAssignments: Map([
+                [1, "rower-1"]
             ])
         });
+
+        const attendees = List([
+            new AttendeeRecord({ attendeeId: "rower-1" })
+        ]);
+
+        const placeAttendees = jest.fn();
         
         const props = {
-            boat: boat.get("boat"),
-            attendees: boat.get("attendees"),
-            placeAttendees: jest.fn()
+            boat,
+            attendees,
+            placeAttendees
         };
 
         testUtils.expectToMountWithoutError(Boat, props);
