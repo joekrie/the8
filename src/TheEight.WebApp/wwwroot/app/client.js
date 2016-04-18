@@ -200,7 +200,18 @@
 	    })])
 	};
 
-	var store = (0, _redux.createStore)(_reducer2.default, _extends({}, sampleState));
+	var logger = function logger(store) {
+	    return function (next) {
+	        return function (action) {
+	            console.log('dispatching', action);
+	            var result = next(action);
+	            console.log('next state', store.getState());
+	            return result;
+	        };
+	    };
+	};
+
+	var store = (0, _redux.createStore)(_reducer2.default, _extends({}, sampleState), (0, _redux.applyMiddleware)(logger));
 
 	var App = (0, _radium2.default)(_class = function (_Component) {
 	    _inherits(App, _Component);

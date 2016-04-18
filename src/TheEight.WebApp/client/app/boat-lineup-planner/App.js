@@ -3,7 +3,7 @@ import Radium from "radium";
 import { Provider } from "react-redux";
 import reducer from "./reducer";
 import { List, Map } from "immutable";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 import TestBackend from "react-dnd-test-backend";
@@ -77,7 +77,14 @@ const sampleState = {
     ])
 };
 
-const store = createStore(reducer, { ...sampleState });
+const logger = store => next => action => {
+    console.log('dispatching', action)
+    let result = next(action)
+    console.log('next state', store.getState())
+    return result
+}
+
+const store = createStore(reducer, { ...sampleState }, applyMiddleware(logger));
 
 @Radium
 class App extends Component {
