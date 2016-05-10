@@ -1,8 +1,18 @@
 import { handleActions } from "redux-actions";
-import defaultState from "./defaultState";
-import * as reducerFunctions from "./reducerFunctions";
+import { Map, List } from "immutable";
 
-export default handleActions({
-    PLACE_ATTENDEES: reducerFunctions.placeAttendees,
-    REPLACE_STATE: reducerFunctions.replaceState
+import { placeAttendees } from "./reducer-functions";
+import WaterEventRecord from "./water-event.record";
+
+const defaultState = {
+    eventSettings: new WaterEventRecord(),
+    boats: Map(),
+    attendees: List()
+};
+
+const reducer = handleActions({
+    PLACE_ATTENDEES: placeAttendees,
 }, defaultState);
+
+export { defaultState }
+export default reducer

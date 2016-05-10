@@ -1,8 +1,3 @@
 ﻿{
-  "Database": {
-    "ConnectionString": "Server=localhost\\MSSQL2014;Database=TheEight_Dev;User ID=the-eight-web-app;Password=P@ssw0rd1;Connection Timeout=30;"
-  },
-  "ApplicationInsights": {
-    "InstrumentationKey": "db7394c8-49c3-4931-8913-a1d39be8d763"
-  }
+
 }

@@ -26,6 +26,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TheEight.WebApp.Tests", "te
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TheEight.QueueHandlers.Tests", "test\TheEight.QueueHandlers.Tests\TheEight.QueueHandlers.Tests.xproj", "{E365FA59-811E-4A60-9B47-719149E9FD30}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TheEight.Options", "src\TheEight.Options\TheEight.Options.xproj", "{F0F54575-A823-4FBF-83D9-22C6D7D4A0C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{E365FA59-811E-4A60-9B47-719149E9FD30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E365FA59-811E-4A60-9B47-719149E9FD30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E365FA59-811E-4A60-9B47-719149E9FD30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0F54575-A823-4FBF-83D9-22C6D7D4A0C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0F54575-A823-4FBF-83D9-22C6D7D4A0C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0F54575-A823-4FBF-83D9-22C6D7D4A0C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0F54575-A823-4FBF-83D9-22C6D7D4A0C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,5 +80,6 @@ Global
 		{B33226BD-952B-43E8-9E8F-644E7819A3E6} = {0D3F6916-8E45-4E5C-96D7-CD87049802C4}
 		{BF9459F4-BE94-43D8-A205-80D5B89CFF64} = {0D3F6916-8E45-4E5C-96D7-CD87049802C4}
 		{E365FA59-811E-4A60-9B47-719149E9FD30} = {0D3F6916-8E45-4E5C-96D7-CD87049802C4}
+		{F0F54575-A823-4FBF-83D9-22C6D7D4A0C1} = {69DEBE83-BA3A-420A-AA7E-3D7F1B696D5E}
 	EndGlobalSection
 EndGlobal

@@ -1,17 +1,72 @@
-import { Component } from "react";
+import { List, Map, fromJS } from "immutable";
 import Radium from "radium";
-import { Provider } from "react-redux";
-import reducer from "./reducer";
-import { List, Map } from "immutable";
-import { createStore, applyMiddleware } from "redux";
+import { Component } from "react";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 import TestBackend from "react-dnd-test-backend";
-import AssignableAttendeeListContainer from "./containers/AssignableAttendeeListContainer";
-import BoatListContainer from "./containers/BoatListContainer";
-import BoatRecord from "./records/BoatRecord";
-import WaterEventRecord from "./records/WaterEventRecord";
-import AttendeeRecord from "./records/AttendeeRecord";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+
+import AssignableAttendeeListContainer from "./attendee-list.container";
+import BoatListContainer from "./boat-list.container";
+import BoatRecord from "./boat.record";
+import WaterEventRecord from "./water-event.record";
+import AttendeeRecord from "./attendee.record";
+import reducer from "./reducer";
+
+const mapEventSettings = serverData => fromJS(serverData);
+
+const mapBoats = serverData => {
+    const reviver = (key, value) => {
+        if (key === "") {
+            const boatMap = Map()
+                .withMutations(map => {
+                    value.forEach(boat => {
+                        const boatId = boat.get("boatId");
+
+                        const boatRecord = new BoatRecord({
+                            boatId,
+                            title: boat.get("title"),
+                            isCoxed: boat.get("isCoxed"),
+                            seatCount: boat.get("seatCount"),
+                            seatAssignments: boat.get("seatAssignments")
+                        });
+
+                        map.set(boatId, boatRecord);
+                    });
+                });
+
+            return boatMap;
+        }
+
+        return value;
+    };
+
+    return fromJS(serverData, reviver);
+};
+
+const mapAttendees = serverData => {
+    const reviver = (key, value) => {
+        if (key === "") {
+            return value.map(attendee => new AttendeeRecord({
+                attendeeId: attendee.get("attendeeId"),
+                displayName: attendee.get("displayName"),
+                sortName: attendee.get("sortName"),
+                isCoxswain: attendee.get("isCoxswain")
+            }));
+        }
+
+        return value;
+    };
+
+    return fromJS(serverData, reviver);
+};
+
+export const mapServerDataToState = serverData => ({
+    eventSettings: mapEventSettings(serverData.eventSettings),
+    boats: mapBoats(serverData.boats),
+    attendees: mapAttendees(serverData.attendees)
+});
 
 const styles = {
     root: {
@@ -35,7 +90,7 @@ const sampleState = {
             ])
         }),
         "boat-2": new BoatRecord({
-            boatId: "boat-1",
+            boatId: "boat-2",
             title: "Voyager 1",
             seatCount: 2,
             isCoxed: false,
@@ -78,10 +133,10 @@ const sampleState = {
 };
 
 const logger = store => next => action => {
-    console.log('dispatching', action)
-    let result = next(action)
-    console.log('next state', store.getState())
-    return result
+    console.log('dispatching', action);
+    let result = next(action);
+    console.log('next state', store.getState());
+    return result;
 }
 
 const store = createStore(reducer, { ...sampleState }, applyMiddleware(logger));
@@ -100,6 +155,5 @@ class App extends Component {
     }
 }
 
-export default DragDropContext(HTML5Backend)(App);
 export const TestApp = DragDropContext(TestBackend)(App);
-export const ServerSideRenderingApp = DragDropContext(TestBackend)(App);
+export default DragDropContext(HTML5Backend)(App)

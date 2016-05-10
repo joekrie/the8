@@ -16,16 +16,6 @@ namespace TheEight.WebApp
             ConfigureAuth(app);
             ConfigureLogging(loggerFactory);
 
-            app.UseReact(config =>
-            {
-                config
-                    .SetLoadBabel(false)
-                    .SetLoadReact(false)
-                    .SetAllowMsieEngine(false)
-                    .SetReuseJavaScriptEngines(true)
-                    .AddScriptWithoutTransform("~/app/server.js");
-            });
-
             app.UseStaticFiles();
             app.UseMvc();
         }

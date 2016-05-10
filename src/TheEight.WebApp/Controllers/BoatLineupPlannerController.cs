@@ -7,13 +7,7 @@ namespace TheEight.WebApp.Controllers
     [Route("boat")]
     public class BoatLineupPlannerController : Controller
     {
-        [HttpGet("server")]
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        [HttpGet("client")]
+        [HttpGet("")]
         public IActionResult Client()
         {
             return View();

@@ -1,2 +1,2 @@
 ﻿global.React = require("react");
-global.testUtils = require("./client/app/common/testUtils");
+global.testUtils = require("./client/app/common/test-utils");

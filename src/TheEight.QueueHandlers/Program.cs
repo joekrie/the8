@@ -2,7 +2,6 @@
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.OptionsModel;
-using TheEight.Common.Infrastructure.Configuration.Infrastructure;
 
 namespace TheEight.QueueHandlers
 {
@@ -17,16 +16,15 @@ namespace TheEight.QueueHandlers
 
         public static void Main()
         {
-            var azureSettings = ServiceProvider
-                .GetService<IOptions<AzureStorageSettings>>()
-                .Value;
+            //var azureSettings = ServiceProvider.GetService<IOptions<AzureStorageSettings>>().Value;
+            var connStr = "DefaultEndpointsProtocol=https;AccountName=the8sandbox;AccountKey=20ZdpfxcGC/Q0oMYEI47wYD40OSReNnSWRUPgK3athlMw3bpDdGR/a6F1cuyRRP5jv1OD+m2z1cG24w229INzw==";
 
             var jobActivator = new JobActivator(ServiceProvider);
 
             var jobHostConfig = new JobHostConfiguration
             {
-                StorageConnectionString = azureSettings.StorageConnectionString,
-                DashboardConnectionString = azureSettings.DashboardConnectionString,
+                StorageConnectionString = connStr,
+                DashboardConnectionString = connStr,
                 JobActivator = jobActivator
             };
 

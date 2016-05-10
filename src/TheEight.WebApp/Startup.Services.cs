@@ -3,16 +3,14 @@ using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNet.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using NodaTime;
 using React.AspNet;
-using TheEight.Common.Infrastructure;
-using TheEight.Common.Infrastructure.Configuration.ExternalServices;
-using TheEight.Common.Infrastructure.Configuration.Infrastructure;
-using TheEight.Common.Infrastructure.Configuration.Security;
-using TheEight.Common.Infrastructure.DependencyInjection;
-using TheEight.WebApp.Services.Invites;
+using NodaTime.Serialization.JsonNet;
+using TheEight.Options;
 
 namespace TheEight.WebApp
 {
@@ -27,7 +25,16 @@ namespace TheEight.WebApp
                 .AddMvc()
                 .AddJsonOptions(options =>
                 {
-                    options.SerializerSettings.ConfigureForTheEight(_isDevelopment);
+                    var settings = options.SerializerSettings;
+
+                    settings.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb);
+                    settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+                    settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+                    if (_isDevelopment)
+                    {
+                        settings.Formatting = Formatting.Indented;
+                    }
                 })
                 .AddMvcOptions(options =>
                 {
@@ -37,17 +44,12 @@ namespace TheEight.WebApp
                     }
                 });
             
-            services.AddReact();
-            services.AddApplicationInsightsTelemetry(_config);
-            services.AddOptions();
-
+            services.AddApplicationInsightsTelemetry(_config.GetSection("AzureAppInsights"));
+            
             services
-                .Configure<GoogleSettings>(_config.GetSection("Google"))
-                .Configure<FacebookSettings>(_config.GetSection("Facebook"))
-                .Configure<TwilioSettings>(_config.GetSection("Twilio"))
-                .Configure<SendGridSettings>(_config.GetSection("SendGrid"))
-                .Configure<AzureStorageSettings>(_config.GetSection("AzureStorage"))
-                .Configure<DatabaseSettings>(_config.GetSection("Database"));
+                .AddOptions()
+                .Configure<SqlServerOptions>(_config.GetSection("SqlServer"))
+                .Configure<AzureActiveDirectoryOptions>(_config.GetSection("AzureAD"));
 
             autofacBuilder
                 .RegisterAssemblyTypes(thisAssembly)
@@ -66,12 +68,8 @@ namespace TheEight.WebApp
                 .As<IClock>()
                 .SingleInstance();
             
-            autofacBuilder.RegisterModule(new DataAccessModule());
             autofacBuilder.Populate(services);
-            
-            return autofacBuilder
-                .Build()
-                .Resolve<IServiceProvider>();
+            return autofacBuilder.Build().Resolve<IServiceProvider>();
         }
     }
 }
