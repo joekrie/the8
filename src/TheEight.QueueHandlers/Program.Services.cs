@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using TheEight.Options;
 
 namespace TheEight.QueueHandlers
 {
@@ -14,7 +15,6 @@ namespace TheEight.QueueHandlers
             var services = new ServiceCollection();
             var appBasePath = PlatformServices.Default.Application.ApplicationBasePath;
 
-
             var configBuilder = new ConfigurationBuilder()
                 .SetBasePath(appBasePath)
                 .AddEnvironmentVariables()
@@ -22,14 +22,13 @@ namespace TheEight.QueueHandlers
 
             var config = configBuilder.Build();
             
-            services.AddOptions();
+            services
+                .AddOptions()
+                .Configure<AzureStorageOptions>(config.GetSection("AzureStorage"));
 
             var autofacBuilder = new ContainerBuilder();
             autofacBuilder.Populate(services);
-
-            return autofacBuilder
-                .Build()
-                .Resolve<IServiceProvider>();
+            return autofacBuilder.Build().Resolve<IServiceProvider>();
         }
     }
 }

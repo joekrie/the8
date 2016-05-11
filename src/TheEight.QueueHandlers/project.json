@@ -18,6 +18,7 @@
     "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc1-final",
     "Microsoft.Extensions.Logging": "1.0.0-rc1-final",
     "TheEight.Common": "1.0.0-*",
+    "TheEight.Options": "1.0.0-*", 
     "Twilio": "4.4.1",
     "Twilio.TwiML": "3.4.0",
     "RestSharp": "105.2.2",
