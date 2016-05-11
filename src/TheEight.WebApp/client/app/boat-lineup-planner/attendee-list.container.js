@@ -17,8 +17,7 @@ const attendeeIsAssignable = (attendee, boats, allowMultiple) => {
 
 const mapStateToProps = ({attendees, boats, eventSettings}) => {
     const assignableAttendees = attendees
-        .filter(a => attendeeIsAssignable(a, boats, 
-            eventSettings.allowMultipleAttendeeAssignments))
+        .filter(a => attendeeIsAssignable(a, boats, eventSettings.allowMultipleAttendeeAssignments))
         .groupBy(a => a.isCoxswain ? "coxswains" : "rowers");
 
     const rowers = assignableAttendees.has("rowers")

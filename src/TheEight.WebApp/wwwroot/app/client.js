@@ -62,7 +62,7 @@
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	exports.BoatLineupPlannerApp = undefined;
 
@@ -272,16 +272,16 @@
 
 	var store = (0, _redux.createStore)(_reducer2.default, _extends({}, sampleState), (0, _redux.applyMiddleware)(logger));
 
-	var App = (0, _radium2.default)(_class = function (_Component) {
-	    _inherits(App, _Component);
+	var Root = (0, _radium2.default)(_class = function (_Component) {
+	    _inherits(Root, _Component);
 
-	    function App() {
-	        _classCallCheck(this, App);
+	    function Root() {
+	        _classCallCheck(this, Root);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(App).apply(this, arguments));
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Root).apply(this, arguments));
 	    }
 
-	    _createClass(App, [{
+	    _createClass(Root, [{
 	        key: "render",
 	        value: function render() {
 	            return React.createElement(
@@ -297,11 +297,14 @@
 	        }
 	    }]);
 
-	    return App;
+	    return Root;
 	}(_react.Component)) || _class;
 
-	var TestApp = exports.TestApp = (0, _reactDnd.DragDropContext)(_reactDndTestBackend2.default)(App);
-	exports.default = (0, _reactDnd.DragDropContext)(_reactDndHtml5Backend2.default)(App);
+	var App = (0, _reactDnd.DragDropContext)(_reactDndHtml5Backend2.default)(Root);
+	var TestApp = (0, _reactDnd.DragDropContext)(_reactDndTestBackend2.default)(Root);
+
+	exports.TestApp = TestApp;
+	exports.default = App;
 
 /***/ },
 /* 4 */
@@ -19464,20 +19467,6 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var dropSpec = {
-	    drop: function drop(_ref, monitor) {
-	        var placeAttendees = _ref.placeAttendees;
-
-	        var dragItem = monitor.getItem();
-
-	        if (!dragItem) {
-	            return;
-	        }
-
-	        placeAttendees({});
-	    }
-	};
-
 	var styles = {
 	    root: {
 	        "float": "left",
@@ -19499,6 +19488,28 @@
 	    }
 	};
 
+	var dropSpec = {
+	    drop: function drop(_ref, monitor) {
+	        var placeAttendees = _ref.placeAttendees;
+
+	        var dragItem = monitor.getItem();
+
+	        if (!dragItem) {
+	            return;
+	        }
+
+	        var _monitor$getItem = monitor.getItem();
+
+	        var draggedOriginSeat = _monitor$getItem.draggedOriginSeat;
+
+
+	        placeAttendees({
+	            assignments: [],
+	            unassignments: [draggedOriginSeat]
+	        });
+	    }
+	};
+
 	var AttendeeListComponent = (_dec = (0, _reactDnd.DropTarget)("ATTENDEE", dropSpec, _dndDefaults.defaultDropCollector), _dec(_class = (0, _radium2.default)(_class = function (_Component) {
 	    _inherits(AttendeeListComponent, _Component);
 
@@ -19514,6 +19525,7 @@
 	            var _props = this.props;
 	            var rowers = _props.rowers;
 	            var coxswains = _props.coxswains;
+	            var connectDropTarget = _props.connectDropTarget;
 
 	            var assignableAttendees = rowers.concat(coxswains);
 
@@ -19521,7 +19533,7 @@
 	                return React.createElement(_attendee2.default, { key: attendee.attendeeId, attendee: attendee });
 	            });
 
-	            return React.createElement(
+	            return connectDropTarget(React.createElement(
 	                "div",
 	                { style: styles.root },
 	                React.createElement(
@@ -19534,7 +19546,7 @@
 	                    { style: styles.attendeeList },
 	                    attendeeComponents
 	                )
-	            );
+	            ));
 	        }
 	    }]);
 
@@ -19554,14 +19566,14 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	var defaultDragCollector = exports.defaultDragCollector = function defaultDragCollector(connect, monitor) {
+	var defaultDragCollector = function defaultDragCollector(connect, monitor) {
 	    return {
 	        connectDragSource: connect.dragSource(),
 	        isDragging: monitor.isDragging()
 	    };
 	};
 
-	var defaultDropCollector = exports.defaultDropCollector = function defaultDropCollector(connect, monitor) {
+	var defaultDropCollector = function defaultDropCollector(connect, monitor) {
 	    return {
 	        connectDropTarget: connect.dropTarget(),
 	        isOver: monitor.isOver(),
@@ -19571,32 +19583,8 @@
 	    };
 	};
 
-	var sortableDropSpec = exports.sortableDropSpec = {
-	    hover: function hover(props, monitor, component) {
-	        var dragIndex = monitor.getItem().index;
-	        var hoverIndex = props.index;
-
-	        if (dragIndex === hoverIndex) {
-	            return;
-	        }
-
-	        var hoverBoundingRect = findDOMNode(component).getBoundingClientRect();
-	        var hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-	        var clientOffset = monitor.getClientOffset();
-	        var hoverClientY = clientOffset.y - hoverBoundingRect.top;
-
-	        if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-	            return;
-	        }
-
-	        if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-	            return;
-	        }
-
-	        props.moveCard(dragIndex, hoverIndex);
-	        monitor.getItem().index = hoverIndex;
-	    }
-	};
+	exports.defaultDragCollector = defaultDragCollector;
+	exports.defaultDropCollector = defaultDropCollector;
 
 /***/ },
 /* 238 */
@@ -19631,17 +19619,6 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var dragSpec = exports.dragSpec = {
-	    beginDrag: function beginDrag(_ref) {
-	        var attendeeId = _ref.attendee.attendeeId;
-	        var seat = _ref.seat;
-	        return {
-	            draggedAttendeeId: attendeeId,
-	            draggedOriginSeat: seat
-	        };
-	    }
-	};
-
 	var styles = {
 	    root: {
 	        base: {
@@ -19656,6 +19633,17 @@
 	        coxswain: {
 	            "backgroundColor": "#2A4458"
 	        }
+	    }
+	};
+
+	var dragSpec = exports.dragSpec = {
+	    beginDrag: function beginDrag(_ref) {
+	        var attendeeId = _ref.attendee.attendeeId;
+	        var seat = _ref.seat;
+	        return {
+	            draggedAttendeeId: attendeeId,
+	            draggedOriginSeat: seat
+	        };
 	    }
 	};
 
@@ -20852,10 +20840,10 @@
 	var BoatComponent = (0, _radium2.default)(_class = function (_Component) {
 	    _inherits(BoatComponent, _Component);
 
-	    function BoatComponent(props) {
+	    function BoatComponent() {
 	        _classCallCheck(this, BoatComponent);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(BoatComponent).call(this, props));
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(BoatComponent).apply(this, arguments));
 	    }
 
 	    _createClass(BoatComponent, [{
@@ -20949,12 +20937,26 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var attendeeAlreadyInBoat = function attendeeAlreadyInBoat(attendeeId, attendeeIdsInBoat) {
-	    return attendeeIdsInBoat.contains(attendeeId);
+	var styles = {
+	    root: {
+	        "height": "50px",
+	        "clear": "both"
+	    },
+	    label: {
+	        "float": "left",
+	        "height": "50px",
+	        "lineHeight": "50px",
+	        "whiteSpace": "nowrap",
+	        "marginLeft": "10px",
+	        "width": "30px"
+	    }
 	};
 
 	var dropSpec = {
-	    canDrop: function canDrop(props, monitor) {
+	    canDrop: function canDrop(_ref, monitor) {
+	        var attendeeIdsInBoat = _ref.attendeeIdsInBoat;
+	        var seat = _ref.seat;
+
 	        if (!monitor.getItem()) {
 	            return false;
 	        }
@@ -20963,14 +20965,18 @@
 
 	        var draggedOriginSeat = _monitor$getItem.draggedOriginSeat;
 	        var draggedAttendeeId = _monitor$getItem.draggedAttendeeId;
-	        var attendeeIdsInBoat = props.attendeeIdsInBoat;
 
-	        var targetBoatId = props.seat.boatId;
+	        var targetBoatId = seat.boatId;
 
 	        var sameBoat = draggedOriginSeat && draggedOriginSeat.boatId === targetBoatId;
-	        return !sameBoat && !attendeeAlreadyInBoat(draggedAttendeeId, attendeeIdsInBoat);
+	        var attendeeAlreadyInBoat = attendeeIdsInBoat.contains(draggedAttendeeId);
+	        return !sameBoat && !attendeeAlreadyInBoat;
 	    },
-	    drop: function drop(props, monitor) {
+	    drop: function drop(_ref2, monitor) {
+	        var placeAttendees = _ref2.placeAttendees;
+	        var seat = _ref2.seat;
+	        var attendee = _ref2.attendee;
+
 	        if (!monitor.getItem() || !monitor.canDrop()) {
 	            return;
 	        }
@@ -20979,14 +20985,13 @@
 
 	        var draggedAttendeeId = _monitor$getItem2.draggedAttendeeId;
 	        var draggedOriginSeat = _monitor$getItem2.draggedOriginSeat;
-	        var placeAttendees = props.placeAttendees;
 
 
-	        var attendeeInTargetSeat = Boolean(props.attendee);
+	        var attendeeInTargetSeat = Boolean(attendee);
 	        var droppedAttendeeWasAssigned = Boolean(draggedOriginSeat);
 
-	        var targetAttendeeId = attendeeInTargetSeat ? props.attendee.attendeeId : "";
-	        var targetSeat = props.seat;
+	        var targetAttendeeId = attendeeInTargetSeat ? attendee.attendeeId : "";
+	        var targetSeat = seat;
 
 	        var actionPayload = {
 	            assignments: [],
@@ -21028,21 +21033,6 @@
 	        }
 
 	        placeAttendees(actionPayload);
-	    }
-	};
-
-	var styles = {
-	    root: {
-	        "height": "50px",
-	        "clear": "both"
-	    },
-	    label: {
-	        "float": "left",
-	        "height": "50px",
-	        "lineHeight": "50px",
-	        "whiteSpace": "nowrap",
-	        "marginLeft": "10px",
-	        "width": "30px"
 	    }
 	};
 
@@ -37468,35 +37458,29 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var placeAttendees = function placeAttendees(prevState, action) {
-	    var _action$payload = action.payload;
-	    var assignments = _action$payload.assignments;
-	    var unassignments = _action$payload.unassignments;
+	var placeAttendees = function placeAttendees(prevState, _ref) {
+	    var _ref$payload = _ref.payload;
+	    var assignments = _ref$payload.assignments;
+	    var unassignments = _ref$payload.unassignments;
 
 	    var newBoats = prevState.boats;
 
-	    assignments.forEach(function (_ref) {
-	        var attendeeId = _ref.attendeeId;
-	        var seat = _ref.seat;
+	    assignments.forEach(function (_ref2) {
+	        var attendeeId = _ref2.attendeeId;
+	        var seat = _ref2.seat;
 
 	        var boat = newBoats.get(seat.boatId);
-
-	        if (boat) {
-	            var newBoat = boat.assignAttendee(attendeeId, seat.seatNumber);
-	            newBoats = newBoats.set(seat.boatId, newBoat);
-	        }
+	        var newBoat = boat.assignAttendee(attendeeId, seat.seatNumber);
+	        newBoats = newBoats.set(seat.boatId, newBoat);
 	    });
 
-	    unassignments.forEach(function (_ref2) {
-	        var boatId = _ref2.boatId;
-	        var seatNumber = _ref2.seatNumber;
+	    unassignments.forEach(function (_ref3) {
+	        var boatId = _ref3.boatId;
+	        var seatNumber = _ref3.seatNumber;
 
 	        var boat = newBoats.get(boatId);
-
-	        if (boat) {
-	            var newBoat = boat.unassignSeat(seatNumber);
-	            newBoats = newBoats.set(boatId, newBoat);
-	        }
+	        var newBoat = boat.unassignSeat(seatNumber);
+	        newBoats = newBoats.set(boatId, newBoat);
 	    });
 
 	    return _extends({}, prevState, {

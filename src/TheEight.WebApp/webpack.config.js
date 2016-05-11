@@ -1,11 +1,10 @@
-var path = require("path");
-var webpack = require("webpack");
+const path = require("path");
+const webpack = require("webpack");
 
 module.exports = {
     context: path.join(__dirname, "client/app"),
     entry: {
-        //server: "./server",
-        client: "./client"
+        client: "./main"
     },
     externals: {
         react: "React"

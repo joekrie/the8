@@ -142,7 +142,7 @@ const logger = store => next => action => {
 const store = createStore(reducer, { ...sampleState }, applyMiddleware(logger));
 
 @Radium
-class App extends Component {
+class Root extends Component {
     render() {
         return (
             <Provider store={store}>
@@ -155,5 +155,8 @@ class App extends Component {
     }
 }
 
-export const TestApp = DragDropContext(TestBackend)(App);
-export default DragDropContext(HTML5Backend)(App)
+const App = DragDropContext(HTML5Backend)(Root);
+const TestApp = DragDropContext(TestBackend)(Root);
+
+export { TestApp }
+export default App

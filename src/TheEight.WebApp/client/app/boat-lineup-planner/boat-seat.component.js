@@ -5,36 +5,46 @@ import { DropTarget } from "react-dnd";
 import Attendee from "./attendee.component";
 import { defaultDropCollector } from "../common/dnd-defaults";
 
-const attendeeAlreadyInBoat = (attendeeId, attendeeIdsInBoat) => 
-    attendeeIdsInBoat.contains(attendeeId);
+const styles = {
+    root: {
+        "height": "50px",
+        "clear": "both"
+    },
+    label: {
+        "float": "left",
+        "height": "50px",
+        "lineHeight": "50px",
+        "whiteSpace": "nowrap",
+        "marginLeft": "10px",
+        "width": "30px"
+    }
+};
 
 const dropSpec = {
-    canDrop: (props, monitor) => {
+    canDrop: ({ attendeeIdsInBoat, seat }, monitor) => {
         if (!monitor.getItem()) {
             return false;
         }
 
         const { draggedOriginSeat, draggedAttendeeId } = monitor.getItem();
-        const { attendeeIdsInBoat } = props;
-        const targetBoatId = props.seat.boatId;
+        const targetBoatId = seat.boatId;
 
         const sameBoat = draggedOriginSeat && draggedOriginSeat.boatId === targetBoatId;
-        return !sameBoat && !attendeeAlreadyInBoat(draggedAttendeeId, attendeeIdsInBoat);
+        const attendeeAlreadyInBoat = attendeeIdsInBoat.contains(draggedAttendeeId);
+        return !sameBoat && !attendeeAlreadyInBoat;
     },
-    drop: (props, monitor) => {
+    drop: ({ placeAttendees, seat, attendee }, monitor) => {
         if (!monitor.getItem() || !monitor.canDrop()) {
             return;
         }
 
         const { draggedAttendeeId, draggedOriginSeat } = monitor.getItem();
 
-        const { placeAttendees } = props;
-
-        const attendeeInTargetSeat = Boolean(props.attendee);
+        const attendeeInTargetSeat = Boolean(attendee);
         const droppedAttendeeWasAssigned = Boolean(draggedOriginSeat);
 
-        const targetAttendeeId = attendeeInTargetSeat ? props.attendee.attendeeId : "";
-        const targetSeat = props.seat;
+        const targetAttendeeId = attendeeInTargetSeat ? attendee.attendeeId : "";
+        const targetSeat = seat;
 
         const actionPayload = {
             assignments: [],
@@ -76,21 +86,6 @@ const dropSpec = {
         }
 
         placeAttendees(actionPayload);
-    }
-};
-
-const styles = {
-    root: {
-        "height": "50px",
-        "clear": "both"
-    },
-    label: {
-        "float": "left",
-        "height": "50px",
-        "lineHeight": "50px",
-        "whiteSpace": "nowrap",
-        "marginLeft": "10px",
-        "width": "30px"
     }
 };
 

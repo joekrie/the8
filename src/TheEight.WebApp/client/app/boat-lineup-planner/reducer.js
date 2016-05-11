@@ -11,7 +11,7 @@ const defaultState = {
 };
 
 const reducer = handleActions({
-    PLACE_ATTENDEES: placeAttendees,
+    PLACE_ATTENDEES: placeAttendees
 }, defaultState);
 
 export { defaultState }

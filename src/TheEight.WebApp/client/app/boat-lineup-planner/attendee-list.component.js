@@ -4,18 +4,6 @@ import { DropTarget } from "react-dnd";
 
 import { defaultDropCollector } from "../common/dnd-defaults";
 import AttendeeComponent from "./attendee.component";
-
-const dropSpec = {
-    drop: ({ placeAttendees }, monitor) => {
-        const dragItem = monitor.getItem();
-
-        if (!dragItem) {
-            return;
-        }
-
-        placeAttendees({});
-    }
-};
     
 const styles = {
     root: {
@@ -38,18 +26,37 @@ const styles = {
     }
 };
 
+const dropSpec = {
+    drop: ({ placeAttendees }, monitor) => {
+        const dragItem = monitor.getItem();
+
+        if (!dragItem) {
+            return;
+        }
+        
+        const { draggedOriginSeat } = monitor.getItem();
+
+        placeAttendees({
+            assignments: [],
+            unassignments: [
+                draggedOriginSeat
+            ]
+        });
+    }
+};
+
 @DropTarget("ATTENDEE", dropSpec, defaultDropCollector)
 @Radium
 class AttendeeListComponent extends Component {
     render() {
-        const { rowers, coxswains } = this.props;
+        const { rowers, coxswains, connectDropTarget } = this.props;
         const assignableAttendees = rowers.concat(coxswains);
 
         const attendeeComponents = assignableAttendees.map(attendee =>
             <AttendeeComponent key={attendee.attendeeId} attendee={attendee} />
         );
 
-        return (
+        return connectDropTarget(
             <div style={styles.root}>
                 <div style={styles.header}>
                     Unassigned

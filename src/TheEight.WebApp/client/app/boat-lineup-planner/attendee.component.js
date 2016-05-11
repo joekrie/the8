@@ -4,13 +4,6 @@ import { DragSource } from "react-dnd";
 
 import { defaultDragCollector } from "../common/dnd-defaults";
 
-export const dragSpec = {
-    beginDrag: ({ attendee: { attendeeId }, seat }) => ({
-        draggedAttendeeId: attendeeId,
-        draggedOriginSeat: seat
-    })
-};
-
 const styles = {
     root: {
         base: {
@@ -26,6 +19,13 @@ const styles = {
             "backgroundColor": "#2A4458"
         }
     }
+};
+
+export const dragSpec = {
+    beginDrag: ({ attendee: { attendeeId }, seat }) => ({
+        draggedAttendeeId: attendeeId,
+        draggedOriginSeat: seat
+    })
 };
 
 @DragSource("ATTENDEE", dragSpec, defaultDragCollector)
