@@ -1,9 +1,10 @@
 import { Record } from "immutable";
 
+import SeatRecord from "./seat.record";
+
 const PlacementRecord = Record({
-    isPlaced: false,
-    boatId: "",
-    seat: ""
+    attendeeId: "",
+    seat: SeatRecord()
 });
 
 export default PlacementRecord

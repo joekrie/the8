@@ -125,15 +125,15 @@
 
 	var _boat2 = _interopRequireDefault(_boat);
 
-	var _waterEvent = __webpack_require__(259);
+	var _waterEvent = __webpack_require__(260);
 
 	var _waterEvent2 = _interopRequireDefault(_waterEvent);
 
-	var _attendee = __webpack_require__(260);
+	var _attendee = __webpack_require__(261);
 
 	var _attendee2 = _interopRequireDefault(_attendee);
 
-	var _reducer = __webpack_require__(261);
+	var _reducer = __webpack_require__(262);
 
 	var _reducer2 = _interopRequireDefault(_reducer);
 
@@ -20855,21 +20855,83 @@
 	            var placeAttendees = _props.placeAttendees;
 
 
+	            var previewPlacement = function previewPlacement(_ref, targetSeat) {
+	                var draggedOriginSeat = _ref.draggedOriginSeat;
+	                var draggedAttendeeId = _ref.draggedAttendeeId;
+
+	                var isMoveWithinBoat = draggedOriginSeat && draggedOriginSeat.boatId === targetSeat.boatId;
+	                var isAttendeeAlreadyInBoat = attendees.map(function (attn) {
+	                    return attn.attendeeId;
+	                }).contains(draggedAttendeeId);
+	                var isSameSeat = isMoveWithinBoat && draggedOriginSeat.seatNumber === targetSeat.seatNumber;
+	                var isAllowed = !isSameSeat && (isMoveWithinBoat || !isAttendeeAlreadyInBoat);
+
+	                var actionPayload = {
+	                    allow: isAllowed,
+	                    assignments: [],
+	                    unassignments: []
+	                };
+
+	                if (!isAllowed) {
+	                    return actionPayload;
+	                }
+
+	                var attendeeInTargetSeat = boat.seatAssignments.get(targetSeat.seatNumber);
+	                var targetAttendeeId = attendeeInTargetSeat ? attendeeInTargetSeat.attendeeId : "";
+
+	                var assignTargetToDropped = function assignTargetToDropped() {
+	                    actionPayload.assignments.push({
+	                        attendeeId: targetAttendeeId,
+	                        seat: draggedOriginSeat
+	                    });
+	                };
+
+	                var assignDroppedToTarget = function assignDroppedToTarget() {
+	                    actionPayload.assignments.push({
+	                        attendeeId: draggedAttendeeId,
+	                        seat: targetSeat
+	                    });
+	                };
+
+	                var unassignTarget = function unassignTarget() {
+	                    actionPayload.unassignments.push(targetSeat);
+	                };
+
+	                var isTargetSeatOpen = boat.seatAssignments.has(targetSeat.seatNumber);console.log("isTargetSeatOpen: " + isTargetSeatOpen);
+	                var isSwapWithAssigned = draggedOriginSeat && !isTargetSeatOpen;console.log("isSwapWithAssigned: " + isSwapWithAssigned);
+	                var isSwapWithUnassigned = !draggedOriginSeat && !isTargetSeatOpen;console.log("isSwapWithUnassigned: " + isSwapWithUnassigned);
+	                var isMoveWithinBoatToOpenSeat = isMoveWithinBoat && isTargetSeatOpen;console.log("isMoveWithinBoatToOpenSeat: " + isMoveWithinBoatToOpenSeat);
+	                var isOutsideBoatToOpenSeat = !isMoveWithinBoat && isTargetSeatOpen;console.log("isOutsideBoatToOpenSeat: " + isOutsideBoatToOpenSeat);
+
+	                if (isSwapWithAssigned) {
+	                    assignTargetToDropped();
+	                    assignDroppedToTarget();
+	                }
+
+	                if (isSwapWithUnassigned || isMoveWithinBoatToOpenSeat) {
+	                    unassignTarget();
+	                    assignDroppedToTarget();
+	                }
+
+	                if (isOutsideBoatToOpenSeat) {
+	                    assignDroppedToTarget();
+	                }
+
+	                return actionPayload;
+	            };
+
 	            var attendeesBySeat = boat.seatAssignments.map(function (attendeeId) {
 	                return attendees.find(function (a) {
 	                    return a.attendeeId === attendeeId;
 	                });
 	            });
 
-	            var attendeeIdsInBoat = attendees.map(function (attn) {
-	                return attn.attendeeId;
-	            }).valueSeq();
-
 	            var createBoatSeat = function createBoatSeat(seat) {
-	                return React.createElement(_boatSeat2.default, { key: seat.seatNumber, seat: seat,
+	                return React.createElement(_boatSeat2.default, { key: seat.seatNumber,
+	                    seat: seat,
 	                    attendee: attendeesBySeat.get(seat.seatNumber),
 	                    placeAttendees: placeAttendees,
-	                    attendeeIdsInBoat: attendeeIdsInBoat });
+	                    previewPlacement: previewPlacement });
 	            };
 
 	            var boatSeats = boat.listSeats().map(createBoatSeat);
@@ -20954,85 +21016,29 @@
 
 	var dropSpec = {
 	    canDrop: function canDrop(_ref, monitor) {
-	        var attendeeIdsInBoat = _ref.attendeeIdsInBoat;
+	        var previewPlacement = _ref.previewPlacement;
 	        var seat = _ref.seat;
 
 	        if (!monitor.getItem()) {
 	            return false;
 	        }
 
-	        var _monitor$getItem = monitor.getItem();
-
-	        var draggedOriginSeat = _monitor$getItem.draggedOriginSeat;
-	        var draggedAttendeeId = _monitor$getItem.draggedAttendeeId;
-
-	        var targetBoatId = seat.boatId;
-
-	        var sameBoat = draggedOriginSeat && draggedOriginSeat.boatId === targetBoatId;
-	        var attendeeAlreadyInBoat = attendeeIdsInBoat.contains(draggedAttendeeId);
-	        return !sameBoat && !attendeeAlreadyInBoat;
+	        var draggedPlacement = monitor.getItem();
+	        var preview = previewPlacement(draggedPlacement, seat);
+	        return preview.allow;
 	    },
 	    drop: function drop(_ref2, monitor) {
+	        var previewPlacement = _ref2.previewPlacement;
 	        var placeAttendees = _ref2.placeAttendees;
 	        var seat = _ref2.seat;
 	        var attendee = _ref2.attendee;
 
-	        if (!monitor.getItem() || !monitor.canDrop()) {
-	            return;
+	        var draggedPlacement = monitor.getItem();
+
+	        if (draggedPlacement || monitor.canDrop()) {
+	            var preview = previewPlacement(draggedPlacement, seat);
+	            placeAttendees(preview);
 	        }
-
-	        var _monitor$getItem2 = monitor.getItem();
-
-	        var draggedAttendeeId = _monitor$getItem2.draggedAttendeeId;
-	        var draggedOriginSeat = _monitor$getItem2.draggedOriginSeat;
-
-
-	        var attendeeInTargetSeat = Boolean(attendee);
-	        var droppedAttendeeWasAssigned = Boolean(draggedOriginSeat);
-
-	        var targetAttendeeId = attendeeInTargetSeat ? attendee.attendeeId : "";
-	        var targetSeat = seat;
-
-	        var actionPayload = {
-	            assignments: [],
-	            unassignments: []
-	        };
-
-	        var assignTargetToDropped = function assignTargetToDropped() {
-	            actionPayload.assignments.push({
-	                attendeeId: targetAttendeeId,
-	                seat: draggedOriginSeat
-	            });
-	        };
-
-	        var assignDroppedToTarget = function assignDroppedToTarget() {
-	            actionPayload.assignments.push({
-	                attendeeId: draggedAttendeeId,
-	                seat: targetSeat
-	            });
-	        };
-
-	        var unassignTarget = function unassignTarget() {
-	            actionPayload.unassignments = {
-	                attendeeId: targetAttendeeId
-	            };
-	        };
-
-	        if (droppedAttendeeWasAssigned && attendeeInTargetSeat) {
-	            assignTargetToDropped();
-	            assignDroppedToTarget();
-	        }
-
-	        if (!droppedAttendeeWasAssigned && attendeeInTargetSeat) {
-	            unassignTarget();
-	            assignDroppedToTarget();
-	        }
-
-	        if (!attendeeInTargetSeat) {
-	            assignDroppedToTarget();
-	        }
-
-	        placeAttendees(actionPayload);
 	    }
 	};
 
@@ -21098,6 +21104,10 @@
 	var _seat = __webpack_require__(258);
 
 	var _seat2 = _interopRequireDefault(_seat);
+
+	var _boatInfo = __webpack_require__(259);
+
+	var _boatInfo2 = _interopRequireDefault(_boatInfo);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37381,6 +37391,27 @@
 
 	var _immutable = __webpack_require__(4);
 
+	var BoatInfoRecord = (0, _immutable.Record)({
+	    boatId: "",
+	    title: "",
+	    isCoxed: false,
+	    seatCount: 0
+	});
+
+	exports.default = BoatInfoRecord;
+
+/***/ },
+/* 260 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _immutable = __webpack_require__(4);
+
 	var WaterEventRecord = (0, _immutable.Record)({
 	    waterEventId: "",
 	    title: "",
@@ -37390,7 +37421,7 @@
 	exports.default = WaterEventRecord;
 
 /***/ },
-/* 260 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -37411,7 +37442,7 @@
 	exports.default = AttendeeRecord;
 
 /***/ },
-/* 261 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -37425,9 +37456,9 @@
 
 	var _immutable = __webpack_require__(4);
 
-	var _reducerFunctions = __webpack_require__(262);
+	var _reducerFunctions = __webpack_require__(263);
 
-	var _waterEvent = __webpack_require__(259);
+	var _waterEvent = __webpack_require__(260);
 
 	var _waterEvent2 = _interopRequireDefault(_waterEvent);
 
@@ -37447,7 +37478,7 @@
 	exports.default = reducer;
 
 /***/ },
-/* 262 */
+/* 263 */
 /***/ function(module, exports) {
 
 	"use strict";

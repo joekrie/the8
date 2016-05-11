@@ -21,71 +21,22 @@ const styles = {
 };
 
 const dropSpec = {
-    canDrop: ({ attendeeIdsInBoat, seat }, monitor) => {
+    canDrop: ({ previewPlacement, seat }, monitor) => {
         if (!monitor.getItem()) {
             return false;
         }
 
-        const { draggedOriginSeat, draggedAttendeeId } = monitor.getItem();
-        const targetBoatId = seat.boatId;
-
-        const sameBoat = draggedOriginSeat && draggedOriginSeat.boatId === targetBoatId;
-        const attendeeAlreadyInBoat = attendeeIdsInBoat.contains(draggedAttendeeId);
-        return !sameBoat && !attendeeAlreadyInBoat;
+        const draggedPlacement = monitor.getItem();
+        const preview = previewPlacement(draggedPlacement, seat);
+        return preview.allow;
     },
-    drop: ({ placeAttendees, seat, attendee }, monitor) => {
-        if (!monitor.getItem() || !monitor.canDrop()) {
-            return;
+    drop: ({ previewPlacement, placeAttendees, seat, attendee }, monitor) => {
+        const draggedPlacement = monitor.getItem();
+        
+        if (draggedPlacement || monitor.canDrop()) {
+            const preview = previewPlacement(draggedPlacement, seat);
+            placeAttendees(preview);
         }
-
-        const { draggedAttendeeId, draggedOriginSeat } = monitor.getItem();
-
-        const attendeeInTargetSeat = Boolean(attendee);
-        const droppedAttendeeWasAssigned = Boolean(draggedOriginSeat);
-
-        const targetAttendeeId = attendeeInTargetSeat ? attendee.attendeeId : "";
-        const targetSeat = seat;
-
-        const actionPayload = {
-            assignments: [],
-            unassignments: []
-        };
-
-        const assignTargetToDropped = () => {
-            actionPayload.assignments.push({
-                attendeeId: targetAttendeeId,
-                seat: draggedOriginSeat
-            });
-        };
-
-        const assignDroppedToTarget = () => {
-            actionPayload.assignments.push({
-                attendeeId: draggedAttendeeId,
-                seat: targetSeat
-            });
-        };
-
-        const unassignTarget = () => {
-            actionPayload.unassignments = {
-                attendeeId: targetAttendeeId
-            }
-        };
-
-        if (droppedAttendeeWasAssigned && attendeeInTargetSeat) {
-            assignTargetToDropped();
-            assignDroppedToTarget();
-        }
-
-        if (!droppedAttendeeWasAssigned && attendeeInTargetSeat) {
-            unassignTarget();
-            assignDroppedToTarget();
-        }
-
-        if (!attendeeInTargetSeat) {
-            assignDroppedToTarget();
-        }
-
-        placeAttendees(actionPayload);
     }
 };
 
