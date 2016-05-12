@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { List } from "immutable";
 import { bindActionCreators } from "redux";
 
-import AttendeeListComponent from "./attendee-list.component";
+import AttendeeList from "./attendee-list.component";
 import { placeAttendees } from "./action-creators";
 
 const attendeeIsAssignable = (attendee, boats, allowMultiple) => {
@@ -37,7 +37,7 @@ const mapDispatchToProps = dispatch =>
 const AttendeeListContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(AttendeeListComponent);
+)(AttendeeList);
 
 export { mapDispatchToProps, mapStateToProps, attendeeIsAssignable }
 export default AttendeeListContainer

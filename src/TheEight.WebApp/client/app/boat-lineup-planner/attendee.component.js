@@ -4,38 +4,33 @@ import { DragSource } from "react-dnd";
 
 import { defaultDragCollector } from "../common/dnd-defaults";
 
-const styles = {
-    root: {
-        base: {
-            "marginBottom": "10px",
-            "padding": "10px",
-            "color": "#F5F5F5",
-            "cursor": "grab"
-        },
-        rower: {
-            "backgroundColor": "#304F66"
-        },
-        coxswain: {
-            "backgroundColor": "#2A4458"
-        }
-    }
-};
-
 export const dragSpec = {
-    beginDrag: ({ attendee: { attendeeId }, seat }) => ({
-        draggedAttendeeId: attendeeId,
-        draggedOriginSeat: seat
-    })
+    beginDrag: ({ seat }) => ({ seat })
 };
 
 @DragSource("ATTENDEE", dragSpec, defaultDragCollector)
 @Radium
-class AttendeeComponent extends Component {
+class Attendee extends Component {
     render() {
         const { attendee, connectDragSource } = this.props;
+
+        const styles = {
+            base: {
+                "marginBottom": "10px",
+                "padding": "10px",
+                "color": "#F5F5F5",
+                "cursor": "grab"
+            },
+            rower: {
+                "backgroundColor": "#304F66"
+            },
+            coxswain: {
+                "backgroundColor": "#2A4458"
+            }
+        };
     
-        const rootStyles = [styles.root.base];
-        rootStyles.push(attendee.isCoxswain ? styles.root.coxswain : styles.root.rower);
+        const rootStyles = [styles.base];
+        rootStyles.push(attendee.isCoxswain ? styles.coxswain : styles.rower);
 
         return connectDragSource(
             <div style={rootStyles}>
@@ -45,4 +40,4 @@ class AttendeeComponent extends Component {
     }
 }
 
-export default AttendeeComponent
+export default Attendee

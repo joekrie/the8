@@ -20897,9 +20897,10 @@
 	                    actionPayload.unassignments.push(targetSeat);
 	                };
 
+	                var wasDraggedAssigned = Boolean(draggedOriginSeat);
 	                var isTargetSeatOpen = boat.seatAssignments.has(targetSeat.seatNumber);console.log("isTargetSeatOpen: " + isTargetSeatOpen);
-	                var isSwapWithAssigned = draggedOriginSeat && !isTargetSeatOpen;console.log("isSwapWithAssigned: " + isSwapWithAssigned);
-	                var isSwapWithUnassigned = !draggedOriginSeat && !isTargetSeatOpen;console.log("isSwapWithUnassigned: " + isSwapWithUnassigned);
+	                var isSwapWithAssigned = wasDraggedAssigned && !isTargetSeatOpen;console.log("isSwapWithAssigned: " + isSwapWithAssigned);
+	                var isSwapWithUnassigned = !wasDraggedAssigned && !isTargetSeatOpen;console.log("isSwapWithUnassigned: " + isSwapWithUnassigned);
 	                var isMoveWithinBoatToOpenSeat = isMoveWithinBoat && isTargetSeatOpen;console.log("isMoveWithinBoatToOpenSeat: " + isMoveWithinBoatToOpenSeat);
 	                var isOutsideBoatToOpenSeat = !isMoveWithinBoat && isTargetSeatOpen;console.log("isOutsideBoatToOpenSeat: " + isOutsideBoatToOpenSeat);
 

@@ -3,42 +3,50 @@ import { range } from "lodash";
 
 import SeatRecord from "./seat.record";
 import BoatInfoRecord from "./boat-info.record";
+import PlacementRecord from "./placement.record";
 
 const defaults = {
-    boatId: "",
-    title: "",
-    isCoxed: false,
-    seatCount: 0,
-    seatAssignments: Map()
+    boatInfo: BoatInfoRecord(),
+    assignedSeats: Map()
 };
 
 class BoatRecord extends Record(defaults) {
-    unassignSeat(seat) {
-        return this.set("seatAssignments", this.seatAssignments.delete(seat));
-    }
-
-    assignAttendee(attendeeId, seat) {
-        return this.set("seatAssignments", this.seatAssignments.set(seat, attendeeId));
-    }
-
     isAttendeeInBoat(attendeeId) {
-        return this.seatAssignments.contains(attendeeId);
+        return this.assignedSeats.contains(attendeeId);
     }
 
-    isSeatAssigned(seat) {
-        return this.seatAssignments.has(seat);
+    isSeatAssigned(seatNumber) {
+        return this.assignedSeats.has(seatNumber);
     }
 
-    listSeats() {
-        const seatNums = range(this.isCoxed ? 0 : 1, this.seatCount + 1);
+    get seats() {
+        const { isCoxed, seatCount, boatId } = this.boatInfo;
+        const seatNums = range(isCoxed ? 0 : 1, seatCount + 1);
 
         const seatRecs = seatNums.map(num =>
             new SeatRecord({
-                boatId: this.boatId,
+                boatId: boatId,
                 seatNumber: num
-            }));
+            })
+        );
         
         return List(seatRecs);
+    }
+
+    get placements() {
+        return this.assignedSeats.map((attendeeId, seatNumber) => {
+            const { boatId } = this.boatInfo;
+
+            const seat = SeatRecord({
+                boatId,
+                seatNumber
+            });
+
+            return PlacementRecord({
+                attendeeId,
+                seat
+            });
+        });
     }
 }
 

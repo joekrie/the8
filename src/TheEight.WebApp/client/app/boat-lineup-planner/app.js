@@ -7,7 +7,7 @@ import TestBackend from "react-dnd-test-backend";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 
-import AssignableAttendeeListContainer from "./attendee-list.container";
+import AttendeeListContainer from "./attendee-list.container";
 import BoatListContainer from "./boat-list.container";
 import BoatRecord from "./boat.record";
 import WaterEventRecord from "./water-event.record";
@@ -147,7 +147,7 @@ class Root extends Component {
         return (
             <Provider store={store}>
                 <div style={styles.root}>
-                    <AssignableAttendeeListContainer />
+                    <AttendeeListContainer />
                     <BoatListContainer />
                 </div>
             </Provider>

@@ -1,7 +1,7 @@
 import Radium from "radium";
 import { Component } from "react";
 
-import BoatComponent from "./boat.component";
+import Boat from "./boat.component";
 
 const styles = {
     root: {
@@ -12,7 +12,7 @@ const styles = {
 };
 
 @Radium
-class BoatListComponent extends Component {
+class BoatList extends Component {
     render() {
         const { boats, placeAttendees } = this.props;    
         
@@ -21,7 +21,7 @@ class BoatListComponent extends Component {
             const attendees = b.get("attendees");
 
             return (
-                <BoatComponent key={boat.boatId} boat={boat} attendees={attendees} 
+                <Boat key={boat.boatId} boat={boat} attendees={attendees} 
                     placeAttendees={placeAttendees} />
             );
         });
@@ -34,4 +34,4 @@ class BoatListComponent extends Component {
     }
 }
 
-export default BoatListComponent
+export default BoatList

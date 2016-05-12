@@ -5,21 +5,6 @@ import { DropTarget } from "react-dnd";
 import Attendee from "./attendee.component";
 import { defaultDropCollector } from "../common/dnd-defaults";
 
-const styles = {
-    root: {
-        "height": "50px",
-        "clear": "both"
-    },
-    label: {
-        "float": "left",
-        "height": "50px",
-        "lineHeight": "50px",
-        "whiteSpace": "nowrap",
-        "marginLeft": "10px",
-        "width": "30px"
-    }
-};
-
 const dropSpec = {
     canDrop: ({ previewPlacement, seat }, monitor) => {
         if (!monitor.getItem()) {
@@ -42,16 +27,28 @@ const dropSpec = {
 
 @DropTarget("ATTENDEE", dropSpec, defaultDropCollector)
 @Radium
-class BoatSeatComponent extends Component {
+class Seat extends Component {
     render() {
-        const { connectDropTarget, attendee, seat } = this.props;
-        let attendeeComponent = null;
-
-        if (attendee) {
-            attendeeComponent = <Attendee key={attendee.attendeeId} attendee={attendee} seat={seat} />;
-        }
-
-        const label = seat.seatNumber === 0 ? "COX" : seat.seatNumber;
+        const { connectDropTarget, attendee, seat: { seatInfo: { seatNumber }, isOccupied } } = this.props;
+        const attendeeComponent = isOccupied ? <Attendee attendee={attendee} seatInfo={seatInfo} /> : null;
+        
+        const coxswainLabel = "COX";
+        const label = seatNumber === 0 ? coxswainLabel : seatNumber;
+        
+        const styles = {
+            root: {
+                "height": "50px",
+                "clear": "both"
+            },
+            label: {
+                "float": "left",
+                "height": "50px",
+                "lineHeight": "50px",
+                "whiteSpace": "nowrap",
+                "marginLeft": "10px",
+                "width": "30px"
+            }
+        };
 
         return connectDropTarget(
             <div style={styles.root}>
@@ -65,4 +62,4 @@ class BoatSeatComponent extends Component {
 }
 
 export { dropSpec }
-export default BoatSeatComponent
+export default Seat

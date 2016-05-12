@@ -1,13 +1,15 @@
 import { Record } from "immutable";
 
+import SeatInfoRecord from "./seat-info.record";
+
 const defaults = {
-    boatId: "",
-    seatNumber: 0
+    attendeeId: "",
+    seat: SeatInfoRecord()
 };
 
 class SeatRecord extends Record(defaults) {
-    isCoxswainSeat() {
-        return this.seatNumber === 0;
+    get isOccupied() {
+        return Boolean(this.attendeeId);
     }
 }
 
