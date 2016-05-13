@@ -2,8 +2,8 @@ import { connect } from "react-redux";
 import { List } from "immutable";
 import { bindActionCreators } from "redux";
 
-import AttendeeList from "./attendee-list.component";
-import { placeAttendees } from "./action-creators";
+import AttendeeList from "../components/attendee-list";
+import { placeAttendees } from "../action-creators";
 
 const attendeeIsAssignable = (attendee, boats, allowMultiple) => {
     if (allowMultiple) {
@@ -31,13 +31,8 @@ const mapStateToProps = ({attendees, boats, eventSettings}) => {
     return { coxswains, rowers };
 };
 
-const mapDispatchToProps = dispatch => 
-    bindActionCreators({ placeAttendees }, dispatch);
-
-const AttendeeListContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(AttendeeList);
+const mapDispatchToProps = dispatch => bindActionCreators({ placeAttendees }, dispatch);
+const AttendeeListContainer = connect(mapStateToProps, mapDispatchToProps)(AttendeeList);
 
 export { mapDispatchToProps, mapStateToProps, attendeeIsAssignable }
 export default AttendeeListContainer

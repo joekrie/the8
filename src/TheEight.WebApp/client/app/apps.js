@@ -1,1 +1,1 @@
-﻿export BoatLineupPlannerApp from "./boat-lineup-planner/App";
+﻿export BoatLineupPlannerApp from "./boat-lineup-planner";

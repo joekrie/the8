@@ -1,0 +1,1 @@
+export BoatLineupPlannerApp from "./app"

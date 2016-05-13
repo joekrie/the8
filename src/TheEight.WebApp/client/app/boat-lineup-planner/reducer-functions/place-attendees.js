@@ -15,4 +15,4 @@ const placeAttendees = (prevState, { payload: { assignments, unassignments } }) 
     };
 };
 
-export { placeAttendees }
+export default placeAttendees;

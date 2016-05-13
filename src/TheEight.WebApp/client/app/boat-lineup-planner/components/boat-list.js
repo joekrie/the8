@@ -1,7 +1,7 @@
 import Radium from "radium";
 import { Component } from "react";
 
-import Boat from "./boat.component";
+import Boat from "./boat";
 
 const styles = {
     root: {

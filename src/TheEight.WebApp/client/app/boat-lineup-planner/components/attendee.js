@@ -2,7 +2,7 @@ import Radium from "radium";
 import { Component } from "react";
 import { DragSource } from "react-dnd";
 
-import { defaultDragCollector } from "../common/dnd-defaults";
+import { defaultDragCollector } from "../../common/dnd-defaults";
 
 export const dragSpec = {
     beginDrag: ({ seat }) => ({ seat })

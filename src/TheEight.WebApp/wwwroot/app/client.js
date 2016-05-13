@@ -121,19 +121,19 @@
 
 	var _boatList2 = _interopRequireDefault(_boatList);
 
-	var _boat = __webpack_require__(256);
+	var _boat = __webpack_require__(259);
 
 	var _boat2 = _interopRequireDefault(_boat);
 
-	var _waterEvent = __webpack_require__(260);
+	var _waterEvent = __webpack_require__(264);
 
 	var _waterEvent2 = _interopRequireDefault(_waterEvent);
 
-	var _attendee = __webpack_require__(261);
+	var _attendee = __webpack_require__(265);
 
 	var _attendee2 = _interopRequireDefault(_attendee);
 
-	var _reducer = __webpack_require__(262);
+	var _reducer = __webpack_require__(266);
 
 	var _reducer2 = _interopRequireDefault(_reducer);
 
@@ -19619,44 +19619,23 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var styles = {
-	    root: {
-	        base: {
-	            "marginBottom": "10px",
-	            "padding": "10px",
-	            "color": "#F5F5F5",
-	            "cursor": "grab"
-	        },
-	        rower: {
-	            "backgroundColor": "#304F66"
-	        },
-	        coxswain: {
-	            "backgroundColor": "#2A4458"
-	        }
-	    }
-	};
-
 	var dragSpec = exports.dragSpec = {
 	    beginDrag: function beginDrag(_ref) {
-	        var attendeeId = _ref.attendee.attendeeId;
 	        var seat = _ref.seat;
-	        return {
-	            draggedAttendeeId: attendeeId,
-	            draggedOriginSeat: seat
-	        };
+	        return { seat: seat };
 	    }
 	};
 
-	var AttendeeComponent = (_dec = (0, _reactDnd.DragSource)("ATTENDEE", dragSpec, _dndDefaults.defaultDragCollector), _dec(_class = (0, _radium2.default)(_class = function (_Component) {
-	    _inherits(AttendeeComponent, _Component);
+	var Attendee = (_dec = (0, _reactDnd.DragSource)("ATTENDEE", dragSpec, _dndDefaults.defaultDragCollector), _dec(_class = (0, _radium2.default)(_class = function (_Component) {
+	    _inherits(Attendee, _Component);
 
-	    function AttendeeComponent() {
-	        _classCallCheck(this, AttendeeComponent);
+	    function Attendee() {
+	        _classCallCheck(this, Attendee);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(AttendeeComponent).apply(this, arguments));
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Attendee).apply(this, arguments));
 	    }
 
-	    _createClass(AttendeeComponent, [{
+	    _createClass(Attendee, [{
 	        key: "render",
 	        value: function render() {
 	            var _props = this.props;
@@ -19664,8 +19643,23 @@
 	            var connectDragSource = _props.connectDragSource;
 
 
-	            var rootStyles = [styles.root.base];
-	            rootStyles.push(attendee.isCoxswain ? styles.root.coxswain : styles.root.rower);
+	            var styles = {
+	                base: {
+	                    "marginBottom": "10px",
+	                    "padding": "10px",
+	                    "color": "#F5F5F5",
+	                    "cursor": "grab"
+	                },
+	                rower: {
+	                    "backgroundColor": "#304F66"
+	                },
+	                coxswain: {
+	                    "backgroundColor": "#2A4458"
+	                }
+	            };
+
+	            var rootStyles = [styles.base];
+	            rootStyles.push(attendee.isCoxswain ? styles.coxswain : styles.rower);
 
 	            return connectDragSource(React.createElement(
 	                "div",
@@ -19675,9 +19669,9 @@
 	        }
 	    }]);
 
-	    return AttendeeComponent;
+	    return Attendee;
 	}(_react.Component)) || _class) || _class);
-	exports.default = AttendeeComponent;
+	exports.default = Attendee;
 
 /***/ },
 /* 239 */
@@ -20655,7 +20649,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.mapDispatchToProps = exports.mapStateToProps = undefined;
+	exports.mapStateToProps = undefined;
 
 	var _immutable = __webpack_require__(4);
 
@@ -20670,14 +20664,6 @@
 	var _actionCreators = __webpack_require__(239);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var styles = {
-	    root: {
-	        "marginTop": "0",
-	        "marginBottom": "0",
-	        "display": "flex"
-	    }
-	};
 
 	var mapStateToProps = function mapStateToProps(_ref) {
 	    var boats = _ref.boats;
@@ -20702,14 +20688,9 @@
 	    };
 	};
 
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	    return (0, _redux.bindActionCreators)({ placeAttendees: _actionCreators.placeAttendees }, dispatch);
-	};
-
-	var BoatListContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_boatList2.default);
+	var BoatListContainer = (0, _reactRedux.connect)(mapStateToProps)(_boatList2.default);
 
 	exports.mapStateToProps = mapStateToProps;
-	exports.mapDispatchToProps = mapDispatchToProps;
 	exports.default = BoatListContainer;
 
 /***/ },
@@ -20752,16 +20733,16 @@
 	    }
 	};
 
-	var BoatListComponent = (0, _radium2.default)(_class = function (_Component) {
-	    _inherits(BoatListComponent, _Component);
+	var BoatList = (0, _radium2.default)(_class = function (_Component) {
+	    _inherits(BoatList, _Component);
 
-	    function BoatListComponent() {
-	        _classCallCheck(this, BoatListComponent);
+	    function BoatList() {
+	        _classCallCheck(this, BoatList);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(BoatListComponent).apply(this, arguments));
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(BoatList).apply(this, arguments));
 	    }
 
-	    _createClass(BoatListComponent, [{
+	    _createClass(BoatList, [{
 	        key: "render",
 	        value: function render() {
 	            var _props = this.props;
@@ -20785,10 +20766,10 @@
 	        }
 	    }]);
 
-	    return BoatListComponent;
+	    return BoatList;
 	}(_react.Component)) || _class;
 
-	exports.default = BoatListComponent;
+	exports.default = BoatList;
 
 /***/ },
 /* 254 */
@@ -20810,9 +20791,13 @@
 
 	var _react = __webpack_require__(8);
 
-	var _boatSeat = __webpack_require__(255);
+	var _boatSeatList = __webpack_require__(255);
 
-	var _boatSeat2 = _interopRequireDefault(_boatSeat);
+	var _boatSeatList2 = _interopRequireDefault(_boatSeatList);
+
+	var _boatHeader = __webpack_require__(258);
+
+	var _boatHeader2 = _interopRequireDefault(_boatHeader);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20822,37 +20807,23 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var styles = {
-	    root: {
-	        "width": "300px",
-	        "backgroundColor": "#263751",
-	        "display": "inline-block",
-	        "marginRight": "20px",
-	        "color": "#F5F5F5"
-	    },
-	    header: {
-	        "backgroundColor": "#263F52",
-	        "marginBottom": "10px",
-	        "padding": "10px"
-	    }
-	};
+	var Boat = (0, _radium2.default)(_class = function (_Component) {
+	    _inherits(Boat, _Component);
 
-	var BoatComponent = (0, _radium2.default)(_class = function (_Component) {
-	    _inherits(BoatComponent, _Component);
+	    function Boat() {
+	        _classCallCheck(this, Boat);
 
-	    function BoatComponent() {
-	        _classCallCheck(this, BoatComponent);
-
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(BoatComponent).apply(this, arguments));
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Boat).apply(this, arguments));
 	    }
 
-	    _createClass(BoatComponent, [{
+	    _createClass(Boat, [{
 	        key: "render",
 	        value: function render() {
 	            var _props = this.props;
-	            var boat = _props.boat;
+	            var _props$boat = _props.boat;
+	            var boatInfo = _props$boat.boatInfo;
+	            var seats = _props$boat.seats;
 	            var attendees = _props.attendees;
-	            var placeAttendees = _props.placeAttendees;
 
 
 	            var previewPlacement = function previewPlacement(_ref, targetSeat) {
@@ -20921,50 +20892,130 @@
 	                return actionPayload;
 	            };
 
-	            var attendeesBySeat = boat.seatAssignments.map(function (attendeeId) {
-	                return attendees.find(function (a) {
-	                    return a.attendeeId === attendeeId;
-	                });
-	            });
-
-	            var createBoatSeat = function createBoatSeat(seat) {
-	                return React.createElement(_boatSeat2.default, { key: seat.seatNumber,
-	                    seat: seat,
-	                    attendee: attendeesBySeat.get(seat.seatNumber),
-	                    placeAttendees: placeAttendees,
-	                    previewPlacement: previewPlacement });
+	            var styles = {
+	                "width": "300px",
+	                "backgroundColor": "#263751",
+	                "display": "inline-block",
+	                "marginRight": "20px",
+	                "color": "#F5F5F5"
 	            };
-
-	            var boatSeats = boat.listSeats().map(createBoatSeat);
 
 	            return React.createElement(
 	                "div",
-	                { style: styles.root },
+	                { style: styles },
 	                React.createElement(
 	                    "div",
 	                    null,
-	                    React.createElement(
-	                        "div",
-	                        { style: styles.header },
-	                        boat.title
-	                    ),
-	                    React.createElement(
-	                        "div",
-	                        null,
-	                        boatSeats
-	                    )
+	                    React.createElement(_boatHeader2.default, { boatInfo: boatInfo }),
+	                    React.createElement(_boatSeatList2.default, { seats: seats, previewPlacement: previewPlacement })
 	                )
 	            );
 	        }
 	    }]);
 
-	    return BoatComponent;
+	    return Boat;
 	}(_react.Component)) || _class;
 
-	exports.default = BoatComponent;
+	exports.default = Boat;
 
 /***/ },
 /* 255 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _class;
+
+	var _radium = __webpack_require__(5);
+
+	var _radium2 = _interopRequireDefault(_radium);
+
+	var _react = __webpack_require__(8);
+
+	var _seat = __webpack_require__(256);
+
+	var _seat2 = _interopRequireDefault(_seat);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var BoatSeatList = (0, _radium2.default)(_class = function (_Component) {
+	    _inherits(BoatSeatList, _Component);
+
+	    function BoatSeatList() {
+	        _classCallCheck(this, BoatSeatList);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(BoatSeatList).apply(this, arguments));
+	    }
+
+	    _createClass(BoatSeatList, [{
+	        key: "render",
+	        value: function render() {
+	            var _props = this.props;
+	            var seats = _props.seats;
+	            var previewPlacement = _props.previewPlacement;
+
+
+	            var boatSeats = seats.map(function (seat) {
+	                return React.createElement(_seat2.default, { key: seat.seatNumber, seat: seat,
+	                    previewPlacement: previewPlacement });
+	            });
+
+	            return React.createElement(
+	                "div",
+	                null,
+	                boatSeats
+	            );
+	        }
+	    }]);
+
+	    return BoatSeatList;
+	}(_react.Component)) || _class;
+
+	exports.default = BoatSeatList;
+
+/***/ },
+/* 256 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _reactRedux = __webpack_require__(220);
+
+	var _redux = __webpack_require__(227);
+
+	var _seat = __webpack_require__(257);
+
+	var _seat2 = _interopRequireDefault(_seat);
+
+	var _actionCreators = __webpack_require__(239);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return (0, _redux.bindActionCreators)({ placeAttendees: _actionCreators.placeAttendees }, dispatch);
+	};
+	var SeatContainer = (0, _reactRedux.connect)(null, mapDispatchToProps)(_seat2.default);
+
+	exports.default = SeatContainer;
+
+/***/ },
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21000,21 +21051,6 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var styles = {
-	    root: {
-	        "height": "50px",
-	        "clear": "both"
-	    },
-	    label: {
-	        "float": "left",
-	        "height": "50px",
-	        "lineHeight": "50px",
-	        "whiteSpace": "nowrap",
-	        "marginLeft": "10px",
-	        "width": "30px"
-	    }
-	};
-
 	var dropSpec = {
 	    canDrop: function canDrop(_ref, monitor) {
 	        var previewPlacement = _ref.previewPlacement;
@@ -21043,30 +21079,44 @@
 	    }
 	};
 
-	var BoatSeatComponent = (_dec = (0, _reactDnd.DropTarget)("ATTENDEE", dropSpec, _dndDefaults.defaultDropCollector), _dec(_class = (0, _radium2.default)(_class = function (_Component) {
-	    _inherits(BoatSeatComponent, _Component);
+	var Seat = (_dec = (0, _reactDnd.DropTarget)("ATTENDEE", dropSpec, _dndDefaults.defaultDropCollector), _dec(_class = (0, _radium2.default)(_class = function (_Component) {
+	    _inherits(Seat, _Component);
 
-	    function BoatSeatComponent() {
-	        _classCallCheck(this, BoatSeatComponent);
+	    function Seat() {
+	        _classCallCheck(this, Seat);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(BoatSeatComponent).apply(this, arguments));
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Seat).apply(this, arguments));
 	    }
 
-	    _createClass(BoatSeatComponent, [{
+	    _createClass(Seat, [{
 	        key: "render",
 	        value: function render() {
 	            var _props = this.props;
 	            var connectDropTarget = _props.connectDropTarget;
 	            var attendee = _props.attendee;
-	            var seat = _props.seat;
+	            var _props$seat = _props.seat;
+	            var seatNumber = _props$seat.seatInfo.seatNumber;
+	            var isOccupied = _props$seat.isOccupied;
 
-	            var attendeeComponent = null;
+	            var attendeeComponent = isOccupied ? React.createElement(_attendee2.default, { attendee: attendee, seatInfo: seatInfo }) : null;
 
-	            if (attendee) {
-	                attendeeComponent = React.createElement(_attendee2.default, { key: attendee.attendeeId, attendee: attendee, seat: seat });
-	            }
+	            var coxswainLabel = "COX";
+	            var label = seatNumber === 0 ? coxswainLabel : seatNumber;
 
-	            var label = seat.seatNumber === 0 ? "COX" : seat.seatNumber;
+	            var styles = {
+	                root: {
+	                    "height": "50px",
+	                    "clear": "both"
+	                },
+	                label: {
+	                    "float": "left",
+	                    "height": "50px",
+	                    "lineHeight": "50px",
+	                    "whiteSpace": "nowrap",
+	                    "marginLeft": "10px",
+	                    "width": "30px"
+	                }
+	            };
 
 	            return connectDropTarget(React.createElement(
 	                "div",
@@ -21081,13 +21131,75 @@
 	        }
 	    }]);
 
-	    return BoatSeatComponent;
+	    return Seat;
 	}(_react.Component)) || _class) || _class);
 	exports.dropSpec = dropSpec;
-	exports.default = BoatSeatComponent;
+	exports.default = Seat;
 
 /***/ },
-/* 256 */
+/* 258 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _class;
+
+	var _radium = __webpack_require__(5);
+
+	var _radium2 = _interopRequireDefault(_radium);
+
+	var _react = __webpack_require__(8);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var styles = {
+	    "backgroundColor": "#263F52",
+	    "marginBottom": "10px",
+	    "padding": "10px"
+	};
+
+	var BoatHeader = (0, _radium2.default)(_class = function (_Component) {
+	    _inherits(BoatHeader, _Component);
+
+	    function BoatHeader() {
+	        _classCallCheck(this, BoatHeader);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(BoatHeader).apply(this, arguments));
+	    }
+
+	    _createClass(BoatHeader, [{
+	        key: "render",
+	        value: function render() {
+	            var boatInfo = this.props.boatInfo;
+
+
+	            return React.createElement(
+	                "div",
+	                { style: styles },
+	                boatInfo.title
+	            );
+	        }
+	    }]);
+
+	    return BoatHeader;
+	}(_react.Component)) || _class;
+
+	exports.default = BoatHeader;
+
+/***/ },
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21100,15 +21212,19 @@
 
 	var _immutable = __webpack_require__(4);
 
-	var _lodash = __webpack_require__(257);
+	var _lodash = __webpack_require__(260);
 
-	var _seat = __webpack_require__(258);
+	var _seat = __webpack_require__(261);
 
 	var _seat2 = _interopRequireDefault(_seat);
 
-	var _boatInfo = __webpack_require__(259);
+	var _boatInfo2 = __webpack_require__(263);
 
-	var _boatInfo2 = _interopRequireDefault(_boatInfo);
+	var _boatInfo3 = _interopRequireDefault(_boatInfo2);
+
+	var _seatInfo = __webpack_require__(262);
+
+	var _seatInfo2 = _interopRequireDefault(_seatInfo);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21119,11 +21235,8 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var defaults = {
-	    boatId: "",
-	    title: "",
-	    isCoxed: false,
-	    seatCount: 0,
-	    seatAssignments: (0, _immutable.Map)()
+	    boatInfo: (0, _boatInfo3.default)(),
+	    assignedSeats: (0, _immutable.Map)()
 	};
 
 	var BoatRecord = function (_Record) {
@@ -21136,40 +21249,53 @@
 	    }
 
 	    _createClass(BoatRecord, [{
-	        key: "unassignSeat",
-	        value: function unassignSeat(seat) {
-	            return this.set("seatAssignments", this.seatAssignments.delete(seat));
-	        }
-	    }, {
-	        key: "assignAttendee",
-	        value: function assignAttendee(attendeeId, seat) {
-	            return this.set("seatAssignments", this.seatAssignments.set(seat, attendeeId));
-	        }
-	    }, {
 	        key: "isAttendeeInBoat",
 	        value: function isAttendeeInBoat(attendeeId) {
-	            return this.seatAssignments.contains(attendeeId);
+	            return this.assignedSeats.contains(attendeeId);
 	        }
 	    }, {
 	        key: "isSeatAssigned",
-	        value: function isSeatAssigned(seat) {
-	            return this.seatAssignments.has(seat);
+	        value: function isSeatAssigned(seatNumber) {
+	            return this.assignedSeats.has(seatNumber);
 	        }
 	    }, {
-	        key: "listSeats",
-	        value: function listSeats() {
-	            var _this2 = this;
+	        key: "seatInfo",
+	        get: function get() {
+	            var _boatInfo = this.boatInfo;
+	            var isCoxed = _boatInfo.isCoxed;
+	            var seatCount = _boatInfo.seatCount;
+	            var boatId = _boatInfo.boatId;
 
-	            var seatNums = (0, _lodash.range)(this.isCoxed ? 0 : 1, this.seatCount + 1);
+	            var seatNums = (0, _lodash.range)(isCoxed ? 0 : 1, seatCount + 1);
 
 	            var seatRecs = seatNums.map(function (num) {
-	                return new _seat2.default({
-	                    boatId: _this2.boatId,
+	                return new _seatInfo2.default({
+	                    boatId: boatId,
 	                    seatNumber: num
 	                });
 	            });
 
 	            return (0, _immutable.List)(seatRecs);
+	        }
+	    }, {
+	        key: "seats",
+	        get: function get() {
+	            var _this2 = this;
+
+	            return this.assignedSeats.map(function (attendeeId, seatNumber) {
+	                var boatId = _this2.boatInfo.boatId;
+
+
+	                var seatInfo = (0, _seatInfo2.default)({
+	                    boatId: boatId,
+	                    seatNumber: seatNumber
+	                });
+
+	                return (0, _seat2.default)({
+	                    attendeeId: attendeeId,
+	                    seatInfo: seatInfo
+	                });
+	            });
 	        }
 	    }]);
 
@@ -21179,7 +21305,7 @@
 	exports.default = BoatRecord;
 
 /***/ },
-/* 257 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/**
@@ -37335,7 +37461,59 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(86)(module), (function() { return this; }())))
 
 /***/ },
-/* 258 */
+/* 261 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _immutable = __webpack_require__(4);
+
+	var _seatInfo = __webpack_require__(262);
+
+	var _seatInfo2 = _interopRequireDefault(_seatInfo);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var defaults = {
+	    attendeeId: "",
+	    seat: (0, _seatInfo2.default)()
+	};
+
+	var SeatRecord = function (_Record) {
+	    _inherits(SeatRecord, _Record);
+
+	    function SeatRecord() {
+	        _classCallCheck(this, SeatRecord);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(SeatRecord).apply(this, arguments));
+	    }
+
+	    _createClass(SeatRecord, [{
+	        key: "isOccupied",
+	        get: function get() {
+	            return Boolean(this.attendeeId);
+	        }
+	    }]);
+
+	    return SeatRecord;
+	}((0, _immutable.Record)(defaults));
+
+	exports.default = SeatRecord;
+
+/***/ },
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -37359,29 +37537,29 @@
 	    seatNumber: 0
 	};
 
-	var SeatRecord = function (_Record) {
-	    _inherits(SeatRecord, _Record);
+	var SeatInfoRecord = function (_Record) {
+	    _inherits(SeatInfoRecord, _Record);
 
-	    function SeatRecord() {
-	        _classCallCheck(this, SeatRecord);
+	    function SeatInfoRecord() {
+	        _classCallCheck(this, SeatInfoRecord);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(SeatRecord).apply(this, arguments));
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(SeatInfoRecord).apply(this, arguments));
 	    }
 
-	    _createClass(SeatRecord, [{
+	    _createClass(SeatInfoRecord, [{
 	        key: "isCoxswainSeat",
 	        value: function isCoxswainSeat() {
 	            return this.seatNumber === 0;
 	        }
 	    }]);
 
-	    return SeatRecord;
+	    return SeatInfoRecord;
 	}((0, _immutable.Record)(defaults));
 
-	exports.default = SeatRecord;
+	exports.default = SeatInfoRecord;
 
 /***/ },
-/* 259 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -37402,7 +37580,7 @@
 	exports.default = BoatInfoRecord;
 
 /***/ },
-/* 260 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -37422,7 +37600,7 @@
 	exports.default = WaterEventRecord;
 
 /***/ },
-/* 261 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -37443,7 +37621,7 @@
 	exports.default = AttendeeRecord;
 
 /***/ },
-/* 262 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -37457,9 +37635,9 @@
 
 	var _immutable = __webpack_require__(4);
 
-	var _reducerFunctions = __webpack_require__(263);
+	var _reducerFunctions = __webpack_require__(267);
 
-	var _waterEvent = __webpack_require__(260);
+	var _waterEvent = __webpack_require__(264);
 
 	var _waterEvent2 = _interopRequireDefault(_waterEvent);
 
@@ -37479,7 +37657,7 @@
 	exports.default = reducer;
 
 /***/ },
-/* 263 */
+/* 267 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -37495,28 +37673,26 @@
 	    var assignments = _ref$payload.assignments;
 	    var unassignments = _ref$payload.unassignments;
 
-	    var newBoats = prevState.boats;
+	    var boats = prevState.boats.withMutations(function (mutable) {
+	        assignments.forEach(function (_ref2) {
+	            var attendeeId = _ref2.attendeeId;
+	            var _ref2$seat = _ref2.seat;
+	            var boatId = _ref2$seat.boatId;
+	            var seatNumber = _ref2$seat.seatNumber;
 
-	    assignments.forEach(function (_ref2) {
-	        var attendeeId = _ref2.attendeeId;
-	        var seat = _ref2.seat;
+	            mutable.set([boatId, "assignedSeats", seatNumber], attendeeId);
+	        });
 
-	        var boat = newBoats.get(seat.boatId);
-	        var newBoat = boat.assignAttendee(attendeeId, seat.seatNumber);
-	        newBoats = newBoats.set(seat.boatId, newBoat);
-	    });
+	        unassignments.forEach(function (_ref3) {
+	            var boatId = _ref3.boatId;
+	            var seatNumber = _ref3.seatNumber;
 
-	    unassignments.forEach(function (_ref3) {
-	        var boatId = _ref3.boatId;
-	        var seatNumber = _ref3.seatNumber;
-
-	        var boat = newBoats.get(boatId);
-	        var newBoat = boat.unassignSeat(seatNumber);
-	        newBoats = newBoats.set(boatId, newBoat);
+	            mutable.delete([boatId, "assignedSeats", seatNumber]);
+	        });
 	    });
 
 	    return _extends({}, prevState, {
-	        boats: newBoats
+	        boats: boats
 	    });
 	};
 

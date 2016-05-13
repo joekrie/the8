@@ -1,8 +1,9 @@
-import { placeAttendees } from "../reducerFunctions";
 import { Map, List } from "immutable";
-import BoatRecord from "../records/BoatRecord";
-import SeatRecord from "../records/SeatRecord";
-import AttendeeRecord from "../records/AttendeeRecord";
+
+import { placeAttendees } from "../reducer-functions";
+import BoatRecord from "../boat.record";
+import SeatRecord from "../seat.record";
+import SeatInfoRecord from "../seat-info.record";
 
 describe("Boat lineup planner reducer functions", () => {
     describe("unassignAttendee", () => {
@@ -10,7 +11,7 @@ describe("Boat lineup planner reducer functions", () => {
             const prevState = {
                 boats: Map({
                     "boat-1": new BoatRecord({
-                        seatAssignments: Map([
+                        assignedSeats: Map([
                             [1, "rower-1"]
                         ])
                     })
@@ -21,7 +22,7 @@ describe("Boat lineup planner reducer functions", () => {
                 payload: {
                     assignments: [],
                     unassignments: [
-                        new SeatRecord({
+                        new SeatInfoRecord({
                             boatId: "boat-1",
                             seatNumber: 1
                         })
@@ -38,7 +39,7 @@ describe("Boat lineup planner reducer functions", () => {
             const prevState = {
                 boats: Map({
                     "boat-1": new BoatRecord({
-                        seatAssignments: Map([
+                        assignedSeats: Map([
                             [1, "rower-1"]
                         ])
                     })
@@ -49,7 +50,7 @@ describe("Boat lineup planner reducer functions", () => {
                 payload: {
                     assignments: [],
                     unassignments: [
-                        new SeatRecord({
+                        new SeatInfoRecord({
                             boatId: "boat-1",
                             seatNumber: 1
                         })
@@ -65,7 +66,7 @@ describe("Boat lineup planner reducer functions", () => {
             const prevState = {
                 boats: Map({
                     "boat-1": new BoatRecord({
-                        seatAssignments: Map([
+                        assignedSeats: Map([
                             [1, "rower-1"]
                         ])
                     })
@@ -76,7 +77,7 @@ describe("Boat lineup planner reducer functions", () => {
                 payload: {
                     assignments: [],
                     unassignments: [
-                        new SeatRecord({
+                        new SeatInfoRecord({
                             boatId: "boat-2",
                             seatNumber: 1
                         })
@@ -92,7 +93,7 @@ describe("Boat lineup planner reducer functions", () => {
             const prevState = {
                 boats: Map({
                     "boat-1": new BoatRecord({
-                        seatAssignments: Map()
+                        assignedSeats: Map()
                     })
                 })
             };
@@ -100,13 +101,13 @@ describe("Boat lineup planner reducer functions", () => {
             const action = {
                 payload: {
                     assignments: [
-                        {
+                        new SeatRecord({
                             attendeeId: "rower-1",
-                            seat: new SeatRecord({
+                            seatInfo: new SeatInfoRecord({
                                 boatId: "boat-1",
                                 seatNumber: 1
                             })
-                        }
+                        })
                     ],
                     unassignments: []
                 }
@@ -122,7 +123,7 @@ describe("Boat lineup planner reducer functions", () => {
             const prevState = {
                 boats: Map({
                     "boat-1": new BoatRecord({
-                        seatAssignments: Map([
+                        assignedSeats: Map([
                             [1, "rower-1"]
                         ])
                     })
@@ -132,13 +133,13 @@ describe("Boat lineup planner reducer functions", () => {
             const action = {
                 payload: {
                     assignments: [
-                        {
+                        new SeatRecord({
                             attendeeId: "rower-2",
-                            seat: new SeatRecord({
+                            seatInfo: new SeatInfoRecord({
                                 boatId: "boat-1",
                                 seatNumber: 1
                             })
-                        }
+                        })
                     ],
                     unassignments: []
                 }
@@ -156,7 +157,7 @@ describe("Boat lineup planner reducer functions", () => {
             const prevState = {
                 boats: Map({
                     "boat-1": new BoatRecord({
-                        seatAssignments: Map([
+                        assignedSeats: Map([
                             [1, "rower-1"],
                             [2, "rower-2"]
                         ])
@@ -167,20 +168,20 @@ describe("Boat lineup planner reducer functions", () => {
             const action = {
                 payload: {
                     assignments: [
-                        {
+                        new SeatRecord({
                             attendeeId: "rower-2",
-                            seat: new SeatRecord({
+                            seatInfo: new SeatInfoRecord({
                                 boatId: "boat-1",
                                 seatNumber: 1
                             })
-                        },
-                        {
+                        }),
+                        new SeatRecord({
                             attendeeId: "rower-1",
-                            seat: new SeatRecord({
+                            seatInfo: new SeatInfoRecord({
                                 boatId: "boat-1",
                                 seatNumber: 2
                             })
-                        }
+                        })
                     ],
                     unassignments: []
                 }
@@ -198,12 +199,12 @@ describe("Boat lineup planner reducer functions", () => {
             const prevState = {
                 boats: Map({
                     "boat-1": new BoatRecord({
-                        seatAssignments: Map([
+                        assignedSeats: Map([
                             [1, "rower-1"]
                         ])
                     }),
                     "boat-2": new BoatRecord({
-                        seatAssignments: Map([
+                        assignedSeats: Map([
                             [1, "rower-2"]
                         ])
                     })
@@ -213,20 +214,20 @@ describe("Boat lineup planner reducer functions", () => {
             const action = {
                 payload: {
                     assignments: [
-                        {
+                        new SeatRecord({
                             attendeeId: "rower-2",
-                            seat: new SeatRecord({
+                            seatInfo: new SeatInfoRecord({
                                 boatId: "boat-1",
                                 seatNumber: 1
                             })
-                        },
-                        {
+                        }),
+                        new SeatRecord({
                             attendeeId: "rower-1",
-                            seat: new SeatRecord({
+                            seatInfo: new SeatInfoRecord({
                                 boatId: "boat-1",
                                 seatNumber: 2
                             })
-                        }
+                        })
                     ],
                     unassignments: []
                 }
@@ -239,39 +240,5 @@ describe("Boat lineup planner reducer functions", () => {
             const assignedAttendee = newBoat.seatAssignments.get(1);
             expect(assignedAttendee).toBe("rower-2");
         });
-    });
-
-    it("keeps attendees property when changing boats", () => {
-        const prevState = {
-            attendees: List([
-                new AttendeeRecord({
-                    attendeeId: "rower-1"
-                })
-            ]),
-            boats: Map({
-                "boat-1": new BoatRecord({
-                    seatAssignments: Map()
-                })
-            })
-        };
-
-        const action = {
-            payload: {
-                assignments: [
-                    {
-                        attendeeId: "rower-1",
-                        seat: new SeatRecord({
-                            boatId: "boat-1",
-                            seatNumber: 1
-                        })
-                    }
-                ],
-                unassignments: []
-            }
-        };
-
-        const newState = placeAttendees(prevState, action);
-        const attendee = newState.attendees.first();
-        expect(attendee.attendeeId).toBe("rower-1");
     });
 });
