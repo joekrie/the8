@@ -1,8 +1,8 @@
 import { List, Map } from "immutable";
 
-import AttendeeRecord from "./records/attendee";
-import BoatRecord from "./records/boat";
-import EventInfoRecord from "./records/event-info";
+import AttendeeRecord from "./models/attendee";
+import BoatRecord from "./models/boat";
+import EventInfoRecord from "./models/event-info";
 
 const sampleState = {
   eventSettings: new EventInfoRecord({

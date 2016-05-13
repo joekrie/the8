@@ -3,14 +3,14 @@ import { Component } from "react";
 
 @Radium
 class BoatHeader extends Component {
-  render() {      
+  render() {
+    const { boatInfo: { title } } = this.props;
+    
     const styles = {
       "backgroundColor": "#263F52",
       "marginBottom": "10px",
       "padding": "10px"
     };
-
-    const { boatInfo: { title } } = this.props;
 
     return (
       <div style={styles}>

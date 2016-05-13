@@ -5,19 +5,17 @@ import Seat from "../components/seat";
 import { placeAttendees } from "../action-creators";
 
 const mapStateToProps = ({ attendees }) => ({ attendees });
-const mapDispatchToProps = dispatch => bindActionCreators({ placeAttendees }, dispatch);
 
-const mergeProps = ({ attendees }, { placeAttendees }, { seat, previewPlacement }) => {
+const mergeProps = ({ attendees }, {}, { seat, previewPlacement }) => {
   const attendee = attendees.find(attendee => attendee.atendeeId === seat.atendeeId);
   
   return {
     attendee,
     seat,
-    placeAttendees,
     previewPlacement
   };
 };
 
-const SeatContainer = connect(mapStateToProps, mapDispatchToProps, mergeProps)(Seat);
+const SeatContainer = connect(mapStateToProps, null, mergeProps)(Seat);
 
 export default SeatContainer

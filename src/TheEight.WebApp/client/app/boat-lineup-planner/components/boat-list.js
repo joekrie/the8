@@ -3,35 +3,26 @@ import { Component } from "react";
 
 import Boat from "./boat";
 
-const styles = {
-    root: {
-        "marginTop": "0",
-        "marginBottom": "0",
-        "display": "flex"
-    }
-};
-
 @Radium
 class BoatList extends Component {
-    render() {
-        const { boats, placeAttendees } = this.props;    
-        
-        const boatComponents = boats.map(b => {
-            const boat = b.get("boat");
-            const attendees = b.get("attendees");
+  render() {
+    const { boats } = this.props;    
+    
+    const boatComponents = boats.map(boat => 
+      <Boat key={boat.boatId} boat={boat} />);
 
-            return (
-                <Boat key={boat.boatId} boat={boat} attendees={attendees} 
-                    placeAttendees={placeAttendees} />
-            );
-        });
+    const styles = {
+      "marginTop": "0",
+      "marginBottom": "0",
+      "display": "flex"
+    };
 
-        return (
-            <div style={styles.root}>
-			    {boatComponents}
-		    </div>
-        );
-    }
+    return (
+      <div style={styles}>
+        {boatComponents}
+      </div>
+    );
+  }
 }
 
 export default BoatList

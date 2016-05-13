@@ -3,7 +3,7 @@ import { Component } from "react"
 
 import BoatSeatList from "./boat-seat-list";
 import BoatHeader from "./boat-header";
-import SeatRecord from "../records/seat";
+import SeatRecord from "../models/seat";
 
 @Radium
 class Boat extends Component {
@@ -16,11 +16,7 @@ class Boat extends Component {
     const isSameSeat = originSeat.seatInfo.equals(targetSeatInfo);
     const isAllowed = !isSameSeat && (isMoveWithinBoat || !isAttendeeAlreadyInBoat);
 
-    const actionPayload = {
-      allow: isAllowed,
-      assignments: [],
-      unassignments: []
-    };
+    const actionPayload = new PlaceAttendeesPayloadRecord({ isAllowed });
     
     if (!isAllowed) {
       return actionPayload;

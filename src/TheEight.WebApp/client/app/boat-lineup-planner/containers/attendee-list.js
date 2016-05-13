@@ -3,35 +3,25 @@ import { List } from "immutable";
 import { bindActionCreators } from "redux";
 
 import AttendeeList from "../components/attendee-list";
-import { placeAttendees } from "../action-creators";
+import { unassignAttendeeInSeat } from "../action-creators";
+import AttendeeListItemRecord from "../models/attendee-list-item";
 
-const attendeeIsAssignable = (attendee, boats, allowMultiple) => {
-    if (allowMultiple) {
-        return true;
-    }
-
-    const assigned = boats.map(b => b.seatAssignments.valueSeq()).flatten();
-    const attendeeId = attendee.attendeeId;
-    return !assigned.contains(attendeeId);
+const mapStateToProps = ({attendees, boats }) => {
+  const assignedAttendeeIds = boats.map(boat => boat.assignedSeats.valueSeq()).flatten();
+  
+  const listItems = attendees.map(attendee => 
+    new AttendeeListItemRecord({
+      attendee,
+      isAssigned: assignedAttendeeIds.contains(attendee.attendeeId)
+    })
+  );
+  
+  return {
+    attendees: listItems
+  };
 };
 
-const mapStateToProps = ({attendees, boats, eventSettings}) => {
-    const assignableAttendees = attendees
-        .filter(a => attendeeIsAssignable(a, boats, eventSettings.allowMultipleAttendeeAssignments))
-        .groupBy(a => a.isCoxswain ? "coxswains" : "rowers");
-
-    const rowers = assignableAttendees.has("rowers")
-        ? assignableAttendees.get("rowers").sortBy(a => a.sortName)
-        : List();
-    
-    const coxswains = assignableAttendees.has("coxswains")
-        ? assignableAttendees.get("coxswains").sortBy(a => a.sortName)
-        : List();
-
-    return { coxswains, rowers };
-};
-
-const mapDispatchToProps = dispatch => bindActionCreators({ placeAttendees }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ unassignAttendeeInSeat }, dispatch);
 const AttendeeListContainer = connect(mapStateToProps, mapDispatchToProps)(AttendeeList);
 
 export { mapDispatchToProps, mapStateToProps, attendeeIsAssignable }

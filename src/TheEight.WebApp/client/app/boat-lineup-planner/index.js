@@ -1,1 +1,1 @@
-export BoatLineupPlannerApp from "./app"
+export BoatLineupPlannerApp as default from "./app"

@@ -5,10 +5,7 @@ import { createStore, applyMiddleware } from "redux";
 
 import Root from "./components/root";
 import mapServerDataToState from "./map-server-data-to-state";
-import loggerMiddleware from "./middleware/logger";
-import BoatRecord from "./records/boat";
-import WaterEventRecord from "./records/water-event";
-import AttendeeRecord from "./records/attendee";
+import { loggerMiddleware } from "./middleware";
 import reducer from "./reducer";
 import sampleState from "./sample-state";
 

@@ -5,7 +5,9 @@ import { DragSource } from "react-dnd";
 import { defaultDragCollector } from "../../common/dnd-defaults";
 
 export const dragSpec = {
-    beginDrag: ({ seat }) => ({ seat })
+    beginDrag: ({ seat }) => ({ 
+        originSeat: seat 
+    })
 };
 
 @DragSource("ATTENDEE", dragSpec, defaultDragCollector)
