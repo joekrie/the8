@@ -3,12 +3,12 @@ import { Component } from "react"
 
 import BoatSeatList from "./boat-seat-list";
 import BoatHeader from "./boat-header";
-import SeatRecord from "../models/seat";
+import SeatRecord from "../models/seat-record";
 
 @Radium
-class Boat extends Component {  
+export default class Boat extends Component {  
   render() {
-    const { boat: { boatInfo, seats } } = this.props;
+    const { boat: { boatDetails, seats, assignedAttendeeIds } } = this.props;
     
     const styles = {
       "width": "300px",
@@ -20,11 +20,9 @@ class Boat extends Component {
 
     return (
       <div style={styles}>
-        <BoatHeader boatInfo={boatInfo} />
-        <BoatSeatList seats={seats} previewPlacement={this.previewPlacement} />
+        <BoatHeader boatDetails={boatDetails} />
+        <BoatSeatList seats={seats} assignedAttendeeIds={assignedAttendeeIds} />
       </div>
     );
   }
 }
-
-export default Boat

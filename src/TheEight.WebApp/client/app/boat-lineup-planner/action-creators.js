@@ -1,8 +1,10 @@
 import { createAction } from "redux-actions";
 
-import { ASSIGN_ATTENDEE_TO_SEAT, UNASSIGN_ATTENDEE_IN_SEAT } from "./actions";
+import { ASSIGN_ATTENDEE, UNASSIGN_ATTENDEE } from "./actions";
 
-const assignAttendeeToSeat = createAction(ASSIGN_ATTENDEE_TO_SEAT);
-const unassignAttendeeInSeat = createAction(UNASSIGN_ATTENDEE_IN_SEAT);
+const assignAttendee = createAction(ASSIGN_ATTENDEE, 
+  (attendeeId, seatDetails) => ({ attendeeId, seatDetails }));
 
-export { assignAttendeeToSeat, unassignAttendeeInSeat }
+const unassignAttendee = createAction(UNASSIGN_ATTENDEE);
+
+export { assignAttendee, unassignAttendee }

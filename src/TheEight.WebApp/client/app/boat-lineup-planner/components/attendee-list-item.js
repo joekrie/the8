@@ -3,16 +3,17 @@ import { Component } from "react";
 import { DragSource } from "react-dnd";
 
 import { defaultDragCollector } from "../../common/dnd-defaults";
+import * as ItemTypes from "../item-types";
 
 export const dragSpec = {
-    beginDrag: ({ seat }) => ({ 
-        originSeat: seat 
-    })
+  beginDrag: ({ seat }) => ({ 
+    originSeat: seat 
+  })
 };
 
-@DragSource("ATTENDEE", dragSpec, defaultDragCollector)
+@DragSource(ItemTypes.UNASSIGNED_ATTENDEE, dragSpec, defaultDragCollector)
 @Radium
-class Attendee extends Component {
+export default class AttendeeListItem extends Component {
     render() {
         const { attendee, connectDragSource } = this.props;
 
@@ -41,5 +42,3 @@ class Attendee extends Component {
         );
     }
 }
-
-export default Attendee

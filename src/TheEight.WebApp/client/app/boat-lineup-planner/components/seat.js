@@ -3,31 +3,43 @@ import { Component } from "react";
 import { DropTarget } from "react-dnd";
 
 import Attendee from "./attendee";
-import { defaultDropCollector } from "../common/dnd-defaults";
+import { defaultDropCollect } from "../../common/dnd-defaults";
+import * as ItemTypes from "../item-types";
 
-const dropSpec = {
-  canDrop: ({ previewPlacement, seat }, monitor) => {
-    if (!monitor.getItem()) {
-      return false;
-    }
-
-    const draggedPlacement = monitor.getItem();
-    const preview = previewPlacement(draggedPlacement, seat);
-    return preview.allow;
+export const attendeeListItemDropSpec = {
+  canDrop: ({ attendeeIdsInBoat }, monitor) => {
+    const { draggedAttendeeId } = monitor.getItem();
+    const alreadyInBoat = attendeeIdsInBoat.contains(draggedAttendeeId);
+    return !alreadyInBoat;
   },
-  drop: ({ previewPlacement, placeAttendees, seat, attendee }, monitor) => {
-    const draggedPlacement = monitor.getItem();
+    drop: ({ assignAttendee, seat }, monitor) => {
+    const { draggedAttendeeId } = monitor.getItem();
+    assignAttendee(draggedAttendeeId, seat.seatDetails);
+  }
+};
+
+export const assignedAttendeeDropSpec = {
+  canDrop: ({ attendeeIdsInBoat, seat: targetSeat }, monitor) => {
+    const { draggedAttendeeId, originSeat } = monitor.getItem();
+    const isMoveWithinBoat = targetSeat.boatId == originSeat.boatId;
+    const alreadyInBoat = attendeeIdsInBoat.contains(draggedAttendeeId);
+    return isMoveWithinBoat || !alreadyInBoat;
+  },
+  drop: ({ assignAttendee, unassignAttendee, seat: targetSeat, attendee: attendeeInTarget }, monitor) => {
+    const { draggedAttendeeId, originSeat } = monitor.getItem();
+    const isMoveWithinBoat = targetSeat.boatId == originSeat.boatId;
+    assignAttendee(draggedAttendeeId, targetSeat);
     
-    if (draggedPlacement || monitor.canDrop()) {
-      const preview = previewPlacement(draggedPlacement, seat);
-      placeAttendees(preview);
+    if (attendeeInTarget) {
+      assignAttendee(attendeeInTarget.attendeeId, originSeat);
     }
   }
 };
 
-@DropTarget("ATTENDEE", dropSpec, defaultDropCollector)
 @Radium
-class Seat extends Component {
+@DropTarget(ItemTypes.ASSIGNED_ATTENDEE, assignedAttendeeDropSpec, defaultDropCollect)
+@DropTarget(ItemTypes.ATTENDEE_LIST_ITEM, attendeeListItemDropSpec, defaultDropCollect)
+export default class Seat extends Component {
   render() {
     const { connectDropTarget, attendee, seat: { seatInfo: { seatNumber }, isOccupied } } = this.props;
     const attendeeComponent = isOccupied ? <Attendee attendee={attendee} seatInfo={seatInfo} /> : null;
@@ -60,6 +72,3 @@ class Seat extends Component {
     );
   }
 }
-
-export { dropSpec }
-export default Seat

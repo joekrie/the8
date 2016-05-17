@@ -1,8 +1,8 @@
 import { Record } from "immutable";
 import SeatInfoRecord from "../models/seat-info";
 
-const UnassignAttendeeInSeatRecord = Record({
+const UnassignAttendeeRecord = Record({
     seatInfo: new SeatInfoRecord()
 });
 
-export default UnassignAttendeeInSeatRecord
+export default UnassignAttendeeRecord

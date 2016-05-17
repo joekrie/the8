@@ -3,22 +3,19 @@ import { Component } from "react";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 
-import AttendeeListContainer from "../containers/attendee-list";
-import BoatListContainer from "../containers/boat-list";
+import AttendeeListContainer from "../containers/attendee-list-container";
+import BoatListContainer from "../containers/boat-list-container";
 
 @Radium
-@DragDropContext(HTML5Backend)
-class Root extends Component {
+export class Root extends Component {
   render() {
     const styles = {
-      root: {
-        "position": "absolute",
-        "height": "100%"
-      }
+      "position": "absolute",
+      "height": "100%"
     };
 
     return (
-      <div style={styles.root}>
+      <div style={styles}>
         <AttendeeListContainer />
         <BoatListContainer />
       </div>
@@ -26,4 +23,4 @@ class Root extends Component {
   }
 }
 
-export default Root
+export default DragDropContext(HTML5Backend)(Root);

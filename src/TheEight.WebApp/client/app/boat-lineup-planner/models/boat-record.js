@@ -28,6 +28,10 @@ class BoatRecord extends Record(defaults) {
       })
     );
   }
+  
+  get assignedAttendeeIds() {
+    return this.assignedSeats.map(attendeeId => attendeeId);
+  }
 }
 
 export default BoatRecord

@@ -1,16 +1,15 @@
 import Radium from "radium";
 import { Component } from "react";
 
-import SeatContainer from "./seat";
+import SeatContainer from "../containers/seat-container";
 
 @Radium
-class BoatSeatList extends Component {
+export default class BoatSeatList extends Component {
   render() {
-    const { seats, previewPlacement } = this.props;
+    const { seats, assignedAttendeeIds } = this.props;
     
     const boatSeats = seats.map(seat => (
-      <SeatContainer key={seat.seatNumber} seat={seat}  
-        previewPlacement={previewPlacement} />
+      <SeatContainer key={seat.seatNumber} seat={seat} assignedAttendeeIds={assignedAttendeeIds} />
     ));
 
     return (
@@ -20,5 +19,3 @@ class BoatSeatList extends Component {
     );
   }
 }
-
-export default BoatSeatList
