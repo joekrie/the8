@@ -8,7 +8,7 @@ import SeatRecord from "../models/seat-record";
 @Radium
 export default class Boat extends Component {  
   render() {
-    const { boat: { boatDetails, seats, assignedAttendeeIds } } = this.props;
+    const { boat } = this.props;
     
     const styles = {
       "width": "300px",
@@ -20,8 +20,8 @@ export default class Boat extends Component {
 
     return (
       <div style={styles}>
-        <BoatHeader boatDetails={boatDetails} />
-        <BoatSeatList seats={seats} assignedAttendeeIds={assignedAttendeeIds} />
+        <BoatHeader boatDetails={boat.details} />
+        <BoatSeatList seats={boat.allSeats} attendeeIdsInBoat={boat.attendeeIdsInBoat} />
       </div>
     );
   }

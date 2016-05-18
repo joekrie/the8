@@ -19,19 +19,19 @@ export const attendeeListItemDropSpec = {
 };
 
 export const assignedAttendeeDropSpec = {
-  canDrop: ({ attendeeIdsInBoat, seat: targetSeat }, monitor) => {
-    const { draggedAttendeeId, originSeat } = monitor.getItem();
-    const isMoveWithinBoat = targetSeat.boatId == originSeat.boatId;
+  canDrop: ({ attendeeIdsInBoat, seatNumber: targetSeatNumber, boatId: targetBoatId }, monitor) => {
+    const { draggedAttendeeId, originBoatId } = monitor.getItem();
+    const isMoveWithinBoat = targetBoatId == originBoatId;
     const alreadyInBoat = attendeeIdsInBoat.contains(draggedAttendeeId);
     return isMoveWithinBoat || !alreadyInBoat;
   },
-  drop: ({ assignAttendee, unassignAttendee, seat: targetSeat, attendee: attendeeInTarget }, monitor) => {
-    const { draggedAttendeeId, originSeat } = monitor.getItem();
-    const isMoveWithinBoat = targetSeat.boatId == originSeat.boatId;
-    assignAttendee(draggedAttendeeId, targetSeat);
+  drop: ({ assignAttendee, unassignAttendee, seat: targetSeat, boatId: targetBoatId, attendeeId: attendeeIdInTarget }, monitor) => {
+    const { draggedAttendeeId, originSeatNumber, originBoatId } = monitor.getItem();
+    const isMoveWithinBoat = targetBoatId == originBboatId;
+    assignAttendee(draggedAttendeeId, targetBoatId, targetSeatNumber);
     
     if (attendeeInTarget) {
-      assignAttendee(attendeeInTarget.attendeeId, originSeat);
+      assignAttendee(attendeeIdInTarget, originBoatId, originSeatNumber);
     }
   }
 };
@@ -41,8 +41,7 @@ export const assignedAttendeeDropSpec = {
 @DropTarget(ItemTypes.ATTENDEE_LIST_ITEM, attendeeListItemDropSpec, defaultDropCollect)
 export default class Seat extends Component {
   render() {
-    const { connectDropTarget, attendee, seat: { seatInfo: { seatNumber }, isOccupied } } = this.props;
-    const attendeeComponent = isOccupied ? <Attendee attendee={attendee} seatInfo={seatInfo} /> : null;
+    const { connectDropTarget, attendeeId, boatId, seatNumber } = this.props;
     
     const coxswainLabel = "COX";
     const label = seatNumber === 0 ? coxswainLabel : seatNumber;
@@ -67,7 +66,7 @@ export default class Seat extends Component {
         <div style={styles.label}>
           {label}
         </div>
-        {attendeeComponent}
+        <Attendee attendeeId={attendeeId} boatId={boatId} seatNumber={seatNumber} />
       </div>
     );
   }

@@ -15,15 +15,6 @@ class BoatInfoRecord extends Record(defaults) {
     const seatNums = range(this.isCoxed ? 0 : 1, this.seatCount + 1);
     return List(seatNums);
   }
-
-  get seats() {
-    return this.seatNumbers.map(num =>
-      new SeatInfoRecord({
-        boatId: this.boatId,
-        seatNumber: num
-      })
-    );
-  }
 }
 
 export default BoatInfoRecord

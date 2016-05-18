@@ -6,10 +6,11 @@ import SeatContainer from "../containers/seat-container";
 @Radium
 export default class BoatSeatList extends Component {
   render() {
-    const { seats, assignedAttendeeIds } = this.props;
+    const { seats, attendeeIdsInBoat } = this.props;
     
-    const boatSeats = seats.map(seat => (
-      <SeatContainer key={seat.seatNumber} seat={seat} assignedAttendeeIds={assignedAttendeeIds} />
+    const boatSeats = seats.map((attendeeId, seatNumber) => (
+      <SeatContainer key={seatNumber} seatNumber={seatNumber} attendeeId={attendeeId} 
+        attendeeIdsInBoat={attendeeIdsInBoat} />
     ));
 
     return (

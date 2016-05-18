@@ -1,7 +1,7 @@
 import { Record } from "immutable";
 
 const EventInfoRecord = Record({
-    boatEventId: "",
+    eventId: "",
     title: "",
     canAttendeeOccupyMultipleBoats: false
 });

@@ -55,7 +55,6 @@
     "webpack-dev-server": "^1.14.1"
   },
   "jest": {
-    "testDirectoryName": "specs",
     "testPathDirs": [
       "client"
     ],

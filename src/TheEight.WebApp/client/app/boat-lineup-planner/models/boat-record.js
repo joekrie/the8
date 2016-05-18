@@ -1,10 +1,10 @@
-import { Record, Map, List } from "immutable";
+import { Record, Map, OrderedMap } from "immutable";
 
 import SeatRecord from "./seat";
 import BoatInfoRecord from "./boat-info";
 
 const defaults = {
-    boatInfo: new BoatInfoRecord(),
+    details: new BoatDetailsRecord(),
     assignedSeats: Map()
 };
 
@@ -16,20 +16,13 @@ class BoatRecord extends Record(defaults) {
   isSeatAssigned(seatNumber) {
     return this.assignedSeats.has(seatNumber);
   }
-
-  get seats() {
-    return this.assignedSeats.map((attendeeId, seatNumber) =>
-      new SeatRecord({
-        attendeeId,
-        seatInfo: new SeatInfoRecord({
-          boatId: this.boatInfo.boatId,
-          seatNumber
-        })
-      })
-    );
+  
+  get allSeats() {
+    const kvps = this.details.seatNumbers.map(num => [num, this.assignedSeats.get(num)]);
+    return OrderedMap(kvps);
   }
   
-  get assignedAttendeeIds() {
+  get attendeeIdsInBoat() {
     return this.assignedSeats.map(attendeeId => attendeeId);
   }
 }
