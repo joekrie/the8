@@ -1,13 +1,31 @@
-import BoatSeat from "../boat-seat";
-import AttendeeRecord from "../../models/attendee-record";
-import SeatRecord from "../../models/seat-record";
+import { List } from "immutable";
+
+import Seat, { attendeeListItemDropSpec, assignedAttendeeDropSpec } from "../seat"; 
 
 describe("<Seat />", () => {
-    xit("allows assignment from outside boat", () => {
-        
+  describe("attendeeListItemDropSpec", () => {
+    it("allows drop when dragged attendee not already in boat", () => {
+      const attendeeIdsInBoat = List([ "boat-1" ]);
+      const draggedAttendeeId = "boat-2";
+      
+      const monitor = {
+        getItem: () => ({ draggedAttendeeId })
+      };
+      
+      const canDrop = attendeeListItemDropSpec.canDrop({ attendeeIdsInBoat }, monitor);
+      expect(canDrop).toBe(true);
     });
-
-    xit("allows move within boat", () => {
-        
+    
+    it("disallows drop when dragged attendee is already in boat", () => {
+      const attendeeIdsInBoat = List([ "boat-1" ]);
+      const draggedAttendeeId = "boat-1";
+      
+      const monitor = {
+        getItem: () => ({ draggedAttendeeId })
+      };
+      
+      const canDrop = attendeeListItemDropSpec.canDrop({ attendeeIdsInBoat }, monitor);
+      expect(canDrop).toBe(false);
     });
+  });
 });

@@ -2,7 +2,7 @@ import Radium from "radium";
 import { Component } from "react";
 import { DropTarget } from "react-dnd";
 
-import Attendee from "./attendee";
+import AssignedAttendee from "./assigned-attendee";
 import { defaultDropCollect } from "../../common/dnd-defaults";
 import * as ItemTypes from "../item-types";
 
@@ -12,7 +12,7 @@ export const attendeeListItemDropSpec = {
     const alreadyInBoat = attendeeIdsInBoat.contains(draggedAttendeeId);
     return !alreadyInBoat;
   },
-    drop: ({ assignAttendee, seat }, monitor) => {
+  drop: ({ assignAttendee, seat }, monitor) => {
     const { draggedAttendeeId } = monitor.getItem();
     assignAttendee(draggedAttendeeId, seat.seatDetails);
   }
@@ -43,7 +43,7 @@ export default class Seat extends Component {
   render() {
     const { connectDropTarget, attendeeId, boatId, seatNumber } = this.props;
     
-    const coxswainLabel = "COX";
+    const coxswainLabel = "Cox";
     const label = seatNumber === 0 ? coxswainLabel : seatNumber;
     
     const styles = {
@@ -66,7 +66,7 @@ export default class Seat extends Component {
         <div style={styles.label}>
           {label}
         </div>
-        <Attendee attendeeId={attendeeId} boatId={boatId} seatNumber={seatNumber} />
+        <AssignedAttendee attendeeId={attendeeId} boatId={boatId} seatNumber={seatNumber} />
       </div>
     );
   }

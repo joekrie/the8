@@ -2,7 +2,7 @@ import Radium from "radium";
 import { Component } from "react";
 import { DragSource } from "react-dnd";
 
-import { defaultDragCollector } from "../../common/dnd-defaults";
+import { defaultDragCollect } from "../../common/dnd-defaults";
 import * as ItemTypes from "../item-types";
 
 const dragSpec = {
@@ -11,7 +11,7 @@ const dragSpec = {
   })
 };
 
-@DragSource(ItemTypes.ASSIGNED_ATTENDEE, dragSpec, defaultDragCollector)
+@DragSource(ItemTypes.ASSIGNED_ATTENDEE, dragSpec, defaultDragCollect)
 @Radium
 export default class AssignedAttendee extends Component {
   render() {

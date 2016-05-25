@@ -4,7 +4,7 @@ import { Component } from "react";
 import SeatContainer from "../containers/seat-container";
 
 @Radium
-export default class BoatSeatList extends Component {
+export default class SeatList extends Component {
   render() {
     const { seats, attendeeIdsInBoat } = this.props;
     
