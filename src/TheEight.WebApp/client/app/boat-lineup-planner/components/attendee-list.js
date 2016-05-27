@@ -3,24 +3,18 @@ import { Component } from "react";
 import { DropTarget } from "react-dnd";
 
 import { defaultDropCollector } from "../../common/dnd-defaults";
-import AttendeeComponent from "./attendee";
-import UnassignAttendeeInSeatRecord from "../payloads/unassign-attendee-in-seat";
+import AttendeeListItem from "./attendee-list-item";
 import * as ItemTypes from "../item-types";
 
-const dropSpec = {
+export const dropSpec = {
   drop: ({ unassignAttendeeInSeat }, monitor) => {
-    const { originSeatInfo } = monitor.getItem();
-
-    unassignAttendeeInSeat(
-      new UnassignAttendeeInSeatRecord({
-        seatInfo: originSeatInfo
-      })
-    );
+    const { originBoatId, originSeatNumber } = monitor.getItem();
+    unassignAttendeeInSeat(originBoatId, originSeatNumber);
   }
 };
 
-@DropTarget(ItemTypes.ASSIGNED_ATTENDEE, dropSpec, defaultDropCollector)
 @Radium
+@DropTarget(ItemTypes.ASSIGNED_ATTENDEE, dropSpec, defaultDropCollector)
 export default class AttendeeList extends Component {
   render() {
     const { rowers, coxswains, connectDropTarget } = this.props;
@@ -63,5 +57,3 @@ export default class AttendeeList extends Component {
     );
   }
 };
-
-export { dropSpec }

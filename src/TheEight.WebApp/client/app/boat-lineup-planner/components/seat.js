@@ -12,25 +12,26 @@ export const attendeeListItemDropSpec = {
     const alreadyInBoat = attendeeIdsInBoat.contains(draggedAttendeeId);
     return !alreadyInBoat;
   },
-  drop: ({ assignAttendee, seat }, monitor) => {
+  drop: ({ assignAttendee, boatId, seatNumber }, monitor) => {
     const { draggedAttendeeId } = monitor.getItem();
-    assignAttendee(draggedAttendeeId, seat.seatDetails);
+    assignAttendee(draggedAttendeeId, boatId, seatNumber);
   }
 };
 
 export const assignedAttendeeDropSpec = {
-  canDrop: ({ attendeeIdsInBoat, seatNumber: targetSeatNumber, boatId: targetBoatId }, monitor) => {
+  canDrop: ({ attendeeIdsInBoat, boatId: targetBoatId }, monitor) => {
     const { draggedAttendeeId, originBoatId } = monitor.getItem();
     const isMoveWithinBoat = targetBoatId == originBoatId;
     const alreadyInBoat = attendeeIdsInBoat.contains(draggedAttendeeId);
+    
     return isMoveWithinBoat || !alreadyInBoat;
   },
-  drop: ({ assignAttendee, unassignAttendee, seat: targetSeat, boatId: targetBoatId, attendeeId: attendeeIdInTarget }, monitor) => {
+  drop: ({ assignAttendee, seatNumber: targetSeatNumber, boatId: targetBoatId, attendeeId: attendeeIdInTarget }, monitor) => {
     const { draggedAttendeeId, originSeatNumber, originBoatId } = monitor.getItem();
-    const isMoveWithinBoat = targetBoatId == originBboatId;
+        
     assignAttendee(draggedAttendeeId, targetBoatId, targetSeatNumber);
     
-    if (attendeeInTarget) {
+    if (attendeeIdInTarget) {
       assignAttendee(attendeeIdInTarget, originBoatId, originSeatNumber);
     }
   }
