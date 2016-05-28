@@ -9,14 +9,14 @@ import { createStore, applyMiddleware } from "redux";
 import AttendeeListContainer from "./containers/attendee-list-container";
 import BoatListContainer from "./containers/boat-list-container";
 import mapServerDataToState from "./map-server-data-to-state";
-import { loggerMiddleware } from "./middleware";
+import loggerMiddleware from "./middleware/logger";
 import reducer from "./reducer";
 import sampleState from "./sample-state";
 
 const store = createStore(reducer, { ...sampleState }, applyMiddleware(loggerMiddleware));
 
 @Radium
-@HTML5Backend
+@DragDropContext(HTML5Backend)
 export default class BoatLineupPlannerApp extends Component {
   render() {
     const styles = {

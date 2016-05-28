@@ -6,13 +6,13 @@ import { defaultDragCollect } from "../../common/dnd-defaults";
 import * as ItemTypes from "../item-types";
 
 const dragSpec = {
-  beginDrag: ({ seat }) => ({ 
-    originSeat: seat 
+  beginDrag: ({ seatNumber }) => ({ 
+    originSeatNumber: seatNumber 
   })
 };
 
-@DragSource(ItemTypes.ASSIGNED_ATTENDEE, dragSpec, defaultDragCollect)
 @Radium
+@DragSource(ItemTypes.ASSIGNED_ATTENDEE, dragSpec, defaultDragCollect)
 export default class AssignedAttendee extends Component {
   render() {
     const { attendee, connectDragSource } = this.props;

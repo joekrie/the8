@@ -1,7 +1,7 @@
 import Radium from "radium";
 import { Component } from "react"
 
-import BoatSeatList from "./boat-seat-list";
+import SeatList from "./seat-list";
 import BoatHeader from "./boat-header";
 import SeatRecord from "../models/seat-record";
 
@@ -21,7 +21,8 @@ export default class Boat extends Component {
     return (
       <div style={styles}>
         <BoatHeader boatDetails={boat.details} />
-        <BoatSeatList seats={boat.allSeats} attendeeIdsInBoat={boat.attendeeIdsInBoat} />
+        <SeatList seats={boat.allSeats} boatId={boat.details.boatId} 
+          attendeeIdsInBoat={boat.attendeeIdsInBoat} />
       </div>
     );
   }

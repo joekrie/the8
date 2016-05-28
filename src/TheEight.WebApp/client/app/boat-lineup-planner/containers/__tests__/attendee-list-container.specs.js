@@ -1,7 +1,8 @@
-import AssignableAttendeeListContainer, { mapStateToProps, attendeeIsAssignable } from "../AssignableAttendeeListContainer";
-import BoatRecord from "../../records/BoatRecord";
-import WaterEventRecord from "../../records/WaterEventRecord";
-import AttendeeRecord from "../../records/AttendeeRecord";
+import AssignableAttendeeListContainer, { mapStateToProps, attendeeIsAssignable } from "../attendee-list-container";
+import BoatRecord from "../../models/boat-record";
+import BoatDetailsRecord from "../../models/boat-details-record";
+import WaterEventRecord from "../../models/event-details-record";
+import AttendeeRecord from "../../models/attendee-record";
 import { Map, List, Iterable } from "immutable";
 import { createStore } from "redux";
 
@@ -13,8 +14,10 @@ describe("<AssignableAttendeeListContainer />", () => {
             }),
             boats: Map({
                 "boat-1": new BoatRecord({
-                    boatId: "boat-1",
-                    seatAssignments: Map([
+                    details: new BoatDetailsRecord({
+                        boatId: "boat-1"
+                    }),
+                    assignedSeats: Map([
                         [1, "rower-1"]
                     ])
                 })

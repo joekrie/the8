@@ -11,7 +11,5 @@ describe("Boat lineup planner app", () => {
     expect(() => mount(App)).not.toThrow();
   });
   
-  nit("", () => {
-    
-  });
+  // it("assigns attendee to boat seat when dragged from attendee list to seat", () => {});
 });

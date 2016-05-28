@@ -1,29 +1,34 @@
 import { List, Map } from "immutable";
 
-import AttendeeRecord from "./models/attendee";
-import BoatRecord from "./models/boat";
-import EventInfoRecord from "./models/event-info";
+import AttendeeRecord from "./models/attendee-record";
+import BoatRecord from "./models/boat-record";
+import BoatDetailsRecord from "./models/boat-details-record";
+import EventDetailsRecord from "./models/event-details-record";
 
 const sampleState = {
-  eventSettings: new EventInfoRecord({
+  eventSettings: new EventDetailsRecord({
     canAttendeeOccupyMultipleBoats: true
   }),
   boats: new Map({
     "boat-1": new BoatRecord({
-      boatId: "boat-1",
-      title: "Lucky",
-      seatCount: 4,
-      isCoxed: true,
-      seatAssignments: Map([
+      details: new BoatDetailsRecord({
+        boatId: "boat-1",
+        title: "Lucky",
+        seatCount: 4,
+        isCoxed: true
+      }),
+      assignedSeats: Map([
         [1, "rower-1"]
       ])
     }),
     "boat-2": new BoatRecord({
-      boatId: "boat-2",
-      title: "Voyager 1",
-      seatCount: 2,
-      isCoxed: false,
-      seatAssignments: Map()
+      details: new BoatDetailsRecord({
+        boatId: "boat-2",
+        title: "Voyager 1",
+        seatCount: 2,
+        isCoxed: false
+      }),
+      assignedSeats: Map()
     })
   }),
   attendees: new List([ 

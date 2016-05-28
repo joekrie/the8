@@ -1,8 +1,6 @@
 import { Record, List } from "immutable";
 import { range } from "lodash";
 
-import SeatInfoRecord from "./seat-info";
-
 const defaults = {
   boatId: "",
   title: "",

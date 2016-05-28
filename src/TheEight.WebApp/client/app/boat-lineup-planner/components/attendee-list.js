@@ -2,26 +2,26 @@ import Radium from "radium";
 import { Component } from "react";
 import { DropTarget } from "react-dnd";
 
-import { defaultDropCollector } from "../../common/dnd-defaults";
+import { defaultDropCollect } from "../../common/dnd-defaults";
 import AttendeeListItem from "./attendee-list-item";
 import * as ItemTypes from "../item-types";
 
 export const dropSpec = {
-  drop: ({ unassignAttendeeInSeat }, monitor) => {
+  drop: (props, monitor) => {
+    const { unassignAttendee } = props;
     const { originBoatId, originSeatNumber } = monitor.getItem();
-    unassignAttendeeInSeat(originBoatId, originSeatNumber);
+    unassignAttendee(originBoatId, originSeatNumber);
   }
 };
 
 @Radium
-@DropTarget(ItemTypes.ASSIGNED_ATTENDEE, dropSpec, defaultDropCollector)
+@DropTarget(ItemTypes.ASSIGNED_ATTENDEE, dropSpec, defaultDropCollect)
 export default class AttendeeList extends Component {
   render() {
-    const { rowers, coxswains, connectDropTarget } = this.props;
-    const assignableAttendees = rowers.concat(coxswains);
+    const { attendeelistItems, connectDropTarget } = this.props;
 
-    const attendeeComponents = assignableAttendees.map(attendee =>
-      <AttendeeListItem key={attendee.attendeeId} attendee={attendee} />
+    const attendeeComponents = attendeelistItems.map(item =>
+      <AttendeeListItem key={item.attendee.attendeeId} attendeelistItem={item} />
     );
 
     const styles = {

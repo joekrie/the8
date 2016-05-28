@@ -1,2 +1,2 @@
-export unassignAttendeeInSeat from "./unassign-attendee-in-seat"
-export assignAttendeeToSeat from "./assign-attendee-to-seat"
+export unassignAttendee from "./unassign-attendee"
+export assignAttendee from "./assign-attendee"

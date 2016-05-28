@@ -1,8 +1,7 @@
 import { List, Map, fromJS } from "immutable";
 
-import AttendeeRecord from "./models/attendee";
-import BoatRecord from "./models/boat";
-import EventInfoRecord from "./models/event-info";
+import AttendeeRecord from "./models/attendee-record";
+import BoatRecord from "./models/boat-record";
 
 const mapEventSettings = serverData => fromJS(serverData);
 

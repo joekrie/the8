@@ -3,26 +3,23 @@ import { List } from "immutable";
 import { bindActionCreators } from "redux";
 
 import AttendeeList from "../components/attendee-list";
-import { unassignAttendeeInSeat } from "../action-creators";
-import AttendeeListItemRecord from "../models/attendee-list-item";
+import { unassignAttendee } from "../action-creators";
+import AttendeeListItemRecord from "../models/attendee-list-item-record";
 
-const mapStateToProps = ({attendees, boats }) => {
+export const mapStateToProps = ({attendees, boats }) => {
   const assignedAttendeeIds = boats.map(boat => boat.assignedSeats.valueSeq()).flatten();
   
-  const listItems = attendees.map(attendee => 
+  const attendeelistItems = attendees.map(attendee => 
     new AttendeeListItemRecord({
       attendee,
       isAssigned: assignedAttendeeIds.contains(attendee.attendeeId)
     })
   );
   
-  return {
-    attendees: listItems
-  };
+  return { attendeelistItems };
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({ unassignAttendeeInSeat }, dispatch);
-const AttendeeListContainer = connect(mapStateToProps, mapDispatchToProps)(AttendeeList);
+export const mapDispatchToProps = dispatch => bindActionCreators({ unassignAttendee }, dispatch);
 
-export { mapDispatchToProps, mapStateToProps, attendeeIsAssignable }
+const AttendeeListContainer = connect(mapStateToProps, mapDispatchToProps)(AttendeeList);
 export default AttendeeListContainer

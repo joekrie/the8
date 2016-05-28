@@ -1,7 +1,7 @@
 import { Record, Map, OrderedMap } from "immutable";
 
-import SeatRecord from "./seat";
-import BoatInfoRecord from "./boat-info";
+import SeatRecord from "./seat-record";
+import BoatDetailsRecord from "./boat-details-record";
 
 const defaults = {
     details: new BoatDetailsRecord(),

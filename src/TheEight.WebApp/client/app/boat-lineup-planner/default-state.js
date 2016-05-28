@@ -1,9 +1,9 @@
 import { Map, List } from "immutable";
 
-import EventInfoRecord from "./models/event-info";
+import EventDetailsRecord from "./models/event-details-record";
 
 const defaultState = {
-    eventSettings: new EventInfoRecord(),
+    eventSettings: new EventDetailsRecord(),
     boats: Map(),
     attendees: List()
 };

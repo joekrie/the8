@@ -1,6 +1,6 @@
 import { Record } from "immutable";
 
-import AttendeeRecord from "./attendee";
+import AttendeeRecord from "./attendee-record";
 
 const AttendeeListItemRecord = Record({
     attendee: new AttendeeRecord(),

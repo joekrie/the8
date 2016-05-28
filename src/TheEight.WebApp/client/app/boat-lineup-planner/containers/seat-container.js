@@ -2,8 +2,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import Seat from "../components/seat";
-import { assignAttendeeToSeat, unassignAttendeeInSeat } from "../action-creators";
+import { assignAttendee, unassignAttendee } from "../action-creators";
 
-const mapDispatchToProps = dispatch => bindActionCreators({ assignAttendeeToSeat, unassignAttendeeInSeat }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ assignAttendee, unassignAttendee }, dispatch);
 
-export default SeatContainer = connect(null, mapDispatchToProps)(Seat);
+const SeatContainer = connect(null, mapDispatchToProps)(Seat);
+export default SeatContainer
