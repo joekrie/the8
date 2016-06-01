@@ -19333,11 +19333,11 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.default = exports.assignedAttendeeDropSpec = exports.attendeeListItemDropSpec = undefined;
+	exports.default = exports.dropSpec = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _dec, _dec2, _class;
+	var _dec, _class;
 
 	var _radium = __webpack_require__(6);
 
@@ -19367,47 +19367,29 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var attendeeListItemDropSpec = exports.attendeeListItemDropSpec = {
-	  canDrop: function canDrop(props, monitor) {
-	    var attendeeIdsInBoat = props.attendeeIdsInBoat;
-
-	    var _monitor$getItem = monitor.getItem();
-
-	    var draggedAttendeeId = _monitor$getItem.draggedAttendeeId;
-
-
-	    var alreadyInBoat = attendeeIdsInBoat.contains(draggedAttendeeId);
-	    return !alreadyInBoat;
-	  },
-	  drop: function drop(props, monitor) {
-	    var assignAttendee = props.assignAttendee;
-	    var boatId = props.boatId;
-	    var seatNumber = props.seatNumber;
-
-	    var _monitor$getItem2 = monitor.getItem();
-
-	    var draggedAttendeeId = _monitor$getItem2.draggedAttendeeId;
-
-
-	    assignAttendee(draggedAttendeeId, boatId, seatNumber);
-	  }
-	};
-
-	var assignedAttendeeDropSpec = exports.assignedAttendeeDropSpec = {
+	var dropSpec = exports.dropSpec = {
 	  canDrop: function canDrop(props, monitor) {
 	    var attendeeIdsInBoat = props.attendeeIdsInBoat;
 	    var targetBoatId = props.boatId;
 
-	    var _monitor$getItem3 = monitor.getItem();
+	    var itemType = monitor.getItemType();
 
-	    var draggedAttendeeId = _monitor$getItem3.draggedAttendeeId;
-	    var originBoatId = _monitor$getItem3.originBoatId;
+	    var _monitor$getItem = monitor.getItem();
+
+	    var draggedAttendeeId = _monitor$getItem.draggedAttendeeId;
+	    var originBoatId = _monitor$getItem.originBoatId;
 
 
-	    var isMoveWithinBoat = targetBoatId == originBoatId;
 	    var alreadyInBoat = attendeeIdsInBoat.contains(draggedAttendeeId);
 
-	    return isMoveWithinBoat || !alreadyInBoat;
+	    if (itemType === ItemTypes.ATTENDEE_LIST_ITEM) {
+	      return !alreadyInBoat;
+	    }
+
+	    if (itemType === ItemTypes.ASSIGNED_ATTENDEE) {
+	      var isMoveWithinBoat = targetBoatId == originBoatId;
+	      return isMoveWithinBoat || !alreadyInBoat;
+	    }
 	  },
 	  drop: function drop(props, monitor) {
 	    var assignAttendee = props.assignAttendee;
@@ -19415,22 +19397,30 @@
 	    var targetBoatId = props.boatId;
 	    var attendeeIdInTarget = props.attendeeId;
 
-	    var _monitor$getItem4 = monitor.getItem();
+	    var itemType = monitor.getItemType();
 
-	    var draggedAttendeeId = _monitor$getItem4.draggedAttendeeId;
-	    var originSeatNumber = _monitor$getItem4.originSeatNumber;
-	    var originBoatId = _monitor$getItem4.originBoatId;
+	    var _monitor$getItem2 = monitor.getItem();
+
+	    var draggedAttendeeId = _monitor$getItem2.draggedAttendeeId;
+	    var originSeatNumber = _monitor$getItem2.originSeatNumber;
+	    var originBoatId = _monitor$getItem2.originBoatId;
 
 
-	    assignAttendee(draggedAttendeeId, targetBoatId, targetSeatNumber);
+	    if (itemType === ItemTypes.ATTENDEE_LIST_ITEM) {
+	      assignAttendee(draggedAttendeeId, targetBoatId, targetSeatNumber);
+	    }
 
-	    if (attendeeIdInTarget) {
-	      assignAttendee(attendeeIdInTarget, originBoatId, originSeatNumber);
+	    if (itemType === ItemTypes.ASSIGNED_ATTENDEE) {
+	      assignAttendee(draggedAttendeeId, targetBoatId, targetSeatNumber);
+
+	      if (attendeeIdInTarget) {
+	        assignAttendee(attendeeIdInTarget, originBoatId, originSeatNumber);
+	      }
 	    }
 	  }
 	};
 
-	var Seat = (_dec = (0, _reactDnd.DropTarget)(ItemTypes.ASSIGNED_ATTENDEE, assignedAttendeeDropSpec, _dndDefaults.defaultDropCollect), _dec2 = (0, _reactDnd.DropTarget)(ItemTypes.ATTENDEE_LIST_ITEM, attendeeListItemDropSpec, _dndDefaults.defaultDropCollect), (0, _radium2.default)(_class = _dec(_class = _dec2(_class = function (_Component) {
+	var Seat = (_dec = (0, _reactDnd.DropTarget)([ItemTypes.ATTENDEE_LIST_ITEM, ItemTypes.ASSIGNED_ATTENDEE], dropSpec, _dndDefaults.defaultDropCollect), (0, _radium2.default)(_class = _dec(_class = function (_Component) {
 	  _inherits(Seat, _Component);
 
 	  function Seat() {
@@ -19484,7 +19474,7 @@
 	  }]);
 
 	  return Seat;
-	}(_react.Component)) || _class) || _class) || _class);
+	}(_react.Component)) || _class) || _class);
 	exports.default = Seat;
 
 /***/ },
