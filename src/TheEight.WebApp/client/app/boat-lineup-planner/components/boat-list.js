@@ -9,7 +9,8 @@ class BoatList extends Component {
     const { boats } = this.props;    
     
     const boatComponents = boats.map(boat => 
-      <Boat key={boat.boatId} boat={boat} />);
+      <Boat key={boat.boatId} boat={boat} />
+    );
 
     const styles = {
       "marginTop": "0",

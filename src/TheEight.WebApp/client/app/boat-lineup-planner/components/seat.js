@@ -7,14 +7,14 @@ import { defaultDropCollect } from "../../common/dnd-defaults";
 import * as ItemTypes from "../item-types";
 
 export const attendeeListItemDropSpec = {
-  canDrop: (props, monitor) => {
+  canDrop(props, monitor) {
     const { attendeeIdsInBoat } = props;
     const { draggedAttendeeId } = monitor.getItem();
     
     const alreadyInBoat = attendeeIdsInBoat.contains(draggedAttendeeId);
     return !alreadyInBoat;
   },
-  drop: (props, monitor) => {
+  drop(props, monitor) {
     const { assignAttendee, boatId, seatNumber } = props;
     const { draggedAttendeeId } = monitor.getItem();
     
@@ -23,7 +23,7 @@ export const attendeeListItemDropSpec = {
 };
 
 export const assignedAttendeeDropSpec = {
-  canDrop: (props, monitor) => {
+  canDrop(props, monitor) {
     const { attendeeIdsInBoat, boatId: targetBoatId } = props;
     const { draggedAttendeeId, originBoatId } = monitor.getItem();
     
@@ -32,8 +32,10 @@ export const assignedAttendeeDropSpec = {
     
     return isMoveWithinBoat || !alreadyInBoat;
   },
-  drop: (props, monitor) => {
-    const { assignAttendee, seatNumber: targetSeatNumber, boatId: targetBoatId, attendeeId: attendeeIdInTarget } = props;
+  drop(props, monitor) {
+    const { assignAttendee, seatNumber: targetSeatNumber, boatId: targetBoatId, 
+      attendeeId: attendeeIdInTarget } = props;
+      
     const { draggedAttendeeId, originSeatNumber, originBoatId } = monitor.getItem();
         
     assignAttendee(draggedAttendeeId, targetBoatId, targetSeatNumber);

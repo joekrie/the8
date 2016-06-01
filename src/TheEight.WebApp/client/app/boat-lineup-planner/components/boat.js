@@ -8,7 +8,8 @@ import SeatRecord from "../models/seat-record";
 @Radium
 export default class Boat extends Component {  
   render() {
-    const { boat } = this.props;
+    const { boat } = this.props;    
+    const attendeeIdsInBoat = boat.assignedSeats.valueSeq().toList();
     
     const styles = {
       "width": "300px",
@@ -22,7 +23,7 @@ export default class Boat extends Component {
       <div style={styles}>
         <BoatHeader boatDetails={boat.details} />
         <SeatList seats={boat.allSeats} boatId={boat.details.boatId} 
-          attendeeIdsInBoat={boat.attendeeIdsInBoat} />
+          attendeeIdsInBoat={attendeeIdsInBoat} />
       </div>
     );
   }

@@ -148,7 +148,7 @@
 
 	var _reducer2 = _interopRequireDefault(_reducer);
 
-	var _sampleState = __webpack_require__(263);
+	var _sampleState = __webpack_require__(261);
 
 	var _sampleState2 = _interopRequireDefault(_sampleState);
 
@@ -17739,14 +17739,14 @@
 	    return boat.assignedSeats.valueSeq();
 	  }).flatten();
 
-	  var attendeelistItems = attendees.map(function (attendee) {
+	  var attendeeListItems = attendees.map(function (attendee) {
 	    return new _attendeeListItemRecord2.default({
 	      attendee: attendee,
 	      isAssigned: assignedAttendeeIds.contains(attendee.attendeeId)
 	    });
 	  });
 
-	  return { attendeelistItems: attendeelistItems };
+	  return { attendeeListItems: attendeeListItems };
 	};
 
 	var mapDispatchToProps = exports.mapDispatchToProps = function mapDispatchToProps(dispatch) {
@@ -17825,12 +17825,12 @@
 	    key: "render",
 	    value: function render() {
 	      var _props = this.props;
-	      var attendeelistItems = _props.attendeelistItems;
+	      var attendeeListItems = _props.attendeeListItems;
 	      var connectDropTarget = _props.connectDropTarget;
 
 
-	      var attendeeComponents = attendeelistItems.map(function (item) {
-	        return React.createElement(_attendeeListItem2.default, { key: item.attendee.attendeeId, attendeelistItem: item });
+	      var attendeeComponents = attendeeListItems.map(function (item) {
+	        return React.createElement(_attendeeListItem2.default, { key: item.attendee.attendeeId, attendeeListItem: item });
 	      });
 
 	      var styles = {
@@ -17909,7 +17909,7 @@
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	exports.default = exports.dragSpec = undefined;
 
@@ -17942,58 +17942,57 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var dragSpec = exports.dragSpec = {
-	    beginDrag: function beginDrag(_ref) {
-	        var seat = _ref.seat;
-	        return {
-	            originSeat: seat
-	        };
-	    }
+	  beginDrag: function beginDrag(props) {
+	    return {
+	      draggedAttendeeId: props.attendeeListItem.attendee.attendeeId
+	    };
+	  }
 	};
 
 	var AttendeeListItem = (_dec = (0, _reactDnd.DragSource)(ItemTypes.ATTENDEE_LIST_ITEM, dragSpec, _dndDefaults.defaultDragCollect), (0, _radium2.default)(_class = _dec(_class = function (_Component) {
-	    _inherits(AttendeeListItem, _Component);
+	  _inherits(AttendeeListItem, _Component);
 
-	    function AttendeeListItem() {
-	        _classCallCheck(this, AttendeeListItem);
+	  function AttendeeListItem() {
+	    _classCallCheck(this, AttendeeListItem);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(AttendeeListItem).apply(this, arguments));
-	    }
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(AttendeeListItem).apply(this, arguments));
+	  }
 
-	    _createClass(AttendeeListItem, [{
-	        key: "render",
-	        value: function render() {
-	            var _props = this.props;
-	            var attendee = _props.attendeelistItem.attendee;
-	            var connectDragSource = _props.connectDragSource;
+	  _createClass(AttendeeListItem, [{
+	    key: "render",
+	    value: function render() {
+	      var _props = this.props;
+	      var attendeeListItem = _props.attendeeListItem;
+	      var connectDragSource = _props.connectDragSource;
 
 
-	            var styles = {
-	                base: {
-	                    "marginBottom": "10px",
-	                    "padding": "10px",
-	                    "color": "#F5F5F5",
-	                    "cursor": "grab"
-	                },
-	                rower: {
-	                    "backgroundColor": "#304F66"
-	                },
-	                coxswain: {
-	                    "backgroundColor": "#2A4458"
-	                }
-	            };
-
-	            var rootStyles = [styles.base];
-	            rootStyles.push(attendee.isCoxswain ? styles.coxswain : styles.rower);
-
-	            return connectDragSource(React.createElement(
-	                "div",
-	                { style: rootStyles },
-	                attendee.displayName
-	            ));
+	      var styles = {
+	        base: {
+	          "marginBottom": "10px",
+	          "padding": "10px",
+	          "color": "#F5F5F5",
+	          "cursor": "grab"
+	        },
+	        rower: {
+	          "backgroundColor": "#304F66"
+	        },
+	        coxswain: {
+	          "backgroundColor": "#2A4458"
 	        }
-	    }]);
+	      };
 
-	    return AttendeeListItem;
+	      var rootStyles = [styles.base];
+	      rootStyles.push(attendeeListItem.attendee.isCoxswain ? styles.coxswain : styles.rower);
+
+	      return connectDragSource(React.createElement(
+	        "div",
+	        { style: rootStyles },
+	        attendeeListItem.attendee.displayName
+	      ));
+	    }
+	  }]);
+
+	  return AttendeeListItem;
 	}(_react.Component)) || _class) || _class);
 	exports.default = AttendeeListItem;
 
@@ -18032,7 +18031,7 @@
 	});
 
 	var unassignAttendee = (0, _reduxActions.createAction)(_actions.UNASSIGN_ATTENDEE, function (boatId, seatNumber) {
-	  boatId, seatNumber;
+	  return { boatId: boatId, seatNumber: seatNumber };
 	});
 
 	exports.assignAttendee = assignAttendee;
@@ -19202,6 +19201,7 @@
 	    value: function render() {
 	      var boat = this.props.boat;
 
+	      var attendeeIdsInBoat = boat.assignedSeats.valueSeq().toList();
 
 	      var styles = {
 	        "width": "300px",
@@ -19216,7 +19216,7 @@
 	        { style: styles },
 	        React.createElement(_boatHeader2.default, { boatDetails: boat.details }),
 	        React.createElement(_seatList2.default, { seats: boat.allSeats, boatId: boat.details.boatId,
-	          attendeeIdsInBoat: boat.attendeeIdsInBoat })
+	          attendeeIdsInBoat: attendeeIdsInBoat })
 	      );
 	    }
 	  }]);
@@ -19561,10 +19561,16 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var dragSpec = {
-	  beginDrag: function beginDrag(_ref) {
-	    var seatNumber = _ref.seatNumber;
+	  beginDrag: function beginDrag(props) {
+	    var boatId = props.boatId;
+	    var seatNumber = props.seatNumber;
+	    var attendee = props.attendee;
+
+
 	    return {
-	      originSeatNumber: seatNumber
+	      originBoatId: boatId,
+	      originSeatNumber: seatNumber,
+	      draggedAttendeeId: attendee.attendeeId
 	    };
 	  }
 	};
@@ -36236,7 +36242,7 @@
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-	var reducer = (0, _reduxActions.handleActions)((_handleActions = {}, _defineProperty(_handleActions, _actions.ASSIGN_ATTENDEE_TO_SEAT, _reducerFunctions.assignAttendeeToSeat), _defineProperty(_handleActions, _actions.UNASSIGN_ATTENDEE_IN_SEAT, _reducerFunctions.unassignAttendeeInSeat), _handleActions), _defaultState.defaultState);
+	var reducer = (0, _reduxActions.handleActions)((_handleActions = {}, _defineProperty(_handleActions, _actions.ASSIGN_ATTENDEE, _reducerFunctions.assignAttendee), _defineProperty(_handleActions, _actions.UNASSIGN_ATTENDEE, _reducerFunctions.unassignAttendee), _handleActions), _defaultState.defaultState);
 
 	exports.default = reducer;
 
@@ -36288,84 +36294,43 @@
 
 /***/ },
 /* 260 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
-	exports.assignAttendee = exports.unassignAttendee = undefined;
 
-	var _unassignAttendee2 = __webpack_require__(261);
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _unassignAttendee3 = _interopRequireDefault(_unassignAttendee2);
+	var assignAttendee = exports.assignAttendee = function assignAttendee(prevState, action) {
+	    var _action$payload = action.payload;
+	    var attendeeId = _action$payload.attendeeId;
+	    var boatId = _action$payload.boatId;
+	    var seatNumber = _action$payload.seatNumber;
 
-	var _assignAttendee2 = __webpack_require__(262);
+	    var newBoats = prevState.boats.setIn([boatId, "assignedSeats", seatNumber], attendeeId);
 
-	var _assignAttendee3 = _interopRequireDefault(_assignAttendee2);
+	    return _extends({}, prevState, {
+	        boats: newBoats
+	    });
+	};
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	var unassignAttendee = exports.unassignAttendee = function unassignAttendee(prevState, action) {
+	    var _action$payload2 = action.payload;
+	    var boatId = _action$payload2.boatId;
+	    var seatNumber = _action$payload2.seatNumber;
 
-	exports.unassignAttendee = _unassignAttendee3.default;
-	exports.assignAttendee = _assignAttendee3.default;
+	    var newBoats = prevState.boats.deleteIn([boatId, "assignedSeats", seatNumber]);
+
+	    return _extends({}, prevState, {
+	        boats: newBoats
+	    });
+	};
 
 /***/ },
 /* 261 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var unassignAttendeeInSeat = function unassignAttendeeInSeat(prevState, _ref) {
-	    var _ref$payload$seatInfo = _ref.payload.seatInfo;
-	    var boatId = _ref$payload$seatInfo.boatId;
-	    var seatNumber = _ref$payload$seatInfo.seatNumber;
-
-	    var oldBoats = prevState.boats;
-	    var newBoats = oldBoats.delete([boatId, "assignedSeats", seatNumber]);
-
-	    return _extends({}, prevState, {
-	        boats: newBoats
-	    });
-	};
-
-	exports.default = unassignAttendeeInSeat;
-
-/***/ },
-/* 262 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var assignAttendeeToSeat = function assignAttendeeToSeat(prevState, _ref) {
-	    var _ref$payload$seatInfo = _ref.payload.seatInfo;
-	    var boatId = _ref$payload$seatInfo.boatId;
-	    var seatNumber = _ref$payload$seatInfo.seatNumber;
-
-	    var oldBoats = prevState.boats;
-	    var newBoats = oldBoats.set([boatId, "assignedSeats", seatNumber], attendeeId);
-
-	    return _extends({}, prevState, {
-	        boats: newBoats
-	    });
-	};
-
-	exports.default = assignAttendeeToSeat;
-
-/***/ },
-/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";

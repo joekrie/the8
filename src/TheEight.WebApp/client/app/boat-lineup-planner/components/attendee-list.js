@@ -7,7 +7,7 @@ import AttendeeListItem from "./attendee-list-item";
 import * as ItemTypes from "../item-types";
 
 export const dropSpec = {
-  drop: (props, monitor) => {
+  drop(props, monitor) {
     const { unassignAttendee } = props;
     const { originBoatId, originSeatNumber } = monitor.getItem();
     unassignAttendee(originBoatId, originSeatNumber);
@@ -18,10 +18,10 @@ export const dropSpec = {
 @DropTarget(ItemTypes.ASSIGNED_ATTENDEE, dropSpec, defaultDropCollect)
 export default class AttendeeList extends Component {
   render() {
-    const { attendeelistItems, connectDropTarget } = this.props;
+    const { attendeeListItems, connectDropTarget } = this.props;
 
-    const attendeeComponents = attendeelistItems.map(item =>
-      <AttendeeListItem key={item.attendee.attendeeId} attendeelistItem={item} />
+    const attendeeComponents = attendeeListItems.map(item =>
+      <AttendeeListItem key={item.attendee.attendeeId} attendeeListItem={item} />
     );
 
     const styles = {

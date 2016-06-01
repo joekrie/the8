@@ -6,9 +6,15 @@ import { defaultDragCollect } from "../../common/dnd-defaults";
 import * as ItemTypes from "../item-types";
 
 const dragSpec = {
-  beginDrag: ({ seatNumber }) => ({ 
-    originSeatNumber: seatNumber 
-  })
+  beginDrag(props) { 
+    const { boatId, seatNumber, attendee } = props;
+    
+    return {
+      originBoatId: boatId,
+      originSeatNumber: seatNumber,
+      draggedAttendeeId: attendee.attendeeId    
+    }
+  }
 };
 
 @Radium
