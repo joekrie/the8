@@ -17787,10 +17787,6 @@
 
 	var _itemTypes = __webpack_require__(225);
 
-	var ItemTypes = _interopRequireWildcard(_itemTypes);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17812,7 +17808,7 @@
 	  }
 	};
 
-	var AttendeeList = (_dec = (0, _reactDnd.DropTarget)(ItemTypes.ASSIGNED_ATTENDEE, dropSpec, _dndDefaults.defaultDropCollect), (0, _radium2.default)(_class = _dec(_class = function (_Component) {
+	var AttendeeList = (_dec = (0, _reactDnd.DropTarget)(_itemTypes.ASSIGNED_ATTENDEE, dropSpec, _dndDefaults.defaultDropCollect), (0, _radium2.default)(_class = _dec(_class = function (_Component) {
 	  _inherits(AttendeeList, _Component);
 
 	  function AttendeeList() {
@@ -17929,10 +17925,6 @@
 
 	var _itemTypes = __webpack_require__(225);
 
-	var ItemTypes = _interopRequireWildcard(_itemTypes);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17949,7 +17941,7 @@
 	  }
 	};
 
-	var AttendeeListItem = (_dec = (0, _reactDnd.DragSource)(ItemTypes.ATTENDEE_LIST_ITEM, dragSpec, _dndDefaults.defaultDragCollect), (0, _radium2.default)(_class = _dec(_class = function (_Component) {
+	var AttendeeListItem = (_dec = (0, _reactDnd.DragSource)(_itemTypes.ATTENDEE_LIST_ITEM, dragSpec, _dndDefaults.defaultDragCollect), (0, _radium2.default)(_class = _dec(_class = function (_Component) {
 	  _inherits(AttendeeListItem, _Component);
 
 	  function AttendeeListItem() {
@@ -17967,26 +17959,16 @@
 
 
 	      var styles = {
-	        base: {
-	          "marginBottom": "10px",
-	          "padding": "10px",
-	          "color": "#F5F5F5",
-	          "cursor": "grab"
-	        },
-	        rower: {
-	          "backgroundColor": "#304F66"
-	        },
-	        coxswain: {
-	          "backgroundColor": "#2A4458"
-	        }
+	        "marginBottom": "10px",
+	        "padding": "10px",
+	        "color": "#F5F5F5",
+	        "cursor": "grab",
+	        "backgroundColor": attendeeListItem.attendee.isCoxswain ? "#304F66" : "#2A4458"
 	      };
-
-	      var rootStyles = [styles.base];
-	      rootStyles.push(attendeeListItem.attendee.isCoxswain ? styles.coxswain : styles.rower);
 
 	      return connectDragSource(React.createElement(
 	        "div",
-	        { style: rootStyles },
+	        { style: styles },
 	        attendeeListItem.attendee.displayName
 	      ));
 	    }
@@ -19355,10 +19337,6 @@
 
 	var _itemTypes = __webpack_require__(225);
 
-	var ItemTypes = _interopRequireWildcard(_itemTypes);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19369,33 +19347,39 @@
 
 	var dropSpec = exports.dropSpec = {
 	  canDrop: function canDrop(props, monitor) {
-	    var attendeeIdsInBoat = props.attendeeIdsInBoat;
+	    var attendeeIdsInTargetBoat = props.attendeeIdsInBoat;
 	    var targetBoatId = props.boatId;
+	    var targetSeatNumber = props.seatNumber;
 
 	    var itemType = monitor.getItemType();
 
 	    var _monitor$getItem = monitor.getItem();
 
 	    var draggedAttendeeId = _monitor$getItem.draggedAttendeeId;
+	    var originSeatNumber = _monitor$getItem.originSeatNumber;
 	    var originBoatId = _monitor$getItem.originBoatId;
 
 
-	    var alreadyInBoat = attendeeIdsInBoat.contains(draggedAttendeeId);
+	    var alreadyInBoat = attendeeIdsInTargetBoat.contains(draggedAttendeeId);
 
-	    if (itemType === ItemTypes.ATTENDEE_LIST_ITEM) {
+	    if (itemType === _itemTypes.ATTENDEE_LIST_ITEM) {
 	      return !alreadyInBoat;
 	    }
 
-	    if (itemType === ItemTypes.ASSIGNED_ATTENDEE) {
+	    if (itemType === _itemTypes.ASSIGNED_ATTENDEE) {
 	      var isMoveWithinBoat = targetBoatId == originBoatId;
-	      return isMoveWithinBoat || !alreadyInBoat;
+	      var isSameSeat = targetSeatNumber == originSeatNumber && isMoveWithinBoat;
+
+	      return !isSameSeat && (isMoveWithinBoat || !alreadyInBoat);
 	    }
 	  },
 	  drop: function drop(props, monitor) {
 	    var assignAttendee = props.assignAttendee;
+	    var unassignAttendee = props.unassignAttendee;
 	    var targetSeatNumber = props.seatNumber;
 	    var targetBoatId = props.boatId;
 	    var attendeeIdInTarget = props.attendeeId;
+
 
 	    var itemType = monitor.getItemType();
 
@@ -19404,23 +19388,32 @@
 	    var draggedAttendeeId = _monitor$getItem2.draggedAttendeeId;
 	    var originSeatNumber = _monitor$getItem2.originSeatNumber;
 	    var originBoatId = _monitor$getItem2.originBoatId;
+	    var attendeeIdsInOriginBoat = _monitor$getItem2.attendeeIdsInOriginBoat;
 
 
-	    if (itemType === ItemTypes.ATTENDEE_LIST_ITEM) {
+	    if (itemType === _itemTypes.ATTENDEE_LIST_ITEM) {
 	      assignAttendee(draggedAttendeeId, targetBoatId, targetSeatNumber);
 	    }
 
-	    if (itemType === ItemTypes.ASSIGNED_ATTENDEE) {
+	    if (itemType === _itemTypes.ASSIGNED_ATTENDEE) {
+	      var isTargetInOrigin = attendeeIdsInOriginBoat.contains(attendeeIdInTarget);
+	      var isMoveWithinBoat = targetBoatId == originBoatId;
+	      var isSwapWithinBoat = isMoveWithinBoat && attendeeIdInTarget;
+
 	      assignAttendee(draggedAttendeeId, targetBoatId, targetSeatNumber);
 
-	      if (attendeeIdInTarget) {
+	      if (isSwapWithinBoat || !isMoveWithinBoat && attendeeIdInTarget && !isTargetInOrigin) {
 	        assignAttendee(attendeeIdInTarget, originBoatId, originSeatNumber);
+	      }
+
+	      if (!isSwapWithinBoat && isTargetInOrigin || isMoveWithinBoat && !attendeeIdInTarget || !isMoveWithinBoat && !attendeeIdInTarget) {
+	        unassignAttendee(originBoatId, originSeatNumber);
 	      }
 	    }
 	  }
 	};
 
-	var Seat = (_dec = (0, _reactDnd.DropTarget)([ItemTypes.ATTENDEE_LIST_ITEM, ItemTypes.ASSIGNED_ATTENDEE], dropSpec, _dndDefaults.defaultDropCollect), (0, _radium2.default)(_class = _dec(_class = function (_Component) {
+	var Seat = (_dec = (0, _reactDnd.DropTarget)([_itemTypes.ATTENDEE_LIST_ITEM, _itemTypes.ASSIGNED_ATTENDEE], dropSpec, _dndDefaults.defaultDropCollect), (0, _radium2.default)(_class = _dec(_class = function (_Component) {
 	  _inherits(Seat, _Component);
 
 	  function Seat() {
@@ -19437,13 +19430,14 @@
 	      var attendeeId = _props.attendeeId;
 	      var boatId = _props.boatId;
 	      var seatNumber = _props.seatNumber;
+	      var attendeeIdsInBoat = _props.attendeeIdsInBoat;
 
 
 	      var coxswainLabel = "COX";
 	      var label = seatNumber === 0 ? coxswainLabel : seatNumber;
 
 	      var assignAttendeeContainer = attendeeId ? React.createElement(_assignedAttendeeContainer2.default, { attendeeId: attendeeId, boatId: boatId,
-	        seatNumber: seatNumber }) : null;
+	        seatNumber: seatNumber, attendeeIdsInBoat: attendeeIdsInBoat }) : null;
 
 	      var styles = {
 	        root: {
@@ -19555,12 +19549,14 @@
 	    var boatId = props.boatId;
 	    var seatNumber = props.seatNumber;
 	    var attendee = props.attendee;
+	    var attendeeIdsInBoat = props.attendeeIdsInBoat;
 
 
 	    return {
 	      originBoatId: boatId,
 	      originSeatNumber: seatNumber,
-	      draggedAttendeeId: attendee.attendeeId
+	      draggedAttendeeId: attendee.attendeeId,
+	      attendeeIdsInOriginBoat: attendeeIdsInBoat
 	    };
 	  }
 	};

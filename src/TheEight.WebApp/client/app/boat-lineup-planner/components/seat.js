@@ -4,56 +4,69 @@ import { DropTarget } from "react-dnd";
 
 import AssignedAttendeeContainer from "../containers/assigned-attendee-container";
 import { defaultDropCollect } from "../../common/dnd-defaults";
-import * as ItemTypes from "../item-types";
+import { ASSIGNED_ATTENDEE, ATTENDEE_LIST_ITEM } from "../item-types";
 
 export const dropSpec = {
   canDrop(props, monitor) {
-    const { attendeeIdsInBoat, boatId: targetBoatId } = props;
+    const { attendeeIdsInBoat: attendeeIdsInTargetBoat, boatId: targetBoatId, seatNumber: targetSeatNumber } = props;
     const itemType = monitor.getItemType();
-    const { draggedAttendeeId, originBoatId } = monitor.getItem();
+    const { draggedAttendeeId, originSeatNumber, originBoatId } = monitor.getItem();
     
-    const alreadyInBoat = attendeeIdsInBoat.contains(draggedAttendeeId);
+    const alreadyInBoat = attendeeIdsInTargetBoat.contains(draggedAttendeeId);
     
-    if (itemType === ItemTypes.ATTENDEE_LIST_ITEM) {
+    if (itemType === ATTENDEE_LIST_ITEM) {
       return !alreadyInBoat;
     }
     
-    if (itemType === ItemTypes.ASSIGNED_ATTENDEE) {      
+    if (itemType === ASSIGNED_ATTENDEE) {      
       const isMoveWithinBoat = targetBoatId == originBoatId;
-      return isMoveWithinBoat || !alreadyInBoat;
+      const isSameSeat = targetSeatNumber == originSeatNumber && isMoveWithinBoat;
+      
+      return !isSameSeat && (isMoveWithinBoat || !alreadyInBoat);
     }
   },
   drop(props, monitor) {
-    const { assignAttendee, seatNumber: targetSeatNumber, boatId: targetBoatId, attendeeId: attendeeIdInTarget } = props;
+    const { assignAttendee, unassignAttendee } = props; 
+    const { seatNumber: targetSeatNumber, boatId: targetBoatId, attendeeId: attendeeIdInTarget } = props;
+    
     const itemType = monitor.getItemType();
-    const { draggedAttendeeId, originSeatNumber, originBoatId } = monitor.getItem();
+    const { draggedAttendeeId, originSeatNumber, originBoatId, attendeeIdsInOriginBoat } = monitor.getItem();
         
-    if (itemType === ItemTypes.ATTENDEE_LIST_ITEM) {
+    if (itemType === ATTENDEE_LIST_ITEM) {
       assignAttendee(draggedAttendeeId, targetBoatId, targetSeatNumber);
     }
     
-    if (itemType === ItemTypes.ASSIGNED_ATTENDEE) {      
+    if (itemType === ASSIGNED_ATTENDEE) {
+      const isTargetInOrigin = attendeeIdsInOriginBoat.contains(attendeeIdInTarget);
+      const isMoveWithinBoat = targetBoatId == originBoatId;
+      const isSwapWithinBoat = isMoveWithinBoat && attendeeIdInTarget;
+            
       assignAttendee(draggedAttendeeId, targetBoatId, targetSeatNumber);
-      
-      if (attendeeIdInTarget) {
+            
+      if (isSwapWithinBoat || (!isMoveWithinBoat && attendeeIdInTarget && !isTargetInOrigin)) {
         assignAttendee(attendeeIdInTarget, originBoatId, originSeatNumber);
+      }
+            
+      if ((!isSwapWithinBoat && isTargetInOrigin) || (isMoveWithinBoat && !attendeeIdInTarget)
+          || (!isMoveWithinBoat && !attendeeIdInTarget)) {
+        unassignAttendee(originBoatId, originSeatNumber);
       }
     }
   }
 };
 
 @Radium
-@DropTarget([ItemTypes.ATTENDEE_LIST_ITEM, ItemTypes.ASSIGNED_ATTENDEE], dropSpec, defaultDropCollect)
+@DropTarget([ATTENDEE_LIST_ITEM, ASSIGNED_ATTENDEE], dropSpec, defaultDropCollect)
 export default class Seat extends Component {
   render() {
-    const { connectDropTarget, attendeeId, boatId, seatNumber } = this.props;
+    const { connectDropTarget, attendeeId, boatId, seatNumber, attendeeIdsInBoat } = this.props;
 
     const coxswainLabel = "COX";
     const label = seatNumber === 0 ? coxswainLabel : seatNumber;
      
     const assignAttendeeContainer = attendeeId 
       ? <AssignedAttendeeContainer attendeeId={attendeeId} boatId={boatId} 
-          seatNumber={seatNumber} />
+          seatNumber={seatNumber} attendeeIdsInBoat={attendeeIdsInBoat} />
       : null;
          
     const styles = {

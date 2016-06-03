@@ -3,7 +3,7 @@ import { Component } from "react";
 import { DragSource } from "react-dnd";
 
 import { defaultDragCollect } from "../../common/dnd-defaults";
-import * as ItemTypes from "../item-types";
+import { ATTENDEE_LIST_ITEM } from "../item-types";
 
 export const dragSpec = {
   beginDrag(props) {
@@ -14,31 +14,21 @@ export const dragSpec = {
 };
 
 @Radium
-@DragSource(ItemTypes.ATTENDEE_LIST_ITEM, dragSpec, defaultDragCollect)
+@DragSource(ATTENDEE_LIST_ITEM, dragSpec, defaultDragCollect)
 export default class AttendeeListItem extends Component {
   render() {
     const { attendeeListItem, connectDragSource } = this.props;
 
     const styles = {
-      base: {
-        "marginBottom": "10px",
-        "padding": "10px",
-        "color": "#F5F5F5",
-        "cursor": "grab"
-      },
-      rower: {
-        "backgroundColor": "#304F66"
-      },
-      coxswain: {
-        "backgroundColor": "#2A4458"
-      }
+      "marginBottom": "10px",
+      "padding": "10px",
+      "color": "#F5F5F5",
+      "cursor": "grab",
+      "backgroundColor": attendeeListItem.attendee.isCoxswain ? "#304F66" : "#2A4458"
     };
 
-    const rootStyles = [styles.base];
-    rootStyles.push(attendeeListItem.attendee.isCoxswain ? styles.coxswain : styles.rower);
-
     return connectDragSource(
-      <div style={rootStyles}>
+      <div style={styles}>
         {attendeeListItem.attendee.displayName}
       </div>
     );

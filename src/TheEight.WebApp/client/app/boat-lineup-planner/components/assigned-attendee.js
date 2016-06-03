@@ -7,12 +7,13 @@ import * as ItemTypes from "../item-types";
 
 const dragSpec = {
   beginDrag(props) { 
-    const { boatId, seatNumber, attendee } = props;
+    const { boatId, seatNumber, attendee, attendeeIdsInBoat } = props;
     
     return {
       originBoatId: boatId,
       originSeatNumber: seatNumber,
-      draggedAttendeeId: attendee.attendeeId    
+      draggedAttendeeId: attendee.attendeeId,
+      attendeeIdsInOriginBoat: attendeeIdsInBoat
     }
   }
 };

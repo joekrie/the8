@@ -4,7 +4,7 @@ import { DropTarget } from "react-dnd";
 
 import { defaultDropCollect } from "../../common/dnd-defaults";
 import AttendeeListItem from "./attendee-list-item";
-import * as ItemTypes from "../item-types";
+import { ASSIGNED_ATTENDEE } from "../item-types";
 
 export const dropSpec = {
   drop(props, monitor) {
@@ -15,7 +15,7 @@ export const dropSpec = {
 };
 
 @Radium
-@DropTarget(ItemTypes.ASSIGNED_ATTENDEE, dropSpec, defaultDropCollect)
+@DropTarget(ASSIGNED_ATTENDEE, dropSpec, defaultDropCollect)
 export default class AttendeeList extends Component {
   render() {
     const { attendeeListItems, connectDropTarget } = this.props;
