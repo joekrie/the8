@@ -1,5 +1,4 @@
 import { List, Map, fromJS } from "immutable";
-import Radium from "radium";
 import { Component } from "react";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
@@ -15,7 +14,6 @@ import sampleState from "./sample-state";
 
 const store = createStore(reducer, { ...sampleState }, applyMiddleware(loggerMiddleware));
 
-@Radium
 @DragDropContext(HTML5Backend)
 export default class BoatLineupPlannerApp extends Component {
   render() {

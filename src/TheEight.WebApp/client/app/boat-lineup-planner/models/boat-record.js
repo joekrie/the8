@@ -23,7 +23,7 @@ class BoatRecord extends Record(defaults) {
   }
   
   get attendeeIdsInBoat() {
-    return this.assignedSeats.map(attendeeId => attendeeId);
+    return this.assignedSeats.valueSeq().toList();
   }
 }
 

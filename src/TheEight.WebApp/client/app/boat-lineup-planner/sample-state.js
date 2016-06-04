@@ -4,10 +4,13 @@ import AttendeeRecord from "./models/attendee-record";
 import BoatRecord from "./models/boat-record";
 import BoatDetailsRecord from "./models/boat-details-record";
 import EventDetailsRecord from "./models/event-details-record";
+import { PRACTICE_MODE } from "./models/event-modes";
 
 const sampleState = {
-  eventSettings: new EventDetailsRecord({
-    canAttendeeOccupyMultipleBoats: true
+  eventDetails: new EventDetailsRecord({
+    eventId: "event-1",
+    title: "June 1, 2016",
+    mode: PRACTICE_MODE
   }),
   boats: new Map({
     "boat-1": new BoatRecord({

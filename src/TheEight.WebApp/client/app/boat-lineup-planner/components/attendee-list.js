@@ -1,10 +1,12 @@
-import Radium from "radium";
 import { Component } from "react";
 import { DropTarget } from "react-dnd";
 
 import { defaultDropCollect } from "../../common/dnd-defaults";
 import AttendeeListItem from "./attendee-list-item";
 import { ASSIGNED_ATTENDEE } from "../item-types";
+import EventDetails from "./event-details";
+import { RACE_MODE } from "../models/event-modes";
+import BoatCreator from "./boat-creator";
 
 export const dropSpec = {
   drop(props, monitor) {
@@ -14,15 +16,17 @@ export const dropSpec = {
   }
 };
 
-@Radium
 @DropTarget(ASSIGNED_ATTENDEE, dropSpec, defaultDropCollect)
 export default class AttendeeList extends Component {
   render() {
-    const { attendeeListItems, connectDropTarget } = this.props;
+    const { attendeeListItems, connectDropTarget, eventDetails, changeEventDetails, createBoat } = this.props;
 
-    const attendeeComponents = attendeeListItems.map(item =>
-      <AttendeeListItem key={item.attendee.attendeeId} attendeeListItem={item} />
-    );
+    const attendeeComponents = attendeeListItems
+      .filter(item => eventDetails.mode === RACE_MODE || !item.isAssigned)
+      .map(item =>
+        <AttendeeListItem key={item.attendee.attendeeId} attendeeListItem={item} 
+          eventDetails={eventDetails} />
+      );
 
     const styles = {
       root: {
@@ -33,23 +37,13 @@ export default class AttendeeList extends Component {
       },
       attendeeList: {
         "padding": "15px"
-      },
-      attendee: {
-        "marginBottom": "10px"
-      },
-      header: {
-        "backgroundColor": "#263F52",
-        "color": "#F5F5F5",
-        "marginBottom": "10px",
-        "padding": "10px"
       }
     };
 
     return connectDropTarget(
       <div style={styles.root}>
-        <div style={styles.header}>
-          Unassigned
-        </div>
+        <EventDetails eventDetails={eventDetails} changeEventDetails={changeEventDetails} />
+        <BoatCreator createBoat={createBoat} />
         <div style={styles.attendeeList}>
           {attendeeComponents}
         </div>

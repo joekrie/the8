@@ -1,4 +1,3 @@
-import Radium from "radium";
 import { Component } from "react";
 import { DropTarget } from "react-dnd";
 
@@ -9,6 +8,7 @@ import { ASSIGNED_ATTENDEE, ATTENDEE_LIST_ITEM } from "../item-types";
 export const dropSpec = {
   canDrop(props, monitor) {
     const { attendeeIdsInBoat: attendeeIdsInTargetBoat, boatId: targetBoatId, seatNumber: targetSeatNumber } = props;
+    
     const itemType = monitor.getItemType();
     const { draggedAttendeeId, originSeatNumber, originBoatId } = monitor.getItem();
     
@@ -55,7 +55,6 @@ export const dropSpec = {
   }
 };
 
-@Radium
 @DropTarget([ATTENDEE_LIST_ITEM, ASSIGNED_ATTENDEE], dropSpec, defaultDropCollect)
 export default class Seat extends Component {
   render() {

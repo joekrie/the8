@@ -8,11 +8,11 @@ const defaults = {
   seatCount: 0
 };
 
-class BoatInfoRecord extends Record(defaults) {
+class BoatDetailsRecord extends Record(defaults) {
   get seatNumbers() {
     const seatNums = range(this.isCoxed ? 0 : 1, this.seatCount + 1);
     return List(seatNums);
   }
 }
 
-export default BoatInfoRecord
+export default BoatDetailsRecord

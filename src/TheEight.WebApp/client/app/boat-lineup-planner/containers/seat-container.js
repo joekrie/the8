@@ -3,8 +3,13 @@ import { bindActionCreators } from "redux";
 
 import Seat from "../components/seat";
 import { assignAttendee, unassignAttendee } from "../action-creators";
+import { RACE_MODE } from "../models/event-modes";
 
-const mapDispatchToProps = dispatch => bindActionCreators({ assignAttendee, unassignAttendee }, dispatch);
+export const mapStateToProps = state => ({
+  canAttendeeOccupyMultipleBoats: state.eventDetails.mode === RACE_MODE 
+});
 
-const SeatContainer = connect(null, mapDispatchToProps)(Seat);
+export const mapDispatchToProps = dispatch => bindActionCreators({ assignAttendee, unassignAttendee }, dispatch);
+
+const SeatContainer = connect(mapStateToProps, mapDispatchToProps)(Seat);
 export default SeatContainer

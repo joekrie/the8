@@ -1,13 +1,54 @@
 import { handleActions } from "redux-actions";
 import { Map, List } from "immutable";
 
-import { ASSIGN_ATTENDEE, UNASSIGN_ATTENDEE } from "./actions";
+import { ASSIGN_ATTENDEE, UNASSIGN_ATTENDEE, CHANGE_EVENT_DETAILS, CREATE_BOAT } from "./actions";
 import { defaultState } from "./default-state";
-import { assignAttendee, unassignAttendee } from "./reducer-functions";
+import BoatRecord from "./models/boat-record";
 
 const reducer = handleActions({
-    [ASSIGN_ATTENDEE]: assignAttendee,
-    [UNASSIGN_ATTENDEE]: unassignAttendee
+  [ASSIGN_ATTENDEE]: (prevState, { type, payload }) => {
+    const { attendeeId, boatId, seatNumber } = payload;
+    const newBoats = prevState.boats.setIn([boatId, "assignedSeats", seatNumber], attendeeId);
+
+    return {
+      ...prevState,
+      boats: newBoats
+    };
+  },
+  [UNASSIGN_ATTENDEE]: (prevState, { type, payload }) => {
+    const { boatId, seatNumber } = payload;
+    const newBoats = prevState.boats.deleteIn([boatId, "assignedSeats", seatNumber]);
+    
+    return {
+      ...prevState,
+      boats: newBoats
+    };
+  },
+  [CHANGE_EVENT_DETAILS]: (prevState, { type, payload }) => {
+    const { property, newValue } = payload;
+     
+    if (property === "eventId") {
+      return { ...prevState };
+    }
+    
+    const newDetails = prevState.eventDetails.set(property, newValue);
+        
+    return {
+      ...prevState,
+      eventDetails: newDetails
+    };
+  },
+  [CREATE_BOAT]: (prevState, { type, payload }) => {
+    const { boatDetails } = payload;
+    
+    const boatId = boatDetails.boatId;
+    const newBoats = prevState.boats.set(boatId, new BoatRecord({ details: boatDetails }));
+    
+    return {
+      ...prevState,
+      boats: newBoats
+    };
+  }
 }, defaultState);
 
 export default reducer

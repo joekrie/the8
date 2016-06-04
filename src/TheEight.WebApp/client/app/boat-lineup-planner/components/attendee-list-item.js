@@ -4,12 +4,19 @@ import { DragSource } from "react-dnd";
 
 import { defaultDragCollect } from "../../common/dnd-defaults";
 import { ATTENDEE_LIST_ITEM } from "../item-types";
+import { RACE_MODE } from "../models/event-modes";
 
 export const dragSpec = {
+  canDrag(props) {
+    const { attendeeListItem, eventDetails } = props;
+    return eventDetails.mode === RACE_MODE || !attendeeListItem.isAssigned;
+  },
   beginDrag(props) {
+    const { attendeeListItem } = props;
+    
     return {
-      draggedAttendeeId: props.attendeeListItem.attendee.attendeeId
-    }
+      draggedAttendeeId: attendeeListItem.attendee.attendeeId
+    };
   }
 };
 
