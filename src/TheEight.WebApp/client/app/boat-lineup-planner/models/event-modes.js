@@ -1,4 +1,2 @@
-const RACE_MODE = "RACE_MODE";
-const PRACTICE_MODE = "PRACTICE_MODE";
-
-export { RACE_MODE, PRACTICE_MODE }
+export const RACE_MODE = "RACE_MODE";
+export const PRACTICE_MODE = "PRACTICE_MODE";

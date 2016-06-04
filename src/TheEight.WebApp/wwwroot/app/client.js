@@ -17999,11 +17999,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var ASSIGNED_ATTENDEE = "ASSIGNED_ATTENDEE";
-	var ATTENDEE_LIST_ITEM = "ATTENDEE_LIST_ITEM";
-
-	exports.ASSIGNED_ATTENDEE = ASSIGNED_ATTENDEE;
-	exports.ATTENDEE_LIST_ITEM = ATTENDEE_LIST_ITEM;
+	var ASSIGNED_ATTENDEE = exports.ASSIGNED_ATTENDEE = "ASSIGNED_ATTENDEE";
+	var ATTENDEE_LIST_ITEM = exports.ATTENDEE_LIST_ITEM = "ATTENDEE_LIST_ITEM";
 
 /***/ },
 /* 226 */
@@ -18014,11 +18011,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var RACE_MODE = "RACE_MODE";
-	var PRACTICE_MODE = "PRACTICE_MODE";
-
-	exports.RACE_MODE = RACE_MODE;
-	exports.PRACTICE_MODE = PRACTICE_MODE;
+	var RACE_MODE = exports.RACE_MODE = "RACE_MODE";
+	var PRACTICE_MODE = exports.PRACTICE_MODE = "PRACTICE_MODE";
 
 /***/ },
 /* 227 */
@@ -18078,8 +18072,9 @@
 	        "div",
 	        { style: styles },
 	        React.createElement(
-	          "div",
+	          "label",
 	          null,
+	          "Title",
 	          React.createElement("input", { value: title, onChange: function onChange(evt) {
 	              return changeEventDetails("title", evt.target.value);
 	            } })
@@ -19563,15 +19558,10 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var ASSIGN_ATTENDEE = "ASSIGN_ATTENDEE";
-	var UNASSIGN_ATTENDEE = "UNASSIGN_ATTENDEE";
-	var CHANGE_EVENT_DETAILS = "CHANGE_EVENT_DETAILS";
-	var CREATE_BOAT = "CREATE_BOAT";
-
-	exports.ASSIGN_ATTENDEE = ASSIGN_ATTENDEE;
-	exports.UNASSIGN_ATTENDEE = UNASSIGN_ATTENDEE;
-	exports.CHANGE_EVENT_DETAILS = CHANGE_EVENT_DETAILS;
-	exports.CREATE_BOAT = CREATE_BOAT;
+	var ASSIGN_ATTENDEE = exports.ASSIGN_ATTENDEE = "ASSIGN_ATTENDEE";
+	var UNASSIGN_ATTENDEE = exports.UNASSIGN_ATTENDEE = "UNASSIGN_ATTENDEE";
+	var CHANGE_EVENT_DETAILS = exports.CHANGE_EVENT_DETAILS = "CHANGE_EVENT_DETAILS";
+	var CREATE_BOAT = exports.CREATE_BOAT = "CREATE_BOAT";
 
 /***/ },
 /* 248 */
@@ -19767,10 +19757,24 @@
 	        return String(seatCount) + (isCoxed ? "+" : "x");
 	      };
 
+	      var styles = {
+	        "color": "white"
+	      };
+
 	      return React.createElement(
 	        "div",
-	        null,
-	        React.createElement("input", { value: this.state.title, onChange: onChangeTitle }),
+	        { style: styles },
+	        React.createElement(
+	          "h2",
+	          null,
+	          "Add Boat"
+	        ),
+	        React.createElement(
+	          "label",
+	          null,
+	          "Title",
+	          React.createElement("input", { value: this.state.title, onChange: onChangeTitle })
+	        ),
 	        React.createElement(
 	          "select",
 	          { value: getTypeValue(), onChange: onChangeType },

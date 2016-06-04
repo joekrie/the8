@@ -39,9 +39,19 @@ export default class BoatCreator extends Component {
       return String(seatCount) + (isCoxed ? "+" : "x");
     };
     
+    const styles = {
+      "color": "white"
+    };
+    
     return (
-      <div>
-        <input value={this.state.title} onChange={onChangeTitle} />
+      <div style={styles}>
+        <h2>
+          Add Boat
+        </h2>
+        <label>
+          Title
+          <input value={this.state.title} onChange={onChangeTitle} />
+        </label>
         <select value={getTypeValue()} onChange={onChangeType}>
           <option value="1x">1x</option> 
           <option value="2x">2x</option>

@@ -18,9 +18,10 @@ export default class EventDetails extends Component {
     
     return (
       <div style={styles}>
-        <div>
+        <label>
+          Title
           <input value={title} onChange={evt => changeEventDetails("title", evt.target.value)} />
-        </div>
+        </label>
         <div>
           <label>
             <input name="mode" type="radio" checked={mode === PRACTICE_MODE} 
