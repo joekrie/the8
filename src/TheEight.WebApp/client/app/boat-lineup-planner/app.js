@@ -2,6 +2,8 @@ import { List, Map, fromJS } from "immutable";
 import { Component } from "react";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
+import TestBackend from "react-dnd-test-backend";
+import TouchBackend from "react-dnd-touch-backend";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 
@@ -14,8 +16,7 @@ import sampleState from "./sample-state";
 
 const store = createStore(reducer, { ...sampleState }, applyMiddleware(loggerMiddleware));
 
-@DragDropContext(HTML5Backend)
-export default class BoatLineupPlannerApp extends Component {
+export class AppBase extends Component {
   render() {
     const styles = {
       "position": "absolute",
@@ -32,3 +33,9 @@ export default class BoatLineupPlannerApp extends Component {
     );
   }
 }
+
+export const TouchEnabledBoatLineupPlannerApp = DragDropContext(TouchBackend)(AppBase)
+export const ServerSideBoatLineupPlannerApp = DragDropContext(TestBackend)(AppBase)
+
+const BoatLineupPlannerApp = DragDropContext(HTML5Backend)(AppBase)
+export default BoatLineupPlannerApp

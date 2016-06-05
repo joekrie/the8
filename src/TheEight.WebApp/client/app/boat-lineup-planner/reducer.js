@@ -1,7 +1,7 @@
 import { handleActions } from "redux-actions";
 import { Map, List } from "immutable";
 
-import { ASSIGN_ATTENDEE, UNASSIGN_ATTENDEE, CHANGE_EVENT_DETAILS, CREATE_BOAT } from "./actions";
+import { ASSIGN_ATTENDEE, UNASSIGN_ATTENDEE, CHANGE_EVENT_DETAILS, CREATE_BOAT, CREATE_ATTENDEE } from "./actions";
 import { defaultState } from "./default-state";
 import BoatRecord from "./models/boat-record";
 
@@ -47,6 +47,16 @@ const reducer = handleActions({
     return {
       ...prevState,
       boats: newBoats
+    };
+  },
+  [CREATE_ATTENDEE]:  (prevState, { type, payload }) => {
+    const { attendee } = payload;
+    
+    const newAttendees = prevState.boats.push(attendee);
+    
+    return {
+      ...prevState,
+      attendees: newAttendees
     };
   }
 }, defaultState);

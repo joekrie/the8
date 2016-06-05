@@ -10,16 +10,15 @@ export default class EventDetails extends Component {
     
     const styles = {
       "backgroundColor": "#263F52",
-      "color": "#F5F5F5",
+      "color": "white",
       "marginBottom": "10px",
       "padding": "10px"
     };
-    
-    
+        
     return (
       <div style={styles}>
+        <h1>{title}</h1>
         <label>
-          Title
           <input value={title} onChange={evt => changeEventDetails("title", evt.target.value)} />
         </label>
         <div>
