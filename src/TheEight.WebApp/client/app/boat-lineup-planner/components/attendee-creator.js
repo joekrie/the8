@@ -1,11 +1,14 @@
 import { Component } from "react";
 
-import BoatDetailsRecord from "../models/boat-details-record";
+import AttendeeRecord from "../models/attendee-record";
 
 export default class BoatCreator extends Component {  
   constructor() {
     super();
-    
+    this.resetState();
+  }
+  
+  resetState() {
     this.state = {
       name: "",
       isCoxswain: false
@@ -13,24 +16,30 @@ export default class BoatCreator extends Component {
   }
   
   render() {
-    const { createBoat } = this.props;
+    const { createAttendee } = this.props;
     
     const onChangeName = event => {
-      this.setState({ title: event.target.value });
+      this.setState({ name: event.target.value });
     };
     
-    const onChangeType = event => {
+    const onChangeRole = event => {
       const value = event.target.value;
-      const seatCount = Number(value[0]);
-      const isCoxed = value[1] === "+";
-      this.setState({ seatCount, isCoxed });
+      this.setState({ isCoxswain: value });
     };
     
     const onSubmit = () => {
-      const { name } = this.state;
-      const attendeeId = "new-boat-" + Date.now();
-      const newBoatDetails = new BoatDetailsRecord({ boatId, title, seatCount, isCoxed });
-      createBoat(newBoatDetails);
+      const { name, isCoxswain } = this.state;
+      const attendeeId = "new-attendee-" + Date.now();
+      
+      const newAttendee = new AttendeeRecord({ 
+        attendeeId, 
+        isCoxswain,
+        displayName: name,
+        sortName: name
+      });
+      
+      createAttendee(newAttendee);
+      this.resetState();
     };
     
     const getTypeValue = () => {
@@ -39,17 +48,20 @@ export default class BoatCreator extends Component {
     };
     
     const styles = {
-      "color": "white"
+      "color": "white",
+      "padding": "10px",
+      "margin": "10px",
+      "backgroundColor": "#2A4458"
     };
     
     return (
       <div style={styles}>
-        <h2>
+        <div>
           Add Attendee
-        </h2>
+        </div>
         <label>
           Name
-          <input value={this.state.title} onChange={onChangeTitle} />
+          <input value={this.state.name} onChange={onChangeName} />
         </label>
         <select value={this.state.isCoxswain} onChange={onChangeRole}>
           <option value="false">Rower</option> 

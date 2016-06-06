@@ -1,9 +1,7 @@
-import Radium from "radium";
 import { Component } from "react";
 
 import Boat from "./boat";
 
-@Radium
 class BoatList extends Component {
   render() {
     const { boats } = this.props;    

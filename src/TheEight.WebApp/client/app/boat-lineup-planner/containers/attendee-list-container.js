@@ -3,7 +3,7 @@ import { List } from "immutable";
 import { bindActionCreators } from "redux";
 
 import AttendeeList from "../components/attendee-list";
-import { unassignAttendee, changeEventDetails, createBoat } from "../action-creators";
+import { unassignAttendee, changeEventDetails, createBoat, createAttendee } from "../action-creators";
 import AttendeeListItemRecord from "../models/attendee-list-item-record";
 
 export const mapStateToProps = state => {
@@ -23,7 +23,7 @@ export const mapStateToProps = state => {
   };
 };
 
-const actionCreators = { unassignAttendee, changeEventDetails, createBoat };
+const actionCreators = { unassignAttendee, changeEventDetails, createBoat, createAttendee };
 export const mapDispatchToProps = dispatch => bindActionCreators(actionCreators, dispatch);
 
 const AttendeeListContainer = connect(mapStateToProps, mapDispatchToProps)(AttendeeList);

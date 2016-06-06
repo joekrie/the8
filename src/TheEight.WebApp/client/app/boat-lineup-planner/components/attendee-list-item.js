@@ -5,6 +5,7 @@ import { DragSource } from "react-dnd";
 import { defaultDragCollect } from "../../common/dnd-defaults";
 import { ATTENDEE_LIST_ITEM } from "../item-types";
 import { RACE_MODE } from "../models/event-modes";
+import Attendee from "./attendee";
 
 export const dragSpec = {
   canDrag(props) {
@@ -36,7 +37,7 @@ export default class AttendeeListItem extends Component {
 
     return connectDragSource(
       <div style={styles}>
-        {attendeeListItem.attendee.displayName}
+        <Attendee attendee={attendeeListItem.attendee} />
       </div>
     );
   }

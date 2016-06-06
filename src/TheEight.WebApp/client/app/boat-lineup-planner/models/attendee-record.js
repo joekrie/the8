@@ -1,10 +1,16 @@
 import { Record } from "immutable";
 
-const AttendeeRecord = Record({
-    attendeeId: "",
-    displayName: "",
-    sortName: "",
-    isCoxswain: false
-});
+import { BISWEPTUAL_ROWER, COXSWAIN } from "./attendee-positions";
 
-export default AttendeeRecord
+const defaults = {
+  attendeeId: "",
+  displayName: "",
+  sortName: "",
+  position: BISWEPTUAL_ROWER
+};
+
+export default class AttendeeRecord extends Record(defaults) {
+  get isCoxswain() {
+    return this.position === COXSWAIN;
+  }
+}

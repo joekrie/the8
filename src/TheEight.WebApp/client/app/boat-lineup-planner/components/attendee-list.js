@@ -7,6 +7,7 @@ import { ASSIGNED_ATTENDEE } from "../item-types";
 import EventDetails from "./event-details";
 import { RACE_MODE } from "../models/event-modes";
 import BoatCreator from "./boat-creator";
+import AttendeeCreator from "./attendee-creator";
 
 export const dropSpec = {
   drop(props, monitor) {
@@ -19,7 +20,7 @@ export const dropSpec = {
 @DropTarget(ASSIGNED_ATTENDEE, dropSpec, defaultDropCollect)
 export default class AttendeeList extends Component {
   render() {
-    const { attendeeListItems, connectDropTarget, eventDetails, changeEventDetails, createBoat } = this.props;
+    const { attendeeListItems, connectDropTarget, eventDetails, changeEventDetails, createBoat, createAttendee } = this.props;
 
     const attendeeComponents = attendeeListItems
       .filter(item => eventDetails.mode === RACE_MODE || !item.isAssigned)
@@ -44,6 +45,7 @@ export default class AttendeeList extends Component {
       <div style={styles.root}>
         <EventDetails eventDetails={eventDetails} changeEventDetails={changeEventDetails} />
         <BoatCreator createBoat={createBoat} />
+        <AttendeeCreator createAttendee={createAttendee} />
         <div style={styles.attendeeList}>
           {attendeeComponents}
         </div>

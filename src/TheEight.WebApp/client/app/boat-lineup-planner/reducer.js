@@ -52,7 +52,7 @@ const reducer = handleActions({
   [CREATE_ATTENDEE]:  (prevState, { type, payload }) => {
     const { attendee } = payload;
     
-    const newAttendees = prevState.boats.push(attendee);
+    const newAttendees = prevState.attendees.push(attendee);
     
     return {
       ...prevState,

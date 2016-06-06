@@ -5,12 +5,15 @@ import BoatDetailsRecord from "../models/boat-details-record";
 export default class BoatCreator extends Component {  
   constructor() {
     super();
-    
+    this.resetState();
+  }
+  
+  resetState() {
     this.state = {
       seatCount: 4,
       isCoxed: true,
       title: ""
-    }
+    };
   }
   
   render() {
@@ -29,9 +32,12 @@ export default class BoatCreator extends Component {
     
     const onSubmit = () => {
       const { title, seatCount, isCoxed } = this.state;
+      
       const boatId = "new-boat-" + Date.now();
       const newBoatDetails = new BoatDetailsRecord({ boatId, title, seatCount, isCoxed });
+      
       createBoat(newBoatDetails);
+      this.resetState();
     };
     
     const getTypeValue = () => {
@@ -40,14 +46,17 @@ export default class BoatCreator extends Component {
     };
     
     const styles = {
-      "color": "white"
+      "color": "white",      
+      "padding": "10px",
+      "margin": "10px",
+      "backgroundColor": "#2A4458"
     };
     
     return (
       <div style={styles}>
-        <h2>
+        <div>
           Add Boat
-        </h2>
+        </div>
         <label>
           Title
           <input value={this.state.title} onChange={onChangeTitle} />

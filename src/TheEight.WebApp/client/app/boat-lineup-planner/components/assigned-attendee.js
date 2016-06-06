@@ -3,6 +3,7 @@ import { DragSource } from "react-dnd";
 
 import { defaultDragCollect } from "../../common/dnd-defaults";
 import { ASSIGNED_ATTENDEE } from "../item-types";
+import Attendee from "./attendee";
 
 const dragSpec = {
   beginDrag(props) { 
@@ -20,8 +21,10 @@ const dragSpec = {
 @DragSource(ASSIGNED_ATTENDEE, dragSpec, defaultDragCollect)
 export default class AssignedAttendee extends Component {
   render() {
-    const { attendee, connectDragSource } = this.props;
-
+    const { attendee, connectDragSource, acceptedPositions } = this.props;
+    
+    const isOutOfPosition = !acceptedPositions.includes(attendee.position);
+    
     const styles = {
       "marginBottom": "10px",
       "padding": "10px",
@@ -32,7 +35,7 @@ export default class AssignedAttendee extends Component {
 
     return connectDragSource(
       <div style={styles}>
-        {attendee.displayName}
+        <Attendee attendee={attendee} isOutOfPosition={isOutOfPosition} />
       </div>
     );
   }

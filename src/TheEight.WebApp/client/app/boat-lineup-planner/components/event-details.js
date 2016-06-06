@@ -6,7 +6,7 @@ import { RACE_MODE, PRACTICE_MODE } from "../models/event-modes";
 export default class EventDetails extends Component {  
   render() {
     const { changeEventDetails } = this.props;
-    const { title, mode } = this.props.eventDetails;
+    const { date, notes, mode } = this.props.eventDetails;
     
     const styles = {
       "backgroundColor": "#263F52",
@@ -17,10 +17,18 @@ export default class EventDetails extends Component {
         
     return (
       <div style={styles}>
-        <h1>{title}</h1>
-        <label>
-          <input value={title} onChange={evt => changeEventDetails("title", evt.target.value)} />
-        </label>
+        <div>
+          <label>
+            Date
+            <input value={date} onChange={evt => changeEventDetails("date", evt.target.value)} />
+          </label>
+        </div>
+        <div>
+          <label>
+            Notes
+            <textarea value={notes} onChange={evt => changeEventDetails("notes", evt.target.value)}></textarea>
+          </label>
+        </div>
         <div>
           <label>
             <input name="mode" type="radio" checked={mode === PRACTICE_MODE} 

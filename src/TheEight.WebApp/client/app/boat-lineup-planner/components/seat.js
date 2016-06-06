@@ -4,6 +4,7 @@ import { DropTarget } from "react-dnd";
 import AssignedAttendeeContainer from "../containers/assigned-attendee-container";
 import { defaultDropCollect } from "../../common/dnd-defaults";
 import { ASSIGNED_ATTENDEE, ATTENDEE_LIST_ITEM } from "../item-types";
+import { COXSWAIN, PORT_ROWER, STARBOARD_ROWER, BISWEPTUAL_ROWER } from "../models/attendee-positions";
 
 export const dropSpec = {
   canDrop(props, monitor) {
@@ -60,12 +61,27 @@ export default class Seat extends Component {
   render() {
     const { connectDropTarget, attendeeId, boatId, seatNumber, attendeeIdsInBoat } = this.props;
 
-    const coxswainLabel = "COX";
-    const label = seatNumber === 0 ? coxswainLabel : seatNumber;
+    const isCoxSeat = seatNumber === 0;
+    const isPort = seatNumber % 2;
+    
+    const label = isCoxSeat ? "C" : seatNumber;
+    
+    const getAcceptedPositions = () => {
+      if (isCoxSeat) {
+        return [COXSWAIN];
+      }
+      
+      if (isPort) {
+        return [PORT_ROWER, BISWEPTUAL_ROWER];
+      }
+      
+      return [STARBOARD_ROWER, BISWEPTUAL_ROWER];
+    };
      
     const assignAttendeeContainer = attendeeId 
       ? <AssignedAttendeeContainer attendeeId={attendeeId} boatId={boatId} 
-          seatNumber={seatNumber} attendeeIdsInBoat={attendeeIdsInBoat} />
+          seatNumber={seatNumber} attendeeIdsInBoat={attendeeIdsInBoat}
+          acceptedPositions={getAcceptedPositions()} />
       : null;
          
     const styles = {

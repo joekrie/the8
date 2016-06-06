@@ -5,11 +5,13 @@ import BoatRecord from "./models/boat-record";
 import BoatDetailsRecord from "./models/boat-details-record";
 import EventDetailsRecord from "./models/event-details-record";
 import { PRACTICE_MODE } from "./models/event-modes";
+import { COXSWAIN, PORT_ROWER, STARBOARD_ROWER, BISWEPTUAL_ROWER } from "./models/attendee-positions";
 
 const sampleState = {
   eventDetails: new EventDetailsRecord({
     eventId: "event-1",
-    title: "June 1, 2016",
+    date: new Date(2016, 7, 30),
+    notes: "",
     mode: PRACTICE_MODE
   }),
   boats: new Map({
@@ -39,32 +41,37 @@ const sampleState = {
       attendeeId: "cox-1",
       sortName: "Hill, Dule",
       displayName: "Dule Hill",
-      isCoxswain: true
+      position: COXSWAIN
     }),
     new AttendeeRecord({
       attendeeId: "rower-1",
       sortName: "Sheen, Martin",
-      displayName: "Martin Sheen"
+      displayName: "Martin Sheen",
+      position: PORT_ROWER
     }),
     new AttendeeRecord({
       attendeeId: "rower-2",
       sortName: "Lowe, Rob",
-      displayName: "Rob Lowe"
+      displayName: "Rob Lowe",
+      position: STARBOARD_ROWER
     }),
     new AttendeeRecord({
       attendeeId: "rower-3",
       sortName: "Schiff, Richard",
-      displayName: "Richard Schiff"
+      displayName: "Richard Schiff",
+      position: BISWEPTUAL_ROWER
     }),
     new AttendeeRecord({
       attendeeId: "rower-4",
       sortName: "Janney, Allison",
-      displayName: "Allison Janney"
+      displayName: "Allison Janney",
+      position: STARBOARD_ROWER
     }),
     new AttendeeRecord({
       attendeeId: "rower-5",
       sortName: "Spencer, John",
-      displayName: "John Spencer"
+      displayName: "John Spencer",
+      position: PORT_ROWER
     })
   ])
 };
