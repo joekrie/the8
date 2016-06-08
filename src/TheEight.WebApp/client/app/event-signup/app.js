@@ -16,7 +16,7 @@ import sampleState from "./sample-state";
 
 const store = createStore(reducer, { ...sampleState }, applyMiddleware(loggerMiddleware));
 
-export class AppBase extends Component {
+export default class EventSignupApp extends Component {
   render() {
     const styles = {
       "position": "absolute",
@@ -26,16 +26,9 @@ export class AppBase extends Component {
     return (
       <Provider store={store}>
         <div style={styles}>
-          <AttendeeListContainer />
-          <BoatListContainer />
+          
         </div>
       </Provider>
     );
   }
 }
-
-export const TouchEnabledBoatLineupPlannerApp = DragDropContext(TouchBackend)(AppBase)
-export const ServerSideBoatLineupPlannerApp = DragDropContext(TestBackend)(AppBase)
-
-const BoatLineupPlannerApp = DragDropContext(HTML5Backend)(AppBase)
-export default BoatLineupPlannerApp

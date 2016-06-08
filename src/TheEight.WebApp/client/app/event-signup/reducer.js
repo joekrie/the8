@@ -1,12 +1,21 @@
 import { handleActions } from "redux-actions";
 import { Map, List } from "immutable";
 
-import { SIGNUP, UN_SIGNUP } from "./actions";
 import { defaultState } from "./default-state";
 
+import { 
+  ATTEND, 
+  UNATTEND 
+} from "./actions";
+
 const reducer = handleActions({
-  [SIGNUP]: (prevState, { type, payload }) => {
-    const { attendeeId, boatId, seatNumber } = payload;
+  [ATTEND]: (prevState, { type, payload }) => {
+    const { 
+      attendeeId, 
+      boatId, 
+      seatNumber 
+    } = payload;
+
     const newBoats = prevState.boats.setIn([boatId, "assignedSeats", seatNumber], attendeeId);
 
     return {
@@ -14,7 +23,7 @@ const reducer = handleActions({
       boats: newBoats
     };
   },
-  [UN_SIGNUP]: (prevState, { type, payload }) => {
+  [UNATTEND]: (prevState, { type, payload }) => {
     const { boatId, seatNumber } = payload;
     const newBoats = prevState.boats.deleteIn([boatId, "assignedSeats", seatNumber]);
     

@@ -1,2 +1,2 @@
-export const SIGNUP = "SIGNUP";
-export const UN_SIGNUP = "UN_SIGNUP";
+export const ATTEND = "ATTEND";
+export const UNATTEND = "UNATTEND";
