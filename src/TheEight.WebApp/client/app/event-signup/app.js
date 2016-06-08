@@ -10,19 +10,11 @@ import { createStore, applyMiddleware } from "redux";
 import AttendeeListContainer from "./containers/attendee-list-container";
 import BoatListContainer from "./containers/boat-list-container";
 import mapServerDataToState from "./map-server-data-to-state";
-import loggerMiddleware from "../common/middleware/logger-middleware";
-import appInsightsMiddleware from "../common/middleware/app-insights-middleware";
+import loggerMiddleware from "./middleware/logger";
 import reducer from "./reducer";
 import sampleState from "./sample-state";
 
-const store = createStore(
-  reducer,
-  { ...sampleState },
-  applyMiddleware(
-    loggerMiddleware,
-    appInsightsMiddleware
-  )
-);
+const store = createStore(reducer, { ...sampleState }, applyMiddleware(loggerMiddleware));
 
 export class AppBase extends Component {
   render() {

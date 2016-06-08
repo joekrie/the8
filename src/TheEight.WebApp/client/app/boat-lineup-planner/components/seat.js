@@ -3,15 +3,34 @@ import { DropTarget } from "react-dnd";
 
 import AssignedAttendeeContainer from "../containers/assigned-attendee-container";
 import { defaultDropCollect } from "../../common/dnd-defaults";
-import { ASSIGNED_ATTENDEE, ATTENDEE_LIST_ITEM } from "../item-types";
-import { COXSWAIN, PORT_ROWER, STARBOARD_ROWER, BISWEPTUAL_ROWER } from "../models/attendee-positions";
+
+import { 
+  ASSIGNED_ATTENDEE, 
+  ATTENDEE_LIST_ITEM 
+} from "../item-types";
+
+import { 
+  COXSWAIN, 
+  PORT_ROWER, 
+  STARBOARD_ROWER, 
+  BISWEPTUAL_ROWER 
+} from "../models/attendee-positions";
 
 export const dropSpec = {
   canDrop(props, monitor) {
-    const { attendeeIdsInBoat: attendeeIdsInTargetBoat, boatId: targetBoatId, seatNumber: targetSeatNumber } = props;
+    const { 
+      attendeeIdsInBoat: attendeeIdsInTargetBoat, 
+      boatId: targetBoatId, 
+      seatNumber: targetSeatNumber 
+    } = props;
     
     const itemType = monitor.getItemType();
-    const { draggedAttendeeId, originSeatNumber, originBoatId } = monitor.getItem();
+
+    const { 
+      draggedAttendeeId, 
+      originSeatNumber, 
+      originBoatId 
+    } = monitor.getItem();
     
     const alreadyInBoat = attendeeIdsInTargetBoat.contains(draggedAttendeeId);
     
@@ -28,10 +47,21 @@ export const dropSpec = {
   },
   drop(props, monitor) {
     const { assignAttendee, unassignAttendee } = props; 
-    const { seatNumber: targetSeatNumber, boatId: targetBoatId, attendeeId: attendeeIdInTarget } = props;
+    
+    const { 
+      seatNumber: targetSeatNumber, 
+      boatId: targetBoatId, 
+      attendeeId: attendeeIdInTarget 
+    } = props;
     
     const itemType = monitor.getItemType();
-    const { draggedAttendeeId, originSeatNumber, originBoatId, attendeeIdsInOriginBoat } = monitor.getItem();
+
+    const { 
+      draggedAttendeeId, 
+      originSeatNumber, 
+      originBoatId, 
+      attendeeIdsInOriginBoat 
+    } = monitor.getItem();
         
     if (itemType === ATTENDEE_LIST_ITEM) {
       assignAttendee(draggedAttendeeId, targetBoatId, targetSeatNumber);
@@ -59,7 +89,13 @@ export const dropSpec = {
 @DropTarget([ATTENDEE_LIST_ITEM, ASSIGNED_ATTENDEE], dropSpec, defaultDropCollect)
 export default class Seat extends Component {
   render() {
-    const { connectDropTarget, attendeeId, boatId, seatNumber, attendeeIdsInBoat } = this.props;
+    const { 
+      connectDropTarget, 
+      attendeeId, 
+      boatId, 
+      seatNumber, 
+      attendeeIdsInBoat 
+    } = this.props;
 
     const isCoxSeat = seatNumber === 0;
     const isPort = seatNumber % 2;

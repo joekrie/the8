@@ -1,18 +1,19 @@
+import { List } from "immutable";
 import { Component } from "react";
 
 import Boat from "./boat";
 
 class BoatList extends Component {
   render() {
-    const { boats } = this.props;    
-    
+    const { boats } = this.props;   
+
     const boatComponents = boats.map(boat => 
-      <Boat key={boat.boatId} boat={boat} />
+      <Boat key={boat.details.boatId} boat={boat} />
     );
 
     const styles = {
-      "marginTop": "0",
-      "marginBottom": "0",
+      "marginTop": "0px",
+      "marginBottom": "0px",
       "display": "flex"
     };
 
