@@ -14,14 +14,11 @@ namespace TheEight.WebApp
         {
             _isDevelopment = hostEnv.IsDevelopment();
             var appBasePath = appEnv.ApplicationBasePath;
-
-            var envName = hostEnv.EnvironmentName;
-
+            
             var configBuilder = new ConfigurationBuilder()
                 .SetBasePath(appBasePath)
                 .AddEnvironmentVariables()
                 .AddUserSecrets()
-                .AddJsonFile($"config/{envName}.json")
                 .AddApplicationInsightsSettings(_isDevelopment);
 
             _config = configBuilder.Build();

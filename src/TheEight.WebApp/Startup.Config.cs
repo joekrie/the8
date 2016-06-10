@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNet.Builder;
 using Microsoft.Extensions.Logging;
-using React.AspNet;
 
 namespace TheEight.WebApp
 {
@@ -17,7 +16,7 @@ namespace TheEight.WebApp
             ConfigureLogging(loggerFactory);
 
             app.UseStaticFiles();
-            app.UseMvc();
+            app.UseMvc(ConfigureRouting);
         }
     }
 }

@@ -11,6 +11,7 @@
     ]
   },
   "dependencies": {
+    "applicationinsights-js": "^0.22.19",
     "classnames": "^2.2.5",
     "immutable": "^3.8.1",
     "lodash": "^4.13.1",

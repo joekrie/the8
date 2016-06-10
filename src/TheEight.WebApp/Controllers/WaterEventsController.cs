@@ -2,11 +2,11 @@
 
 namespace TheEight.WebApp.Controllers
 {
-    [Route("invites")]
-    public class InviteController : Controller
+    [Route("water-events")]
+    public class WaterEventsController : Controller
     {
         [HttpGet("")]
-        public IActionResult InviteRowers()
+        public IActionResult Index()
         {
             return View();
         }

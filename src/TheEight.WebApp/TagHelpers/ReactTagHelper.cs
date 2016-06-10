@@ -1,36 +1,32 @@
 ﻿using System.Collections.Generic;
-using System.IO;
-using Microsoft.AspNet.Html.Abstractions;
-using Microsoft.AspNet.Http;
+using System.Linq;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.AspNet.Razor.TagHelpers;
-using Microsoft.Extensions.WebEncoders;
 
 namespace TheEight.WebApp.TagHelpers
 {
     public class ReactScriptTagHelper : TagHelper
     {
-        public string ComponentName{ get; set; }
+        public string ComponentName { get; set; }
         public IDictionary<string, string> Props { get; set; }
-        public string MountElementId { get; set; }
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            output.TagName = "script";
+            output.TagName = null;
 
-            var mountNode = $"document.getElementById({MountElementId})";
+            var mountElement = new TagBuilder("div");
+            mountElement.MergeAttribute("id", context.UniqueId);
 
-            var componentTagBuilder = new TagBuilder(ComponentName);
+            var props = "{ " + string.Join(", ", Props.Select(kvp => $"{kvp.Key}: {kvp.Value}")) + " }";
 
-            foreach (var prop in Props)
-            {
-                componentTagBuilder.Attributes[prop.Key] = prop.Value;
-            }
+            var script = new TagBuilder("script");
+            var factory = $"React.createFactory(Apps.{ComponentName})({props})";
+            var mount = $"document.getElementById({context.UniqueId})";
+            script.InnerHtml.AppendHtml($"ReactDOM.render({factory}, {mount})");
             
-            var mountExpr = $"ReactDOM.render(\"<BoatLineupPlannerApp \\>\" {mountNode})";
-            output.Content.SetContent(mountExpr);
+            output.Content.Append(mountElement);
+            output.Content.Append(script);
+            output.SuppressOutput();
         }
     }
-
-
 }
