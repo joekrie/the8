@@ -1,21 +1,29 @@
 import { Component } from "react";
+import Modal from "react-modal";
 
 import BoatDetailsRecord from "../models/boat-details-record";
 
 export default class BoatCreator extends Component {  
   constructor() {
     super();
-    this.resetState();
-  }
-  
-  resetState() {
+
     this.state = {
       seatCount: 4,
       isCoxed: true,
-      title: ""
+      title: "",
+      open: false
     };
   }
   
+  resetState() {
+    this.setState({
+      seatCount: 4,
+      isCoxed: true,
+      title: "",
+      open: false
+    });
+  }
+    
   render() {
     const { createBoat } = this.props;
     
@@ -44,7 +52,7 @@ export default class BoatCreator extends Component {
       const { seatCount, isCoxed } = this.state;
       return String(seatCount) + (isCoxed ? "+" : "x");
     };
-    
+
     const styles = {
       "color": "white",      
       "padding": "10px",
@@ -54,23 +62,27 @@ export default class BoatCreator extends Component {
     
     return (
       <div style={styles}>
-        <div>
-          Add Boat
-        </div>
-        <label>
-          Title
-          <input value={this.state.title} onChange={onChangeTitle} />
-        </label>
-        <select value={getTypeValue()} onChange={onChangeType}>
-          <option value="1x">1x</option> 
-          <option value="2x">2x</option>
-          <option value="4x">4x</option>
-          <option value="4+">4+</option>
-          <option value="8+">8+</option>
-        </select>
-        <button onClick={onSubmit}>
-          Add
-        </button>
+        <Modal isOpen={this.state.open} onRequestClose={() => this.resetState()}>
+          <button onClick={() => this.resetState()}>Close</button>
+          <div>
+            Add Boat
+          </div>
+          <label>
+            Title
+            <input value={this.state.title} onChange={onChangeTitle} />
+          </label>
+          <select value={getTypeValue()} onChange={onChangeType}>
+            <option value="1x">1x</option> 
+            <option value="2x">2x</option>
+            <option value="4x">4x</option>
+            <option value="4+">4+</option>
+            <option value="8+">8+</option>
+          </select>
+          <button onClick={onSubmit}>
+            Add
+          </button>
+        </Modal>
+        <button onClick={() => this.setState({open:true})}>Add Boat</button>
       </div>
     );
   }

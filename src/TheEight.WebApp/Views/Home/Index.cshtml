@@ -1,13 +1,1 @@
-﻿@using System.Collections.Generic
-
-@{
-    var props = new Dictionary<string, string>
-    {
-        ["1"] = "!",
-        ["d"] = "123"
-    };
-}
-
-@section scripts {
-    <render-react-app component-name="BoatLineupPlannerApp" props="@props"></render-react-app>
-}
+﻿<a asp-controller="WaterEvents" asp-action="BoatLineups" asp-route-id="00000000-0000-0000-0000-000000000000">Boat Lineup Planner</a>

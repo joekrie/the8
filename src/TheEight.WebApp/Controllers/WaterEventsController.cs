@@ -12,8 +12,8 @@ namespace TheEight.WebApp.Controllers
             return View();
         }
 
-        [HttpGet("boat-lineups/{id:guid}")]
-        public IActionResult BoatLineups(Guid id)
+        [HttpGet("boat-lineups/{id:guid?}")]
+        public IActionResult BoatLineups(Guid id = new Guid())
         {
             return View();
         }

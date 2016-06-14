@@ -18,7 +18,7 @@ namespace TheEight.WebApp.TagHelpers
         {
             if (string.IsNullOrWhiteSpace(ComponentName))
             {
-                throw new ArgumentException("React component name not supplied", nameof(ComponentName));
+                throw new ArgumentException("React component name must be supplied", nameof(ComponentName));
             }
 
             output.TagName = null;

@@ -4,8 +4,7 @@ const webpack = require("webpack");
 var config = {
   context: path.join(__dirname, "client/app"),
   entry: {
-    client: "./client",
-    server: "./server"
+    client: "./client"
   },
   module: {
     loaders: [

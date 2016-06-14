@@ -1,18 +1,24 @@
 import { Component } from "react";
+import Modal from "react-modal";
 
 import AttendeeRecord from "../models/attendee-record";
 
 export default class BoatCreator extends Component {  
   constructor() {
-    super();
-    this.resetState();
+    super();    
+    this.state = {
+      name: "",
+      isCoxswain: false,
+      open: false
+    };
   }
   
   resetState() {
-    this.state = {
+    this.setState({
       name: "",
-      isCoxswain: false
-    }
+      isCoxswain: false,
+      open: false
+    });
   }
   
   render() {
@@ -56,20 +62,24 @@ export default class BoatCreator extends Component {
     
     return (
       <div style={styles}>
-        <div>
-          Add Attendee
-        </div>
-        <label>
-          Name
-          <input value={this.state.name} onChange={onChangeName} />
-        </label>
-        <select value={this.state.isCoxswain} onChange={onChangeRole}>
-          <option value="false">Rower</option> 
-          <option value="true">Coxswain</option>
-        </select>
-        <button onClick={onSubmit}>
-          Add
-        </button>
+        <Modal isOpen={this.state.open} onRequestClose={() => this.resetState()}>
+          <button onClick={() => this.resetState()}>Close</button>
+          <div>
+            Add Attendee
+          </div>
+          <label>
+            Name
+            <input value={this.state.name} onChange={onChangeName} />
+          </label>
+          <select value={this.state.isCoxswain} onChange={onChangeRole}>
+            <option value="false">Rower</option> 
+            <option value="true">Coxswain</option>
+          </select>
+          <button onClick={onSubmit}>
+            Add
+          </button>
+        </Modal>
+        <button onClick={() => this.setState({open:true})}>Add Rower or Coxswain</button>
       </div>
     );
   }

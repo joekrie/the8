@@ -1,8 +1,13 @@
-﻿<div id="app"></div>
+﻿@using System.Collections.Generic
+
+@{
+    var props = new Dictionary<string, string>
+    {
+        ["1"] = "!",
+        ["d"] = "123"
+    };
+}
 
 @section scripts {
-    <script>
-        var Factory = React.createFactory(Apps.BoatLineupPlannerApp);
-        ReactDOM.render(Factory(), document.getElementById("app"));
-    </script>
+    <render-react-app component-name="BoatLineupPlannerApp" props="@props"></render-react-app>
 }
