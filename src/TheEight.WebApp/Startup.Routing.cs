@@ -1,7 +1,4 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Mvc.Infrastructure;
-using Microsoft.AspNet.Routing;
+﻿using Microsoft.AspNetCore.Routing;
 
 namespace TheEight.WebApp
 {

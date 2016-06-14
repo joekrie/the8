@@ -2,11 +2,10 @@
 
 namespace TheEight.WebApp.Controllers
 {
-    [Route("")]
-    public class HomeController : Controller
+    public class EventSignupController : Controller
     {
         public IActionResult Index()
-        { 
+        {
             return View();
         }
     }

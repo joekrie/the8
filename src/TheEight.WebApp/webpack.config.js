@@ -1,13 +1,11 @@
 const path = require("path");
 const webpack = require("webpack");
 
-module.exports = {
+var config = {
   context: path.join(__dirname, "client/app"),
   entry: {
-    client: "./main"
-  },
-  externals: {
-    react: "React"
+    client: "./client",
+    server: "./server"
   },
   module: {
     loaders: [
@@ -34,9 +32,19 @@ module.exports = {
     ]
   },
   plugins: [
-    // new webpack.optimize.UglifyJsPlugin({ minimize: true }),
     new webpack.ProvidePlugin({
-      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-    })
+      "fetch": "imports?this=>global!exports?global.fetch!whatwg-fetch"
+    }),
+    //new webpack.optimize.CommonsChunkPlugin("common", "common.js")
   ]
 };
+
+if (process.env.NODE_ENV === "production") {
+  config.plugins.push(
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true
+    })
+  );
+}
+
+module.exports = config;

@@ -2,14 +2,14 @@
 using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using NodaTime;
-using React.AspNet;
 using NodaTime.Serialization.JsonNet;
+using React.AspNet;
 using TheEight.Options;
 
 namespace TheEight.WebApp
@@ -22,6 +22,7 @@ namespace TheEight.WebApp
             var autofacBuilder = new ContainerBuilder();
 
             services
+                .AddReact()
                 .AddMvc()
                 .AddJsonOptions(options =>
                 {
@@ -48,9 +49,15 @@ namespace TheEight.WebApp
             
             services
                 .AddOptions()
-                .Configure<SqlServerOptions>(_config.GetSection("SqlServer"))
-                .Configure<AzureActiveDirectoryOptions>(_config.GetSection("AzureAD"));
-
+                .Configure<SqlServerOptions>(opts =>
+                {
+                    var sqlSettings = _config.GetSection("SqlServer");
+                })
+                .Configure<AzureActiveDirectoryOptions>(opts =>
+                {
+                    var adSettings = _config.GetSection("AzureAD");
+                });
+            
             autofacBuilder
                 .RegisterAssemblyTypes(thisAssembly)
                 .Where(type => type.IsInNamespace("TheEight.WebApp.Repositories"))

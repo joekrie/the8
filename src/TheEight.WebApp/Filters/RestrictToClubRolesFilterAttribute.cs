@@ -1,5 +1,5 @@
 ﻿using System;
-using Microsoft.AspNet.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 using TheEight.Common.Clubs;
 using TheEight.WebApp.Services.Authorization;
@@ -21,5 +21,7 @@ namespace TheEight.WebApp.Filters
             
             return new RestrictToRolesFilter(authService, _clubRoles, SquadRoles.None, false);
         }
+
+        public bool IsReusable { get; } = true;
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TheEight.WebApp.Controllers
 {
@@ -7,6 +8,12 @@ namespace TheEight.WebApp.Controllers
     {
         [HttpGet("")]
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet("boat-lineups/{id:guid}")]
+        public IActionResult BoatLineups(Guid id)
         {
             return View();
         }

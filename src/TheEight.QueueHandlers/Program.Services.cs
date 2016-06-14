@@ -21,10 +21,15 @@ namespace TheEight.QueueHandlers
                 .AddUserSecrets();
 
             var config = configBuilder.Build();
-            
+
             services
                 .AddOptions()
-                .Configure<AzureStorageOptions>(config.GetSection("AzureStorage"));
+                .Configure<AzureStorageOptions>(opts =>
+                {
+                    var storageConfig = config.GetSection("AzureStorage");
+                    opts.StorageConnectionString = storageConfig["StorageConnectionString"];
+                    opts.DashboardConnectionString = storageConfig["DashboardConnectionString"];
+                });
 
             var autofacBuilder = new ContainerBuilder();
             autofacBuilder.Populate(services);

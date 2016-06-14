@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc.Filters;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Filters;
 using TheEight.Common.Clubs;
-using TheEight.WebApp.Services.Authorization;
+using IAuthorizationService = TheEight.WebApp.Services.Authorization.IAuthorizationService;
 
 namespace TheEight.WebApp.Filters
 {
@@ -23,8 +24,13 @@ namespace TheEight.WebApp.Filters
 
         public async Task OnAuthorizationAsync(AuthorizationContext context)
         {
-            var claimsPrincipal = context.HttpContext.User;
+            var claimsPrincipal = context.User;
             await Task.FromResult(0);
+        }
+
+        public Task OnAuthorizationAsync(AuthorizationFilterContext context)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

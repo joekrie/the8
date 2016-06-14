@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Http;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.OptionsModel;
+using Microsoft.Extensions.Options;
 using TheEight.Options;
 
 namespace TheEight.WebApp
@@ -12,26 +12,29 @@ namespace TheEight.WebApp
 
         private static void ConfigureAuth(IApplicationBuilder app)
         {
-            app.UseCookieAuthentication(options =>
-            {
-                options.AuthenticationScheme = CookieAuthScheme;
-                options.CookieName = "the8.auth";
+            app.UseCookieAuthentication(
+                new CookieAuthenticationOptions
+                {
+                    AuthenticationScheme = CookieAuthScheme,
+                    CookieName = "the8.auth",
+                    LoginPath = new PathString("/login"),
+                    LogoutPath = new PathString("/logout"),
+                    ReturnUrlParameter = "next",
+                    AutomaticAuthenticate = true
+                });
 
-                options.LoginPath = new PathString("/login");
-                options.LogoutPath = new PathString("/logout");
+            var adSettings = app
+                .ApplicationServices
+                .GetRequiredService<IOptions<AzureActiveDirectoryOptions>>()
+                .Value;
 
-                options.ReturnUrlParameter = "next";
-                options.AutomaticAuthenticate = true;
-            });
-
-            app.UseOpenIdConnectAuthentication(options =>
-            {
-                var settings = app.ApplicationServices.GetRequiredService<IOptions<AzureActiveDirectoryOptions>>().Value;
-
-                options.SignInScheme = CookieAuthScheme;
-                options.ClientId = settings.ClientId;
-                options.ClientSecret = settings.ApplicationKey;
-            });
+            app.UseOpenIdConnectAuthentication(
+                new OpenIdConnectOptions
+                {
+                    SignInScheme = CookieAuthScheme,
+                    ClientId = adSettings.ClientId,
+                    ClientSecret = adSettings.ApplicationKey
+                });
         }
     }
 }

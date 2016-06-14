@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNet.Hosting;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.PlatformAbstractions;
+using Microsoft.Extensions.Logging;
+using React.AspNet;
 
 namespace TheEight.WebApp
 {
@@ -10,18 +12,41 @@ namespace TheEight.WebApp
         private readonly bool _isDevelopment;
         private readonly IConfiguration _config;
 
-        public Startup(IHostingEnvironment hostEnv, IApplicationEnvironment appEnv)
+        public Startup(IHostingEnvironment hostEnv)
         {
             _isDevelopment = hostEnv.IsDevelopment();
-            var appBasePath = appEnv.ApplicationBasePath;
             
             var configBuilder = new ConfigurationBuilder()
-                .SetBasePath(appBasePath)
+                .SetBasePath(hostEnv.ContentRootPath)
                 .AddEnvironmentVariables()
                 .AddUserSecrets()
                 .AddApplicationInsightsSettings(_isDevelopment);
 
             _config = configBuilder.Build();
+        }
+
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
+        {
+            if (_isDevelopment)
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            ConfigureAuth(app);
+            ConfigureLogging(loggerFactory);
+
+            app.UseReact(config =>
+            {
+                //config.AllowMsieEngine = false;
+                config.ReuseJavaScriptEngines = !_isDevelopment;
+                config.LoadBabel = false;
+                config.LoadReact = false;
+
+                config.AddScriptWithoutTransform("~/app/server.js");
+            });
+
+            app.UseStaticFiles();
+            app.UseMvc(ConfigureRouting);
         }
     }
 }

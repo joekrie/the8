@@ -3,25 +3,24 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:61583/",
+      "applicationUrl": "http://localhost:56361/",
       "sslPort": 0
     }
   },
   "profiles": {
-    "web": {
-      "commandName": "web",
-      "launchBrowser": true,
-      "launchUrl": "http://localhost:5004/boat",
-      "environmentVariables": {
-        "Hosting:Environment": "Development"
-      },
-      "sdkVersion": "dnx-clr-win-x86.1.0.0-rc1-update1"
-    },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "Hosting:Environment": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "TheEight.WebApp": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:5000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
   }
