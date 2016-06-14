@@ -1,5 +1,13 @@
-﻿@Html.React("Apps.BoatLineupPlannerApp", new {})
+﻿@using System.Collections.Generic
+
+@{
+    var props = new Dictionary<string, string>
+    {
+        ["1"] = "!",
+        ["d"] = "123"
+    };
+}
 
 @section scripts {
-    @Html.ReactInitJavaScript()
+    <render-react-app component-name="BoatLineupPlannerApp" props="@props"></render-react-app>
 }

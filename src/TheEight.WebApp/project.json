@@ -21,7 +21,6 @@
     "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc2-final",
     "NodaTime": "1.3.2",
     "NodaTime.Serialization.JsonNet": "1.3.2",
-    "React.AspNet": "2.4.0",
     "TheEight.Common": "1.0.0-*",
     "TheEight.Options": "1.0.0-*"
   },

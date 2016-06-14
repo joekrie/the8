@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using React.AspNet;
 
 namespace TheEight.WebApp
 {
@@ -34,16 +33,6 @@ namespace TheEight.WebApp
 
             ConfigureAuth(app);
             ConfigureLogging(loggerFactory);
-
-            app.UseReact(config =>
-            {
-                //config.AllowMsieEngine = false;
-                config.ReuseJavaScriptEngines = !_isDevelopment;
-                config.LoadBabel = false;
-                config.LoadReact = false;
-
-                config.AddScriptWithoutTransform("~/app/server.js");
-            });
 
             app.UseStaticFiles();
             app.UseMvc(ConfigureRouting);

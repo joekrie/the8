@@ -9,7 +9,6 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using NodaTime;
 using NodaTime.Serialization.JsonNet;
-using React.AspNet;
 using TheEight.Options;
 
 namespace TheEight.WebApp
@@ -22,7 +21,6 @@ namespace TheEight.WebApp
             var autofacBuilder = new ContainerBuilder();
 
             services
-                .AddReact()
                 .AddMvc()
                 .AddJsonOptions(options =>
                 {
