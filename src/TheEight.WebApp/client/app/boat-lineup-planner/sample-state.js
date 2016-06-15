@@ -1,4 +1,5 @@
 import { List, Map } from "immutable";
+import { LocalDate } from "js-joda";
 
 import AttendeeRecord from "./models/attendee-record";
 import BoatRecord from "./models/boat-record";
@@ -10,7 +11,7 @@ import { COXSWAIN, PORT_ROWER, STARBOARD_ROWER, BISWEPTUAL_ROWER } from "./model
 const sampleState = {
   eventDetails: new EventDetailsRecord({
     eventId: "event-1",
-    date: new Date(2016, 7, 30),
+    date: LocalDate.of(2016, 7, 30),
     notes: "",
     mode: PRACTICE_MODE
   }),

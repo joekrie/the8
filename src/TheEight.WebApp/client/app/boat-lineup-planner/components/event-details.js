@@ -1,4 +1,5 @@
 import { Component } from "react";
+import DateField from "./date-field";
 
 import Boat from "./boat";
 import { RACE_MODE, PRACTICE_MODE } from "../models/event-modes";
@@ -17,16 +18,11 @@ export default class EventDetails extends Component {
         
     return (
       <div style={styles}>
-        <div>
-          <label>
-            Date
-            <input value={date} onChange={evt => changeEventDetails("date", evt.target.value)} />
-          </label>
-        </div>
+        <DateField initialValue={date} onChange={newValue => changeEventDetails("date", newValue)} />
         <div>
           <label>
             Notes
-            <textarea value={notes} onChange={evt => changeEventDetails("notes", evt.target.value)}></textarea>
+            <textarea color="black" value={notes} onChange={evt => changeEventDetails("notes", evt.target.value)}></textarea>
           </label>
         </div>
         <div>

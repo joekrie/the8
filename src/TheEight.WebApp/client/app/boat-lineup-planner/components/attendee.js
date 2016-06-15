@@ -1,17 +1,48 @@
 import { Component } from "react";
+import Modal from "react-modal";
+import $ from "jquery";
+import "bootstrap";
 
-import { COXSWAIN, PORT_ROWER, STARBOARD_ROWER, BISWEPTUAL_ROWER } from "../models/attendee-positions";
+import { 
+  COXSWAIN, 
+  PORT_ROWER, 
+  STARBOARD_ROWER, 
+  BISWEPTUAL_ROWER
+} from "../models/attendee-positions";
 
 export default class Attendee extends Component {
-  render() {
-    const { attendee, isOutOfPosition = false } = this.props;
-    
-    const positionLabels = {
-      [COXSWAIN]: "C", 
-      [PORT_ROWER]: "P", 
-      [STARBOARD_ROWER]: "S", 
-      [BISWEPTUAL_ROWER]: "B"
+  constructor() {
+    super();
+
+    this.state = {
+      open: false
+    };
+  }
+
+  positionLabels = {
+    [COXSWAIN]: {
+      abbr: "C",
+      title: "Coxswain"
+    }, 
+    [PORT_ROWER]: {
+      abbr: "P",
+      title: "Port"
+    },
+    [STARBOARD_ROWER]: { 
+      abbr: "S",
+      title: "Starboard"
+    }, 
+    [BISWEPTUAL_ROWER]: {
+      abbr: "B",
+      title: "Bisweptual"
     }
+  };
+
+  render() {
+    const { 
+      attendee, 
+      isOutOfPosition = false 
+    } = this.props;
     
     const styles = {
       root: {
@@ -27,11 +58,17 @@ export default class Attendee extends Component {
     
     return (
       <div style={styles.root}>
-        <div style={styles.name}>
+        <Modal isOpen={this.state.open} onRequestClose={() => this.setState({ open: false })}>
           {displayName}
+        </Modal>
+        <div style={styles.name}>
+          {displayName}&nbsp;
+          <button onClick={() => this.setState({ open: true })}>
+            Details
+          </button>
         </div>
-        <div style={styles.position}>
-          {positionLabels[attendee.position]}
+        <div style={styles.position} title={this.positionLabels[attendee.position].title}>
+          {this.positionLabels[attendee.position].abbr}
         </div>
       </div>
     );

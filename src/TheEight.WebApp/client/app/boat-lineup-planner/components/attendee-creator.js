@@ -28,11 +28,6 @@ export default class BoatCreator extends Component {
       this.setState({ name: event.target.value });
     };
     
-    const onChangeRole = event => {
-      const value = event.target.value;
-      this.setState({ isCoxswain: value });
-    };
-    
     const onSubmit = () => {
       const { name, isCoxswain } = this.state;
       const attendeeId = "new-attendee-" + Date.now();
@@ -52,6 +47,13 @@ export default class BoatCreator extends Component {
       const { seatCount, isCoxed } = this.state;
       return String(seatCount) + (isCoxed ? "+" : "x");
     };
+
+    const openModal = isCoxswain => {
+      this.setState({
+        open: true, 
+        isCoxswain
+      });
+    };
     
     const styles = {
       "color": "white",
@@ -69,17 +71,15 @@ export default class BoatCreator extends Component {
           </div>
           <label>
             Name
-            <input value={this.state.name} onChange={onChangeName} />
+            <input value={this.state.name} 
+              onChange={evt => this.setState({ name: evt.target.value })} />
           </label>
-          <select value={this.state.isCoxswain} onChange={onChangeRole}>
-            <option value="false">Rower</option> 
-            <option value="true">Coxswain</option>
-          </select>
           <button onClick={onSubmit}>
             Add
           </button>
         </Modal>
-        <button onClick={() => this.setState({open:true})}>Add Rower or Coxswain</button>
+        <button onClick={() => openModal(false)}>Add Rower</button>
+        <button onClick={() => openModal(true)}>Add Coxswain</button>
       </div>
     );
   }

@@ -23,7 +23,7 @@ namespace TheEight.WebApp.TagHelpers
 
             output.TagName = null;
 
-            var id = $"app-{context.UniqueId}";
+            var id = $"react-app-{context.UniqueId}";
 
             var mountElement = new TagBuilder("div");
             mountElement.MergeAttribute("id", id);
