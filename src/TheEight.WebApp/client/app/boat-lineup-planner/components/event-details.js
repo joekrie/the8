@@ -1,42 +1,50 @@
+import { random } from "lodash";
 import { Component } from "react";
-import DateField from "./date-field";
 
+import DateField from "./date-field";
 import Boat from "./boat";
 import { RACE_MODE, PRACTICE_MODE } from "../models/event-modes";
 
-export default class EventDetails extends Component {  
+export default class EventDetails extends Component {
+  constructor() {
+    super();
+
+    this.state = { exampleNote: undefined };
+  }
+
   render() {
     const { changeEventDetails } = this.props;
     const { date, notes, mode } = this.props.eventDetails;
-    
-    const styles = {
-      "backgroundColor": "#263F52",
-      "color": "white",
-      "marginBottom": "10px",
-      "padding": "10px"
+
+    const exampleNotes = [
+      "Race day!!",
+      "6 x 4min",
+      "Warmup to railroad bridge...",
+      "Good luck",
+      "Sunrises!"
+    ];
+
+    const getExampleNote = () => {
+      if (!this.state.exampleNote) {
+        const rnd = random(exampleNotes.length - 1);
+        const note = exampleNotes[rnd];
+        this.setState({ exampleNote: `e.g., ${note}` });
+      }
+
+      return this.state.exampleNote;
     };
-        
+    
     return (
-      <div style={styles}>
-        <DateField initialValue={date} onChange={newValue => changeEventDetails("date", newValue)} />
-        <div>
-          <label>
+      <div>
+        <DateField value={date} onChange={newValue => changeEventDetails("date", newValue)} />
+        <fieldset className="form-group">
+          <label htmlFor="notes">
             Notes
-            <textarea color="black" value={notes} onChange={evt => changeEventDetails("notes", evt.target.value)}></textarea>
           </label>
-        </div>
-        <div>
-          <label>
-            <input name="mode" type="radio" checked={mode === PRACTICE_MODE} 
-              onChange={evt => changeEventDetails("mode", PRACTICE_MODE)} />
-            Practice mode
-          </label>
-          <label> 
-            <input name="mode" type="radio" checked={mode === RACE_MODE} 
-              onChange={evt => changeEventDetails("mode", RACE_MODE)} />
-            Race mode
-          </label>
-        </div>
+          <textarea id="notes" className="form-control" rows="5" value={notes} 
+            placeholder={getExampleNote()}
+            onChange={evt => changeEventDetails("notes", evt.target.value)}></textarea>
+        </fieldset>
       </div>
     );
   }

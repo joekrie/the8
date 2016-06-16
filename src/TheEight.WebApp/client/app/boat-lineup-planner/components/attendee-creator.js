@@ -55,15 +55,8 @@ export default class BoatCreator extends Component {
       });
     };
     
-    const styles = {
-      "color": "white",
-      "padding": "10px",
-      "margin": "10px",
-      "backgroundColor": "#2A4458"
-    };
-    
     return (
-      <div style={styles}>
+      <span>
         <Modal isOpen={this.state.open} onRequestClose={() => this.resetState()}>
           <button onClick={() => this.resetState()}>Close</button>
           <div>
@@ -78,9 +71,13 @@ export default class BoatCreator extends Component {
             Add
           </button>
         </Modal>
-        <button onClick={() => openModal(false)}>Add Rower</button>
-        <button onClick={() => openModal(true)}>Add Coxswain</button>
-      </div>
+        <button className="btn btn-secondary" onClick={() => openModal(false)}>
+          Add Rower
+        </button>
+        <button className="btn btn-secondary" onClick={() => openModal(true)}>
+          Add Coxswain
+        </button>
+      </span>
     );
   }
 }

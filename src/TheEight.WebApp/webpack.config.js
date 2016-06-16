@@ -12,6 +12,10 @@ var config = {
         test: /\.js(x)?$/,
         exclude: /node_modules/,
         loader: "babel-loader"
+      },
+      { 
+        test: /bootstrap\/dist\/js\/umd\//, 
+        loader: "imports?jQuery=jquery" 
       }
     ]
   },
@@ -32,9 +36,13 @@ var config = {
   },
   plugins: [
     new webpack.ProvidePlugin({
-      "fetch": "imports?this=>global!exports?global.fetch!whatwg-fetch"
-    }),
-    //new webpack.optimize.CommonsChunkPlugin("common", "common.js")
+      "fetch": "imports?this=>global!exports?global.fetch!whatwg-fetch",
+      "$": "jquery",
+      "jQuery": "jquery",
+      "jquery": "jquery",
+      "Tether": "tether",
+      "window.Tether": "tether"
+    })
   ]
 };
 

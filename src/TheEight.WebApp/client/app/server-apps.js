@@ -1,1 +1,0 @@
-﻿export { ServerSideBoatLineupPlannerApp as BoatLineupPlannerApp } from "./boat-lineup-planner";

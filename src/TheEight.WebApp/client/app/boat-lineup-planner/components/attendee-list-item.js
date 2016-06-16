@@ -1,4 +1,3 @@
-import Radium from "radium";
 import { Component } from "react";
 import { DragSource } from "react-dnd";
 
@@ -21,18 +20,13 @@ export const dragSpec = {
   }
 };
 
-@Radium
 @DragSource(ATTENDEE_LIST_ITEM, dragSpec, defaultDragCollect)
 export default class AttendeeListItem extends Component {
   render() {
     const { attendeeListItem, connectDragSource } = this.props;
 
     const styles = {
-      "marginBottom": "10px",
-      "padding": "10px",
-      "color": "#F5F5F5",
-      "cursor": "grab",
-      "backgroundColor": attendeeListItem.attendee.isCoxswain ? "#304F66" : "#2A4458"
+      "marginBottom": "10px"
     };
 
     return connectDragSource(

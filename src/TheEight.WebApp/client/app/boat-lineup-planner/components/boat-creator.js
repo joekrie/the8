@@ -52,16 +52,9 @@ export default class BoatCreator extends Component {
       const { seatCount, isCoxed } = this.state;
       return String(seatCount) + (isCoxed ? "+" : "x");
     };
-
-    const styles = {
-      "color": "white",      
-      "padding": "10px",
-      "margin": "10px",
-      "backgroundColor": "#2A4458"
-    };
     
     return (
-      <div style={styles}>
+      <span>
         <Modal isOpen={this.state.open} onRequestClose={() => this.resetState()}>
           <button onClick={() => this.resetState()}>Close</button>
           <div>
@@ -82,8 +75,10 @@ export default class BoatCreator extends Component {
             Add
           </button>
         </Modal>
-        <button onClick={() => this.setState({open:true})}>Add Boat</button>
-      </div>
+        <button className="btn btn-secondary" onClick={() => this.setState({open:true})}>
+          Add Boat
+        </button>
+      </span>
     );
   }
 }

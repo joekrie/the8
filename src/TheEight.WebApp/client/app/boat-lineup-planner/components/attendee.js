@@ -38,6 +38,12 @@ export default class Attendee extends Component {
     }
   };
 
+  componentDidMount() {
+    $(this.positionRef).tooltip({
+      placement: "right"
+    });
+  }
+
   render() {
     const { 
       attendee, 
@@ -46,13 +52,20 @@ export default class Attendee extends Component {
     
     const styles = {
       root: {
-        "display": "flex"
+        "display": "flex",
+        "cursor": "grab",
+        "border": "1px solid black",
+        "padding": "5px"
       },
       name: {},
       position: {
         "marginLeft": "auto"
       }
     };
+
+    if (attendee.isCoxswain) {
+      styles.root["backgroundColor"] = "lightgrey";
+    }
     
     const displayName = attendee.displayName + (isOutOfPosition ? "*" : "");
     
@@ -63,11 +76,12 @@ export default class Attendee extends Component {
         </Modal>
         <div style={styles.name}>
           {displayName}&nbsp;
-          <button onClick={() => this.setState({ open: true })}>
+          <a onClick={() => this.setState({ open: true })}>
             Details
-          </button>
+          </a>
         </div>
-        <div style={styles.position} title={this.positionLabels[attendee.position].title}>
+        <div style={styles.position} ref={ref => this.positionRef = ref} 
+          title={this.positionLabels[attendee.position].title}>
           {this.positionLabels[attendee.position].abbr}
         </div>
       </div>

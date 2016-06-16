@@ -18,16 +18,16 @@ export default class Boat extends Component {
     
     const styles = {
       root: {
-        "width": "300px",
-        "backgroundColor": "#263751",
+        "width": "250px",
+        "minWidth": "250px",
         "display": "inline-block",
         "marginRight": "20px",
-        "color": "#F5F5F5"
+        "border": "1px solid black"
       },
       header: {
-        "backgroundColor": "#263F52",
         "marginBottom": "10px",
-        "padding": "10px"
+        "padding": "10px",
+        "borderBottom": "1px solid black"
       }
     };
 
@@ -36,9 +36,9 @@ export default class Boat extends Component {
         <Modal isOpen={this.state.open} onRequestClose={() => this.setState({ open: false })}>
           {boat.details.title}
         </Modal>        
-        <div style={styles.header}>
+        <div className="container" style={styles.header}>
           {boat.details.title}&nbsp;
-          <button onClick={() => this.setState({ open: true })}>
+          <button className="btn btn-secondary btn-sm" onClick={() => this.setState({ open: true })}>
             Details
           </button>
         </div>

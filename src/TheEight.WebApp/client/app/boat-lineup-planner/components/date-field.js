@@ -8,10 +8,11 @@ export default class DateField extends Component {
   constructor(props) {
     super(props);
 
-    const { initialValue } = props;
+    const { value } = props;
 
     this.state = {
-      rawValue: initialValue.toString()
+      rawValue: value.toString(),
+      isValid: true
     };
   }
 
@@ -26,16 +27,36 @@ export default class DateField extends Component {
     }
   }
 
+  componentDidMount() {
+    $(this.infoRef).tooltip({
+      title: "Hint: Try entering 'today' or 'next Monday'",
+      placement: "right"
+    });
+  }
+
   render() {
     const { rawValue } = this.state;
 
+    const formatLocalDate = ld => {
+      const dow = ld.dayOfWeek();
+      return `${dow}, ${ld.toString()}`;
+    };
+
+    const displayParsed = this.state.isValid
+      ? <small className="text-muted">{formatLocalDate(this.props.value)}</small>
+      : null;
+
     return (
-      <div>
-        <label>
+      <fieldset className="form-group">
+        <label htmlFor="date">
           Date
-          <input color="black" value={rawValue} onChange={evt => this.onChange(evt.target.value)} />
+          &nbsp;
+          <i className="fa fa-info-circle" ref={ref => this.infoRef = ref} aria-hidden="true"></i>
         </label>
-      </div>
+        <input id="date" className="form-control" color="black" value={rawValue} 
+          onChange={evt => this.onChange(evt.target.value)} />
+        {displayParsed}
+      </fieldset>
     );
   }
 }

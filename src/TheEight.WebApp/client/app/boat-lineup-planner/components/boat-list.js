@@ -14,7 +14,11 @@ class BoatList extends Component {
     const styles = {
       "marginTop": "0px",
       "marginBottom": "0px",
-      "display": "flex"
+      "paddingLeft": "20px",
+      "display": "flex",
+      "overflowX": "scroll",
+      "alignItems": "flex-start",
+      "height": "100%"
     };
 
     return (

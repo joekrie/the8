@@ -28,12 +28,14 @@ export class AppBase extends Component {
   render() {
     const styles = {
       "position": "absolute",
-      "height": "100%"
+      "height": "100%",
+      "paddingTop": "15px",
+      "paddingBottom": "15px"
     };
     
     return (
       <Provider store={store}>
-        <div style={styles}>
+        <div className="container-fluid" style={styles}>
           <AttendeeListContainer />
           <BoatListContainer />
         </div>
@@ -41,9 +43,6 @@ export class AppBase extends Component {
     );
   }
 }
-
-export const TouchEnabledBoatLineupPlannerApp = DragDropContext(TouchBackend)(AppBase)
-export const ServerSideBoatLineupPlannerApp = DragDropContext(TestBackend)(AppBase)
 
 const BoatLineupPlannerApp = DragDropContext(HTML5Backend)(AppBase)
 export default BoatLineupPlannerApp

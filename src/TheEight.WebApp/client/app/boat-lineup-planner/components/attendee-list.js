@@ -33,16 +33,16 @@ export default class AttendeeList extends Component {
       root: {
         "float": "left",
         "width": "300px",
-        "backgroundColor": "#263751",
-        "marginRight": "20px"
+        "border": "1px solid black",
+        "height": "100%"
       },
       attendeeList: {
-        "padding": "15px"
+        "paddingTop": "15px"
       }
     };
 
     return connectDropTarget(
-      <div style={styles.root}>
+      <div className="container" style={styles.root}>
         <EventDetails eventDetails={eventDetails} changeEventDetails={changeEventDetails} />
         <BoatCreator createBoat={createBoat} />
         <AttendeeCreator createAttendee={createAttendee} />

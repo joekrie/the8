@@ -16,7 +16,7 @@ export default class SeatList extends Component {
     )).valueSeq();
 
     return (
-      <div>
+      <div className="container">
         {boatSeats}
       </div>
     );

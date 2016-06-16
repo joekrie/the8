@@ -27,10 +27,7 @@ export default class AssignedAttendee extends Component {
     
     const styles = {
       "marginBottom": "10px",
-      "padding": "10px",
-      "color": "#F5F5F5",
-      "cursor": "grab",
-      "backgroundColor": attendee.isCoxswain ? "#304F66" : "#2A4458"
+      "cursor": "grab"
     };
 
     return connectDragSource(
