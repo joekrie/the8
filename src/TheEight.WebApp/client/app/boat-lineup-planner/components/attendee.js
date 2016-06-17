@@ -1,7 +1,5 @@
 import { Component } from "react";
 import Modal from "react-modal";
-import $ from "jquery";
-import "bootstrap";
 
 import { 
   COXSWAIN, 

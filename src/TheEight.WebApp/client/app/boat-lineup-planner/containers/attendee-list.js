@@ -1,13 +1,43 @@
+import { List } from "immutable";
 import { Component } from "react";
 import { DropTarget } from "react-dnd";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+import AttendeeListItem from "../components/attendee-list-item";
+import EventDetails from "../components/event-details";
+import BoatCreator from "../components/boat-creator";
+import AttendeeCreator from "../components/attendee-creator";
 
 import { defaultDropCollect } from "../../common/dnd-defaults";
-import AttendeeListItem from "./attendee-list-item";
 import { ASSIGNED_ATTENDEE } from "../item-types";
-import EventDetails from "./event-details";
 import { RACE_MODE } from "../models/event-modes";
-import BoatCreator from "./boat-creator";
-import AttendeeCreator from "./attendee-creator";
+import { unassignAttendee, changeEventDetails, createBoat, createAttendee } from "../action-creators";
+import AttendeeListItemRecord from "../models/attendee-list-item-record";
+
+export const mapStateToProps = state => {
+  const { attendees, boats, eventDetails } = state;
+  const assignedAttendeeIds = boats.map(boat => boat.assignedSeats.valueSeq()).valueSeq().flatten();
+  
+  const attendeeListItems = attendees.map(attendee => 
+    new AttendeeListItemRecord({
+      attendee,
+      isAssigned: assignedAttendeeIds.contains(attendee.attendeeId)
+    })
+  );
+    
+  return { 
+    attendeeListItems,
+    eventDetails
+  };
+};
+
+export const mapDispatchToProps = dispatch => bindActionCreators({
+  unassignAttendee, 
+  changeEventDetails, 
+  createBoat, 
+  createAttendee
+}, dispatch);
 
 export const dropSpec = {
   drop(props, monitor) {
@@ -17,6 +47,7 @@ export const dropSpec = {
   }
 };
 
+@connect(mapStateToProps, mapDispatchToProps)
 @DropTarget(ASSIGNED_ATTENDEE, dropSpec, defaultDropCollect)
 export default class AttendeeList extends Component {
   render() {
@@ -32,7 +63,7 @@ export default class AttendeeList extends Component {
     const styles = {
       root: {
         "float": "left",
-        "width": "300px",
+        "width": "275px",
         "border": "1px solid black",
         "height": "100%"
       },

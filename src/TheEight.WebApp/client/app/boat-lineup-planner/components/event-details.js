@@ -2,37 +2,33 @@ import { random } from "lodash";
 import { Component } from "react";
 
 import DateField from "./date-field";
-import Boat from "./boat";
 import { RACE_MODE, PRACTICE_MODE } from "../models/event-modes";
 
 export default class EventDetails extends Component {
   constructor() {
     super();
-
     this.state = { exampleNote: undefined };
+  }
+
+  componentDidMount() {
+    if (!this.state.exampleNote) {
+      const exampleNotes = [
+        "Race day!!",
+        "6 x 4min w/1min rest",
+        "Warmup by pairs to railroad bridge...",
+        "Enjoy the sunrise :)",
+        "It's windy out there, be careful"
+      ];
+
+      const rnd = random(exampleNotes.length - 1);
+      const note = exampleNotes[rnd];
+      this.setState({ exampleNote: `e.g., ${note}` });
+    }
   }
 
   render() {
     const { changeEventDetails } = this.props;
-    const { date, notes, mode } = this.props.eventDetails;
-
-    const exampleNotes = [
-      "Race day!!",
-      "6 x 4min",
-      "Warmup to railroad bridge...",
-      "Good luck",
-      "Sunrises!"
-    ];
-
-    const getExampleNote = () => {
-      if (!this.state.exampleNote) {
-        const rnd = random(exampleNotes.length - 1);
-        const note = exampleNotes[rnd];
-        this.setState({ exampleNote: `e.g., ${note}` });
-      }
-
-      return this.state.exampleNote;
-    };
+    const { date, notes } = this.props.eventDetails;
     
     return (
       <div>
@@ -42,7 +38,7 @@ export default class EventDetails extends Component {
             Notes
           </label>
           <textarea id="notes" className="form-control" rows="5" value={notes} 
-            placeholder={getExampleNote()}
+            placeholder={this.state.exampleNote}
             onChange={evt => changeEventDetails("notes", evt.target.value)}></textarea>
         </fieldset>
       </div>

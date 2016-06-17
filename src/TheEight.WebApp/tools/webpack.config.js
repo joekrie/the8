@@ -2,7 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 
 var config = {
-  context: path.join(__dirname, "client/app"),
+  context: path.join(__dirname, "../client/app"),
   entry: {
     client: "./client"
   },
@@ -20,13 +20,13 @@ var config = {
     ]
   },
   output: {
-    path: path.join(__dirname, "wwwroot/app"),
+    path: path.join(__dirname, "../wwwroot/app"),
     filename: "[name].js",
     publicPath: "/static/"
   },
   resolve: {
     modulesDirectories: [
-      "node_modules"
+      "../node_modules"
     ],
     extensions: [
       "",

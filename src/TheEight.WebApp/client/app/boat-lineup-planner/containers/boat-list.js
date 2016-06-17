@@ -1,9 +1,13 @@
 import { List } from "immutable";
 import { Component } from "react";
+import { connect } from "react-redux";
 
-import Boat from "./boat";
+import Boat from "../components/boat";
 
-class BoatList extends Component {
+export const mapStateToProps = ({ boats }) => ({ boats: boats.valueSeq() });
+
+@connect(mapStateToProps)
+export default class BoatList extends Component {
   render() {
     const { boats } = this.props;   
 
@@ -16,7 +20,7 @@ class BoatList extends Component {
       "marginBottom": "0px",
       "paddingLeft": "20px",
       "display": "flex",
-      "overflowX": "scroll",
+      "overflowX": "auto",
       "alignItems": "flex-start",
       "height": "100%"
     };

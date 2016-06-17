@@ -15,24 +15,44 @@ export const dragSpec = {
     const { attendeeListItem } = props;
     
     return {
-      draggedAttendeeId: attendeeListItem.attendee.attendeeId
+      draggedAttendeeId: attendeeListItem.attendee.attendeeId,
+      draggedAttendeeName: attendeeListItem.attendee.displayName
     };
   }
 };
 
-@DragSource(ATTENDEE_LIST_ITEM, dragSpec, defaultDragCollect)
+const collect = connect => ({
+  connectDragSource: connect.dragSource(),
+  connectDragPreview: connect.dragPreview()
+});
+
+@DragSource(ATTENDEE_LIST_ITEM, dragSpec, collect)
 export default class AttendeeListItem extends Component {
+  styles = {
+    "marginBottom": "10px"
+  };
+
+  componentDidMount() {
+    const { attendeeListItem, connectDragPreview } = this.props;
+
+  
+  }
+
   render() {
-    const { attendeeListItem, connectDragSource } = this.props;
+    const {
+      attendeeListItem, 
+      connectDragSource,
+      connectDragPreview
+    } = this.props;
 
-    const styles = {
-      "marginBottom": "10px"
-    };
-
-    return connectDragSource(
-      <div style={styles}>
-        <Attendee attendee={attendeeListItem.attendee} />
-      </div>
+    return (
+      connectDragPreview(
+        connectDragSource(
+          <div style={this.styles}>
+            <Attendee attendee={attendeeListItem.attendee} />
+          </div>
+        )
+      )
     );
   }
 }

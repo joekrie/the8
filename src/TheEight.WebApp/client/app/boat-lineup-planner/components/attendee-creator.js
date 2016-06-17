@@ -24,10 +24,6 @@ export default class BoatCreator extends Component {
   render() {
     const { createAttendee } = this.props;
     
-    const onChangeName = event => {
-      this.setState({ name: event.target.value });
-    };
-    
     const onSubmit = () => {
       const { name, isCoxswain } = this.state;
       const attendeeId = "new-attendee-" + Date.now();
@@ -54,27 +50,34 @@ export default class BoatCreator extends Component {
         isCoxswain
       });
     };
+
+    const styles = {
+      button: {
+        "marginRight": "5px"
+      }
+    };
     
     return (
       <span>
         <Modal isOpen={this.state.open} onRequestClose={() => this.resetState()}>
-          <button onClick={() => this.resetState()}>Close</button>
-          <div>
-            Add Attendee
-          </div>
-          <label>
-            Name
-            <input value={this.state.name} 
+          <button className="btn btn-secondary" onClick={() => this.resetState()}>
+            Close
+          </button>
+          <fieldset className="form-group">
+            <label htmlFor="new-attendee-name">
+              Name
+            </label>
+            <input className="form-control" id="new-attendee-name" value={this.state.name} 
               onChange={evt => this.setState({ name: evt.target.value })} />
-          </label>
-          <button onClick={onSubmit}>
+          </fieldset>
+          <button className="btn btn-primary" onClick={onSubmit}>
             Add
           </button>
         </Modal>
-        <button className="btn btn-secondary" onClick={() => openModal(false)}>
+        <button className="btn btn-secondary" style={styles.button} onClick={() => openModal(false)}>
           Add Rower
         </button>
-        <button className="btn btn-secondary" onClick={() => openModal(true)}>
+        <button className="btn btn-secondary" style={styles.button} onClick={() => openModal(true)}>
           Add Coxswain
         </button>
       </span>

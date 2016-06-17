@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-import SeatContainer from "../containers/seat-container";
+import Seat from "../containers/seat";
 
 export default class SeatList extends Component {
   render() {
@@ -11,7 +11,7 @@ export default class SeatList extends Component {
     } = this.props;
 
     const boatSeats = seats.map((attendeeId, seatNumber) => (
-      <SeatContainer key={seatNumber} boatId={boatId} seatNumber={seatNumber} 
+      <Seat key={seatNumber} boatId={boatId} seatNumber={seatNumber} 
         attendeeId={attendeeId} attendeeIdsInBoat={attendeeIdsInBoat} />
     )).valueSeq();
 

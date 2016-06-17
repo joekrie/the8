@@ -13,7 +13,9 @@
   "dependencies": {
     "applicationinsights-js": "^0.22.19",
     "bootstrap": "^4.0.0-alpha.2",
+    "browsernizr": "^2.1.0",
     "classnames": "^2.2.5",
+    "flexibility": "^1.0.5",
     "immutable": "^3.8.1",
     "jquery": "^3.0.0",
     "js-joda": "^1.1.8",
@@ -93,10 +95,10 @@
   "private": true,
   "scripts": {
     "test": "jest",
-    "prepublish": "webpack",
-    "styles": "node-sass client/styles/site.scss > wwwroot/styles/site.css",
-    "start": "webpack-dev-server --inline --hot",
-    "prestart": "start http://localhost:8080/dev-server.html"
+    "build-js": "webpack --config tools/webpack.config.js",
+    "build-sass": "node-sass client/styles/site.scss > wwwroot/styles/site.css",
+    "start": "webpack-dev-server --config tools/webpack.config.js --inline --hot",
+    "prestart": "start http://localhost:8080/tools/dev-server.html"
   },
   "version": "0.1.0"
 }

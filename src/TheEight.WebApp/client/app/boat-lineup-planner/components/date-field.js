@@ -2,8 +2,6 @@ import { Component } from "react";
 import "sugar";
 import { LocalDate, nativeJs } from "js-joda";
 
-import SeatContainer from "../containers/seat-container";
-
 export default class DateField extends Component {
   constructor(props) {
     super(props);

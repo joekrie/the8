@@ -2,7 +2,6 @@ import { Component } from "react"
 import Modal from "react-modal";
 
 import SeatList from "./seat-list";
-import SeatRecord from "../models/seat-record";
 
 export default class Boat extends Component {  
   constructor() {

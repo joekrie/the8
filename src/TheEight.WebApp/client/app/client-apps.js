@@ -1,1 +1,3 @@
-﻿export BoatLineupPlannerApp from "./boat-lineup-planner";
+﻿import "bootstrap";
+
+export BoatLineupPlannerApp from "./boat-lineup-planner";

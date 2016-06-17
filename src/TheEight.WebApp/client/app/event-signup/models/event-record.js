@@ -1,13 +1,13 @@
 import { Record } from "immutable";
 import { LocalDate } from "js-joda";
 
-import { PRACTICE_MODE } from "./event-modes";
+import { WATER_EVENT } from "./event-types";
 
-const EventDetailsRecord = Record({
+const EventRecord = Record({
     eventId: "",
     date: LocalDate.of(1900, 1, 1),
     notes: "",
-    mode: PRACTICE_MODE
+    type: WATER_EVENT
 });
 
-export default EventDetailsRecord
+export default EventRecord

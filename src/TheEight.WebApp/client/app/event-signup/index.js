@@ -1,17 +1,14 @@
-import "browsernizr/test/touchevents";
-import Modernizr from "browsernizr";
 import { List, Map, fromJS } from "immutable";
 import { Component } from "react";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
+import TestBackend from "react-dnd-test-backend";
 import TouchBackend from "react-dnd-touch-backend";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 
-import AttendeeList from "./containers/attendee-list";
-import BoatList from "./containers/boat-list";
-import AttendeeDragLayer from "./components/attendee-drag-layer";
-
+import AttendeeListContainer from "./containers/attendee-list-container";
+import BoatListContainer from "./containers/boat-list-container";
 import mapServerDataToState from "./map-server-data-to-state";
 import loggerMiddleware from "../common/middleware/logger-middleware";
 import appInsightsMiddleware from "../common/middleware/app-insights-middleware";
@@ -35,22 +32,17 @@ export class AppBase extends Component {
       "paddingTop": "15px",
       "paddingBottom": "15px"
     };
-
+    
     return (
       <Provider store={store}>
         <div className="container-fluid" style={styles}>
-          <AttendeeDragLayer />
-          <AttendeeList />
-          <BoatList />
+          <AttendeeListContainer />
+          <BoatListContainer />
         </div>
       </Provider>
     );
   }
 }
 
-const backend = Modernizr.touchevents 
-    ? TouchBackend({ enableMouseEvents: true })
-    : HTML5Backend;
-
-const BoatLineupPlannerApp = DragDropContext(backend)(AppBase);
-export default BoatLineupPlannerApp;
+const BoatLineupPlannerApp = DragDropContext(HTML5Backend)(AppBase)
+export default BoatLineupPlannerApp

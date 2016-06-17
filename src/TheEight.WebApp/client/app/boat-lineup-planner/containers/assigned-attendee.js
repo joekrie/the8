@@ -1,9 +1,16 @@
 import { Component } from "react";
 import { DragSource } from "react-dnd";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import { defaultDragCollect } from "../../common/dnd-defaults";
 import { ASSIGNED_ATTENDEE } from "../item-types";
-import Attendee from "./attendee";
+import Attendee from "../components/attendee";
+
+export const mapStateToProps = ({ attendees }, { attendeeId }) => {
+  const attendee = attendees.find(attendee => attendee.attendeeId === attendeeId);
+  return { attendee };
+};
 
 const dragSpec = {
   beginDrag(props) { 
@@ -13,11 +20,13 @@ const dragSpec = {
       originBoatId: boatId,
       originSeatNumber: seatNumber,
       draggedAttendeeId: attendee.attendeeId,
-      attendeeIdsInOriginBoat: attendeeIdsInBoat
+      attendeeIdsInOriginBoat: attendeeIdsInBoat,
+      draggedAttendeeName: attendee.displayName
     }
   }
 };
 
+@connect(mapStateToProps)
 @DragSource(ASSIGNED_ATTENDEE, dragSpec, defaultDragCollect)
 export default class AssignedAttendee extends Component {
   render() {

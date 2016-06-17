@@ -1,7 +1,9 @@
 import { Component } from "react";
 import { DropTarget } from "react-dnd";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import AssignedAttendeeContainer from "../containers/assigned-attendee-container";
+import AssignedAttendee from "./assigned-attendee";
 import { defaultDropCollect } from "../../common/dnd-defaults";
 
 import { 
@@ -15,6 +17,15 @@ import {
   STARBOARD_ROWER, 
   BISWEPTUAL_ROWER 
 } from "../models/attendee-positions";
+
+import { assignAttendee, unassignAttendee } from "../action-creators";
+import { RACE_MODE } from "../models/event-modes";
+
+export const mapStateToProps = state => ({
+  canAttendeeOccupyMultipleBoats: state.eventDetails.mode === RACE_MODE 
+});
+
+export const mapDispatchToProps = dispatch => bindActionCreators({ assignAttendee, unassignAttendee }, dispatch);
 
 export const dropSpec = {
   canDrop(props, monitor) {
@@ -38,12 +49,10 @@ export const dropSpec = {
       return !alreadyInBoat;
     }
     
-    if (itemType === ASSIGNED_ATTENDEE) {      
-      const isMoveWithinBoat = targetBoatId == originBoatId;
-      const isSameSeat = targetSeatNumber == originSeatNumber && isMoveWithinBoat;
+    const isMoveWithinBoat = targetBoatId == originBoatId;
+    const isSameSeat = targetSeatNumber == originSeatNumber && isMoveWithinBoat;
       
-      return !isSameSeat && (isMoveWithinBoat || !alreadyInBoat);
-    }
+    return !isSameSeat && (isMoveWithinBoat || !alreadyInBoat);
   },
   drop(props, monitor) {
     const { assignAttendee, unassignAttendee } = props; 
@@ -86,6 +95,7 @@ export const dropSpec = {
   }
 };
 
+@connect(mapStateToProps, mapDispatchToProps)
 @DropTarget([ATTENDEE_LIST_ITEM, ASSIGNED_ATTENDEE], dropSpec, defaultDropCollect)
 export default class Seat extends Component {
   render() {
@@ -115,7 +125,7 @@ export default class Seat extends Component {
     };
      
     const assignAttendeeContainer = attendeeId 
-      ? <AssignedAttendeeContainer attendeeId={attendeeId} boatId={boatId} 
+      ? <AssignedAttendee attendeeId={attendeeId} boatId={boatId} 
           seatNumber={seatNumber} attendeeIdsInBoat={attendeeIdsInBoat}
           acceptedPositions={getAcceptedPositions()} />
       : null;

@@ -1,6 +1,14 @@
 import { createAction } from "redux-actions";
 
-import { ASSIGN_ATTENDEE, UNASSIGN_ATTENDEE, CHANGE_EVENT_DETAILS, CREATE_BOAT, CREATE_ATTENDEE } from "./actions";
+import {
+  ASSIGN_ATTENDEE, 
+  UNASSIGN_ATTENDEE, 
+  CHANGE_EVENT_DETAILS, 
+  CREATE_BOAT, 
+  CREATE_ATTENDEE,
+  DELETE_ATTENDEE,
+  DELETE_BOAT
+} from "./actions";
 
 export const assignAttendee = createAction(ASSIGN_ATTENDEE, (attendeeId, boatId, seatNumber) => ({ attendeeId, boatId, seatNumber }));
 export const unassignAttendee = createAction(UNASSIGN_ATTENDEE, (boatId, seatNumber) => ({ boatId, seatNumber }));

@@ -52,30 +52,38 @@ export default class BoatCreator extends Component {
       const { seatCount, isCoxed } = this.state;
       return String(seatCount) + (isCoxed ? "+" : "x");
     };
+
+    const styles = {
+      button: {
+        "marginRight": "5px"
+      }
+    };
     
     return (
       <span>
         <Modal isOpen={this.state.open} onRequestClose={() => this.resetState()}>
-          <button onClick={() => this.resetState()}>Close</button>
-          <div>
-            Add Boat
-          </div>
-          <label>
-            Title
-            <input value={this.state.title} onChange={onChangeTitle} />
-          </label>
-          <select value={getTypeValue()} onChange={onChangeType}>
-            <option value="1x">1x</option> 
-            <option value="2x">2x</option>
-            <option value="4x">4x</option>
-            <option value="4+">4+</option>
-            <option value="8+">8+</option>
-          </select>
-          <button onClick={onSubmit}>
+          <button className="btn btn-secondary" onClick={() => this.resetState()}>Close</button>
+          <fieldset className="form-group">
+            <label htmlFor="new-boat-title">
+              Title
+            </label>
+            <input className="form-control" id="new-boat-title" value={this.state.title} onChange={onChangeTitle} />
+          </fieldset>
+          <fieldset className="form-group">
+            <select value={getTypeValue()} onChange={onChangeType}>
+              <option value="1x">1x</option> 
+              <option value="2x">2x</option>
+              <option value="4x">4x</option>
+              <option value="4+">4+</option>
+              <option value="8+">8+</option>
+            </select>
+          </fieldset>
+          <button className="btn btn-primary" onClick={onSubmit}>
             Add
           </button>
         </Modal>
-        <button className="btn btn-secondary" onClick={() => this.setState({open:true})}>
+        <button className="btn btn-secondary"  style={styles.button} 
+          onClick={() => this.setState({open:true})}>
           Add Boat
         </button>
       </span>

@@ -1,5 +1,6 @@
 export const defaultDragCollect = (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
+  connectDragPreview: connect.dragPreview(),
   isDragging: monitor.isDragging()
 });
 
