@@ -25,8 +25,7 @@ const getItemStyles = currentOffset => {
     "transform": transform,
     "WebkitTransform": transform,
     "padding": "5px",
-    "border": "1px solid black",
-    "width": "250px"
+    "width": "200px"
   };
 }
 
@@ -51,7 +50,7 @@ export default class AttendeeDragLayer extends Component {
     
     return (
       <div style={layerStyles}>
-        <div style={getItemStyles(currentOffset)}>
+        <div className="card card-block" style={getItemStyles(currentOffset)}>
           {displayName}
         </div>
       </div>

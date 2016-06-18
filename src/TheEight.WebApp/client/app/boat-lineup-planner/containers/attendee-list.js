@@ -64,7 +64,6 @@ export default class AttendeeList extends Component {
       root: {
         "float": "left",
         "width": "275px",
-        "border": "1px solid black",
         "height": "100%"
       },
       attendeeList: {
@@ -73,12 +72,14 @@ export default class AttendeeList extends Component {
     };
 
     return connectDropTarget(
-      <div className="container" style={styles.root}>
-        <EventDetails eventDetails={eventDetails} changeEventDetails={changeEventDetails} />
-        <BoatCreator createBoat={createBoat} />
-        <AttendeeCreator createAttendee={createAttendee} />
-        <div style={styles.attendeeList}>
-          {attendeeComponents}
+      <div className="card" style={styles.root}>
+        <div className="card-block">
+          <EventDetails eventDetails={eventDetails} changeEventDetails={changeEventDetails} />
+          <BoatCreator createBoat={createBoat} />
+          <AttendeeCreator createAttendee={createAttendee} />
+          <div style={styles.attendeeList}>
+            {attendeeComponents}
+          </div>
         </div>
       </div>
     );

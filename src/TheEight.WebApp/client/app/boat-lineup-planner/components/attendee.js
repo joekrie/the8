@@ -51,9 +51,8 @@ export default class Attendee extends Component {
     const styles = {
       root: {
         "display": "flex",
-        "cursor": "grab",
-        "border": "1px solid black",
-        "padding": "5px"
+        "padding": "5px",
+        "cursor": "move"
       },
       name: {},
       position: {
@@ -68,21 +67,20 @@ export default class Attendee extends Component {
     const displayName = attendee.displayName + (isOutOfPosition ? "*" : "");
     
     return (
-      <div style={styles.root}>
-        <Modal isOpen={this.state.open} onRequestClose={() => this.setState({ open: false })}>
-          {displayName}
-        </Modal>
-        <div style={styles.name}>
-          {displayName}&nbsp;
-          <a onClick={() => this.setState({ open: true })}>
-            Details
-          </a>
+      <a onClick={() => this.setState({ open: true })}>
+        <div className="card card-block" style={styles.root}>
+          <Modal isOpen={this.state.open} onRequestClose={() => this.setState({ open: false })}>
+            {displayName}
+          </Modal>
+          <div style={styles.name}>
+            {displayName}
+          </div>
+          <div style={styles.position} ref={ref => this.positionRef = ref} 
+            title={this.positionLabels[attendee.position].title}>
+            {this.positionLabels[attendee.position].abbr}
+          </div>
         </div>
-        <div style={styles.position} ref={ref => this.positionRef = ref} 
-          title={this.positionLabels[attendee.position].title}>
-          {this.positionLabels[attendee.position].abbr}
-        </div>
-      </div>
+      </a>
     );
   }
 }

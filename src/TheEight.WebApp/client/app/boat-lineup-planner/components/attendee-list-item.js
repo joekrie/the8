@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { DragSource } from "react-dnd";
+import { getEmptyImage } from "react-dnd-html5-backend";
 
 import { defaultDragCollect } from "../../common/dnd-defaults";
 import { ATTENDEE_LIST_ITEM } from "../item-types";
@@ -33,25 +34,21 @@ export default class AttendeeListItem extends Component {
   };
 
   componentDidMount() {
-    const { attendeeListItem, connectDragPreview } = this.props;
-
-  
+    const { connectDragPreview } = this.props;
+    connectDragPreview(getEmptyImage());
   }
 
   render() {
     const {
       attendeeListItem, 
-      connectDragSource,
-      connectDragPreview
+      connectDragSource
     } = this.props;
 
     return (
-      connectDragPreview(
-        connectDragSource(
-          <div style={this.styles}>
-            <Attendee attendee={attendeeListItem.attendee} />
-          </div>
-        )
+      connectDragSource(
+        <div style={this.styles}>
+          <Attendee attendee={attendeeListItem.attendee} />
+        </div>
       )
     );
   }

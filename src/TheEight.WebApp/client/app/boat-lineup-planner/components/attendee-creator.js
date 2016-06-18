@@ -38,11 +38,6 @@ export default class BoatCreator extends Component {
       createAttendee(newAttendee);
       this.resetState();
     };
-    
-    const getTypeValue = () => {
-      const { seatCount, isCoxed } = this.state;
-      return String(seatCount) + (isCoxed ? "+" : "x");
-    };
 
     const openModal = isCoxswain => {
       this.setState({
@@ -60,9 +55,6 @@ export default class BoatCreator extends Component {
     return (
       <span>
         <Modal isOpen={this.state.open} onRequestClose={() => this.resetState()}>
-          <button className="btn btn-secondary" onClick={() => this.resetState()}>
-            Close
-          </button>
           <fieldset className="form-group">
             <label htmlFor="new-attendee-name">
               Name
@@ -74,10 +66,10 @@ export default class BoatCreator extends Component {
             Add
           </button>
         </Modal>
-        <button className="btn btn-secondary" style={styles.button} onClick={() => openModal(false)}>
+        <button className="btn btn-secondary btn-sm" style={styles.button} onClick={() => openModal(false)}>
           Add Rower
         </button>
-        <button className="btn btn-secondary" style={styles.button} onClick={() => openModal(true)}>
+        <button className="btn btn-secondary btn-sm" style={styles.button} onClick={() => openModal(true)}>
           Add Coxswain
         </button>
       </span>

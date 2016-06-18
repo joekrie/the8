@@ -19,27 +19,26 @@ export default class Boat extends Component {
       root: {
         "width": "250px",
         "minWidth": "250px",
-        "display": "inline-block",
-        "marginRight": "20px",
-        "border": "1px solid black"
+        "marginRight": "20px"
       },
       header: {
         "marginBottom": "10px",
         "padding": "10px",
-        "borderBottom": "1px solid black"
+        "marginLeft": "auto"
       }
     };
 
     return (
-      <div style={styles.root}>
+      <div className="card" style={styles.root}>
         <Modal isOpen={this.state.open} onRequestClose={() => this.setState({ open: false })}>
           {boat.details.title}
-        </Modal>        
-        <div className="container" style={styles.header}>
-          {boat.details.title}&nbsp;
-          <button className="btn btn-secondary btn-sm" onClick={() => this.setState({ open: true })}>
-            Details
-          </button>
+        </Modal>
+        <div className="card-header" style={styles.header}>
+          <h3>
+            <a onClick={() => this.setState({ open: true })}>
+              {boat.details.title}
+            </a>
+          </h3>
         </div>
         <SeatList seats={boat.allSeats} boatId={boat.details.boatId} 
           attendeeIdsInBoat={boat.attendeeIdsInBoat} />

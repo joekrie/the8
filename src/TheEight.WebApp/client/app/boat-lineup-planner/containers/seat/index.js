@@ -3,23 +3,22 @@ import { DropTarget } from "react-dnd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import AssignedAttendee from "./assigned-attendee";
-import { defaultDropCollect } from "../../common/dnd-defaults";
+import AssignedAttendee from "../assigned-attendee";
 
 import { 
   ASSIGNED_ATTENDEE, 
   ATTENDEE_LIST_ITEM 
-} from "../item-types";
+} from "../../item-types";
 
 import { 
   COXSWAIN, 
   PORT_ROWER, 
   STARBOARD_ROWER, 
   BISWEPTUAL_ROWER 
-} from "../models/attendee-positions";
+} from "../../models/attendee-positions";
 
-import { assignAttendee, unassignAttendee } from "../action-creators";
-import { RACE_MODE } from "../models/event-modes";
+import { assignAttendee, unassignAttendee } from "../../action-creators";
+import { RACE_MODE } from "../../models/event-modes";
 
 export const mapStateToProps = state => ({
   canAttendeeOccupyMultipleBoats: state.eventDetails.mode === RACE_MODE 
@@ -49,8 +48,8 @@ export const dropSpec = {
       return !alreadyInBoat;
     }
     
-    const isMoveWithinBoat = targetBoatId == originBoatId;
-    const isSameSeat = targetSeatNumber == originSeatNumber && isMoveWithinBoat;
+    const isMoveWithinBoat = targetBoatId === originBoatId;
+    const isSameSeat = targetSeatNumber === originSeatNumber && isMoveWithinBoat;
       
     return !isSameSeat && (isMoveWithinBoat || !alreadyInBoat);
   },
@@ -78,7 +77,7 @@ export const dropSpec = {
     
     if (itemType === ASSIGNED_ATTENDEE) {
       const isTargetInOrigin = attendeeIdsInOriginBoat.contains(attendeeIdInTarget);
-      const isMoveWithinBoat = targetBoatId == originBoatId;
+      const isMoveWithinBoat = targetBoatId === originBoatId;
       const isSwapWithinBoat = isMoveWithinBoat && attendeeIdInTarget;
             
       assignAttendee(draggedAttendeeId, targetBoatId, targetSeatNumber);
@@ -95,8 +94,16 @@ export const dropSpec = {
   }
 };
 
+const dropCollect = (connect, monitor) => ({
+  connectDropTarget: connect.dropTarget(),
+  isOver: monitor.isOver(),
+  isOverCurrent: monitor.isOver({ shallow: true }),
+  canDrop: monitor.canDrop(),
+  itemType: monitor.getItemType()
+});
+
 @connect(mapStateToProps, mapDispatchToProps)
-@DropTarget([ATTENDEE_LIST_ITEM, ASSIGNED_ATTENDEE], dropSpec, defaultDropCollect)
+@DropTarget([ATTENDEE_LIST_ITEM, ASSIGNED_ATTENDEE], dropSpec, dropCollect)
 export default class Seat extends Component {
   render() {
     const { 
@@ -104,7 +111,8 @@ export default class Seat extends Component {
       attendeeId, 
       boatId, 
       seatNumber, 
-      attendeeIdsInBoat 
+      attendeeIdsInBoat,
+      isOver
     } = this.props;
 
     const isCoxSeat = seatNumber === 0;
@@ -123,34 +131,39 @@ export default class Seat extends Component {
       
       return [STARBOARD_ROWER, BISWEPTUAL_ROWER];
     };
-     
-    const assignAttendeeContainer = attendeeId 
-      ? <AssignedAttendee attendeeId={attendeeId} boatId={boatId} 
-          seatNumber={seatNumber} attendeeIdsInBoat={attendeeIdsInBoat}
-          acceptedPositions={getAcceptedPositions()} />
-      : null;
-         
+    
+    const seatHeight = 35;
+
     const styles = {
       root: {
-        "height": "50px",
+        "height": `${seatHeight}px`,
         "clear": "both"
       },
       label: {
         "float": "left",
-        "height": "50px",
-        "lineHeight": "50px",
+        "height": `${seatHeight}px`,
+        "lineHeight": `${seatHeight}px`,
         "whiteSpace": "nowrap",
-        "marginLeft": "10px",
-        "width": "30px"
+        "width": "20px"
+      },
+      placeholder: {
+        "height": "28px",
+        "display": isOver ? "flex" : "none"
       }
     };
+    
+    const attendeeSlot = attendeeId 
+      ? <AssignedAttendee attendeeId={attendeeId} boatId={boatId} 
+          seatNumber={seatNumber} attendeeIdsInBoat={attendeeIdsInBoat}
+          acceptedPositions={getAcceptedPositions()} />
+      : <div className="card" style={styles.placeholder}></div>;
 
     return connectDropTarget(
       <div style={styles.root}>
         <div style={styles.label}>
           {label}
         </div>
-        {assignAttendeeContainer}
+        {attendeeSlot}
       </div>
     );
   }

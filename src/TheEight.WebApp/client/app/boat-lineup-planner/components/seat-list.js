@@ -16,7 +16,7 @@ export default class SeatList extends Component {
     )).valueSeq();
 
     return (
-      <div className="container">
+      <div className="card-block">
         {boatSeats}
       </div>
     );

@@ -62,7 +62,6 @@ export default class BoatCreator extends Component {
     return (
       <span>
         <Modal isOpen={this.state.open} onRequestClose={() => this.resetState()}>
-          <button className="btn btn-secondary" onClick={() => this.resetState()}>Close</button>
           <fieldset className="form-group">
             <label htmlFor="new-boat-title">
               Title
@@ -70,7 +69,7 @@ export default class BoatCreator extends Component {
             <input className="form-control" id="new-boat-title" value={this.state.title} onChange={onChangeTitle} />
           </fieldset>
           <fieldset className="form-group">
-            <select value={getTypeValue()} onChange={onChangeType}>
+            <select className="form-control" value={getTypeValue()} onChange={onChangeType}>
               <option value="1x">1x</option> 
               <option value="2x">2x</option>
               <option value="4x">4x</option>
@@ -82,7 +81,7 @@ export default class BoatCreator extends Component {
             Add
           </button>
         </Modal>
-        <button className="btn btn-secondary"  style={styles.button} 
+        <button className="btn btn-secondary btn-sm"  style={styles.button} 
           onClick={() => this.setState({open:true})}>
           Add Boat
         </button>

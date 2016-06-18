@@ -2,6 +2,8 @@ import { Component } from "react";
 import "sugar";
 import { LocalDate, nativeJs } from "js-joda";
 
+import { formatLocalDate } from "../../common/date-utils";
+
 export default class DateField extends Component {
   constructor(props) {
     super(props);
@@ -34,11 +36,6 @@ export default class DateField extends Component {
 
   render() {
     const { rawValue } = this.state;
-
-    const formatLocalDate = ld => {
-      const dow = ld.dayOfWeek();
-      return `${dow}, ${ld.toString()}`;
-    };
 
     const displayParsed = this.state.isValid
       ? <small className="text-muted">{formatLocalDate(this.props.value)}</small>
