@@ -1,12 +1,18 @@
 import { List, Map } from "immutable";
 import { LocalDate } from "js-joda";
 
-import AttendeeRecord from "./models/attendee-record";
-import BoatRecord from "./models/boat-record";
-import BoatDetailsRecord from "./models/boat-details-record";
-import EventDetailsRecord from "./models/event-details-record";
-import { PRACTICE_MODE } from "./models/event-modes";
-import { COXSWAIN, PORT_ROWER, STARBOARD_ROWER, BISWEPTUAL_ROWER } from "./models/attendee-positions";
+import AttendeeRecord from "../models/attendee-record";
+import BoatRecord from "../models/boat-record";
+import BoatDetailsRecord from "../models/boat-details-record";
+import EventDetailsRecord from "../models/event-details-record";
+import { PRACTICE_MODE } from "../models/event-modes";
+
+import { 
+  COXSWAIN, 
+  PORT_ROWER, 
+  STARBOARD_ROWER, 
+  BISWEPTUAL_ROWER 
+} from "../models/attendee-positions";
 
 const sampleState = {
   eventDetails: new EventDetailsRecord({

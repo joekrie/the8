@@ -40,6 +40,7 @@
     "xregexp": "^3.1.1"
   },
   "devDependencies": {
+    "autoprefixer": "^6.3.6",
     "babel-core": "^6.9.1",
     "babel-jest": "^12.1.0",
     "babel-loader": "^6.2.4",
@@ -60,6 +61,7 @@
     "imports-loader": "^0.6.5",
     "jest-cli": "^12.1.1",
     "node-sass": "^3.7.0",
+    "postcss-flexibility": "^1.0.3",
     "postcss-loader": "^0.9.1",
     "react-addons-test-utils": "^15.1.0",
     "react-dnd-test-backend": "^1.0.2",

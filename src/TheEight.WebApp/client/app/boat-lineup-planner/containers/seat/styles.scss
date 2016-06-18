@@ -1,0 +1,21 @@
+﻿$seat-height: 35px;
+
+.boat-lineup-planner .seat {
+      
+    height: $seat-height;
+    clear: $seat-height;
+      
+    .seat-num {
+        float: left;
+        height: $seat-height;
+        line-height: $seat-height;
+        white-space: nowrap;
+        width: 20px;
+        user-select: none;
+    }
+
+    .placeholder {
+        height: 28px;
+        display: flex;
+    }
+}

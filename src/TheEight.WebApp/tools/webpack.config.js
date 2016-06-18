@@ -1,5 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
+const flexibility = require("postcss-flexibility");
+const autoprefixer = require("autoprefixer");
 
 var config = {
   context: path.join(__dirname, "../client/app"),
@@ -8,6 +10,11 @@ var config = {
   },
   module: {
     loaders: [
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        loaders: ["style", "css", "postcss", "sass"]
+      },
       {
         test: /\.js(x)?$/,
         exclude: /node_modules/,
@@ -19,6 +26,12 @@ var config = {
       }
     ]
   },
+  postcss: [ 
+    autoprefixer({
+      browsers: ["last 2 versions"]
+    }),
+    flexibility
+  ],
   output: {
     path: path.join(__dirname, "../wwwroot/app"),
     filename: "[name].js",
