@@ -73,6 +73,9 @@ export default class AttendeeList extends Component {
 
     return connectDropTarget(
       <div className="card" style={styles.root}>
+        <h1 className="card-header">
+          Boat Lineups
+        </h1>
         <div className="card-block">
           <EventDetails eventDetails={eventDetails} changeEventDetails={changeEventDetails} />
           <BoatCreator createBoat={createBoat} />
