@@ -1,6 +1,6 @@
 import { Component } from "react";
-import "sugar";
 import { LocalDate, nativeJs } from "js-joda";
+import "sugar";
 
 import { formatLocalDate } from "../../common/date-utils";
 

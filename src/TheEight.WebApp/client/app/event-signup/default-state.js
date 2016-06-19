@@ -1,11 +1,11 @@
-import { Map, List } from "immutable";
+import { List, Map } from "immutable"
+import { LocalDate } from "js-joda"
 
-import EventDetailsRecord from "./models/event-details-record";
+import SettingsRecord from "./models/settings-record"
 
-const defaultState = {
-    eventDetails: new EventDetailsRecord(),
-    boats: Map(),
-    attendees: List()
+const sampleState = {
+  settings: new SettingsRecord(),
+  events: List()
 };
 
-export default defaultState
+export default sampleState;

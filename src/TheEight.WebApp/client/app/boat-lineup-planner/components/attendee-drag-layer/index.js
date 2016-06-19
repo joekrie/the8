@@ -1,17 +1,13 @@
 import { Component } from "react";
 import { DragLayer } from "react-dnd";
 
-import { ASSIGNED_ATTENDEE, ATTENDEE_LIST_ITEM } from "../item-types";
+import { ASSIGNED_ATTENDEE, ATTENDEE_LIST_ITEM } from "../../item-types";
+import { collect } from "./dnd";
 
-const collect = monitor => ({
-  item: monitor.getItem(),
-  itemType: monitor.getItemType(),
-  initialOffset: monitor.getInitialSourceClientOffset(),
-  currentOffset: monitor.getSourceClientOffset(),
-  isDragging: monitor.isDragging()
-});
+import "./styles.scss";
 
-const getItemStyles = currentOffset => {
+const getItemStyles = currentOffset => 
+{
   if (!currentOffset) {
     return {
       "display": "none"
@@ -29,16 +25,6 @@ const getItemStyles = currentOffset => {
   };
 }
 
-const layerStyles = {
-  "position": "fixed",
-  "pointerEvents": "none",
-  "zIndex": 100,
-  "left": 0,
-  "top": 0,
-  "width": "100%",
-  "height": "100%"
-};
-
 @DragLayer(collect)
 export default class AttendeeDragLayer extends Component {
   render() {
@@ -49,7 +35,7 @@ export default class AttendeeDragLayer extends Component {
       : "";
     
     return (
-      <div style={layerStyles}>
+      <div className="drag-layer">
         <div className="card card-block" style={getItemStyles(currentOffset)}>
           {displayName}
         </div>

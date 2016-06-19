@@ -1,7 +1,9 @@
 import { createAction } from "redux-actions";
 
 import {
-  SIGN_UP 
+  REGISTER,
+  UNREGISTER
 } from "./actions";
 
-export const signUp = createAction(SIGN_UP, (eventId, attendeeId) => ({ eventId, attendeeId }));
+export const register = createAction(REGISTER, eventId => ({ eventId }));
+export const unregister = createAction(UNREGISTER, eventId => ({ eventId }));
