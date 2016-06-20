@@ -22,7 +22,6 @@
     "lodash": "^4.13.1",
     "moment": "^2.13.0",
     "normalize.css": "^4.1.1",
-    "popper.js": "^0.4.2",
     "radium": "^0.17.1",
     "react": "^15.1.0",
     "react-dnd": "^2.1.4",
@@ -98,7 +97,7 @@
   "scripts": {
     "test": "jest",
     "build-js": "webpack --config tools/webpack.config.js",
-    "build-sass": "node-sass client/styles/site.scss > wwwroot/styles/site.css",
+    "build-styles": "node-sass client/styles/site.scss > wwwroot/styles/site.css",
     "start": "webpack-dev-server --config tools/webpack.config.js --inline --hot",
     "prestart": "start http://localhost:8080/tools/dev-server.html"
   },

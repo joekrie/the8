@@ -5,7 +5,7 @@ import EventRecord from "./event-record";
 
 const EventListItemRecord = Record({
   event: new EventRecord(),
-  attendees: List(),
+  otherAttendees: List(),
   isRegistered: false
 });
 

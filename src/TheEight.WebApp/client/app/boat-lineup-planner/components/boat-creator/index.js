@@ -1,18 +1,20 @@
-import { Component } from "react";
-import Modal from "react-modal";
+import { Component } from "react"
+import Modal from "react-modal"
 
-import BoatDetailsRecord from "../models/boat-details-record";
+import BoatDetailsRecord from "../../models/boat-details-record"
+
+import "./styles.scss"
 
 export default class BoatCreator extends Component {  
   constructor() {
-    super();
+    super()
 
     this.state = {
       seatCount: 4,
       isCoxed: true,
       title: "",
       open: false
-    };
+    }
   }
   
   resetState() {
@@ -21,43 +23,43 @@ export default class BoatCreator extends Component {
       isCoxed: true,
       title: "",
       open: false
-    });
+    })
   }
     
   render() {
-    const { createBoat } = this.props;
+    const { createBoat } = this.props
     
     const onChangeTitle = event => {
-      this.setState({ title: event.target.value });
-    };
+      this.setState({ title: event.target.value })
+    }
     
     const onChangeType = event => {
-      const value = event.target.value;
-      const seatCount = Number(value[0]);
-      const isCoxed = value[1] === "+";
-      this.setState({ seatCount, isCoxed });
-    };
+      const value = event.target.value
+      const seatCount = Number(value[0])
+      const isCoxed = value[1] === "+"
+      this.setState({ seatCount, isCoxed })
+    }
     
     const onSubmit = () => {
-      const { title, seatCount, isCoxed } = this.state;
+      const { title, seatCount, isCoxed } = this.state
       
-      const boatId = "new-boat-" + Date.now();
-      const newBoatDetails = new BoatDetailsRecord({ boatId, title, seatCount, isCoxed });
+      const boatId = "new-boat-" + Date.now()
+      const newBoatDetails = new BoatDetailsRecord({ boatId, title, seatCount, isCoxed })
       
-      createBoat(newBoatDetails);
-      this.resetState();
-    };
+      createBoat(newBoatDetails)
+      this.resetState()
+    }
     
     const getTypeValue = () => {
-      const { seatCount, isCoxed } = this.state;
-      return String(seatCount) + (isCoxed ? "+" : "x");
-    };
+      const { seatCount, isCoxed } = this.state
+      return String(seatCount) + (isCoxed ? "+" : "x")
+    }
 
     const styles = {
       button: {
         "marginRight": "5px"
       }
-    };
+    }
     
     return (
       <span>
@@ -86,6 +88,6 @@ export default class BoatCreator extends Component {
           Add Boat
         </button>
       </span>
-    );
+    )
   }
 }

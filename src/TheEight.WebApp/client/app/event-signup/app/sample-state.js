@@ -20,8 +20,13 @@ import {
 
 const sampleState = {
   settings: new SettingsRecord({
-    showRegisteredAttendees: true,
-    attendeeId: "rower-1"
+    showRegisteredAttendees: true
+  }),
+  attendee: new AttendeeRecord({
+    attendeeId: "rower-1",
+    sortName: "Sheen, Martin",
+    displayName: "Martin Sheen",
+    position: PORT_ROWER
   }),
   events: Map({
     "event-1": new EventListItemRecord({
@@ -31,18 +36,12 @@ const sampleState = {
         notes: "",
         type: WATER_EVENT
       }),
-      attendees: List([
+      otherAttendees: List([
         new AttendeeRecord({
           attendeeId: "cox-1",
           sortName: "Hill, Dule",
           displayName: "Dule Hill",
           position: COXSWAIN
-        }),
-        new AttendeeRecord({
-          attendeeId: "rower-1",
-          sortName: "Sheen, Martin",
-          displayName: "Martin Sheen",
-          position: PORT_ROWER
         })
       ]),
       isRegistered: true
@@ -50,11 +49,11 @@ const sampleState = {
     "event-2": new EventListItemRecord({
       event: new EventRecord({
         eventId: "event-2",
-        date: LocalDate.of(2016, 7, 30),
+        date: LocalDate.of(2016, 8, 1),
         notes: "",
         type: ERG_EVENT
       }),
-      attendees: List([
+      otherAttendees: List([
         new AttendeeRecord({
           attendeeId: "rower-3",
           sortName: "Schiff, Richard",

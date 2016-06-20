@@ -1,6 +1,6 @@
-import { Component } from "react";
+import { Component } from "react"
 
-import Seat from "../containers/seat";
+import Seat from "../../containers/seat"
 
 export default class SeatList extends Component {
   render() {
@@ -8,17 +8,17 @@ export default class SeatList extends Component {
       seats, 
       attendeeIdsInBoat, 
       boatId 
-    } = this.props;
+    } = this.props
 
     const boatSeats = seats.map((attendeeId, seatNumber) => (
       <Seat key={seatNumber} boatId={boatId} seatNumber={seatNumber} 
         attendeeId={attendeeId} attendeeIdsInBoat={attendeeIdsInBoat} />
-    )).valueSeq();
+    )).valueSeq()
 
     return (
       <div className="card-block">
         {boatSeats}
       </div>
-    );
+    )
   }
 }

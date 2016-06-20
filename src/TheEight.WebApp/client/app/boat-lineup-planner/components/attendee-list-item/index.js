@@ -2,10 +2,12 @@ import { Component } from "react";
 import { DragSource } from "react-dnd";
 import { getEmptyImage } from "react-dnd-html5-backend";
 
-import { defaultDragCollect } from "../../common/dnd-defaults";
-import { ATTENDEE_LIST_ITEM } from "../item-types";
-import { RACE_MODE } from "../models/event-modes";
-import Attendee from "./attendee";
+import { defaultDragCollect } from "../../../common/dnd-defaults";
+import { ATTENDEE_LIST_ITEM } from "../../item-types";
+import { RACE_MODE } from "../../models/event-modes";
+import Attendee from "../attendee";
+
+import "./styles.scss"
 
 export const dragSpec = {
   canDrag(props) {
@@ -29,10 +31,6 @@ const collect = connect => ({
 
 @DragSource(ATTENDEE_LIST_ITEM, dragSpec, collect)
 export default class AttendeeListItem extends Component {
-  styles = {
-    "marginBottom": "10px"
-  };
-
   componentDidMount() {
     const { connectDragPreview } = this.props;
     connectDragPreview(getEmptyImage());
@@ -46,7 +44,7 @@ export default class AttendeeListItem extends Component {
 
     return (
       connectDragSource(
-        <div style={this.styles}>
+        <div className="attendee-list-item">
           <Attendee attendee={attendeeListItem.attendee} />
         </div>
       )

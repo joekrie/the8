@@ -1,7 +1,7 @@
-const path = require("path");
-const webpack = require("webpack");
-const flexibility = require("postcss-flexibility");
-const autoprefixer = require("autoprefixer");
+const path = require("path")
+const webpack = require("webpack")
+const flexibility = require("postcss-flexibility")
+const autoprefixer = require("autoprefixer")
 
 var config = {
   context: path.join(__dirname, "../client/app"),
@@ -57,14 +57,14 @@ var config = {
       "window.Tether": "tether"
     })
   ]
-};
+}
 
 if (process.env.NODE_ENV === "production") {
   config.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       minimize: true
     })
-  );
+  )
 }
 
-module.exports = config;
+module.exports = config

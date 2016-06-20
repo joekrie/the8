@@ -9,11 +9,11 @@ export const mapDispatchToProps = dispatch => bindActionCreators({ register, unr
 
 export const mapStateToProps = state => {
   const {
-    events, 
-    settings: { attendeeId }
+    events,
+    attendee
   } = state
   
-  return { events, attendeeId }
+  return { events, attendee }
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -22,14 +22,16 @@ export default class EventList extends Component {
     const {
       events,
       register,
-      unregister
+      unregister,
+      attendee
     } = this.props
 
     const eventComponents = events.map(item => {
       const {
         isRegistered,
-        event: { eventId }
-      } = item;
+        event: { eventId },
+        otherAttendees
+      } = item
         
       const registerAction = 
         isRegistered 
@@ -38,8 +40,13 @@ export default class EventList extends Component {
 
       const registerLabel = isRegistered ? "Unregister" : "Register"
 
+      const attendees =
+        isRegistered
+          ? otherAttendees.unshift(attendee)
+          : otherAttendees
+
       return (
-        <Event key={item.event.eventId} eventListItem={item}
+        <Event key={item.event.eventId} eventListItem={item} attendees={attendees}
           registerAction={registerAction} registerLabel={registerLabel} />
       )
     }).valueSeq()

@@ -1,7 +1,9 @@
 import { Component } from "react";
 import Modal from "react-modal";
 
-import AttendeeRecord from "../models/attendee-record";
+import AttendeeRecord from "../../models/attendee-record";
+
+import "./styles.scss"
 
 export default class BoatCreator extends Component {  
   constructor() {
@@ -45,15 +47,9 @@ export default class BoatCreator extends Component {
         isCoxswain
       });
     };
-
-    const styles = {
-      button: {
-        "marginRight": "5px"
-      }
-    };
     
     return (
-      <span>
+      <span className="attendee-creator">
         <Modal isOpen={this.state.open} onRequestClose={() => this.resetState()}>
           <fieldset className="form-group">
             <label htmlFor="new-attendee-name">
@@ -66,10 +62,10 @@ export default class BoatCreator extends Component {
             Add
           </button>
         </Modal>
-        <button className="btn btn-secondary btn-sm" style={styles.button} onClick={() => openModal(false)}>
+        <button className="btn btn-secondary btn-sm" onClick={() => openModal(false)}>
           Add Rower
         </button>
-        <button className="btn btn-secondary btn-sm" style={styles.button} onClick={() => openModal(true)}>
+        <button className="btn btn-secondary btn-sm" onClick={() => openModal(true)}>
           Add Coxswain
         </button>
       </span>

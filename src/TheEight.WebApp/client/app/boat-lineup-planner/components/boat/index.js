@@ -1,7 +1,9 @@
 import { Component } from "react"
-import Modal from "react-modal";
+import Modal from "react-modal"
 
-import SeatList from "./seat-list";
+import SeatList from "../seat-list"
+
+import "./styles.scss"
 
 export default class Boat extends Component {  
   constructor() {
@@ -14,26 +16,13 @@ export default class Boat extends Component {
 
   render() {
     const { boat } = this.props;
-    
-    const styles = {
-      root: {
-        "width": "250px",
-        "minWidth": "250px",
-        "marginRight": "20px"
-      },
-      header: {
-        "marginBottom": "10px",
-        "padding": "10px",
-        "marginLeft": "auto"
-      }
-    };
 
     return (
-      <div className="card" style={styles.root}>
+      <div className="boat card">
         <Modal isOpen={this.state.open} onRequestClose={() => this.setState({ open: false })}>
           {boat.details.title}
         </Modal>
-        <div className="card-header" style={styles.header}>
+        <div className="header card-header">
           <h3>
             <a onClick={() => this.setState({ open: true })}>
               {boat.details.title}
@@ -43,6 +32,6 @@ export default class Boat extends Component {
         <SeatList seats={boat.allSeats} boatId={boat.details.boatId} 
           attendeeIdsInBoat={boat.attendeeIdsInBoat} />
       </div>
-    );
+    )
   }
 }
