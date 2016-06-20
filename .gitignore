@@ -196,3 +196,4 @@ deploy/azure-deploy-params.json
 .vs/config/applicationhost.config
 TheEight.sln.DotSettings.user
 **/.vscode/*
+**/.vs/*
