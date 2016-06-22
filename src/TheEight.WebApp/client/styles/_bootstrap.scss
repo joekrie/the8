@@ -1,4 +1,7 @@
-﻿$font-family-sans-serif: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+﻿@import "https://fonts.googleapis.com/css?family=Source+Sans+Pro";
+
+$custom-font: "Source Sans Pro";
+$font-family-sans-serif: $custom-font, "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-size-root: 12px;
 
 @import "../../node_modules/bootstrap/scss/bootstrap-flex";

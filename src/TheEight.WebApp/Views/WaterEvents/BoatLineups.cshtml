@@ -8,6 +8,6 @@
     };
 }
 
-@section scripts {
-    <render-react-app component-name="BoatLineupPlannerApp" props="@props"></render-react-app>
-}
+<render-react-app component-name="BoatLineupPlannerApp" 
+                  script-path="@Url.Content("~/app/client.js")" 
+                  props="@props"></render-react-app>

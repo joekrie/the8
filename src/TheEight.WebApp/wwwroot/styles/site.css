@@ -6819,3 +6819,6 @@ a.bg-danger:focus, a.bg-danger:hover {
   overflow: visible;
   clip: auto; }
 
+.content {
+  margin-top: -40px; }
+
