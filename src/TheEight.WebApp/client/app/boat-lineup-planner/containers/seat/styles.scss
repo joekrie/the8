@@ -1,4 +1,4 @@
-﻿$seat-height: 35px;
+﻿$seat-height: 2.5rem;
 
 .boat-lineup-planner .seat {
       
@@ -10,12 +10,13 @@
         height: $seat-height;
         line-height: $seat-height;
         white-space: nowrap;
-        width: 20px;
+        width: 1rem;
         user-select: none;
     }
 
     .placeholder {
-        height: 28px;
+        height: 1.8rem;
+        width: 20rem;
         display: flex;
     }
 }

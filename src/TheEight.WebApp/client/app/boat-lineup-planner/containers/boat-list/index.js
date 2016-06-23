@@ -2,7 +2,7 @@ import { List } from "immutable";
 import { Component } from "react";
 import { connect } from "react-redux";
 
-import Boat from "../../components/boat";
+import Boat from "boat-lineup-planner/components/boat";
 
 export const mapStateToProps = ({ boats }) => ({ boats: boats.valueSeq() });
 

@@ -4,16 +4,16 @@ import { DropTarget } from "react-dnd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import AttendeeListItem from "../../components/attendee-list-item";
-import EventDetails from "../../components/event-details";
-import BoatCreator from "../../components/boat-creator";
-import AttendeeCreator from "../../components/attendee-creator";
+import AttendeeListItem from "boat-lineup-planner/components/attendee-list-item";
+import EventDetails from "boat-lineup-planner/components/event-details";
+import BoatCreator from "boat-lineup-planner/components/boat-creator";
+import AttendeeCreator from "boat-lineup-planner/components/attendee-creator";
 
-import { defaultDropCollect } from "../../../common/dnd-defaults";
-import { ASSIGNED_ATTENDEE } from "../../item-types";
-import { RACE_MODE } from "../../models/event-modes";
-import { unassignAttendee, changeEventDetails, createBoat, createAttendee } from "../../action-creators";
-import AttendeeListItemRecord from "../../models/attendee-list-item-record";
+import { defaultDropCollect } from "common/dnd-defaults";
+import { ASSIGNED_ATTENDEE } from "boat-lineup-planner/item-types";
+import { RACE_MODE } from "boat-lineup-planner/models/event-modes";
+import { unassignAttendee, changeEventDetails, createBoat, createAttendee } from "boat-lineup-planner/action-creators";
+import AttendeeListItemRecord from "boat-lineup-planner/models/attendee-list-item-record";
 
 export const mapStateToProps = state => {
   const { attendees, boats, eventDetails } = state;

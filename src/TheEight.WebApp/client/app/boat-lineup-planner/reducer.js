@@ -1,9 +1,16 @@
 import { handleActions } from "redux-actions";
 import { Map, List } from "immutable";
 
-import { ASSIGN_ATTENDEE, UNASSIGN_ATTENDEE, CHANGE_EVENT_DETAILS, CREATE_BOAT, CREATE_ATTENDEE } from "./actions";
-import { defaultState } from "./default-state";
-import BoatRecord from "./models/boat-record";
+import { 
+  ASSIGN_ATTENDEE, 
+  UNASSIGN_ATTENDEE, 
+  CHANGE_EVENT_DETAILS, 
+  CREATE_BOAT, 
+  CREATE_ATTENDEE 
+} from "boat-lineup-planner/actions";
+
+import { defaultState } from "boat-lineup-planner/default-state";
+import BoatRecord from "boat-lineup-planner/models/boat-record";
 
 const reducer = handleActions({
   [ASSIGN_ATTENDEE]: (prevState, { type, payload }) => {

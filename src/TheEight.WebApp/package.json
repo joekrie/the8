@@ -69,8 +69,10 @@
     "postcss-loader": "^0.9.1",
     "react-addons-test-utils": "^15.1.0",
     "react-dnd-test-backend": "^1.0.2",
+    "resolve-url-loader": "^1.4.4",
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   },

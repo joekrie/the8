@@ -4,23 +4,31 @@ import { DropTarget } from "react-dnd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import AssignedAttendee from "../assigned-attendee";
-import { dropSpec, dropCollect } from "./dnd";
+import AssignedAttendee from "boat-lineup-planner/containers/assigned-attendee";
+
+import { 
+  dropSpec, 
+  dropCollect 
+} from "./dnd";
 
 import { 
   ASSIGNED_ATTENDEE, 
   ATTENDEE_LIST_ITEM 
-} from "../../item-types";
+} from "boat-lineup-planner/item-types";
 
 import { 
   COXSWAIN, 
   PORT_ROWER, 
   STARBOARD_ROWER, 
   BISWEPTUAL_ROWER 
-} from "../../models/attendee-positions";
+} from "boat-lineup-planner/models/attendee-positions";
 
-import { assignAttendee, unassignAttendee } from "../../action-creators";
-import { RACE_MODE } from "../../models/event-modes";
+import { 
+  assignAttendee, 
+  unassignAttendee 
+} from "boat-lineup-planner/action-creators";
+
+import { RACE_MODE } from "boat-lineup-planner/models/event-modes";
 
 import "./styles.scss"
 
@@ -67,7 +75,7 @@ export default class Seat extends Component {
       ? <AssignedAttendee attendeeId={attendeeId} boatId={boatId} 
           seatNumber={seatNumber} attendeeIdsInBoat={attendeeIdsInBoat}
           acceptedPositions={getAcceptedPositions()} />
-      : <div className={classNames("card", "placeholder")} style={getPlaceholderStyles()}></div>;
+      : <div className="card placeholder" style={getPlaceholderStyles()}></div>;
 
     return connectDropTarget(
       <div className="seat">

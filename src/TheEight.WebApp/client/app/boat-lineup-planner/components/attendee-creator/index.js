@@ -1,7 +1,7 @@
 import { Component } from "react";
 import Modal from "react-modal";
 
-import AttendeeRecord from "../../models/attendee-record";
+import AttendeeRecord from "boat-lineup-planner/models/attendee-record";
 
 import "./styles.scss"
 

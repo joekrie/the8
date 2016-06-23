@@ -10,13 +10,13 @@ import TouchBackend from "react-dnd-touch-backend";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 
-import AttendeeList from "../containers/attendee-list";
-import BoatList from "../containers/boat-list";
-import AttendeeDragLayer from "../components/attendee-drag-layer";
+import AttendeeList from "boat-lineup-planner/containers/attendee-list";
+import BoatList from "boat-lineup-planner/containers/boat-list";
+import AttendeeDragLayer from "boat-lineup-planner/components/attendee-drag-layer";
 
-import loggerMiddleware from "../../common/middleware/logger-middleware";
-import appInsightsMiddleware from "../../common/middleware/app-insights-middleware";
-import reducer from "../reducer";
+import loggerMiddleware from "common/middleware/logger-middleware";
+import appInsightsMiddleware from "common/middleware/app-insights-middleware";
+import reducer from "boat-lineup-planner/reducer";
 import sampleState from "./sample-state";
 
 import "./styles.scss"

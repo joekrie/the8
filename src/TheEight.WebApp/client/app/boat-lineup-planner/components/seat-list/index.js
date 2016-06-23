@@ -1,6 +1,6 @@
 import { Component } from "react"
 
-import Seat from "../../containers/seat"
+import Seat from "boat-lineup-planner/containers/seat"
 
 export default class SeatList extends Component {
   render() {

@@ -5,23 +5,18 @@
     <meta content="utf-8" http-equiv="encoding">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>The Eight</title>
-    <link href="~/styles/site.css" rel="stylesheet"/>
+    <link href="~/site.css" rel="stylesheet"/>
+    @RenderSection("Styles", false)
 </head>
 <body>
     <nav class="navbar navbar-light bg-faded">
         <a class="navbar-brand" href="#">the8.io</a>
         <ul class="nav navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">Events <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
+                <a class="nav-link" href="#">Team</a>
             </li>
         </ul>
     </nav>

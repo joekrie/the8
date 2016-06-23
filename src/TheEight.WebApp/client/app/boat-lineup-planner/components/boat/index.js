@@ -1,7 +1,7 @@
 import { Component } from "react"
 import Modal from "react-modal"
 
-import SeatList from "../seat-list"
+import SeatList from "boat-lineup-planner/components/seat-list"
 
 import "./styles.scss"
 

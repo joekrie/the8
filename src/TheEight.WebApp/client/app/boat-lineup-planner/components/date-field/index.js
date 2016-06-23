@@ -1,6 +1,6 @@
 import { Component } from "react"
 
-import { formatLocalDate, parseLocalDate } from "../../../common/date-utils"
+import { formatLocalDate, parseLocalDate } from "common/date-utils"
 
 export default class DateField extends Component {
   constructor(props) {

@@ -3,9 +3,9 @@ import { DragSource } from "react-dnd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { defaultDragCollect } from "../../../common/dnd-defaults";
-import { ASSIGNED_ATTENDEE } from "../../item-types";
-import Attendee from "../../components/attendee";
+import { defaultDragCollect } from "common/dnd-defaults";
+import { ASSIGNED_ATTENDEE } from "boat-lineup-planner/item-types";
+import Attendee from "boat-lineup-planner/components/attendee";
 
 export const mapStateToProps = ({ attendees }, { attendeeId }) => {
   const attendee = attendees.find(attendee => attendee.attendeeId === attendeeId);

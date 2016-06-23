@@ -1,17 +1,17 @@
 import { 
   ASSIGNED_ATTENDEE, 
   ATTENDEE_LIST_ITEM 
-} from "../../item-types";
+} from "boat-lineup-planner/item-types";
 
 import { 
   COXSWAIN, 
   PORT_ROWER, 
   STARBOARD_ROWER, 
   BISWEPTUAL_ROWER 
-} from "../../models/attendee-positions";
+} from "boat-lineup-planner/models/attendee-positions";
 
-import { assignAttendee, unassignAttendee } from "../../action-creators";
-import { RACE_MODE } from "../../models/event-modes";
+import { assignAttendee, unassignAttendee } from "boat-lineup-planner/action-creators";
+import { RACE_MODE } from "boat-lineup-planner/models/event-modes";
 
 export const dropSpec = {
   canDrop(props, monitor) {
