@@ -70,18 +70,16 @@
           "lib/net45/Autofac.Integration.Mef.dll": {}
         }
       },
-      "Dapper/1.50.0-rc2b": {
+      "Dapper/1.38.0": {
         "type": "package",
         "frameworkAssemblies": [
-          "System.Data",
-          "System.Xml",
-          "System.Xml.Linq"
+          "Microsoft.CSharp"
         ],
         "compile": {
-          "lib/net451/Dapper.dll": {}
+          "lib/net45/Dapper.dll": {}
         },
         "runtime": {
-          "lib/net451/Dapper.dll": {}
+          "lib/net45/Dapper.dll": {}
         }
       },
       "Dapper-NodaTime/0.0.1": {
@@ -877,7 +875,7 @@
         "dependencies": {
           "Autofac": "4.0.0-rc2-240",
           "Autofac.Extensions.DependencyInjection": "4.0.0-rc2-240",
-          "Dapper": "1.50.0-rc2b",
+          "Dapper": "1.38.0",
           "Dapper-NodaTime": "0.0.1",
           "Microsoft.Extensions.Configuration": "1.0.0-rc2-final",
           "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc2-final",
@@ -949,20 +947,21 @@
         "lib/net45/Autofac.Integration.Mef.xml"
       ]
     },
-    "Dapper/1.50.0-rc2b": {
-      "sha512": "201VJ8sYUkyaEPavlHvi1Wy71vXtZcTCMQlQM6eImqE08oZBLypLFgqQ7DJ5pUc+CsyicXancgF5xEQeZwAxEA==",
+    "Dapper/1.38.0": {
+      "sha512": "7M5OvKWT4dM9mBRdIsK0zlPrHsMwqqCXYaIxLa1NEt0G5IZjxDbpWJOjO1hVqyzjj+5ZANHLjQF0SH/AH6EOyQ==",
       "type": "package",
       "files": [
-        "Dapper.1.50.0-rc2b.nupkg.sha512",
+        "Dapper.1.38.0.nupkg.sha512",
         "Dapper.nuspec",
+        "lib/net35/Dapper.dll",
+        "lib/net35/Dapper.pdb",
+        "lib/net35/Dapper.xml",
         "lib/net40/Dapper.dll",
+        "lib/net40/Dapper.pdb",
         "lib/net40/Dapper.xml",
         "lib/net45/Dapper.dll",
-        "lib/net45/Dapper.xml",
-        "lib/net451/Dapper.dll",
-        "lib/net451/Dapper.xml",
-        "lib/netstandard1.3/Dapper.dll",
-        "lib/netstandard1.3/Dapper.xml"
+        "lib/net45/Dapper.pdb",
+        "lib/net45/Dapper.xml"
       ]
     },
     "Dapper-NodaTime/0.0.1": {

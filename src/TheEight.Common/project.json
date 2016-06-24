@@ -5,7 +5,7 @@
   "dependencies": {
     "Autofac": "4.0.0-rc2-240",
     "Autofac.Extensions.DependencyInjection": "4.0.0-rc2-240",
-    "Dapper": "1.50.0-rc2b",
+    "Dapper": "1.38.0",
     "Dapper-NodaTime": "0.0.1",
     "Microsoft.Extensions.Configuration": "1.0.0-rc2-final",
     "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc2-final",
