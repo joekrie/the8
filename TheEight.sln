@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25402.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{69DEBE83-BA3A-420A-AA7E-3D7F1B696D5E}"
 EndProject
@@ -11,12 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{0D3F6916-8E45-4E5C-96D7-CD87049802C4}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TheEight.Common", "src\TheEight.Common\TheEight.Common.xproj", "{FBF539E0-1767-4AFA-9DCD-F19BBB397AA9}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TheEight.QueueHandlers", "src\TheEight.QueueHandlers\TheEight.QueueHandlers.xproj", "{7414D0DC-3DAF-4CCA-AB4B-EFC756467184}"
-EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TheEight.Database", "src\TheEight.Database\TheEight.Database.sqlproj", "{1B98D5AC-9183-4AA0-8D06-03D82615560E}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TheEight.Options", "src\TheEight.Options\TheEight.Options.xproj", "{F0F54575-A823-4FBF-83D9-22C6D7D4A0C1}"
 EndProject
@@ -28,20 +22,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FBF539E0-1767-4AFA-9DCD-F19BBB397AA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FBF539E0-1767-4AFA-9DCD-F19BBB397AA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FBF539E0-1767-4AFA-9DCD-F19BBB397AA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FBF539E0-1767-4AFA-9DCD-F19BBB397AA9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7414D0DC-3DAF-4CCA-AB4B-EFC756467184}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7414D0DC-3DAF-4CCA-AB4B-EFC756467184}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7414D0DC-3DAF-4CCA-AB4B-EFC756467184}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7414D0DC-3DAF-4CCA-AB4B-EFC756467184}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1B98D5AC-9183-4AA0-8D06-03D82615560E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B98D5AC-9183-4AA0-8D06-03D82615560E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B98D5AC-9183-4AA0-8D06-03D82615560E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{1B98D5AC-9183-4AA0-8D06-03D82615560E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B98D5AC-9183-4AA0-8D06-03D82615560E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1B98D5AC-9183-4AA0-8D06-03D82615560E}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{F0F54575-A823-4FBF-83D9-22C6D7D4A0C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F0F54575-A823-4FBF-83D9-22C6D7D4A0C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0F54575-A823-4FBF-83D9-22C6D7D4A0C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -55,9 +35,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{FBF539E0-1767-4AFA-9DCD-F19BBB397AA9} = {69DEBE83-BA3A-420A-AA7E-3D7F1B696D5E}
-		{7414D0DC-3DAF-4CCA-AB4B-EFC756467184} = {69DEBE83-BA3A-420A-AA7E-3D7F1B696D5E}
-		{1B98D5AC-9183-4AA0-8D06-03D82615560E} = {69DEBE83-BA3A-420A-AA7E-3D7F1B696D5E}
 		{F0F54575-A823-4FBF-83D9-22C6D7D4A0C1} = {69DEBE83-BA3A-420A-AA7E-3D7F1B696D5E}
 		{EC7351C2-3F69-480D-A0BB-13F8D2D52F5F} = {69DEBE83-BA3A-420A-AA7E-3D7F1B696D5E}
 	EndGlobalSection
