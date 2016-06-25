@@ -1,7 +1,9 @@
-﻿{
+{
   "version": "1.0.0-*",
 
-  "dependencies": { },
+  "dependencies": {
+    "NodaTime": "1.3.2"
+  },
 
   "frameworks": {
     "net461": { }

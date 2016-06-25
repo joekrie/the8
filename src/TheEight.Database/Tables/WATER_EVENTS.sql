@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[WATER_EVENTS]
+(
+	[WaterEventId] UNIQUEIDENTIFIER NOT NULL, 
+    [Date] DATE NOT NULL, 
+    [Time] TIME(0) NULL, 
+    [Notes] NVARCHAR(MAX) NOT NULL DEFAULT '', 
+    [Mode] TINYINT NOT NULL, 
+    CONSTRAINT [PK_WATER_EVENTS] PRIMARY KEY ([WaterEventId])
+)

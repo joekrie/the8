@@ -6,11 +6,11 @@ using NodaTime.Serialization.JsonNet;
 
 namespace TheEight.WebApp.Models.Shared
 {
-    public class ReactVM
+    public class ReactVM<T> : IReactVM
     {
         public string ComponentName { get; set; }
         public string FileName { get; set; }
-        public object Props { get; set; }
+        public T Props { get; set; }
 
         public string JsonProps
         {

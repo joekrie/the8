@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[WATER_EVENT_MODES]
+(
+	[WaterEventModeId] INT NOT NULL, 
+    [Name] NVARCHAR(20) NOT NULL, 
+    CONSTRAINT [PK_WATER_EVENT_MODES] PRIMARY KEY ([WaterEventModeId])
+)

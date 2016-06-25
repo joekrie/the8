@@ -16,11 +16,11 @@ namespace TheEight.WebApp.Controllers
         [HttpGet("boat-lineups/{id:guid?}")]
         public IActionResult BoatLineups(Guid id = new Guid())
         {
-            var reactVM = new ReactVM
+            var reactVM = new ReactVM<int>
             {
                 ComponentName = "BoatLineupPlanner",
                 FileName = "boat-lineup-planner",
-                Props = new { x = 1, y = 2 }
+                Props = 1
             };
 
             return View("React", reactVM);
