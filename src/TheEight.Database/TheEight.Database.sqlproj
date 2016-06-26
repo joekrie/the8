@@ -59,10 +59,24 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables" />
+    <Folder Include="Views" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\WATER_EVENTS.sql" />
     <Build Include="Tables\WATER_EVENT_MODES.sql" />
     <Build Include="Tables\WATER_EVENT_ATTENDEES.sql" />
+    <Build Include="Tables\WATER_EVENT_BOATS.sql" />
+    <Build Include="Tables\EVENTS.sql" />
+    <Build Include="Tables\ATTENDEES.sql" />
+    <Build Include="Tables\USERS.sql" />
+    <Build Include="Tables\GLOBAL_ROLES.sql" />
+    <Build Include="Tables\USERS_IN_GLOBAL_ROLES.sql" />
+    <Build Include="Tables\CLUBS.sql" />
+    <Build Include="Tables\TEAMS.sql" />
+    <Build Include="Tables\CLUB_MEMBERS.sql" />
+    <Build Include="Tables\TEAM_MEMBERS.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="TheEight.Database.refactorlog" />
   </ItemGroup>
 </Project>

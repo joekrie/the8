@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[USERS]
+(
+	[UserId] UNIQUEIDENTIFIER NOT NULL, 
+    [AzureAdObjectId] UNIQUEIDENTIFIER NOT NULL, 
+    CONSTRAINT [PK__USERS] PRIMARY KEY ([UserId]), 
+    CONSTRAINT [AK__USERS__AzureAdObjectId] UNIQUE ([AzureAdObjectId])
+)
