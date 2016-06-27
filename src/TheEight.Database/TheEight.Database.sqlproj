@@ -47,6 +47,7 @@
     <DefineTrace>true</DefineTrace>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunSqlCodeAnalysis>True</RunSqlCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
@@ -90,5 +91,8 @@
     <Build Include="Tables\INVITEES_IN_TEAM_ROLES.sql" />
     <Build Include="Tables\INVITEES_IN_CLUB_ROLES.sql" />
     <Build Include="Tables\INVITEES_IN_GLOBAL_ROLES.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="TheEight.Database.refactorlog" />
   </ItemGroup>
 </Project>

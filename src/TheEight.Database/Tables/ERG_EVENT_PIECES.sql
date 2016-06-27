@@ -4,13 +4,13 @@
     [PieceOrder] TINYINT NOT NULL, 
     [DistanceInMeters] SMALLINT NULL, 
     [DurationInSeconds] SMALLINT NULL, 
-    [PieceTypeId] AS (
+    [PieceTypeId] AS CAST(
 		CASE
 			WHEN DistanceInMeters IS NULL AND DistanceInMeters IS NOT NULL THEN 1
 			ELSE 2
-		END
-	), 
-    CONSTRAINT [PK__ERG_EVENT_PIECES] PRIMARY KEY ([PieceOrder], [EventId]), 
+		END AS TINYINT
+	) PERSISTED, 
+    CONSTRAINT [PK__ERG_EVENT_PIECES] PRIMARY KEY ([EventId], [PieceOrder]), 
     CONSTRAINT [CK__ERG_EVENT_PIECES__PieceOrder] CHECK (PieceOrder > 0), 
     CONSTRAINT [CK__ERG_EVENT_PIECES__DistanceInMeters] CHECK (DistanceInMeters > 0), 
     CONSTRAINT [CK__ERG_EVENT_PIECES__DurationInSeconds] CHECK (DurationInSeconds > 0), 
