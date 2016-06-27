@@ -1,4 +1,14 @@
 ﻿CREATE TABLE [dbo].[ERG_EVENT_RESULTS]
 (
-	[Id] INT NOT NULL PRIMARY KEY
+	[EventId] UNIQUEIDENTIFIER NOT NULL , 
+    [PieceOrder] TINYINT NOT NULL, 
+    [AttendeeId] UNIQUEIDENTIFIER NOT NULL, 
+    [SplitInMilliseconds] INT NOT NULL, 
+    CONSTRAINT [PK__ERG_EVENT_RESULTS] PRIMARY KEY ([AttendeeId], [EventId], [PieceOrder]), 
+    CONSTRAINT [FK__ERG_EVENT_RESULTS__ERG_EVENT_PIECES] FOREIGN KEY ([EventId], [PieceOrder]) 
+		REFERENCES [ERG_EVENT_PIECES]([EventId], [PieceOrder]), 
+    CONSTRAINT [FK__ERG_EVENT_RESULTS__TEAM_MEMBERS] FOREIGN KEY ([AttendeeId]) 
+		REFERENCES [TEAM_MEMBERS]([ClubMemberUserId]), 
+    CONSTRAINT [CK__ERG_EVENT_RESULTS__SplitInMilliseconds] 
+		CHECK (SplitInMilliseconds > 30000 AND SplitInMilliseconds < 240000) 
 )

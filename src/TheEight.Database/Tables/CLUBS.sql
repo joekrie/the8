@@ -2,6 +2,7 @@
 (
 	[ClubId] UNIQUEIDENTIFIER NOT NULL, 
     [Name] NVARCHAR(50) NOT NULL, 
+    [IanaTimeZone] NVARCHAR(50) NOT NULL DEFAULT  'America/Chicago', 
     CONSTRAINT [PK__CLUBS] PRIMARY KEY ([ClubId]), 
     CONSTRAINT [AK__CLUBS__Name] UNIQUE ([Name])
 )
