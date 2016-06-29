@@ -9,6 +9,6 @@
 		REFERENCES [ERG_EVENT_PIECES]([EventId], [PieceOrder]), 
     CONSTRAINT [FK__ERG_EVENT_RESULTS__WATER_EVENT_ATTENDEES] FOREIGN KEY ([AttendeeId]) 
 		REFERENCES [WATER_EVENT_ATTENDEES]([AttendeeId]), 
-    CONSTRAINT [CK__ERG_EVENT_RESULTS__SplitInMilliseconds] 
+    CONSTRAINT [CK__ERG_EVENT_RESULTS__SplitInMilliseconds__Range] 
 		CHECK (SplitInMilliseconds > 30000 AND SplitInMilliseconds < 240000) 
 )

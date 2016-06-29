@@ -60,6 +60,8 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables" />
+    <Folder Include="Views" />
+    <Folder Include="DeploymentScripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\WATER_EVENTS.sql" />
@@ -86,14 +88,16 @@
     <Build Include="Tables\WATER_EVENT_PLACEMENTS.sql" />
     <Build Include="Tables\INVITES.sql" />
     <Build Include="Tables\INVITEES_IN_TEAM_ROLES.sql" />
+    <Build Include="Views\VW__TEAM_MEMBERS_IN_TEAM_ROLES__Flags.sql" />
+    <Build Include="Views\VW__WATER_EVENT_ATTENDEES__AllAttendees.sql" />
+    <Build Include="Views\VW__TEAM_MEMBERS__UserInfo.sql" />
+    <PostDeploy Include="DeploymentScripts\PostDeployment.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TheEight.Database.refactorlog" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="PostDeployment.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="TheEight.Database.publish.xml" />
+    <None Include="DeploymentScripts\InsertEnumData.sql" />
   </ItemGroup>
 </Project>

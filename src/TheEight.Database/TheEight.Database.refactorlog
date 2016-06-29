@@ -14,4 +14,32 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="UserId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="b1dd06ca-0e28-4aa5-b4f2-e6a69fef3cba" ChangeDateTime="06/29/2016 02:58:49">
+    <Property Name="ElementName" Value="[dbo].[TEAM_MEMBERS].[UserId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[TEAM_MEMBERS]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ClubMemberId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="176828f3-2cf6-4913-90ae-397055951e55" ChangeDateTime="06/29/2016 03:02:26">
+    <Property Name="ElementName" Value="[dbo].[TEAM_MEMBER_EVENT_ATTENDEES].[UserId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[TEAM_MEMBER_EVENT_ATTENDEES]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TeamMemberId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5a59d83b-1b73-40af-847d-db459d0d219a" ChangeDateTime="06/29/2016 03:04:15">
+    <Property Name="ElementName" Value="[dbo].[TEAM_MEMBERS_IN_TEAM_ROLES].[TeamMemberUserId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[TEAM_MEMBERS_IN_TEAM_ROLES]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TeamMemberid" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="47813ece-ec95-4472-9e21-a3b8bebb6ed5" ChangeDateTime="06/29/2016 03:04:18">
+    <Property Name="ElementName" Value="[dbo].[TEAM_MEMBERS_IN_TEAM_ROLES].[TeamMemberid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[TEAM_MEMBERS_IN_TEAM_ROLES]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TeamMemberId" />
+  </Operation>
 </Operations>
