@@ -2,6 +2,8 @@
 (
 	[UserId] UNIQUEIDENTIFIER NOT NULL, 
     [AzureAdObjectId] UNIQUEIDENTIFIER NOT NULL, 
+    [GivenName] NVARCHAR(150) NOT NULL, 
+    [Surname] NVARCHAR(150) NOT NULL, 
     CONSTRAINT [PK__USERS] PRIMARY KEY ([UserId]), 
     CONSTRAINT [AK__USERS__AzureAdObjectId] UNIQUE ([AzureAdObjectId])
 )

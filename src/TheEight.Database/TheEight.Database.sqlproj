@@ -69,8 +69,6 @@
     <Build Include="Tables\EVENTS.sql" />
     <Build Include="Tables\EVENT_ATTENDEES.sql" />
     <Build Include="Tables\USERS.sql" />
-    <Build Include="Tables\GLOBAL_ROLES.sql" />
-    <Build Include="Tables\USERS_IN_GLOBAL_ROLES.sql" />
     <Build Include="Tables\CLUBS.sql" />
     <Build Include="Tables\TEAMS.sql" />
     <Build Include="Tables\CLUB_MEMBERS.sql" />
@@ -86,13 +84,16 @@
     <Build Include="Tables\CLUB_BOATS.sql" />
     <Build Include="Tables\BOAT_POSITIONS.sql" />
     <Build Include="Tables\WATER_EVENT_PLACEMENTS.sql" />
-    <Build Include="Tables\CLUB_ROLES.sql" />
     <Build Include="Tables\INVITES.sql" />
     <Build Include="Tables\INVITEES_IN_TEAM_ROLES.sql" />
-    <Build Include="Tables\INVITEES_IN_CLUB_ROLES.sql" />
-    <Build Include="Tables\INVITEES_IN_GLOBAL_ROLES.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TheEight.Database.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TheEight.Database.publish.xml" />
   </ItemGroup>
 </Project>

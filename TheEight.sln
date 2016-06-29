@@ -23,6 +23,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TheEight.Database", "src\Th
 EndProject
 Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "TheEight.AzureResourceGroup", "src\TheEight.AzureResourceGroup\TheEight.AzureResourceGroup.deployproj", "{9C0C3AD5-BA8C-47F9-AF57-5C95AB401D3F}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TheEight.QueueHandlers", "src\TheEight.QueueHandlers\TheEight.QueueHandlers.xproj", "{2936CCAF-1687-4CA3-86A3-86E6F7B911E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{9C0C3AD5-BA8C-47F9-AF57-5C95AB401D3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C0C3AD5-BA8C-47F9-AF57-5C95AB401D3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C0C3AD5-BA8C-47F9-AF57-5C95AB401D3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2936CCAF-1687-4CA3-86A3-86E6F7B911E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2936CCAF-1687-4CA3-86A3-86E6F7B911E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2936CCAF-1687-4CA3-86A3-86E6F7B911E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2936CCAF-1687-4CA3-86A3-86E6F7B911E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,5 +72,6 @@ Global
 		{AF705B36-9691-4322-A5B5-67A4465F02A6} = {69DEBE83-BA3A-420A-AA7E-3D7F1B696D5E}
 		{6E0591E2-CB0B-45F1-AA4D-688019B30DA9} = {69DEBE83-BA3A-420A-AA7E-3D7F1B696D5E}
 		{9C0C3AD5-BA8C-47F9-AF57-5C95AB401D3F} = {69DEBE83-BA3A-420A-AA7E-3D7F1B696D5E}
+		{2936CCAF-1687-4CA3-86A3-86E6F7B911E7} = {69DEBE83-BA3A-420A-AA7E-3D7F1B696D5E}
 	EndGlobalSection
 EndGlobal
