@@ -103,8 +103,7 @@
   "private": true,
   "scripts": {
     "test": "jest",
-    "build-js": "webpack --config tools/webpack.config.js",
-    "build-styles": "node-sass client/styles/site.scss > wwwroot/styles/site.css",
+    "build": "webpack --config tools/webpack.config.js",
     "start": "webpack-dev-server --config tools/webpack.config.js --inline --hot",
     "prestart": "start http://localhost:8080/tools/dev-server.html"
   },
