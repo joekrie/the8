@@ -89,16 +89,13 @@
     <Build Include="Tables\WATER_EVENT_PLACEMENTS.sql" />
     <Build Include="Tables\INVITES.sql" />
     <Build Include="Tables\INVITEES_IN_TEAM_ROLES.sql" />
-    <Build Include="Views\TEAM_MEMBERS_IN_TEAM_ROLE_FLAGS.sql" />
     <Build Include="Views\ALL_WATER_EVENT_ATTENDEES.sql" />
     <Build Include="Views\TEAM_MEMBER_USER_INFO.sql" />
     <PostDeploy Include="DeploymentScripts\Post_Deployment.sql" />
-    <Build Include="Views\__ENSURE_EVENT_NOT_BOTH_WATER_AND_ERG.sql" />
     <Build Include="Functions\FN__Calculate_Duration_In_Milliseconds.sql" />
     <Build Include="Functions\FN__Calculate_Distance_In_Meters.sql" />
     <Build Include="Functions\FN__Calculate_Split_In_Milliseconds.sql" />
     <Build Include="Views\ERG_EVENT_RESULT_CALCULATIONS.sql" />
-    <Build Include="Views\__ENSURE_EVENT_ATTENDEE_NOT_BOTH_TEAM_MEMBER_AND_GUEST.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TheEight.Database.publish.xml" />
