@@ -1,4 +1,5 @@
-﻿CREATE VIEW [dbo].[VW__TEAM_MEMBERS__UserInfo] AS
+﻿CREATE VIEW [dbo].[TEAM_MEMBERS_USER_INFO] 
+WITH SCHEMABINDING AS
 	SELECT 
 		tm.[TeamMemberId],
 		tm.[PreferredBoatPositionId],

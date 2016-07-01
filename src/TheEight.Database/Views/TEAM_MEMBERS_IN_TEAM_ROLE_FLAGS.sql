@@ -1,0 +1,7 @@
+﻿CREATE VIEW [dbo].[TEAM_MEMBERS_IN_TEAM_ROLES_FLAGS]
+WITH SCHEMABINDING AS 
+	SELECT
+		[TeamMemberId],
+		SUM([TeamRoleId]) AS TeamRoleFlag
+	FROM [dbo].[TEAM_MEMBERS_IN_TEAM_ROLES] AS tmr
+	GROUP BY [TeamMemberId]

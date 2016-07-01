@@ -1,6 +1,0 @@
-﻿CREATE VIEW [dbo].[VW__TEAM_MEMBERS_IN_TEAM_ROLES_FLAGS] AS 
-	SELECT
-		[TeamMemberId],
-		SUM([TeamRoleId]) AS TeamRoleFlag
-	FROM [dbo].[TEAM_MEMBERS_IN_TEAM_ROLES]
-	GROUP BY [TeamMemberId]
