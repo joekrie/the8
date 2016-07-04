@@ -1,10 +1,23 @@
-﻿{
+{
   "dependencies": {
-    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0"
+    "Autofac": "4.0.0-rc3-286",
+    "Autofac.Extensions.DependencyInjection": "4.0.0-rc3-280",
+    "Microsoft.Azure.WebJobs": "1.1.2",
+    "Microsoft.Extensions.Configuration": "1.0.0",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
+    "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0",
+    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0",
+    "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
+    "Microsoft.Extensions.DependencyInjection": "1.0.0",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
+    "Microsoft.Extensions.Options": "1.0.0",
+    "Microsoft.Extensions.PlatformAbstractions": "1.0.0",
+    "TheEight.Options": "1.0.0-*",
+    "Twilio": "4.7.2" 
   },
 
   "frameworks": {
-    "net461": { }
+    "net461": {}
   },
 
   "buildOptions": {
@@ -12,7 +25,9 @@
     "preserveCompilationContext": true
   },
 
-  "publishOptions": { },
+  "publishOptions": {},
 
-  "scripts": { }
+  "scripts": {},
+
+  "userSecretsId": "TheEight"
 }
