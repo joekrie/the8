@@ -4,11 +4,8 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
 using NodaTime;
-using NodaTime.Serialization.JsonNet;
+using TheEight.Common.JsonSerialization;
 using TheEight.Options;
 
 namespace TheEight.WebApp
@@ -22,19 +19,7 @@ namespace TheEight.WebApp
 
             services
                 .AddMvc()
-                .AddJsonOptions(options =>
-                {
-                    var settings = options.SerializerSettings;
-
-                    settings.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb);
-                    settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
-                    settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-
-                    if (_isDevelopment)
-                    {
-                        settings.Formatting = Formatting.Indented;
-                    }
-                })
+                .AddJsonOptions(options => options.SerializerSettings.Configure(_isDevelopment))
                 .AddMvcOptions(options =>
                 {
                     if (!_isDevelopment)
@@ -47,14 +32,8 @@ namespace TheEight.WebApp
             
             services
                 .AddOptions()
-                .Configure<SqlServerOptions>(opts =>
-                {
-                    var sqlSettings = _config.GetSection("SqlServer");
-                })
-                .Configure<AzureActiveDirectoryOptions>(opts =>
-                {
-                    var adSettings = _config.GetSection("AzureAD");
-                });
+                .Configure<SqlServerOptions>(_config.GetSection("SqlServer"))
+                .Configure<AzureActiveDirectoryOptions>(_config.GetSection("AzureAD"));
             
             autofacBuilder
                 .RegisterAssemblyTypes(thisAssembly)
@@ -74,7 +53,8 @@ namespace TheEight.WebApp
                 .SingleInstance();
             
             autofacBuilder.Populate(services);
-            return autofacBuilder.Build().Resolve<IServiceProvider>();
+            var autofacContainer = autofacBuilder.Build();
+            return autofacContainer.Resolve<IServiceProvider>();
         }
     }
 }

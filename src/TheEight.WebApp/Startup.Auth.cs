@@ -55,7 +55,7 @@ namespace TheEight.WebApp
                 {
                     SignInScheme = CookieAuthScheme,
                     ClientId = adSettings.ClientId,
-                    ClientSecret = adSettings.ApplicationKey
+                    ClientSecret = adSettings.ApplicationSecret
                 });
         }
     }

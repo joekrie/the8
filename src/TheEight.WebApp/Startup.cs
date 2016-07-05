@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using TheEight.Common.JsonSerialization;
 
 namespace TheEight.WebApp
 {
@@ -31,11 +33,13 @@ namespace TheEight.WebApp
                 app.UseDeveloperExceptionPage();
             }
 
-            ConfigureAuth(app);
+            //ConfigureAuth(app);
             ConfigureLogging(loggerFactory);
 
             app.UseStaticFiles();
             app.UseMvc(ConfigureRouting);
+
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings().Configure(_isDevelopment);
         }
     }
 }

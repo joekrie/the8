@@ -1,9 +1,8 @@
-import { mount } from "enzyme";
-import TestBackend from "react-dnd-test-backend";
-import { DragDropContext } from "react-dnd";
-import { Iterable } from "immutable";
+import { mount } from "enzyme"
+import { DragDropContext } from "react-dnd"
+import { Iterable } from "immutable"
 
-import App, { TestApp, mapServerDataToState } from "../App";
+import mapServerDataToState, { mapBoats, mapAttendees, } from "../map-server-data-to-state"
 
 describe("Boat lineup planner server-data-to-state mapper", () => {
     it("maps boats", () => {
@@ -24,16 +23,16 @@ describe("Boat lineup planner server-data-to-state mapper", () => {
                 seatCount: 4,
                 seatAssignments: {}
             }
-        ];
+        ]
 
-        const stateBoats = mapBoats(serverBoats);
+        const stateBoats = mapBoats(serverBoats)
 
-        expect(Iterable.isIterable(stateBoats)).toBe(true);
-        expect(stateBoats.count()).toBe(2);
-        expect(stateBoats.sortBy(b => b.boatId).first().boatId).toBeTruthy();
-        expect(stateBoats.sortBy(b => b.boatId).first().seatAssignments.count()).toBe(1);
-        expect(stateBoats.sortBy(b => b.boatId).first().seatAssignments.get(1)).toBe("rower-1");
-    });
+        expect(Iterable.isIterable(stateBoats)).toBe(true)
+        expect(stateBoats.count()).toBe(2)
+        expect(stateBoats.sortBy(b => b.boatId).first().boatId).toBeTruthy()
+        expect(stateBoats.sortBy(b => b.boatId).first().seatAssignments.count()).toBe(1)
+        expect(stateBoats.sortBy(b => b.boatId).first().seatAssignments.get(1)).toBe("rower-1")
+    })
 
     it("maps attendees", () => {
         const serverAttendees = [
@@ -49,15 +48,15 @@ describe("Boat lineup planner server-data-to-state mapper", () => {
                 sortName: "1, Coxswain",
                 isCoxswain: true
             }
-        ];
+        ]
 
-        const stateAttendees = mapAttendees(serverAttendees);
+        const stateAttendees = mapAttendees(serverAttendees)
 
-        expect(Iterable.isIterable(stateAttendees)).toBe(true);
-        expect(stateAttendees.count()).toBe(2);
-        expect(stateAttendees.sortBy(a => a.attendeeId).first().attendeeId).toBeTruthy();
-        expect(stateAttendees.sortBy(a => a.attendeeId).first().isCoxswain).toBe(true);
-    });
+        expect(Iterable.isIterable(stateAttendees)).toBe(true)
+        expect(stateAttendees.count()).toBe(2)
+        expect(stateAttendees.sortBy(a => a.attendeeId).first().attendeeId).toBeTruthy()
+        expect(stateAttendees.sortBy(a => a.attendeeId).first().isCoxswain).toBe(true)
+    })
 
     it("maps basic data", () => {
         const serverData = {
@@ -85,34 +84,12 @@ describe("Boat lineup planner server-data-to-state mapper", () => {
                     isCoxswain: false
                 }
             ]
-        };
+        }
 
-        const state = mapServerDataToState(serverData);
+        const state = mapServerDataToState(serverData)
 
-        expect(Iterable.isIterable(state.eventSettings)).toBe(true);
-        expect(Iterable.isIterable(state.boats)).toBe(true);
-        expect(Iterable.isIterable(state.attendees)).toBe(true);
-    });
-});
-
-describe("Boat lineup planner <App />", () => {
-    it("mounts without error", () => {
-        expect(() => mount(<TestApp />)).not.toThrow();
-    });
-
-    xit("renders attendees", () => {
-        const TestComponent = (TestApp);
-        const wrapper = mount(<TestComponent />);
-        
-
-    });
-
-    xit("drags and drops", () => {
-        const TestComponent = DragDropContext(TestBackend)(App);
-        const wrapper = mount(<TestComponent />);
-        const component = wrapper.instance();
-        const dndBackend = component.getManager().getBackend();
-
-
-    });
-});
+        expect(Iterable.isIterable(state.eventSettings)).toBe(true)
+        expect(Iterable.isIterable(state.boats)).toBe(true)
+        expect(Iterable.isIterable(state.attendees)).toBe(true)
+    })
+})

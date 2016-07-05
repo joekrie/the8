@@ -13,7 +13,10 @@
     "Microsoft.Extensions.Options": "1.0.0",
     "Microsoft.Extensions.PlatformAbstractions": "1.0.0",
     "TheEight.Options": "1.0.0-*",
-    "Twilio": "4.7.2" 
+    "TheEight.Common": "1.0.0-*",
+    "Twilio": "5.0.0-rc2",
+    "Newtonsoft.Json": "9.0.1",
+    "RestSharp": "105.2.3"
   },
 
   "frameworks": {
