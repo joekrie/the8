@@ -1,8 +1,6 @@
-import { mount } from "enzyme"
-import { DragDropContext } from "react-dnd"
 import { Iterable } from "immutable"
 
-import mapServerDataToState, { mapBoats, mapAttendees, } from "../map-server-data-to-state"
+import mapServerDataToState, { mapBoats, mapAttendees, mapEventSettings } from "../map-server-data-to-state"
 
 describe("Boat lineup planner server-data-to-state mapper", () => {
     it("maps boats", () => {

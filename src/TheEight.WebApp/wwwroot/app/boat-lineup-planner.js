@@ -35,9 +35,9 @@ webpackJsonp([0],[
 	});
 	exports.AppBase = undefined;
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	__webpack_require__(3);
 	
@@ -95,7 +95,11 @@ webpackJsonp([0],[
 	
 	var _sampleState2 = _interopRequireDefault(_sampleState);
 	
-	__webpack_require__(432);
+	var _mapServerDataToState = __webpack_require__(432);
+	
+	var _mapServerDataToState2 = _interopRequireDefault(_mapServerDataToState);
+	
+	__webpack_require__(433);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -104,8 +108,6 @@ webpackJsonp([0],[
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var store = (0, _redux.createStore)(_reducer2.default, _extends({}, _sampleState2.default), (0, _redux.applyMiddleware)(_loggerMiddleware2.default, _appInsightsMiddleware2.default));
 	
 	var AppBase = exports.AppBase = function (_Component) {
 	  _inherits(AppBase, _Component);
@@ -117,14 +119,22 @@ webpackJsonp([0],[
 	  }
 	
 	  _createClass(AppBase, [{
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
+	      var initialState = this.props.initialState;
+	
+	
+	      this.store = (0, _redux.createStore)(_reducer2.default, _extends({}, _sampleState2.default), (0, _redux.applyMiddleware)(_loggerMiddleware2.default, _appInsightsMiddleware2.default));
+	    }
+	  }, {
 	    key: "render",
 	    value: function render() {
 	      return React.createElement(
 	        _reactRedux.Provider,
-	        { store: store },
+	        { store: this.store },
 	        React.createElement(
 	          "div",
-	          { className: (0, _classnames2.default)("container-fluid", "boat-lineup-planner") },
+	          { className: "container-fluid boat-lineup-planner" },
 	          React.createElement(_attendeeDragLayer2.default, null),
 	          React.createElement(_attendeeList2.default, null),
 	          React.createElement(_boatList2.default, null)
@@ -17764,9 +17774,9 @@ webpackJsonp([0],[
 
 /***/ },
 /* 385 */
-449,
+450,
 /* 386 */
-449,
+450,
 /* 387 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -54675,7 +54685,7 @@ webpackJsonp([0],[
 
 /***/ },
 /* 396 */
-449,
+450,
 /* 397 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -54869,7 +54879,7 @@ webpackJsonp([0],[
 
 /***/ },
 /* 399 */
-449,
+450,
 /* 400 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -56018,9 +56028,9 @@ webpackJsonp([0],[
 
 /***/ },
 /* 419 */
-449,
+450,
 /* 420 */
-449,
+450,
 /* 421 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -56126,7 +56136,7 @@ webpackJsonp([0],[
 
 /***/ },
 /* 423 */
-449,
+450,
 /* 424 */
 /***/ function(module, exports) {
 
@@ -56567,6 +56577,91 @@ webpackJsonp([0],[
 
 /***/ },
 /* 432 */
-449
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _immutable = __webpack_require__(20);
+	
+	var _attendeeRecord = __webpack_require__(398);
+	
+	var _attendeeRecord2 = _interopRequireDefault(_attendeeRecord);
+	
+	var _boatRecord = __webpack_require__(429);
+	
+	var _boatRecord2 = _interopRequireDefault(_boatRecord);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapEventSettings = function mapEventSettings(serverData) {
+	  return (0, _immutable.fromJS)(serverData);
+	};
+	
+	var mapBoats = function mapBoats(serverData) {
+	  var reviver = function reviver(key, value) {
+	    var atTopLevel = key === "";
+	
+	    if (atTopLevel) {
+	      var boatMap = (0, _immutable.Map)().withMutations(function (map) {
+	        value.forEach(function (boat) {
+	          var boatRecord = new _boatRecord2.default({
+	            boatId: boat.get("boatId"),
+	            title: boat.get("title"),
+	            isCoxed: boat.get("isCoxed"),
+	            seatCount: boat.get("seatCount"),
+	            seatAssignments: boat.get("seatAssignments")
+	          });
+	
+	          map.set(boat.get("boatId"), boatRecord);
+	        });
+	      });
+	
+	      return boatMap;
+	    }
+	
+	    return value;
+	  };
+	
+	  return (0, _immutable.fromJS)(serverData, reviver);
+	};
+	
+	var mapAttendees = function mapAttendees(serverData) {
+	  var reviver = function reviver(key, value) {
+	    var atTopLevel = key === "";
+	
+	    if (atTopLevel) {
+	      return value.map(function (attendee) {
+	        return new _attendeeRecord2.default({
+	          attendeeId: attendee.get("attendeeId"),
+	          displayName: attendee.get("displayName"),
+	          sortName: attendee.get("sortName"),
+	          isCoxswain: attendee.get("isCoxswain")
+	        });
+	      });
+	    }
+	
+	    return value;
+	  };
+	
+	  return (0, _immutable.fromJS)(serverData, reviver);
+	};
+	
+	var mapServerDataToState = function mapServerDataToState(serverData) {
+	  return {
+	    eventSettings: mapEventSettings(serverData.eventSettings),
+	    boats: mapBoats(serverData.boats),
+	    attendees: mapAttendees(serverData.attendees)
+	  };
+	};
+	
+	exports.default = mapServerDataToState;
+
+/***/ },
+/* 433 */
+450
 ]);
 //# sourceMappingURL=boat-lineup-planner.js.map

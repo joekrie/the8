@@ -63,7 +63,12 @@
     "expose-loader": "^0.7.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "imports-loader": "^0.6.5",
+    "jasmine-core": "^2.4.1",
     "jest-cli": "^12.1.1",
+    "karma": "^1.1.0",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-jasmine": "^1.0.2",
+    "karma-webpack": "^1.7.0",
     "node-sass": "^3.7.0",
     "postcss-flexibility": "^1.0.3",
     "postcss-loader": "^0.9.1",
@@ -95,8 +100,9 @@
     ],
     "automock": false,
     "setupFiles": [
-      "jest-setup.js"
-    ]
+      "tools/jest-setup.js"
+    ],
+    "rootDir": "./client/app"
   },
   "license": "UNLICENSED",
   "name": "the-eight",

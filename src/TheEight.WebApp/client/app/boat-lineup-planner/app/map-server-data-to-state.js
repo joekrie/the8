@@ -3,9 +3,9 @@ import { List, Map, fromJS } from "immutable"
 import AttendeeRecord from "boat-lineup-planner/models/attendee-record"
 import BoatRecord from "boat-lineup-planner/models/boat-record"
 
-const mapEventSettings = serverData => fromJS(serverData)
+export const mapEventSettings = serverData => fromJS(serverData)
 
-const mapBoats = serverData => {
+export const mapBoats = serverData => {
   const reviver = (key, value) => {
     const atTopLevel = key === ""
 
@@ -34,7 +34,7 @@ const mapBoats = serverData => {
   return fromJS(serverData, reviver)
 }
 
-const mapAttendees = serverData => {
+export const mapAttendees = serverData => {
   const reviver = (key, value) => {
     const atTopLevel = key === ""
 

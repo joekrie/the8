@@ -17,8 +17,9 @@ import AttendeeDragLayer from "boat-lineup-planner/components/attendee-drag-laye
 import loggerMiddleware from "common/middleware/logger-middleware"
 import appInsightsMiddleware from "common/middleware/app-insights-middleware"
 import reducer from "boat-lineup-planner/reducer"
+
 import sampleState from "./sample-state"
-import mapServerDataToState from "app/map-server-data-to-state"
+import mapServerDataToState from "./map-server-data-to-state"
 
 import "./styles.scss"
 
