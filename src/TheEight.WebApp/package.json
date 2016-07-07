@@ -37,6 +37,7 @@
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "redux-actions": "^0.9.1",
+    "rome": "^2.1.22",
     "sugar": "^1.4.1",
     "tether": "^1.3.2",
     "victory-chart": "^9.2.0",
@@ -100,7 +101,7 @@
   "scripts": {
     "test": "karma start tools/karma.conf.js",
     "build": "webpack --config tools/webpack.config.js",
-    "start": "webpack-dev-server --config tools/webpack.config.js --inline --hot",
+    "start": "node tools/dev-server.js",
     "prestart": "start http://localhost:8080/tools/dev-server.html"
   },
   "version": "0.1.0"

@@ -3,7 +3,7 @@ import { DragSource } from "react-dnd";
 import { getEmptyImage } from "react-dnd-html5-backend";
 
 import { defaultDragCollect } from "common/dnd-defaults";
-import { ATTENDEE_LIST_ITEM } from "boat-lineup-planner/item-types";
+import { ATTENDEE_LIST_ITEM } from "boat-lineup-planner/dnd-item-types";
 import { RACE_MODE } from "boat-lineup-planner/models/event-modes";
 import Attendee from "boat-lineup-planner/components/attendee";
 

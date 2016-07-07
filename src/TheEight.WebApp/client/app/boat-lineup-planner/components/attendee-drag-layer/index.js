@@ -4,7 +4,7 @@ import { DragLayer } from "react-dnd"
 import { 
   ASSIGNED_ATTENDEE, 
   ATTENDEE_LIST_ITEM 
-} from "boat-lineup-planner/item-types"
+} from "boat-lineup-planner/dnd-item-types"
 
 import { collect } from "./dnd"
 

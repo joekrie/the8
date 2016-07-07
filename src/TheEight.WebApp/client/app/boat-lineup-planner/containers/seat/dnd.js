@@ -1,7 +1,7 @@
 import { 
   ASSIGNED_ATTENDEE, 
   ATTENDEE_LIST_ITEM 
-} from "boat-lineup-planner/item-types";
+} from "boat-lineup-planner/dnd-item-types";
 
 import { 
   COXSWAIN, 
@@ -10,7 +10,7 @@ import {
   BISWEPTUAL_ROWER 
 } from "boat-lineup-planner/models/attendee-positions";
 
-import { assignAttendee, unassignAttendee } from "boat-lineup-planner/action-creators";
+import { assignAttendee, unassignAttendee } from "boat-lineup-planner/reducer/action-creators";
 import { RACE_MODE } from "boat-lineup-planner/models/event-modes";
 
 export const dropSpec = {

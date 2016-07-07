@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import { defaultDragCollect } from "common/dnd-defaults";
-import { ASSIGNED_ATTENDEE } from "boat-lineup-planner/item-types";
+import { ASSIGNED_ATTENDEE } from "boat-lineup-planner/dnd-item-types";
 import Attendee from "boat-lineup-planner/components/attendee";
 
 export const mapStateToProps = ({ attendees }, { attendeeId }) => {

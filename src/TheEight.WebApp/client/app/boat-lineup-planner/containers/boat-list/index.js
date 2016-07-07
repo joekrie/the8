@@ -1,19 +1,19 @@
-import { List } from "immutable";
-import { Component } from "react";
-import { connect } from "react-redux";
+import { List } from "immutable"
+import { Component } from "react"
+import { connect } from "react-redux"
 
-import Boat from "boat-lineup-planner/components/boat";
+import Boat from "boat-lineup-planner/components/boat"
 
-export const mapStateToProps = ({ boats }) => ({ boats: boats.valueSeq() });
+export const mapStateToProps = ({ boats }) => ({ boats: boats.valueSeq() })
 
 @connect(mapStateToProps)
 export default class BoatList extends Component {
   render() {
-    const { boats } = this.props;   
+    const { boats } = this.props   
 
     const boatComponents = boats.map(boat => 
       <Boat key={boat.details.boatId} boat={boat} />
-    );
+    )
 
     const styles = {
       "marginTop": "0px",
@@ -23,13 +23,13 @@ export default class BoatList extends Component {
       "overflowX": "auto",
       "alignItems": "flex-start",
       "height": "100%"
-    };
+    }
 
     return (
       <div style={styles}>
         {boatComponents}
       </div>
-    );
+    )
   }
 }
 

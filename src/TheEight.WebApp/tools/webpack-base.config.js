@@ -41,7 +41,7 @@ var config = {
   output: {
     path: path.join(__dirname, "../wwwroot"),
     filename: "[name].js",
-    publicPath: ""
+    publicPath: "/static/"
   },
   resolve: {
     root: [

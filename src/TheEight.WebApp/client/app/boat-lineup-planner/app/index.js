@@ -8,7 +8,7 @@ import { DragDropContext } from "react-dnd"
 import HTML5Backend from "react-dnd-html5-backend"
 import TouchBackend from "react-dnd-touch-backend"
 import { Provider } from "react-redux"
-import { createStore, applyMiddleware } from "redux"
+import { createStore, applyMiddleware, compose } from "redux"
 
 import AttendeeList from "boat-lineup-planner/containers/attendee-list"
 import BoatList from "boat-lineup-planner/containers/boat-list"
@@ -17,30 +17,41 @@ import AttendeeDragLayer from "boat-lineup-planner/components/attendee-drag-laye
 import loggerMiddleware from "common/middleware/logger-middleware"
 import appInsightsMiddleware from "common/middleware/app-insights-middleware"
 import reducer from "boat-lineup-planner/reducer"
+//import applyMiddleware from "common/middleware/apply-middleware"
 
 import sampleState from "./sample-state"
+import defaultState from "boat-lineup-planner/default-state"
 import mapServerDataToState from "./map-server-data-to-state"
+import sampleServerData from "./sample-server-data"
+
+import { 
+  replaceState
+} from "boat-lineup-planner/reducer/action-creators"
 
 import "./styles.scss"
 
+const store = createStore(
+  reducer,
+  { ...defaultState },
+  compose(
+    applyMiddleware(
+      loggerMiddleware,
+      appInsightsMiddleware
+    ),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  )
+)
 
 export class AppBase extends Component {
   componentDidMount() {
-    const { initialState } = this.props;
-    
-    this.store = createStore(
-      reducer,
-      { ...sampleState },
-        applyMiddleware(
-          loggerMiddleware,
-          appInsightsMiddleware
-        )
-      )  
+    const stateFromServer = mapServerDataToState(sampleServerData)
+    console.log(stateFromServer)
+    store.dispatch(replaceState(sampleState))
   }
 
   render() {
     return (
-      <Provider store={this.store}>
+      <Provider store={store}>
         <div className="container-fluid boat-lineup-planner">
           <AttendeeDragLayer />
           <AttendeeList />

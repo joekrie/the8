@@ -2,8 +2,22 @@ import { List, Map, fromJS } from "immutable"
 
 import AttendeeRecord from "boat-lineup-planner/models/attendee-record"
 import BoatRecord from "boat-lineup-planner/models/boat-record"
+import BoatDetailsRecord from "boat-lineup-planner/models/boat-details-record"
+import EventDetailsRecord from "boat-lineup-planner/models/event-details-record"
 
-export const mapEventSettings = serverData => fromJS(serverData)
+export const mapEventSettings = serverData => {
+  const reviver = (key, value) => {
+    const atTopLevel = key === ""
+
+    if (atTopLevel) {
+      return new EventDetailsRecord(value)
+    }
+
+    return value
+  }
+
+  return fromJS(serverData, reviver)
+}
 
 export const mapBoats = serverData => {
   const reviver = (key, value) => {
@@ -14,14 +28,16 @@ export const mapBoats = serverData => {
         .withMutations(map => {
           value.forEach(boat => {
             const boatRecord = new BoatRecord({
-              boatId: boat.get("boatId"),
-              title: boat.get("title"),
-              isCoxed: boat.get("isCoxed"),
-              seatCount: boat.get("seatCount"),
-              seatAssignments: boat.get("seatAssignments")
+              details: new BoatDetailsRecord({
+                boatId: boat.getIn(["details", "boatId"]),
+                title: boat.getIn(["details", "title"]),
+                isCoxed: boat.getIn(["details", "isCoxed"]),
+                seatCount: boat.getIn(["details", "seatCount"])
+              }),
+              assignedSeats: boat.get("assignedSeats")
             })
 
-            map.set(boat.get("boatId"), boatRecord)
+            map.set(boat.getIn(["details", "boatId"]), boatRecord)
           })
         })
 
@@ -43,7 +59,7 @@ export const mapAttendees = serverData => {
         attendeeId: attendee.get("attendeeId"),
         displayName: attendee.get("displayName"),
         sortName: attendee.get("sortName"),
-        isCoxswain: attendee.get("isCoxswain")
+        position: attendee.get("position")
       }))
     }
 
@@ -54,7 +70,7 @@ export const mapAttendees = serverData => {
 }
 
 const mapServerDataToState = serverData => ({
-  eventSettings: mapEventSettings(serverData.eventSettings),
+  eventDetails: mapEventSettings(serverData.eventSettings),
   boats: mapBoats(serverData.boats),
   attendees: mapAttendees(serverData.attendees)
 })

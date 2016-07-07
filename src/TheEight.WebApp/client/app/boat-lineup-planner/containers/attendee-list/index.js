@@ -1,64 +1,64 @@
-import { List } from "immutable";
-import { Component } from "react";
-import { DropTarget } from "react-dnd";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { List } from "immutable"
+import { Component } from "react"
+import { DropTarget } from "react-dnd"
+import { connect } from "react-redux"
+import { bindActionCreators } from "redux"
 
-import AttendeeListItem from "boat-lineup-planner/components/attendee-list-item";
-import EventDetails from "boat-lineup-planner/components/event-details";
-import BoatCreator from "boat-lineup-planner/components/boat-creator";
-import AttendeeCreator from "boat-lineup-planner/components/attendee-creator";
+import AttendeeListItem from "boat-lineup-planner/components/attendee-list-item"
+import EventDetails from "boat-lineup-planner/components/event-details"
+import BoatCreator from "boat-lineup-planner/components/boat-creator"
+import AttendeeCreator from "boat-lineup-planner/components/attendee-creator"
 
-import { defaultDropCollect } from "common/dnd-defaults";
-import { ASSIGNED_ATTENDEE } from "boat-lineup-planner/item-types";
-import { RACE_MODE } from "boat-lineup-planner/models/event-modes";
-import { unassignAttendee, changeEventDetails, createBoat, createAttendee } from "boat-lineup-planner/action-creators";
-import AttendeeListItemRecord from "boat-lineup-planner/models/attendee-list-item-record";
+import { defaultDropCollect } from "common/dnd-defaults"
+import { ASSIGNED_ATTENDEE } from "boat-lineup-planner/dnd-item-types"
+import { RACE_MODE } from "boat-lineup-planner/models/event-modes"
+import { unassignAttendee, changeEventDetails, createBoat, createAttendee } from "boat-lineup-planner/reducer/action-creators"
+import AttendeeListItemRecord from "boat-lineup-planner/models/attendee-list-item-record"
 
 export const mapStateToProps = state => {
-  const { attendees, boats, eventDetails } = state;
-  const assignedAttendeeIds = boats.map(boat => boat.assignedSeats.valueSeq()).valueSeq().flatten();
+  const { attendees, boats, eventDetails } = state
+  const assignedAttendeeIds = boats.map(boat => boat.assignedSeats.valueSeq()).valueSeq().flatten()
   
   const attendeeListItems = attendees.map(attendee => 
     new AttendeeListItemRecord({
       attendee,
       isAssigned: assignedAttendeeIds.contains(attendee.attendeeId)
     })
-  );
+  )
     
   return { 
     attendeeListItems,
     eventDetails
-  };
-};
+  }
+}
 
 export const mapDispatchToProps = dispatch => bindActionCreators({
   unassignAttendee, 
   changeEventDetails, 
   createBoat, 
   createAttendee
-}, dispatch);
+}, dispatch)
 
 export const dropSpec = {
   drop(props, monitor) {
-    const { unassignAttendee } = props;
-    const { originBoatId, originSeatNumber } = monitor.getItem();
-    unassignAttendee(originBoatId, originSeatNumber);
+    const { unassignAttendee } = props
+    const { originBoatId, originSeatNumber } = monitor.getItem()
+    unassignAttendee(originBoatId, originSeatNumber)
   }
-};
+}
 
 @connect(mapStateToProps, mapDispatchToProps)
 @DropTarget(ASSIGNED_ATTENDEE, dropSpec, defaultDropCollect)
 export default class AttendeeList extends Component {
   render() {
-    const { attendeeListItems, connectDropTarget, eventDetails, changeEventDetails, createBoat, createAttendee } = this.props;
+    const { attendeeListItems, connectDropTarget, eventDetails, changeEventDetails, createBoat, createAttendee } = this.props
 
     const attendeeComponents = attendeeListItems
       .filter(item => eventDetails.mode === RACE_MODE || !item.isAssigned)
       .map(item =>
         <AttendeeListItem key={item.attendee.attendeeId} attendeeListItem={item} 
           eventDetails={eventDetails} />
-      );
+      )
 
     const styles = {
       root: {
@@ -69,7 +69,7 @@ export default class AttendeeList extends Component {
       attendeeList: {
         "paddingTop": "15px"
       }
-    };
+    }
 
     return connectDropTarget(
       <div className="card" style={styles.root}>
@@ -85,6 +85,6 @@ export default class AttendeeList extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
-};
+}

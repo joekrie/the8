@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>the8.io webpack-dev-server</title>
-  <link href="/common.css" rel="stylesheet">
-  <link href="/app/boat-lineup-planner.css" rel="stylesheet">
+  <link href="/static/common.css" rel="stylesheet">
+  <link href="/static/app/boat-lineup-planner.css" rel="stylesheet">
 </head>
 <body>
   <div id="app"></div>
   <script src="http://localhost:8080/webpack-dev-server.js"></script>
-  <script src="/common.js"></script>
-  <script src="/app/boat-lineup-planner.js"></script>
+  <script src="/static/common.js"></script>
+  <script src="/static/app/boat-lineup-planner.js"></script>
   <script>
     ReactDOM.render(
       React.createFactory(BoatLineupPlanner.default)(), 
