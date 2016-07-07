@@ -94,21 +94,11 @@
       "semi": 2
     }
   },
-  "jest": {
-    "testPathDirs": [
-      "client"
-    ],
-    "automock": false,
-    "setupFiles": [
-      "tools/jest-setup.js"
-    ],
-    "rootDir": "./client/app"
-  },
   "license": "UNLICENSED",
   "name": "the-eight",
   "private": true,
   "scripts": {
-    "test": "jest",
+    "test": "karma start tools/karma.conf.js",
     "build": "webpack --config tools/webpack.config.js",
     "start": "webpack-dev-server --config tools/webpack.config.js --inline --hot",
     "prestart": "start http://localhost:8080/tools/dev-server.html"
