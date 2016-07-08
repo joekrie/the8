@@ -44,6 +44,14 @@ export default class Attendee extends Component {
     })
   }
 
+  openModal() {
+    this.setState({ open: true })
+  }
+
+  closeModal() {
+    this.setState({ open: false })
+  }
+
   render() {
     const { 
       attendee, 
@@ -58,20 +66,23 @@ export default class Attendee extends Component {
     const displayName = attendee.displayName + (isOutOfPosition ? "*" : "")
     
     return (
-      <a onClick={() => this.setState({ open: true })}>
-        <div className="card card-block attendee" style={styles}>
-          <Modal isOpen={this.state.open} onRequestClose={() => this.setState({ open: false })}>
-            {displayName}
-          </Modal>
-          <div className="name">
-            {displayName}
-          </div>
-          <div className="position" ref={ref => this.positionRef = ref} 
-            title={this.positionLabels[attendee.position].title}>
-            {this.positionLabels[attendee.position].abbr}
-          </div>
+      <div className="card card-block attendee" style={styles}>
+        <Modal isOpen={this.state.open} onRequestClose={() => this.closeModal()}>
+          {displayName}
+        </Modal>
+        <div className="name">
+          {displayName}
+          &nbsp;
+          <span ref={ref => this.positionRef = ref}  title={this.positionLabels[attendee.position].title}>
+            ({this.positionLabels[attendee.position].abbr})
+          </span>
         </div>
-      </a>
+        <div className="position">
+          <a href="#" onClick={() => this.openModal()}>
+            details
+          </a>
+        </div>
+      </div>
     )
   }
 }

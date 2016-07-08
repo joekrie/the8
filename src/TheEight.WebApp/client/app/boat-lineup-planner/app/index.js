@@ -9,6 +9,7 @@ import HTML5Backend from "react-dnd-html5-backend"
 import TouchBackend from "react-dnd-touch-backend"
 import { Provider } from "react-redux"
 import { createStore, applyMiddleware, compose } from "redux"
+import thunk from "redux-thunk"
 
 import AttendeeList from "boat-lineup-planner/containers/attendee-list"
 import BoatList from "boat-lineup-planner/containers/boat-list"
@@ -35,6 +36,7 @@ const store = createStore(
   { ...defaultState },
   compose(
     applyMiddleware(
+      thunk,
       loggerMiddleware,
       appInsightsMiddleware
     ),

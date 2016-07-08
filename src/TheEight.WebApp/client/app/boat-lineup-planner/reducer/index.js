@@ -14,7 +14,7 @@ import defaultState from "boat-lineup-planner/default-state"
 import BoatRecord from "boat-lineup-planner/models/boat-record"
 
 const reducer = handleActions({
-  [REPLACE_STATE]: (prevState, { type, payload }) => payload.newState,
+  [REPLACE_STATE]: (prevState, { type, payload: { newState } }) => newState,
   [ASSIGN_ATTENDEE]: (prevState, { type, payload: { attendeeId, boatId, seatNumber } }) => {
     const newBoats = prevState.boats.setIn([boatId, "assignedSeats", seatNumber], attendeeId)
 

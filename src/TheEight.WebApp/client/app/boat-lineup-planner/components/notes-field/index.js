@@ -1,17 +1,11 @@
-import { debounce } from "lodash"
 import { Component } from "react"
-import rome from "rome"
 
-import { formatLocalDate, parseLocalDate } from "common/date-utils"
-
-export default class DateField extends Component {
+export default class NotesField extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      rawValue: this.props.value.toString(),
-      isValid: true,
-      isShowingDatepicker: false,
+      newValue: this.props.value,
       isEditing: false
     }
   }
@@ -23,6 +17,18 @@ export default class DateField extends Component {
     })
 
     this.datepicker.setValue(nextProps.value.toString())
+  }
+
+  onChange(rawValue) {
+    const parsedDate = parseLocalDate(rawValue)
+    let isValid = false
+    
+    if (parsedDate) {
+      isValid = true
+      this.props.onChange(parsedDate)
+    }
+    
+    this.setState({ rawValue, isValid })
   }
 
   componentDidMount() {
@@ -40,17 +46,6 @@ export default class DateField extends Component {
       this.onChange(newValue)
     })
   }
-  
-  onChange(rawValue) {
-    const parsedDate = parseLocalDate(rawValue)
-    let isValid = false
-    
-    if (parsedDate) {
-      isValid = true
-    }
-    
-    this.setState({ rawValue, isValid })
-  }
 
   onToggleDatepicker() {
     this.setState({
@@ -64,26 +59,10 @@ export default class DateField extends Component {
     })
   }
 
-  onSave(rawValue) {
-    const parsedDate = parseLocalDate(rawValue)
-    let isValid = false
-    
-    if (parsedDate) {
-      isValid = true
-      this.props.onChange(parsedDate)
-    }
-    
-    this.setState({ 
-      rawValue, 
-      isValid,
+  onSave() {
+    this.setState({
       isEditing: false
     })  
-  }
-
-  onSubmitForm(evt) {
-    evt.persist()
-    console.log(evt)
-    evt.preventDefault()
   }
 
   render() {
@@ -106,9 +85,14 @@ export default class DateField extends Component {
       }
     }
 
-    const editDateForm = (
-      <div className="card card-block" style={styles.edit}>
-        <form onSubmit={(evt) => this.onSubmitForm(evt)}>
+    return (
+      <div>
+        <div style={styles.display}>
+          {formatLocalDate(this.props.value)}
+          &nbsp;
+          <a href="#" onClick={() => this.onOpenEditor()}>edit</a>
+        </div>
+        <div style={styles.edit}>
           <fieldset className="form-group">
             <label htmlFor="date">
               Date
@@ -116,7 +100,7 @@ export default class DateField extends Component {
               <i className="fa fa-info-circle" ref={ref => this.infoRef = ref} aria-hidden="true"></i>
             </label>
             <div className="input-group">
-              <input name="date" id="date" className="form-control" value={rawValue.toString()} 
+              <input id="date" className="form-control" value={rawValue.toString()} 
                 onChange={evt => this.onChange(evt.target.value)} />
               <span className="input-group-btn">
                 <button className="btn btn-secondary" type="button" onClick={() => this.onToggleDatepicker()}>
@@ -127,21 +111,10 @@ export default class DateField extends Component {
             <div style={styles.datepicker} ref={ref => this.input = ref}></div>
             {displayParsed}
           </fieldset>
-          <button type="submit" className="btn btn-secondary btn-sm">
+          <button onClick={() => this.onSave()} className="btn btn-secondary btn-sm">
             Save
           </button>
-        </form>
-      </div>
-    )
-
-    return (
-      <div>
-        <div style={styles.display}>
-          {formatLocalDate(this.props.value)}
-          &nbsp;
-          <a href="#" onClick={() => this.onOpenEditor()}>edit</a>
         </div>
-        {editDateForm}
       </div>
     )
   }
