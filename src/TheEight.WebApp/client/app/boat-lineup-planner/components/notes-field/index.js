@@ -1,3 +1,4 @@
+import { random } from "lodash"
 import { Component } from "react"
 
 export default class NotesField extends Component {
@@ -5,117 +6,50 @@ export default class NotesField extends Component {
     super(props)
 
     this.state = {
-      newValue: this.props.value,
-      isEditing: false
+      exampleNote: ""
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      rawValue: nextProps.value.toString(),
-      isValid: true
-    })
+  componentDidMount() {
+    if (!this.state.exampleNote) {
+      const exampleNote = this.getRandomNote()
+      this.setState({ exampleNote })
+    }
+  }
 
-    this.datepicker.setValue(nextProps.value.toString())
+  getRandomNote() {
+    const exampleNotes = [
+      "Race day!!",
+      "6 x 4min w/1min rest",
+      "Warmup by pairs to railroad bridge...",
+      "Enjoy the sunrise :)",
+      "It's windy out there, be careful"
+    ]
+
+    const rnd = random(exampleNotes.length - 1)
+    const note = exampleNotes[rnd]
+    return `e.g., ${note}`
   }
 
   onChange(rawValue) {
     const parsedDate = parseLocalDate(rawValue)
     let isValid = false
-    
+
     if (parsedDate) {
       isValid = true
-      this.props.onChange(parsedDate)
     }
-    
+
     this.setState({ rawValue, isValid })
   }
 
-  componentDidMount() {
-    $(this.infoRef).tooltip({
-      title: "Hint: Try entering 'today' or 'next Monday'",
-      placement: "right"
-    })
-
-    this.datepicker = rome(this.input, {
-      time: false,
-      initialValue: this.props.value.toString()
-    })
-    
-    this.datepicker.on("data", newValue => {
-      this.onChange(newValue)
-    })
-  }
-
-  onToggleDatepicker() {
-    this.setState({
-      isShowingDatepicker: !this.state.isShowingDatepicker
-    })
-  }
-
-  onOpenEditor() {
-    this.setState({
-      isEditing: true
-    })
-  }
-
-  onSave() {
-    this.setState({
-      isEditing: false
-    })  
-  }
-
   render() {
-    const { rawValue } = this.state
-
-    const displayParsed = 
-      this.state.isValid
-        ? <small className="text-muted">{formatLocalDate(this.props.value)}</small>
-        : null
-
-    const styles = {
-      datepicker: {
-        display: this.state.isShowingDatepicker ? "inherit" : "none" 
-      },
-      display: {
-        display: this.state.isEditing ? "none": "inherit"
-      },
-      edit: {
-        display: this.state.isEditing ? "inherit" : "none"
-      }
-    }
-
     return (
-      <div>
-        <div style={styles.display}>
-          {formatLocalDate(this.props.value)}
-          &nbsp;
-          <a href="#" onClick={() => this.onOpenEditor()}>edit</a>
-        </div>
-        <div style={styles.edit}>
-          <fieldset className="form-group">
-            <label htmlFor="date">
-              Date
-              &nbsp;
-              <i className="fa fa-info-circle" ref={ref => this.infoRef = ref} aria-hidden="true"></i>
-            </label>
-            <div className="input-group">
-              <input id="date" className="form-control" value={rawValue.toString()} 
-                onChange={evt => this.onChange(evt.target.value)} />
-              <span className="input-group-btn">
-                <button className="btn btn-secondary" type="button" onClick={() => this.onToggleDatepicker()}>
-                  <i className="fa fa-calendar" aria-hidden="true"></i>
-                </button>
-              </span>
-            </div>
-            <div style={styles.datepicker} ref={ref => this.input = ref}></div>
-            {displayParsed}
-          </fieldset>
-          <button onClick={() => this.onSave()} className="btn btn-secondary btn-sm">
-            Save
-          </button>
-        </div>
-      </div>
+      <fieldset className="form-group">
+        <label htmlFor="event-details-notes">
+          Notes
+        </label>
+        <textarea className="form-control" id="event-details-notes" rows="5"></textarea>
+      </fieldset>
     )
   }
 }

@@ -1,17 +1,21 @@
 import { 
   ASSIGNED_ATTENDEE, 
   ATTENDEE_LIST_ITEM 
-} from "boat-lineup-planner/dnd-item-types";
+} from "boat-lineup-planner/dnd-item-types"
 
 import { 
   COXSWAIN, 
   PORT_ROWER, 
   STARBOARD_ROWER, 
   BISWEPTUAL_ROWER 
-} from "boat-lineup-planner/models/attendee-positions";
+} from "boat-lineup-planner/models/attendee-positions"
 
-import { assignAttendee, unassignAttendee } from "boat-lineup-planner/reducer/action-creators";
-import { RACE_MODE } from "boat-lineup-planner/models/event-modes";
+import { 
+  assignAttendee, 
+  unassignAttendee 
+} from "boat-lineup-planner/reducer/action-creators"
+
+import { RACE_MODE } from "boat-lineup-planner/models/event-modes"
 
 export const dropSpec = {
   canDrop(props, monitor) {
@@ -19,67 +23,78 @@ export const dropSpec = {
       attendeeIdsInBoat: attendeeIdsInTargetBoat, 
       boatId: targetBoatId, 
       seatNumber: targetSeatNumber 
-    } = props;
+    } = props
     
-    const itemType = monitor.getItemType();
+    const itemType = monitor.getItemType()
 
     const { 
       draggedAttendeeId, 
       originSeatNumber, 
       originBoatId 
-    } = monitor.getItem();
+    } = monitor.getItem()
     
-    const alreadyInBoat = attendeeIdsInTargetBoat.contains(draggedAttendeeId);
+    const alreadyInBoat = attendeeIdsInTargetBoat.contains(draggedAttendeeId)
     
     if (itemType === ATTENDEE_LIST_ITEM) {
-      return !alreadyInBoat;
+      return !alreadyInBoat
     }
     
-    const isMoveWithinBoat = targetBoatId === originBoatId;
-    const isSameSeat = targetSeatNumber === originSeatNumber && isMoveWithinBoat;
+    const isMoveWithinBoat = targetBoatId === originBoatId
+    const isSameSeat = targetSeatNumber === originSeatNumber && isMoveWithinBoat
       
-    return !isSameSeat && (isMoveWithinBoat || !alreadyInBoat);
+    return !isSameSeat && (isMoveWithinBoat || !alreadyInBoat)
   },
   drop(props, monitor) {
-    const { assignAttendee, unassignAttendee } = props; 
+    const { assignAttendee, unassignAttendee } = props 
     
     const { 
       seatNumber: targetSeatNumber, 
       boatId: targetBoatId, 
       attendeeId: attendeeIdInTarget 
-    } = props;
+    } = props
     
-    const itemType = monitor.getItemType();
+    const itemType = monitor.getItemType()
 
     const { 
       draggedAttendeeId, 
       originSeatNumber, 
       originBoatId, 
       attendeeIdsInOriginBoat 
-    } = monitor.getItem();
+    } = monitor.getItem()
         
     if (itemType === ATTENDEE_LIST_ITEM) {
-      assignAttendee(draggedAttendeeId, targetBoatId, targetSeatNumber);
+      assignAttendee(draggedAttendeeId, targetBoatId, targetSeatNumber)
     }
     
     if (itemType === ASSIGNED_ATTENDEE) {
-      const isTargetInOrigin = attendeeIdsInOriginBoat.contains(attendeeIdInTarget);
-      const isMoveWithinBoat = targetBoatId === originBoatId;
-      const isSwapWithinBoat = isMoveWithinBoat && attendeeIdInTarget;
+      const isTargetInOrigin = attendeeIdsInOriginBoat.contains(attendeeIdInTarget)
+      const isMoveWithinBoat = targetBoatId === originBoatId
+      const isSwapWithinBoat = isMoveWithinBoat && attendeeIdInTarget
             
-      assignAttendee(draggedAttendeeId, targetBoatId, targetSeatNumber);
+      assignAttendee({
+        draggedAttendeeId, 
+        targetBoatId, 
+        targetSeatNumber
+      })
             
       if (isSwapWithinBoat || (!isMoveWithinBoat && attendeeIdInTarget && !isTargetInOrigin)) {
-        assignAttendee(attendeeIdInTarget, originBoatId, originSeatNumber);
+        assignAttendee({
+          attendeeIdInTarget, 
+          originBoatId, 
+          originSeatNumber
+        })
       }
             
       if ((!isSwapWithinBoat && isTargetInOrigin) || (isMoveWithinBoat && !attendeeIdInTarget)
           || (!isMoveWithinBoat && !attendeeIdInTarget)) {
-        unassignAttendee(originBoatId, originSeatNumber);
+        unassignAttendee({
+          originBoatId, 
+          originSeatNumber
+        })
       }
     }
   }
-};
+}
 
 export const dropCollect = (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
@@ -87,4 +102,4 @@ export const dropCollect = (connect, monitor) => ({
   isOverCurrent: monitor.isOver({ shallow: true }),
   canDrop: monitor.canDrop(),
   itemType: monitor.getItemType()
-});
+})

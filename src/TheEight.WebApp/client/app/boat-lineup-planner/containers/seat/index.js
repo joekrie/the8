@@ -1,14 +1,8 @@
 import { Component } from "react"
 import { DropTarget } from "react-dnd"
 import { connect } from "react-redux"
-import { bindActionCreators } from "redux"
 
 import AssignedAttendee from "boat-lineup-planner/containers/assigned-attendee"
-
-import { 
-  dropSpec, 
-  dropCollect 
-} from "./dnd"
 
 import { 
   ASSIGNED_ATTENDEE, 
@@ -22,20 +16,12 @@ import {
   BISWEPTUAL_ROWER 
 } from "boat-lineup-planner/models/attendee-positions"
 
-import { 
-  assignAttendee, 
-  unassignAttendee 
-} from "boat-lineup-planner/reducer/action-creators"
-
 import { RACE_MODE } from "boat-lineup-planner/models/event-modes"
 
+import { mapStateToProps, mapDispatchToProps } from "./redux-specs"
+import { dropSpec, dropCollect } from "./dnd-specs"
+
 import "./styles.scss"
-
-export const mapStateToProps = state => ({
-  canAttendeeOccupyMultipleBoats: state.eventDetails.mode === RACE_MODE 
-})
-
-export const mapDispatchToProps = dispatch => bindActionCreators({ assignAttendee, unassignAttendee }, dispatch)
 
 @connect(mapStateToProps, mapDispatchToProps)
 @DropTarget([ATTENDEE_LIST_ITEM, ASSIGNED_ATTENDEE], dropSpec, dropCollect)

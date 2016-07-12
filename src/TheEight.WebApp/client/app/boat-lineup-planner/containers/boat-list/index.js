@@ -4,7 +4,9 @@ import { connect } from "react-redux"
 
 import Boat from "boat-lineup-planner/components/boat"
 
-export const mapStateToProps = ({ boats }) => ({ boats: boats.valueSeq() })
+import { mapStateToProps } from "./redux-specs"
+
+import "./styles.scss"
 
 @connect(mapStateToProps)
 export default class BoatList extends Component {
@@ -15,18 +17,8 @@ export default class BoatList extends Component {
       <Boat key={boat.details.boatId} boat={boat} />
     )
 
-    const styles = {
-      "marginTop": "0px",
-      "marginBottom": "0px",
-      "paddingLeft": "20px",
-      "display": "flex",
-      "overflowX": "auto",
-      "alignItems": "flex-start",
-      "height": "100%"
-    }
-
     return (
-      <div style={styles}>
+      <div className="boat-list">
         {boatComponents}
       </div>
     )

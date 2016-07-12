@@ -6,26 +6,9 @@ import {
   ATTENDEE_LIST_ITEM 
 } from "boat-lineup-planner/dnd-item-types"
 
-import { collect } from "./dnd"
+import { collect, getDragItemStyles } from "./dnd"
 
 import "./styles.scss"
-
-const getItemStyles = currentOffset => 
-{
-  if (!currentOffset) {
-    return {
-      "display": "none"
-    }
-  }
-
-  const { x, y } = currentOffset
-  const transform = `translate(${x}px, ${y}px)`
-
-  return {
-    "transform": transform,
-    "WebkitTransform": transform
-  }
-}
 
 @DragLayer(collect)
 export default class AttendeeDragLayer extends Component {
@@ -42,7 +25,7 @@ export default class AttendeeDragLayer extends Component {
     
     return (
       <div className="drag-layer">
-        <div className="attendee card card-block" style={getItemStyles(currentOffset)}>
+        <div className="attendee card card-block" style={getDragItemStyles(currentOffset)}>
           {displayName}
         </div>
       </div>

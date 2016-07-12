@@ -15,35 +15,46 @@ import {
 } from "boat-lineup-planner/models/attendee-positions"
 
 const sampleState = {
-  eventDetails: new EventDetailsRecord({
-    eventId: "event-1",
-    date: LocalDate.of(2016, 7, 30),
-    notes: "",
-    mode: PRACTICE_MODE
-  }),
-  boats: new Map({
-    "boat-1": new BoatRecord({
-      details: new BoatDetailsRecord({
-        boatId: "boat-1",
-        title: "Lucky",
-        seatCount: 4,
-        isCoxed: true
-      }),
-      assignedSeats: Map([
-        [1, "rower-1"]
-      ])
-    }),
-    "boat-2": new BoatRecord({
-      details: new BoatDetailsRecord({
-        boatId: "boat-2",
-        title: "Voyager 1",
-        seatCount: 2,
-        isCoxed: false
-      }),
-      assignedSeats: Map()
+  isInitialDataLoaded: true,
+  eventDetails: Map({
+    isSaving: false,
+    saveUrl: "",
+    data: new EventDetailsRecord({
+      eventId: "event-1",
+      date: LocalDate.of(2016, 7, 30),
+      notes: "",
+      mode: PRACTICE_MODE
     })
   }),
-  attendees: new List([ 
+  boats: Map({
+    "boat-1": Map({
+      data: new BoatRecord({
+        details: new BoatDetailsRecord({
+          boatId: "boat-1",
+          title: "Lucky",
+          seatCount: 4,
+          isCoxed: true
+        }),
+        assignedSeats: Map([
+          [1, "rower-1"]
+        ])
+      }),
+      isSaving: true
+    }),
+    "boat-2": Map({
+      data: new BoatRecord({
+        details: new BoatDetailsRecord({
+          boatId: "boat-2",
+          title: "Voyager 1",
+          seatCount: 2,
+          isCoxed: false
+        }),
+        assignedSeats: Map()
+      }),
+      isSaving: false
+    })
+  }),
+  attendees: List([ 
     new AttendeeRecord({
       attendeeId: "cox-1",
       sortName: "Hill, Dule",

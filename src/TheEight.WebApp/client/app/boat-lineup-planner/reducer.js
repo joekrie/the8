@@ -10,6 +10,10 @@ import {
   REPLACE_STATE
 } from "./actions"
 
+import {
+  add
+}
+
 import defaultState from "boat-lineup-planner/default-state"
 import BoatRecord from "boat-lineup-planner/models/boat-record"
 
