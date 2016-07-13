@@ -7,27 +7,9 @@ import { ATTENDEE_LIST_ITEM } from "boat-lineup-planner/dnd-item-types";
 import { RACE_MODE } from "boat-lineup-planner/models/event-modes";
 import Attendee from "boat-lineup-planner/components/attendee";
 
+import { dragSpec, collect } from "./dnd"
+
 import "./styles.scss"
-
-export const dragSpec = {
-  canDrag(props) {
-    const { attendeeListItem, eventDetails } = props;
-    return eventDetails.mode === RACE_MODE || !attendeeListItem.isAssigned;
-  },
-  beginDrag(props) {
-    const { attendeeListItem } = props;
-    
-    return {
-      draggedAttendeeId: attendeeListItem.attendee.attendeeId,
-      draggedAttendeeName: attendeeListItem.attendee.displayName
-    };
-  }
-};
-
-const collect = connect => ({
-  connectDragSource: connect.dragSource(),
-  connectDragPreview: connect.dragPreview()
-});
 
 @DragSource(ATTENDEE_LIST_ITEM, dragSpec, collect)
 export default class AttendeeListItem extends Component {
@@ -37,10 +19,7 @@ export default class AttendeeListItem extends Component {
   }
 
   render() {
-    const {
-      attendeeListItem, 
-      connectDragSource
-    } = this.props;
+    const { attendeeListItem, connectDragSource } = this.props;
 
     return (
       connectDragSource(
@@ -48,6 +27,6 @@ export default class AttendeeListItem extends Component {
           <Attendee attendee={attendeeListItem.attendee} />
         </div>
       )
-    );
+    )
   }
 }
