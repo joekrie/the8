@@ -1,4 +1,4 @@
-export const assignAttendee = (prevState, action) => {
+export default function assignAttendee(prevState, action) {
   const { 
     type, 
     payload: { attendeeId, boatId, seatNumber } 

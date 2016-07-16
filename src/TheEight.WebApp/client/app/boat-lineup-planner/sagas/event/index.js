@@ -1,11 +1,3 @@
-import { 
-  SAVE_EVENT_DETAILS_REQUEST,
-  SAVE_EVENT_DETAILS_SUCCESS,
-  SAVE_EVENT_DETAILS_ERROR
-} from "../actions"
-
-export const saveEventDetailsSuccess = createAction(SAVE_EVENT_DETAILS_SUCCESS)
-export const saveEventDetailsError = createAction(SAVE_EVENT_DETAILS_ERROR)
 
 const saveEventDetailsRequest = createAction(
   SAVE_EVENT_DETAILS_REQUEST,
@@ -21,5 +13,3 @@ const saveEventDetailsRequest = createAction(
     })
   }
 )
-
-export default saveEventDetailsRequest
