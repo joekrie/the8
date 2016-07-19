@@ -13,7 +13,7 @@ import { mapStateToProps } from "./redux-specs"
 import "./styles.scss"
 
 @connect(mapStateToProps)
-@DragSource(ASSIGNED_ATTENDEE, dragSpec, defaultDragCollect)
+@DragSource("ASSIGNED_ATTENDEE", dragSpec, defaultDragCollect)
 export default class AssignedAttendee extends Component {
   render() {
     const { 

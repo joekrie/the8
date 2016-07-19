@@ -9,35 +9,28 @@ import BoatCreator from "boat-lineup-planner/components/boat-creator"
 import AttendeeCreator from "boat-lineup-planner/components/attendee-creator"
 
 import { defaultDropCollect } from "common/dnd-defaults"
-import { ASSIGNED_ATTENDEE } from "boat-lineup-planner/dnd-item-types"
-import { RACE_MODE } from "boat-lineup-planner/models/event-modes"
+import EventModes from "boat-lineup-planner/models/event-modes"
 import AttendeeListItemRecord from "boat-lineup-planner/models/attendee-list-item-record"
-
-import { unassignAttendee } from "boat-lineup-planner/action-creators/unassign-attendee"
-import { saveEventDetailsRequest } from "boat-lineup-planner/action-creators/save-event-details"
-import { moveAttendeesRequest } from "boat-lineup-planner/action-creators/move-attendees"
-import { addBoat } from "boat-lineup-planner/action-creators/add-boat"
-import { addAttendee } from "boat-lineup-planner/action-creators/add-attendee"
-
-import { mapStateToProps, mapDispatchToProps } from "./redux-specs"
+ 
+import { mapStateToProps } from "./redux-specs"
 
 import "./styles.scss"
 
-@connect(mapStateToProps, mapDispatchToProps)
-@DropTarget(ASSIGNED_ATTENDEE, dropSpec, defaultDropCollect)
+@connect(mapStateToProps)
+@DropTarget("ASSIGNED_ATTENDEE", dropSpec, defaultDropCollect)
 export default class AttendeeList extends Component {
   render() {
-    const { 
-      attendeeListItems, 
+    const {
+      attendeeListItems,
       connectDropTarget, 
-      eventDetails, 
+      eventDetails,
       changeEventDetails, 
-      createBoat, 
+      createBoat,
       createAttendee 
     } = this.props
 
     const attendeeComponents = attendeeListItems
-      .filter(item => eventDetails.mode === RACE_MODE || !item.isAssigned)
+      .filter(item => eventDetails.mode === EventModes.RACE_MODE || !item.isAssigned)
       .map(item =>
         <AttendeeListItem key={item.attendee.attendeeId} attendeeListItem={item} 
           eventDetails={eventDetails} />
