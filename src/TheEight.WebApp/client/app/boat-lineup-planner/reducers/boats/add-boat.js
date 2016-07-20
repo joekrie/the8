@@ -1,4 +1,4 @@
-const addBoat = (prevState, action) => {
+export default function addBoat(prevState, action) {
   const { 
     type, 
     payload: { boatDetails: { boatId } } 
@@ -16,5 +16,3 @@ const addBoat = (prevState, action) => {
     boats: newBoats
   }
 }
-
-export default addBoat

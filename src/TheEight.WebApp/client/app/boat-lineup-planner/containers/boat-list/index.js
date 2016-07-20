@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 
 import Boat from "boat-lineup-planner/components/boat"
 
-import { mapStateToProps } from "./redux-specs"
+import { mapStateToProps } from "./redux-mappers"
 
 import "./styles.scss"
 

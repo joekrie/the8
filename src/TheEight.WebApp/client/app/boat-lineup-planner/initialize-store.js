@@ -1,17 +1,18 @@
 import { createStore, applyMiddleware, compose } from "redux"
-import loggerMiddleware from "common/middleware/logger-middleware"
+import createLogger from "redux-logger"
+
 import appInsightsMiddleware from "common/middleware/app-insights-middleware"
-import reducer from "./reducer"
+import rootReducer from "boat-lineup-planner/reducers/root-reducer"
 
 export default function initializeState() {
   const sagaMiddleware = createSagaMiddleware()
+  const loggerMiddleware = createLogger()
 
   const store = createStore(
-    reducer,
+    rootReducer,
     { ...defaultState },
     compose(
       applyMiddleware(
-        thunk,
         loggerMiddleware,
         appInsightsMiddleware,
         sagaMiddleware

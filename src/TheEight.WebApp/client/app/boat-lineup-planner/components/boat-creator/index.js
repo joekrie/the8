@@ -1,7 +1,7 @@
 import { Component } from "react"
 import Modal from "react-modal"
 
-import BoatDetailsRecord from "boat-lineup-planner/models/boat-details-record"
+import BoatDetailsRecord from "boat-lineup-planner/models/boats/boat-details-record"
 
 import "./styles.scss"
 

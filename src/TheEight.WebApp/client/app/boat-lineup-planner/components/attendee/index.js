@@ -6,7 +6,7 @@ import {
   PORT_ROWER, 
   STARBOARD_ROWER, 
   BISWEPTUAL_ROWER
-} from "boat-lineup-planner/models/attendee-positions"
+} from "boat-lineup-planner/models/attendees/attendee-positions"
 
 import "./styles.scss"
 

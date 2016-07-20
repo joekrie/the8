@@ -1,7 +1,5 @@
 import { Record } from "immutable"
 
-import EventStateRecord from "./event-state-record"
-
 const EventStateRecord = Record({
     details: new EventDetailsRecord(),
     isLoaded: false,

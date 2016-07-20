@@ -1,11 +1,6 @@
 import { Component } from "react"
 import { DragLayer } from "react-dnd"
 
-import { 
-  ASSIGNED_ATTENDEE, 
-  ATTENDEE_LIST_ITEM 
-} from "boat-lineup-planner/dnd-item-types"
-
 import { collect, getDragItemStyles } from "./dnd"
 
 import "./styles.scss"
@@ -19,9 +14,10 @@ export default class AttendeeDragLayer extends Component {
       currentOffset 
     } = this.props
 
-    const displayName = (itemType === ASSIGNED_ATTENDEE || itemType === ATTENDEE_LIST_ITEM)
-      ? item.draggedAttendeeName
-      : ""
+    const displayName = 
+      (itemType === "ASSIGNED_ATTENDEE" || itemType === "ATTENDEE_LIST_ITEM")
+        ? item.draggedAttendeeName
+        : ""
     
     return (
       <div className="drag-layer">

@@ -2,16 +2,13 @@ import { Component } from "react";
 import { DragSource } from "react-dnd";
 import { getEmptyImage } from "react-dnd-html5-backend";
 
-import { defaultDragCollect } from "common/dnd-defaults";
-import { ATTENDEE_LIST_ITEM } from "boat-lineup-planner/dnd-item-types";
-import { RACE_MODE } from "boat-lineup-planner/models/event-modes";
 import Attendee from "boat-lineup-planner/components/attendee";
 
 import { dragSpec, collect } from "./dnd"
 
 import "./styles.scss"
 
-@DragSource(ATTENDEE_LIST_ITEM, dragSpec, collect)
+@DragSource("ATTENDEE_LIST_ITEM", dragSpec, collect)
 export default class AttendeeListItem extends Component {
   componentDidMount() {
     const { connectDragPreview } = this.props;

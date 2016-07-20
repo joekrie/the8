@@ -9,10 +9,11 @@ import BoatCreator from "boat-lineup-planner/components/boat-creator"
 import AttendeeCreator from "boat-lineup-planner/components/attendee-creator"
 
 import { defaultDropCollect } from "common/dnd-defaults"
-import EventModes from "boat-lineup-planner/models/event-modes"
-import AttendeeListItemRecord from "boat-lineup-planner/models/attendee-list-item-record"
+import EventModes from "boat-lineup-planner/models/event/event-modes"
+import AttendeeListItemRecord from "boat-lineup-planner/models/attendees/attendee-list-item-record"
  
-import { mapStateToProps } from "./redux-specs"
+import { mapStateToProps } from "./redux-mappers"
+import { dropSpec } from "./dnd"
 
 import "./styles.scss"
 

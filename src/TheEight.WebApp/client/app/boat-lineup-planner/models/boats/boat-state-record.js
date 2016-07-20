@@ -1,7 +1,5 @@
 import { Map } from "immutable"
 
-import BoatStateRecord from "./event-details-record"
-
 const defaults = {
   boats: Map(),
   isLoaded: false,

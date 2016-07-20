@@ -4,11 +4,10 @@ import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 
 import { defaultDragCollect } from "common/dnd-defaults"
-import { ASSIGNED_ATTENDEE } from "boat-lineup-planner/dnd-item-types"
 import Attendee from "boat-lineup-planner/components/attendee"
 
-import { dragSpec } from "./dnd-specs"
-import { mapStateToProps } from "./redux-specs"
+import { dragSpec } from "./dnd"
+import { mapStateToProps } from "./redux-mappers"
 
 import "./styles.scss"
 

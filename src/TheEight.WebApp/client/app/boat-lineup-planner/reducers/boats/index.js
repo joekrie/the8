@@ -1,10 +1,5 @@
 import { handleActions } from "redux-actions"
 
-import {
-  ADD_BOAT
-} from "./actions"
-
-import { SET_INITIAL_STATE } from "boat-lineup-planner/actions/root/actions"
 
 import addBoat from "./reducer-functions/add-boat"
 

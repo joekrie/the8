@@ -1,1 +1,3 @@
-export const setInitialState = (prevState, action) => action.payload.newState 
+export default function setInitialState(prevState, action) {
+  return action.payload.boats 
+}

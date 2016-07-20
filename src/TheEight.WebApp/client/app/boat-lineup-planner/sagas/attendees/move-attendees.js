@@ -2,6 +2,8 @@ import { takeEvery, takeLatest } from "redux-saga"
 import { put, call } from "redux-saga/effects"
 
 export function saveAttendeeMoves(payload) { 
+  return
+
   return fetch("/move-attendees", {
     method: "POST",
     headers: {

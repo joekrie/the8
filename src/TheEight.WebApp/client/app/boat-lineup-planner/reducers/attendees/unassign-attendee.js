@@ -1,4 +1,4 @@
-const unassignAttendee = (prevState, action) => {
+export default function unassignAttendee(prevState, action) {
   const { 
     type, 
     payload: { boatId, seatNumber } 
@@ -11,5 +11,3 @@ const unassignAttendee = (prevState, action) => {
     boats: newBoats
   }
 }
-
-export default unassignAttendee

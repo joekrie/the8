@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux"
 
 import DateField from "boat-lineup-planner/app/components/date-field"
 import NotesField from "boat-lineup-planner/app/components/notes-field"
-import LoadingAnimation from "common/loading-animation"
+import LoadingAnimation from "common/components/loading-animation"
 
 import { saveEventDetailsRequest } from "boat-lineup-planner/action-creators/save-event-details"
 

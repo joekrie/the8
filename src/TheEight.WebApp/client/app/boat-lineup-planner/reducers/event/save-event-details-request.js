@@ -1,4 +1,4 @@
-const saveEventDetailsRequest = (prevState, action) => {
+export default function saveEventDetailsRequest(prevState, action) {
   const { 
     type, 
     payload: { property, newValue } 
@@ -15,5 +15,3 @@ const saveEventDetailsRequest = (prevState, action) => {
     eventDetails: newDetails
   }
 }
-
-export default saveEventDetailsRequest

@@ -1,21 +1,11 @@
 import { 
-  ASSIGNED_ATTENDEE, 
-  ATTENDEE_LIST_ITEM 
-} from "boat-lineup-planner/dnd-item-types"
-
-import { 
   COXSWAIN, 
   PORT_ROWER, 
   STARBOARD_ROWER, 
   BISWEPTUAL_ROWER 
-} from "boat-lineup-planner/models/attendee-positions"
+} from "boat-lineup-planner/models/attendees/attendee-positions"
 
-import { 
-  assignAttendee, 
-  unassignAttendee 
-} from "boat-lineup-planner/reducer/action-creators"
-
-import { RACE_MODE } from "boat-lineup-planner/models/event-modes"
+import { RACE_MODE } from "boat-lineup-planner/models/event/event-modes"
 
 export const dropSpec = {
   canDrop(props, monitor) {
@@ -35,7 +25,7 @@ export const dropSpec = {
     
     const alreadyInBoat = attendeeIdsInTargetBoat.contains(draggedAttendeeId)
     
-    if (itemType === ATTENDEE_LIST_ITEM) {
+    if (itemType === "ATTENDEE_LIST_ITEM") {
       return !alreadyInBoat
     }
     
@@ -62,11 +52,11 @@ export const dropSpec = {
       attendeeIdsInOriginBoat 
     } = monitor.getItem()
         
-    if (itemType === ATTENDEE_LIST_ITEM) {
+    if (itemType === "ATTENDEE_LIST_ITEM") {
       assignAttendee(draggedAttendeeId, targetBoatId, targetSeatNumber)
     }
     
-    if (itemType === ASSIGNED_ATTENDEE) {
+    if (itemType === "ASSIGNED_ATTENDEE") {
       const isTargetInOrigin = attendeeIdsInOriginBoat.contains(attendeeIdInTarget)
       const isMoveWithinBoat = targetBoatId === originBoatId
       const isSwapWithinBoat = isMoveWithinBoat && attendeeIdInTarget

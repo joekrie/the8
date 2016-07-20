@@ -15,6 +15,16 @@
   button-margin-right: 5px;
 }.boat-lineup-planner .attendee-creator {
   button-margin-right: 5px;
+}.boat-lineup-planner .attendee-list {
+  float: left;
+  width: 275px;
+  height: 100%;
+}
+
+.boat-lineup-planner .attendee-list .list-items {
+  padding-top: 15px;
+}.boat-lineup-planner .assigned-attendee {
+  margin-bottom: 10px;
 }.boat-lineup-planner .seat {
   height: 2.5rem;
   clear: 2.5rem;
@@ -47,6 +57,21 @@
   margin-bottom: 10px;
   padding: 10px;
   margin-left: auto;
+}
+
+.boat-lineup-planner .boat .header h3 {
+  display: inline;
+}.boat-lineup-planner .boat-list {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-left: 20px;
+  display: -ms-flexbox;
+  -js-display: flex;
+  display: flex;
+  overflow-x: auto;
+  -ms-flex-align: start;
+      align-items: flex-start;
+  height: 100%;
 }.drag-layer {
   position: fixed;
   pointer-events: none;

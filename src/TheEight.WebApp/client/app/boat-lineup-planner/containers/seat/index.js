@@ -5,26 +5,24 @@ import { connect } from "react-redux"
 import AssignedAttendee from "boat-lineup-planner/containers/assigned-attendee"
 
 import { 
-  ASSIGNED_ATTENDEE, 
-  ATTENDEE_LIST_ITEM 
-} from "boat-lineup-planner/dnd-item-types"
-
-import { 
   COXSWAIN, 
   PORT_ROWER, 
   STARBOARD_ROWER, 
   BISWEPTUAL_ROWER 
-} from "boat-lineup-planner/models/attendee-positions"
+} from "boat-lineup-planner/models/attendees/attendee-positions"
 
-import { RACE_MODE } from "boat-lineup-planner/models/event-modes"
+import { RACE_MODE } from "boat-lineup-planner/models/event/event-modes"
 
-import { mapStateToProps, mapDispatchToProps } from "./redux-specs"
-import { dropSpec, dropCollect } from "./dnd-specs"
+import { dropSpec, dropCollect } from "./dnd"
 
 import "./styles.scss"
 
-@connect(mapStateToProps, mapDispatchToProps)
-@DropTarget([ATTENDEE_LIST_ITEM, ASSIGNED_ATTENDEE], dropSpec, dropCollect)
+export const mapStateToProps = state => ({
+  canAttendeeOccupyMultipleBoats: state.eventDetails.mode === RACE_MODE 
+})
+
+@connect(mapStateToProps)
+@DropTarget(["ATTENDEE_LIST_ITEM", "ASSIGNED_ATTENDEE"], dropSpec, dropCollect)
 export default class Seat extends Component {
   render() {
     const { 
