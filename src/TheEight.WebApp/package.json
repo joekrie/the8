@@ -95,7 +95,7 @@
       "semi": 2
     }
   },
-  "license": "UNLICENSED",
+  "license": "MIT",
   "name": "the-eight",
   "private": true,
   "scripts": {
