@@ -6,6 +6,6 @@ import AppStatusStateRecord from "boat-lineup-planner/models/app-status/app-stat
 
 const attendeeReducer = handleActions({
   "SET_INITIAL_STATE": setInitialState
-}, defaultState)
+}, new AppStatusStateRecord())
 
 export default attendeeReducer

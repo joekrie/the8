@@ -13,7 +13,7 @@ export const dragSpec = {
   }
 };
 
-const collect = connect => ({
+export const dragCollect = connect => ({
   connectDragSource: connect.dragSource(),
   connectDragPreview: connect.dragPreview()
 });

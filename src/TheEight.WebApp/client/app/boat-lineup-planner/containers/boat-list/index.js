@@ -14,7 +14,7 @@ export default class BoatList extends Component {
     const { boats } = this.props   
 
     const boatComponents = boats.map(boat => 
-      <Boat key={boat.details.boatId} boat={boat} />
+      <Boat key={boat.boat.boatId} boat={boat} />
     )
 
     return (

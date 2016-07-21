@@ -73,8 +73,8 @@ export default class Attendee extends Component {
         <div className="name">
           {displayName}
           &nbsp;
-          <span ref={ref => this.positionRef = ref}  title={this.positionLabels[attendee.position].title}>
-            ({this.positionLabels[attendee.position].abbr})
+          <span ref={ref => this.positionRef = ref}  title={this.positionLabels[attendee.details.position].title}>
+            ({this.positionLabels[attendee.details.position].abbr})
           </span>
         </div>
         <div className="position">

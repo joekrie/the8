@@ -1,13 +1,13 @@
 import { handleActions } from "redux-actions"
 
+import setInitialState from "./set-initial-state"
+import addBoat from "./add-boat"
 
-import addBoat from "./reducer-functions/add-boat"
-
-import defaultState from "./default-state"
+import BoatsStateRecord from "boat-lineup-planner/models/boats/boats-state-record"
 
 const attendeeReducer = handleActions({
-  [ADD_BOAT]: addBoat,
-  [SET_INIITIAL_STATE]: (prevState, action) => action.payload.boats
-}, defaultState)
+  "ADD_BOAT": addBoat,
+  "SET_INIITIAL_STATE": setInitialState
+}, new BoatsStateRecord())
 
 export default attendeeReducer

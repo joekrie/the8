@@ -1,22 +1,29 @@
 import { bindActionCreators } from "redux"
 
-export const mapStateToProps = state => {
-  const { attendees, boats, eventDetails } = state
-  
-  const assignedAttendeeIds = boats
-    .map(boat => boat.assignedSeats.valueSeq())
-    .valueSeq()
-    .flatten()
+import AttendeeListItemRecord from "boat-lineup-planner/models/attendees/attendee-list-item-record"
 
-  const attendeeListItems = attendees.map(attendee => 
-    new AttendeeListItemRecord({
-      attendee,
-      isAssigned: assignedAttendeeIds.contains(attendee.attendeeId)
-    })
-  )
+export const mapStateToProps = state => {
+  const { attendees, boats, event } = state
+
+  const assignedAttendeeIds = 
+    boats
+      .boats
+      .map(boat => boat.boat.assignedSeats.valueSeq())
+      .valueSeq()
+      .flatten()
+
+  const attendeeListItems = 
+    attendees
+      .attendees
+      .map(attendee => 
+        new AttendeeListItemRecord({
+          attendee,
+          isAssigned: assignedAttendeeIds.contains(attendee.attendeeId)
+        })
+      )
     
   return { 
     attendeeListItems,
-    eventDetails
+    eventDetails: event
   }
 }

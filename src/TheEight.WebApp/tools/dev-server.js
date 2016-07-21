@@ -1,9 +1,9 @@
 ﻿const webpack = require("webpack")
 const WebpackDevServer = require("webpack-dev-server")
 
-const config = require("./webpack.config")
+const config = require("./webpack.config.dev")
 
-const port = 8080
+const port = 8085
 
 new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,

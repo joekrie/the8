@@ -29,7 +29,7 @@ export default class DateField extends Component {
   }
 
   render() {
-    const { rawValue, onChange } = this.state
+    const { value, onChange } = this.props
 
     return (
       <fieldset className="form-group">
@@ -38,10 +38,10 @@ export default class DateField extends Component {
           &nbsp;
           <i className="fa fa-info-circle" ref={ref => this.infoRef = ref} aria-hidden="true"></i>
         </label>          
-        <input id="event-details-date" className="form-control" value={rawValue.toString()} 
+        <input id="event-details-date" className="form-control" value={value} 
           onChange={evt => onChange(evt.target.value)} />
         <div ref={ref => this.input = ref}></div>
-        {displayParsed}
+        
       </fieldset>
     )
   }

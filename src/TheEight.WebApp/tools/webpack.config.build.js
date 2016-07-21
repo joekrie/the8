@@ -1,7 +1,6 @@
 const webpack = require("webpack")
-const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
-const webpackConfig = require("./webpack-base.config.js")
+const webpackConfig = require("./webpack.config.common.js")
 
 var config = Object.create(webpackConfig)
 

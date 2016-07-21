@@ -7,9 +7,10 @@ import AttendeesStateRecord from "boat-lineup-planner/models/attendees/attendees
 import AttendeeRecord from "boat-lineup-planner/models/attendees/attendee-record"
 import * as AttendeePositions from "boat-lineup-planner/models/attendees/attendee-positions"
 
-import BoatsStateRecord from "boat-lineup-planner/models/boats/boat-state-record"
+import BoatsStateRecord from "boat-lineup-planner/models/boats/boats-state-record"
 import BoatRecord from "boat-lineup-planner/models/boats/boat-record"
 import BoatDetailsRecord from "boat-lineup-planner/models/boats/boat-details-record"
+import BoatListItemRecord from "boat-lineup-planner/models/boats/boat-list-item-record"
 
 import EventStateRecord from "boat-lineup-planner/models/event/event-state-record"
 import EventDetailsRecord from "boat-lineup-planner/models/event/event-details-record"
@@ -32,8 +33,8 @@ const sampleState = {
   }),
   boats: new BoatsStateRecord({
     boats: Map({
-      "boat-1": Map({
-        data: new BoatRecord({
+      "boat-1": new BoatListItemRecord({
+        boat: new BoatRecord({
           details: new BoatDetailsRecord({
             boatId: "boat-1",
             title: "Lucky",
@@ -46,8 +47,8 @@ const sampleState = {
         }),
         isSaving: true
       }),
-      "boat-2": Map({
-        data: new BoatRecord({
+      "boat-2": new BoatListItemRecord({
+        boat: new BoatRecord({
           details: new BoatDetailsRecord({
             boatId: "boat-2",
             title: "Voyager 1",

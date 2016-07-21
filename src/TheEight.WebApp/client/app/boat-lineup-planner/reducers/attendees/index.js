@@ -8,7 +8,7 @@ import moveAttendeesSuccess from "./move-attendees-success"
 import unassignAttendee from "./unassign-attendee"
 import setInitialState from "./set-initial-state"
 
-import AttendeesStateRecord from "boat-lineup-planner/models/attendees/attendee-state-record"
+import AttendeesStateRecord from "boat-lineup-planner/models/attendees/attendees-state-record"
 
 const attendeeReducer = handleActions({
   "SET_INITIAL_STATE": setInitialState,
