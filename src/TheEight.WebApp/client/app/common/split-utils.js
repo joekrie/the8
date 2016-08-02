@@ -2,10 +2,9 @@
 import { Duration } from "js-joda"
 
 export const formatSplit = duration => {
-    let minutes = duration.minutes()
-    minutes += duration.hours() * 60
+    let minutes = duration.toMinutes()
 
-    const split = ""
+    let split = ""
     split += minutes + ":"
 
     if (duration.seconds() < 10) {
@@ -13,7 +12,7 @@ export const formatSplit = duration => {
     }
 
     const seconds = duration.seconds()
-    const deciseconds = Math.round(duration.milliseconds() / 100)
+    const deciseconds = Math.round(duration.nano() / 100000)
     split += `${seconds}.${deciseconds}`
 
     return split

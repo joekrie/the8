@@ -12,7 +12,7 @@ module.exports = function (config) {
     basePath: "",
     frameworks: ["jasmine"],
     files: [
-      "../client/app/**/records/*.tests.js"
+      "../client/app/**/*.tests.js"
     ],
     exclude: [],
     reporters: ["progress"],
