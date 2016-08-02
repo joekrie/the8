@@ -3,7 +3,7 @@ const webpackConfig = require("./webpack.config.common.js")
 module.exports = function (config) {
   config.set({
     preprocessors: {
-      "../**/*.tests.js": ["webpack"]
+      "../client/app/**/*.tests.js": ["webpack"]
     },
     webpack: webpackConfig,
     webpackMiddleware: {
@@ -12,7 +12,7 @@ module.exports = function (config) {
     basePath: "",
     frameworks: ["jasmine"],
     files: [
-      "../client/app/**/*.tests.js"
+      "../client/app/**/records/*.tests.js"
     ],
     exclude: [],
     reporters: ["progress"],
