@@ -48,7 +48,7 @@
     "redux-saga": "^0.11.0",
     "redux-thunk": "^2.1.0",
     "rome": "^2.1.22",
-    "sugar": "^1.4.1",
+    "sugar": "^2.0.0",
     "tether": "^1.3.2",
     "victory-chart": "^9.2.0",
     "whatwg-fetch": "^1.0.0",

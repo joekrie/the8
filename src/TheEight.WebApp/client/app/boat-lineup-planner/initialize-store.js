@@ -5,8 +5,9 @@ import createSagaMiddleware from "redux-saga"
 
 import appInsightsMiddleware from "common/middleware/app-insights-middleware"
 
-import rootReducer from "boat-lineup-planner/reducers/root-reducer"
-import rootSaga from "boat-lineup-planner/sagas/root-saga"
+import rootReducer from "./reducers/root.reducer"
+import rootSaga from "./sagas/root.saga"
+
 import sampleState from "./sample-state"
 
 function initializeStore(defaultState, rootReducer, rootSaga, additionalMiddleware = []) {

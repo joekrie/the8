@@ -16,7 +16,7 @@ import AttendeeDragLayer from "boat-lineup-planner/components/attendee-drag-laye
 import sampleState from "boat-lineup-planner/sample-state"
 import initializeStore from "boat-lineup-planner/initialize-store"
 
-import "boat-lineup-planner/styles.scss"
+import "./index.scss"
 
 export class AppBase extends Component {
   constructor() {
