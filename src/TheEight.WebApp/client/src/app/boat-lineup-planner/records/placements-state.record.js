@@ -2,7 +2,9 @@ import { Record, List, Map, fromJS } from "immutable"
 
 export const defaults = {
   committedPlacements: Map(),
-  uncommittedPlacementChanges: Map()
+  uncommittedPlacementChanges: Map(),  // todo: combine placements, make each placement hold committed and uncommitted
+  isSaving: false,
+  errorOnSaving: ""
 }
 
 export class Unplacer {  // todo: this should probably be a record/immutable
@@ -25,6 +27,8 @@ export class Placer {
   }
 }
 
+// todo: no-op placer?
+
 export function commitPlacementChanges(committedPlacements, uncommittedPlacements) {
   return committedPlacements.withMutations(placements => {
     uncommittedPlacements.forEach((modBoat, modBoatId) => {
@@ -42,6 +46,10 @@ export default class PlacementsStateRecord extends Record(defaults) {
     }
 
     return fromJS(serverData, reviver)
+  }
+
+  get didSavingError() {
+    return Boolean(this.errorOnSaving)
   }
 
   getUncommittedPlacement(boatId, seatNumber) {
