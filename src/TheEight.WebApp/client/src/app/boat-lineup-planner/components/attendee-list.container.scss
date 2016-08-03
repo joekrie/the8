@@ -1,0 +1,19 @@
+.boat-lineup-planner .attendee-list {
+    @extend .card;
+
+    float: left;
+    width: 275px;
+    height: 100%;
+
+    .header {
+        @extend .card-header;
+    }
+
+    .content {
+        @extend .card-block;
+    }
+
+    .list-items {
+        padding-top: 15px;
+    }
+}

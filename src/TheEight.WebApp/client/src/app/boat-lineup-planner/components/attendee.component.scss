@@ -1,0 +1,13 @@
+.boat-lineup-planner .attendee {
+    @extend .card;
+    @extend .card-block;
+
+    display: flex;
+    padding: 0.4rem;
+    line-height: 1;
+    cursor: move;
+
+    .position {
+        margin-left: auto;
+    }
+}
