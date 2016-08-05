@@ -1,6 +1,6 @@
 const webpackConfig = require("./webpack.config.common.js")
 
-const testsGlob = "../client/app/**/__tests__/**/*.testsx.js"
+const testsGlob = "../src/app/**/records/__tests__/**/*.tests.js"
 
 module.exports = function (config) {
   config.set({

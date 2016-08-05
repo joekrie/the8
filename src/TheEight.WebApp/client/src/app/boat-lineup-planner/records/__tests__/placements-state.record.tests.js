@@ -3,46 +3,6 @@ import { Map, fromJS } from "immutable"
 import PlacementsStateRecord, { Placer, Unplacer, commitPlacementChanges } from "../placements-state.record"
 
 describe("boat-lineup-planner > records > placements-state-record >", () => {
-  describe("commitPlacementChanges", () => {
-    it("should place attendee in empty seat", () => {
-      // arrange
-      const committedPlacements = Map()
-
-      const uncommittedPlacementChanges = Map({
-        "boat-1": Map({
-          "2": new Placer("attn-1")
-        })
-      })
-
-      // act
-      const newCommittedPlacements = commitPlacementChanges(committedPlacements, uncommittedPlacementChanges)
-
-      // assert
-      expect(newCommittedPlacements.getIn(["boat-1", "2"])).toBe("attn-1")
-    })
-
-    it("should unplace attendee", () => {
-      // arrange
-      const committedPlacements = fromJS({
-        "boat-1": {
-          "2": "attn-1"
-        }
-      })
-
-      const uncommittedPlacementChanges = Map({
-        "boat-1": Map({
-          "2": new Unplacer()
-        })
-      })
-
-      // act
-      const newCommittedPlacements = commitPlacementChanges(committedPlacements, uncommittedPlacementChanges)
-
-      // assert
-      expect(newCommittedPlacements.getIn(["boat-1", "2"])).toBeUndefined()
-    })
-  })
-
   describe("PlacementsStateRecord", () => {
     it("should commit changes after placing attendee in an empty seat", () => {
       // arrange
@@ -54,18 +14,22 @@ describe("boat-lineup-planner > records > placements-state-record >", () => {
         .commitPlacementChanges()
 
       // assert
-      expect(state.committedPlacements.getIn(["boat-1", "2"])).toBe("attn-1")
+      expect(state.placements.getIn(["boat-1", "2", "uncommitted"])).toBe("attn-1")
     })
 
     it("should commit changes after swapping attendees", () => {
       // arrange
       let state = new PlacementsStateRecord({
-        committedPlacements: fromJS({
+        placements: fromJS({
           "boat-1": {
-            "3": "attn-2"
+            "3": { 
+              committed: "attn-2"
+            }
           },
           "boat-2": {
-            "1": "attn-1"
+            "1": {
+              committed: "attn-1"
+            }
           }
         })
       })
@@ -76,17 +40,19 @@ describe("boat-lineup-planner > records > placements-state-record >", () => {
         .commitPlacementChanges()
 
       // assert
-      expect(state.committedPlacements.getIn(["boat-1", "3"])).toBe("attn-1")
-      expect(state.committedPlacements.getIn(["boat-2", "1"])).toBe("attn-2")
+      expect(state.placements.getIn(["boat-1", "3", "uncommitted"])).toBe("attn-1")
+      expect(state.placements.getIn(["boat-2", "1", "uncommitted"])).toBe("attn-2")
     })
 
     describe("getUncommittedPlacement", () => {
       it("should get committed placement when no uncommitted placement for seat", () => {
         // arrange
         const state = new PlacementsStateRecord({
-          committedPlacements: fromJS({
+          placements: fromJS({
             "boat-1": {
-              "2": "attn-1"
+              "2": {
+                committed: "attn-1"
+              }
             }
           })
         })
@@ -101,14 +67,12 @@ describe("boat-lineup-planner > records > placements-state-record >", () => {
       it("should get uncommitted placement for seat", () => {
         // arrange
         const state = new PlacementsStateRecord({
-          committedPlacements: fromJS({
+          placements: fromJS({
             "boat-1": {
-              "2": "attn-1"
-            }
-          }),
-          uncommittedPlacementChanges: fromJS({
-            "boat-1": {
-              "2": new Placer("attn-2")
+              "2": {
+                committed: "attn-1",
+                uncommitted: "attn-2"
+              }
             }
           })
         })

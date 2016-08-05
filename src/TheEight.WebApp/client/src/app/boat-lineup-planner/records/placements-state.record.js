@@ -1,42 +1,9 @@
 import { Record, List, Map, fromJS } from "immutable"
 
 export const defaults = {
-  committedPlacements: Map(),
-  uncommittedPlacementChanges: Map(),  // todo: combine placements, make each placement hold committed and uncommitted
+  placements: Map(),
   isSaving: false,
   errorOnSaving: ""
-}
-
-export class Unplacer {  // todo: this should probably be a record/immutable
-  commit(committedPlacements, boatId, seatNumber) {
-    return committedPlacements.deleteIn([boatId, seatNumber])
-  }
-
-  get attendeeId() {
-    return undefined
-  }
-}
-
-export class Placer {
-  constructor(attendeeId) {
-    this.attendeeId = attendeeId
-  }
-
-  commit(committedPlacements, boatId, seatNumber) {
-    return committedPlacements.setIn([boatId, seatNumber], this.attendeeId)
-  }
-}
-
-// todo: no-op placer?
-
-export function commitPlacementChanges(committedPlacements, uncommittedPlacements) {
-  return committedPlacements.withMutations(placements => {
-    uncommittedPlacements.forEach((modBoat, modBoatId) => {
-      modBoat.forEach((modifier, modSeatNum) => {
-        modifier.commit(placements, modBoatId, modSeatNum)
-      })
-    })
-  })
 }
 
 export default class PlacementsStateRecord extends Record(defaults) {
@@ -48,18 +15,14 @@ export default class PlacementsStateRecord extends Record(defaults) {
     return fromJS(serverData, reviver)
   }
 
-  get didSavingError() {
-    return Boolean(this.errorOnSaving)
-  }
-
   getUncommittedPlacement(boatId, seatNumber) {
-    const uncommitted = this.getIn(["uncommittedPlacementChanges", boatId, seatNumber])
-    
-    if (uncommitted && uncommitted.attendeeId) {
-      return uncommitted.attendeeId
+    const uncommitted = this.placements.getIn([boatId, seatNumber, "uncommitted"])
+
+    if (uncommitted) {
+      return uncommitted
     }
 
-    return this.getIn(["committedPlacements", boatId, seatNumber])
+    return this.placements.getIn([boatId, seatNumber, "committed"])
   }
 
   placeAttendee(attendeeId, newBoatId, newSeatNumber, oldBoatId, oldSeatNumber) {
@@ -67,29 +30,44 @@ export default class PlacementsStateRecord extends Record(defaults) {
 
     if (attendeeInTarget) {
       return this
-        .setIn(["uncommittedPlacementChanges", oldBoatId, oldSeatNumber], new Placer(attendeeInTarget))
-        .setIn(["uncommittedPlacementChanges", newBoatId, newSeatNumber], new Placer(attendeeId))
+        .setIn(["placements", oldBoatId, oldSeatNumber, "uncommitted"], attendeeInTarget)
+        .setIn(["placements", newBoatId, newSeatNumber, "uncommitted"], attendeeId)
     }
 
     if (oldBoatId) {
       return this
-        .setIn(["uncommittedPlacementChanges", oldBoatId, oldSeatNumber], new Unplacer())
-        .setIn(["uncommittedPlacementChanges", newBoatId, newSeatNumber], new Placer(attendeeId))
+        .deleteIn(["placements", oldBoatId, oldSeatNumber, "uncommitted"])
+        .setIn(["placements", newBoatId, newSeatNumber, "uncommitted"], attendeeId)
     }
 
-    return this.setIn(["uncommittedPlacementChanges", newBoatId, newSeatNumber], new Placer(attendeeId))
+    return this.setIn(["placements", newBoatId, newSeatNumber, "uncommitted"], attendeeId)
   }
 
   unplaceAttendee(boatId, seatNumber) {
-    return this.setIn(["uncommittedPlacementChanges", boatId, seatNumber], new Unplacer())
+    return this.deleteIn(["placements", boatId, seatNumber, "uncommitted"])
   }
 
   undoPlacementChanges() {
-    return this.set("uncommittedPlacementChanges", Map())
+    return this.withMutations(record => {
+      record.placements.forEach((boat, boatId) => {
+        boat.forEach(placement => {
+          placement.set("uncommitted", placement.get("committed"))
+        })
+      })
+    })
   }
 
   commitPlacementChanges() {
-    return this.update("committedPlacements", committedPlacements => 
-      commitPlacementChanges(committedPlacements, this.uncommittedPlacementChanges))
+    return this.withMutations(record => {
+      record.placements.forEach((boat, boatId) => {
+        boat.forEach(placement => {
+          placement.set("committed", placement.get("uncommitted"))
+        })
+      })
+    })
+  }
+
+  get didSavingError() {
+    return Boolean(this.errorOnSaving)
   }
 }

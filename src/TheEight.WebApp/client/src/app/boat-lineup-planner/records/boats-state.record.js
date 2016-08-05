@@ -1,4 +1,4 @@
-import { Record, List, fromJS } from "immutable"
+import { Record, List, Map, fromJS } from "immutable"
 
 const defaults = {
   boats: Map()
@@ -14,13 +14,12 @@ export default class BoatsStateRecord extends Record(defaults) {
   }
 
   modifyBoatDetails(boatId, newBoatDetails) {
-    return this.setIn(["boats", boatId, "modifiedDetails"], newBoatDetails)
+    return this.setIn(["boats", boatId, "uncommittedDetails"], newBoatDetails)
   }
 
   areBoatDetailsModified() {
-    const modified = this.getIn(["boats", boatId, "modifiedDetails"])
-    const committed = this.getIn(["boats", boatId, "committedDetails"])
-    return modified.equals(committed)
+    const uncommitted = this.getIn(["boats", boatId, "uncommittedDetails"])
+    return Boolean(committed)
   }
 
   setIsSavingBoat(boatId, isSaving) {
@@ -28,13 +27,21 @@ export default class BoatsStateRecord extends Record(defaults) {
   }
 
   commitBoatDetailChanges(boatId) {
-    const newBoatDetails = this.getIn(["boats", boatId, "modifiedDetails"])
-    return this.setIn(["boats", boatId, "committedDetails"], newBoatDetails)
+    const uncommittedDetails = this.getIn(["boats", boatId, "uncommittedDetails"])
+
+    if (uncommittedDetails) {
+      return this.setIn(["boats", boatId, "committedDetails"], newBoatDetails)
+    }
+
+    return this;
+  }
+
+  undoBoatDetailChanges(boatId) {
+    return this.deleteIn(["boats", boatId, "committedDetails"], newBoatDetails)
   }
 
   addBoat(boatId, boatDetails) {
     const newBoat = Map({
-      modifiedDetails: boatDetails,
       committedDetails: boatDetails,
       isSaving: false
     })
