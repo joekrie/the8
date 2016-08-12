@@ -31,13 +31,10 @@ export const dragSpec = {
   }
 }
 
-export const dropCollect = (connect, monitor) => ({
-  connectDropTarget: connect.dropTarget(),
-  isOver: monitor.isOver(),
-  isOverCurrent: monitor.isOver({ shallow: true }),
-  canDrop: monitor.canDrop(),
-  itemType: monitor.getItemType()
-})
+export const dragCollect = connect => ({
+  connectDragSource: connect.dragSource(),
+  connectDragPreview: connect.dragPreview()
+});
 
 @connect(mapStateToProps)
 @DragSource("ASSIGNED_ATTENDEE", dragSpec, dragCollect)

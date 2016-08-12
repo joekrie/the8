@@ -1,8 +1,7 @@
 import { random } from "lodash"
 import { Component } from "react"
 
-import DateField from "boat-lineup-planner/components/date-field"
-import { RACE_MODE, PRACTICE_MODE } from "boat-lineup-planner/models/event/event-modes"
+import DateField from "./date-field.component"
 
 export default class EventDetails extends Component {
   constructor() {

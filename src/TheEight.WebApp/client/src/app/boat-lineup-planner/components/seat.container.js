@@ -2,27 +2,9 @@ import { Component } from "react"
 import { DropTarget } from "react-dnd"
 import { connect } from "react-redux"
 
-import AssignedAttendee from "boat-lineup-planner/containers/assigned-attendee"
-
-import { 
-  COXSWAIN, 
-  PORT_ROWER, 
-  STARBOARD_ROWER, 
-  BISWEPTUAL_ROWER 
-} from "boat-lineup-planner/models/attendees/attendee-positions"
-
-import { RACE_MODE } from "boat-lineup-planner/models/event/event-modes"
+import AssignedAttendee from "./assigned-attendee.container"
 
 import "./seat.container.scss"
-
-import { 
-  COXSWAIN, 
-  PORT_ROWER, 
-  STARBOARD_ROWER, 
-  BISWEPTUAL_ROWER 
-} from "boat-lineup-planner/models/attendees/attendee-positions"
-
-import { RACE_MODE } from "boat-lineup-planner/models/event/event-modes"
 
 export const dropSpec = {
   canDrop(props, monitor) {

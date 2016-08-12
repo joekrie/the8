@@ -2,7 +2,7 @@ import { List } from "immutable"
 import { Component } from "react"
 import { connect } from "react-redux"
 
-import Boat from "boat-lineup-planner/components/boat"
+import Boat from "./boat.component"
 
 import "./boat-list.container.scss"
 

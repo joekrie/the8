@@ -1,6 +1,6 @@
 import { Component } from "react"
 
-import Seat from "boat-lineup-planner/containers/seat"
+import Seat from "./seat.container"
 
 import "./seat-list.component.scss"
 

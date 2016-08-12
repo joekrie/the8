@@ -1,4 +1,5 @@
 const webpack = require("webpack")
+const path = require("path")
 
 // todo: import based on ENV (prod or dev)
 const webpackConfig = require("./webpack.config.common.js")

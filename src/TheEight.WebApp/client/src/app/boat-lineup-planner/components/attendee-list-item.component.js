@@ -2,9 +2,7 @@ import { Component } from "react";
 import { DragSource } from "react-dnd";
 import { getEmptyImage } from "react-dnd-html5-backend";
 
-import Attendee from "boat-lineup-planner/components/attendee";
-
-import { dragSpec, dragCollect } from "./dnd"
+import Attendee from "./attendee.component";
 
 import "./attendee-list-item.component.scss"
 

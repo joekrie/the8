@@ -2,13 +2,9 @@ import { Component } from "react"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 
-import DateField from "boat-lineup-planner/app/components/date-field"
-import NotesField from "boat-lineup-planner/app/components/notes-field"
-import LoadingAnimation from "common/components/loading-animation"
-
-import { saveEventDetailsRequest } from "boat-lineup-planner/action-creators/save-event-details"
-
-import { mapDispatchToProps } from "./redux-specs"
+import DateField from "./date-field.component"
+import NotesField from "./notes-field.component"
+import LoadingAnimation from "app/common/components/loading-animation.component"
 
 import "./edit-event-details-form.component.scss"
 

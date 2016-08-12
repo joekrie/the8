@@ -5,7 +5,7 @@ const autoprefixer = require("autoprefixer")
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 const config = {
-  context: path.join(__dirname, "../client"),
+  context: path.join(__dirname, "../src"),
   entry: {
     "app/boat-lineup-planner": "expose?BoatLineupPlanner!./app/boat-lineup-planner",
     "common": "./common"
@@ -34,7 +34,7 @@ const config = {
   },
   postcss: [ 
     autoprefixer({
-      browsers: ["last 2 versions"]
+      browsers: ["last 3 versions"]
     }),
     flexibility
   ],

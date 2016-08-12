@@ -8,9 +8,6 @@
     height: 100%;
 
     .attendee {
-        @extend .card;
-        @extend .card-block;
-
         padding: 0.4rem;
         width: 20rem;
         line-height: 1;

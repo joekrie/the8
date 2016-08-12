@@ -8,20 +8,15 @@ import AttendeeList from "./attendee-list.container"
 import BoatList from "./boat-list.container"
 import AttendeeDragLayer from "./attendee-drag-layer.component"
 
-import sampleState from "boat-lineup-planner/sample-state"
-import initializeStore from "boat-lineup-planner/initialize-store"
-
 import { Iterable } from "immutable"
 import { applyMiddleware, compose, createStore } from "redux"
 import createLogger from "redux-logger"
 import createSagaMiddleware from "redux-saga"
 
-import appInsightsMiddleware from "common/middleware/app-insights-middleware"
+import initializeStore from "app/common/initialize-store"
 
-import rootReducer from "./reducers/root.reducer"
-import rootSaga from "./sagas/root.saga"
-
-import sampleState from "./sample-state"
+import rootReducer from "../reducers/root.reducer"
+import rootSaga from "../sagas/root.saga"
 
 import "./root.component.scss"
 
@@ -75,7 +70,7 @@ const sampleState = {
         }
       },
       changes: {}
-    }
+    },
     attendees: {
       attendees: [ 
         {
@@ -116,7 +111,7 @@ const sampleState = {
         }
       ]
     }
-  }
+  })
 }
 
 export default class Root extends Component {

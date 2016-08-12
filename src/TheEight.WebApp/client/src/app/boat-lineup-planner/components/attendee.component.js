@@ -1,13 +1,6 @@
 import { Component } from "react"
 import Modal from "react-modal"
 
-import { 
-  COXSWAIN, 
-  PORT_ROWER, 
-  STARBOARD_ROWER, 
-  BISWEPTUAL_ROWER
-} from "boat-lineup-planner/models/attendees/attendee-positions"
-
 import "./attendee.component.scss"
 
 export default class Attendee extends Component {
@@ -66,7 +59,7 @@ export default class Attendee extends Component {
     const displayName = attendee.displayName + (isOutOfPosition ? "*" : "")
     
     return (
-      <div className="attendee" style={styles}>
+      <div className="attendee card card-block" style={styles}>
         <Modal isOpen={this.state.open} onRequestClose={() => this.closeModal()}>
           {displayName}
         </Modal>

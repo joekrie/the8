@@ -3,16 +3,10 @@ import { Component } from "react"
 import { DropTarget } from "react-dnd"
 import { connect } from "react-redux"
 
-import AttendeeListItem from "boat-lineup-planner/components/attendee-list-item"
-import EventDetails from "boat-lineup-planner/containers/event-details"
-import BoatCreator from "boat-lineup-planner/components/boat-creator"
-import AttendeeCreator from "boat-lineup-planner/components/attendee-creator"
-
-import * as EventModes from "boat-lineup-planner/models/event/event-modes"
-import AttendeeListItemRecord from "boat-lineup-planner/models/attendees/attendee-list-item-record"
- 
-import { mapStateToProps } from "./redux-mappers"
-import { dropSpec } from "./dnd"
+import AttendeeListItem from "./attendee-list-item.component"
+import EventDetails from "./event-details.container"
+import BoatCreator from "./boat-creator.component"
+import AttendeeCreator from "./attendee-creator.component"
 
 import "./attendee-list.container.scss"
 
@@ -82,11 +76,11 @@ export default class AttendeeList extends Component {
       )
 
     return connectDropTarget(
-      <div className="attendee-list">
-        <h1 className="header">
+      <div className="attendee-list card">
+        <h1 className="card-header">
           Boat Lineups
         </h1>
-        <div className="content">
+        <div className="card-block">
           <EventDetails eventDetails={eventDetails} changeEventDetails={changeEventDetails} />
           <BoatCreator createBoat={createBoat} />
           <AttendeeCreator createAttendee={createAttendee} />

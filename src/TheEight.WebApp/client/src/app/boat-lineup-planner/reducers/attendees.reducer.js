@@ -1,14 +1,6 @@
 import { handleActions } from "redux-actions"
 
-import addAttendee from "./add-attendee"
-import assignAttendee from "./assign-attendee"
-import moveAttendeesError from "./move-attendees-error"
-import moveAttendeesRequest from "./move-attendees-request"
-import moveAttendeesSuccess from "./move-attendees-success"
-import unassignAttendee from "./unassign-attendee"
-import setInitialState from "./set-initial-state"
-
-import AttendeesStateRecord from "boat-lineup-planner/models/attendees/attendees-state-record"
+import AttendeesStateRecord from "../records/attendees-state.record"
 
 const attendeeReducer = handleActions({
   "SET_INITIAL_STATE": setInitialState,

@@ -1,8 +1,6 @@
 import { Component } from "react"
 import Modal from "react-modal"
 
-import BoatDetailsRecord from "boat-lineup-planner/models/boats/boat-details-record"
-
 import "./boat-creator.component.scss"
 
 export default class BoatCreator extends Component {  

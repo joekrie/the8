@@ -1,7 +1,7 @@
 import { Component } from "react"
 import rome from "rome"
 
-import { formatLocalDate, parseLocalDate } from "common/date-utils"
+import { formatLocalDate, parseLocalDate } from "app/common/utils/date-utils"
 
 export default class DateField extends Component {
   componentWillReceiveProps(nextProps) {
@@ -41,7 +41,6 @@ export default class DateField extends Component {
         <input id="event-details-date" className="form-control" value={value} 
           onChange={evt => onChange(evt.target.value)} />
         <div ref={ref => this.input = ref}></div>
-        
       </fieldset>
     )
   }

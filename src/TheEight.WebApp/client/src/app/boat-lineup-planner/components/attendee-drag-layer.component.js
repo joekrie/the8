@@ -44,7 +44,7 @@ export default class AttendeeDragLayer extends Component {
     
     return (
       <div className="drag-layer">
-        <div className="attendee" style={getDragItemStyles(currentOffset)}>
+        <div className="attendee card card-block" style={getDragItemStyles(currentOffset)}>
           {displayName}
         </div>
       </div>

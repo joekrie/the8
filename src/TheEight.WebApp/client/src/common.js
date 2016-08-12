@@ -1,5 +1,4 @@
 ﻿import "expose?React!react"
 import "expose?ReactDOM!react-dom"
-import "bootstrap"
+import "./styles/site.scss"
 import "flexibility"
-import "site.scss"  // ???
