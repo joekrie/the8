@@ -5,7 +5,7 @@ import createSagaMiddleware from "redux-saga"
 
 import appInsightsMiddleware from "./middleware/app-insights.middleware"
 
-export function initializeStore(defaultState, rootReducer, rootSaga, additionalMiddleware = []) {
+export default function initializeStore(defaultState, rootReducer, rootSaga, additionalMiddleware = []) {
   const sagaMiddleware = createSagaMiddleware()
   
   const loggerMiddleware = createLogger({

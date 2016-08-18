@@ -1,6 +1,6 @@
 ﻿import { capitalize } from "lodash"
 import { LocalDate, nativeJs } from "js-joda"
-import Sugar from "sugar/date"
+import Sugar from "sugar"
 
 export const formatLocalDate = localDate => {
   const dow = capitalize(localDate.dayOfWeek())

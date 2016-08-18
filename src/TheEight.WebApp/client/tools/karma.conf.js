@@ -2,7 +2,7 @@ const webpackConfig = require("./webpack.config.common.js")
 
 const testsGlob = "../src/app/**/records/__tests__/**/*.tests.js"
 
-module.exports = function (config) {
+module.exports = config => {
   config.set({
     preprocessors: {
       [testsGlob]: ["webpack"]

@@ -19,7 +19,14 @@ export const defaultDropCollect = (connect, monitor) => ({
 })
 
 export const mapStateToProps = state => {
-  const { attendees, boats, event } = state
+  const { 
+    attendees,
+    boats,
+    placements,
+    event
+  } = state
+
+  console.log(state)
 
   const assignedAttendeeIds = 
     boats

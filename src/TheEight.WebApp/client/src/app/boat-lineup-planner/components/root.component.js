@@ -62,15 +62,6 @@ const sampleState = {
         }
       }
     },
-    placements: {
-      saved: {
-        "boat-1": {
-          COXSWAIN: "attendee-1",
-          1: "attendee-2"
-        }
-      },
-      changes: {}
-    },
     attendees: {
       attendees: [ 
         {
@@ -133,7 +124,7 @@ export default class Root extends Component {
         <div className="container-fluid boat-lineup-planner">
           <AttendeeDragLayer />
           <AttendeeList />
-          <BoatList />
+          {/*<BoatList />*/}
         </div>
       </Provider>
     )

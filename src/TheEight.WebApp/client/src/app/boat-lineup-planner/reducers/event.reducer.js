@@ -1,10 +1,8 @@
 import { handleActions } from "redux-actions"
 
 
-const attendeeReducer = handleActions({
-  //"SAVE_EVENT_DETAILS_ERROR": saveEventDetailsError,
-  //"SAVE_EVENT_DETAILS_REQUEST": saveEventDetailsRequest,
-  //"SAVE_EVENT_DETAILS_SUCCESS": saveEventDetailsSuccess
+const eventReducer = handleActions({
+  
 }, {})
 
-export default attendeeReducer
+export default eventReducer

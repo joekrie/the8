@@ -1,4 +1,6 @@
 const webpack = require("webpack")
+const Dashboard = require('webpack-dashboard')
+const DashboardPlugin = require('webpack-dashboard/plugin')
 
 const webpackConfig = require("./webpack.config.build.js")
 
