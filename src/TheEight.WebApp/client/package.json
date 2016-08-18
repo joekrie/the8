@@ -122,8 +122,7 @@
   "private": true,
   "scripts": {
     "test": "karma start tools/karma.conf.js",
-    "build-prod": "webpack --config tools/webpack.config.prod.js",
-    "build-dev": "webpack --config tools/webpack.config.dev.js",
+    "build": "webpack --config tools/webpack.config.js",
     "start": "node tools/dev-server.js",
     "prestart": "start http://localhost:8085/tools/dev-server.html"
   },

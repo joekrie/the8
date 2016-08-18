@@ -2,3 +2,4 @@
 import "expose?ReactDOM!react-dom"
 import "flexibility"
 import "bootstrap/dist/js/bootstrap"
+import "./styles/site.scss"
