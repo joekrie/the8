@@ -193,3 +193,4 @@ TheEight.sln.DotSettings.user
 **/.vscode/*
 **/.vs/*
 **/.idea/*
+**/test-results/*

@@ -1,3 +1,5 @@
+const baseUrl = "http://localhost:3000"
+
 exports.config = {
   specs: [
     "./tests/**/*.tests.js"
@@ -14,13 +16,18 @@ exports.config = {
   logLevel: "result",
   coloredLogs: true,
   screenshotPath: "./results/error-screenshots",
-  baseUrl: "http://localhost",
+  baseUrl,
   waitforTimeout: 10000,
   connectionRetryTimeout: 90000,
   connectionRetryCount: 3,
   services: ["selenium-standalone"],
   framework: "jasmine",
-  reporters: ["dot"],
+  reporters: ["dot", "junit"],
+  reporterOptions: {
+    junit: {
+      outputDir: "./test-results/junit"
+    }
+  },
   jasmineNodeOpts: {
     defaultTimeoutInterval: 10000
   }

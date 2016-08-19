@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/wdio"
+    "test": "gulp"
   },
   "author": "",
   "license": "MIT",
@@ -15,6 +15,7 @@
     "wdio-dot-reporter": "0.0.6",
     "wdio-jasmine-framework": "^0.2.5",
     "wdio-json-reporter": "0.0.3",
+    "wdio-junit-reporter": "^0.1.0",
     "wdio-selenium-standalone-service": "0.0.5",
     "webdriverio": "^4.2.5"
   }
