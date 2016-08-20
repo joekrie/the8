@@ -1,6 +1,0 @@
-﻿CREATE TABLE [dbo].[WATER_EVENT_MODES]
-(
-	[WaterEventModeId] TINYINT NOT NULL, 
-    [Name] NVARCHAR(20) NOT NULL, 
-    CONSTRAINT [PK__WATER_EVENT_MODES] PRIMARY KEY ([WaterEventModeId])
-)
