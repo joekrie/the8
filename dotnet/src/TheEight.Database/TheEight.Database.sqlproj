@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>TheEight.Database</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{6e0591e2-cb0b-45f1-aa4d-688019b30da9}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>TheEight.Database</RootNamespace>
+    <AssemblyName>TheEight.Database</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <GenerateCreateScript>False</GenerateCreateScript>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunSqlCodeAnalysis>True</RunSqlCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Tables" />
+    <Folder Include="Views" />
+    <Folder Include="DeploymentScripts" />
+    <Folder Include="Functions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\WATER_EVENTS.sql" />
+    <Build Include="Tables\WATER_EVENT_MODES.sql" />
+    <Build Include="Tables\WATER_EVENT_ATTENDEES.sql" />
+    <Build Include="Tables\WATER_EVENT_BOATS.sql" />
+    <Build Include="Tables\EVENTS.sql" />
+    <Build Include="Tables\EVENT_ATTENDEES.sql" />
+    <Build Include="Tables\USERS.sql" />
+    <Build Include="Tables\CLUBS.sql" />
+    <Build Include="Tables\TEAMS.sql" />
+    <Build Include="Tables\CLUB_MEMBERS.sql" />
+    <Build Include="Tables\TEAM_MEMBERS.sql" />
+    <Build Include="Tables\ERG_EVENTS.sql" />
+    <Build Include="Tables\ERG_EVENT_PIECES.sql" />
+    <Build Include="Tables\ERG_EVENT_RESULTS.sql" />
+    <Build Include="Tables\ERG_EVENT_PIECE_TYPES.sql" />
+    <Build Include="Tables\TEAM_ROLES.sql" />
+    <Build Include="Tables\TEAM_MEMBERS_IN_TEAM_ROLES.sql" />
+    <Build Include="Tables\TEAM_MEMBER_EVENT_ATTENDEES.sql" />
+    <Build Include="Tables\GUEST_EVENT_ATTENDEES.sql" />
+    <Build Include="Tables\CLUB_BOATS.sql" />
+    <Build Include="Tables\BOAT_POSITIONS.sql" />
+    <Build Include="Tables\WATER_EVENT_PLACEMENTS.sql" />
+    <Build Include="Tables\INVITES.sql" />
+    <Build Include="Tables\INVITEES_IN_TEAM_ROLES.sql" />
+    <Build Include="Views\ALL_WATER_EVENT_ATTENDEES.sql" />
+    <Build Include="Views\TEAM_MEMBER_USER_INFO.sql" />
+    <PostDeploy Include="DeploymentScripts\Post_Deployment.sql" />
+    <Build Include="Functions\FN__Calculate_Duration_In_Milliseconds.sql" />
+    <Build Include="Functions\FN__Calculate_Distance_In_Meters.sql" />
+    <Build Include="Functions\FN__Calculate_Split_In_Milliseconds.sql" />
+    <Build Include="Views\ERG_EVENT_RESULT_CALCULATIONS.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TheEight.Database.publish.xml" />
+    <None Include="DeploymentScripts\Insert_Enum_Data.sql" />
+    <None Include="DeploymentScripts\Insert_Sample_Data.sql" />
+  </ItemGroup>
+</Project>

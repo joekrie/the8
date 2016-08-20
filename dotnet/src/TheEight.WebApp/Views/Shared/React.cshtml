@@ -1,0 +1,17 @@
+﻿@model TheEight.WebApp.Models.Shared.IReactVM
+
+@section Styles {
+    <link rel="stylesheet" href="~/app/@(Model.FileName).css" />
+}
+
+<div id="app" class="content"></div>
+<script src="~/common.js"></script>
+<script src="~/app/@(Model.FileName).js"></script>
+<script>
+    (function() {
+        var app = @(Model.ComponentName).default;
+        var factory = React.createFactory(app)(@Html.Raw(Model.JsonProps));
+        var mountNode = document.getElementById("app");
+        ReactDOM.render(factory, mountNode);
+    })();
+</script>

@@ -1,0 +1,15 @@
+﻿.drag-layer {
+    position: fixed;
+    pointer-events: none;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+    .attendee {
+        padding: 0.4rem;
+        width: 20rem;
+        line-height: 1;
+    }
+}

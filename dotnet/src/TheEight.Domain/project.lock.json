@@ -1,0 +1,42 @@
+{
+  "locked": false,
+  "version": 2,
+  "targets": {
+    ".NETFramework,Version=v4.6.1": {
+      "NodaTime/1.3.2": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Xml"
+        ],
+        "compile": {
+          "lib/net35-Client/NodaTime.dll": {}
+        },
+        "runtime": {
+          "lib/net35-Client/NodaTime.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "NodaTime/1.3.2": {
+      "sha512": "iIV8xtLH7JhElTag7wMzP8YkZcSvFUcHZfGZhl3npzVz7V7y0T1JJOeqS/UcY3epq9480jcuUO2jzo8ewhQmlg==",
+      "type": "package",
+      "files": [
+        "NodaTime.1.3.2.nupkg.sha512",
+        "NodaTime.nuspec",
+        "lib/net35-Client/NodaTime.dll",
+        "lib/net35-Client/NodaTime.xml",
+        "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1+XamariniOS1/NodaTime.dll",
+        "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1+XamariniOS1/NodaTime.xml"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "": [
+      "NodaTime >= 1.3.2"
+    ],
+    ".NETFramework,Version=v4.6.1": []
+  },
+  "tools": {},
+  "projectFileToolGroups": {}
+}

@@ -1,0 +1,13 @@
+﻿@using System.Collections.Generic
+
+@{
+    var props = new Dictionary<string, string>
+    {
+        ["1"] = "!",
+        ["d"] = "123"
+    };
+}
+
+<render-react-app component-name="BoatLineupPlanner" 
+                  script-path="@Url.Content("~/app/boat-lineup-planner.js")" 
+                  props="@props"></render-react-app>
