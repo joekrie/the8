@@ -18,7 +18,7 @@ function getConfig() {
   return config
 }
 
-gulp.task("build", done => {
+gulp.task("build", ["clean:build"], done => {
   const config = getConfig()
 
   config.devtool = "source-map",
@@ -33,7 +33,7 @@ gulp.task("build", done => {
   })
 })
 
-gulp.task("build:ci", done => {
+gulp.task("build:ci", ["clean:build"], done => {
   const config = getConfig()
 
   config.plugins.push(
@@ -91,6 +91,6 @@ gulp.task("build:watch", done => {
     })
 })
 
-gulp.task("clean:build", () => {
-  rimraf("../../dist/app/**")
+gulp.task("clean:build", done => {
+  rimraf(path.join(__dirname, "../../dist/app"), done)
 })
