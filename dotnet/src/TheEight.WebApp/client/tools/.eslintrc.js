@@ -2,8 +2,11 @@ module.exports = {
   "env": {
     "browser": true
   },
+  "parser": "babel-eslint",
   "extends": "eslint:recommended",
   "parserOptions": {
+    "ecmaVersion": 7,
+    "sourceType": "module",
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,
       "jsx": true

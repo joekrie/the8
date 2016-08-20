@@ -39,7 +39,7 @@ namespace TheEight.QueueHandlers
             var appBasePath = PlatformServices.Default.Application.ApplicationBasePath;
 
             var configBuilder = new ConfigurationBuilder()
-                .SetBasePath("C:\\Users\\joekr\\Development\\The Eight\\src\\TheEight.QueueHandlers")
+                .SetBasePath(@"C:\Users\joekr\Development\The Eight\dotnet\src\TheEight.QueueHandlers")
                 .AddEnvironmentVariables()
                 .AddUserSecrets();
 

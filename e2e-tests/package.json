@@ -1,5 +1,5 @@
 {
-  "name": "the-eight-web-app-tests",
+  "name": "the-eight-web-app-e2e-tests",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -16,7 +16,9 @@
     "wdio-jasmine-framework": "^0.2.5",
     "wdio-json-reporter": "0.0.3",
     "wdio-junit-reporter": "^0.1.0",
+    "wdio-phantomjs-service": "^0.1.0",
     "wdio-selenium-standalone-service": "0.0.5",
+    "wdio-spec-reporter": "0.0.3",
     "webdriverio": "^4.2.5"
   }
 }

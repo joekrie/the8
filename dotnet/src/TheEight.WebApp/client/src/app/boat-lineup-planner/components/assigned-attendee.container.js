@@ -34,7 +34,7 @@ export const dragSpec = {
 export const dragCollect = connect => ({
   connectDragSource: connect.dragSource(),
   connectDragPreview: connect.dragPreview()
-});
+})
 
 @connect(mapStateToProps)
 @DragSource("ASSIGNED_ATTENDEE", dragSpec, dragCollect)

@@ -7,8 +7,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const config = {
   context: path.join(__dirname, "../src"),
   entry: {
-    "app/boat-lineup-planner": "expose?BoatLineupPlanner!./app/boat-lineup-planner",
-    "common": "./common"
+    "index": "./index"
   },
   module: {
     loaders: [
@@ -18,9 +17,9 @@ const config = {
         loader: ExtractTextPlugin.extract("style", ["css", "postcss", "resolve-url", "sass"])
       },
       {
-        test: /\.js(x)?$/,
+        test: /\.js?$/,
         exclude: /node_modules/,
-        loader: "babel"
+        loaders: ["babel", "eslint"]
       },
       { 
         test: /bootstrap\/dist\/js\/umd\//, 
@@ -38,6 +37,12 @@ const config = {
     }),
     flexibility
   ],
+  eslint: {
+    configFile: path.join(__dirname, ".eslintrc.js"),
+    emitError: true,
+    emitWarning: true,
+    //failOnError: true
+  },
   resolve: {
     root: [
       path.join(__dirname, "../src")
@@ -51,12 +56,11 @@ const config = {
       ".jsx"
     ]
   },
-  devtool: "source-map",
   plugins: [
     new webpack.optimize.DedupePlugin(),
     new webpack.ProvidePlugin({
-      "fetch": "imports?this=>global!exports?global.fetch!whatwg-fetch",
-      "$": "jquery",
+      "fetch": "imports?this=>global!exports?global.fetch!whatwg-fetch",  // todo: is this still necessary?
+      "$": "jquery",  // todo: has Bootstrap been refactored to classes?
       "jQuery": "jquery",
       "jquery": "jquery",
       "Tether": "tether",

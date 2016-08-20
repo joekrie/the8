@@ -68,6 +68,8 @@
     "css-loader": "^0.23.1",
     "enzyme": "^2.4.1",
     "eslint": "^3.3.1",
+    "eslint-config-defaults": "^9.0.0",
+    "eslint-loader": "^1.5.0",
     "eslint-plugin-react": "^6.0.0",
     "exports-loader": "^0.6.3",
     "expose-loader": "^0.7.1",
@@ -81,8 +83,12 @@
     "jasmine-core": "^2.4.1",
     "karma": "^1.1.2",
     "karma-chrome-launcher": "^1.0.1",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-ie-launcher": "^1.0.0",
     "karma-jasmine": "^1.0.2",
     "karma-junit-reporter": "^1.1.0",
+    "karma-phantomjs-launcher": "^1.0.1",
+    "karma-spec-reporter": "0.0.26",
     "karma-webpack": "^1.7.0",
     "node-sass": "^3.8.0",
     "postcss-flexibility": "^1.1.0",
@@ -100,27 +106,6 @@
     "webpack": "^1.13.1",
     "webpack-dashboard": "0.0.1",
     "webpack-dev-server": "^1.14.1"
-  },
-  "eslintConfig": {
-    "parser": "babel-eslint",
-    "parserOptions": {
-      "ecmaVersion": 7,
-      "sourceType": "module",
-      "ecmaFeatures": {
-        "jsx": true,
-        "experimentalObjectRestSpread": true
-      }
-    },
-    "rules": {
-      "semi": [
-        2,
-        "never"
-      ],
-      "quotes": [
-        2,
-        "double"
-      ]
-    }
   },
   "license": "MIT",
   "name": "the-eight-web-app",
