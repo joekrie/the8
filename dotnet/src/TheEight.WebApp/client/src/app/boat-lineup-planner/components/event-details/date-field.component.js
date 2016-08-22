@@ -24,7 +24,7 @@ export default class DateField extends Component {
     })
     
     this.datepicker.on("data", newValue => {
-      this.onChange(newValue)
+      this.props.onChange(newValue)
     })
   }
 

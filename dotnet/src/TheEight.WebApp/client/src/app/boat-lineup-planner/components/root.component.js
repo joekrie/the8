@@ -4,9 +4,9 @@ import { Component } from "react"
 import { Provider } from "react-redux"
 import { LocalDate } from "js-joda"
 
-import AttendeeList from "./attendee-list.container"
-import BoatList from "./boat-list.container"
-import AttendeeDragLayer from "./attendee-drag-layer.component"
+import AttendeeList from "./event-details/attendee-list.container"
+import BoatList from "./boat-list/boat-list.container"
+import AttendeeDragLayer from "./common/attendee-drag-layer.component"
 
 import { Iterable } from "immutable"
 import { applyMiddleware, compose, createStore } from "redux"

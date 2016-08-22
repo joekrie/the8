@@ -1,16 +1,17 @@
-import { Component } from "react";
-import Modal from "react-modal";
+import { Component } from "react"
+import Modal from "react-modal"
 
 import "./attendee-creator.component.scss"
 
 export default class BoatCreator extends Component {  
   constructor() {
-    super();    
+    super()
+
     this.state = {
       name: "",
       isCoxswain: false,
       open: false
-    };
+    }
   }
   
   resetState() {
@@ -18,33 +19,33 @@ export default class BoatCreator extends Component {
       name: "",
       isCoxswain: false,
       open: false
-    });
+    })
   }
   
   render() {
-    const { createAttendee } = this.props;
+    const { createAttendee } = this.props
     
     const onSubmit = () => {
-      const { name, isCoxswain } = this.state;
-      const attendeeId = "new-attendee-" + Date.now();
+      const { name, isCoxswain } = this.state
+      const attendeeId = "new-attendee-" + Date.now()
       
       const newAttendee = new AttendeeRecord({ 
         attendeeId, 
         isCoxswain,
         displayName: name,
         sortName: name
-      });
+      })
       
-      createAttendee(newAttendee);
-      this.resetState();
-    };
+      createAttendee(newAttendee)
+      this.resetState()
+    }
 
     const openModal = isCoxswain => {
       this.setState({
         open: true, 
         isCoxswain
-      });
-    };
+      })
+    }
     
     return (
       <span className="attendee-creator">
@@ -67,6 +68,6 @@ export default class BoatCreator extends Component {
           Add Coxswain
         </button>
       </span>
-    );
+    )
   }
 }

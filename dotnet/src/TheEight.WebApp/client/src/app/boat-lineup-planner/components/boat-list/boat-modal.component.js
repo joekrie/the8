@@ -23,16 +23,14 @@ export default class Boat extends Component {
   }
 
   render() {
-    const { boat } = this.props
-
     return (
       <div className="boat card">
         <Modal isOpen={this.state.open} onRequestClose={() => this.onCloseModal()}>
-          {boat.details.title}
+          {this.props.boat.details.title}
         </Modal>
         <div className="header card-header">
           <h3>
-            {boat.details.title}
+            {this.props.boat.details.title}
           </h3>
           <a href="#" onClick={() => this.onOpenModal()}>
             details
@@ -44,4 +42,3 @@ export default class Boat extends Component {
     )
   }
 }
- 

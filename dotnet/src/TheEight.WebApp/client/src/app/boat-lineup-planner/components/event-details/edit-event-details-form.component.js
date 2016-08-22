@@ -42,11 +42,9 @@ export default class EditEventDetailsForm extends Component {
   }
 
   render() {
-    const { isSaving } = this.props
-
     const styles = {
       savingOverlay: {
-        display: isSaving ? "inherit" : "none"
+        display: this.props.isSaving ? "inherit" : "none"
       }
     }
 

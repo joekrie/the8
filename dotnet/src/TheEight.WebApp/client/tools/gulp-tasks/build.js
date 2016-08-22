@@ -4,6 +4,7 @@ const path = require("path")
 const gutil = require("gulp-util")
 const WebpackDevServer = require("webpack-dev-server")
 const rimraf = require("rimraf")
+const opn = require("opn")
 
 const webpackConfig = require("../webpack.config.js")
 
@@ -87,7 +88,7 @@ gulp.task("build:watch", done => {
       }
 
       gutil.log("[webpack-dev-server]", `Listening at http://localhost:${port}/`)
-      done()
+      opn(`http://localhost:${port}/dev-server.html`).then(done)
     })
 })
 
