@@ -4,14 +4,19 @@ const defaults = {
   attendees: Map()
 }
 
-export default class BoatsStateRecord extends Record(defaults) {
+export default class AttendeesStateRecord extends Record(defaults) {
   static createFromServerData(serverData) {
-    const reviver = () => {
-
-    }
-
-    fromJS(serverData, reviver)
+    return new AttendeesStateRecord({
+      attendees: EntityMap.createMapFromServerData(serverData)
+    })
   }
 
-  
+  add(attendeeId, details) {
+    const newBoat = BoatRecord.create(details)
+    return this.setIn(["attendees", boatId], newBoat)
+  }
+
+  remove(attendeeId) {
+    return this.deleteIn(["attendees", boatId])
+  }
 }

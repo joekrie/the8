@@ -1,9 +1,10 @@
 import { Component } from "react"
 import Modal from "react-modal"
+import addModalState from "common/components/add-modal-state.hoc"
 
 import "./boat-creator.component.scss"
 
-export default class BoatCreator extends Component {  
+class BoatCreator extends Component {  
   constructor() {
     super()
 
@@ -89,3 +90,5 @@ export default class BoatCreator extends Component {
     )
   }
 }
+
+export default addModalState("")(BoatCreator)

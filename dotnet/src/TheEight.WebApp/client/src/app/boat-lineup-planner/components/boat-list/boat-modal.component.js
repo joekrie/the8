@@ -36,7 +36,7 @@ export default class Boat extends Component {
             details
           </a>
         </div>
-        <SeatList seats={boat.allSeats} boatId={boat.details.boatId} 
+        <SeatList seats={boat.allSeats} boatId={boat.details.boatId}
           attendeeIdsInBoat={boat.attendeeIdsInBoat} />
       </div>
     )

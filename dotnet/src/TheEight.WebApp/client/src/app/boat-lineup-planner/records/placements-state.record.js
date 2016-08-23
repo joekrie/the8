@@ -10,13 +10,9 @@ const defaults = {
 
 export default class PlacementsStateRecord extends Record(defaults) {
   static createFromServerData(serverData) {
-    const parsed = JSON.stringify(serverData)
-
-    const reviver = (key, value) => {
-      
-    }
-
-    return fromJS(parsed, reviver)
+    return new PlacementsStateRecord({ 
+      committed: fromJS(serverData)
+    })
   }
 
   get currentRevision() {
@@ -28,45 +24,39 @@ export default class PlacementsStateRecord extends Record(defaults) {
   }
 
   getCurrentPlacement(seat) {
-    const uncommitted = this.currentRevision.getIn([seat.boatId, seat.seatNumber])
-
-    if (uncommitted) {
-      return uncommitted
-    }
-
     return this.currentRevision.getIn([seat.boatId, seat.seatNumber])
   }
 
-  placeAttendee(attendeeId, newSeat, oldSeat) {
+  place(movedAttendeeId, newSeat, oldSeat) {
     const attendeeInTarget = this.getCurrentPlacement(newSeat)
     
-    const revision = this.currentRevision.withMutations(placements => {
+    const latestRevision = this.currentRevision.withMutations(placements => {
       if (attendeeInTarget) {
-        placements
-          .setIn([oldSeat.boatId, oldSeat.seatNumber], attendeeInTarget)
-          .setIn([newSeat.boatId, newSeat.seatNumber], attendeeId)
-      }
-          
-      if (attendeeInTarget) {
-        placements
-          .setIn([oldSeat.boatId, oldSeat.seatNumber], attendeeInTarget)
-          .setIn([newseat.boatId, newSeat.seatNumber], attendeeId)
+        placements.setIn([oldSeat.boatId, oldSeat.seatNumber], attendeeInTarget)
       }
 
-      if (oldSeat.boatId) {
-        placements
-          .deleteIn([oldSeat.boatId, oldSeat.seatNumber])
-          .setIn([newSeat.boatId, newSeat.seatNumber], attendeeId)
+      if (!attendeeInTarget && oldSeat) {
+        placements.deleteIn([oldSeat.boatId, oldSeat.seatNumber])
       }
 
-      placements.setIn([newSeat.boatId, newSeat.seatNumber], attendeeId)
+      placements.setIn([newSeat.boatId, newSeat.seatNumber], movedAttendeeId)
     })
 
-    // slice revision into list
+    const newRevisions = this.revisions
+      .slice(0, this.revisionPosition + 1)
+      .push(latestRevision)
+
+    return this.set("revisions", newRevisions)
   }
 
-  unplaceAttendee(boatId, seatNumber) {
-    return this.deleteIn([boatId, seatNumber])
+  unplace(seat) {
+    const latestRevision = this.currentRevision.deleteIn([seat.boatId, seat.seatNumber])
+
+    const newRevisions = this.revisions
+      .slice(0, this.revisionPosition + 1)
+      .push(latestRevision)
+
+    return this.set("revisions", newRevisions)
   }
 
   undo() {
@@ -77,6 +67,14 @@ export default class PlacementsStateRecord extends Record(defaults) {
   redo() {
     const nextPosition = Math.min(this.revisionPosition--, 0)
     return this.set("currentRevision", nextPosition)
+  }
+
+  get canUndo() {
+    return this.revisionPosition > 0
+  }
+
+  get canRedo() {
+    return this.revisionPosition < this.revisions.count()
   }
 
   commit() {
