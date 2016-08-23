@@ -1,16 +1,13 @@
 import { combineReducers } from "redux"
-import { handleActions } from "redux-actions"
 
-import attendeesReducer from "./attendees.reducer"
-import boatsReducer from "./boats.reducer"
-import eventReducer from "./event.reducer"
-import appStatusReducer from "./app-status.reducer"
+import detailsReducer from "./attendees.reducer"
+import placementsReducer from "./boats.reducer"
+import statusReducer from "./status.reducer"
 
 const rootReducer = combineReducers({
-  attendees: attendeesReducer,
-  boats: boatsReducer,
-  event: eventReducer,
-  appStatus: appStatusReducer
+  details: detailsReducer,
+  placements: placementsReducer,
+  status: statusReducer
 })
 
 export default rootReducer

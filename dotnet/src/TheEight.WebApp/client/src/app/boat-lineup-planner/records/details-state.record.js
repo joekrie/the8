@@ -1,11 +1,12 @@
 import { Record, List, Map, fromJS } from "immutable"
 
 import PlacementsRecord from "./placements.record"
+import EntityRecord from "./entity.record"
 
 const defaults = {
   attendees: Map(),
   boats: Map(),
-  placements: new PlacementsRecord()
+  event: new EntityRecord()
 }
 
 export default class BoatLineupPlannerStateRecord extends Record(defaults) {
@@ -17,7 +18,7 @@ export default class BoatLineupPlannerStateRecord extends Record(defaults) {
   }
 
   addAttendee(attendeeId, details) {
-    const newBoat = BoatRecord.create(details)
+    const newBoat = EntityMap.create(details)
     return this.setIn(["attendees", boatId], newBoat)
   }
 
@@ -26,7 +27,7 @@ export default class BoatLineupPlannerStateRecord extends Record(defaults) {
   }
   
   addBoat(boatId, details) {
-    const newBoat = BoatRecord.create(details)
+    const newBoat = EntityMap.create(details)
     return this.setIn(["boats", boatId], newBoat)
   }
 
