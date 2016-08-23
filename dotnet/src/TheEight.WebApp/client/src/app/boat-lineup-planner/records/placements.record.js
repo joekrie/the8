@@ -8,7 +8,7 @@ const defaults = {
   errorOnSaving: ""
 }
 
-export default class PlacementsStateRecord extends Record(defaults) {
+export default class PlacementsRecord extends Record(defaults) {
   static createFromServerData(serverData) {
     return new PlacementsStateRecord({ 
       committed: fromJS(serverData)

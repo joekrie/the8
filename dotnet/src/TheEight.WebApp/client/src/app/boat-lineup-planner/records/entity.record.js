@@ -18,7 +18,7 @@ export default class EntityRecord extends Record(defaults) {
     })
   }
 
-  static createMapFromServerData(serverData) {
+  static mapFromServerData(serverData) {
     const entities = fromJS(serverData, (key, value) => {
       if (!key) {
         return detailsMap.map(details => EntityRecord.create(details))
