@@ -60,7 +60,9 @@ export function savingPlacementsErrored(state, action) {
 }
 
 export function doneLoading(state, action) {
-  const newState = PlacementsStateRecord.createFromServerData(action.payload.placements)
+  const newState = PlacementsStateRecord
+    .createFromServerData(action.payload.placements)
+    
   return state.set("placements", newState)
 }
 
