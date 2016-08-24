@@ -17,7 +17,7 @@ const config = {
         loader: ExtractTextPlugin.extract("style", ["css", "postcss", "resolve-url", "sass"])
       },
       {
-        test: /\.js?$/,
+        test: /\.js(x)?$/,
         exclude: /node_modules/,
         loaders: ["babel", "eslint"]
       },
@@ -40,8 +40,7 @@ const config = {
   eslint: {
     configFile: path.join(__dirname, ".eslintrc.js"),
     emitError: true,
-    emitWarning: true,
-    //failOnError: true
+    emitWarning: true
   },
   resolve: {
     root: [

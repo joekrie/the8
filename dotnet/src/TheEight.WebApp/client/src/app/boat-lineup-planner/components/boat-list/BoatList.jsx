@@ -1,7 +1,6 @@
 import { List } from "immutable"
 import { Component } from "react"
-import { connect } from "react-redux"
-import { compose, pure } from "recompose"
+import { observer } from "mobx-react"
 
 import Boat from "./boat.component"
 
@@ -19,15 +18,4 @@ function BoatList(props) {
   )
 }
 
-export const redux = {
-  mapStateToProps(state) {
-    return {
-      boats: boats.valueSeq()
-    }
-  }
-}
-
-export default connect(
-  redux.mapStateToProps,
-  pure
-)(BoatList)
+export default observer(BoatList)
