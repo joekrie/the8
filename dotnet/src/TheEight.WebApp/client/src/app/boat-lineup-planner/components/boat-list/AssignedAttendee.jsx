@@ -2,7 +2,8 @@ import { Component } from "react"
 import { DragSource } from "react-dnd"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
-import { compose, pure } from "recompose"
+import { compose } from "recompose"
+import { observer } from "mobx-react"
 
 import Attendee from "../common/attendee.component"
 
@@ -18,16 +19,8 @@ function AssignedAttendee(props) {
   )
 }
 
-export const redux = {
-  mapStateToProps(state, ownProps) {
-    return {
-      attendee: state.attendees.find(attn => attn.attendeeId === ownProps.attendeeId)
-    }
-  }
-}
-
-export const dnd = {
-  dragSpec: {
+const dragSource = DragSource(
+  "ASSIGNED_ATTENDEE", {
     beginDrag(props) {
       return {
         originBoatId: props.boatId,
@@ -37,17 +30,13 @@ export const dnd = {
         draggedAttendeeName: props.attendee.displayName
       }
     }
-  },
-  dragCollect(connect) {
-    return {
-      connectDragSource: connect.dragSource(),
-      connectDragPreview: connect.dragPreview()
-    }
-  }
-}
+  }, connect => ({
+    connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview()
+  })
+)
 
 export default compose(
-  connect(mapStateToProps),
-  DragSource("ASSIGNED_ATTENDEE", dragSpec, dragCollect),
-  pure
+  dragSource,
+  observer
 )(AssignedAttendee)

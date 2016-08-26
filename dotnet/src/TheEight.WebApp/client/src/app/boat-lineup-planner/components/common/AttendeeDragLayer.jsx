@@ -1,59 +1,44 @@
 import { Component } from "react"
 import { DragLayer } from "react-dnd"
-import { compose } from "recompose"
 
-import "./attendee-drag-layer.component.scss"
+import "./AttendeeDragLayer.scss"
 
-function AttendeeDragLayer(props) {
-  const { 
-    item, 
-    itemType, 
-    currentOffset 
-  } = props
+@DragLayer(monitor => ({
+  item: monitor.getItem(),
+  itemType: monitor.getItemType(),
+  initialOffset: monitor.getInitialSourceClientOffset(),
+  currentOffset: monitor.getSourceClientOffset(),
+  isDragging: monitor.isDragging()
+}))
+export default class AttendeeDragLayer extends Component {
+  render() {    
+    const displayName = 
+      (this.props.itemType === "ASSIGNED_ATTENDEE" || this.props.itemType === "ATTENDEE_LIST_ITEM")
+        ? this.props.item.draggedAttendeeName
+        : ""
 
-  function getDragItemStyles(currentOffset) { 
-  {
-    if (!currentOffset) {
+    function getDragItemStyles(currentOffset) {
+      if (!currentOffset) {
+        return {
+          "display": "none"
+        }
+      }
+
+      const { x, y } = currentOffset
+      const transform = `translate(${x}px, ${y}px)`
+
       return {
-        "display": "none"
+        "transform": transform,
+        "WebkitTransform": transform
       }
     }
 
-    const { x, y } = currentOffset
-    const transform = `translate(${x}px, ${y}px)`
-
-    return {
-      "transform": transform,
-      "WebkitTransform": transform
-    }
-  }
-
-  const displayName = 
-    (itemType === "ASSIGNED_ATTENDEE" || itemType === "ATTENDEE_LIST_ITEM")
-      ? item.draggedAttendeeName
-      : ""
-  
-  return (
-    <div className="drag-layer">
-      <div className="attendee card card-block" style={getDragItemStyles(currentOffset)}>
-        {displayName}
+    return (
+      <div className="drag-layer">
+        <div className="attendee card card-block" style={getDragItemStyles(this.props.currentOffset)}>
+          {displayName}
+        </div>
       </div>
-    </div>
-  )
-}
-
-export default dnd = {
-  collect(monitor) {
-    return {
-      item: monitor.getItem(),
-      itemType: monitor.getItemType(),
-      initialOffset: monitor.getInitialSourceClientOffset(),
-      currentOffset: monitor.getSourceClientOffset(),
-      isDragging: monitor.isDragging()
-    }
+    )
   }
 }
-
-export default compose(
-  DragLayer(dnd.collect)
-)(AttendeeDragLayer)

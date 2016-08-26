@@ -34,6 +34,7 @@
     "mobx-react": "^3.5.5",
     "normalize.css": "^4.2.0",
     "radium": "^0.18.1",
+    "ramda": "^0.22.1",
     "react": "^15.3.0",
     "react-dnd": "^2.1.4",
     "react-dnd-html5-backend": "^2.1.2",
@@ -41,6 +42,7 @@
     "react-dnd-touch-backend": "^0.3.0",
     "react-dom": "^15.3.0",
     "react-modal": "^1.4.0",
+    "recompose": "^0.20.2",
     "redux": "^3.5.2",
     "rome": "^2.1.22",
     "rx": "^4.1.0",
@@ -109,10 +111,9 @@
   "name": "the-eight-web-app",
   "private": true,
   "scripts": {
-    "test": "karma start tools/karma.conf.js",
-    "build": "webpack --config tools/webpack.config.js",
-    "start": "node tools/dev-server.js",
-    "prestart": "start http://localhost:8085/tools/dev-server.html"
+    "test": "gulp test:watch",
+    "build": "gulp build",
+    "start": "gulp build:watch"
   },
   "version": "0.1.0"
 }

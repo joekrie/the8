@@ -1,19 +1,20 @@
-import { List } from "immutable"
 import { Component } from "react"
 import { observer } from "mobx-react"
+import R from "ramda"
 
-import Boat from "./boat.component"
+import Boat from "./Boat"
 
-import "./boat-list.container.scss"
+import "./BoatList.scss"
 
 function BoatList(props) {
-  const boatComponents = props.boats.map(boat => 
-    <Boat key={boat.boat.boatId} boat={boat} />
+  const mapBoats = R.pipe(
+    R.values,
+    R.map(boat => <Boat key={boat.boatId} boat={boat} />)
   )
 
   return (
     <div className="boat-list">
-      {boatComponents}
+      {mapBoats(props.boats)}
     </div>
   )
 }
