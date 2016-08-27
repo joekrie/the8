@@ -4,7 +4,7 @@ const flexibility = require("postcss-flexibility")
 const autoprefixer = require("autoprefixer")
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
-const config = {
+module.exports = {
   context: path.join(__dirname, "../src"),
   entry: {
     "index": "./index"
@@ -56,7 +56,28 @@ const config = {
     flexibility
   ],
   eslint: {
-    configFile: path.join(__dirname, ".eslintrc.js"),
+    env: {
+      browser: true
+    },
+    parser: "babel-eslint",
+    extends: "eslint:recommended",
+    parserOptions: {
+      ecmaVersion: 7,
+      sourceType: "module",
+      ecmaFeatures: {
+        experimentalObjectRestSpread: true,
+        jsx: true
+      }
+    },
+    plugins: [
+      "react"
+    ],
+    rules: {
+      "indent": ["error", 2],
+      "linebreak-style": ["error", "windows"],
+      "quotes": ["error", "double"],
+      "semi": ["error", "never"]
+    },
     emitError: true,
     emitWarning: true
   },
@@ -88,5 +109,3 @@ const config = {
     })
   ]
 }
-
-module.exports = config
