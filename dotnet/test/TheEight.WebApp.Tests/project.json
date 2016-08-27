@@ -1,0 +1,27 @@
+﻿{
+  "dependencies": {
+
+  },
+
+  "tools": {
+  },
+
+  "frameworks": {
+    "net461": { }
+  },
+
+  "buildOptions": {
+    "emitEntryPoint": true,
+    "preserveCompilationContext": true
+  },
+
+  "publishOptions": {
+    "include": [
+      "wwwroot",
+      "web.config"
+    ]
+  },
+
+  "scripts": {
+  }
+}

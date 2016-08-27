@@ -1,0 +1,14 @@
+﻿CREATE TABLE [dbo].[INVITES]
+(
+	[InviteId] UNIQUEIDENTIFIER NOT NULL, 
+    [Email] NVARCHAR(250) NOT NULL, 
+	[AccessCode] NCHAR(10) NOT NULL,
+    [CreatedDate] DATETIMEOFFSET NOT NULL, 
+    [ExpirationDate] DATETIMEOFFSET NOT NULL, 
+    [SentDate] DATETIMEOFFSET NULL, 
+    [AcceptedDate] DATETIMEOFFSET NULL, 
+    [UserId] UNIQUEIDENTIFIER NULL, 
+    CONSTRAINT [PK__INVITES] PRIMARY KEY ([InviteId]), 
+    CONSTRAINT [AK__INVITES__Email__AccessCode] UNIQUE ([Email], [AccessCode]), 
+    CONSTRAINT [AK__INVITES__UserId] UNIQUE ([UserId]) 
+)

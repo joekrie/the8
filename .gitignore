@@ -189,9 +189,8 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 
-src/WebApp/static/jspm_packages/
-*.lock.json
-sh.exe.stackdump
-deploy/azure-deploy-params.json
-.vs/config/applicationhost.config
 TheEight.sln.DotSettings.user
+**/.vscode/*
+**/.vs/*
+**/.idea/*
+**/test-results/*
