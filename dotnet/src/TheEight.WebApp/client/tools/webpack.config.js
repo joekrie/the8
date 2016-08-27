@@ -17,9 +17,27 @@ const config = {
         loader: ExtractTextPlugin.extract("style", ["css", "postcss", "resolve-url", "sass"])
       },
       {
-        test: /\.js?$/,
+        test: /\.js(x)?$/,
         exclude: /node_modules/,
-        loaders: ["babel", "eslint"]
+        loader: "babel",
+        query: {
+          plugins: [
+            "transform-decorators-legacy",
+            "transform-regenerator",
+            [
+              "transform-runtime",
+              {
+                polyfill: false,
+                regenerator: true
+              }
+            ]
+          ],
+          presets: [
+            "es2015",
+            "stage-0",
+            "react"
+          ]
+        }
       },
       { 
         test: /bootstrap\/dist\/js\/umd\//, 
@@ -40,8 +58,7 @@ const config = {
   eslint: {
     configFile: path.join(__dirname, ".eslintrc.js"),
     emitError: true,
-    emitWarning: true,
-    //failOnError: true
+    emitWarning: true
   },
   resolve: {
     root: [
@@ -60,7 +77,7 @@ const config = {
     new webpack.optimize.DedupePlugin(),
     new webpack.ProvidePlugin({
       "fetch": "imports?this=>global!exports?global.fetch!whatwg-fetch",  // todo: is this still necessary?
-      "$": "jquery",  // todo: has Bootstrap been refactored to classes?
+      "$": "jquery",  // todo: has Bootstrap been refactored to classes/components?
       "jQuery": "jquery",
       "jquery": "jquery",
       "Tether": "tether",
