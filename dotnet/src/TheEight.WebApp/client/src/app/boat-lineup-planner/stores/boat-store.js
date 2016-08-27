@@ -1,17 +1,20 @@
 import { observable, computed, action } from "mobx"
+import R from "ramda"
 
 export class Boat {
   @observable boatId
   @observable title
   @observable seatCount
   @observable isCoxed
+  @observable placements
   boatStore
 
-  constructor(boatId, title, seatCount, isCoxed, boatStore) {
+  constructor(boatId, title, seatCount, isCoxed, placements, boatStore) {
     this.boatId = boatId
     this.title = title
     this.seatCount = seatCount
     this.isCoxed = isCoxed
+    this.placements = placements
     this.boatStore = boatStore
   }
 
@@ -19,6 +22,16 @@ export class Boat {
     return this.boatStore
       .placements[this.boatId]
       .map(attn => this.boatStore.attendees[attn])
+  }
+
+  @computed get seats() {
+    return R
+      .range(this.isCoxed ? 0 : 1, this.seatCount + 1)
+      .map(num => ({
+        number: num,
+        label: num === 0 ? "Cox" : num,
+        attendee: R.find(R.propEq("attendeeId", this.placements[num]), this.boatStore.attendees)
+      }))
   }
 
   @action updateTitle(title) {
@@ -52,22 +65,18 @@ export class Attendee {
 }
 
 export default class BoatStore {
-  @observable boats = {}
-  @observable placements = {}
+  @observable boats = []
+  @observable attendees = []
 
   @action load() {
-    this.boats = {
-      "boat-1": new Boat("boat-1", "Lucky", 8, true, this),
-      "boat-2": new Boat("boat-2", "M1", 4, true, this)
-    }
+    this.boats.push(
+      new Boat("boat-1", "Lucky", 8, true, {3: "attendee-1"}, this),
+      new Boat("boat-2", "M1", 4, true, {}, this)
+    )
 
-    console.log(this)
-
-    return;
-    fetch("http://jsonplaceholder.typicode.com/todos")
-      .then(resp => resp.json())
-      .then(json => console.log("parsed json", json))
-      .catch(ex => console.log("parsing failed", ex))
+    this.attendees.push(
+      new Attendee("attendee-1", "John", "Doe")
+    )
   }
 
   @action placeAttendee(newSeat, oldSeat, attendeeId) {
