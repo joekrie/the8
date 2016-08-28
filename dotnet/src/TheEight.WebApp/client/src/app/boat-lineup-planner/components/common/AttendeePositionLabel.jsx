@@ -1,8 +1,6 @@
 import { Component } from "react"
 import Modal from "react-modal"
 
-import "./attendee.component.scss"
-
 export default class Attendee extends Component {
   positionLabels = {
     COXSWAIN: {

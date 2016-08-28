@@ -1,21 +1,20 @@
 import { Component } from "react"
-import { pure } from "recompose"
+import { observer } from "mobx-react"
+import R from "ramda"
 
-import Seat from "./seat.container"
+import Seat from "./Seat"
 
-import "./seat-list.component.scss"
+import "./SeatList.scss"
 
 function SeatList(props) {
-  const boatSeats = props.seats.map((attendeeId, seatNumber) => (
-    <Seat key={seatNumber} boatId={props.boatId} seatNumber={seatNumber} 
-      attendeeId={attendeeId} attendeeIdsInBoat={props.attendeeIdsInBoat} />
-  )).valueSeq()
-
   return (
     <div className="card-block">
-      {boatSeats}
+      {props.seats.map(seat =>
+        <Seat key={seat.number} boatId={props.boat.boatId} seat={seat} 
+          attendeeIdsInBoat={R.values(props.boat.placements)} />
+      )}
     </div>
   )
 }
 
-export default pure(SeatList)
+export default observer(SeatList)

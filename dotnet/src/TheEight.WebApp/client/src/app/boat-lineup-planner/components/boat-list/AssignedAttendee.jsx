@@ -1,13 +1,11 @@
 import { Component } from "react"
 import { DragSource } from "react-dnd"
-import { connect } from "react-redux"
-import { bindActionCreators } from "redux"
 import { compose } from "recompose"
 import { observer } from "mobx-react"
 
-import Attendee from "../common/attendee.component"
+import Attendee from "../common/Attendee"
 
-import "./assigned-attendee.container.scss"
+import "./AssignedAttendee.scss"
 
 function AssignedAttendee(props) {
   const isOutOfPosition = !props.acceptedPositions.includes(props.attendee.position)

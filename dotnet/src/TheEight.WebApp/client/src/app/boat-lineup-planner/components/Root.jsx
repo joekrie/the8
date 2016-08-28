@@ -7,15 +7,14 @@ import { DragDropContext } from "react-dnd"
 
 import classNames from "classnames"
 import { Component } from "react"
-import { LocalDate } from "js-joda"
-import { observer } from "mobx-react"
-import { compose } from "recompose"
+import { observer, Provider } from "mobx-react"
 
 //import AttendeeList from "./event-details/AttendeeList"
 import BoatList from "./boat-list/BoatList"
 import AttendeeDragLayer from "./common/AttendeeDragLayer"
 
-import BoatStore from "../stores/boat-store"
+import BoatStore from "../stores/BoatStore"
+import AttendeeStore from "../stores/AttendeeStore"
 
 import "./Root.scss"
 
@@ -31,19 +30,24 @@ export default class Root extends Component {
 
   constructor() {
     super()
+
     this.boatStore = new BoatStore()
+    this.attendeeStore = new AttendeeStore()
   }
 
   componentDidMount() {
     this.boatStore.load()
+    this.attendeeStore.load()
   }
 
   render() {
     return (
-      <div className="container-fluid boat-lineup-planner">
-        <AttendeeDragLayer />
-        <BoatList boats={this.boatStore.boats} />
-      </div>
+      <Provider boatStore={this.boatStore} attendeeStore={this.attendeeStore}>
+        <div className="container-fluid boat-lineup-planner">
+          <AttendeeDragLayer />
+          <BoatList />
+        </div>
+      </Provider>
     )
   }
 }

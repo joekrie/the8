@@ -1,11 +1,10 @@
 import { Component } from "react"
 import Modal from "react-modal"
-import { pure, compose } from "recompose"
+import { observer } from "mobx-react"
 
-import addModalState from "common/components/add-modal-state.hoc"
-import AttendeePositionLabel from "./attendee-position-label.component"
+import AttendeePositionLabel from "./AttendeePositionLabel"
 
-import "./attendee.component.scss"
+import "./Attendee.scss"
 
 function Attendee(props) {
   const { 
@@ -39,7 +38,4 @@ function Attendee(props) {
   )
 }
 
-export default compose(
-  pure,
-  addModalState("attendee")
-)(Attendee)
+export default observer(Attendee)
