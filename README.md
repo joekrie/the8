@@ -1,6 +1,12 @@
 # The Eight
 Management tool for rowing clubs to manage teams, water practices, race lineups, and erg practices.
 
+Most recent development work has been on the [boat lineup planner UI](dotnet/src/TheEight.WebApp/client/src/app/boat-lineup-planner)
+
+## Features
+* Lineup planner to set up lineups for practices and races
+* Logbook for erg workouts
+
 ## Technology stack
 * ASP.NET Core
 * ReactJS
@@ -10,8 +16,8 @@ Management tool for rowing clubs to manage teams, water practices, race lineups,
 * Azure WebJobs
 
 ## Third-party services & APIs
-* Namecheap: domain registration & DNS
-* Twilio: SMS
-* Postmark: transactional email
-* Azure AD B2C: authentication
-* Azure Application Insights: analytics & telemetry
+* [Namecheap](https://www.namecheap.com/): domain registration & DNS
+* [Twilio](https://www.twilio.com/): SMS
+* [Postmark](https://postmarkapp.com/): transactional email
+* [Azure Active Directory B2C](https://azure.microsoft.com/en-us/services/active-directory-b2c/): authentication
+* [Visual Studio Application Insights](https://azure.microsoft.com/en-us/services/application-insights/): analytics & telemetry
