@@ -1,7 +1,6 @@
-import { List } from "immutable";
+import { List } from "immutable"
 
-import Seat, { dropSpec } from "../seat"; 
-import { ASSIGNED_ATTENDEE, ATTENDEE_LIST_ITEM } from "../../item-types"; 
+import Seat, { dropSpec } from "../seat"
 
 describe("<Seat />", () => {
   describe("dropSpec", () => {
@@ -10,7 +9,7 @@ describe("<Seat />", () => {
         getItem: () => ({
           draggedAttendeeId: "2"
         }),
-        getItemType: () => ATTENDEE_LIST_ITEM
+        getItemType: () => "ATTENDEE_LIST_ITEM"
       };
       
       const props = { 
@@ -26,7 +25,7 @@ describe("<Seat />", () => {
         getItem: () => ({
           draggedAttendeeId: "1"
         }),
-        getItemType: () => ATTENDEE_LIST_ITEM
+        getItemType: () => "ATTENDEE_LIST_ITEM"
       };
 
       const props = { 
@@ -44,7 +43,7 @@ describe("<Seat />", () => {
           originBoatId: "100",
           originSeatNumber: 1
         }),
-        getItemType: () => ASSIGNED_ATTENDEE
+        getItemType: () => "ASSIGNED_ATTENDEE"
       };
                  
       const props = { 
@@ -64,7 +63,7 @@ describe("<Seat />", () => {
           originBoatId: "100",
           originSeatNumber: 1
         }),
-        getItemType: () => ASSIGNED_ATTENDEE
+        getItemType: () => "ASSIGNED_ATTENDEE"
       };
            
       const props = { 
@@ -84,7 +83,7 @@ describe("<Seat />", () => {
           originBoatId: "100",
           originSeatNumber: 1
         }),
-        getItemType: () => ASSIGNED_ATTENDEE
+        getItemType: () => "ASSIGNED_ATTENDEE"
       };
             
       const props = { 
@@ -105,7 +104,7 @@ describe("<Seat />", () => {
           originBoatId: "100",
           originSeatNumber: 1
         }),
-        getItemType: () => ASSIGNED_ATTENDEE
+        getItemType: () => "ASSIGNED_ATTENDEE"
       };
             
       const props = { 
@@ -126,7 +125,7 @@ describe("<Seat />", () => {
           originSeatNumber: 2,
           attendeeIdsInOriginBoat: List()
         }),
-        getItemType: () => ASSIGNED_ATTENDEE
+        getItemType: () => "ASSIGNED_ATTENDEE"
       };
       
       const assignAttendee = jest.fn();
@@ -163,7 +162,7 @@ describe("<Seat />", () => {
           originSeatNumber: 2,
           attendeeIdsInOriginBoat: List()
         }),
-        getItemType: () => ASSIGNED_ATTENDEE
+        getItemType: () => "ASSIGNED_ATTENDEE"
       };
       
       const assignAttendee = jest.fn();
@@ -204,7 +203,7 @@ describe("<Seat />", () => {
           originSeatNumber: 2,
           attendeeIdsInOriginBoat: List([ "1", "2" ])
         }),
-        getItemType: () => ASSIGNED_ATTENDEE
+        getItemType: () => "ASSIGNED_ATTENDEE"
       };
       
       const assignAttendee = jest.fn();
@@ -243,7 +242,7 @@ describe("<Seat />", () => {
           originSeatNumber: 2,
           attendeeIdsInOriginBoat: List([ "2" ])
         }),
-        getItemType: () => ASSIGNED_ATTENDEE
+        getItemType: () => "ASSIGNED_ATTENDEE"
       };
       
       const assignAttendee = jest.fn();
