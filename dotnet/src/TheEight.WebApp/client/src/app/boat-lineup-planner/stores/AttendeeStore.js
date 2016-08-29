@@ -5,6 +5,10 @@ import Attendee from "../models/Attendee"
 
 export default class AttendeeStore {
   @observable attendees = []
+
+  getAttendeeById(attendeeId) {
+    return this.attendees[attendeeId]
+  }
   
   @action load() {
     this.attendees.push(

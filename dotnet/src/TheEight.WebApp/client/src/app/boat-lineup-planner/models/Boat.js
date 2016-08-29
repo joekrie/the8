@@ -18,11 +18,6 @@ export default class Boat {
     this.getAttendeeById = getAttendeeById
   }
 
-  @computed get attendees() {
-    return this.placements[this.boatId]
-      .map(attn => this.getAttendeeById(attn))
-  }
-
   @computed get seatNumbers() {
     return R.range(this.isCoxed ? 0 : 1, this.seatCount + 1)
   }
@@ -36,12 +31,40 @@ export default class Boat {
       }))
   }
 
+  isAttendeeInBoat(attendeeId) {
+    return R.values(this.placements)
+      .includes(attendeeId)
+  }
+
+  allowPlaceAttendee(attendeeId, seatNumber, oldSeat) {
+    const alreadyInBoat = isAttendeeInBoat(attendeeId)
+    
+    if (!oldSeat) {
+      return !alreadyInBoat
+    }
+    
+    const isMoveWithinBoat = oldSeat.boatId == this.boatId
+    const isSameSeat = seatNumber == oldSeat.seatNumber && isMoveWithinBoat
+    return !isSameSeat && (isMoveWithinBoat || !alreadyInBoat)
+  }
+
+  @action placeAttendee(attendeeId, seatNumber) {
+    this.placements[seatNumber] = attendeeId
+  }
+
+  @action unplaceAttendee(seatNumber) {
+    delete this.placements[seatNumber]
+  }
+
   @action updateTitle(title) {
     this.title = title
   }
 
-  @action updateSpecs(seatCount, isCoxed) {  // todo: when shrinking should it unassign?
+  @action updateSize(seatCount, isCoxed) {  // todo: when shrinking should it unassign?
     this.seatCount = seatCount
     this.isCoxed = isCoxed
+
+    this.placements = R.pickBy((attnId, seatNum) => seatNum <= this.seatCount 
+      && (seatNum > 0 || this.isCoxed), this.placements)
   }
 }

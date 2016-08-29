@@ -9,7 +9,7 @@ import "./attendee-list-item.component.scss"
 export const dnd = {
   dragSpec: {
     canDrag(props) {
-      return props.eventDetails.mode === RACE_MODE || !props.attendeeListItem.isAssigned
+      return !props.attendeeListItem.isAssigned
     },
     beginDrag(props) {
       return {

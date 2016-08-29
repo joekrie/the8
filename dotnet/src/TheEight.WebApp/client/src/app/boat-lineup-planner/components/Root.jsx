@@ -31,8 +31,8 @@ export default class Root extends Component {
   constructor() {
     super()
 
-    this.boatStore = new BoatStore()
     this.attendeeStore = new AttendeeStore()
+    this.boatStore = new BoatStore(this.attendeeStore)
   }
 
   componentDidMount() {

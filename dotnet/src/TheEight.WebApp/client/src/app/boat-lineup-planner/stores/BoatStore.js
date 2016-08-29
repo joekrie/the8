@@ -6,15 +6,32 @@ import Boat from "../models/Boat"
 export default class BoatStore {
   @observable boats = []
 
-  constructor(getAttendeeById) {
-    this.getAttendeeById = getAttendeeById
+  constructor(attendeeStore) {
+    this.attendeeStore = attendeeStore
   }
 
-  @action load() {  // todo: replace with function injected in constructor?
-    this.boats.push(
-      new Boat("boat-1", "Lucky", 8, true, {3: "attendee-1"}, this.getAttendeeById),
-      new Boat("boat-2", "M1", 4, true, {}, this.getAttendeeById)
-    )
+  @action load() {
+    this.addBoat({
+      boatId: "boat-1",
+      title: "Lucky",
+      seatCount: 8,
+      isCoxed: true,
+      placements: { 
+        3: "attendee-1"
+      }
+    })
+
+    this.addBoat({
+      boatId: "boat-2",
+      title: "M1",
+      seatCount: 4,
+      isCoxed: true
+    })
+  }
+
+  @action addBoat(details) {
+    this.boats.push(new Boat(details.boatId, details.title, details.seatCount, details.isCoxed, 
+      details.placements || {}, attnId => this.attendeeStore.getAttendeeById(attnId)))
   }
 
   @action placeAttendee(newSeat, oldSeat, attendeeId) {

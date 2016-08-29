@@ -1,7 +1,7 @@
 import { Component } from "react"
 import { DragSource } from "react-dnd"
 import { compose } from "recompose"
-import { observer } from "mobx-react"
+import { observer, inject } from "mobx-react"
 
 import Attendee from "../common/Attendee"
 

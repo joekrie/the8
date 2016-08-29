@@ -9,9 +9,8 @@ import "./SeatList.scss"
 function SeatList(props) {
   return (
     <div className="card-block">
-      {props.seats.map(seat =>
-        <Seat key={seat.number} boatId={props.boat.boatId} seat={seat} 
-          attendeeIdsInBoat={R.values(props.boat.placements)} />
+      {props.boat.seats.map(seat =>
+        <Seat key={seat.number} boatId={props.boat.boatId} seat={seat} />
       )}
     </div>
   )

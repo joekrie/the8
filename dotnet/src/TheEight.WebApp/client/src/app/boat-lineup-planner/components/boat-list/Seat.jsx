@@ -6,6 +6,7 @@ import R from "ramda"
 
 import AssignedAttendee from "./AssignedAttendee"
 
+import dropTarget from "./Seat.dnd"
 import "./Seat.scss"
 
 function Seat(props) {
@@ -36,92 +37,7 @@ function Seat(props) {
   )
 }
 
-export const dropSpec = {
-  canDrop(props, monitor) {
-    const { 
-      attendeeIdsInBoat: attendeeIdsInTargetBoat, 
-      boatId: targetBoatId, 
-      seatNumber: targetSeatNumber 
-    } = props
-    
-    const itemType = monitor.getItemType()
-
-    const { 
-      draggedAttendeeId, 
-      originSeatNumber, 
-      originBoatId 
-    } = monitor.getItem()
-    
-    const alreadyInBoat = attendeeIdsInTargetBoat.contains(draggedAttendeeId)
-    
-    if (itemType === "ATTENDEE_LIST_ITEM") {
-      return !alreadyInBoat
-    }
-    
-    const isMoveWithinBoat = targetBoatId === originBoatId
-    const isSameSeat = targetSeatNumber === originSeatNumber && isMoveWithinBoat
-      
-    return !isSameSeat && (isMoveWithinBoat || !alreadyInBoat)
-  },
-  drop(props, monitor) {
-    const { 
-      assignAttendee,
-      unassignAttendee,
-      seatNumber: targetSeatNumber, 
-      boatId: targetBoatId, 
-      attendeeId: attendeeIdInTarget 
-    } = props
-    
-    const { 
-      draggedAttendeeId, 
-      originSeatNumber, 
-      originBoatId, 
-      attendeeIdsInOriginBoat 
-    } = monitor.getItem()
-
-    const draggedType = monitor.getItemType()
-
-    if (draggedType === "ATTENDEE_LIST_ITEM") {
-      assignAttendee(draggedAttendeeId, targetBoatId, targetSeatNumber)
-    }
-
-    if (draggedType === "ASSIGNED_ATTENDEE") {
-      props.boatStore.assignAttendee(draggedAttendeeId, targetBoatId, targetSeatNumber)
-
-      const isTargetInOrigin = attendeeIdsInOriginBoat.contains(attendeeIdInTarget)
-      const isMoveWithinBoat = targetBoatId === originBoatId
-      const isSwapWithinBoat = isMoveWithinBoat && attendeeIdInTarget
-
-      const shouldAssignAttendeeInTarget = isSwapWithinBoat || (!isMoveWithinBoat 
-        && attendeeIdInTarget && !isTargetInOrigin)
-
-      if (shouldAssignAttendeeInTarget) {
-        assignAttendee(attendeeIdInTarget, originBoatId, originSeatNumber)
-      }
-
-      const shouldUnassign = 
-        (!isSwapWithinBoat && isTargetInOrigin) 
-          || (isMoveWithinBoat && !attendeeIdInTarget)
-          || (!isMoveWithinBoat && !attendeeIdInTarget)
-
-      if (shouldUnassign) {
-        unassignAttendee(originBoatId, originSeatNumber)
-      }
-    }
-  }
-}
-
-function dropCollect(connect, monitor) {
-  return {
-    connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver(),
-    isOverCurrent: monitor.isOver({ shallow: true }),
-    canDrop: monitor.canDrop(),
-    itemType: monitor.getItemType()
-  }
-}
-
 export default compose(
-  DropTarget(["ATTENDEE_LIST_ITEM", "ASSIGNED_ATTENDEE"], dropSpec, dropCollect),
+  dropTarget,
   observer
 )(Seat)

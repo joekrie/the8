@@ -18,7 +18,7 @@ function Boat(props) {
           details
         </a>
       </div>
-      <SeatList seats={props.boat.seats} boat={props.boat} />
+      <SeatList boat={props.boat} />
     </div>
   )
 }
