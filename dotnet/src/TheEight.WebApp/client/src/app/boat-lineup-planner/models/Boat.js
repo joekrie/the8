@@ -26,14 +26,13 @@ export default class Boat {
     return this.seatNumbers
       .map(num => ({
         number: num,
-        label: num === 0 ? "Cox" : num,
+        label: num == 0 ? "C" : num,
         attendee: this.getAttendeeById(this.placements[num])
       }))
   }
 
   isAttendeeInBoat(attendeeId) {
-    return R.values(this.placements)
-      .includes(attendeeId)
+    return R.values(this.placements).includes(attendeeId)
   }
 
   allowPlaceAttendee(attendeeId, seatNumber, oldSeat) {

@@ -10,7 +10,7 @@ function SeatList(props) {
   return (
     <div className="card-block">
       {props.boat.seats.map(seat =>
-        <Seat key={seat.number} boatId={props.boat.boatId} seat={seat} />
+        <Seat key={seat.number} boat={props.boat} seat={seat} />
       )}
     </div>
   )

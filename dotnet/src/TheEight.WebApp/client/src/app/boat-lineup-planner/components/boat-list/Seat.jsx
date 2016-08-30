@@ -10,27 +10,15 @@ import dropTarget from "./Seat.dnd"
 import "./Seat.scss"
 
 function Seat(props) {
-  const isCoxSeat = props.seatNumber === 0
-  const isPort = props.seatNumber % 2
-  const label = isCoxSeat ? "C" : props.seatNumber
-
-  const acceptedPositions =
-    isCoxSeat ? ["COXSWAIN"]
-              : isPort ? ["PORT_ROWER", "BISWEPTUAL_ROWER"]
-                       : ["STARBOARD_ROWER", "BISWEPTUAL_ROWER"]
-
-  const attendeeSlot = 
-    props.attendeeId 
-      ? <AssignedAttendee attendeeId={props.attendeeId} boatId={props.boatId}
-          seatNumber={props.seatNumber} attendeeIdsInBoat={props.attendeeIdsInBoat}
-          acceptedPositions={acceptedPositions} />
-      : <div className="card placeholder"
-          style={props.isOver ? { backgroundColor: "lightgrey" } : {}}></div>
+  const attendeeSlot = props.seat.attendee
+    ? <AssignedAttendee seat={props.seat} boat={props.boat} />
+    : <div className="card placeholder"
+        style={props.isOver ? { backgroundColor: "lightgrey" } : {}}></div>
 
   return props.connectDropTarget(
     <div className="seat">
       <div className="seat-num">
-        {label}
+        {props.seat.label}
       </div>
       {attendeeSlot}
     </div>

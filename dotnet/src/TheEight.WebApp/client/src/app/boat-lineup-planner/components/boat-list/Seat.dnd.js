@@ -1,77 +1,41 @@
 import { DropTarget } from "react-dnd"
-import { observer } from "mobx-react"
-import { compose } from "recompose"
 import R from "ramda"
 
 export function canDrop(props, monitor) {
-  const {
-    boatId: targetBoatId, 
-    seatNumber: targetSeatNumber 
-  } = props
+  const draggedItem = monitor.getItem()
+  const alreadyInBoat = draggedItem.boat.isAttendeeInBoat(draggedItem.seat.attendee.attendeeId)
   
-  const itemType = monitor.getItemType()
-
-  const { 
-    draggedAttendeeId, 
-    originSeatNumber, 
-    originBoatId 
-  } = monitor.getItem()
-  
-  const alreadyInBoat = props.attendeeIdsInBoat.includes(draggedAttendeeId)
-  
-  if (itemType === "ATTENDEE_LIST_ITEM") {
+  if (monitor.getItemType() == "ATTENDEE_LIST_ITEM") {
     return !alreadyInBoat
   }
   
-  const isMoveWithinBoat = targetBoatId === originBoatId
-  const isSameSeat = R.equals(targetSeatNumber, originSeatNumber) && isMoveWithinBoat
-    
-  return !isSameSeat && (isMoveWithinBoat || !alreadyInBoat)
+  if (monitor.getItemType() == "ASSIGNED_ATTENDEE") {
+    const isMoveWithinBoat = props.seat.boatId == draggedItem.seat.boatId
+    const isSameSeat = R.equals(props.seat, draggedItem.seat)
+    return !isSameSeat && (isMoveWithinBoat || !alreadyInBoat)
+  }
 }
   
 export function drop(props, monitor) {
-  const { 
-    assignAttendee,
-    unassignAttendee,
-    seatNumber: targetSeatNumber, 
-    boatId: targetBoatId, 
-    attendeeId: attendeeIdInTarget 
-  } = props
-  
-  const { 
-    draggedAttendeeId, 
-    originSeatNumber, 
-    originBoatId, 
-    attendeeIdsInOriginBoat 
-  } = monitor.getItem()
+  const draggedItem = monitor.getItem()
+  props.boat.placeAttendee(draggedItem.seat.attendee.attendeeId, props.seat.number)
 
-  const draggedType = monitor.getItemType()
+  if (monitor.getItemType() == "ASSIGNED_ATTENDEE") {
+    const isTargetInOrigin = draggedItem.boat.isAttendeeInBoat(props.seat.attendee.attendeeId)
+    const isMoveWithinBoat = props.seat.boatId == draggedItem.seat.boatId
+    const isSwapWithinBoat = isMoveWithinBoat && props.seat.attendee
+    const isSwapAcrossBoats = !isMoveWithinBoat && props.seat.attendee && !isTargetInOrigin
 
-  if (draggedType === "ATTENDEE_LIST_ITEM") {
-    assignAttendee(draggedAttendeeId, targetBoatId, targetSeatNumber)
-  }
-
-  if (draggedType === "ASSIGNED_ATTENDEE") {
-    props.boatStore.assignAttendee(draggedAttendeeId, targetBoatId, targetSeatNumber)
-
-    const isTargetInOrigin = attendeeIdsInOriginBoat.includes(attendeeIdInTarget)
-    const isMoveWithinBoat = R.equals(targetBoatId, originBoatId)
-    const isSwapWithinBoat = isMoveWithinBoat && attendeeIdInTarget
-
-    const shouldAssignAttendeeInTarget = isSwapWithinBoat || (!isMoveWithinBoat 
-      && attendeeIdInTarget && !isTargetInOrigin)
-
-    if (shouldAssignAttendeeInTarget) {
-      assignAttendee(attendeeIdInTarget, originBoatId, originSeatNumber)
+    if (isSwapWithinBoat || isSwapAcrossBoats) {
+      draggedItem.boat.placeAttendee(props.attendee.attendeeId, draggedItem.seat.number)
     }
 
-    const shouldUnassign = 
-      (!isSwapWithinBoat && isTargetInOrigin) 
-        || (isMoveWithinBoat && !attendeeIdInTarget)
-        || (!isMoveWithinBoat && !attendeeIdInTarget)
+    const shouldUnassign = (!isSwapWithinBoat && isTargetInOrigin) 
+      || (isMoveWithinBoat && !attendeeIdInTarget)
+      || (!isMoveWithinBoat && !attendeeIdInTarget)
 
     if (shouldUnassign) {
-      unassignAttendee(originBoatId, originSeatNumber)
+      draggedItem.boat.unplaceAttendee(draggedItem.seat.number)
     }
   }
 }
@@ -80,11 +44,12 @@ export function dropCollect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),
-    isOverCurrent: monitor.isOver({ shallow: true }),
     canDrop: monitor.canDrop(),
     itemType: monitor.getItemType()
   }
 }
 
-const dropTarget = DropTarget(["ATTENDEE_LIST_ITEM", "ASSIGNED_ATTENDEE"], { canDrop, drop }, dropCollect)
+const dropTarget = DropTarget(["ATTENDEE_LIST_ITEM", "ASSIGNED_ATTENDEE"], 
+  { canDrop, drop }, dropCollect)
+
 export default dropTarget

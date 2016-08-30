@@ -30,7 +30,7 @@ export default class Attendee extends Component {
   render() {
     return (
       <span ref={ref => this.positionRef = ref}  title={this.positionLabels[this.props.position].title}>
-        ({this.positionLabels[this.props.position].abbr})
+        {this.positionLabels[this.props.position].abbr}
       </span>
     )
   }

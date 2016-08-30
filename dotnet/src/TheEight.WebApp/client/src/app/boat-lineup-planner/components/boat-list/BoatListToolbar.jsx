@@ -1,6 +1,6 @@
 import { Component } from "react"
 
-import "./boat-list-toolbar.container.scss"
+import "./BoatListToolbar.scss"
 
 function BoatListToolbar(props) {
   return (

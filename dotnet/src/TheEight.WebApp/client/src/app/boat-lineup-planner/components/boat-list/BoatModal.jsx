@@ -3,12 +3,8 @@ import Modal from "react-modal"
 import { observe } from "mobx"
 import { observer } from "mobx-react"
 
-import SeatList from "./seat-list.component"
-
-import "./boat.component.scss"
-
 @observer
-export default class Boat extends Component {  
+export default class BoatModal extends Component {  
   @observe open = false
 
   onCloseModal() {

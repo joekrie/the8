@@ -7,32 +7,21 @@ import AttendeePositionLabel from "./AttendeePositionLabel"
 import "./Attendee.scss"
 
 function Attendee(props) {
-  const { 
-    attendee, 
-    isOutOfPosition = false 
-  } = props
+  let displayName = props.attendee.displayName
 
-  const styles = 
-    attendee.isCoxswain
-      ? { backgroundColor: "lightgrey" }
-      : {}
-
-  const displayName = attendee.displayName + (isOutOfPosition ? "*" : "")
+  if (props.isOutOfPosition) {
+    displayName = displayName.concat("*")
+  }
 
   return (
-    <div className="attendee card card-block" style={styles}>
-      <Modal isOpen={this.state.open} onRequestClose={() => this.closeModal()}>
-        {displayName}
-      </Modal>
+    <div className="attendee card card-block" 
+      style={props.attendee.isCoxswain ? { backgroundColor: "lightgrey" } : {}}>
       <div className="name">
         {displayName}
         &nbsp;
-        <AttendeePositionLabel position={attendee.position} />
       </div>
       <div className="position">
-        <a href="#" onClick={() => this.openModal()}>
-          details
-        </a>
+        <AttendeePositionLabel position={props.attendee.position} />
       </div>
     </div>
   )

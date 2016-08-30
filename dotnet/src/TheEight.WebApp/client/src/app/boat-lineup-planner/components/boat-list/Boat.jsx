@@ -14,9 +14,6 @@ function Boat(props) {
         <h3>
           {props.boat.title}
         </h3>
-        <a href="#" onClick={() => this.onOpenModal()}>
-          details
-        </a>
       </div>
       <SeatList boat={props.boat} />
     </div>
