@@ -18,23 +18,26 @@ export function canDrop(props, monitor) {
   
 export function drop(props, monitor) {
   const draggedItem = monitor.getItem()
-  props.boat.placeAttendee(draggedItem.seat.attendee.attendeeId, props.seat.number)
+
+  const draggedAttendeeId = R.path(["attendee", "attendeeId"], draggedItem.seat)
+  const attendeeIdInTarget = R.path(["attendee", "attendeeId"], props.seat)
+
+  console.log(`Placing ${draggedAttendeeId} in boat ${props.boat.boatId} seat ${props.seat.number}`)
+  props.boat.placeAttendee(draggedAttendeeId, props.seat.number)
 
   if (monitor.getItemType() == "ASSIGNED_ATTENDEE") {
-    const isTargetInOrigin = draggedItem.boat.isAttendeeInBoat(props.seat.attendee.attendeeId)
+    const isTargetInOrigin = draggedItem.boat.isAttendeeInBoat(draggedAttendeeId)
     const isMoveWithinBoat = props.seat.boatId == draggedItem.seat.boatId
     const isSwapWithinBoat = isMoveWithinBoat && props.seat.attendee
     const isSwapAcrossBoats = !isMoveWithinBoat && props.seat.attendee && !isTargetInOrigin
 
     if (isSwapWithinBoat || isSwapAcrossBoats) {
-      draggedItem.boat.placeAttendee(props.attendee.attendeeId, draggedItem.seat.number)
+      console.log(`Placing ${attendeeIdInTarget} in boat ${draggedItem.boat.boatId} seat ${draggedItem.seat.number}`)
+      draggedItem.boat.placeAttendee(attendeeIdInTarget, draggedItem.seat.number)
     }
 
-    const shouldUnassign = (!isSwapWithinBoat && isTargetInOrigin) 
-      || (isMoveWithinBoat && !attendeeIdInTarget)
-      || (!isMoveWithinBoat && !attendeeIdInTarget)
-
-    if (shouldUnassign) {
+    if ((!isSwapWithinBoat && isTargetInOrigin) || !props.seat.attendee) {
+      console.log(`Unplacing attendee in boat ${draggedItem.boat.boatId} seat ${draggedItem.seat.number}`)
       draggedItem.boat.unplaceAttendee(draggedItem.seat.number)
     }
   }

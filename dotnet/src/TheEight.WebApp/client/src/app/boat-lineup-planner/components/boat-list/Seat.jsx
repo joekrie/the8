@@ -12,8 +12,7 @@ import "./Seat.scss"
 function Seat(props) {
   const attendeeSlot = props.seat.attendee
     ? <AssignedAttendee seat={props.seat} boat={props.boat} />
-    : <div className="card placeholder"
-        style={props.isOver ? { backgroundColor: "lightgrey" } : {}}></div>
+    : <div className="card placeholder" style={props.isOver ? { backgroundColor: "lightgrey" } : {}}></div>
 
   return props.connectDropTarget(
     <div className="seat">
