@@ -1,4 +1,6 @@
 # The Eight
+[![Build status](https://ci.appveyor.com/api/projects/status/e70qp48brvrdyxlh?svg=true)](https://ci.appveyor.com/project/joekrie/the8)
+
 Management tool for rowing clubs to manage teams, water practices, race lineups, and erg practices.
 
 Most recent development work has been on the [boat lineup planner UI](dotnet/src/TheEight.WebApp/client/src/app/boat-lineup-planner)
