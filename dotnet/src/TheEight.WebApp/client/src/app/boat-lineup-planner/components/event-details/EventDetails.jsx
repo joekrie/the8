@@ -1,18 +1,22 @@
-import { random } from "lodash"
-import { Component } from "react"
-import { LocalDate } from "js-joda"
+import { PropTypes } from "react"
+import { observer } from "mobx-react"
 
-//import EditEventDetailsForm from "./edit-event-details-form.component"
+import AttendeeList from "./AttendeeList"
+//import BoatCreator from "./BoatCreator"
+//import AttendeeCreator from "./AttendeeCreator"
 
-export default class EventDetails extends Component {
-  render() {
-    const date = LocalDate.parse("2016-09-24")
-    const notes = "These are some notes"
-    
-    return (
-      <div>
+import "./EventDetails.scss"
 
+function EventDetails(props) {
+  return (
+    <div className="event-details card">
+      <div className="card-block">
+        {/*<BoatCreator createBoat={props.createBoat} />
+        <AttendeeCreator createAttendee={props.createAttendee} />*/}
+        <AttendeeList />
       </div>
-    )
-  }
+    </div>
+  )
 }
+
+export default observer(EventDetails)

@@ -1,4 +1,5 @@
-import { observable, computed, action, asMap, whyRun, isObservable } from "mobx"
+import { observable, computed, action, asMap } from "mobx"
+import { range } from "lodash"
 import R from "ramda"
 
 export default class Boat {
@@ -16,18 +17,13 @@ export default class Boat {
     this.isCoxed = isCoxed
     this.placements = asMap(placements)
     this.getAttendeeById = getAttendeeById
-    console.log(this)
   }
 
   @computed get seatNumbers() {
-    whyRun()
-    console.log(`is this.isCoxed observable?: ${isObservable(this.isCoxed)}`)
-    return R.range(this.isCoxed ? 0 : 1, this.seatCount + 1)
+    return range(this.isCoxed ? 0 : 1, this.seatCount + 1)
   }
 
   @computed get seats() {
-    whyRun()
-    console.log(`is this.placements.get("2") observable?: ${isObservable(this.placements.get("2"))}`)
     return this.seatNumbers
       .map(num => ({
         number: num,
@@ -37,7 +33,7 @@ export default class Boat {
   }
 
   isAttendeeInBoat(attendeeId) {
-    return R.values(this.placements).includes(attendeeId)
+    return this.placements.values().includes(attendeeId)
   }
 
   allowPlaceAttendee(attendeeId, seatNumber, oldSeat) {
@@ -54,7 +50,6 @@ export default class Boat {
 
   @action placeAttendee(attendeeId, seatNumber) {
     this.placements.set(seatNumber, attendeeId)
-    console.log(this.placements)
   }
 
   @action unplaceAttendee(seatNumber) {
@@ -65,7 +60,7 @@ export default class Boat {
     this.title = title
   }
 
-  @action updateSize(seatCount, isCoxed) {  // todo: when shrinking should it unassign?
+  @action updateSize(seatCount, isCoxed) {
     this.seatCount = seatCount
     this.isCoxed = isCoxed
 

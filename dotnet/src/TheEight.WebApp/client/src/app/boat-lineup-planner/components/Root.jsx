@@ -1,31 +1,22 @@
 import "browsernizr/test/touchevents"
 import Modernizr from "browsernizr"
-
 import TouchBackend from "react-dnd-touch-backend"
 import HTML5Backend from "react-dnd-html5-backend"
 import { DragDropContext } from "react-dnd"
-
 import classNames from "classnames"
 import { Component } from "react"
 import { observer, Provider } from "mobx-react"
+import R from "ramda"
 
-//import AttendeeList from "./event-details/AttendeeList"
+import EventDetails from "./event-details/EventDetails"
 import BoatList from "./boat-list/BoatList"
 import AttendeeDragLayer from "./common/AttendeeDragLayer"
-
 import BoatStore from "../stores/BoatStore"
 import AttendeeStore from "../stores/AttendeeStore"
 
 import "./Root.scss"
 
-const backend =
-  Modernizr.touchevents
-    ? TouchBackend({ enableMouseEvents: true })
-    : HTML5Backend
-
-@DragDropContext(backend)
-@observer
-export default class Root extends Component {
+class Root extends Component {
   boatStore
 
   constructor() {
@@ -45,9 +36,17 @@ export default class Root extends Component {
       <Provider boatStore={this.boatStore} attendeeStore={this.attendeeStore}>
         <div className="container-fluid boat-lineup-planner">
           <AttendeeDragLayer />
+          <EventDetails />
           <BoatList />
         </div>
       </Provider>
     )
   }
 }
+
+export default R.compose(
+  DragDropContext(Modernizr.touchevents 
+    ? TouchBackend({ enableMouseEvents: true }) 
+    : HTML5Backend),
+  observer
+)(Root)

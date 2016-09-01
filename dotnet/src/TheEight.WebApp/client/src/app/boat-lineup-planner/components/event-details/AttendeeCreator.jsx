@@ -1,7 +1,7 @@
 import { Component } from "react"
 import Modal from "react-modal"
 
-import "./attendee-creator.component.scss"
+import "./AttendeeCreator.scss"
 
 export default class BoatCreator extends Component {  
   constructor() {

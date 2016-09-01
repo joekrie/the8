@@ -34,21 +34,11 @@ export default class BoatStore {
       details.placements || {}, attnId => this.attendeeStore.getAttendeeById(attnId)))
   }
 
-  @action placeAttendee(newSeat, oldSeat, attendeeId) {
-    const attendeeInTarget = this.placements[newSeat.boatId][newSeat.seatNumber]
-
-    if (attendeeInTarget) {
-      this.placements[oldSeat.boatId][oldSeat.seatNumber] = attendeeInTarget
-    }
-
-    if (!attendeeInTarget && oldSeat) {
-      delete this.placements[oldSeat.boatId][oldSeat.seatNumber]
-    }
-
-    this.placements[newSeat.boatId][newSeat.seatNumber] = attendeeId
+  @computed get allPlacedAttendeeIds() {
+    return R.flatten(this.boats.map(b => b.placements.values()))
   }
 
-  @action unplaceAttendee(seat) {
-     delete this.placements[seat.boatId][seat.seatNumber]
+  isAttendeePlacedInAnyBoat(attendeeId) {
+    return this.allPlacedAttendeeIds.includes(attendeeId)
   }
 }

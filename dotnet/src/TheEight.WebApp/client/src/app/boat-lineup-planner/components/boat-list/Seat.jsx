@@ -3,6 +3,7 @@ import { DropTarget } from "react-dnd"
 import { observer } from "mobx-react"
 import { compose, branch } from "recompose"
 import R from "ramda"
+import { throttle } from "lodash"
 
 import AssignedAttendee from "./AssignedAttendee"
 import AttendeeModel from "../../models/Attendee"
@@ -35,44 +36,43 @@ Seat.propTypes = {
   connectDropTarget: PropTypes.func.isRequired,
   isOver: PropTypes.bool.isRequired
 }
-
+const log = throttle(txt => console.log(txt), 250)
 export function canDrop(props, monitor) {
   const draggedItem = monitor.getItem()
-  const alreadyInBoat = draggedItem.boat.isAttendeeInBoat(draggedItem.seat.attendee.attendeeId)
+  const alreadyInBoat = props.boat.isAttendeeInBoat(draggedItem.attendee.attendeeId)
   
   if (monitor.getItemType() == "ATTENDEE_LIST_ITEM") {
     return !alreadyInBoat
   }
   
   if (monitor.getItemType() == "ASSIGNED_ATTENDEE") {
-    const isMoveWithinBoat = props.seat.boatId == draggedItem.seat.boatId
-    const isSameSeat = R.equals(props.seat, draggedItem.seat)
+    const getBoatId = R.path(["boat", "boatId"])
+    const getSeatNumber = R.path(["seat", "number"])
+    const isMoveWithinBoat = getBoatId(props) == getBoatId(draggedItem)
+    const isSameSeat = isMoveWithinBoat && getSeatNumber(props) == getSeatNumber(draggedItem)
+    
     return !isSameSeat && (isMoveWithinBoat || !alreadyInBoat)
   }
 }
-  
+
 export function drop(props, monitor) {
   const draggedItem = monitor.getItem()
-
-  const draggedAttendeeId = R.path(["attendee", "attendeeId"], draggedItem.seat)
+  const draggedAttendeeId = R.path(["attendee", "attendeeId"], draggedItem)
   const attendeeIdInTarget = R.path(["attendee", "attendeeId"], props.seat)
 
-  console.log(`Placing ${draggedAttendeeId} in boat ${props.boat.boatId} seat ${props.seat.number}`)
   props.boat.placeAttendee(draggedAttendeeId, props.seat.number)
 
   if (monitor.getItemType() == "ASSIGNED_ATTENDEE") {
     const isTargetInOrigin = draggedItem.boat.isAttendeeInBoat(draggedAttendeeId)
-    const isMoveWithinBoat = props.seat.boatId == draggedItem.seat.boatId
+    const isMoveWithinBoat = props.boat.boatId == draggedItem.boat.boatId
     const isSwapWithinBoat = isMoveWithinBoat && props.seat.attendee
     const isSwapAcrossBoats = !isMoveWithinBoat && props.seat.attendee && !isTargetInOrigin
 
     if (isSwapWithinBoat || isSwapAcrossBoats) {
-      console.log(`Placing ${attendeeIdInTarget} in boat ${draggedItem.boat.boatId} seat ${draggedItem.seat.number}`)
       draggedItem.boat.placeAttendee(attendeeIdInTarget, draggedItem.seat.number)
     }
 
     if ((!isSwapWithinBoat && isTargetInOrigin) || !props.seat.attendee) {
-      console.log(`Unplacing attendee in boat ${draggedItem.boat.boatId} seat ${draggedItem.seat.number}`)
       draggedItem.boat.unplaceAttendee(draggedItem.seat.number)
     }
   }

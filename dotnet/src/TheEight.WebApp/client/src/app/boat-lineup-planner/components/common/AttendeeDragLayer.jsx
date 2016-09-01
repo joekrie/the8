@@ -1,16 +1,13 @@
 import { Component } from "react"
 import { DragLayer } from "react-dnd"
+import R from "ramda"
+
+import Attendee from "./Attendee"
 
 import "./AttendeeDragLayer.scss"
 
-@DragLayer(dragCollect)
-export default class AttendeeDragLayer extends Component {
-  render() {    
-    const displayName = 
-      (this.props.itemType === "ASSIGNED_ATTENDEE" || this.props.itemType === "ATTENDEE_LIST_ITEM")
-        ? this.props.item.draggedAttendeeName
-        : ""
-
+class AttendeeDragLayer extends Component {
+  render() {
     function getDragItemStyles(currentOffset) {
       if (!currentOffset) {
         return {
@@ -27,12 +24,18 @@ export default class AttendeeDragLayer extends Component {
       }
     }
 
-    return (
-      <div className="drag-layer">
-        <div className="attendee card card-block" style={getDragItemStyles(this.props.currentOffset)}>
-          {displayName}
+    if (this.props.item && this.props.item.attendee) {
+      return (
+        <div className="drag-layer">
+          <div style={getDragItemStyles(this.props.currentOffset)}>
+            <Attendee attendee={this.props.item.attendee} />
+          </div>
         </div>
-      </div>
+      )
+    }
+    
+    return (
+      <div className="drag-layer"></div>
     )
   }
 }
@@ -46,3 +49,5 @@ function dragCollect(monitor) {
     isDragging: monitor.isDragging()
   }
 }
+
+export default DragLayer(dragCollect)(AttendeeDragLayer)

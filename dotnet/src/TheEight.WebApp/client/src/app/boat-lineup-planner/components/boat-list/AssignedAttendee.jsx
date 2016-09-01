@@ -11,10 +11,11 @@ function AssignedAttendee(props) {
   const isCoxSeat = props.seat.number === 0
   const isPort = props.seat.number % 2
   const attendeePosition = props.seat.attendee.position
-  let isOutOfPosition 
+  
+  let isOutOfPosition = false
   
   if (isCoxSeat) {
-    isOutOfPosition = attendeePosition == "COXSWAIN"
+    isOutOfPosition = attendeePosition != "COXSWAIN"
   } else {
     if (attendeePosition == "BISWEPTUAL_ROWER") {
       isOutOfPosition = !isCoxSeat
@@ -34,22 +35,22 @@ function AssignedAttendee(props) {
   )
 }
 
-const dragSource = DragSource(
-  "ASSIGNED_ATTENDEE", 
-  {
-    beginDrag(props) {
-      return {
-        boat: props.boat,
-        seat: props.seat
-      }
-    }
-  }, connect => ({
+function beginDrag(props) {
+  return {
+    boat: props.boat,
+    seat: props.seat,
+    attendee: props.seat.attendee
+  }
+}
+
+function dragCollect(connect) {
+  return {
     connectDragSource: connect.dragSource(),
     connectDragPreview: connect.dragPreview()
-  })
-)
+  }
+}
 
 export default compose(
-  dragSource,
+  DragSource("ASSIGNED_ATTENDEE", { beginDrag }, dragCollect),
   observer
 )(AssignedAttendee)

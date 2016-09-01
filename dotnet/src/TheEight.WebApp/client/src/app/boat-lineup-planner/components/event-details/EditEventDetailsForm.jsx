@@ -6,7 +6,7 @@ import DateField from "./date-field.component"
 import NotesField from "./notes-field.component"
 import LoadingAnimation from "app/common/components/loading-animation.component"
 
-import "./edit-event-details-form.component.scss"
+import "./EditEventDetailsForm.scss"
 
 export const mapDispatchToProps = dispatch => 
   bindActionCreators({
