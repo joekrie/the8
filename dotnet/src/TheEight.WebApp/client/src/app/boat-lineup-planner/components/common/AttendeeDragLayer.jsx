@@ -3,13 +3,7 @@ import { DragLayer } from "react-dnd"
 
 import "./AttendeeDragLayer.scss"
 
-@DragLayer(monitor => ({
-  item: monitor.getItem(),
-  itemType: monitor.getItemType(),
-  initialOffset: monitor.getInitialSourceClientOffset(),
-  currentOffset: monitor.getSourceClientOffset(),
-  isDragging: monitor.isDragging()
-}))
+@DragLayer(dragCollect)
 export default class AttendeeDragLayer extends Component {
   render() {    
     const displayName = 
@@ -40,5 +34,15 @@ export default class AttendeeDragLayer extends Component {
         </div>
       </div>
     )
+  }
+}
+
+function dragCollect(monitor) {
+  return {
+    item: monitor.getItem(),
+    itemType: monitor.getItemType(),
+    initialOffset: monitor.getInitialSourceClientOffset(),
+    currentOffset: monitor.getSourceClientOffset(),
+    isDragging: monitor.isDragging()
   }
 }

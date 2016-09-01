@@ -31,7 +31,7 @@ export default class Boat {
     return this.seatNumbers
       .map(num => ({
         number: num,
-        label: num == 0 ? "C" : num,
+        label: num == 0 ? "C" : String(num),
         attendee: this.getAttendeeById(this.placements.get(num))
       }))
   }
