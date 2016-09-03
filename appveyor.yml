@@ -1,3 +1,7 @@
 version: 0.1.{build}
+
 build:
   verbosity: minimal
+
+before_build:
+- cmd: nuget restore dotnet\TheEight.sln
