@@ -8,6 +8,7 @@ const opn = require("opn")
 const KarmaServer = require("karma").Server
 
 const webpackConfig = require("./webpack.config.js")
+const distPath = path.join(__dirname, "../../dotnet/src/TheEight.WebApp/wwwroot/app")
 
 gulp.task("default", ["test", "lint", "build"])
 
@@ -46,7 +47,7 @@ function getConfig() {
   const config = Object.create(webpackConfig)
 
   config.output = {
-    path: path.join(__dirname, "../dist/app"),
+    path: distPath,
     filename: "[name].js"
   }
 
@@ -127,5 +128,5 @@ gulp.task("build:watch", done => {
 })
 
 gulp.task("clean:build", done => {
-  rimraf(path.join(__dirname, "../dist/app"), done)
+  rimraf(distPath, done)
 })

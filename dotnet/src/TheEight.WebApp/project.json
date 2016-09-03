@@ -45,7 +45,7 @@
   },
   "publishOptions": {
     "include": [
-      "client/dist",
+      "wwwroot",
       "web.config"
     ]
   },
