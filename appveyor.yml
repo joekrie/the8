@@ -5,4 +5,4 @@ build:
   verbosity: minimal
 
 before_build:
-- cmd: nuget restore dotnet\TheEight.sln --verbosity Minimal
+- cmd: dotnet restore dotnet
