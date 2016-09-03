@@ -1,12 +1,14 @@
 ﻿@model TheEight.WebApp.Models.Shared.IReactVM
 
 @section Styles {
-    <link rel="stylesheet" href="~/app/@(Model.FileName).css" />
+    @*<link rel="stylesheet" href="~/app/@(Model.FileName).css" />*@
+    <link rel="stylesheet" href="~/app/index.css" />
 }
 
 <div id="app" class="content"></div>
-<script src="~/common.js"></script>
-<script src="~/app/@(Model.FileName).js"></script>
+@*<script src="~/common.js"></script>*@
+@*<script src="~/app/@(Model.FileName).js"></script>*@
+<script src="~/app/index.js"></script>
 <script>
     (function() {
         var app = @(Model.ComponentName).default;

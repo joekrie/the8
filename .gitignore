@@ -194,3 +194,4 @@ TheEight.sln.DotSettings.user
 **/.vs/*
 **/.idea/*
 **/test-results/*
+*.jfm

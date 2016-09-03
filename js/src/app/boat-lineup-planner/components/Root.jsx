@@ -6,7 +6,7 @@ import { DragDropContext } from "react-dnd"
 import classNames from "classnames"
 import { Component } from "react"
 import { observer, Provider } from "mobx-react"
-import R from "ramda"
+import { compose } from "ramda"
 
 import EventDetails from "./event-details/EventDetails"
 import BoatList from "./boat-list/BoatList"
@@ -44,9 +44,10 @@ class Root extends Component {
   }
 }
 
-export default R.compose(
+export default compose(
   DragDropContext(Modernizr.touchevents 
     ? TouchBackend({ enableMouseEvents: true }) 
-    : HTML5Backend),
+    : HTML5Backend
+  ),
   observer
 )(Root)

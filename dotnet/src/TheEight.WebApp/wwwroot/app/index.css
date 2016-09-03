@@ -10588,18 +10588,12 @@ a.text-danger:hover {
   margin-left: auto;
 }.boat-lineup-planner .attendee-list-item {
   margin-bottom: 10px;
-}.boat-lineup-planner .boat-creator {
-  button-margin-right: 5px;
-}.boat-lineup-planner .attendee-creator {
-  button-margin-right: 5px;
-}.boat-lineup-planner .attendee-list {
+}.boat-lineup-planner .attendee-list .list-items {
+  padding-top: 15px;
+}.boat-lineup-planner .event-details {
   float: left;
   width: 275px;
   height: 100%;
-}
-
-.boat-lineup-planner .attendee-list .list-items {
-  padding-top: 15px;
 }.boat-lineup-planner .assigned-attendee {
   margin-bottom: 10px;
 }.boat-lineup-planner .seat {
