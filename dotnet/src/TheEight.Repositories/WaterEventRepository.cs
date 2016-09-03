@@ -41,6 +41,8 @@ namespace TheEight.Repositories
 
             var cmdDef = new CommandDefinition(cmdTxt);
             var queryResults = await _dbConnection.QueryAsync<GetWaterEventResult>(cmdDef);
+
+            return new WaterEvent();
         }
 
         private class GetWaterEventResult
