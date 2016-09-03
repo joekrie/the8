@@ -1,7 +1,8 @@
 version: 0.1.{build}
 
 build:
+  project: dotnet\TheEight.sln
   verbosity: minimal
 
 before_build:
-- cmd: nuget restore dotnet\TheEight.sln
+- cmd: nuget restore dotnet\TheEight.sln --verbosity Minimal
