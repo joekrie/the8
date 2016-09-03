@@ -11,6 +11,12 @@ function BoatListToolbar(props) {
       <button class="btn btn-default">
         Reorder boats
       </button>
+      <button class="btn btn-default">
+        Undo
+      </button>
+      <button class="btn btn-default">
+        Redo
+      </button>
     </div>
   )
 }

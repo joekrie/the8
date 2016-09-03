@@ -5,6 +5,7 @@ import Attendee from "../models/Attendee"
 
 export default class AttendeeStore {
   @observable attendees = []
+  @observable draggingAttendee
 
   getAttendeeById(attendeeId) {
     return R.find(R.propEq("attendeeId", attendeeId), this.attendees)

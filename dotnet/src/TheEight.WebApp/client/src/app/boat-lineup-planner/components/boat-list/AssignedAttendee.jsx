@@ -36,21 +36,27 @@ function AssignedAttendee(props) {
 }
 
 function beginDrag(props) {
-  return {
-    boat: props.boat,
-    seat: props.seat,
-    attendee: props.seat.attendee
+  props.seat.attendee.startDragging()
+  
+  return { 
+    boat: props.boat, 
+    seat: props.seat, 
+    attendee: props.seat.attendee 
   }
 }
 
-function dragCollect(connect) {
+function endDrag(props) {
+  props.seat.attendee.stopDragging()
+}
+
+function dragCollect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
-    connectDragPreview: connect.dragPreview()
+    isDragging: monitor.isDragging()
   }
 }
 
 export default compose(
-  DragSource("ASSIGNED_ATTENDEE", { beginDrag }, dragCollect),
+  DragSource("ASSIGNED_ATTENDEE", { beginDrag, endDrag }, dragCollect),
   observer
 )(AssignedAttendee)

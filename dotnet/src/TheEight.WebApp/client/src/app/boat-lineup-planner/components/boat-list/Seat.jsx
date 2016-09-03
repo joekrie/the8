@@ -1,9 +1,7 @@
 import { Component, PropTypes } from "react"
 import { DropTarget } from "react-dnd"
-import { observer } from "mobx-react"
-import { compose, branch } from "recompose"
-import R from "ramda"
-import { throttle } from "lodash"
+import { observer, inject } from "mobx-react"
+import R, { compose, path } from "ramda"
 
 import AssignedAttendee from "./AssignedAttendee"
 import AttendeeModel from "../../models/Attendee"
@@ -12,9 +10,18 @@ import BoatModel from "../../models/Boat"
 import "./Seat.scss"
 
 function Seat(props) {
-  const attendeeSlot = props.seat.attendee
-    ? <AssignedAttendee seat={props.seat} boat={props.boat} />
-    : <div className="card placeholder" style={props.isOver ? { backgroundColor: "lightgrey" } : {}}></div>
+  const emptySeat = (
+    <div className="card placeholder" 
+      style={props.isOver ? { backgroundColor: "lightgrey" } : {}}></div>
+  )
+
+  let attendeeSlot 
+  
+  if (props.seat.attendee && !props.seat.attendee.isDragging) {
+    attendeeSlot = <AssignedAttendee seat={props.seat} boat={props.boat} />
+  } else {
+    attendeeSlot = emptySeat
+  }
 
   return props.connectDropTarget(
     <div className="seat">
@@ -36,7 +43,7 @@ Seat.propTypes = {
   connectDropTarget: PropTypes.func.isRequired,
   isOver: PropTypes.bool.isRequired
 }
-const log = throttle(txt => console.log(txt), 250)
+
 export function canDrop(props, monitor) {
   const draggedItem = monitor.getItem()
   const alreadyInBoat = props.boat.isAttendeeInBoat(draggedItem.attendee.attendeeId)
@@ -46,9 +53,9 @@ export function canDrop(props, monitor) {
   }
   
   if (monitor.getItemType() == "ASSIGNED_ATTENDEE") {
-    const getBoatId = R.path(["boat", "boatId"])
-    const getSeatNumber = R.path(["seat", "number"])
+    const getBoatId = path(["boat", "boatId"])
     const isMoveWithinBoat = getBoatId(props) == getBoatId(draggedItem)
+    const getSeatNumber = path(["seat", "number"])
     const isSameSeat = isMoveWithinBoat && getSeatNumber(props) == getSeatNumber(draggedItem)
     
     return !isSameSeat && (isMoveWithinBoat || !alreadyInBoat)
@@ -87,7 +94,7 @@ export function dropCollect(connect, monitor) {
   }
 }
 
-export default R.compose(
+export default compose(
   DropTarget(["ATTENDEE_LIST_ITEM", "ASSIGNED_ATTENDEE"], { canDrop, drop }, dropCollect),
   observer
 )(Seat)
