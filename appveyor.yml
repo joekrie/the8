@@ -1,5 +1,9 @@
 version: 0.1.{build}
 
+environment:
+  AZURE_KEY:
+    secure: Hd3sV13pSLAay9L53X7c/3XSkl0n7e1NQKi4QfQay+DazIcmyTrpaJWfzz+jyN1R
+
 build:
   project: dotnet\TheEight.sln
   verbosity: minimal
