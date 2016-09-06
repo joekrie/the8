@@ -2,11 +2,16 @@ version: 0.1.{build}
 
 environment:
   AZURE_KEY:
-    secure: Hd3sV13pSLAay9L53X7c/3XSkl0n7e1NQKi4QfQay+DazIcmyTrpaJWfzz+jyN1R
+    secure: Px0wZ+FveTB9pYNhfwVyqeeK8mUC0PgOe55p9WX2oQ+yMlUyb3hp/YOmfBuOtxo+
 
 build:
   project: dotnet\TheEight.sln
   verbosity: minimal
+
+branches:
+  only:
+  - develop
+  - master
 
 before_build:
 - cmd: dotnet restore dotnet

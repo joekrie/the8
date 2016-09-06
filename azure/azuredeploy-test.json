@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {},
+  "variables": {
+    "offerType": "Standard",
+    "databaseAccountName": "testdbjoekrie"
+  },
+  "resources": [
+    {
+      "apiVersion": "2015-04-08",
+      "type": "Microsoft.DocumentDB/databaseAccounts",
+      "name": "[variables('databaseAccountName')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "name": "[variables('databaseAccountName')]",
+        "databaseAccountOfferType": "[variables('offerType')]"
+      }
+    }
+  ]
+}
