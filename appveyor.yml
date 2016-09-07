@@ -1,11 +1,17 @@
-version: 0.1.{build}
+version: 0.1.0-{build}
 
 environment:
   AZURE_KEY:
     secure: Px0wZ+FveTB9pYNhfwVyqeeK8mUC0PgOe55p9WX2oQ+yMlUyb3hp/YOmfBuOtxo+
 
+before_build:
+- cmd: dotnet restore .\dotnet --configfile .\dotnet\nuget.config --verbosity Error
+
 build_script:
-- cmd: dotnet build .\dotnet\project.json
+- cmd: dotnet build .\dotnet\src\TheEight.WebApp
+
+after_build:
+- cmd: dotnet publish .\dotnet\src\TheEight.WebApp
 
 deploy:
 - provider: WebDeploy
@@ -20,9 +26,3 @@ branches:
   only:
   - develop
   - master
-
-before_build:
-- cmd: dotnet restore .\dotnet\project.json
-
-after_build:
-- cmd: dotnet publish .\dotnet\TheEight.sln --output %appveyor_build_folder%\dist --configuration Debug --no-build
