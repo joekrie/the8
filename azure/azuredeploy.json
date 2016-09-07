@@ -1,0 +1,137 @@
+﻿{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "environment": {
+      "type": "string",
+      "allowedValues": [
+        "dev",
+        "prod"
+      ]
+    },
+    "environmentName": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "variables": {
+    "environmentSettings": {
+      "dev": {
+        "appService": {
+          "tier": "Shared",
+          "size": "D1"
+        },
+        "sql": {
+          "tier": "Basic",
+          "size": "Basic",
+          "maxBytes": "2000000000"
+        }
+      },
+      "prod": {
+        "appService": {
+          "tier": "Basic",
+          "size": "B1"
+        },
+        "sql": {
+          "tier": "Standard",
+          "size": "S0",
+          "maxBytes": "5000000000"
+        }
+      }
+    },
+    "webSiteName": "[concat('webSite', uniqueString(resourceGroup().id))]",
+    "sqlServerName": "[concat('sqlserver', uniqueString(resourceGroup().id))]",
+    "sqlServerAdminPassword": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/{guid}/resourceGroups/{group-name}/providers/Microsoft.KeyVault/vaults/{vault-name}"
+        },
+        "secretName": "sqlServerAdminPassword"
+      }
+    },
+    "databaseName": "TheEight"
+  },
+  "resources": [
+    {
+      "name": "[variables('sqlserverName')]",
+      "type": "Microsoft.Sql/servers",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2014-04-01-preview",
+      "properties": {
+        "administratorLogin": "the8admin",
+        "administratorLoginPassword": "[variables('sqlServerAdminPassword')]"
+      },
+      "resources": [
+        {
+          "name": "TheEight",
+          "type": "databases",
+          "location": "[resourceGroup().location]",
+          "apiVersion": "2014-04-01-preview",
+          "dependsOn": [
+            "[concat('Microsoft.Sql/servers/', variables('sqlServerName'))]"
+          ],
+          "properties": {
+            "edition": "[variables('environmentSettings')[parameters('environment')].sql.tier]",
+            "maxSizeBytes": "[variables('environmentSettings')[parameters('environment')].sql.maxSizeBytes]",
+            "requestedServiceObjectiveName": "[variables('environmentSettings')[parameters('environment')].sql.size]"
+          }
+        },
+        {
+          "type": "firewallrules",
+          "apiVersion": "2014-04-01-preview",
+          "dependsOn": [
+            "[concat('Microsoft.Sql/servers/', variables('sqlServerName'))]"
+          ],
+          "location": "[resourceGroup().location]",
+          "name": "AllowAllWindowsAzureIps",
+          "properties": {
+            "endIpAddress": "0.0.0.0",
+            "startIpAddress": "0.0.0.0"
+          }
+        }
+      ]
+    },
+    {
+      "apiVersion": "2015-08-01",
+      "name": "[parameters('environmentName')]",
+      "type": "Microsoft.Web/serverfarms",
+      "location": "[resourceGroup().location]",
+      "sku": {
+        "name": "[variables('environmentSettings')[parameters('environment')].appServiceSku.tier]",
+        "capacity": "[variables('environmentSettings')[parameters('environment')].appServiceSku.size]"
+      },
+      "properties": {
+        "name": "[parameters('environmentName')]"
+      }
+    },
+    {
+      "apiVersion": "2015-08-01",
+      "name": "[variables('webSiteName')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverFarms/', parameters('environmentName'))]"
+      ],
+      "properties": {
+        "name": "[variables('webSiteName')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('environmentName'))]"
+      },
+      "resources": [
+        {
+          "apiVersion": "2015-08-01",
+          "type": "config",
+          "name": "connectionstrings",
+          "dependsOn": [
+            "[concat('Microsoft.Web/Sites/', variables('webSiteName'))]"
+          ],
+          "properties": {
+            "DefaultConnection": {
+              "value": "[concat('Data Source=tcp:', reference(concat('Microsoft.Sql/servers/', variables('sqlserverName'))).fullyQualifiedDomainName, ',1433;Initial Catalog=', variables('databaseName'), ';User Id=', parameters('administratorLogin'), '@', variables('sqlserverName'), ';Password=', parameters('administratorLoginPassword'), ';Persist Security Info=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Authentication=ActiveDirectoryIntegrated;')]",
+              "type": "SQLServer"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
