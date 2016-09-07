@@ -11,7 +11,7 @@ build_script:
 - cmd: dotnet build .\dotnet\src\TheEight.WebApp
 
 after_build:
-- cmd: dotnet publish .\dotnet\src\TheEight.WebApp --version-suffix {build}
+- cmd: dotnet publish .\dotnet\src\TheEight.WebApp --version-suffix %APPVEYOR_BUILD_NUMBER%
 
 deploy:
 - provider: WebDeploy
