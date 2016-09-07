@@ -4,9 +4,17 @@ environment:
   AZURE_KEY:
     secure: Px0wZ+FveTB9pYNhfwVyqeeK8mUC0PgOe55p9WX2oQ+yMlUyb3hp/YOmfBuOtxo+
 
-build:
-  project: dotnet\TheEight.sln
-  verbosity: minimal
+build_script:
+- cmd: dotnet build .\dotnet\project.json
+
+deploy:
+- provider: WebDeploy
+  server: https://the8-dev.scm.azurewebsites.net:443/msdeploy.axd?site=the8-dev
+  website: the8-dev
+  username: $the8-dev
+  password:
+    secure: IowojYjSU3gwHS58Ej4VhbvEGldNwvRCb/IvktrZU+ATY5hewAMwQ179Fy4wnp7Tbi6Vnm8KhoMSKleYbOtoyg==
+  aspnet_core: true
 
 branches:
   only:
@@ -14,4 +22,7 @@ branches:
   - master
 
 before_build:
-- cmd: dotnet restore dotnet
+- cmd: dotnet restore .\dotnet\project.json
+
+after_build:
+- cmd: dotnet publish .\dotnet\TheEight.sln --output %appveyor_build_folder%\dist --configuration Debug --no-build
