@@ -196,3 +196,4 @@ TheEight.sln.DotSettings.user
 **/test-results/*
 *.jfm
 dotnet/test/TheEight.WebApp.Tests/project.lock.json
+dotnet/artifacts/*

@@ -11,7 +11,7 @@ build_script:
 - cmd: dotnet build .\dotnet\src\TheEight.WebApp
 
 after_build:
-- cmd: dotnet publish .\dotnet\src\TheEight.WebApp
+- cmd: dotnet publish .\dotnet\src\TheEight.WebApp --version-suffix {build}
 
 deploy:
 - provider: WebDeploy
