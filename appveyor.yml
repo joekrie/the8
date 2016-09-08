@@ -4,7 +4,9 @@ environment:
   AZURE_KEY:
     secure: Px0wZ+FveTB9pYNhfwVyqeeK8mUC0PgOe55p9WX2oQ+yMlUyb3hp/YOmfBuOtxo+
 
-cache: .\dotnet\packages
+cache: 
+- .\dotnet\packages
+- .\node_modules
 
 before_build:
 - cmd: dotnet restore .\dotnet --configfile .\dotnet\nuget.config --packages .\dotnet\packages --verbosity Error
