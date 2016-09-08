@@ -17,8 +17,9 @@ build_script:
 
 after_build:
 - cmd: dotnet publish .\dotnet\src\TheEight.WebApp --output .\dotnet\artifacts --version-suffix %APPVEYOR_BUILD_NUMBER%
-- cmd: 7z a -tzip .\dotnet\artifacts.zip .\dotnet\artifacts
-- ps: Push-AppveyorArtifact .\dotnet\artifacts.zip
+
+artifacts:
+- path: .\dotnet\artifacts
 
 deploy:
 - provider: WebDeploy
