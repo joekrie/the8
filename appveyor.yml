@@ -9,7 +9,7 @@ cache:
 - .\node_modules
 
 before_build:
-- cmd: dotnet restore .\dotnet --configfile .\dotnet\nuget.config --packages .\dotnet\packages --verbosity Error
+- cmd: dotnet restore .\dotnet --configfile .\dotnet\nuget.config --packages .\dotnet\packages --verbosity Warning
 
 build_script:
 - cmd: dotnet build .\dotnet\src\TheEight.WebApp
