@@ -5,7 +5,7 @@ environment:
     secure: Px0wZ+FveTB9pYNhfwVyqeeK8mUC0PgOe55p9WX2oQ+yMlUyb3hp/YOmfBuOtxo+
 
 before_build:
-- cmd: dotnet restore .\dotnet --configfile .\dotnet\nuget.config --verbosity Error
+- cmd: dotnet restore .\dotnet --configfile .\dotnet\nuget.config --packages .\dotnet\packages --verbosity Error
 
 build_script:
 - cmd: dotnet build .\dotnet\src\TheEight.WebApp
