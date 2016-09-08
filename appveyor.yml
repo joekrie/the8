@@ -13,6 +13,11 @@ build_script:
 after_build:
 - cmd: dotnet publish .\dotnet\src\TheEight.WebApp --version-suffix %APPVEYOR_BUILD_NUMBER%
 
+artifacts:
+- path: .\dotnet\artifacts
+  name: WebDeploy
+  type: WebDeployPackage
+
 deploy:
 - provider: WebDeploy
   server: https://the8-dev.scm.azurewebsites.net:443/msdeploy.axd?site=the8-dev

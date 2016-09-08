@@ -1,4 +1,5 @@
 {
+  "version": "0.1.0-*",
   "dependencies": {
     "Autofac": "4.0.0-rc3-286",
     "Autofac.Extensions.DependencyInjection": "4.0.0-rc3-280",
