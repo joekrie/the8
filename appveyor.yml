@@ -5,34 +5,34 @@ environment:
     secure: Px0wZ+FveTB9pYNhfwVyqeeK8mUC0PgOe55p9WX2oQ+yMlUyb3hp/YOmfBuOtxo+
 
 cache: 
-- .\dotnet\packages
-- .\node_modules
+  - .\dotnet\packages
+  - .\node_modules
 
 before_build:
-- cmd: dotnet restore .\dotnet --configfile .\dotnet\nuget.config --packages .\dotnet\packages --verbosity Minimal
-- cmd: npm install
+  - cmd: dotnet restore .\dotnet --configfile .\dotnet\nuget.config --packages .\dotnet\packages --verbosity Minimal
+  - cmd: npm install
 
 build_script:
-- cmd: dotnet build .\dotnet\src\TheEight.WebApp
+  - cmd: dotnet build .\dotnet\src\TheEight.WebApp
 
 after_build:
-- cmd: dotnet publish .\dotnet\src\TheEight.WebApp --output .\dotnet\artifacts --version-suffix %APPVEYOR_BUILD_NUMBER%
+  - cmd: dotnet publish .\dotnet\src\TheEight.WebApp --output .\dotnet\artifacts --version-suffix %APPVEYOR_BUILD_NUMBER%
 
 artifacts:
-- path: .\dotnet\artifacts
+  - path: .\dotnet\artifacts
 
 deploy:
-- provider: WebDeploy
-  server: https://the8-dev.scm.azurewebsites.net:443/msdeploy.axd?site=the8-dev
-  website: the8-dev
-  username: $the8-dev
-  password:
-    secure: IowojYjSU3gwHS58Ej4VhbvEGldNwvRCb/IvktrZU+ATY5hewAMwQ179Fy4wnp7Tbi6Vnm8KhoMSKleYbOtoyg==
-  aspnet_core: true
+  - provider: WebDeploy
+    server: https://the8-dev.scm.azurewebsites.net:443/msdeploy.axd?site=the8-dev
+    website: the8-dev
+    username: $the8-dev
+    password:
+      secure: IowojYjSU3gwHS58Ej4VhbvEGldNwvRCb/IvktrZU+ATY5hewAMwQ179Fy4wnp7Tbi6Vnm8KhoMSKleYbOtoyg==
+    aspnet_core: true
 
 branches:
   only:
-  - develop
-  - master
+    - develop
+    - master
 
 clone_depth: 5

@@ -765,7 +765,7 @@
           "lib/net40/Microsoft.WindowsAzure.Storage.dll": {}
         }
       },
-      "TheEight.Common/1.0.0": {
+      "TheEight.Common/0.1.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
@@ -779,7 +779,7 @@
           "net461/TheEight.Common.dll": {}
         }
       },
-      "TheEight.Options/1.0.0": {
+      "TheEight.Options/0.1.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6.1",
         "compile": {
@@ -2711,12 +2711,12 @@
         "lib/wpa/Microsoft.WindowsAzure.Storage.dll"
       ]
     },
-    "TheEight.Common/1.0.0": {
+    "TheEight.Common/0.1.0": {
       "type": "project",
       "path": "../TheEight.Common/project.json",
       "msbuildProject": "../TheEight.Common/TheEight.Common.xproj"
     },
-    "TheEight.Options/1.0.0": {
+    "TheEight.Options/0.1.0": {
       "type": "project",
       "path": "../TheEight.Options/project.json",
       "msbuildProject": "../TheEight.Options/TheEight.Options.xproj"

@@ -42,7 +42,7 @@
           "lib/net35-Client/NodaTime.dll": {}
         }
       },
-      "TheEight.Domain/1.0.0": {
+      "TheEight.Domain/0.1.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
@@ -95,7 +95,7 @@
         "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1+XamariniOS1/NodaTime.xml"
       ]
     },
-    "TheEight.Domain/1.0.0": {
+    "TheEight.Domain/0.1.0": {
       "type": "project",
       "path": "../TheEight.Domain/project.json",
       "msbuildProject": "../TheEight.Domain/TheEight.Domain.xproj"
