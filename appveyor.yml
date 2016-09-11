@@ -21,10 +21,13 @@ build_script:
 artifacts:
   - path: .\dotnet\artifacts
 
+test: off
+
 deploy:
   - provider: WebDeploy
     server: https://the8-dev.scm.azurewebsites.net:443/msdeploy.axd?site=the8-dev
     remove_files: false
+    app_offline: true
     website: the8-dev
     username: $the8-dev
     password:
