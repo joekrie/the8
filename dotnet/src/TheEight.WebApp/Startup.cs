@@ -34,10 +34,9 @@ namespace TheEight.WebApp
             }
 
             //ConfigureAuth(app);
-            ConfigureLogging(loggerFactory);
 
             app.UseStaticFiles();
-            app.UseMvc(ConfigureRouting);
+            app.UseMvcWithDefaultRoute();
 
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings().Configure(_isDevelopment);
         }

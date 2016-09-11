@@ -24,7 +24,7 @@ namespace TheEight.WebApp
                 {
                     if (!_isDevelopment)
                     {
-                        options.Filters.Add(new RequireHttpsAttribute());
+                        //options.Filters.Add(new RequireHttpsAttribute());
                     }
                 });
             

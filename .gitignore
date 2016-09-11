@@ -198,3 +198,4 @@ TheEight.sln.DotSettings.user
 dotnet/**/project.lock.json
 dotnet/artifacts/*
 dotnet/packages/*
+dotnet/src/TheEight.WebApp/web.config
