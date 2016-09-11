@@ -4,10 +4,6 @@ environment:
   AZURE_KEY:
     secure: Px0wZ+FveTB9pYNhfwVyqeeK8mUC0PgOe55p9WX2oQ+yMlUyb3hp/YOmfBuOtxo+
 
-cache: 
-  - .\dotnet\packages
-  - .\node_modules
-
 before_build:
   - cmd: dotnet restore .\dotnet --configfile .\dotnet\nuget.config --packages .\dotnet\packages --verbosity Minimal
   - cmd: npm install
@@ -24,6 +20,7 @@ artifacts:
 deploy:
   - provider: WebDeploy
     server: https://the8-dev.scm.azurewebsites.net:443/msdeploy.axd?site=the8-dev
+    remove_files: true
     website: the8-dev
     username: $the8-dev
     password:
