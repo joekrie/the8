@@ -29,7 +29,7 @@ namespace TheEight.WebApp
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
             //if (_isDevelopment)
-            {
+            //{
                 app.UseDeveloperExceptionPage();
             //}
 
