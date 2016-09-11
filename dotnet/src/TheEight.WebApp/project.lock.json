@@ -3490,7 +3490,7 @@
       ]
     },
     "NETStandard.Library/1.6.0": {
-      "sha512": "3V5o320fwDgSisfDbp3C3YGazQ+lBTgzFKk+qbhI2KE51Nf4Q/TlGyMZ2UJMg0PzirroJ8hzsaX+P8bSVIRCAQ==",
+      "sha512": "ypsCvIdCZ4IoYASJHt6tF2fMo7N30NLgV1EbmC+snO490OMl9FvVxmumw14rhReWU3j3g7BYudG6YCrchwHJlA==",
       "type": "package",
       "path": "NETStandard.Library/1.6.0",
       "files": [
@@ -5034,7 +5034,7 @@
       ]
     },
     "System.Net.Sockets/4.1.0": {
-      "sha512": "IQJZJZGGawJmvdtw3G9fcETfpEFmGdgv167HhgAzScP54Zshic9+PzzEHCZMXtsLn1sumCvCHWDaf6nA1LGnBA==",
+      "sha512": "xAz0N3dAV/aR/9g8r0Y5oEqU1JRsz29F5EGb/WVHmX3jVSLqi2/92M5hTad2aNWovruXrJpJtgZ9fccPMG9uSw==",
       "type": "package",
       "path": "System.Net.Sockets/4.1.0",
       "files": [
@@ -6578,7 +6578,7 @@
       ]
     },
     "System.Threading.Timer/4.0.1": {
-      "sha512": "B5szWVqFgBYD7P54P1+QVB3l1fb4greYUf8T2dvzBi74rE9ptitVb/68+lCX+nkw2RRJHb7umFEtYi3xZoDbwQ==",
+      "sha512": "saGfUV8uqVW6LeURiqxcGhZ24PzuRNaUBtbhVeuUAvky1naH395A/1nY0P2bWvrw/BreRtIB/EzTDkGBpqCwEw==",
       "type": "package",
       "path": "System.Threading.Timer/4.0.1",
       "files": [
@@ -6914,13 +6914,13 @@
   },
   "tools": {
     ".NETCoreApp,Version=v1.0": {
-      "Microsoft.AspNetCore.Server.IISIntegration.Tools/1.0.0-preview1-final": {
+      "Microsoft.AspNetCore.Server.IISIntegration.Tools/1.0.0-preview2-final": {
         "type": "package",
         "dependencies": {
-          "Microsoft.DotNet.ProjectModel": "1.0.0-rc2-002702",
-          "Microsoft.Extensions.CommandLineUtils": "1.0.0-rc2-final",
-          "Microsoft.NETCore.App": "1.0.0-rc2-3002702",
-          "System.Diagnostics.Process": "4.1.0-rc2-24027"
+          "Microsoft.DotNet.ProjectModel": "1.0.0-rc3-003121",
+          "Microsoft.Extensions.CommandLineUtils": "1.0.0",
+          "Microsoft.NETCore.App": "1.0.0",
+          "System.Diagnostics.Process": "4.1.0"
         },
         "compile": {
           "lib/netcoreapp1.0/dotnet-publish-iis.dll": {}
@@ -6933,7 +6933,7 @@
   },
   "projectFileToolGroups": {
     ".NETCoreApp,Version=v1.0": [
-      "Microsoft.AspNetCore.Server.IISIntegration.Tools >= 1.0.0-preview1-final"
+      "Microsoft.AspNetCore.Server.IISIntegration.Tools >= 1.0.0-preview2-final"
     ]
   }
 }

@@ -13,10 +13,10 @@ before_build:
   - cmd: npm install
 
 build_script:
-  - cmd: dotnet build .\dotnet\src\TheEight.WebApp
-
-after_build:
-  - cmd: dotnet publish .\dotnet\src\TheEight.WebApp --output .\dotnet\artifacts --version-suffix %APPVEYOR_BUILD_NUMBER%
+  - cmd: cd .\dotnet\src\TheEight.WebApp
+  - cmd: dotnet build
+  - cmd: dotnet publish --output ..\..\artifacts --version-suffix %APPVEYOR_BUILD_NUMBER%
+  - cmd: cd ..\..\..
 
 artifacts:
   - path: .\dotnet\artifacts
