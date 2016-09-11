@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -20,7 +21,7 @@ namespace TheEight.WebApp
             var configBuilder = new ConfigurationBuilder()
                 .SetBasePath(hostEnv.ContentRootPath)
                 .AddEnvironmentVariables()
-                .AddUserSecrets()
+                //.AddUserSecrets()
                 .AddApplicationInsightsSettings(_isDevelopment);
 
             _config = configBuilder.Build();
@@ -28,17 +29,28 @@ namespace TheEight.WebApp
 
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
-            //if (_isDevelopment)
-            //{
+            try
+            {
+                //if (_isDevelopment)
+                //{
                 app.UseDeveloperExceptionPage();
-            //}
+                //}
 
-            //ConfigureAuth(app);
+                //ConfigureAuth(app);
 
-            app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
+                app.UseStaticFiles();
+                app.UseMvcWithDefaultRoute();
 
-            JsonConvert.DefaultSettings = () => new JsonSerializerSettings().Configure(_isDevelopment);
+                JsonConvert.DefaultSettings = () => new JsonSerializerSettings().Configure(_isDevelopment);
+            }
+            catch (System.Exception ex)
+            {
+                app.Run(async context =>
+                {
+                    context.Response.ContentType = "text/plain";
+                    await context.Response.WriteAsync(ex.Message);
+                });
+            }
         }
     }
 }
