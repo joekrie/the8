@@ -36,8 +36,10 @@ deploy:
     aspnet_core: true
 
 after_deploy:
-  - cmd: .\node_modules\.bin\gulp e2e-test:ci --cwd .\e2e-tests
-  - ps: (Get-Content .\) -Join "`n" | ConvertFrom-Json
+  - cmd: .\node_modules\.bin\wdio
+  - ps: >- 
+      $ChromeResult = Get-Content .\e2e-tests\test-results\WDIO.json.chrome.0a.json | ConvertFrom-Json
+      $ChromeResult
 
 branches:
   only:

@@ -69,6 +69,7 @@
     "gulp": "^3.9.1",
     "gulp-eslint": "^3.0.1",
     "gulp-util": "^3.0.7",
+    "gulp-webdriver": "^2.0.2",
     "i18n-webpack-plugin": "^0.3.0",
     "imports-loader": "^0.6.5",
     "jasmine-core": "^2.4.1",
@@ -94,11 +95,8 @@
     "sass-resources-loader": "^1.0.2",
     "selenium-webdriver": "^3.0.0-beta-2",
     "style-loader": "^0.13.1",
+    "transform-regenerator": "^0.9.3",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.1",
-    "webpack-dashboard": "0.0.1",
-    "webpack-dev-server": "^1.14.1",
-    "gulp-webdriver": "^2.0.2",
     "wdio": "^0.3.3",
     "wdio-dot-reporter": "0.0.6",
     "wdio-jasmine-framework": "^0.2.5",
@@ -107,6 +105,9 @@
     "wdio-phantomjs-service": "^0.1.0",
     "wdio-selenium-standalone-service": "0.0.5",
     "wdio-spec-reporter": "0.0.3",
-    "webdriverio": "^4.2.5"
+    "webdriverio": "^4.2.5",
+    "webpack": "^1.13.1",
+    "webpack-dashboard": "0.0.1",
+    "webpack-dev-server": "^1.14.1"
   }
 }
