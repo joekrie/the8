@@ -20,7 +20,7 @@ exports.config = {
   reporterOptions: {
     outputDir: "./e2e-tests/test-results"
   },
-  services: ["selenium-standalone"],
+  services: ["phantomjs"],
   capabilities: [
     {
       maxInstances: 5,
