@@ -8,15 +8,12 @@ cache:
   - .\dotnet\packages
   - .\node_modules
 
-install:
-  - cmd: npm install
-  - cmd: npm link gulp
-
 before_build:
+  - cmd: npm install
   - cmd: dotnet restore .\dotnet --configfile .\dotnet\nuget.config --packages .\dotnet\packages --verbosity Minimal
 
 build_script:
-  - cmd: gulp build:ci --cwd .\ui\tools
+  - cmd: .\node_modules\.bin\gulp build:ci --cwd .\ui\tools
   - cmd: cd .\dotnet\src\TheEight.WebApp
   - cmd: dotnet build
   - cmd: dotnet publish --output ..\..\artifacts --version-suffix %APPVEYOR_BUILD_NUMBER%
@@ -39,7 +36,7 @@ deploy:
     aspnet_core: true
 
 after_deploy:
-  - cmd: gulp e2e-test:ci --cwd .\e2e-tests
+  - cmd: .\node_modules\.bin\gulp e2e-test:ci --cwd .\e2e-tests
 
 branches:
   only:
