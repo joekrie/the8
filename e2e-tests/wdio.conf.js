@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3000"
+const baseUrl = "http://the8-dev.azurewebsites.net"
 
 exports.config = {
   specs: [

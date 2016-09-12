@@ -3490,7 +3490,7 @@
       ]
     },
     "NETStandard.Library/1.6.0": {
-      "sha512": "ypsCvIdCZ4IoYASJHt6tF2fMo7N30NLgV1EbmC+snO490OMl9FvVxmumw14rhReWU3j3g7BYudG6YCrchwHJlA==",
+      "sha512": "3V5o320fwDgSisfDbp3C3YGazQ+lBTgzFKk+qbhI2KE51Nf4Q/TlGyMZ2UJMg0PzirroJ8hzsaX+P8bSVIRCAQ==",
       "type": "package",
       "path": "NETStandard.Library/1.6.0",
       "files": [
@@ -5034,7 +5034,7 @@
       ]
     },
     "System.Net.Sockets/4.1.0": {
-      "sha512": "xAz0N3dAV/aR/9g8r0Y5oEqU1JRsz29F5EGb/WVHmX3jVSLqi2/92M5hTad2aNWovruXrJpJtgZ9fccPMG9uSw==",
+      "sha512": "IQJZJZGGawJmvdtw3G9fcETfpEFmGdgv167HhgAzScP54Zshic9+PzzEHCZMXtsLn1sumCvCHWDaf6nA1LGnBA==",
       "type": "package",
       "path": "System.Net.Sockets/4.1.0",
       "files": [
@@ -6578,7 +6578,7 @@
       ]
     },
     "System.Threading.Timer/4.0.1": {
-      "sha512": "saGfUV8uqVW6LeURiqxcGhZ24PzuRNaUBtbhVeuUAvky1naH395A/1nY0P2bWvrw/BreRtIB/EzTDkGBpqCwEw==",
+      "sha512": "B5szWVqFgBYD7P54P1+QVB3l1fb4greYUf8T2dvzBi74rE9ptitVb/68+lCX+nkw2RRJHb7umFEtYi3xZoDbwQ==",
       "type": "package",
       "path": "System.Threading.Timer/4.0.1",
       "files": [

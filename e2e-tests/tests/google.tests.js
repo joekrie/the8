@@ -4,6 +4,12 @@ describe("google.com", () => {
     browser.setValue("[name='q']", "webdriver")
     browser.click("[name='btnG']")
 
-    browser.waitUntil(() => browser.getTitle() === "webdriver - Google Search", 5000);
+    browser.waitUntil(() => browser.getTitle() === "webdriver - Google Search", 5000)
+  })
+})
+
+describe("boat lineup planner", () => {
+  it("loads the page", () => {
+    browser.url("/water-events/boat-lineups/00000000-0000-0000-0000-000000000000")
   })
 })
