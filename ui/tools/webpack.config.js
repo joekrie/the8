@@ -23,7 +23,6 @@ module.exports = {
         query: {
           plugins: [
             "transform-decorators-legacy",
-            "transform-regenerator",
             [
               "transform-runtime",
               {
