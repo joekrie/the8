@@ -1,5 +1,5 @@
 const gulp = require("gulp")
-const webdriver = require("webdriverio")
+const webdriver = require("gulp-webdriver")
 const rimraf = require("rimraf")
 
 gulp.task("default", ["e2e-test"])
