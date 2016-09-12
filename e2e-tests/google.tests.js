@@ -1,3 +1,5 @@
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000
+
 describe("google.com", () => {
   it("should let you search for 'webdriver'", () => {
     browser.url("http://www.google.com/ncr")
