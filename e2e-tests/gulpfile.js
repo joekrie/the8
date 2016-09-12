@@ -39,7 +39,7 @@ gulp.task("e2e-test:ci", () => {
   }
 
   return gulp
-    .src("./e2e-tests/wdio.conf.js")
+    .src("wdio.conf.js")
     .pipe(webdriver(config))
 })
 

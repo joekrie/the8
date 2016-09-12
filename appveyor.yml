@@ -37,6 +37,7 @@ deploy:
 
 after_deploy:
   - cmd: .\node_modules\.bin\gulp e2e-test:ci --cwd .\e2e-tests
+  - ps: (Get-Content .\) -Join "`n" | ConvertFrom-Json
 
 branches:
   only:
