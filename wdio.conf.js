@@ -50,7 +50,7 @@ if (process.env.APPVEYOR) {
     console.log("Sending test results to AppVeyor")
     console.log(body)
 
-    request({
+    request.post({
       url,
       json: true,
       body
