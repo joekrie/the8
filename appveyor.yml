@@ -12,7 +12,7 @@ artifacts:
 test: off
 
 
-after_deploy:
+on_finish:
   - cmd: .\node_modules\.bin\wdio
 
 branches:
