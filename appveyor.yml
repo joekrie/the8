@@ -4,6 +4,7 @@ environment:
   AZURE_KEY:
     secure: Px0wZ+FveTB9pYNhfwVyqeeK8mUC0PgOe55p9WX2oQ+yMlUyb3hp/YOmfBuOtxo+
 
+build: off
 
 artifacts:
   - path: .\dotnet\artifacts
