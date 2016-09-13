@@ -4,6 +4,9 @@ environment:
   AZURE_KEY:
     secure: Px0wZ+FveTB9pYNhfwVyqeeK8mUC0PgOe55p9WX2oQ+yMlUyb3hp/YOmfBuOtxo+
 
+cache: 
+  - .\node_modules
+
 build: off
 
 artifacts:
@@ -12,7 +15,9 @@ artifacts:
 test: off
 
 
+
 on_finish:
+  - cmd: npm install
   - cmd: .\node_modules\.bin\wdio
 
 branches:
