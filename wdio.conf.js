@@ -1,4 +1,5 @@
 const request = require("request")
+const resolve = require("url").resolve
 
 const config = {
   specs: [
@@ -32,18 +33,26 @@ const config = {
   afterTest: test => console.log(test)
 }
 
-if (process.env.CI) {
+if (process.env.APPVEYOR) {
+  console.log("Detected AppVeyor")
+  const url = resolve(process.env.APPVEYOR_API_URL, "/api/tests")
+
   config.afterTest = test => {
+    const body = {
+      "testName": test.fullName,
+      "testFramework": "WebdriverIO",
+      "fileName": test.file,
+      "outcome": test.passed ? "Passed" : "Failed",
+      "durationMilliseconds": test.duration
+    }
+
+    console.log("Sending test results to AppVeyor")
+    console.log(body)
+
     request({
-      url: `${process.env.APPVEYOR_API_URL}api/tests`,
+      url,
       json: true,
-      body: {
-        "testName": test.fullName,
-        "testFramework": "WebdriverIO",
-        "fileName": test.file,
-        "outcome": test.passed ? "Passed" : "Failed",
-        "durationMilliseconds": test.duration
-      }
+      body
     })
   }
 }

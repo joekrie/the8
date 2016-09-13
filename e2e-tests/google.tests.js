@@ -6,7 +6,7 @@ describe("google.com", () => {
     browser.setValue("[name='q']", "webdriver")
     browser.click("[name='btnG']")
 
-    browser.waitUntil(() => browser.getTitle() === "webdriver - Google SearchX", 5000)
+    browser.waitUntil(() => browser.getTitle() === "webdriver - Google Search", 5000)
   })
 })
 
