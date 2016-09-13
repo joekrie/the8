@@ -28,13 +28,14 @@ const config = {
       maxInstances: 5,
       browserName: "chrome"
     }
-  ]
+  ],
+  afterTest: test => console.log(test)
 }
 
-if (env.CI) {
+if (process.env.CI) {
   config.afterTest = test => {
     request({
-      url: `${env.APPVEYOR_API_URL}api/tests`,
+      url: `${process.env.APPVEYOR_API_URL}api/tests`,
       json: true,
       body: {
         "testName": test.fullName,

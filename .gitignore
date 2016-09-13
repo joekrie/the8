@@ -201,3 +201,4 @@ dotnet/packages/*
 dotnet/src/TheEight.WebApp/web.config
 dotnet/src/TheEight.WebApp/Properties/PublishProfiles/*
 *.jfm
+e2e-tests/error-screenshots/*
