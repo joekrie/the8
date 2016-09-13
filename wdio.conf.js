@@ -54,6 +54,10 @@ if (process.env.APPVEYOR) {
       url,
       json: true,
       body
+    }, (err, res, body) => {
+      console.log(err)
+      console.log(res)
+      console.log(body)
     })
   }
 }
