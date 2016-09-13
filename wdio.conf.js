@@ -1,4 +1,6 @@
-exports.config = {
+const request = require("request")
+
+const config = {
   specs: [
     "./e2e-tests/**/*.tests.js"
   ],
@@ -7,7 +9,7 @@ exports.config = {
   sync: true,
   logLevel: "result",
   coloredLogs: true,
-  screenshotPath: "./error-screenshots",
+  screenshotPath: "./e2e-tests/error-screenshots",
   baseUrl: "http://the8-dev.azurewebsites.net",
   waitforTimeout: 10000,
   connectionRetryTimeout: 90000,
@@ -16,7 +18,7 @@ exports.config = {
   jasmineNodeOpts: {
     defaultTimeoutInterval: 10000
   },
-  reporters: ["spec", "json"],
+  reporters: ["spec"],
   reporterOptions: {
     outputDir: "./e2e-tests/test-results"
   },
@@ -28,3 +30,21 @@ exports.config = {
     }
   ]
 }
+
+if (env.CI) {
+  config.afterTest = test => {
+    request({
+      url: `${env.APPVEYOR_API_URL}api/tests`,
+      json: true,
+      body: {
+        "testName": test.fullName,
+        "testFramework": "WebdriverIO",
+        "fileName": test.file,
+        "outcome": test.passed ? "Passed" : "Failed",
+        "durationMilliseconds": test.duration
+      }
+    })
+  }
+}
+
+exports.config = config

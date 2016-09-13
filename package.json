@@ -108,6 +108,7 @@
     "webdriverio": "^4.2.5",
     "webpack": "^1.13.1",
     "webpack-dashboard": "0.0.1",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "request": "^2.74.0"
   }
 }
