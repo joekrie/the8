@@ -34,9 +34,7 @@ const config = {
 }
 
 if (process.env.APPVEYOR) {
-  console.log("Detected AppVeyor")
   const url = resolve(process.env.APPVEYOR_API_URL, "/api/tests")
-  console.log(`Posting test results to ${url}`)
 
   config.afterTest = test => {
     const body = {
@@ -47,13 +45,10 @@ if (process.env.APPVEYOR) {
       "durationMilliseconds": test.duration
     }
 
-    console.log("Sending test results to AppVeyor")
-    console.log(body)
-
     request.post({
       url,
-      json: true,
-      body
+      body,
+      json: true
     }, () => {})
   }
 }
