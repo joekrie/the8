@@ -21,15 +21,9 @@ export default class Attendee extends Component {
     }
   }
 
-  componentDidMount() {
-    $(this.positionRef).tooltip({
-      placement: "right"
-    })
-  }
-
   render() {
     return (
-      <span ref={ref => this.positionRef = ref}  title={this.positionLabels[this.props.position].title}>
+      <span title={this.positionLabels[this.props.position].title}>
         {this.positionLabels[this.props.position].abbr}
       </span>
     )
