@@ -1,32 +1,15 @@
 import { Component } from "react"
 import { DragLayer } from "react-dnd"
 import R from "ramda"
+import { StyleSheet, css } from "aphrodite"
 
 import Attendee from "./Attendee"
 
-import "./AttendeeDragLayer.scss"
-
 class AttendeeDragLayer extends Component {
   render() {
-    function getDragItemStyles(currentOffset) {
-      if (!currentOffset) {
-        return {
-          "display": "none"
-        }
-      }
-
-      const { x, y } = currentOffset
-      const transform = `translate(${x}px, ${y}px)`
-
-      return {
-        "transform": transform,
-        "WebkitTransform": transform
-      }
-    }
-
     if (this.props.item && this.props.item.attendee) {
       return (
-        <div className="drag-layer">
+        <div className={css(styles.dragLayer)}>
           <div style={getDragItemStyles(this.props.currentOffset)}>
             <Attendee attendee={this.props.item.attendee} />
           </div>
@@ -35,8 +18,41 @@ class AttendeeDragLayer extends Component {
     }
     
     return (
-      <div className="drag-layer"></div>
+      <div className={css(styles.dragLayer)}></div>
     )
+  }
+}
+
+const styles = StyleSheet.create({
+  dragLayer: {
+    position: "fixed",
+    pointerEvents: "none",
+    zIndex: 100,
+    left: 0,
+    top: 0,
+    width: "100%",
+    height: "100%"
+  },
+  attendee: {
+    padding: "0.4rem",
+    width: "20rem",
+    lineHeight: 1
+  }
+})
+
+function getDragItemStyles(currentOffset) {
+  if (!currentOffset) {
+    return {
+      "display": "none"
+    }
+  }
+
+  const { x, y } = currentOffset
+  const transform = `translate(${x}px, ${y}px)`
+
+  return {
+    "transform": transform,
+    "WebkitTransform": transform
   }
 }
 

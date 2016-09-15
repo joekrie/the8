@@ -2,10 +2,10 @@ import { Component } from "react"
 import { DragSource } from "react-dnd"
 import { getEmptyImage } from "react-dnd-html5-backend"
 import R from "ramda"
+import { StyleSheet, css } from "aphrodite"
+import classNames from "classnames"
 
 import Attendee from "../common/Attendee"
-
-import "./AttendeeListItem.scss"
 
 class AttendeeListItem extends Component {
   componentDidMount() {
@@ -15,13 +15,19 @@ class AttendeeListItem extends Component {
   render() {
     return (
       this.props.connectDragSource(
-        <div className="attendee-list-item">
+        <div className={css(styles.root)}>
           <Attendee attendee={this.props.attendee} />
         </div>
       )
     )
   }
 }
+
+const styles = StyleSheet.create({
+  root: {
+    marginBottom: "10px"
+  }
+})
   
 function beginDrag(props) {
   return {

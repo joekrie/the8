@@ -1,7 +1,5 @@
 import { Component } from "react"
 
-import "./styles.scss"
-
 export default class LoadingAnimation extends Component {
   constructor() {
     super()
