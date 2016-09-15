@@ -8,7 +8,7 @@ const opn = require("opn")
 const KarmaServer = require("karma").Server
 
 const webpackConfig = require("./webpack.config.js")
-const distPath = path.join(__dirname, "../../dotnet/src/TheEight.WebApp/wwwroot/app")
+const distPath = path.join(__dirname, "../dist")
 
 gulp.task("default", ["test", "lint", "build"])
 
@@ -102,29 +102,25 @@ gulp.task("build:watch", done => {
     }
   )
 
+  const port = 8085
+
   config.entry["dev-server"] = [
-    "webpack-dev-server/client?http://localhost:8085",
+    `webpack-dev-server/client?http://localhost:${port}`,
     "webpack/hot/only-dev-server"
   ]
 
-  const compiler = webpack(config)
-  const port = 8085
-
-  const devServerConfig = {
+  new WebpackDevServer(webpack(config), {
     publicPath: "/static/",
     hot: true,
     historyApiFallback: true
-  }
+  }).listen(port, "localhost", (err, result) => {
+    if (err) {
+      throw new gutil.PluginError("webpack", err)
+    }
 
-  new WebpackDevServer(compiler, devServerConfig)
-    .listen(port, "localhost", (err, result) => {
-      if (err) {
-        throw new gutil.PluginError("webpack", err)
-      }
-
-      gutil.log("[webpack-dev-server]", `Listening at http://localhost:${port}/`)
-      opn(`http://localhost:${port}/dev-server.html`).then(done)
-    })
+    gutil.log("[webpack-dev-server]", `Listening at http://localhost:${port}/`)
+    opn(`http://localhost:${port}/dev-server.html`).then(done)
+  })
 })
 
 gulp.task("clean:build", done => {

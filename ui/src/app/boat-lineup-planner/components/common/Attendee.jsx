@@ -1,10 +1,10 @@
 import { Component } from "react"
 import Modal from "react-modal"
 import { observer } from "mobx-react"
+import { StyleSheet, css } from "aphrodite"
+import classNames from "classnames"
 
 import AttendeePositionLabel from "./AttendeePositionLabel"
-
-import "./Attendee.scss"
 
 function Attendee(props) {
   let displayName = props.attendee.displayName
@@ -14,8 +14,7 @@ function Attendee(props) {
   }
 
   return (
-    <div className="attendee card card-block" 
-      style={props.attendee.isCoxswain ? { backgroundColor: "lightgrey" } : {}}>
+    <div className={classNames("card", css(styles.attendee), { [css(styles.coxswain)]: props.attendee.isCoxswain })}>
       <div className="name">
         {displayName}
         &nbsp;
@@ -26,5 +25,20 @@ function Attendee(props) {
     </div>
   )
 }
+
+const styles = StyleSheet.create({
+  attendee: {
+    display: "flex",
+    padding: "0.4rem",
+    lineHeight: 1,
+    cursor: "move"
+  },
+  coxswain: {
+    backgroundColor: "lightgrey"
+  },
+  position: {
+    marginLeft: "auto"
+  }
+})
 
 export default observer(Attendee)

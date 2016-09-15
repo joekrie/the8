@@ -2,10 +2,9 @@ import { Component } from "react"
 import { DragSource } from "react-dnd"
 import { compose } from "recompose"
 import { observer, inject } from "mobx-react"
+import { css, StyleSheet } from "aphrodite"
 
 import Attendee from "../common/Attendee"
-
-import "./AssignedAttendee.scss"
 
 function AssignedAttendee(props) {
   const isCoxSeat = props.seat.number === 0
@@ -29,11 +28,17 @@ function AssignedAttendee(props) {
   }
   
   return props.connectDragSource(
-    <div className="assign-attendee">
+    <div className={css(styles.assignedAttendee)}>
       <Attendee attendee={props.seat.attendee} isOutOfPosition={isOutOfPosition} />
     </div>
   )
 }
+
+const styles = StyleSheet.create({
+  assignedAttendee: {
+    marginBottom: "10px"
+  }
+})
 
 function beginDrag(props) {
   props.seat.attendee.startDragging()

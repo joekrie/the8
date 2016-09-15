@@ -7,14 +7,14 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin")
 module.exports = {
   context: path.join(__dirname, "../src"),
   entry: {
-    "index": "./index"
+    "app": "./app",
   },
   module: {
     loaders: [
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract("style", ["css", "postcss", "resolve-url", "sass"])
+        loader: ExtractTextPlugin.extract("style", ["css", "postcss", "resolve-url", "sass?sourceMap"])
       },
       {
         test: /\.js(x)?$/,
@@ -31,18 +31,9 @@ module.exports = {
               }
             ]
           ],
-          presets: [
-            "es2015-loose",
-            "es2015",
-            "stage-0",
-            "react"
-          ]
+          presets: ["es2015-loose", "es2015", "stage-0", "react"]
         }
       },
-      { 
-        test: /bootstrap\/dist\/js\/umd\//, 
-        loader: "imports?jQuery=jquery" 
-      },    
       { 
         test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
         loader: "file?name=fonts/[name]-[hash].[ext]"
@@ -86,7 +77,7 @@ module.exports = {
       path.join(__dirname, "../src")
     ],
     modulesDirectories: [
-      "../node_modules"
+      "../../node_modules"
     ],
     extensions: [
       "",
@@ -96,14 +87,6 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.DedupePlugin(),
-    new webpack.ProvidePlugin({
-      "fetch": "imports?this=>global!exports?global.fetch!whatwg-fetch",  // todo: is this still necessary?
-      "$": "jquery",  // todo: has Bootstrap been refactored to classes/components?
-      "jQuery": "jquery",
-      "jquery": "jquery",
-      "Tether": "tether",
-      "window.Tether": "tether"
-    }),
     new ExtractTextPlugin("[name].css", {
       allChunks: true
     })
