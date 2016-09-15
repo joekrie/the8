@@ -4,7 +4,7 @@ import { compose } from "recompose"
 import { observer, inject } from "mobx-react"
 import { css, StyleSheet } from "aphrodite"
 
-import Attendee from "../common/Attendee"
+import Attendee from "./Attendee"
 
 function AssignedAttendee(props) {
   const isCoxSeat = props.seat.number === 0

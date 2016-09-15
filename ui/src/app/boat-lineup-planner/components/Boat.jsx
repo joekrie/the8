@@ -5,7 +5,7 @@ import { css, StyleSheet } from "aphrodite"
 import classNames from "classnames"
 
 import SeatList from "./SeatList"
-import BoatModel from "../../models/Boat"
+import BoatModel from "../models/Boat"
 
 function Boat(props) {
   return (

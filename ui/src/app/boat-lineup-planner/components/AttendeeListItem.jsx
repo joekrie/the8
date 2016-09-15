@@ -5,7 +5,7 @@ import R from "ramda"
 import { StyleSheet, css } from "aphrodite"
 import classNames from "classnames"
 
-import Attendee from "../common/Attendee"
+import Attendee from "./Attendee"
 
 class AttendeeListItem extends Component {
   componentDidMount() {

@@ -9,9 +9,9 @@ import { compose } from "ramda"
 import { StyleSheet, css } from "aphrodite"
 import classNames from "classnames"
 
-import EventDetails from "./event-details/EventDetails"
-import BoatList from "./boat-list/BoatList"
-import AttendeeDragLayer from "./common/AttendeeDragLayer"
+import EventDetails from "./EventDetails"
+import BoatList from "./BoatList"
+import AttendeeDragLayer from "./AttendeeDragLayer"
 import BoatStore from "../stores/BoatStore"
 import AttendeeStore from "../stores/AttendeeStore"
 

@@ -4,21 +4,38 @@ environment:
   AZURE_KEY:
     secure: Px0wZ+FveTB9pYNhfwVyqeeK8mUC0PgOe55p9WX2oQ+yMlUyb3hp/YOmfBuOtxo+
 
+install
+  - npm install
+
 cache: 
   - .\node_modules
 
-build: off
+build_script:
+  - cmd: .\node_modules\.bin\gulp build:ci --cwd .\ui\tools
+  - cmd: dotnet restore .\dotnet --configfile .\dotnet\nuget.config --packages .\dotnet\packages --verbosity Minimal
+  - cmd: cd .\dotnet\src\TheEight.WebApp
+  - cmd: dotnet build
+  - cmd: dotnet publish --output ..\..\artifacts --version-suffix %APPVEYOR_BUILD_NUMBER%
+  - cmd: cd ..\..\..
 
 artifacts:
   - path: .\dotnet\artifacts
 
 test: off
 
-
+deploy:
+  - provider: WebDeploy
+    server: https://the8-dev.scm.azurewebsites.net:443/msdeploy.axd?site=the8-dev
+    remove_files: false
+    app_offline: true
+    website: the8-dev
+    username: $the8-dev
+    password:
+      secure: IowojYjSU3gwHS58Ej4VhbvEGldNwvRCb/IvktrZU+ATY5hewAMwQ179Fy4wnp7Tbi6Vnm8KhoMSKleYbOtoyg==
+    aspnet_core: true
 
 on_finish:
-  - cmd: npm install
-  - cmd: .\node_modules\.bin\wdio
+  - cmd: .\node_modules\.bin\wdio .\e2e-tests\wdio.conf.js
 
 branches:
   only:

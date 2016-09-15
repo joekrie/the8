@@ -6,8 +6,8 @@ import { css, StyleSheet } from "aphrodite"
 import classNames from "classnames"
 
 import AssignedAttendee from "./AssignedAttendee"
-import AttendeeModel from "../../models/Attendee"
-import BoatModel from "../../models/Boat"
+import AttendeeModel from "../models/Attendee"
+import BoatModel from "../models/Boat"
 
 function Seat(props) {
   const emptySeat = (

@@ -1,6 +1,6 @@
 import { List } from "immutable"
 
-import Seat, { dropSpec } from "../seat"
+import Seat, { dropSpec } from "./Seat"
 
 describe("<Seat />", () => {
   describe("dropSpec", () => {
