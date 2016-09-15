@@ -1,17 +1,17 @@
 import { Component, PropTypes } from "react"
 import { DropTarget } from "react-dnd"
 import { observer, inject } from "mobx-react"
-import R, { compose, path } from "ramda"
+import { compose, path } from "ramda"
+import { css, StyleSheet } from "aphrodite"
+import classNames from "classnames"
 
 import AssignedAttendee from "./AssignedAttendee"
 import AttendeeModel from "../../models/Attendee"
 import BoatModel from "../../models/Boat"
 
-import "./Seat.scss"
-
 function Seat(props) {
   const emptySeat = (
-    <div className="card placeholder" 
+    <div className={classNames("card", css(styles.root))}
       style={props.isOver ? { backgroundColor: "lightgrey" } : {}}></div>
   )
 
@@ -24,8 +24,8 @@ function Seat(props) {
   }
 
   return props.connectDropTarget(
-    <div className="seat">
-      <div className="seat-num">
+    <div className={css(styles.root)}>
+      <div className={css(styles.neatNumber)}>
         {props.seat.label}
       </div>
       {attendeeSlot}
@@ -43,6 +43,25 @@ Seat.propTypes = {
   connectDropTarget: PropTypes.func.isRequired,
   isOver: PropTypes.bool.isRequired
 }
+
+const styles = StyleSheet.create({
+  root: {
+    height: "2.5rem",
+    clear: "2.5rem"
+  },
+  seatNumber: {
+    float: "left",
+    height: "2.5rem",
+    lineHeight: "2.5rem",
+    whiteSpace: "nowrap",
+    width: "1rem",
+    userSelect: "none"
+  },
+  placeholder: {
+    height: "1.8rem",
+    display: "flex"
+  }
+})
 
 export function canDrop(props, monitor) {
   const draggedItem = monitor.getItem()
@@ -64,8 +83,8 @@ export function canDrop(props, monitor) {
 
 export function drop(props, monitor) {
   const draggedItem = monitor.getItem()
-  const draggedAttendeeId = R.path(["attendee", "attendeeId"], draggedItem)
-  const attendeeIdInTarget = R.path(["attendee", "attendeeId"], props.seat)
+  const draggedAttendeeId = path(["attendee", "attendeeId"], draggedItem)
+  const attendeeIdInTarget = path(["attendee", "attendeeId"], props.seat)
 
   props.boat.placeAttendee(draggedAttendeeId, props.seat.number)
 

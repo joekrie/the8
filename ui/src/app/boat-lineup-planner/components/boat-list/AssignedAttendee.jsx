@@ -28,14 +28,14 @@ function AssignedAttendee(props) {
   }
   
   return props.connectDragSource(
-    <div className={css(styles.assignedAttendee)}>
+    <div className={css(styles.root)}>
       <Attendee attendee={props.seat.attendee} isOutOfPosition={isOutOfPosition} />
     </div>
   )
 }
 
 const styles = StyleSheet.create({
-  assignedAttendee: {
+  root: {
     marginBottom: "10px"
   }
 })

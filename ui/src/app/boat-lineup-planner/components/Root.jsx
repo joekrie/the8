@@ -3,18 +3,17 @@ import Modernizr from "browsernizr"
 import TouchBackend from "react-dnd-touch-backend"
 import HTML5Backend from "react-dnd-html5-backend"
 import { DragDropContext } from "react-dnd"
-import classNames from "classnames"
 import { Component } from "react"
 import { observer, Provider } from "mobx-react"
 import { compose } from "ramda"
+import { StyleSheet, css } from "aphrodite"
+import classNames from "classnames"
 
 import EventDetails from "./event-details/EventDetails"
 import BoatList from "./boat-list/BoatList"
 import AttendeeDragLayer from "./common/AttendeeDragLayer"
 import BoatStore from "../stores/BoatStore"
 import AttendeeStore from "../stores/AttendeeStore"
-
-import "./Root.scss"
 
 class Root extends Component {
   boatStore
@@ -34,7 +33,7 @@ class Root extends Component {
   render() {
     return (
       <Provider boatStore={this.boatStore} attendeeStore={this.attendeeStore}>
-        <div className="container-fluid boat-lineup-planner">
+        <div className={classNames("container-fluid", css(styles.root))}>
           <AttendeeDragLayer />
           <EventDetails />
           <BoatList />
@@ -43,6 +42,15 @@ class Root extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  root: {
+    position: "absolute",
+    height: "100%",
+    paddingTop: "15px",
+    paddingBottom: "15px"
+  }
+})
 
 export default compose(
   DragDropContext(Modernizr.touchevents 

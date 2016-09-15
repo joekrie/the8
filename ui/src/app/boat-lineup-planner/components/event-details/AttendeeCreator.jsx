@@ -1,7 +1,7 @@
 import { Component } from "react"
 import Modal from "react-modal"
-
-import "./AttendeeCreator.scss"
+import { StyleSheet, css } from "aphrodite"
+import classNames from "classnames"
 
 export default class BoatCreator extends Component {  
   constructor() {
@@ -61,13 +61,19 @@ export default class BoatCreator extends Component {
             Add
           </button>
         </Modal>
-        <button className="btn btn-secondary btn-sm" onClick={() => openModal(false)}>
+        <button className={classNames("btn btn-secondary btn-sm", css(styles.button))} onClick={() => openModal(false)}>
           Add Rower
         </button>
-        <button className="btn btn-secondary btn-sm" onClick={() => openModal(true)}>
+        <button className={classNames("btn btn-secondary btn-sm", css(styles.button))} onClick={() => openModal(true)}>
           Add Coxswain
         </button>
       </span>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  button: {
+    marginRight: "5px"
+  }
+})

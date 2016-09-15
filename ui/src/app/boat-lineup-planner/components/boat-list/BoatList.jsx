@@ -1,20 +1,30 @@
 import { Component } from "react"
 import { observer, inject } from "mobx-react"
-import { compose } from "recompose"
-import R from "ramda"
+import { compose, map } from "ramda"
+import { css, StyleSheet } from "aphrodite"
 
 import Boat from "./Boat"
 
-import "./BoatList.scss"
-
 function BoatList(props) {
   return (
-    <div className="boat-list">
-      {R.map(boat => <Boat key={boat.boatId} boat={boat} />, 
+    <div className={css(styles.root)}>
+      {map(boat => <Boat key={boat.boatId} boat={boat} />, 
         props.boatStore.boats)}
     </div>
   )
 }
+
+const styles = StyleSheet.create({
+  root: {
+    marginTop: "0px",
+    marginBottom: "0px",
+    paddingLeft: "20px",
+    display: "flex",
+    overflowX: "auto",
+    alignItems: "flex-start",
+    height: "100%"
+  }
+})
 
 export default compose(
   inject("boatStore"),

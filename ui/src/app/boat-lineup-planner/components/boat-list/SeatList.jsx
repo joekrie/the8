@@ -1,10 +1,8 @@
 import { Component } from "react"
 import { observer } from "mobx-react"
-import R from "ramda"
+import { css, StyleSheet } from "aphrodite"
 
 import Seat from "./Seat"
-
-import "./SeatList.scss"
 
 function SeatList(props) {
   return (

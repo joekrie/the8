@@ -2,6 +2,7 @@ import { Component } from "react"
 import Modal from "react-modal"
 import { observe } from "mobx"
 import { observer } from "mobx-react"
+import { css, StyleSheet } from "aphrodite"
 
 @observer
 export default class BoatModal extends Component {  

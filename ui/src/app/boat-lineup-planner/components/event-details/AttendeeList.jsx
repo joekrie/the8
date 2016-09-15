@@ -1,28 +1,35 @@
 import { Component } from "react"
 import { DropTarget } from "react-dnd"
 import { observer, inject } from "mobx-react"
-import R from "ramda"
+import { filter, compose } from "ramda"
+import { StyleSheet, css } from "aphrodite"
+import classNames from "classnames"
 
 import AttendeeListItem from "./AttendeeListItem"
 
-import "./AttendeeList.scss"
-
 function AttendeeList(props) {
-  const attendeesToShow = R.filter(attn => !props.boatStore.isAttendeePlacedInAnyBoat(attn.attendeeId), 
-    props.attendeeStore.attendees)
+  const attendeesToShow = props.attendeeStore.attendees.filter(attn => 
+    !props.boatStore.isAttendeePlacedInAnyBoat(attn.attendeeId))
 
   return props.connectDropTarget(
-    <div className="attendee-list card">
-      <div className="card-block">
-        <div className="list-items">
-          {attendeesToShow.map(attn => 
-            <AttendeeListItem key={attn.attendeeId} attendee={attn} />
-          )}
-        </div>
+    <div className={classNames("card", css(styles.listItems))}>
+      <div className={css(styles.listItems)}>
+        {attendeesToShow.map(attn => 
+          <AttendeeListItem key={attn.attendeeId} attendee={attn} />
+        )}
       </div>
     </div>
   )
 }
+
+const styles = StyleSheet.create({
+  root: {
+    height: "500px"
+  },
+  listItems: {
+    paddingTop: "15px"
+  }
+})
 
 function dropCollect(connect, monitor) {
   return {
@@ -41,7 +48,7 @@ const dropSpec = {
   }
 }
 
-export default R.compose(
+export default compose(
   DropTarget("ASSIGNED_ATTENDEE", dropSpec, dropCollect),
   inject("attendeeStore", "boatStore"),
   observer
