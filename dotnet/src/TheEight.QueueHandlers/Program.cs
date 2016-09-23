@@ -9,6 +9,7 @@ using Microsoft.Extensions.PlatformAbstractions;
 using Newtonsoft.Json;
 using TheEight.Common.JsonSerialization;
 using TheEight.Options;
+using TheEight.Messaging;
 
 namespace TheEight.QueueHandlers
 {
@@ -18,6 +19,7 @@ namespace TheEight.QueueHandlers
         {
             var serviceProvider = ConfigureServices();
             var azureSettings = serviceProvider.Resolve<IOptions<AzureStorageOptions>>().Value;
+            System.Console.WriteLine("conn str: " + azureSettings.StorageConnectionString);
             var jobActivator = new AutofacJobActivator(serviceProvider);
 
             var jobHostConfig = new JobHostConfiguration
@@ -30,6 +32,7 @@ namespace TheEight.QueueHandlers
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings().Configure();
             
             var host = new JobHost(jobHostConfig);
+            System.Console.WriteLine("host created");
             host.RunAndBlock();
         }
 
@@ -39,24 +42,26 @@ namespace TheEight.QueueHandlers
             var appBasePath = PlatformServices.Default.Application.ApplicationBasePath;
 
             var configBuilder = new ConfigurationBuilder()
-                .SetBasePath(@"C:\Users\joekr\Development\The Eight\dotnet\src\TheEight.QueueHandlers")
-                .AddEnvironmentVariables()
-                .AddUserSecrets();
+                .SetBasePath(appBasePath)
+                .AddEnvironmentVariables();
+                //.AddUserSecrets();
 
             var config = configBuilder.Build();
+
+            services.AddScoped<EmailSender>();
 
             services
                 .AddOptions()
                 .Configure<AzureStorageOptions>(config.GetSection("AzureStorage"))
                 .Configure<TwilioOptions>(config.GetSection("Twilio"))
                 .Configure<MailgunOptions>(config.GetSection("Mailgun"));
-            
+
             var autofacBuilder = new ContainerBuilder();
 
             autofacBuilder
                 .RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                 .Where(type => type.IsInNamespace("TheEight.QueueHandlers.Handlers"));
-            
+
             autofacBuilder.Populate(services);
             return autofacBuilder.Build();
         }

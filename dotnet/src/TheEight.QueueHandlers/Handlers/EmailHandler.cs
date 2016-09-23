@@ -6,44 +6,22 @@ using RestSharp;
 using RestSharp.Authenticators;
 using TheEight.Options;
 using TheEight.QueueHandlers.Messages;
+using TheEight.Messaging;
 
 namespace TheEight.QueueHandlers.Handlers
 {
     public class EmailHandler
     {
-        private readonly MailgunOptions _mailgunOptions;
+        private readonly EmailSender _emailSender;
 
-        public EmailHandler(IOptions<MailgunOptions> mailgunOptions)
+        public EmailHandler(EmailSender emailSender)
         {
-            _mailgunOptions = mailgunOptions.Value;
+            _emailSender = emailSender;
         }
 
         public async Task ProcessQueueMessage([QueueTrigger("emails")] EmailMsg message)
         {
-            var client = new RestClient
-            {
-                BaseUrl = new Uri(_mailgunOptions.ApiBaseUrl),
-                Authenticator = new HttpBasicAuthenticator("api", _mailgunOptions.ApiKey)
-            };
-
-            var request = new RestRequest
-            {
-                Resource = "messages",
-                Method = Method.POST
-            };
-
-            request.AddParameter("from", message.SenderEmailAddress);
-            request.AddParameter("to", message.RecipientEmailAddressesCommaSeperated);
-            request.AddParameter("subject", message.Header);
-            request.AddParameter("text", message.Body);
-
-            var response = await client.ExecuteTaskAsync(request);
-
-            // how to handle all exceptions?
-            if (response.ErrorException != null)
-            {
-                throw response.ErrorException;
-            }
+            await _emailSender.SendEmail();
         }
     }
 }

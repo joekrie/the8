@@ -1,0 +1,7 @@
+<mjml>
+  <mj-body>
+    <mj-container>
+      <mj-text>{{{content}}}</mj-text>
+    </mj-container>
+  </mj-body>
+</mjml>

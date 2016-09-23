@@ -8,7 +8,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CAEF08D3-56BC-45BF-A50C-AE2A3B7C32A5}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
-		nuget.config = nuget.config
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TheEight.Options", "src\TheEight.Options\TheEight.Options.xproj", "{F0F54575-A823-4FBF-83D9-22C6D7D4A0C1}"
@@ -28,6 +27,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{285B2A33-3B43-470D-ABB2-43C2624B4506}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TheEight.WebApp.Tests", "test\TheEight.WebApp.Tests\TheEight.WebApp.Tests.xproj", "{1DFDC222-50BC-4C7C-B790-24A0C3F3B3D3}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TheEight.Messaging", "src\TheEight.Messaging\TheEight.Messaging.xproj", "{C1B2820F-A35F-4E0F-B05B-7B7D24D4F9BD}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TheEight.Queues", "src\TheEight.Queues\TheEight.Queues.xproj", "{E42A441D-F738-4DCE-BED0-2B6EEC2D918D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +72,14 @@ Global
 		{1DFDC222-50BC-4C7C-B790-24A0C3F3B3D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DFDC222-50BC-4C7C-B790-24A0C3F3B3D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DFDC222-50BC-4C7C-B790-24A0C3F3B3D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1B2820F-A35F-4E0F-B05B-7B7D24D4F9BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1B2820F-A35F-4E0F-B05B-7B7D24D4F9BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1B2820F-A35F-4E0F-B05B-7B7D24D4F9BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1B2820F-A35F-4E0F-B05B-7B7D24D4F9BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E42A441D-F738-4DCE-BED0-2B6EEC2D918D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E42A441D-F738-4DCE-BED0-2B6EEC2D918D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E42A441D-F738-4DCE-BED0-2B6EEC2D918D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E42A441D-F738-4DCE-BED0-2B6EEC2D918D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,5 +93,7 @@ Global
 		{2936CCAF-1687-4CA3-86A3-86E6F7B911E7} = {69DEBE83-BA3A-420A-AA7E-3D7F1B696D5E}
 		{4D730F40-B4DA-4D33-A3DB-5C04BBB6286A} = {69DEBE83-BA3A-420A-AA7E-3D7F1B696D5E}
 		{1DFDC222-50BC-4C7C-B790-24A0C3F3B3D3} = {285B2A33-3B43-470D-ABB2-43C2624B4506}
+		{C1B2820F-A35F-4E0F-B05B-7B7D24D4F9BD} = {69DEBE83-BA3A-420A-AA7E-3D7F1B696D5E}
+		{E42A441D-F738-4DCE-BED0-2B6EEC2D918D} = {69DEBE83-BA3A-420A-AA7E-3D7F1B696D5E}
 	EndGlobalSection
 EndGlobal

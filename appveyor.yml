@@ -10,9 +10,10 @@ install:
 cache: 
   - .\node_modules
   - .\dotnet\packages
-  
+
 build_script:
   - cmd: .\node_modules\.bin\gulp build:ci --cwd .\ui\tools
+  - cmd: .\node_modules\.bin\gulp copy --cwd .\ui\tools
   - cmd: dotnet restore .\dotnet --configfile .\dotnet\nuget.config --packages .\dotnet\packages --verbosity Minimal
   - cmd: cd .\dotnet\src\TheEight.WebApp
   - cmd: dotnet build

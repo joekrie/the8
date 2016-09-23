@@ -1,0 +1,6 @@
+@import "theme";
+@import "~postcss/src/plugins/input/plugin";
+
+.textbox {
+  @extend input;
+}
