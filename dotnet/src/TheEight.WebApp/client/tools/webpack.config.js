@@ -14,7 +14,7 @@ module.exports = {
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract("style", ["css", "postcss", "resolve-url", "sass?sourceMap"])
+        loader: ExtractTextPlugin.extract("style", ["css?modules&camelCase", "postcss", "resolve-url", "sass?sourceMap"])
       },
       {
         test: /\.js(x)?$/,

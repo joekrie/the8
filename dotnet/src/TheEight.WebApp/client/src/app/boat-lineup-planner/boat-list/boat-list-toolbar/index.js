@@ -1,5 +1,4 @@
 import { Component } from "react"
-import { css, StyleSheet } from "aphrodite"
 
 function BoatListToolbar(props) {
   return (

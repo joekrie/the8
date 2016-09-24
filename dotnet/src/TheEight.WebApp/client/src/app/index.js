@@ -1,5 +1,4 @@
 ﻿import "expose?React!react"
 import "expose?ReactDOM!react-dom"
 import "flexibility"
-import "../styles/app.scss"
 import "expose?BoatLineupPlanner!./boat-lineup-planner"

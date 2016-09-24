@@ -1,21 +1,16 @@
-import "browsernizr/test/touchevents"
-import Modernizr from "browsernizr"
-import TouchBackend from "react-dnd-touch-backend"
-import HTML5Backend from "react-dnd-html5-backend"
-import { DragDropContext } from "react-dnd"
 import { Component } from "react"
 import { observer, Provider } from "mobx-react"
-import { compose } from "ramda"
-import { StyleSheet, css } from "aphrodite"
-import classNames from "classnames"
 
-import EventDetails from "./EventDetails"
-import BoatList from "./BoatList"
-import AttendeeDragLayer from "./AttendeeDragLayer"
-import BoatStore from "../stores/BoatStore"
-import AttendeeStore from "../stores/AttendeeStore"
+import BoatList from "./boat-list"
+import AttendeeDragLayer from "./attendee-list/attendee-drag-layer"
+import BoatStore from "./boat-list/boat-store"
+import AttendeeStore from "./attendee-list/attendee-store"
+import dragDropContext from "./dnd"
+import styles from "./styles.scss"
 
-class Root extends Component {
+@dragDropContext
+@observer
+export default class Root extends Component {
   boatStore
 
   constructor() {
@@ -33,29 +28,11 @@ class Root extends Component {
   render() {
     return (
       <Provider boatStore={this.boatStore} attendeeStore={this.attendeeStore}>
-        <div className={classNames("container-fluid", css(styles.root))}>
+        <div className={`container-fluid ${styles.root}`}>
           <AttendeeDragLayer />
-          <EventDetails />
           <BoatList />
         </div>
       </Provider>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  root: {
-    position: "absolute",
-    height: "100%",
-    paddingTop: "15px",
-    paddingBottom: "15px"
-  }
-})
-
-export default compose(
-  DragDropContext(Modernizr.touchevents 
-    ? TouchBackend({ enableMouseEvents: true }) 
-    : HTML5Backend
-  ),
-  observer
-)(Root)

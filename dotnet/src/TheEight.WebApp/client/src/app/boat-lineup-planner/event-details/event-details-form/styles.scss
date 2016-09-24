@@ -1,9 +1,7 @@
-@import "~rome/dist/rome.css";
+.saving-overlay {
+  color: red;
+}
 
-.root {
-  @extend .rd-container;
-
-  td {
-    padding: 0.3rem;
-  }
+.edit-event-details-form {
+  color: blue;
 }

@@ -3,11 +3,11 @@ import { observer, inject } from "mobx-react"
 import { compose, map } from "ramda"
 
 import styles from "./styles.scss"
-import Boat from "./Boat"
+import Boat from "./boat"
 
 function BoatList(props) {
   return (
-    <div className={css(styles.root)}>
+    <div className={styles.root}>
       {map(boat => <Boat key={boat.boatId} boat={boat} />, 
         props.boatStore.boats)}
     </div>

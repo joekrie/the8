@@ -1,13 +1,13 @@
 import { Component } from "react"
-import { DragSource } from "react-dnd"
 import { getEmptyImage } from "react-dnd-html5-backend"
-import classNames from "classnames"
 
 import Attendee from "../attendee"
+import dragSource from "./dnd"
 
-class AttendeeListItem extends Component {
+@dragSource
+export default class AttendeeListItem extends Component {
   componentDidMount() {
-    //this.props.connectDragPreview(getEmptyImage())
+    //this.props.connectDragPreview(getEmptyImage())  // todo: add drag handle
   }
 
   render() {
@@ -20,6 +20,3 @@ class AttendeeListItem extends Component {
     )
   }
 }
-
-
-export default DragSource("ATTENDEE_LIST_ITEM", { beginDrag }, dragCollect)(AttendeeListItem)

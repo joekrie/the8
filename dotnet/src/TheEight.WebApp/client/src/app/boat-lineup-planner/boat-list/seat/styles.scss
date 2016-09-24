@@ -1,0 +1,22 @@
+.root {
+  height: 2.5rem;
+  clear: 2.5rem;
+}
+
+.seatNumber {
+  float: left;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  white-space: nowrap;
+  width: 1rem;
+  user-select: none;
+}
+
+.placeholder {
+  height: 1.8rem;
+  display: flex;
+}
+
+.hover {
+  background-color: lightgray;
+}

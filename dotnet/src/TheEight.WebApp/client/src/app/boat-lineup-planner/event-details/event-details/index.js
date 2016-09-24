@@ -1,24 +1,15 @@
 import { PropTypes } from "react"
 import { observer } from "mobx-react"
-import { StyleSheet, css } from "aphrodite"
-import classNames from "classnames"
 
-import AttendeeList from "./AttendeeList"
+import AttendeeList from "../attendee-list"
+import styles from "./styles.scss"
 
 function EventDetails(props) {
   return (
-    <div className={classNames("card", css(styles.root))}>
+    <div className={`card ${styles.root}`}>
       <AttendeeList />
     </div>
   )
 }
-
-const styles = StyleSheet.create({
-  root: {
-    float: "left",
-    width: "275px",
-    height: "100%"
-  }
-})
 
 export default observer(EventDetails)

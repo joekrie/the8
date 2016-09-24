@@ -1,7 +1,7 @@
 import { observable, computed, action } from "mobx"
 import R from "ramda"
 
-import Boat from "../models/Boat"
+import Boat from "./boat-model"
 
 export default class BoatStore {
   @observable boats = []

@@ -1,17 +1,9 @@
 import { Component } from "react"
-import { connect } from "react-redux"
-import { bindActionCreators } from "redux"
 
-import DateField from "./date-field.component"
-import NotesField from "./notes-field.component"
-import LoadingAnimation from "app/common/components/loading-animation.component"
+import EventDateField from "../event-date-field"
+import EventNotesField from "../event-notes-field"
+import WaitingAnimation from "app/common/loading-animation"
 
-export const mapDispatchToProps = dispatch => 
-  bindActionCreators({
-    saveEventDetails
-  }, dispatch)
-
-@connect(null, mapDispatchToProps)
 export default class EditEventDetailsForm extends Component {
   constructor(props) {
     super(props)
@@ -40,20 +32,18 @@ export default class EditEventDetailsForm extends Component {
   }
 
   render() {
-    const styles = {
-      savingOverlay: {
-        display: this.props.isSaving ? "inherit" : "none"
-      }
+    const savingOverlayStyles = {
+      display: this.props.isSaving ? "inherit" : "none"
     }
 
     return (
-      <div className="edit-event-details-form">
-        <div styles={styles.savingOverlay} className="saving-overlay">
-          <LoadingAnimation label="Saving" />
+      <div className={styles.editEventDetailsForm}>
+        <div styles={savingOverlayStyles} className={styles.savingOverlay}>
+          <WaitingAnimation label="Saving" />
         </div>
         <form onSubmit={evt => this.onSubmitForm(evt.target.value)}>
-          <DateField />
-          <NotesField />
+          <EventDateField />
+          <EventNotesField />
         </form>
       </div>
     )

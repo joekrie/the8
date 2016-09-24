@@ -1,8 +1,7 @@
 import { Component } from "react"
 import { observer } from "mobx-react"
-import { css, StyleSheet } from "aphrodite"
 
-import Seat from "./Seat"
+import Seat from "../seat"
 
 function SeatList(props) {
   return (

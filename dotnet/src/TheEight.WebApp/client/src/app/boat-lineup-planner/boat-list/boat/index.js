@@ -1,15 +1,14 @@
 import { Component, PropTypes } from "react"
 import Modal from "react-modal"
 import { observer } from "mobx-react"
-import { css, StyleSheet } from "aphrodite"
-import classNames from "classnames"
 
-import SeatList from "./SeatList"
-import BoatModel from "../models/Boat"
+import SeatList from "../seat-list"
+import BoatModel from "../boat-model"
+import styles from "./styles.scss"
 
 function Boat(props) {
   return (
-    <div className={classNames("card", css(styles.root))}>
+    <div className={`card ${styles.root}`}>
       <header>
         <h3>
           {props.boat.title}
@@ -23,13 +22,5 @@ function Boat(props) {
 Boat.propTypes = {
   boat: PropTypes.instanceOf(BoatModel).isRequired
 }
-
-const styles = StyleSheet.create({
-  root: {
-    width: "250px",
-    minWidth: "250px",
-    marginRight: "20px"
-  }
-})
 
 export default observer(Boat)

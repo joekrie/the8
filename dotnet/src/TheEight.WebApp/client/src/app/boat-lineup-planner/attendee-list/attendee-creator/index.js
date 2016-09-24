@@ -1,6 +1,5 @@
 import { Component } from "react"
 import Modal from "react-modal"
-import classNames from "classnames"
 
 import styles from "./styles.scss"
 
@@ -62,10 +61,10 @@ export default class BoatCreator extends Component {
             Add
           </button>
         </Modal>
-        <button className={classNames("btn btn-secondary btn-sm", styles.button)} onClick={() => openModal(false)}>
+        <button className={`btn btn-secondary btn-sm ${styles.button}`} onClick={() => openModal(false)}>
           Add Rower
         </button>
-        <button className={classNames("btn btn-secondary btn-sm", styles.button)} onClick={() => openModal(true)}>
+        <button className={`btn btn-secondary btn-sm ${styles.button}`} onClick={() => openModal(true)}>
           Add Coxswain
         </button>
       </span>

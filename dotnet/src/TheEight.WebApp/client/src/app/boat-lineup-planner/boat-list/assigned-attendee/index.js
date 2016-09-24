@@ -1,10 +1,10 @@
 import { Component } from "react"
-import { DragSource } from "react-dnd"
-import { compose } from "recompose"
-import { observer, inject } from "mobx-react"
-import { css, StyleSheet } from "aphrodite"
+import { compose } from "ramda"
+import { observer } from "mobx-react"
 
-import Attendee from "./Attendee"
+import Attendee from "../../attendee-list/attendee"
+import styles from "./styles.scss"
+import dragSource from "./dnd"
 
 function AssignedAttendee(props) {
   const isCoxSeat = props.seat.number === 0
@@ -28,40 +28,13 @@ function AssignedAttendee(props) {
   }
   
   return props.connectDragSource(
-    <div className={css(styles.root)}>
+    <div className={styles.root}>
       <Attendee attendee={props.seat.attendee} isOutOfPosition={isOutOfPosition} />
     </div>
   )
 }
 
-const styles = StyleSheet.create({
-  root: {
-    marginBottom: "10px"
-  }
-})
-
-function beginDrag(props) {
-  props.seat.attendee.startDragging()
-  
-  return { 
-    boat: props.boat, 
-    seat: props.seat, 
-    attendee: props.seat.attendee 
-  }
-}
-
-function endDrag(props) {
-  props.seat.attendee.stopDragging()
-}
-
-function dragCollect(connect, monitor) {
-  return {
-    connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging()
-  }
-}
-
 export default compose(
-  DragSource("ASSIGNED_ATTENDEE", { beginDrag, endDrag }, dragCollect),
+  dragSource,
   observer
 )(AssignedAttendee)

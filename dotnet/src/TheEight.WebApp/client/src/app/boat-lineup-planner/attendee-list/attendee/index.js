@@ -3,7 +3,7 @@ import Modal from "react-modal"
 import { observer } from "mobx-react"
 import classNames from "classnames"
 
-import AttendeePositionLabel from "./AttendeePositionLabel"
+import AttendeePositionLabel from "../attendee-position-label"
 import styles from "./styles.scss"
 
 function Attendee(props) {

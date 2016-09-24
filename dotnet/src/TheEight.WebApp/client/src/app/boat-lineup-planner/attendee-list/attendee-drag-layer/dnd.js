@@ -1,3 +1,5 @@
+import { DragLayer } from "react-dnd"
+
 export function dragCollect(monitor) {
   return {
     item: monitor.getItem(),
@@ -7,3 +9,6 @@ export function dragCollect(monitor) {
     isDragging: monitor.isDragging()
   }
 }
+
+const dragLayer = DragLayer(dragCollect)
+export default dragLayer
