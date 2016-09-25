@@ -8,7 +8,7 @@ const opn = require("opn")
 const KarmaServer = require("karma").Server
 
 const webpackConfig = require("./webpack.config.js")
-const distPath = path.join(__dirname, "../wwwroot/app")
+const distPath = path.join(__dirname, "../../wwwroot")
 
 gulp.task("default", ["test", "lint", "build"])
 
@@ -16,7 +16,7 @@ gulp.task("test", done => {
   new KarmaServer({
     configFile,
     singleRun: true,
-    browsers,
+    browsers: ["PhantomJS"],
     reporters: ["spec"]
   }, done).start()
 })

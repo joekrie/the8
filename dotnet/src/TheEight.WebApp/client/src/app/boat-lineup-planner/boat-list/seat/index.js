@@ -11,16 +11,12 @@ import dropTarget from "./dnd"
 import styles from "./styles.scss"
 
 function Seat(props) {
-  const emptySeat = (
-    <div className={`card ${styles.root} ${classNames({hover: props.isOver})}`}></div>
-  )
+  let attendeeSlot
 
-  let attendeeSlot 
-  
   if (props.seat.attendee && !props.seat.attendee.isDragging) {
     attendeeSlot = <AssignedAttendee seat={props.seat} boat={props.boat} />
   } else {
-    attendeeSlot = emptySeat
+    attendeeSlot = null
   }
 
   return props.connectDropTarget(
@@ -28,7 +24,9 @@ function Seat(props) {
       <div className={styles.seatNumber}>
         {props.seat.label}
       </div>
-      {attendeeSlot}
+      <div className={classNames(styles.attendeeSlot, {[styles.hover]: props.isOver})}>
+        {attendeeSlot}
+      </div>
     </div>
   )
 }

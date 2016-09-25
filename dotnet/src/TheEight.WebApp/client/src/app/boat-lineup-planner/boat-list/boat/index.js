@@ -8,11 +8,9 @@ import styles from "./styles.scss"
 
 function Boat(props) {
   return (
-    <div className={`card ${styles.root}`}>
-      <header>
-        <h3>
-          {props.boat.title}
-        </h3>
+    <div className={styles.root}>
+      <header className={styles.header}>
+        <span className={styles.title}>{props.boat.title}</span>
       </header>
       <SeatList boat={props.boat} />
     </div>

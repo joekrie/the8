@@ -1,5 +1,5 @@
 import { observable, computed, action } from "mobx"
-import R from "ramda"
+import { flatten } from "ramda"
 
 import Boat from "./boat-model"
 
@@ -35,7 +35,7 @@ export default class BoatStore {
   }
 
   @computed get allPlacedAttendeeIds() {
-    return R.flatten(this.boats.map(b => b.placements.values()))
+    return flatten(this.boats.map(b => b.placements.values()))
   }
 
   isAttendeePlacedInAnyBoat(attendeeId) {

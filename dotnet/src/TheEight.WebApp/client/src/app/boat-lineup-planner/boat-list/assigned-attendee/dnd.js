@@ -1,8 +1,6 @@
 import { DragSource } from "react-dnd"
 
 function beginDrag(props) {
-  props.seat.attendee.startDragging()
-  
   return { 
     boat: props.boat, 
     seat: props.seat, 
@@ -10,16 +8,13 @@ function beginDrag(props) {
   }
 }
 
-function endDrag(props) {
-  props.seat.attendee.stopDragging()
-}
-
 function dragCollect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
     isDragging: monitor.isDragging()
   }
 }
 
-const dragSource = DragSource("ASSIGNED_ATTENDEE", { beginDrag, endDrag }, dragCollect)
+const dragSource = DragSource("ASSIGNED_ATTENDEE", { beginDrag }, dragCollect)
 export default dragSource

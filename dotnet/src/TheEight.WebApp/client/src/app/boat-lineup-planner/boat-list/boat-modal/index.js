@@ -17,11 +17,11 @@ export default class BoatModal extends Component {
 
   render() {
     return (
-      <div className="boat card">
+      <div>
         <Modal isOpen={this.open} onRequestClose={() => this.openModal = false}>
           {this.props.boat.details.title}
         </Modal>
-        <div className="header card-header">
+        <div>
           <h3>
             {this.props.boat.details.title}
           </h3>

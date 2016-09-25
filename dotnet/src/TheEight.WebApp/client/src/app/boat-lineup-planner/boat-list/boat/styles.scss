@@ -1,5 +1,21 @@
+@import "../../variables";
+
 .root {
-  width: 250px;
-  min-width: 250px;
-  margin-right: 20px;
+  width: $attendee-slot-width + $seat-number-width;
+  background-color: lightgreen;
+  margin: 0.5rem;
+
+  &:not(:last-of-type) {
+    margin-right: 0;
+  }
+}
+
+.header {
+  padding: 0.75rem;
+  background-color: blueviolet;
+  user-select: none;
+
+  &.title {
+    font-weight: 600;
+  }
 }

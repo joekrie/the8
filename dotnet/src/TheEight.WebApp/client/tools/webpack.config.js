@@ -7,7 +7,8 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin")
 module.exports = {
   context: path.join(__dirname, "../src"),
   entry: {
-    "app": "./app",
+    "app/app": ["babel-polyfill", "./app"],
+    "base": "./styles/base.scss"
   },
   module: {
     loaders: [
@@ -26,7 +27,7 @@ module.exports = {
             [
               "transform-runtime",
               {
-                polyfill: false,
+                polyfill: true,
                 regenerator: true
               }
             ]

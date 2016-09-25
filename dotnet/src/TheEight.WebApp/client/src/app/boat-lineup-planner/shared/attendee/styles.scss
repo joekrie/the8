@@ -1,0 +1,50 @@
+@import "../../variables";
+
+.root {
+  display: flex;
+  align-items: stretch;
+  height: $seat-height;
+  width: $attendee-slot-width;
+  background-color: lightsalmon;
+  user-select: none;
+
+  &.coxswain {
+    background-color: lightseagreen;
+  }
+}
+
+.drag-handle {
+  width: 2rem;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover, &.is-dragging {
+    background-color: darken(lightsalmon, 5);
+  }
+
+  &.is-dragging {
+    cursor: dragging;
+  }
+}
+
+.attendee {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken(lightsalmon, 5);
+  }
+
+  .name {
+    margin-left: 0.35rem;
+  }
+
+  .position {
+    margin-left: auto;
+    margin-right: 0.5rem;
+  }
+}

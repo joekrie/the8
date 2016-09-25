@@ -3,7 +3,7 @@ import { DropTarget } from "react-dnd"
 import { observer, inject } from "mobx-react"
 import { filter, compose } from "ramda"
 
-import AttendeeListItem from "./AttendeeListItem"
+import AttendeeListItem from "./attendee-list-item"
 import styles from "./styles.scss"
 import dropTarget from "./dnd"
 

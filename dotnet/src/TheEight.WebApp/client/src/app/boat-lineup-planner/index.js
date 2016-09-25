@@ -1,8 +1,9 @@
 import { Component } from "react"
 import { observer, Provider } from "mobx-react"
+import DevTools from 'mobx-react-devtools';
 
 import BoatList from "./boat-list"
-import AttendeeDragLayer from "./attendee-list/attendee-drag-layer"
+import AttendeeDragLayer from "./shared/attendee-drag-layer"
 import BoatStore from "./boat-list/boat-store"
 import AttendeeStore from "./attendee-list/attendee-store"
 import dragDropContext from "./dnd"
@@ -15,7 +16,6 @@ export default class Root extends Component {
 
   constructor() {
     super()
-
     this.attendeeStore = new AttendeeStore()
     this.boatStore = new BoatStore(this.attendeeStore)
   }
@@ -28,9 +28,10 @@ export default class Root extends Component {
   render() {
     return (
       <Provider boatStore={this.boatStore} attendeeStore={this.attendeeStore}>
-        <div className={`container-fluid ${styles.root}`}>
+        <div className={styles.root}>
           <AttendeeDragLayer />
           <BoatList />
+          <DevTools />
         </div>
       </Provider>
     )

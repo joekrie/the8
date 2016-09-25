@@ -1,22 +1,27 @@
+@import "../../variables";
+
 .root {
-  height: 2.5rem;
-  clear: 2.5rem;
+  height: $seat-height;
+  display: flex;
+  border-bottom: 1px solid black;
 }
 
-.seatNumber {
-  float: left;
-  height: 2.5rem;
-  line-height: 2.5rem;
-  white-space: nowrap;
-  width: 1rem;
+.seat-number {
+  width: $seat-number-width;
+  background-color: orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   user-select: none;
 }
 
-.placeholder {
-  height: 1.8rem;
+.attendee-slot {
+  flex-grow: 1;
+  background-color: yellowgreen;
   display: flex;
-}
 
-.hover {
-  background-color: lightgray;
+  
+  &.hover {
+    background-color: lightyellow;
+  }
 }

@@ -1,4 +1,5 @@
 import { Component } from "react"
+import { identity } from "ramda"
 
 import Attendee from "../attendee"
 import dragLayer from "./dnd"
@@ -15,26 +16,27 @@ function getDragItemStyles(currentOffset) {
   const transform = `translate(${x}px, ${y}px)`
 
   return {
-    "transform": transform,
-    "WebkitTransform": transform
+    transform,
+    WebkitTransform: transform
   }
 }
 
 @dragLayer
 export default class AttendeeDragLayer extends Component {
   render() {
-    if (this.props.item && this.props.item.attendee) {
+    const { item, isDragging } = this.props
+
+    if (isDragging && item && item.attendee) {
       return (
         <div className={styles.dragLayer}>
           <div style={getDragItemStyles(this.props.currentOffset)}>
-            <Attendee attendee={this.props.item.attendee} />
+            <Attendee attendee={this.props.item.attendee} connectDragPreview={identity} 
+              connectDragSource={identity} isDragging={true} />
           </div>
         </div>
       )
     }
     
-    return (
-      <div className={styles.dragLayer}></div>
-    )
+    return null
   }
 }

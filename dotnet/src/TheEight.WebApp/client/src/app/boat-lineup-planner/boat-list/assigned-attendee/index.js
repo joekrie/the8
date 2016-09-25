@@ -1,8 +1,9 @@
 import { Component } from "react"
 import { compose } from "ramda"
 import { observer } from "mobx-react"
+import classNames from "classnames";
 
-import Attendee from "../../attendee-list/attendee"
+import Attendee from "../../shared/attendee"
 import styles from "./styles.scss"
 import dragSource from "./dnd"
 
@@ -27,9 +28,10 @@ function AssignedAttendee(props) {
     }
   }
   
-  return props.connectDragSource(
-    <div className={styles.root}>
-      <Attendee attendee={props.seat.attendee} isOutOfPosition={isOutOfPosition} />
+  return (
+    <div className={classNames({[styles.isDragging]: props.isDragging})}>
+      <Attendee attendee={props.seat.attendee} isOutOfPosition={isOutOfPosition} 
+        connectDragSource={props.connectDragSource} connectDragPreview={props.connectDragPreview} />
     </div>
   )
 }

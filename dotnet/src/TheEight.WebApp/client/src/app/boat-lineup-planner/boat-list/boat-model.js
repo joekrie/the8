@@ -1,6 +1,6 @@
 import { observable, computed, action, asMap } from "mobx"
 import { range } from "lodash"
-import R from "ramda"
+import { pickBy } from "ramda"
 
 export default class Boat {
   @observable boatId
@@ -64,7 +64,7 @@ export default class Boat {
     this.seatCount = seatCount
     this.isCoxed = isCoxed
 
-    this.placements = R.pickBy((attnId, seatNum) => seatNum <= this.seatCount 
+    this.placements = pickBy((attnId, seatNum) => seatNum <= this.seatCount 
       && (seatNum > 0 || this.isCoxed), this.placements)
   }
 }
