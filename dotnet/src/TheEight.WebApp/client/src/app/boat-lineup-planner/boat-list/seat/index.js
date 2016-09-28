@@ -5,8 +5,8 @@ import { compose, path } from "ramda"
 import classNames from "classnames"
 
 import AssignedAttendee from "../assigned-attendee"
-import AttendeeModel from "../../attendee-list/attendee-model"
-import BoatModel from "../boat-model"
+import AttendeeModel from "../../state/attendee"
+import BoatModel from "../../state/boat"
 import dropTarget from "./dnd" 
 import styles from "./styles.scss"
 

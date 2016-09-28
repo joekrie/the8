@@ -4,8 +4,8 @@ import DevTools from 'mobx-react-devtools';
 
 import BoatList from "./boat-list"
 import AttendeeDragLayer from "./shared/attendee-drag-layer"
-import BoatStore from "./boat-list/boat-store"
-import AttendeeStore from "./attendee-list/attendee-store"
+import BoatStore from "./state/boat-store"
+import AttendeeStore from "./state/attendee-store"
 import dragDropContext from "./dnd"
 import styles from "./styles.scss"
 

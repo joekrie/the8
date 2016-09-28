@@ -3,7 +3,7 @@ import Modal from "react-modal"
 import { observer } from "mobx-react"
 
 import SeatList from "../seat-list"
-import BoatModel from "../boat-model"
+import BoatModel from "../../state/boat"
 import styles from "./styles.scss"
 
 function Boat(props) {

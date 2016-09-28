@@ -36,8 +36,8 @@ module.exports = {
         }
       },
       { 
-        test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-        loader: "file?name=fonts/[name]-[hash].[ext]"
+        test: /\.svg$/,
+        loader: "file?name=img/[name]-[hash].[ext]"
       }
     ]
   },

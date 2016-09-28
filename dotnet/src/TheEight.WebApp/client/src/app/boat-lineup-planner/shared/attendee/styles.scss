@@ -1,11 +1,13 @@
 @import "../../variables";
+@import "../../../../styles/theme";
+@import "~picnic/src/plugins/label/plugin";
+@import "~picnic/src/plugins/tooltip/plugin";
 
 .root {
   display: flex;
   align-items: stretch;
   height: $seat-height;
   width: $attendee-slot-width;
-  background-color: lightsalmon;
   user-select: none;
 
   &.coxswain {
@@ -14,8 +16,8 @@
 }
 
 .drag-handle {
-  width: 2rem;
-  cursor: grab;
+  width: 2.5rem;
+  cursor: move;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -34,6 +36,10 @@
   align-items: center;
   flex-grow: 1;
   cursor: pointer;
+  background-color: lightsalmon;
+  outline: none;
+  padding: 0;
+  border: none;
 
   &:hover {
     background-color: darken(lightsalmon, 5);
@@ -47,4 +53,22 @@
     margin-left: auto;
     margin-right: 0.5rem;
   }
+}
+
+.modal {
+  background-color: yellow;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  bottom: 40px;
+  border: 1px solid black;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  outline: none;
+  padding: 20px;
+}
+
+.position-tooltip {
+  @extend .tooltip-right;
 }

@@ -1,7 +1,7 @@
 import { observable, computed, action } from "mobx"
 import { find, propEq } from "ramda"
 
-import Attendee from "./attendee-model"
+import Attendee from "./attendee"
 
 export default class AttendeeStore {
   @observable attendees = []

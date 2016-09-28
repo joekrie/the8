@@ -109,7 +109,7 @@ gulp.task("build:watch", done => {
   ]
 
   new WebpackDevServer(webpack(config), {
-    publicPath: "/static/",
+    publicPath: `http://localhost:${port}/static/`,
     hot: true,
     historyApiFallback: true
   }).listen(port, "localhost", (err, result) => {
@@ -124,7 +124,7 @@ gulp.task("build:watch", done => {
 
 gulp.task("copy", () => {
   gulp.src("../dist")
-    .pipe(gulp.dest("../../dotnet/src/TheEight.WebApp/wwwroot"))
+    .pipe(gulp.dest(distPath))
 })
 
 gulp.task("clean", done => {

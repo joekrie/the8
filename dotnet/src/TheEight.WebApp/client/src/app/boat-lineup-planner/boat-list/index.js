@@ -14,7 +14,6 @@ function BoatList(props) {
   )
 }
 
-
 export default compose(
   inject("boatStore"),
   observer
