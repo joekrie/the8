@@ -2,7 +2,6 @@
 
 .root {
   width: $attendee-slot-width + $seat-number-width;
-  background-color: lightgreen;
   margin: 0.5rem;
 
   &:not(:last-of-type) {
@@ -12,10 +11,11 @@
 
 .header {
   padding: 0.75rem;
-  background-color: blueviolet;
   user-select: none;
+  border: 1px solid lightgray;
+  background-color: lighten(lightgray, 10);
 
-  &.title {
+  .title {
     font-weight: 600;
   }
 }

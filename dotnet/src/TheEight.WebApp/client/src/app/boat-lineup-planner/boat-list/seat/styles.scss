@@ -3,25 +3,25 @@
 .root {
   height: $seat-height;
   display: flex;
-  border-bottom: 1px solid black;
+  border: 0.0625rem solid lightgray;
+  border-top: none;
 }
 
 .seat-number {
   width: $seat-number-width;
-  background-color: orange;
   display: flex;
   justify-content: center;
   align-items: center;
   user-select: none;
+  border-right: 0.0625rem solid lightgray;
 }
 
 .attendee-slot {
   flex-grow: 1;
-  background-color: yellowgreen;
   display: flex;
 
   
   &.hover {
-    background-color: lightyellow;
+    background-color: lighten(lightgray, 10);
   }
 }

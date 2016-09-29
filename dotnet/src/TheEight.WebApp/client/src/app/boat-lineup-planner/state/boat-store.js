@@ -17,7 +17,8 @@ export default class BoatStore {
       seatCount: 8,
       isCoxed: true,
       placements: { 
-        3: "attendee-1"
+        3: "attendee-1",
+        1: "attendee-2"
       }
     })
 
@@ -40,6 +41,8 @@ export default class BoatStore {
   }
 
   attendeePlacements(attendeeId) {
-    return this.boats.map(boat => boat.placements.map())
+    return this.boats.map(boat => 
+      boat.placements.map()
+    )
   }
 }

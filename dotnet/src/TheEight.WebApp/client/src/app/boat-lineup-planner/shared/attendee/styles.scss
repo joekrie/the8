@@ -7,28 +7,22 @@
   display: flex;
   align-items: stretch;
   height: $seat-height;
-  width: $attendee-slot-width;
+  width: $attendee-slot-width - 0.1875rem;
   user-select: none;
-
-  &.coxswain {
-    background-color: lightseagreen;
+  
+  &.is-dragging {
+    border: 0.0625rem solid lightgray;
   }
 }
 
 .drag-handle {
-  width: 2.5rem;
+  width: 2rem;
   cursor: move;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  &:hover, &.is-dragging {
-    background-color: darken(lightsalmon, 5);
-  }
-
-  &.is-dragging {
-    cursor: dragging;
-  }
+  background-color: white;
+  border-right: 0.0625rem solid lightgray;
 }
 
 .attendee {
@@ -36,17 +30,13 @@
   align-items: center;
   flex-grow: 1;
   cursor: pointer;
-  background-color: lightsalmon;
   outline: none;
   padding: 0;
   border: none;
-
-  &:hover {
-    background-color: darken(lightsalmon, 5);
-  }
+  background-color: white;
 
   .name {
-    margin-left: 0.35rem;
+    margin-left: 0.4rem;
   }
 
   .position {
@@ -56,13 +46,12 @@
 }
 
 .modal {
-  background-color: yellow;
   position: absolute;
   top: 40px;
   left: 40px;
   right: 40px;
   bottom: 40px;
-  border: 1px solid black;
+  border: 0.0625rem solid lightgray;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   outline: none;
@@ -71,4 +60,8 @@
 
 .position-tooltip {
   @extend .tooltip-right;
+}
+
+.drag-handle-image {
+  width: 0.75rem;
 }

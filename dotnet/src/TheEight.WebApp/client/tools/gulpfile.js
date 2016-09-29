@@ -109,7 +109,7 @@ gulp.task("build:watch", done => {
   ]
 
   new WebpackDevServer(webpack(config), {
-    publicPath: `http://localhost:${port}/static/`,
+    publicPath: `http://localhost:${port}/`,
     hot: true,
     historyApiFallback: true
   }).listen(port, "localhost", (err, result) => {

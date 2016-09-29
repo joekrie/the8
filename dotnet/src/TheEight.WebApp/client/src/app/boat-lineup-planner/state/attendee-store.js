@@ -13,7 +13,8 @@ export default class AttendeeStore {
   
   @action load() {
     this.attendees.push(
-      new Attendee("attendee-1", "John Doe", "Doe, John", "PORT_ROWER")
+      new Attendee("attendee-1", "John Doe", "Doe, John", "PORT_ROWER"),
+      new Attendee("attendee-2", "Johnny Appleseed", "Appleseed, Johnny", "STARBOARD_ROWER")
     )
   }
 }

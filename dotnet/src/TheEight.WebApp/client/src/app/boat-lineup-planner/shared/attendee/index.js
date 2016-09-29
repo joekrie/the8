@@ -33,11 +33,10 @@ export default class Attendee extends Component {
     }
 
     return this.props.connectDragPreview(
-      <div className={classNames(styles.root, {[styles.coxswain]: this.props.attendee.isCoxswain})}>
+      <div className={classNames(styles.root, {[styles.coxswain]: this.props.attendee.isCoxswain, [styles.isDragging]: this.props.isDragging})}>
         {this.props.connectDragSource(
-          <div className={classNames(styles.dragHandle, { [styles.isDragging]: this.props.isDragging })}>
-            {/*&#9776;*/}
-            <img src={dragHandleImage} />
+          <div className={styles.dragHandle}>
+            <img className={styles.dragHandleImage} src={dragHandleImage} />
           </div>
         )}
         <button className={styles.attendee} onClick={() => this.open()}>
