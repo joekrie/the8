@@ -29,14 +29,18 @@ export function drop(props, monitor) {
   if (monitor.getItemType() == "ASSIGNED_ATTENDEE") {
     const isTargetInOrigin = draggedItem.boat.isAttendeeInBoat(draggedAttendeeId)
     const isMoveWithinBoat = props.boat.boatId == draggedItem.boat.boatId
-    const isSwapWithinBoat = isMoveWithinBoat && props.seat.attendee
-    const isSwapAcrossBoats = !isMoveWithinBoat && props.seat.attendee && !isTargetInOrigin
+    const isSwapWithinBoat = isMoveWithinBoat && attendeeIdInTarget
+    const isSwapAcrossBoats = !isMoveWithinBoat && attendeeIdInTarget && isTargetInOrigin
 
     if (isSwapWithinBoat || isSwapAcrossBoats) {
       draggedItem.boat.placeAttendee(attendeeIdInTarget, draggedItem.seat.number)
     }
 
-    if ((!isSwapWithinBoat && isTargetInOrigin) || !props.seat.attendee) {
+    if (isSwapAcrossBoats) {
+      return;
+    }
+
+    if ((!isSwapWithinBoat && isTargetInOrigin) || !attendeeIdInTarget) {
       draggedItem.boat.unplaceAttendee(draggedItem.seat.number)
     }
   }

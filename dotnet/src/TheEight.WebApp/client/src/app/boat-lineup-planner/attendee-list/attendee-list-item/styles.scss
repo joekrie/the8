@@ -1,0 +1,17 @@
+@import "../../variables";
+
+.list-item {
+  height: $seat-height;
+
+  &:not(:first-of-type) {
+    border-top: 1px solid lightgray;
+  }
+
+  &:last-of-type {
+    border-bottom: 1px solid lightgray;
+  }
+}
+
+.is-dragging {
+  display: none;
+}

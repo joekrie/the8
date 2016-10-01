@@ -1,15 +1,15 @@
 import { Component, PropTypes } from "react"
-import Modal from "react-modal"
 import { observer } from "mobx-react"
 import { observable, action } from "mobx"
 import classNames from "classnames"
 
-import AttendeeDetails from "../attendee-details"
+import AttendeeModal from "./attendee-modal"
 import styles from "./styles.scss"
-import dragHandleImage from "../../../../img/drag-handle.svg"
+import dragHandleImage from "img/drag-handle.svg"
+import attendeePositions from "app/common/state/attendee-positions"
 
 @observer
-export default class Attendee extends Component {
+export default class Attendee extends Component {  
   @observable isOpen = false
 
   @action open() {
@@ -19,60 +19,44 @@ export default class Attendee extends Component {
   @action close() {
     this.isOpen = false
   }
-  
-  static propTypes = {
-    connectDragSource: PropTypes.func.isRequired,
-    connectDragPreview: PropTypes.func.isRequired
-  }
 
   render() {
-    let displayName = this.props.attendee.displayName
+    const outOfPlaceMarker = this.props.isOutOfPosition ? "*" : ""
 
-    if (this.props.isOutOfPosition) {
-      displayName = displayName.concat("*")
-    }
+    const rootClasses = classNames(styles.root, {
+      [styles.coxswain]: this.props.attendee.isCoxswain, 
+      [styles.isDragging]: this.props.isDragging
+    })
 
     return this.props.connectDragPreview(
-      <div className={classNames(styles.root, {[styles.coxswain]: this.props.attendee.isCoxswain, [styles.isDragging]: this.props.isDragging})}>
+      <div className={rootClasses}>
         {this.props.connectDragSource(
           <div className={styles.dragHandle}>
             <img className={styles.dragHandleImage} src={dragHandleImage} />
           </div>
         )}
         <button className={styles.attendee} onClick={() => this.open()}>
-          <div className={styles.name}>
-            {displayName}
-            &nbsp;
+          <div className={styles.info}>
+            <div className={styles.name}>
+              {this.props.attendee.displayName}
+            </div>
+            <div className={styles.position}>
+              {attendeePositions[this.props.attendee.position].title}
+              {outOfPlaceMarker}
+            </div>
           </div>
-          <div className={styles.position}>
-            <span className={styles.positionTooltip} data-tooltip={positionLabels[this.props.attendee.position].title}>
-              {positionLabels[this.props.attendee.position].abbr}
-            </span>
+          <div className={styles.metric}>
+            {this.props.attendee.metric}
           </div>
         </button>
-        <Modal className={styles.modal} isOpen={this.isOpen} onRequestClose={() => this.close()}>
-          <AttendeeDetails attendee={this.props.attendee} />
-        </Modal>
+        <AttendeeModal isOpen={this.isOpen} close={() => this.close()} 
+          attendee={this.props.attendee} />
       </div>
     )
-  }
-}
-
-const positionLabels = {
-  COXSWAIN: {
-    abbr: "C",
-    title: "Coxswain"
-  }, 
-  PORT_ROWER: {
-    abbr: "P",
-    title: "Port"
-  },
-  STARBOARD_ROWER: {
-    abbr: "S",
-    title: "Starboard"
-  }, 
-  BISWEPTUAL_ROWER: {
-    abbr: "B",
-    title: "Bisweptual"
+  }  
+  
+  static propTypes = {
+    connectDragSource: PropTypes.func.isRequired,
+    connectDragPreview: PropTypes.func.isRequired
   }
 }

@@ -1,0 +1,44 @@
+@import "styles/colors";
+@import "styles/buttons";
+
+.modal {
+  position: absolute;
+  top: 60px;
+  left: 60px;
+  right: 60px;
+  bottom: 60px;
+  border: 0.0625rem solid lightgray;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  outline: none;
+  padding: 20px;
+  background-color: $base-color;
+}
+
+.overlay {
+  background-color: $base-color;
+  background-color: transparentize($base-color, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.close {
+  @include clear-button-styles;
+
+  float: right;
+
+  img {
+    width: 1rem;
+  }
+}
+
+.name {
+  margin-bottom: 0.175rem;
+}
+
+.position {
+  font-size: 0.8rem;
+}

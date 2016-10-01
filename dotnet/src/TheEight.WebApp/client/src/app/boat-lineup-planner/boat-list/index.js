@@ -8,8 +8,7 @@ import Boat from "./boat"
 function BoatList(props) {
   return (
     <div className={styles.root}>
-      {map(boat => <Boat key={boat.boatId} boat={boat} />, 
-        props.boatStore.boats)}
+      {map(boat => <Boat key={boat.boatId} boat={boat} />, props.boatStore.boats)}
     </div>
   )
 }

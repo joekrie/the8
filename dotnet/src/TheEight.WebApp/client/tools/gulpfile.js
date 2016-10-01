@@ -6,6 +6,7 @@ const WebpackDevServer = require("webpack-dev-server")
 const rimraf = require("rimraf")
 const opn = require("opn")
 const KarmaServer = require("karma").Server
+const argv = require("yargs").argv
 
 const webpackConfig = require("./webpack.config.js")
 const distPath = path.join(__dirname, "../../wwwroot")
@@ -35,7 +36,7 @@ gulp.task("test:ci", done => {
 gulp.task("test:watch", done => {
   new KarmaServer({
     configFile,
-    browsers
+    browsers: ["PhantomJS"]
   }, done).start()
 })
 
@@ -118,7 +119,12 @@ gulp.task("build:watch", done => {
     }
 
     gutil.log("[webpack-dev-server]", `Listening at http://localhost:${port}/`)
-    opn(`http://localhost:${port}/dev-server.html`).then(done)
+
+    if (argv.browser) {
+      opn(`http://localhost:${port}/dev-server.html`, {
+        app: ["chrome", "--incognito"]
+      }).then(done)
+    }
   })
 })
 

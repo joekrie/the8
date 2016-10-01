@@ -1,5 +1,6 @@
 import { observable, computed, action } from "mobx"
 import { flatten } from "ramda"
+import chroma from "chroma-js"
 
 import Boat from "./boat"
 
@@ -19,6 +20,10 @@ export default class BoatStore {
       placements: { 
         3: "attendee-1",
         1: "attendee-2"
+      },
+      color: {
+        background: chroma("#001f3f"),
+        text: chroma("hsla(210, 100%, 75%, 1.0)")
       }
     })
 
@@ -26,13 +31,17 @@ export default class BoatStore {
       boatId: "boat-2",
       title: "M1",
       seatCount: 4,
-      isCoxed: true
+      isCoxed: true,
+      color: {
+        background: chroma("#01FF70"),
+        text: chroma("hsla(146, 100%, 20%, 1.0)")
+      }
     })
   }
 
   @action addBoat(details) {
     this.boats.push(new Boat(details.boatId, details.title, details.seatCount, details.isCoxed, 
-      details.placements || {}, attnId => this.attendeeStore.getAttendeeById(attnId)))
+      details.placements || {}, details.color, attnId => this.attendeeStore.getAttendeeById(attnId)))
   }
 
   isAttendeePlacedInAnyBoat(attendeeId) {

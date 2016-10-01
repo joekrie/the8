@@ -1,7 +1,6 @@
 @import "../../variables";
-@import "../../../../styles/theme";
-@import "~picnic/src/plugins/label/plugin";
-@import "~picnic/src/plugins/tooltip/plugin";
+@import "styles/colors";
+@import "styles/buttons";
 
 .root {
   display: flex;
@@ -12,6 +11,10 @@
   
   &.is-dragging {
     border: 0.0625rem solid lightgray;
+
+    .drag-handle {
+      background-color: lightgray;
+    }
   }
 }
 
@@ -23,43 +26,41 @@
   justify-content: center;
   background-color: white;
   border-right: 0.0625rem solid lightgray;
+  
+  &:hover {
+    background-color: lightgray;
+  }
 }
 
 .attendee {
+  @include clear-button-styles;
+
+  background-color: white;
   display: flex;
   align-items: center;
   flex-grow: 1;
-  cursor: pointer;
-  outline: none;
-  padding: 0;
-  border: none;
-  background-color: white;
 
-  .name {
-    margin-left: 0.4rem;
-  }
-
-  .position {
-    margin-left: auto;
-    margin-right: 0.5rem;
+  &:hover {
+    background-color: lightgray;
   }
 }
 
-.modal {
-  position: absolute;
-  top: 40px;
-  left: 40px;
-  right: 40px;
-  bottom: 40px;
-  border: 0.0625rem solid lightgray;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  outline: none;
-  padding: 20px;
+.info {
+  margin-left: 0.6rem;
 }
 
-.position-tooltip {
-  @extend .tooltip-right;
+.name {
+  margin-bottom: 0.175rem;
+}
+
+.position {
+  font-size: 0.8rem;
+}
+
+.metric {
+  margin-left: auto;
+  margin-right: 0.6rem;
+  font-size: 0.8rem;
 }
 
 .drag-handle-image {

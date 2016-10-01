@@ -7,9 +7,14 @@ import BoatModel from "../../state/boat"
 import styles from "./styles.scss"
 
 function Boat(props) {
+  const headerStyles = {
+    backgroundColor: props.boat.color.toJS().background.css(),
+    color: props.boat.color.toJS().text.css()
+  }
+
   return (
     <div className={styles.root}>
-      <header className={styles.header}>
+      <header style={headerStyles} className={styles.header}>
         <span className={styles.title}>{props.boat.title}</span>
       </header>
       <SeatList boat={props.boat} />

@@ -1,3 +1,5 @@
+import { DropTarget } from "react-dnd"
+
 function dropCollect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),

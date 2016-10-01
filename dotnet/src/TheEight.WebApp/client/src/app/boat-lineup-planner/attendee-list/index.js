@@ -1,5 +1,4 @@
 import { Component } from "react"
-import { DropTarget } from "react-dnd"
 import { observer, inject } from "mobx-react"
 import { filter, compose } from "ramda"
 
@@ -12,7 +11,7 @@ function AttendeeList(props) {
     !props.boatStore.isAttendeePlacedInAnyBoat(attn.attendeeId))
 
   return props.connectDropTarget(
-    <div className={`card ${styles.listItems}`}>
+    <div className={styles.root}>
       <div className={styles.listItems}>
         {attendeesToShow.map(attn => 
           <AttendeeListItem key={attn.attendeeId} attendee={attn} />

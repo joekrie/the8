@@ -1,22 +1,19 @@
 import { Component } from "react"
-import { getEmptyImage } from "react-dnd-html5-backend"
+import classNames from "classnames"
 
-import Attendee from "../attendee"
+import Attendee from "../../shared/attendee"
 import dragSource from "./dnd"
+import styles from "./styles.scss"
 
-@dragSource
-export default class AttendeeListItem extends Component {
-  componentDidMount() {
-    //this.props.connectDragPreview(getEmptyImage())  // todo: add drag handle
-  }
-
-  render() {
-    return (
-      this.props.connectDragSource(
-        <div className={styles.root}>
-          <Attendee attendee={this.props.attendee} />
-        </div>
-      )
-    )
-  }
+function AttendeeListItem(props) {
+  return (
+    <div className={styles.listItem}>
+      <div className={classNames({[styles.isDragging]: props.isDragging})}>
+        <Attendee attendee={props.attendee} connectDragSource={props.connectDragSource} 
+          connectDragPreview={props.connectDragPreview} />
+      </div>
+    </div>
+  )
 }
+
+export default dragSource(AttendeeListItem)

@@ -1,0 +1,11 @@
+@import "styles/colors";
+
+@mixin clear-button-styles() {
+  outline: none;
+  padding: 0;
+  border: none;
+  background-color: $base-color;
+  text-align: left;
+  color: $text-color;
+  cursor: pointer;
+}

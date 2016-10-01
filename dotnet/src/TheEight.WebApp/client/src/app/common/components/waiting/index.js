@@ -1,25 +1,22 @@
 import { Component } from "react"
+import { observable, action } from "mobx"
+import { observer } from "mobx-react"
 
+@observer
 export default class WaitingAnimation extends Component {
-  constructor() {
-    super()
-
-    this.state = {
-      dots: ''
-    }
-  }
+  @observable dots = ''
   
+  @action setDots(dots) {
+    this.dots = dots
+  }
+
   componentDidMount() {
     const dotCombos = [ '', .', '..', '...' ]
     let dotComboPos = 0
 
     const onInterval = () => {
-      dotComboPos = dotComboPos >= dotCombos.length - 1 
-        ? 0 : dotComboPos + 1
-
-      this.setState({
-        dots: dotCombos[dotComboPos]
-      })
+      dotComboPos = dotComboPos >= dotCombos.length - 1 ? 0 : dotComboPos + 1
+      this.setDots(dotCombos[dotComboPos])
     }
 
     onInterval()

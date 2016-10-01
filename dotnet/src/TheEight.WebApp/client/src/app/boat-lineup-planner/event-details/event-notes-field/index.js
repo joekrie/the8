@@ -1,19 +1,19 @@
 import { random } from "lodash"
 import { Component } from "react"
+import { observable, action } from "mobx"
+import { observer } from "mobx-react"
 
+@observer
 export default class NotesField extends Component {
-  constructor(props) {
-    super(props)
+  @observable exampleNote
 
-    this.state = {
-      exampleNote: ""
-    }
+  @action setExampleNote(text) {
+    this.exampleNote = text
   }
 
   componentDidMount() {
-    if (!this.state.exampleNote) {
-      const exampleNote = this.getRandomNote()
-      this.setState({ exampleNote })
+    if (!this.exampleNote) {
+      this.setExampleNote(this.getRandomNote())
     }
   }
 
@@ -26,8 +26,7 @@ export default class NotesField extends Component {
     ]
 
     const rnd = random(exampleNotes.length - 1)
-    const note = exampleNotes[rnd]
-    return `e.g., ${note}`
+    return `e.g., ${exampleNotes[rnd]}`
   }
 
   onChange(rawValue) {
@@ -43,11 +42,11 @@ export default class NotesField extends Component {
 
   render() {
     return (
-      <fieldset className="form-group">
-        <label htmlFor="event-details-notes">
+      <fieldset>
+        <label>
           Notes
+          <textarea className="form-control" rows="5"></textarea>
         </label>
-        <textarea className="form-control" id="event-details-notes" rows="5"></textarea>
       </fieldset>
     )
   }

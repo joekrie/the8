@@ -6,10 +6,11 @@ export function beginDrag(props) {
   }
 }
 
-export function dragCollect(connect) {
+export function dragCollect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
-    connectDragPreview: connect.dragPreview()
+    connectDragPreview: connect.dragPreview(),
+    isDragging: monitor.isDragging()
   }
 }
 

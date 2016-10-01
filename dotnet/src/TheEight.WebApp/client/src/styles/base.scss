@@ -1,6 +1,9 @@
 @import "~normalize.css";
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600');  // todo: consider web font loader
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans");
+
+@import "styles/colors";
 
 html {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Noto Sans", "Helvetica", sans-serif;
+  color: $text-color;
 }

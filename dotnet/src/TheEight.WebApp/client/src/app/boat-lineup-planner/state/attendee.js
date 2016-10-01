@@ -5,11 +5,13 @@ export default class Attendee {
   @observable displayName
   @observable sortName
   @observable position
+  @observable metric
 
-  constructor(attendeeId, displayName, sortName, position) {
+  constructor(attendeeId, displayName, position, metric) {
     this.attendeeId = attendeeId
     this.displayName = displayName
-    this.sortName = sortName
+    this.sortName = displayName
     this.position = position
+    this.metric = metric
   }
 }

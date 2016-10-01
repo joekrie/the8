@@ -28,7 +28,7 @@ export default class AttendeeDragLayer extends Component {
 
     if (isDragging && item && item.attendee) {
       return (
-        <div className={styles.dragLayer}>
+        <div className={styles.root}>
           <div className={styles.attendee} style={getDragItemStyles(this.props.currentOffset)}>
             <Attendee attendee={this.props.item.attendee} connectDragPreview={identity} 
               connectDragSource={identity} isDragging={true} />

@@ -15,7 +15,7 @@ module.exports = {
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract("style", ["css?modules&camelCase", "postcss", "resolve-url", "sass?sourceMap"])
+        loader: ExtractTextPlugin.extract("style", ["css?modules&camelCase&localIdentName=[local]_[hash:base64]", "postcss", "resolve-url", "sass"])
       },
       {
         test: /\.js(x)?$/,
@@ -39,6 +39,12 @@ module.exports = {
         test: /\.svg$/,
         loader: "file?name=img/[name]-[hash].[ext]"
       }
+    ]
+  },
+  sassLoader: {
+    sourceMap: true,
+    includePaths: [
+      path.resolve(__dirname, "../src")
     ]
   },
   postcss: [ 

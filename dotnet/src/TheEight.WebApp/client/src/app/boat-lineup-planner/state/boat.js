@@ -3,20 +3,22 @@ import { range } from "lodash"
 import { pickBy } from "ramda"
 
 export default class Boat {
-  @observable boatId
+  boatId
   @observable title
   @observable seatCount
   @observable isCoxed
   @observable placements
+  @observable color
   getAttendeeById
 
-  constructor(boatId, title, seatCount, isCoxed, placements, getAttendeeById) {
+  constructor(boatId, title, seatCount, isCoxed, placements, color, getAttendeeById) {
     this.boatId = boatId
     this.title = title
     this.seatCount = seatCount
     this.isCoxed = isCoxed
     this.placements = asMap(placements)
     this.getAttendeeById = getAttendeeById
+    this.color = asMap(color)
   }
 
   @computed get seatNumbers() {

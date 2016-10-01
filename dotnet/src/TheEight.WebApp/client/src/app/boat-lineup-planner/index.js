@@ -3,6 +3,8 @@ import { observer, Provider } from "mobx-react"
 import DevTools from 'mobx-react-devtools';
 
 import BoatList from "./boat-list"
+import AttendeeList from "./attendee-list"
+import EventDetails from "./event-details"
 import AttendeeDragLayer from "./shared/attendee-drag-layer"
 import BoatStore from "./state/boat-store"
 import AttendeeStore from "./state/attendee-store"
@@ -29,8 +31,12 @@ export default class Root extends Component {
     return (
       <Provider boatStore={this.boatStore} attendeeStore={this.attendeeStore}>
         <div className={styles.root}>
-          <AttendeeDragLayer />
+          <div>
+            <EventDetails />
+            <AttendeeList />
+          </div>
           <BoatList />
+          <AttendeeDragLayer />
           <DevTools />
         </div>
       </Provider>

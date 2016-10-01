@@ -1,7 +1,13 @@
+@import "../variables";
+
 .root {
-  height: 500px;
+  min-height: 10rem;
+  width: $attendee-slot-width - 0.1875rem;
+  border: 1px solid lightgray;
+  margin-left: 0.5rem;
 }
 
-.list-items {
-  padding-top: 15px;
+.filters {
+  height: 200px;
+  border-bottom: 1px solid lightgray;
 }
