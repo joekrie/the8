@@ -122,7 +122,7 @@ gulp.task("build:watch", done => {
 
     if (argv.browser) {
       opn(`http://localhost:${port}/dev-server.html`, {
-        app: ["chrome", "--incognito"]
+        app: ["chrome"]
       }).then(done)
     }
   })

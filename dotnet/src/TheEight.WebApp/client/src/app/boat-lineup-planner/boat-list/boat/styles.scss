@@ -3,6 +3,7 @@
 .root {
   width: $attendee-slot-width + $seat-number-width;
   margin: 0.5rem;
+  margin-top: 0;
 
   &:not(:last-of-type) {
     margin-right: 0;

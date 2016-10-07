@@ -1,0 +1,15 @@
+@import "styles/buttons";
+
+.root {
+  display: flex;
+  flex-grow: 1;
+  border: 1px solid lightgray;
+
+  button {
+    @include make-button;
+  }
+}
+
+.button-group {
+  display: flex;
+}

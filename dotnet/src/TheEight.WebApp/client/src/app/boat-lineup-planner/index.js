@@ -6,8 +6,11 @@ import BoatList from "./boat-list"
 import AttendeeList from "./attendee-list"
 import EventDetails from "./event-details"
 import AttendeeDragLayer from "./shared/attendee-drag-layer"
+import Toolbar from "./toolbar"
+
 import BoatStore from "./state/boat-store"
 import AttendeeStore from "./state/attendee-store"
+
 import dragDropContext from "./dnd"
 import styles from "./styles.scss"
 
@@ -31,11 +34,18 @@ export default class Root extends Component {
     return (
       <Provider boatStore={this.boatStore} attendeeStore={this.attendeeStore}>
         <div className={styles.root}>
-          <div>
-            <EventDetails />
-            <AttendeeList />
+          <div className={styles.toolbar}>
+            <Toolbar />
           </div>
-          <BoatList />
+          <div className={styles.main}>
+            <div className={styles.sidebar}>
+              <EventDetails />
+              <AttendeeList />
+            </div>
+            <div className={styles.boatList}>
+              <BoatList />
+            </div>            
+          </div>
           <AttendeeDragLayer />
           <DevTools />
         </div>

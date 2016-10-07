@@ -1,5 +1,7 @@
 import { Component } from "react"
 import { identity } from "ramda"
+import { sync } from "postcss-js"
+import autoprefixer from "autoprefixer"
 
 import Attendee from "../attendee"
 import dragLayer from "./dnd"
@@ -15,10 +17,11 @@ function getDragItemStyles(currentOffset) {
   const { x, y } = currentOffset
   const transform = `translate(${x}px, ${y}px)`
 
-  return {
-    transform,
-    WebkitTransform: transform
-  }
+  const prefixer = sync([ autoprefixer({ browsers: ['last 2 versions'] }) ]);
+
+  return prefixer({
+    transform
+  })
 }
 
 @dragLayer

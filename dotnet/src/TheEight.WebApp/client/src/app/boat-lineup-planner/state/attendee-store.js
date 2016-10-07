@@ -24,7 +24,13 @@ export default class AttendeeStore {
       new Attendee("attendee-9", "Terrence Hegmann", "PORT_ROWER", "1:56"),
       new Attendee("attendee-10", "Astrid Hoppe", "STARBOARD_ROWER", "1:49"),
       new Attendee("attendee-11", "Michel Ondricka", "PORT_ROWER", "1:41"),
-      new Attendee("attendee-12", "Brain Bogisich", "BISWEPTUAL_ROWER", "1:54")
+      new Attendee("attendee-12", "Brain Bogisich", "BISWEPTUAL_ROWER", "1:54"),
+      new Attendee("attendee-13", "Adolphus Pollich", "BISWEPTUAL_ROWER", "1:54"),
+      new Attendee("attendee-14", "Abbie Schulist", "COXSWAIN", ""),
+      new Attendee("attendee-15", "Erling Sanford", "STARBOARD_ROWER", "1:51"),
+      new Attendee("attendee-16", "Omer Herzog", "STARBOARD_ROWER", "1:42"),
+      new Attendee("attendee-17", "Nyah Medhurst", "STARBOARD_ROWER", "1:45"),
+      new Attendee("attendee-18", "Camilo Murphy", "PORT_ROWER", "1:47")
     )
   }
 }

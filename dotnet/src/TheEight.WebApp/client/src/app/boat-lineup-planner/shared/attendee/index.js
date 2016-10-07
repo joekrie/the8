@@ -10,14 +10,14 @@ import attendeePositions from "app/common/state/attendee-positions"
 
 @observer
 export default class Attendee extends Component {  
-  @observable isOpen = false
+  @observable openAttendeeId
 
-  @action open() {
-    this.isOpen = true
+  @action open(attendeeId) {
+    this.openAttendeeId = attendeeId
   }
 
   @action close() {
-    this.isOpen = false
+    this.openAttendeeId = null
   }
 
   render() {
@@ -35,7 +35,7 @@ export default class Attendee extends Component {
             <img className={styles.dragHandleImage} src={dragHandleImage} />
           </div>
         )}
-        <button className={styles.attendee} onClick={() => this.open()}>
+        <button className={styles.attendee} onClick={() => this.open(this.props.attendee.attendeeId)}>
           <div className={styles.info}>
             <div className={styles.name}>
               {this.props.attendee.displayName}
@@ -49,7 +49,7 @@ export default class Attendee extends Component {
             {this.props.attendee.metric}
           </div>
         </button>
-        <AttendeeModal isOpen={this.isOpen} close={() => this.close()} 
+        <AttendeeModal isOpen={this.openAttendeeId === this.props.attendee.attendeeId} close={() => this.close()} 
           attendee={this.props.attendee} />
       </div>
     )

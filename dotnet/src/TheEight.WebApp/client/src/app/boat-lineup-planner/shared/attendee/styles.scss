@@ -43,6 +43,14 @@
   &:hover {
     background-color: lightgray;
   }
+
+  &:focus {
+    background-color: lighten(lightgray, 5);
+  }
+
+  &:active {
+    background-color: darken(lightgray, 5);
+  }
 }
 
 .info {
@@ -50,7 +58,7 @@
 }
 
 .name {
-  margin-bottom: 0.175rem;
+  margin-bottom: 0.1rem;
 }
 
 .position {

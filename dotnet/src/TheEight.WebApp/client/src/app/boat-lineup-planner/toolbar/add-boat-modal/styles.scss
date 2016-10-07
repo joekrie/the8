@@ -35,10 +35,10 @@
   }
 }
 
-.name {
-  margin-bottom: 0.175rem;
-}
+.boat-type {
+  @include make-button;
 
-.position {
-  font-size: 0.8rem;
+  &.selected {
+    background-color: lightgray;
+  }
 }

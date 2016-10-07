@@ -8,4 +8,24 @@
   text-align: left;
   color: $text-color;
   cursor: pointer;
+  
+  &:hover {
+    background-color: lighten(lightgray, 8);
+  }
+
+  &:active {
+    background-color: lighten(lightgray, 5);
+  }
+
+  &:focus {
+    background-color: lighten(lightgray, 8s);
+  }
+}
+
+@mixin make-button() {
+  @include clear-button-styles;
+
+  border: 1px solid lightgray;
+  padding: 0.3rem;
+  margin: 0.2rem;
 }

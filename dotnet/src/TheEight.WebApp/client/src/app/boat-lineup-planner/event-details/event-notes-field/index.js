@@ -7,37 +7,18 @@ import { observer } from "mobx-react"
 export default class NotesField extends Component {
   @observable exampleNote
 
-  @action setExampleNote(text) {
-    this.exampleNote = text
-  }
-
   componentDidMount() {
     if (!this.exampleNote) {
-      this.setExampleNote(this.getRandomNote())
+      const exampleNotes = [
+        "Race day!!",
+        "6 x 4min w/1min rest",
+        "Warmup by pairs to railroad bridge...",
+        "Enjoy the sunrise :)"
+      ]
+
+      const rnd = random(exampleNotes.length - 1)
+      this.exampleNote = `e.g., ${exampleNotes[rnd]}`
     }
-  }
-
-  getRandomNote() {
-    const exampleNotes = [
-      "Race day!!",
-      "6 x 4min w/1min rest",
-      "Warmup by pairs to railroad bridge...",
-      "Enjoy the sunrise :)"
-    ]
-
-    const rnd = random(exampleNotes.length - 1)
-    return `e.g., ${exampleNotes[rnd]}`
-  }
-
-  onChange(rawValue) {
-    const parsedDate = parseLocalDate(rawValue)
-    let isValid = false
-
-    if (parsedDate) {
-      isValid = true
-    }
-
-    this.setState({ rawValue, isValid })
   }
 
   render() {
@@ -45,7 +26,7 @@ export default class NotesField extends Component {
       <fieldset>
         <label>
           Notes
-          <textarea className="form-control" rows="5"></textarea>
+          <textarea rows="5"></textarea>
         </label>
       </fieldset>
     )

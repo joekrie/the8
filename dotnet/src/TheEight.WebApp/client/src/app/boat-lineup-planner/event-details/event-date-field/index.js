@@ -1,46 +1,39 @@
 import { Component } from "react"
 import rome from "rome"
+import { observer } from "mobx-react"
+import { observable, action, computed } from "mobx"
 
 import { formatLocalDate, parseLocalDate } from "app/common/utils/date-utils"
+import styles from "./styles.scss"
 
-export default class DateField extends Component {
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      rawValue: nextProps.value.toString()
-    })
-
-    this.datepicker.setValue(nextProps.value.toString())
-  }
+@observer
+export default class EventDateField extends Component {
+  @observable rawValue
+  
+  //@computed get parsedValue() {
+  //  return parseLocalDate(this.rawValue)
+  //}
 
   componentDidMount() {
-    $(this.infoRef).tooltip({
-      title: "Hint: Try entering 'today' or 'next Monday'",
-      placement: "right"
-    })
-
-    this.datepicker = rome(this.input, {
+    this.datepicker = rome(this.datepickerRef, {
       time: false,
-      initialValue: this.props.value.toString()
+      initialValue: '10/10/2016'
     })
     
     this.datepicker.on("data", newValue => {
-      this.props.onChange(newValue)
+      this.rawValue = newValue
     })
   }
 
   render() {
-    const { value, onChange } = this.props
-
     return (
-      <fieldset className="form-group">
-        <label htmlFor="event-details-date">
-          Date
-          &nbsp;
-          <i className="fa fa-info-circle" ref={ref => this.infoRef = ref} aria-hidden="true"></i>
-        </label>          
-        <input id="event-details-date" className="form-control" value={value} 
-          onChange={evt => onChange(evt.target.value)} />
-        <div ref={ref => this.input = ref}></div>
+      <fieldset>
+        <label>
+          Date        
+          <input ref={ref => this.inputRef = ref} defaultValue={this.rawValue} 
+            onChange={evt => this.rawValue = evt.target.value} />
+        </label> 
+        <div ref={ref => this.datepickerRef = ref}></div>
       </fieldset>
     )
   }

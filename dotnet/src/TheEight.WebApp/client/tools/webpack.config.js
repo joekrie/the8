@@ -15,7 +15,12 @@ module.exports = {
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract("style", ["css?modules&camelCase&localIdentName=[local]_[hash:base64]", "postcss", "resolve-url", "sass"])
+        loader: ExtractTextPlugin.extract("style", [
+          "css?modules&camelCase&localIdentName=[local]_[hash:base64]&sourceMap", 
+          "postcss", 
+          "resolve-url", 
+          "sass"
+        ])
       },
       {
         test: /\.js(x)?$/,
@@ -38,6 +43,10 @@ module.exports = {
       { 
         test: /\.svg$/,
         loader: "file?name=img/[name]-[hash].[ext]"
+      },
+      {
+        test: /\.json$/,
+        loader: "json-loader"
       }
     ]
   },
@@ -97,5 +106,8 @@ module.exports = {
     new ExtractTextPlugin("[name].css", {
       allChunks: true
     })
-  ]
+  ],
+  node: {
+    fs: "empty"
+  }
 }

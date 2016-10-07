@@ -4,14 +4,14 @@ import { observer } from "mobx-react"
 
 @observer
 export default class WaitingAnimation extends Component {
-  @observable dots = ''
+  @observable dots = ""
   
   @action setDots(dots) {
     this.dots = dots
   }
 
   componentDidMount() {
-    const dotCombos = [ '', .', '..', '...' ]
+    const dotCombos = [ "", ".", "..", "..." ]
     let dotComboPos = 0
 
     const onInterval = () => {

@@ -2,4 +2,24 @@
   position: absolute;
   height: 100%;
   display: flex;
+  flex-direction: column;
+}
+
+.toolbar {
+  flex-shrink: 0;
+  display: flex;
+  margin: 0.5rem;
+}
+
+.main {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.sidebar {
+  margin-left: 0.5rem;
+}
+
+.boat-list {
+  
 }
