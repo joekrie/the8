@@ -13,7 +13,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.scss$/,
+        test: /\.(s)?css$/,
         exclude: /node_modules/,
         loader: ExtractTextPlugin.extract("style", [
           "css?modules&camelCase&localIdentName=[local]_[hash:base64]&sourceMap", 
