@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.25920.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{034E1E21-CD13-4664-BF1B-50A0F5F65C83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheEight.WebApp", "src\TheEight.WebApp\TheEight.WebApp.csproj", "{FA84D6B6-EEE5-4A38-B984-EF4702A82F18}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA84D6B6-EEE5-4A38-B984-EF4702A82F18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA84D6B6-EEE5-4A38-B984-EF4702A82F18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA84D6B6-EEE5-4A38-B984-EF4702A82F18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA84D6B6-EEE5-4A38-B984-EF4702A82F18}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FA84D6B6-EEE5-4A38-B984-EF4702A82F18} = {034E1E21-CD13-4664-BF1B-50A0F5F65C83}
+	EndGlobalSection
+EndGlobal

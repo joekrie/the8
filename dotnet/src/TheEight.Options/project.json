@@ -1,9 +1,0 @@
-﻿{
-  "version": "0.1.0-*",
-
-  "dependencies": { },
-
-  "frameworks": {
-    "net461": { }
-  }
-}
